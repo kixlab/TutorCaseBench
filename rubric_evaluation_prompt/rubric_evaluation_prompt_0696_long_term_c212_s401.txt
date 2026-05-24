@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Shifting Verification to Tools
+  Check: The long-term plan must explicitly include strategies to redirect Marcia's requests for teacher confirmation back to her instructional tools (ALG/Box) for self-verification.
+
+Criterion 2: Simultaneous CRA-I Integration
+  Check: The long-term plan must ensure simultaneous, ongoing access to concrete manipulatives, visual sketches, and abstract notation, explicitly allowing her to transition between them based on her needs.
+
+Criterion 3: Facilitated Exploration
+  Check: The long-term plan must position the tutor as a facilitator who minimizes direct instruction during manipulative use, allowing Marcia to lead the exploration and discover rules.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Marcia is a student who struggles with abstract multi-step algebra, frequently doubting her own correct answers and seeking teacher validation. The evidence reveals she uniquely needs simultaneous access to concrete manipulatives and graphic organizers to visually 'break down' problems and verify her own accuracy, rather than relying on direct instruction or mimicry.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's try multiplying (x + 3) and (x + 5) using only the abstract symbols today, moving away from the blocks.
+
+STUDENT: It’s so much more hard because it’s not broken up then.
+
+TUTOR: Just do your best to work through the problem.
+
+STUDENT: I can’t break it down. I guess I’m not good at blending the steps.
+
+TUTOR: Write down what you think the answer is.
+
+STUDENT: (Writes x2 + 15) I got x2 + 15. But when it’s all numbers then I forgot where to break it up and what’s what.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Multiplying (x + 3) (x + 5) using only abstract symbolism",
+      "learning_goal": "Multiplying linear expressions"
+    },
+    "context": {
+      "environment": "Instructional session",
+      "materials": "Abstract notation, Algebra Lab Gear (ALG) concrete manipulatives available for reference",
+      "social_setting": "One-on-one tutoring session",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When using only abstract symbolism to multiply binomials",
+      "observable_behavior": "Responding with an incorrect solution that misses the middle terms (x2 + 15)",
+      "internal_state": "Forgetting where to break it up and what's what when it's all numbers",
+      "related_quotes": [
+        "It’s so much more hard because it’s not broken up then.",
+        "But when it’s all numbers then I forgot where to break it up and what’s what."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When presented with a task that has a lot of words and a lot of steps",
+        "observable_behavior": "Stating she is not good at blending the steps and forgetting parts of the problem once she understands another part",
+        "internal_state": "Feeling turned off by the task unless it is explained and broken down",
+        "related_quotes": [
+          "I think if it was broken down I would be able to do it. The problem is that there are a lot of words and a lot of steps and once I understand what to do with one part I forget the other – I guess I’m not good at blending the steps.",
+          "as I said this kind of stuff turns me off BUT I think that parts of it I really might know so again if it was explained and broken down I think there may be some hope.",
+          "I can’t break it down."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

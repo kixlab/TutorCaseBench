@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Continuous Task Redirection
+  Check: The tutor provides continuous, active redirection or scaffolding to keep the student focused on the current task.
+
+Criterion 2: Strategic Ignoring of Undesirable Behavior
+  Check: The tutor deliberately ignores minor undesirable behaviors (e.g., swearing, inappropriate words) rather than verbally reprimanding or confronting the student.
+
+Criterion 3: Active Distraction for Verbal Outbursts
+  Check: The tutor responds to shouting or nonsensical talk by actively introducing a conversational or environmental distraction to redirect his thoughts.
+
+Criterion 4: Music-Based Contingent Rewards
+  Check: The tutor explicitly offers or provides access to music (e.g., YouTube, TV) as a reward contingent upon the successful completion of a task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly sensitive to unexpected changes, reacting with severe emotional distress and self-harm (punching his head) when his routine is disrupted. He struggles with a short attention span, hyperactivity, and elopement risks, but is highly intelligent and responsive to non-verbal cues. The evidence reveals he uniquely needs continuous task redirection, strategic ignoring for undesirable behaviors, and structured music-based therapies and rewards to maintain focus and emotional regulation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's sit down at your desk and finish reading this chapter.
+
+STUDENT: (Speaks an inappropriate swear word)
+
+TUTOR: Please look at the book and start reading.
+
+STUDENT: (Gets in the tutor's face and smiles) How are you? I apologize for my behavior.
+
+TUTOR: I am fine, but we need to keep working on the assignment.
+
+STUDENT: (Starts shouting loudly) The helicopter is landing inside the classroom! The pilot is waving at me right now!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "times throughout the day",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school environment",
+      "materials": "",
+      "social_setting": "with the teaching assistant or mother",
+      "time_context": "times throughout the day when the boy is in puberty"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "as a result of his inner world",
+      "observable_behavior": "starts shouting loudly and talking about things that did not actually happen",
+      "internal_state": "inner world",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when the boy is in puberty",
+        "observable_behavior": "often speeks ugly and inappropriate words (swear words)",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

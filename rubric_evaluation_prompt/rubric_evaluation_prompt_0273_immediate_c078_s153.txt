@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prompting Actionable Replacement Behavior
+  Check: The tutor prompts Ben to use a specific, actionable replacement behavior (e.g., a verbal phrase, a physical stance) when he encounters a trigger, rather than dismissing his fear or forcing exposure.
+
+Criterion 2: Verbal Reinforcement of Coping Skills
+  Check: The tutor provides explicit verbal praise or reinforcement immediately after Ben attempts or successfully uses a replacement behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ben is a student who experiences intense emotional distress and hyperactivity triggered by the presence of dogs or dog dolls in his environment. The evidence reveals he uniquely needs concrete replacement behaviors to manage his immediate fear, alongside long-term game-based desensitization and a highly structured classroom environment.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Ben, please join the rest of the class on the rug so we can start our morning activity.
+
+STUDENT: (Fidgets constantly and refuses to walk toward the rug, looking nervously around the classroom) I don't want to go over there.
+
+TUTOR: Everyone else is sitting down. Come take your spot.
+
+STUDENT: (Points toward the shelf next to the rug, showing visible emotional distress) No, the dog doll is sitting right there.
+
+TUTOR: It's just a toy on the shelf. Please sit down with the class.
+
+STUDENT: (Backs away quickly from the area, crying and exhibiting intense fear of the object, completely unable to participate in the class activity) No! I'm scared of it! I can't sit there!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in activities observed by the teacher during the class all day",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "a dog doll which was found in the classroom",
+      "social_setting": "whole class",
+      "time_context": "during the class all day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "seeing the animals or a dog doll which was found in the classroom",
+      "observable_behavior": "fearing dogs which were normally found in the school area as well as a dog doll",
+      "internal_state": "emotional symptoms",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "seeing dogs which were normally found in the school area",
+        "observable_behavior": "fearing dogs",
+        "internal_state": "emotional symptoms",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

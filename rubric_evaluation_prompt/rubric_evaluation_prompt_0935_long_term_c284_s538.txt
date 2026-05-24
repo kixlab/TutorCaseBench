@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Predictable Cycle Implementation
+  Check: The tutor's long-term plan establishes a consistent, repeating routine (e.g., a 2-week unit cycle) that minimizes daily procedural confusion.
+
+Criterion 2: Adult-Level Empowerment
+  Check: The tutor's plan includes explicit strategies to treat the student as an adult, such as using first names, establishing peer-level respect, or giving them adult-level autonomy.
+
+Criterion 3: Mandatory Collaborative Roles
+  Check: The tutor's plan requires the student to participate in cooperative groups or structured role-play (like moot court) rather than allowing them to work entirely independently.
+
+Criterion 4: Debatable Legal Case Curriculum
+  Check: The tutor's curriculum plan centers on debatable legal cases or constitutional conflicts rather than focusing primarily on social movements or local community issues.
+
+Criterion 5: Evidence-Based Disagreement Norms
+  Check: The tutor's plan explicitly builds classroom norms where disagreement is encouraged and students are taught to attack perspectives using evidence rather than attacking individuals.
+
+Criterion 6: Explicit Test Demystification
+  Check: The tutor's plan incorporates explicit, ongoing instruction on concrete strategies designed to demystify standardized test formats.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an older, marginalized urban youth with a history of truancy and negative school experiences, leading to a 'get in and get out' mentality and deep reluctance to participate in group work or writing tasks. They are highly cynical and easily overwhelmed by formal academic requirements, but they respond exceptionally well to being treated as an adult, highly predictable routines, and explicit strategies that demystify complex tasks. They engage best with debatable legal narratives and contemporary national connections, but actively disengage when history is forced into comparisons with their own local community.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please arrange your desks into a semicircle for the moot court case. You need to choose your role as petitioner, respondent, or judge and participate with your group.
+
+STUDENT: I don't want to speak out. When I first got here I didn't know anyone or anything, and I still don't want to do this.
+
+TUTOR: You have to do the work in here. Go ahead and pick a role.
+
+STUDENT: I don't want to. It's an assigned kind of thing, and I'm just trying to get in and get out and do what I need to graduate.
+
+TUTOR: It's a required activity for everyone.
+
+STUDENT: People get so over that too. I'm not doing it, I really dislike being required to participate in all these activities.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in moot court cases and cooperative group work.",
+      "learning_goal": "Democratic Living Skills Through Required Participation and Cooperative Group Work"
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "court cases",
+      "social_setting": "worked in circles or semicircles, choose their roles for the moot courts (petitioner, respondent, or judge)",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "being required to participate in all activities",
+      "observable_behavior": "expressed displeasure in being required to participate",
+      "internal_state": "reluctance",
+      "related_quotes": [
+        "people get so over that too."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when I first got here",
+        "observable_behavior": "initially disliked speaking out",
+        "internal_state": "didn't know anyone or anything",
+        "related_quotes": [
+          "when I first got here I didn't know anyone or anything."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

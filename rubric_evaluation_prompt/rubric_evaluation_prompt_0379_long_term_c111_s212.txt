@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Ample Pacing and Structured Plenary
+  Check: The tutor's long-term plan includes structured lesson phases with dedicated, unhurried time for practice and plenary evaluation.
+
+Criterion 2: Periodic Goal-Setting Interviews
+  Check: The tutor incorporates recurring, interactive goal-setting and self-evaluation sessions (e.g., termly interviews) into the student's learning trajectory.
+
+Criterion 3: Cross-Context Skill Reinforcement
+  Check: The tutor coordinates with other subjects or contexts to ensure the student practices the same target skills consistently over time.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jason is an anxious student with low initial motivation who frequently worries about holding his classmates back during group work. He uniquely requires capability-matched roles, direct face-to-face validation to accept his weaknesses, and structured opportunities to build incrementally on peers' ideas rather than generating them from scratch.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Before we start the group discussion for Chinese class, please look at your notes and identify your goals for improvement.
+
+STUDENT: (Shows very low initial motivation) We have to be confident.
+
+TUTOR: What else do you need to do to prepare for the group work?
+
+STUDENT: I have to answer questions; I have to pay more attention to classmates’ speaking.
+
+TUTOR: Any difficulties that you might encounter?
+
+STUDENT: (Feeling nervous, he writes down in his notes: confidence, practice, endurance, communication with people) I shouldn’t make all my classmates wait for me.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Identifying goals for improvement and preparation work before starting a group discussion",
+      "learning_goal": "Develop self-evaluation, setting new goals, finding out what they have to improve"
+    },
+    "context": {
+      "environment": "Chinese class",
+      "materials": "Notes, homework, test papers",
+      "social_setting": "Group discussion preparation",
+      "time_context": "1st and 2nd term"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked 'Any difficulties that you might encounter?' before a group task",
+      "observable_behavior": "Writes down in his notes: 'confidence, practice, endurance, communication with people', and states 'I shouldn’t make all my classmates wait for me.'",
+      "internal_state": "feeling nervous",
+      "related_quotes": [
+        "we have to be confident .",
+        "I shouldn’t make all my classmates wait for me ."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In the initial phase of implementing self-regulated learning strategies",
+        "observable_behavior": "Takes a period of time to master SRL strategies and reach the level of using complete sentences to express feelings",
+        "internal_state": "Motivation of students’ self-regulated learning remains at a very low level",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

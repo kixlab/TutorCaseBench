@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Linguistic Scaffolding
+  Check: The tutor provides or prompts the use of a specific sentence frame or linguistic structure (e.g., 'I agree/disagree because...') for the student to formulate their response.
+
+Criterion 2: Exact Phrasing Validation
+  Check: The tutor acknowledges, records, or repeats the student's contribution using their exact phrasing, avoiding translating it into technical jargon.
+
+Criterion 3: Peer-Directed Interaction
+  Check: The tutor directs the student to respond to or address a peer's contribution rather than just answering the tutor.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with self-regulation, turn-taking, and reading unpredictable social cues, often leading to disruptive behavior in group settings. However, they can participate independently and effectively when provided with a highly predictable environment, transparent rules, and explicit linguistic frameworks for interaction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are starting our philosophical inquiry session. I will read the text, and then we will take turns sharing our thoughts with the group.
+
+STUDENT: (Raises hand immediately before the text is finished) I want to say something right now!
+
+TUTOR: Please wait your turn, we are still listening to the story.
+
+STUDENT: (Drops hand and turns to the student sitting next to him in the circle) Hey, look at what I can do with my shoes.
+
+TUTOR: Let's try to stay on task and focus on the discussion.
+
+STUDENT: (Interrupts the group discussion loudly) This is taking too long! Watch this, everyone! (Starts making noises and waving his arms to get the attention of the other children in the circle)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a 1-hour weekly Community of Philosophical Inquiry (CoPI) session. The task involves sitting in a circle, listening to a stimulus text, and engaging in structured dialogue using the 'I agree/disagree because...' format.",
+      "learning_goal": "Engaging in collaborative philosophical dialogue"
+    },
+    "context": {
+      "environment": "Mainstream classroom setting",
+      "materials": "Stimulus text",
+      "social_setting": "Whole-class session, sitting in a circle, without the usual 1-to-1 support assistant intervention",
+      "time_context": "1-hour weekly session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Waiting for a turn to speak after raising a hand during a group discussion",
+      "observable_behavior": "Lack of self-regulation in the form of trying to distract others, interrupting, and not staying 'on task'",
+      "internal_state": "Difficulty in reading social cues and predicting what will happen in larger groups",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Throughout the rest of the school week during general class activities",
+        "observable_behavior": "Requires a support assistant to ensure he stays 'on task' and is susceptible to attempts from other children to distract him",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

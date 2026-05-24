@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Facilitative Stance
+  Check: The tutor avoids lecturing or issuing direct compliance commands, instead asking the student how they want to approach, plan, or lead the current task.
+
+Criterion 2: Authentic Audience Framing
+  Check: The tutor explicitly connects the immediate task to an authentic audience who will view, use, or benefit from the student's work.
+
+Criterion 3: Higher-Order Reflection Prompting
+  Check: The tutor prompts the student to reflect on the task using higher-order thinking or critical analysis rather than just asking for factual recall or task completion.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student strongly resists traditional didactic instruction, reacting to lectures and direct commands with off-task behavior, defiance, and apathy toward discipline referrals. They uniquely require a 'guide on the side' approach where learning is driven by real-world problems, authentic audiences, and opportunities for student leadership and voice.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are going to study the causes and effects of cancer. I will be lecturing on abnormal cell division, melanoma, lung cancer, genetic mutations, and viruses. Please sit quietly and take notes.
+
+STUDENT: (Slouches in chair) I don't want to just sit here and listen to a lecture about cell division.
+
+TUTOR: Please open your notebook and start writing down what I have on the board.
+
+STUDENT: (Turns around and starts talking loudly to another classmate instead of looking at the board) This is boring.
+
+TUTOR: You need to stop talking and pay attention to the lesson.
+
+STUDENT: I'm not doing this! Just give me a referral to the office for discipline, I don't care.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "studied causes and effects of cancer. More specifically, students learned about abnormal cell division, melanoma, lung cancer, genetic mutations, and viruses and disease.",
+      "learning_goal": "addressing the content standards and curriculum designated for middle school science"
+    },
+    "context": {
+      "environment": "seventh-grade science class",
+      "materials": "",
+      "social_setting": "teacher's didactic instruction",
+      "time_context": "10-month (80 hours) SL project"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During teacher's didactic instruction",
+      "observable_behavior": "absences and discipline cases",
+      "internal_state": "",
+      "related_quotes": [
+        "absences and discipline cases"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "prior to participating in the project",
+        "observable_behavior": "referrals to the office for discipline",
+        "internal_state": "",
+        "related_quotes": [
+          "referrals to the office for discipline"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

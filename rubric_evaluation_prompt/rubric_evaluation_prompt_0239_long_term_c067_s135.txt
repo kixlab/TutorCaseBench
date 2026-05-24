@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: De-centered Peer-to-Peer Structuring
+  Check: The tutor's long-term strategy establishes an environment where the tutor remains on the periphery (e.g., outside the circle) and positions students to interact directly with one another.
+
+Criterion 2: Withholding Authority Validation and Opinion
+  Check: The tutor's long-term plan strictly avoids offering personal opinions, drawing conclusions for the students, or providing validation or confirmation of student contributions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Catriona is a socially isolated student with low self-confidence who avoids active participation, makes tentative or irrelevant contributions, and relies heavily on an older buddy. She requires a highly structured, equalizing environment where a facilitator actively manages turn-taking to prevent overshadowing, while remaining unobtrusive and withholding validation to foster her independent engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are starting our whole class discussion on the stimulus text now. Everyone is in the circle, so please share your questions or ideas.
+
+STUDENT: (Sits next to her older buddy, separated from her classmates. She listens attentively to the others speaking but remains completely silent and does not volunteer any ideas.)
+
+TUTOR: Catriona, do you have anything you would like to add to the discussion?
+
+STUDENT: Um... I think... maybe... is it almost time for break?
+
+TUTOR: Let's focus on the text we just read. What is your idea about the reading?
+
+STUDENT: (Moves closer to her buddy and looks down at her desk) No... I don't have any questions. I'm just going to listen.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "take an active role in team tasks or whole class discussions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "weekly 1-hour CoPI sessions as part of the Religious, Moral and Philosophical Studies (RMPS) curriculum",
+      "materials": "stimulus text",
+      "social_setting": "participants in a circle, with regular support from a sixth-year pupil (age 17 years) who acts as a ‘buddy’",
+      "time_context": "weekly 1-hour"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the initial CoPI sessions",
+      "observable_behavior": "isolated in class, choosing to sit with her allocated buddy, but not with any of her class mates, and listened attentively to others, but would not volunteer questions or ideas",
+      "internal_state": "particular difficulties with self-confidence and resilience",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Gradually, she made tentative contributions",
+        "observable_behavior": "these would often not be in line with the CoPI structure and sometimes lacked relevance to the discussion",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

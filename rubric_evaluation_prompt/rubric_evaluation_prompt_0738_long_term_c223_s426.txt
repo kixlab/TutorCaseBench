@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Routine Somatic Skill-Building
+  Check: The tutor's plan includes regular, short practices focused specifically on breath and body awareness (e.g., belly breathing, body scans) to build foundational regulation skills.
+
+Criterion 2: Playful Regulation Practices
+  Check: The tutor incorporates elements of play, fun, or interactive activities into the student's long-term emotional regulation or mindfulness routines.
+
+Criterion 3: Distress Monitoring and Alternatives
+  Check: The tutor's plan includes a mechanism to monitor the student for increased distress during mindfulness exercises and explicitly offers alternative supports if rumination occurs.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with emotional regulation and prolonged anger when facing academic frustration, particularly getting answers wrong or taking high-stakes tests. They are prone to cognitive overload and rumination when asked to 'clear their mind' or use abstract visualizations. The evidence reveals they uniquely require concrete, physiological grounding techniques (like body scans and belly breathing) and proactive settling practices before stressful tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are doing some SIGMAS and MICRAS now. Please open your test booklets and begin the first section.
+
+STUDENT: I have stuff in my stomach, and I feel kind of nervous, it's like, kind of tickling me in the stomach.
+
+TUTOR: Just focus on the questions and do what you can.
+
+STUDENT: I don't know this one. It means you can't really stay on top of everything.
+
+TUTOR: Keep trying, just write down your best guess and move to the next one.
+
+STUDENT: (Pushes the test away) I get a bit angry, because I'd get an answer wrong! Once I am angry, it takes quite a while for me to calm down. I'm going to get one of those yellow-card yokes!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "doing some SIGMAS and MICRAS now",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "SIGMAS and MICRAS tests",
+      "social_setting": "In class",
+      "time_context": "before we start"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "because I'd get an answer wrong",
+      "observable_behavior": "I'd get a bit angry, irritated, and exhibit behaviors that previously led to yellow-card yokes [for misbehaving]",
+      "internal_state": "once I am angry, it takes quite a while for me to calm down; stuff in my stomach, and I feel kind of nervous, it's like, kind of tickling me in the stomach",
+      "related_quotes": [
+        "when we are learning, sometimes I'd get a bit angry, because I'd get an answer wrong.",
+        "once I am angry, it takes quite a while for me to calm down",
+        "stuff in my stomach, and I feel kind of nervous, it's like, kind of tickling me in the stomach",
+        "in our class, like, there is these kinda yellow-card yokes [for misbehaving]"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing low-competence in class",
+        "observable_behavior": "Getting angry and misbehaving",
+        "internal_state": "Feeling unable to cope, it means you can't really stay on top of everything",
+        "related_quotes": [
+          "it means you can't really stay on top of everything",
+          "when we are learning, sometimes I'd get a bit angry"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

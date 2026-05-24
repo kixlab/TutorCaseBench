@@ -1,0 +1,131 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Predictable Cycle Implementation
+  Check: The tutor's long-term plan establishes a consistent, repeating routine (e.g., a 2-week unit cycle) that minimizes daily procedural confusion.
+
+Criterion 2: Adult-Level Empowerment
+  Check: The tutor's plan includes explicit strategies to treat the student as an adult, such as using first names, establishing peer-level respect, or giving them adult-level autonomy.
+
+Criterion 3: Mandatory Collaborative Roles
+  Check: The tutor's plan requires the student to participate in cooperative groups or structured role-play (like moot court) rather than allowing them to work entirely independently.
+
+Criterion 4: Debatable Legal Case Curriculum
+  Check: The tutor's curriculum plan centers on debatable legal cases or constitutional conflicts rather than focusing primarily on social movements or local community issues.
+
+Criterion 5: Evidence-Based Disagreement Norms
+  Check: The tutor's plan explicitly builds classroom norms where disagreement is encouraged and students are taught to attack perspectives using evidence rather than attacking individuals.
+
+Criterion 6: Explicit Test Demystification
+  Check: The tutor's plan incorporates explicit, ongoing instruction on concrete strategies designed to demystify standardized test formats.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an older, marginalized urban youth with a history of truancy and negative school experiences, leading to a 'get in and get out' mentality and deep reluctance to participate in group work or writing tasks. They are highly cynical and easily overwhelmed by formal academic requirements, but they respond exceptionally well to being treated as an adult, highly predictable routines, and explicit strategies that demystify complex tasks. They engage best with debatable legal narratives and contemporary national connections, but actively disengage when history is forced into comparisons with their own local community.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our 20-minute discussion on the 'do now' question. How did the U.S. change after September 11? You can look at the responses we put on the front board.
+
+STUDENT: Privacy is being taken away. The country has become more strict.
+
+TUTOR: Can you say a bit more about that?
+
+STUDENT: The government is more secretive. I just do not trust the government. Look what happened to Arab Americans after 9/11.
+
+TUTOR: What do the rest of you think about this?
+
+STUDENT: We all agree. We are all equal and they should not be discriminated against because they are Japanese Americans or Arab Americans. This is just an act of racism.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a 20-minute whole-class discussion following a 'do now' activity about government changes after 9/11.",
+      "learning_goal": "exchange informed viewpoints to better understand the text and the issues raised by the text"
+    },
+    "context": {
+      "environment": "front board, overhead projector",
+      "materials": "primary document",
+      "social_setting": "worked in circles or semicircles, whole-class discussion",
+      "time_context": "20-minute discussion"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the 20-minute discussion that followed",
+      "observable_behavior": "complained that the country has become 'more strict' and the government 'more secretive', wanted to talk more about this topic",
+      "internal_state": "seemed 'not to trust the government'",
+      "related_quotes": [
+        "Country is more ready to fight terrorism.",
+        "Privacy is being taken away."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When students reach a consensus that might oversimplify a complex legal issue",
+        "observable_behavior": "All 15 students agreed that this case was about racism",
+        "internal_state": "held a number of strong opinions",
+        "related_quotes": [
+          "We are all equal and they should not be discriminated against because they are Japanese Americans or Arab Americans. This is just an act of racism."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

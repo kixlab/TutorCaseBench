@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Attention Scheduling
+  Check: The tutor's long-term plan incorporates scheduled, mutually enjoyable activities (e.g., low-energy games, puzzles) immediately preceding known challenging routines to proactively provide positive attention.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kayden is a 3-year-old who exhibits escape and attention-seeking behaviors (screaming, throwing toys, hitting) triggered by transitions and prompts to start non-preferred routines like cleanup or bedtime. He requires extreme task reduction, explicit First-Then contingencies, and proactive attention, as standard reprimands, redirection, or task-removal inadvertently reinforce his challenging behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Kayden, it is time to start getting ready for bed.
+
+STUDENT: (Starts crying)
+
+TUTOR: Let's go get your pajamas.
+
+STUDENT: (Screams)
+
+TUTOR: We have to get ready for bed now.
+
+STUDENT: (Screams and begins hitting)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Getting ready for bed",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Home",
+      "materials": "Pajamas, favorite book",
+      "social_setting": "One-on-one with mother",
+      "time_context": "Bedtime"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Receiving a verbal prompt from mom for Kayden to start to get ready for bed",
+      "observable_behavior": "Screaming, crying, and/or hitting",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "At some point between delivery of the prompt and Kayden actually falling asleep",
+        "observable_behavior": "Some amount of screaming, crying, and/or hitting will likely occur",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

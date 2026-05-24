@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Contingent Positive Reinforcement for Turn-Taking
+  Check: The tutor provides, or explicitly prompts Sybil to earn, immediate positive reinforcement (e.g., verbal praise, a high five) specifically for raising her hand or waiting her turn.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sybil is a highly verbal student who loves sharing stories but frequently talks over peers and adults without pausing or raising her hand. To successfully manage her turn-taking, she uniquely requires proactive visual reminders before activities and immediate positive reinforcement when she exhibits desired waiting behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Welcome to circle time, everyone. Today we are going to take turns sharing a story about our weekend.
+
+STUDENT: I went to the zoo with my family and we saw the monkeys and they were swinging everywhere!
+
+TUTOR: Okay, let's let Sarah tell her story now.
+
+STUDENT: And then after the monkeys we saw the lions and one of them roared super loud at us!
+
+TUTOR: Please wait, Sybil.
+
+STUDENT: But I have to tell you about the elephants too! They were spraying water and my sisters got all wet!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interacting with peers and adults during classroom activities; specifically telling stories and talking where turn-taking in conversation is required",
+      "learning_goal": "have the opportunity to listen and learn from friends and adults in the classroom"
+    },
+    "context": {
+      "environment": "Large group circle time at school",
+      "materials": "pictures to remind Sybil to raise her hand before speaking and wait her turn to talk",
+      "social_setting": "Group activities in the classroom",
+      "time_context": "10-minute observation during circle time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When participating in group activities where turn-taking in conversation is required",
+      "observable_behavior": "Sybil does not raise her hand or signal the need to speak before talking; talks over a friend or adult; and does not pause to hear her friend’s or adult’s response.",
+      "internal_state": "enjoys talking and telling stories",
+      "related_quotes": [
+        "Sybil talks so much that the other children do not have time to share."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During large group circle time at school",
+        "observable_behavior": "talking out of turn as much as 80% of the time during group activities",
+        "internal_state": "",
+        "related_quotes": [
+          "talks over a friend or adult",
+          "does not pause to hear her friend’s or adult’s response"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

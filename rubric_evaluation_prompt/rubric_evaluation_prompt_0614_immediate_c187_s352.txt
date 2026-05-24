@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Cue-to-Emotion Mapping
+  Check: The tutor explicitly points out a specific physical cue (e.g., crossed arms, tone of voice, facial expression) and guides the student to attach an accurate emotional label to it.
+
+Criterion 2: Supportive and Nurturing Framing
+  Check: The tutor uses validating, encouraging, or gentle language rather than punitive, sarcastic, or strictly authoritative correction when addressing the student's behavior.
+
+Criterion 3: Prompting Internal Emotional Awareness
+  Check: The tutor asks the student to reflect on, identify, or evaluate their own current feelings, tone of voice, or emotional delivery.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This learner has an inflated perception of their own emotional intelligence but severely lacks the ability to process social-emotional cues, often dominating peers or refusing to cooperate. They uniquely require explicit instruction linking physical cues to emotional labels, delivered through a highly supportive and nurturing approach to bypass their defensiveness and build accurate self-awareness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to practice how to converse in a different and appropriate manner depending on the situation. Let's start by showing me how you would ask a friend for a pencil, and then how you would ask the principal.
+
+STUDENT: I'm already really good at this. I would just say the exact same thing to both of them: 'Hey, give me a pencil right now.'
+
+TUTOR: How do you think the principal would react to that choice of words?
+
+STUDENT: He wouldn't care. I don't understand why it matters. My tone of voice is completely normal and he knows I just need a pencil.
+
+TUTOR: Try to use code-switching and change your words for the principal.
+
+STUDENT: (Yelling loudly) No, I'm not doing it! I don't get why you're making a weird face at me! My tone is fine and I'm not changing how I talk just because it's the principal!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "converse in a different and appropriate manner depending on the situation",
+      "learning_goal": "learn to express their feelings accurately, and to be able to use good social language"
+    },
+    "context": {
+      "environment": "efficient peer interactions",
+      "materials": "",
+      "social_setting": "conversing with others",
+      "time_context": "middle childhood"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "experience difficulties understanding complex emotions, or hidden and mixed emotions",
+      "observable_behavior": "experience difficulties interpreting and communicating the feeling part of language, using an appropriate tone of voice, recognising a tone in others, using a correct choice of words, or following the rhythm of language",
+      "internal_state": "unable to understand the intentions of others or their perspective on a situation",
+      "related_quotes": [
+        "experience difficulties interpreting and communicating the feeling part of language, using an appropriate tone of voice, recognising a tone in others"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When conversing with others and interpreting social language",
+        "observable_behavior": "find it hard to use ‘code-switching’",
+        "internal_state": "lack planning strategies and the ability to develop social goals",
+        "related_quotes": [
+          "find it hard to use ‘code-switching’, an essential language function, which refers to being able to converse in a different and appropriate manner depending on the situation"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

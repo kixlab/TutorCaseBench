@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Unhurried Processing Space
+  Check: The tutor explicitly provides Angus with time and space to pause, think, or restart his contribution without prompting him to hurry or immediately continue.
+
+Criterion 2: Mediated Disagreement
+  Check: The tutor introduces contrasting views by carefully selecting and juxtaposing speakers, rather than abruptly forcing Angus to defend his position against a direct attack.
+
+Criterion 3: Jargon and Clarity Control
+  Check: The tutor ensures that no technical language or jargon goes unexplained, actively clarifying any terms that might act as a barrier to Angus's understanding.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Angus is a student who lacks academic confidence and struggles to express himself, often becoming flustered or reacting with violent outbursts when peers disagree or he loses track of a conversation. He uniquely requires a highly structured, unhurried environment where he is given explicit time to formulate ideas and where disagreements are carefully mediated without adult interpretation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to discuss the story Laura and Paul today in our circle. Angus, what do you think about what Paul did in the story?
+
+STUDENT: I think... um... I think Paul was right. He did the right thing.
+
+TUTOR: Another student in the circle just said they disagree with your view about Paul. What do you say to that?
+
+STUDENT: (Gets flustered) But... no! I said he was right! Why are they saying that? They are wrong!
+
+TUTOR: They just have a different view. Keep trying to explain your side.
+
+STUDENT: (Makes an angry face at the other student and kicks the chair) Shut up! You're stupid! I'm not talking anymore!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in Community of Philosophical Inquiry (CoPI) sessions using the story Laura and Paul as their stimulus",
+      "learning_goal": "To ensure that the dialogue is as philosophically strong as possible"
+    },
+    "context": {
+      "environment": "Seating the participants in a circle",
+      "materials": "The story Laura and Paul",
+      "social_setting": "Group discussion where the facilitator remains outside the circle",
+      "time_context": "During a 10-week period of sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When peers say things he does not like or that disagree with his views",
+      "observable_behavior": "He shouts out in class and makes faces at others or kicks them, and has violent outbursts at those who disagreed with him",
+      "internal_state": "He found it very hard not to take it personally and is upset when he is not coping",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When talking in class discussions",
+        "observable_behavior": "Becomes over-excited and flustered because he loses track of the conversation",
+        "internal_state": "Becomes frustrated and seriously lacks confidence in his academic work",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

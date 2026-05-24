@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Private Processing Space
+  Check: The tutor explicitly offers or initiates a private, one-on-one conversation (e.g., before class, between classes) to discuss the student's reactions or upcoming content.
+
+Criterion 2: Content Previewing
+  Check: The tutor provides explicit details or previews about the day's lesson and upcoming reading material to remove the element of surprise.
+
+Criterion 3: Actionable Allyship Framing
+  Check: The tutor guides the discussion toward exploring supportive scenarios, such as how to help friends in dangerous situations or how to act as an ally.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is navigating highly sensitive trauma literature and exhibits polarized reactions, ranging from deep vulnerability and fear of being triggered to defensive dismissiveness. They uniquely require intense psychological safety, trauma-informed facilitation, explicit choices in their engagement, and private spaces to process their reactions away from peers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For this activity, please write a newspaper headline to describe the main plot of the novel Speak.
+
+STUDENT: I wrote down 'Don't Say Anything' for my headline.
+
+TUTOR: What else could you write?
+
+STUDENT: Maybe I could use 'Sealed Lips'.
+
+TUTOR: Can you state plainly what the story is about?
+
+STUDENT: It's about shame and secrecy. I am going to avoid plainly stating what happened or using the word rape.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing newspaper headlines to describe the plot of Speak",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Novel Speak",
+      "social_setting": "Classroom setting",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to describe the plot of a story about sexual assault",
+      "observable_behavior": "General avoidance of directly discussing sexual assault, such as using the term rape; alluded to shame and secrecy with headlines but avoided plainly stating that this was a story about rape",
+      "internal_state": "",
+      "related_quotes": [
+        "Don't Say Anything",
+        "Sealed Lips"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When required to directly discuss sexual assault",
+        "observable_behavior": "Alluded to shame and secrecy with headlines but avoided plainly stating that this was a story about rape",
+        "internal_state": "",
+        "related_quotes": [
+          "Don't Say Anything",
+          "Sealed Lips"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Art-Integration Hook
+  Check: The tutor's immediate response explicitly introduces an art, drawing, or visual creation element to the current task.
+
+Criterion 2: Pivot from Passive Reading
+  Check: The tutor does not demand, encourage, or redirect the student to read from a textbook or standard text passage.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are probationary students who exhibit extreme, sometimes dangerous disruptive behaviors (e.g., destroying property, attempting to set fires) when forced into traditional reading-based history instruction. They feel marginalized and hate school, but possess a strong affinity for art, requiring history to be taught entirely through visual research and artifact creation to maintain engagement and prevent severe behavioral outbursts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your history textbooks and read the chapter on the Industrial Age and World War I.
+
+STUDENT: (Tears a page out of the textbook) Why are you teaching us bad kids?
+
+TUTOR: Please leave the book intact and focus on the reading.
+
+STUDENT: (Throws a paper ball across the room) I hate the subject of history. We don't pay attention while reading.
+
+TUTOR: We need to finish this lesson. Keep trying to read.
+
+STUDENT: (Squirts hand sanitizer on the chair and tries to set it on fire) I'm doing an unauthorized science experiment.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Study world history, specifically the Industrial Age and World War I, by reading from the history textbook",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Probationary high school classroom with instructor's desk, bulletin boards, and posters on the wall",
+      "materials": "History textbooks, paper, pens, food, hand sanitizer, internet access for searching images, art materials for re-creating artifacts",
+      "social_setting": "General classroom setting with a teacher and probationary students",
+      "time_context": "During world history class periods"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to pay attention to the class and read about history, a subject they hated",
+      "observable_behavior": "Instead of paying attention to the class, they threw paper balls, pen caps and food across the room. They cut the teacher short with questions.",
+      "internal_state": "Disliked school, hated the subject of history, and believed they were 'bad kids'",
+      "related_quotes": [
+        "Why are you teaching us bad kids?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When interacting with classroom materials and environment",
+        "observable_behavior": "Ruined many books by tagging or tearing out the pages. Tore down parts of instructor’s bulletin boards and posters on the wall.",
+        "internal_state": "Loved to destroy things in the classroom",
+        "related_quotes": []
+      },
+      {
+        "condition": "During class time disruptions",
+        "observable_behavior": "Put food in the instructor’s desk and behind books and let it rot. Tried to set their chair on fire using hand sanitizer.",
+        "internal_state": "",
+        "related_quotes": [
+          "unauthorized science experiment."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

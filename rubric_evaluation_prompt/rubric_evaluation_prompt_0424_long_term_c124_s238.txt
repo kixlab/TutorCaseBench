@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained OTR Integration Plan
+  Check: The tutor's long-term strategy includes a systematic plan to deliver frequent, consistent opportunities to respond during all instructional routines.
+
+Criterion 2: Strategic Praise Generation
+  Check: The tutor's plan explicitly links the delivery of OTRs to the planned provision of positive reinforcement and praise.
+
+Criterion 3: Consistent Demand Persistence Routine
+  Check: The tutor outlines a consistent, long-term protocol for maintaining instructional demands despite the student's persistent challenging behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe, socially mediated challenging behaviors (aggression, disruption, elopement) triggered by task demands, driven by a desire for attention or escape. They uniquely require frequent, structured Opportunities to Respond (OTRs) to maintain engagement and access positive attention, while needing the tutor to firmly maintain instructional demands without resorting to negative feedback.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, please open your reading workbooks to page 20 so we can start our language arts lesson.
+
+STUDENT: (Grabs the workbook from the student sitting next to them) I want to use yours.
+
+TUTOR: Please return your classmate's workbook and open your own.
+
+STUDENT: (Pushes the workbook off the desk onto the floor) No, I don't want to.
+
+TUTOR: Pick up the workbook and turn to page 20.
+
+STUDENT: (Stands up and shouts loudly across the room) Make me! I'm not doing this reading!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "reading, language arts, or literacy",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "large group instruction",
+      "materials": "peer or teacher materials",
+      "social_setting": "naturally occurring instructional routines in elementary classrooms",
+      "time_context": "30-min observations"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "social positive reinforcement (i.e., access to attention/preferred items)",
+      "observable_behavior": "shouting or yelling (above current conversational level), cursing, touching or taking peer or teacher materials without permission, leaving classroom without permission",
+      "internal_state": "social positive reinforcement (i.e., access to attention/preferred items)",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "socially mediated",
+        "observable_behavior": "verbal aggression or disruption",
+        "internal_state": "social positive reinforcement (i.e., access to attention/preferred items)",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

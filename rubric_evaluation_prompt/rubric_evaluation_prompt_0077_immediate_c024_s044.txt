@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Vocabulary Translation
+  Check: The tutor explicitly defines, translates, or emphasizes specific mathematical vocabulary (e.g., comparative terms or division phrases) to ensure correct operational understanding.
+
+Criterion 2: Visual-to-Model Bridging
+  Check: The tutor explicitly prompts the student to connect a visual representation (like drawings or arrows) to specific parts of a formal model diagram (e.g., by underlining words or pointing to specific boxes).
+
+Criterion 3: Targeted Quantity Prompting
+  Check: The tutor asks connected, specific questions that direct the student's attention to identifying the distinct quantities involved and their specific roles (e.g., 'Which part tells us the value of each group?').
+
+Criterion 4: Explicit Operation Notation
+  Check: The tutor instructs the student to explicitly write down the name of the operation (e.g., 'division', 'multiplication') and/or use a simplified notation format like a fraction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Peter is a student with ASD and intellectual disabilities who relies heavily on visual modeling and drawing to solve math problems. He struggles with the conceptual understanding of multiplicative and comparative language, often misinterpreting division as multiplication or comparative phrases as additive. He requires explicit vocabulary instruction, direct bridging between his drawings and formal model diagrams, and highly structured instructional routines.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the next problem for the baseline test. You have 8 shirts and 3 pants. How many different ways can you dress?
+
+STUDENT: (Looks at the problem statement and writes down the number 8.)
+
+TUTOR: Keep trying. What else should you write?
+
+STUDENT: (Writes text related to the problem situation on the paper.)
+
+TUTOR: What is your final answer for the problem?
+
+STUDENT: Pants, shirts, socks, and underwear.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "8 shirts and 3 pants... how many ways to dress",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "baseline tests",
+      "materials": "model diagram, visual representation",
+      "social_setting": "interaction with the teacher",
+      "time_context": "baseline tests"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When encountering difficulties understanding the problem statements",
+      "observable_behavior": "provided responses using one of the numbers given in the problem or wrote text related to the problem situation",
+      "internal_state": "showing a clear lack of conceptual understanding for these problems",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When answering all the problems in the baseline tests incorrectly",
+        "observable_behavior": "responded with all possible clothing combinations, mentioning items such as “pants, shirts, socks, and underwear.”",
+        "internal_state": "encountered difficulties understanding the problem statements",
+        "related_quotes": [
+          "pants, shirts, socks, and underwear."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

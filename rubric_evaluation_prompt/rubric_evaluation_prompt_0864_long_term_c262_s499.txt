@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Delayed and Minimal Intervention
+  Check: The long-term plan must explicitly include a strategy of observing her play covertly and delaying intervention until behavior becomes extremely disruptive or a peer explicitly asks for help.
+
+Criterion 2: Preservation of Play Autonomy
+  Check: The long-term plan must refrain from imposing rigid structures on her play, such as forced turn-taking, timers, or relocating her activities to highly visible, adult-monitored areas.
+
+Criterion 3: Avoidance of Scripted SEL Language
+  Check: The long-term plan must avoid the use of pre-packaged character education, scripted SEL lessons, or providing her with 'teacher-speak' to manage peer conflicts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Delia is a highly articulate preschooler who engages in sophisticated, covert play characterized by exclusion, rule-breaking, and the weaponization of teacher-modeled language. When adults attempt to structure, monitor, or sanitize her play, she evades them by abandoning the activity and seeking out new 'illegal' spaces. She uniquely requires a 'leaky' approach to classroom management that affords her the autonomy to develop complex play narratives without rigid adult interference.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I notice you moved the cushions under the storage tables to set up your Gymnastics Game.
+
+STUDENT: (Laying down next to Sarah and whispering) Pretend I am the coolest girl in town... And we are going to have our own kingdom, with our own castle made of colors in the sky, and lava and dinosaurs, okay?
+
+TUTOR: Lizzie is walking over to your corner to ask if she can join in.
+
+STUDENT: (Giving a sympathetic look) I’m so sorry, Lizzie, but only two are allowed in Gymnastics. The space is not big enough for three.
+
+TUTOR: What are you going to do next in your game?
+
+STUDENT: (Doing a headstand) And you’re my friend, who can never be as cool as me… but you have to go out into the lava and get a throne for me to sit on. Go get Joya's small black wicker Teacher Chair.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Setting up a hidden play area and engaging in a complex fantasy narrative called the 'Gymnastics Game' while doing headstands",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Unseen corner behind storage tables, not visible from common activity areas",
+      "materials": "Cushions and pillows stealthily removed from the book area, tile floor, Joya's small black wicker Teacher Chair",
+      "social_setting": "Two girls (Delia and Sarah) cuddling together, whispering, and pretending to sleep",
+      "time_context": "Two-hour morning free play period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a peer (Lizzie) rushes over to the corner and asks to join in",
+      "observable_behavior": "Delia uses a sympathetic look and pseudo-official tone to exclude the peer, citing space limitations, and later directs her playmate to commit an act of brazen mischief by stealing the teacher's chair",
+      "internal_state": "Nervously glanced around to see if anyone was watching",
+      "related_quotes": [
+        "I’m so sorry, Lizzie, but only two are allowed in Gymnastics. The space is not big enough for three",
+        "Pretend I am the coolest girl in town ... And we are going to have our own kingdom, with our own castle made of colors in the sky, and lava and dinosaurs, okay? And you ’re my friend, who can never be as cool as me …but you have to go out into the lava and get a throne for me to sit on."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When manipulating group membership or ejecting a current player",
+        "observable_behavior": "Uses bureaucratic-style rules like 'signing up' to eject peers using a similar reasoning",
+        "internal_state": "",
+        "related_quotes": [
+          "Sarah, you have to sign up for Gymnastics. You haven ’t signed up, so I ’m so sorry you can ’t do this activity today"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

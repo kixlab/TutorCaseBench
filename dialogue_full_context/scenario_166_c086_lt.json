@@ -1,0 +1,75 @@
+{
+  "category_id": "086",
+  "category_title": "Students with learning disabilities who rely on background knowledge or prior experience during text-dependent questioning",
+  "scenario_id": "166",
+  "scenario_title": "Predicting future events for a previously read book",
+  "minimal_context": "The student is participating in a small-group reading instruction session and anticipating future events in the book 'The Mouse and the Motorcycle'.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are reading 'The Mouse and the Motorcycle'. What do you predict will happen next with Ralph and Keith?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Well, my teacher read this to us in third grade."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Try to make a prediction about what happens next."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "u:m. Does Ralph have a sister that is going to lose—I mean a brother that is going to try and ride the motorcycle and then ()"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "So usually when we predict, we predict off of what we read so far. Where is that prediction coming from?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "A silly prediction.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are reading 'The Mouse and the Motorcycle'. What do you predict will happen next with Ralph and Keith?\n\nSTUDENT: Well, my teacher read this to us in third grade.\n\nTUTOR: Try to make a prediction about what happens next.\n\nSTUDENT: u:m. Does Ralph have a sister that is going to lose—I mean a brother that is going to try and ride the motorcycle and then ()\n\nTUTOR: So usually when we predict, we predict off of what we read so far. Where is that prediction coming from?\n\nSTUDENT: A silly prediction.",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 298,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Anticipating future events in the book 'The Mouse and the Motorcycle'",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Small-group reading instruction",
+        "materials": "The Mouse and the Motorcycle book",
+        "social_setting": "Small-group",
+        "time_context": "Early in the lesson cycle"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the teacher asks 'Where is that prediction coming from?' after the student uses prior knowledge of the book",
+        "observable_behavior": "Labels her own contribution as 'A silly prediction'",
+        "internal_state": "Understood the question to imply that she had made a mistake in her response",
+        "related_quotes": [
+          "A silly prediction",
+          "u:m. Does Ralph have a sister that is going to lose—I mean a brother that is going to try and ride the motorcycle and then ()"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When engaging in a prediction task for a book the student had previously heard read aloud in a prior grade",
+          "observable_behavior": "Uses memory of the book to make predictions rather than basing responses off of what was already read",
+          "internal_state": "Memory is often a source of difficulty... the task of pretending to predict while not giving the book away would be a challenge",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

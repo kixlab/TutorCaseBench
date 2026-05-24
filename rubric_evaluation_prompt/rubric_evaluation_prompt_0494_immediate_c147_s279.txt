@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Probing Student Logic
+  Check: The tutor asks a clarifying or open-ended question that directly uses or challenges Kristoff's stated logic, rather than correcting him or changing the subject.
+
+Criterion 2: Non-Punitive Response to Protest
+  Check: The tutor refrains from reprimanding Kristoff's physical or vocal protests (e.g., lying on the floor, calling out) and does not demand immediate behavioral compliance.
+
+Criterion 3: Collaborative Negotiation
+  Check: The tutor invites Kristoff's input or asks an open-ended question to help negotiate a compromise regarding the schedule or task transition.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kristoff is a highly engaged student who protests historical injustices and rigid schedule transitions through vocal and physical resistance, such as calling out or lying on the floor. He requires a facilitator who views his resistance as a productive challenge rather than a behavioral infraction. He uniquely needs tutors to probe his logic with open-ended questions and invite his input to negotiate classroom routines, rather than attempting to control or reprimand him.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, it is time to stop our persuasive writing and transition to our math lesson for the next 30 minutes.
+
+STUDENT: But I want to keep writing. This is important to me.
+
+TUTOR: We have to follow the schedule. Please put your writing away.
+
+STUDENT: I am super mad that we have to stop.
+
+TUTOR: We need to move forward with the schedule as planned.
+
+STUDENT: Me too! I will just be here and not do anything! (He lies down on the floor)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Protesting the transition from a persuasive writing task about racial identity to a math lesson",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-class meeting",
+      "materials": "",
+      "social_setting": "Whole-class setting",
+      "time_context": "After lunch and recess, transitioning to the next 30 minutes of the schedule"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Moving forward with the schedule as planned (stopping writing to do math)",
+      "observable_behavior": "Expressing vocal resistance, lying down on the floor, and refusing to do anything to create a pause in the schedule",
+      "internal_state": "Super mad",
+      "related_quotes": [
+        "Me too! I will just be here and not do anything!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to transition away from an engaging task",
+        "observable_behavior": "Enacting agency, talking about what is important to them, engaging in resistance, and expressing their feelings and emotions",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

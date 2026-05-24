@@ -1,0 +1,78 @@
+{
+  "category_id": "014",
+  "category_title": "Independent students who struggle with spatial visualization in three-dimensional geometry problems",
+  "scenario_id": "028",
+  "scenario_title": "3D Pythagorean Theorem truck problem with 2D diagram",
+  "minimal_context": "Lisa is working independently at her desk to solve a word problem about fitting a long pole in a loading truck using a diagram of a rectangular prism.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is the multistep word problem about fitting a long pole in the back of a loading truck. You can use this diagram of a rectangular prism with the labeled dimensions to solve it."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks at the diagram and her scratch paper) Is that supposed to be the way it is farthest in the truck?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think based on the picture?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Is the next one going to be in here? Is it still Pythagorean Theorem?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just try your best to calculate the answer using the numbers provided in the diagram."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Starts to guess again using a different combination of dimensions.) I’m not sure yet, because we don’t know the whole truck.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is the multistep word problem about fitting a long pole in the back of a loading truck. You can use this diagram of a rectangular prism with the labeled dimensions to solve it.\n\nSTUDENT: (Looks at the diagram and her scratch paper) Is that supposed to be the way it is farthest in the truck?\n\nTUTOR: What do you think based on the picture?\n\nSTUDENT: Is the next one going to be in here? Is it still Pythagorean Theorem?\n\nTUTOR: Just try your best to calculate the answer using the numbers provided in the diagram.\n\nSTUDENT: (Starts to guess again using a different combination of dimensions.) I’m not sure yet, because we don’t know the whole truck.",
+  "immediate_dialogue_prompt": 48,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "fitting a long pole in the back of a loading truck, but the provided diagram consisted only of a rectangular prism with some labeled dimensions",
+        "learning_goal": "solve a multistep, word problem that required three-dimensional use of the Pythagorean Theorem"
+      },
+      "context": {
+        "environment": "desk",
+        "materials": "diagram consisted only of a rectangular prism with some labeled dimensions",
+        "social_setting": "worked independently",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "multistep, word problem that required three-dimensional use of the Pythagorean Theorem",
+        "observable_behavior": "Starts to guess again using a different combination of dimensions.",
+        "internal_state": "difficulty visualizing the entire 3D space",
+        "related_quotes": [
+          "I’m not sure yet, because we don’t know the whole truck."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Even with the semiconcrete visual and verbal supports",
+          "observable_behavior": "continued to struggle",
+          "internal_state": "",
+          "related_quotes": [
+            "Is it still Pythagorean Theorem?",
+            "Is that supposed to be the way it is farthest in the truck?",
+            "Is the next one going to be in here?"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

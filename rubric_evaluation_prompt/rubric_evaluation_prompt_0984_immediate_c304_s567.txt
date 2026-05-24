@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Taboo Topics
+  Check: The tutor's response must accept, validate, or explore the student's chosen topic (even if it involves taboo subjects like gangs, drugs, or weapons) without redirecting to a 'safer' school-approved topic.
+
+Criterion 2: Suspension of Language Policing
+  Check: The tutor must refrain from correcting, reprimanding, or policing the student's use of non-standard language, swearing, or abrasive tone.
+
+Criterion 3: Alignment of Concepts with Student Interests
+  Check: If the tutor introduces new concepts, narratives, or outside expertise, they must explicitly connect them to the student's self-selected topic rather than a separate, teacher-imposed subject.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These students are highly disengaged from traditional schooling, frequently walking out and dismissing teacher-selected tasks as boring or stupid. They uniquely require extreme flexibility, the suspension of traditional classroom rules regarding language and taboo topics, and the ability to use digital media to explore self-selected topics related to their lived experiences (e.g., gangs, drugs).
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's finish reading the newspaper article about Aboriginal gangs from yesterday.
+
+STUDENT: I don't want to read that again. We should talk about gang clothing, weapons, and initiation rites instead.
+
+TUTOR: We need to focus on the assignment first.
+
+STUDENT: Why do we need to do this? So what?
+
+TUTOR: Well, what do you all think? So, why do you think the author...OK, let's look at the type of language he uses. He is always comparing us, right? To whom is he comparing us? Why is he doing that?
+
+STUDENT: It’s all stupid. I didn’t come to school to learn this. This is gay. Boring...boring...boring.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Analyze a newspaper article about Aboriginal gangs to look at the type of language the author uses and to whom he is comparing them",
+      "learning_goal": "Understand identity construction and stereotypes"
+    },
+    "context": {
+      "environment": "Alternative education classroom",
+      "materials": "Newspaper article about Aboriginal gangs",
+      "social_setting": "Whole-class discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher asked, 'So, why do you think the author...OK, let's look at the type of language he uses. He is always comparing us, right? To whom is he comparing us? Why is he doing that?'",
+      "observable_behavior": "Students verbally dismissed the lesson, stating 'It's all stupid', 'This is gay', 'Why do we need to do this?', and 'Boring...boring...boring'",
+      "internal_state": "Frustration with trying to engage in texts and topics they did not choose",
+      "related_quotes": [
+        "It’s all stupid. I didn’t come to school to learn this.",
+        "This is gay.",
+        "Why do we need to do this? So what?",
+        "Boring...boring...boring."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the teacher attempted to finish reading the newspaper article the next day",
+        "observable_behavior": "Resisted reading the newspaper article again and on their own initiative diverted to discuss gangs, gang clothing, weapons, gang initiation rites, gang hierarchies, prostitution, and gang protection",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

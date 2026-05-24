@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Microaggression Prevention Strategy
+  Check: The long-term plan must include specific strategies to identify, prevent, or eliminate sarcastic, infantilizing, or belittling language from the tutor's instructional practice.
+
+Criterion 2: Academic Identity Affirmation
+  Check: The long-term plan must incorporate methods for consistently affirming the student's intelligence and academic belonging (e.g., culturally responsive teaching practices, highlighting strengths, framing errors as normal).
+
+Criterion 3: Reflective Communication Practice
+  Check: The long-term plan must demonstrate a commitment to ongoing self-reflection or professional development regarding the tutor's own communication style, implicit biases, or emotional regulation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Javier is a student who is highly sensitive to intelligence-typed microaggressions, sarcasm, and public belittling. When his competence is questioned or infantilized, he experiences stereotype threat and reacts by becoming expressionless, silent, and disengaged as a form of protest. He uniquely requires a culturally responsive environment where his academic identity is actively affirmed and instructors proactively monitor their communication for implicit biases.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I have collected the quizzes. Now you got to show your work. Javier, come to the board to solve this problem.
+
+STUDENT: (Walks to the board in front of the class) Okay, I will write out my steps for this equation.
+
+TUTOR: Go ahead and solve it.
+
+STUDENT: (Attempts the problem on the board) So if I multiply these, the final answer is 24.
+
+TUTOR: That is the wrong answer. You need to do it like you are in kindergarten, that way you make no mistakes, right? Write this 17 times. (Writes "17 times" on the board) Right, Javier?
+
+STUDENT: (Looks at the board expressionless and falls completely silent, disengaging from the task as an act of protest.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solve a problem on the board to 'show your work'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General education math course, at the board in front of the class",
+      "materials": "Board",
+      "social_setting": "In front of the class",
+      "time_context": "After collecting quizzes from students"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the student attempts the problem but gets the wrong answer and the professor states, 'You need to do it like you are in kindergarten, that way you make no mistakes, right? Write this 17 times'",
+      "observable_behavior": "Looks at the board expressionless",
+      "internal_state": "Feeling disempowered, cognitive distraction and disruption of attention, attempt to make meaning of the event (Did that really just happen?), and activation of a stereotype threat (Do I have to prove myself as a member of my group yet again?)",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Following a microaggressive event where comments made by instructors are sarcastic and laced with their obvious frustration",
+        "observable_behavior": "Eruptions followed by silencing of students, behavioral disruptions, and disengagement initiated as an act of protest",
+        "internal_state": "Feels distinctly uncomfortable, questioning of social belongingness, undermined academic self-concept, and reinforced stereotype vulnerability",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

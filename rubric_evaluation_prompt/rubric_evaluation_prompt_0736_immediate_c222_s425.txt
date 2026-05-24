@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Theatrical Peer Praise
+  Check: The tutor uses highly visible, loud, or exaggerated praise and attention toward an on-task peer rather than directly reprimanding the target student for minor off-task behavior.
+
+Criterion 2: Discreet Tolerance of Minor Play
+  Check: The tutor ignores or only discreetly monitors minor, non-dangerous off-task behaviors (e.g., a quick unauthorized trick) without stopping the lesson to issue a direct reprimand.
+
+Criterion 3: Visible Intervention for Harmful Behavior
+  Check: If the student engages in physically harmful or highly disruptive behavior (e.g., violent blows, shoving), the tutor issues a clear, public reprimand or strict boundary.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student rapidly cycles between disruptive peer play and on-task work, using 'ostentation' to demand approval and 'masking' to hide misbehavior. They require a delicate balance of discreet monitoring and highly visible praise of peers, as constant direct correction triggers anger and complete disengagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright, it's time for the 'Flying' workshop. I want everyone doing straight jumps over the horse. Please line up.
+
+STUDENT: (Whispering to a friend) There I make the jump, it's easy, I'm going to have fun. (Stands in line for the run-up)
+
+TUTOR: Next person, go ahead.
+
+STUDENT: (Executes a quick somersault instead of a straight jump, lands, and immediately returns to the back of the line to wait, pretending to fulfill expectations)
+
+TUTOR: Keep practicing your jumps. I need to go take care of the other group for a minute.
+
+STUDENT: (Sees the teacher leaving) The teacher can't see us, he's looking in the other direction. (Insults Aris who is preparing to jump. Laughs loudly when Aris misses and falls. Tries to flee as Aris pursues him, receives a violent blow on the shoulder) Stop, stop! (Laughs)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Executing a jump in the 'Jumping over' or 'Flying' workshop (teacher asked for 'straight jumps')",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "PE classes in a shared work space",
+      "materials": "Horse for jumping",
+      "social_setting": "Waiting in line in their workshop, teacher taking care of another group",
+      "time_context": "Off-task jumps lasted only a split second embedded in nearly a minute of on-task activities"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the student thinks the exercise is easy or sees the teacher leaving/looking in the other direction",
+      "observable_behavior": "Insults a peer preparing to make his jump. Tries to flee a peer, receives a violent blow on the shoulder, shouts while laughing 'Stop, stop !'. Frequently tries somersaults even though the teacher asked for 'straight jumps'.",
+      "internal_state": "Believes there will be time to play around because the exercise is easy.",
+      "related_quotes": [
+        "There I make the jump, it’s easy, I’m going to have fun.",
+        "I’m working ...and here I see the teacher leaving, so I take the opportunity to play a little bit with my friend Alexis. The teacher can’t see us, he’s looking in the other direction."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When performing the required physical task",
+        "observable_behavior": "Embeds off-task jumps (somersaults) that last only a split second into the remaining on-task actions (jump reception, return to the back of the line, waiting to go again, run-up).",
+        "internal_state": "Develops elaborate strategies to play while pretending to fulfill the teacher's expectations.",
+        "related_quotes": [
+          "Yeah, you have to be careful not to get caught !"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

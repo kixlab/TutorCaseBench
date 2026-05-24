@@ -1,0 +1,77 @@
+{
+  "category_id": "054",
+  "category_title": "Students who attempt to engage in peer-to-peer learning despite being positioned as work-avoidant",
+  "scenario_id": "107",
+  "scenario_title": "U.S. History reading and peer collaboration",
+  "minimal_context": "Mark is in U.S. History class where the teacher is reading and summarizing a history text for the students.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's go through this history text. I'm going to read it out loud and write down the answers for you, so just sit there quiet and pay attention."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Can you try to let us do the work instead of sitting and watching you do it for us? And maybe try to keep the texts in our mid-range of reading?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just follow along with what I am doing on the board."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Turns to a classmate to talk) I can explain this part to you. I'm just making a comment to help the person learn."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please stop the side conversation and face forward."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Grows socially distant and reluctant to participate) We completely go off task because we feel what we're doing is just completely meaningless. Moore isn't helping me . . . I hear Lincoln High has a stronger program.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's go through this history text. I'm going to read it out loud and write down the answers for you, so just sit there quiet and pay attention.\n\nSTUDENT: Can you try to let us do the work instead of sitting and watching you do it for us? And maybe try to keep the texts in our mid-range of reading?\n\nTUTOR: Just follow along with what I am doing on the board.\n\nSTUDENT: (Turns to a classmate to talk) I can explain this part to you. I'm just making a comment to help the person learn.\n\nTUTOR: Please stop the side conversation and face forward.\n\nSTUDENT: (Grows socially distant and reluctant to participate) We completely go off task because we feel what we're doing is just completely meaningless. Moore isn't helping me . . . I hear Lincoln High has a stronger program.",
+  "immediate_dialogue_prompt": 187,
+  "long_term_dialogue_prompt": 188,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Reading history texts",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "U.S. History class",
+        "materials": "history texts",
+        "social_setting": "Teacher performing the work for the students while they are sitting and watching",
+        "time_context": "middle of the school year"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the teacher is sitting and watching him do it for us and using texts outside their mid-range of reading",
+        "observable_behavior": "completely go off task, engage in out-of-turn talking and side conversation",
+        "internal_state": "feel what we're doing is just completely meaningless",
+        "related_quotes": [
+          "[We] completely go off task because we feel what we're doing is just completely meaningless.",
+          "comment[s] to help the person learn."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When expected to sit there quiet and pay attention without meaningful instruction",
+          "observable_behavior": "grown socially distant from teachers and peers and was reluctant to participate in class",
+          "internal_state": "resisted a rendering of himself as noncompliant",
+          "related_quotes": [
+            "Moore isn't helping me . . . I hear Lincoln High has a stronger program."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

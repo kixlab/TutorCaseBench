@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Logistical Scaffolding
+  Check: The tutor explicitly offers, confirms, or facilitates logistical support (e.g., transport, wake-up routines) rather than simply demanding the student's attendance.
+
+Criterion 2: Individualized Emotional Triage
+  Check: The tutor offers individual attention to listen to the student's problems or feelings before attempting to integrate them into a group or task.
+
+Criterion 3: Adult-to-Adult Communication Style
+  Check: The tutor uses respectful, non-authoritarian language that acknowledges the student's autonomy, avoiding parental or punitive directives (e.g., avoiding 'You need to' or 'We expect you to').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits chronic absenteeism and school refusal, driven by a deep aversion to mainstream environments where they feel infantilized. They uniquely require holistic logistical support (like wake-up calls and transport) to overcome attendance barriers, alongside gradual integration into small, adult-oriented vocational settings where their autonomy is respected.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Good morning. I am calling to wake you up and remind you that the minibus will be arriving soon to take you to today's off-site activity.
+
+STUDENT: (yawns) I'm not going. I don't like going to these things.
+
+TUTOR: You need to attend the program today. Please get out of bed.
+
+STUDENT: I don't want to. At work experience and college you get treated more of an adult, and at school I was like – I thought I was treated more of a child, so I didn't go.
+
+TUTOR: We expect you to participate. The minibus is on its way.
+
+STUDENT: I don't care. I'm not getting on the minibus and I'm not going.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "To attend an activity and participate on programmes",
+      "learning_goal": "To make a successful transition into post-16 learning and avoid becoming 'not in education, employment or Training'"
+    },
+    "context": {
+      "environment": "Off-site programmes and the young person in their home",
+      "materials": "Minibus transport, phone",
+      "social_setting": "Part-time out-of-school alternative packages of provision",
+      "time_context": "In the morning"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "In the morning when expected to attend an activity",
+      "observable_behavior": "Poor attendance and a greater likelihood to play truant",
+      "internal_state": "Lower aspirations, dislike of school, and motivation issues",
+      "related_quotes": [
+        "At work experience and college you get treated more of an adult, and at school I was like – I thought I was treated more of a child, so I didn’t go."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When placed in mainstream schooling",
+        "observable_behavior": "Disengaging from mainstream schooling, becoming truants and absentees",
+        "internal_state": "Feeling treated more of a child",
+        "related_quotes": [
+          "At work experience and college you get treated more of an adult, and at school I was like – I thought I was treated more of a child, so I didn’t go."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,84 @@
+{
+  "category_id": "273",
+  "category_title": "Students without behavior problems who demonstrate higher rates of active and passive engagement",
+  "scenario_id": "519",
+  "scenario_title": "Unacknowledged hand-raising during academic instruction",
+  "minimal_context": "The student is sitting at their desk working on an assigned reading and writing task during teacher-directed academic instruction.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please sit at your desk and complete the assigned reading and writing tasks."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Sits quietly at the desk, tracking the materials with eyes, and then raises hand to respond to the instruction.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Everyone, just keep working on your own."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Keeps hand raised, attempting to actively engage with the instruction and respond to the teacher.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Look at your own papers and keep reading."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Drops hand, stops reading and writing, and becomes completely off-task after the raised hand is ignored.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please sit at your desk and complete the assigned reading and writing tasks.\n\nSTUDENT: (Sits quietly at the desk, tracking the materials with eyes, and then raises hand to respond to the instruction.)\n\nTUTOR: Everyone, just keep working on your own.\n\nSTUDENT: (Keeps hand raised, attempting to actively engage with the instruction and respond to the teacher.)\n\nTUTOR: Look at your own papers and keep reading.\n\nSTUDENT: (Drops hand, stops reading and writing, and becomes completely off-task after the raised hand is ignored.)",
+  "immediate_dialogue_prompt": 899,
+  "long_term_dialogue_prompt": 900,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Engaging with instruction via choral responding, raising hand, responding to teacher instruction, writing, reading or otherwise completing assigned tasks",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Teacher-directed academic instruction in reading, math, social studies, or science",
+        "materials": "Desk, collaborative work group, materials",
+        "social_setting": "Classrooms, where students spend the majority of their time",
+        "time_context": "15-minute observation intervals"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Teachers tended not to respond to students even when the student appropriately elicited such with a raised hand",
+        "observable_behavior": "Act in a negative manner to garner teacher attention and become off-task",
+        "internal_state": "",
+        "related_quotes": [
+          "act in a negative manner to garner teacher attention"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When no task or expectations were apparent (down time)",
+          "observable_behavior": "Off-task",
+          "internal_state": "",
+          "related_quotes": [
+            "coded as “down time,” indicating no task or expectations were apparent"
+          ]
+        },
+        {
+          "condition": "When passively attending to instruction",
+          "observable_behavior": "Sitting quietly at desk and facing the teacher who is instructing and a student sitting quietly with collaborative work group but not actively speaking, writing, or otherwise working on an activity",
+          "internal_state": "",
+          "related_quotes": [
+            "tracking with eyes"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

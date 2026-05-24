@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Immediate Idea Restoration
+  Check: The tutor provides an exact verbal reminder of the phrase David just said, or offers to dictate it for him, rather than just prompting him to 'keep trying'.
+
+Criterion 2: Metacognitive Error Modeling
+  Check: When an SR error occurs, the tutor models thinking aloud about the word's sounds or spelling instead of instructing David to manually navigate the device's text editing tools.
+
+Criterion 3: Swift Technical Buffering
+  Check: The tutor swiftly intervenes to manage, delete, or bypass disruptive SR transcriptions rather than letting David struggle with the interface.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+David is a first-grade struggling reader who experiences severe cognitive overload when transitioning from brainstorming to using speech recognition (SR) technology. The mechanical act of launching the app causes him to 'go blank' and forget his ideas, and he quickly abandons tasks or deletes entire drafts when faced with transcription errors or cumbersome editing tools. He uniquely needs immediate verbal scaffolding to hold his ideas in working memory, swift teacher intervention to bypass technical hurdles, and a shift away from using SR for full-sentence drafting toward generating word banks and messy drafts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the sentence you just dictated into the iPad and fix any mistakes.
+
+STUDENT: That’s not what I said!
+
+TUTOR: Try to move the cursor to the end of the wrong word and backspace.
+
+STUDENT: (Touches the screen repeatedly) I can't get the little line to move.
+
+TUTOR: Keep trying to touch the word until it is selected, then choose delete.
+
+STUDENT: (Deletes the entire draft) I'm just deleting the whole thing. My story was already done when I said it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Evaluating and discussing incorrect SR transcriptions and attempting to revise and edit transcribed text",
+      "learning_goal": "Navigating the stages of the writing process (brainstorming, drafting, revising)"
+    },
+    "context": {
+      "environment": "Supervised writing center",
+      "materials": "iPads, SR apps, native text editing features (cursor movement, selection, cut/paste), chart paper",
+      "social_setting": "Peer conversations and teacher supervision",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When SR was inaccurate or when attempting to use text editor protocols (e.g., move the cursor to the end of the word and backspace)",
+      "observable_behavior": "Students said to me, 'That’s not what I said!' They deleted entire sentences and drafts. They consistently ignored the writing process and wanted to skip brainstorming and drafting and go straight to revising.",
+      "internal_state": "Text editor protocols shifted students’ focus from revising and editing meaningful compositions to using the text editor.",
+      "related_quotes": [
+        "That’s not what I said!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participants were unsure of the appropriateness of a transcribed word",
+        "observable_behavior": "They consistently and quickly turned to me for assistance.",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When using SR for the writing process",
+        "observable_behavior": "To them, what they dictated was the final composition. They dictated complete ideas.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

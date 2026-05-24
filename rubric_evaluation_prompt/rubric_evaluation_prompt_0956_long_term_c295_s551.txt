@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Threatening Persistence Modeling
+  Check: The long-term plan includes using puppets or similar non-threatening, playful models to demonstrate persistence and how to handle frustration.
+
+Criterion 2: Proactive Emotional Regulation Instruction
+  Check: The long-term plan incorporates explicit teaching, modeling, or role-playing of calming strategies and problem-solving outside of immediate crisis moments.
+
+Criterion 3: In-Context Skill Generalization
+  Check: The long-term plan embeds the practice of social-emotional skills directly into daily self-care or fine motor routines where his triggers naturally occur.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Zeke is a preschooler who struggles with emotional regulation, often whining or crying for extended periods when he perceives self-care or fine motor tasks as too difficult. He lacks the independent coping skills to push through frustration, requiring explicit visual supports, alternative behavior prompts (asking for help), and tangible reinforcement to successfully navigate challenges.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Zeke, it is time for recess. Please get your coat from the hook and put it on.
+
+STUDENT: (Zeke takes his coat off the hook and tries to push his arm into the sleeve, but it gets stuck inside out.)
+
+TUTOR: Keep trying, you can figure it out.
+
+STUDENT: (Zeke pulls at the tangled sleeve and begins to whine and cry softly as he perceives the task is too difficult.)
+
+TUTOR: Just push your arm through the hole.
+
+STUDENT: (Zeke drops the coat on the floor and begins crying loudly. He continues to cry continuously for over 60 seconds without attempting the task or asking for help.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Putting on/taking off his clothes (i.e., coat, shirt, pants)",
+      "learning_goal": "Attempt the task or ask for help without crying"
+    },
+    "context": {
+      "environment": "Arrival routine, before recess, and dismissal routine",
+      "materials": "Coat, visual prompt mounted above his coat hook that includes pictures of the steps, sticker chart",
+      "social_setting": "Classroom environment with Mr. Cho",
+      "time_context": "Morning arrival, before recess, or dismissal"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Zeke perceives a task to be too difficult (e.g., putting his coat on)",
+      "observable_behavior": "Zeke whines, cries softly or cries loudly for durations ranging from 41 s to 77 seconds or longer",
+      "internal_state": "Perceives a task to be too difficult; frustrated",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When he gets dressed in the morning or during classroom routines",
+        "observable_behavior": "Crying episodes lasting 77 seconds or longer with five or more episodes per day",
+        "internal_state": "Frustrated",
+        "related_quotes": [
+          "Zeke’s crying is preventing him from learning new skills."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

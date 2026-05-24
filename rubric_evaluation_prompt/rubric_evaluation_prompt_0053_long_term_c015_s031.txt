@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Constructivist Lesson Design
+  Check: The tutor's long-term strategy outlines a method for the student to discover or construct concepts themselves (e.g., inquiry-based learning, problem-solving discussions) rather than receiving direct instruction.
+
+Criterion 2: Sustained Voice and Agency
+  Check: The tutor's plan includes structural opportunities for the student to regularly lead discussions, choose topics, or voice their interpretations in every session.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly susceptible to boredom and sleepiness in passive learning environments, often resorting to disruptive behaviors like talking to friends or cutting paper when subjected to continuous lecturing or dictation. They uniquely require amusing, student-centered, and constructivist approaches where they are given the right to speak, visual stimuli, and inclusive attention that does not exclusively favor 'successful' students.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please copy down the next set of algebra rules as I dictate them to you.
+
+STUDENT: (Yawns) You just tell and tell and tell... we only dictate even in algebra.
+
+TUTOR: Just keep writing what I am saying.
+
+STUDENT: (Puts head on desk) It's been 20 minutes of just focusing on the course, I feel sleepy.
+
+TUTOR: Sit up and focus on the algebra.
+
+STUDENT: Hey, did anyone watch the game last night? I'm bored.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in an algebra class characterized by constant lecturing and dictation without student interaction.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Attending a general classroom lecture",
+      "materials": "",
+      "social_setting": "teacher focuses exclusively on the course content",
+      "time_context": "after 20 minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "after 20 minutes",
+      "observable_behavior": "all of the students feel sleepy after 20 minutes, apart from some few in the front, the rest sleeps",
+      "internal_state": "feel sleepy",
+      "related_quotes": [
+        "As most of the teachers focus only on the course, all of the students feel sleepy after 20 minutes, apart from some few in the front, the rest sleeps"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "One of the students who get bored",
+        "observable_behavior": "wants to disrupt the class, changes the subject",
+        "internal_state": "bored",
+        "related_quotes": [
+          "One of the students who get bored wants to disrupt the class, changes the subject, the teacher gets angry and send the student out of the classroom"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,72 @@
+{
+  "category_id": "122",
+  "category_title": "Children with autism who exhibit disruptive or avoidant behaviors (shouting, random clicking) during difficult reading tasks",
+  "scenario_id": "233",
+  "scenario_title": "Formulating verbal responses during standardized reading assessments",
+  "minimal_context": "The student is taking a standardized reading assessment with a familiar teacher and is asked to read a passage and retell the story.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please read this passage out loud for the assessment."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Reads slowly) The boy was walking and talking."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Now, please tell me what happened in the story."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Long pause) Boy was walking and talking."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Can you formulate a different answer to tell me more?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Shouts) No! (Looks back at the page and reads with errors) Boy has... walking... talking.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please read this passage out loud for the assessment.\n\nSTUDENT: (Reads slowly) The boy was walking and talking.\n\nTUTOR: Now, please tell me what happened in the story.\n\nSTUDENT: (Long pause) Boy was walking and talking.\n\nTUTOR: Can you formulate a different answer to tell me more?\n\nSTUDENT: (Shouts) No! (Looks back at the page and reads with errors) Boy has... walking... talking.",
+  "immediate_dialogue_prompt": 415,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "formulate a verbal answer",
+        "learning_goal": "retell fluency"
+      },
+      "context": {
+        "environment": "assessments were conducted as stated in the assessment manuals",
+        "materials": "DORF and DRA assessment materials, tangible reinforcement",
+        "social_setting": "familiar teacher administered the tests",
+        "time_context": "short sessions"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "additional demand to formulate a verbal answer",
+        "observable_behavior": "making more errors with their reading as evidenced by word substitutions (e.g., reading “was ”as “has ”) and word omissions (e.g., leaving out small words such as conjunctions)",
+        "internal_state": "comprehension processing speeds were sometimes low",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "For those with expressive language deficits (Sarah, with an average utterance length of 5 and Mark, with an average utterance length of 7)",
+          "observable_behavior": "comprehension skills to be underestimated",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

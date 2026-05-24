@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Contingent Demand Removal
+  Check: If the aggression is triggered by a task demand, the tutor immediately removes the task instructions and materials for a brief period rather than insisting on compliance.
+
+Criterion 2: Contingent Attention Provision
+  Check: If the aggression is triggered by the withdrawal of adult attention, the tutor immediately turns back to the student, provides a verbal statement of concern, and offers brief physical comfort (e.g., a pat on the back).
+
+Criterion 3: Contingent Tangible Access
+  Check: If the aggression is triggered by the restriction of a preferred item or food, the tutor immediately restores the student's access to that item.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Lauren is a 5-year-old with severe autism who communicates in one-word utterances and frequently engages in aggressive behaviors (screaming, pushing, kicking) to escape demands, gain attention, or access tangibles. She is highly sensitive to her natural classroom environment and exhibits severe observational reactivity in contrived settings, requiring interventions to be embedded naturally rather than in isolated areas.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here are the rings to stack. I need to complete some work. (Turns body away from the student)
+
+STUDENT: Ring.
+
+TUTOR: Keep stacking.
+
+STUDENT: Look.
+
+TUTOR: I am working right now.
+
+STUDENT: (Screams, grabs the teacher, and begins pushing and kicking)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engage with independent work or leisure materials (e.g., picture cards to sort, match, or rings to stack)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Self-contained special education classroom for students with autism",
+      "materials": "Independent work or leisure materials (picture cards to sort, match, or rings to stack)",
+      "social_setting": "Regularly scheduled activities alongside her classmates; teacher sitting next to the student",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Teacher explained that she needed to complete some work, turned her body away from the student, and removed attention for 60 s",
+      "observable_behavior": "Screaming, pushing, kicking, and grabbing teachers",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attention is removed during independent work",
+        "observable_behavior": "Episodes of aggressive behaviors lasted up to 2 min",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

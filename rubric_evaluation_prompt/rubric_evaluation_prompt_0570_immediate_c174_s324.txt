@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Comprehension Verification Before Judgment
+  Check: The tutor's response includes a step to review, clarify, or verify the student's comprehension of the story's basic facts before or alongside probing their moral stance.
+
+Criterion 2: Open-Ended Moral Probing
+  Check: The tutor asks at least one open-ended question that prompts the student to explain the reasoning behind their moral judgment or perspective.
+
+Criterion 3: Personal Experience Elicitation
+  Check: The tutor asks a situation-specific question that invites the student to relate the scenario to their own personal experiences, feelings, or real-life relationships.
+
+Criterion 4: Absence of Authoritarian Directives
+  Check: The tutor avoids using harsh, punitive, or 'do what I say or else' language, instead maintaining a collaborative and respectful tone.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits a cooperative moral orientation, deeply valuing social harmony and justice, but often omits critical details when initially recalling a story. They are highly sensitive to authoritarian or punitive approaches, which trigger fear, anger, and retaliatory disobedience. They uniquely need comprehension verification before making moral judgments, as well as caring, non-coercive interactions that connect moral dilemmas to their personal experiences.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I just read you the story about the Mother's Scissors. Can you tell me what the story was about?
+
+STUDENT: It was just about some kids and a pair of scissors.
+
+TUTOR: What do you think about the mother punishing all of the children because she does not know who actually played with her scissors?
+
+STUDENT: I think a child might think his mother was mean and it's not good to have a child think you're mean.
+
+TUTOR: What if the mother decides to use a really harsh punishment to make sure they always do what she says?
+
+STUDENT: The little boy will start acting afraid, and if you're afraid of something, then you start acting mean also. They might just disobey her on purpose to get back at her.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Evaluating moral dilemmas such as 'Louise's Dilemma', 'Mother's Scissors', 'The Long Walk', and 'Boxcar Children' by making an issue choice and explaining reasoning",
+      "learning_goal": "Interpret the moral elements of each story"
+    },
+    "context": {
+      "environment": "Individually conducted moral dilemma interview",
+      "materials": "Moral dilemmas read aloud",
+      "social_setting": "One-on-one interview",
+      "time_context": "Immediately after each story was told"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When subjected to authoritarian 'do what I say or else' relationships or harsh punishment",
+      "observable_behavior": "Prescriptions of retaliation, retribution, and disobedience; starts acting afraid and acting mean also",
+      "internal_state": "Anger, sadness, and fear",
+      "related_quotes": [
+        "The little boy will start acting afraid [if punished] and if you’re afraid of something, then you start acting mean also."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Immediately after each story was told when asked to relate what the story was about",
+        "observable_behavior": "Omitted critical comprehension information in the retelling of the story",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When anticipating feelings of sadness or abandonment",
+        "observable_behavior": "Predicts that someone could do something against the law just because they are so sad",
+        "internal_state": "Sadness",
+        "related_quotes": [
+          "If you leave somebody, someone could be so sad that something really bad could happen to them. Like they could, you know, do something against the law just because they are so sad."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

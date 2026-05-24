@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physical Prompting and Error Blocking
+  Check: The tutor's response includes or recommends direct physical guidance (e.g., hand-over-hand prompting) to help the student complete the action or to physically prevent them from advancing the screen prematurely.
+
+Criterion 2: Active Communication Partnership
+  Check: In AAC contexts, the tutor actively engages in a back-and-forth communication exchange with the student rather than simply issuing a verbal command to use the device.
+
+Criterion 3: Direct Interface Modeling
+  Check: The tutor explicitly models or demonstrates the correct physical interaction with the app (e.g., showing how to move an object rather than just tapping it) before expecting the student to perform it.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is a nonverbal student with ASD who struggles with independent iPad use, frequently engaging in repetitive stereotypical movements (rapid tapping/swiping), premature screen advancing, and navigating away from AAC apps to play games. The evidence reveals they uniquely require direct physical intervention (hand-over-hand prompting), active professional presence, and strict separation of devices (one for AAC, one for games) to successfully fulfill app functions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for the Speech with Milo app. Touch Milo the mouse.
+
+STUDENT: (Touches Milo the mouse on the iPad.)
+
+TUTOR: Listen to the preposition.
+
+STUDENT: (Advances the screen before the audio description is completed.)
+
+TUTOR: Let's go back. Touch Milo and watch what he does.
+
+STUDENT: (Touches Milo the mouse, but advances the screen before Milo demonstrates the preposition.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "touching Milo the mouse, listening to a preposition named, and watching Milo demonstrate the preposition",
+      "learning_goal": "to teach prepositions"
+    },
+    "context": {
+      "environment": "natural classroom environment",
+      "materials": "iPad, Speech with Milo: Sequencing app",
+      "social_setting": "participants independently used the iPad",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "before Milo demonstrated the preposition",
+      "observable_behavior": "participant advanced the screen before Milo demonstrated the preposition",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a flashcard appears, the animal must be tapped, and a description of the animal is provided",
+        "observable_behavior": "participant advanced the screen before the description was completed",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Private Emotional Validation
+  Check: The tutor's response includes a private acknowledgment that validates or normalizes the student's frustration or anxiety without judging them.
+
+Criterion 2: Structural Labor Redistribution
+  Check: The tutor proposes or initiates a practical discussion about redistributing group labor, roles, or deadlines.
+
+Criterion 3: Indirect Public Communication Framing
+  Check: If guiding the student to communicate with the group, the tutor suggests indirect, non-threatening, or structured formats (e.g., metaphors, structured feedback forms) rather than direct emotional confrontation.
+
+Criterion 4: Protection from Public Emotional Exposure
+  Check: The tutor does NOT instruct or pressure the student to directly express their anger, frustration, or emotional grievances to their peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with the tension between public politeness and private frustration regarding unequal peer contributions in group work. They tend to mask their true feelings publicly or apologize for venting, while privately experiencing anxiety and disengagement. They uniquely require private channels to express emotions, individual validation to normalize these feelings, and structural help redistributing group labor rather than forced public confrontation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I am reviewing the online discussion board for your research team as the final project deadline approaches. How is the collaboration going?
+
+STUDENT: I posted a message to the group because most of you thus far have only told me that the [questions] are crap, too long, and irrelevant ...well that is great and all, but it is not too helpful or productive.
+
+TUTOR: What happened after you shared that on the discussion board?
+
+STUDENT: When my teammates responded with apologies and constructive feedback, I posted an apology for my venting. I told them I hope it did not come off as being too harsh or bitchy, I really did not mean to be. I just wanted to name it as frustration rather than anger.
+
+TUTOR: Please continue working with your team to finish the assignment.
+
+STUDENT: With the diversity of personalities and the perception of unequal contributions of peers, my emotions have intensified with frustration and anxiety. I feel my own contributions are inadequate, so I have just disengaged from the project.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Collaborating in research teams as final project deadlines approached",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "online discussion board",
+      "materials": "online discussion board, weekly journal reflections",
+      "social_setting": "diversity of personalities in their research teams",
+      "time_context": "As class deadlines approached"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "perception of unequal contributions of peers",
+      "observable_behavior": "disengaged from the project",
+      "internal_state": "emotions intensified with frustration and anxiety",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When teammates responded with apologies and constructive feedback",
+        "observable_behavior": "posted an apology for her ‘venting’, reinforcing the notion that emotions are inappropriate in the classroom",
+        "internal_state": "minimized her emotions by naming them as frustration rather than anger, anger being one of the emotions that women in our culture are discouraged from expressing",
+        "related_quotes": [
+          "Most of you thus far have only told me that the [questions] are crap, too long, and irrelevant ...well that is great and all, but it is not too helpful or productive ...I am telling you what I think and feel. I hope it did not come off as being too harsh or bitchy, I really did not mean to be."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

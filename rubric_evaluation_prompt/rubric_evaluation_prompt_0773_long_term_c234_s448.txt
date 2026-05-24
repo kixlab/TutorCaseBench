@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Integration of Tangible and Home Literacies
+  Check: The long-term plan includes structured opportunities (e.g., 'The Important Bag') for Luis to bring in and discuss physical items from home to bridge his out-of-school and in-school literacies.
+
+Criterion 5: Sustained Text Leveling and Monitoring
+  Check: The long-term plan includes a mechanism for continuously assessing Luis's decoding abilities to ensure assigned reading parts remain manageable and appropriately leveled over time.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Luis is an eager student who relies heavily on physical movement, rhythm, and memory rather than text-based decoding. He frequently guesses words based on illustrations or reads slightly behind his peers' voices. He uniquely requires explicit phonemic segmentation, rhythmic reading structures, and carefully leveled texts to prevent cognitive overload and peer frustration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's read our list of words in the /an/ family together from the chart.
+
+STUDENT: (Runs his hand along the side of the table and taps his leg to the rhythm, reading slightly behind the voices of his peers. As the list finishes, he jumps to his feet and jogs in place.) Ran.
+
+TUTOR: Okay, now let's talk about the story we just read.
+
+STUDENT: (Motions and taps his hands while waiting for the discussion.)
+
+TUTOR: What word in the story tells us how elephants sound when they walk?
+
+STUDENT: (Gets out of his seat and silently stomps his feet.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in phonics lessons, whole-class discussions about stories, and choral reading of a list of words in the /an/ family",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-class shared reading and discussion",
+      "materials": "Poem chart, items from home for 'The Important Bag'",
+      "social_setting": "Whole class with peers and teacher",
+      "time_context": "The day begins with the shared reading of a poem-of-the-month"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked a direct comprehension question: 'What word in the story tells us how elephants sound when they walk?'",
+      "observable_behavior": "Responded by getting out of his seat and silently stomping his feet instead of verbalizing the word",
+      "internal_state": "Privileges his memory, illustrations, and his common sense over text",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "As the class completes a chanted list of words in the /an/ family",
+        "observable_behavior": "Runs hand along the side of the table, taps his leg to the rhythm, jumps to his feet, and shouts while jogging in place",
+        "internal_state": "",
+        "related_quotes": [
+          "Ran."
+        ]
+      },
+      {
+        "condition": "During phonics lessons and shared reading",
+        "observable_behavior": "Participates by motioning, tapping, and 'reading' slightly behind the voices of his peers",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

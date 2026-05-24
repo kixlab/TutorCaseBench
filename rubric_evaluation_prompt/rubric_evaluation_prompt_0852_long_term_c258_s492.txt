@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mastery Goal Framing
+  Check: The tutor's long-term plan includes consistent messaging that values personal improvement, skill mastery, and deep understanding over grades, speed, or peer comparisons.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly motivated and attempts to use self-regulation strategies, but often struggles with disorganization, reading difficulties, and attention interference due to social comparison. They uniquely require tasks matched to their ability level, explicit instructional clarity, and a strong emphasis on mastery and deep learning rather than performance or grades.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For this geometry assignment, please read the paragraph, then color and mark the angles and sides of the triangles.
+
+STUDENT: I want to master this task and get a high grade. I'm going to turn this assignment into a game to help me focus.
+
+TUTOR: Go ahead and start reading the instructions.
+
+STUDENT: I am marking the main ideas in the paragraph to help me with the reading. Looking at my first triangle, I can evaluate my work and see I marked the wrong angle.
+
+TUTOR: What do you think you should do next?
+
+STUDENT: I know I have some difficulties reading these long instructions. I tried marking the main ideas, but I'm still confused and my strategy isn't really working to help me figure out what to do next.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "geometry assignment was below grade level and involved coloring and marking angles and sides of triangles",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "",
+      "materials": "geometry assignment",
+      "social_setting": "",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "confront reading difficulties",
+      "observable_behavior": "use of learning and self-regulation strategies was still not optimal",
+      "internal_state": "aware of having some learning difficulties but none were very explicit in characterizing themselves as having disabilities",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When confronting reading difficulties",
+        "observable_behavior": "mentioned very specific reading strategies she used to confront reading difficulties such as marking the main ideas in the paragraph",
+        "internal_state": "wanting to learn, to improve, and to master the task",
+        "related_quotes": []
+      },
+      {
+        "condition": "During engagement in the task",
+        "observable_behavior": "engaging in monitoring and correction strategies, and they made more correct evaluations of the quality of their product than the other students",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

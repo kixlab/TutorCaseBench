@@ -1,0 +1,75 @@
+{
+  "category_id": "335",
+  "category_title": "Lower-proficiency students who use L1 and gestures to express concepts in content-subject lessons",
+  "scenario_id": "621",
+  "scenario_title": "Struggling with abstract Biology concepts and technical terms",
+  "minimal_context": "The student is answering questions about respiration, energy, and carbon dioxide during a Biology lesson.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Today we are looking at respiration. What is produced during this process?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "ENERGY."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Yes. And what does the word 'cellular' mean here?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Cells."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Right. Now, please explain the relationship between respiration, energy, and carbon dioxide in English."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Remains silent, struggling to form a response due to the language barrier with the abstract content)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Today we are looking at respiration. What is produced during this process?\n\nSTUDENT: ENERGY.\n\nTUTOR: Yes. And what does the word 'cellular' mean here?\n\nSTUDENT: Cells.\n\nTUTOR: Right. Now, please explain the relationship between respiration, energy, and carbon dioxide in English.\n\nSTUDENT: (Remains silent, struggling to form a response due to the language barrier with the abstract content)",
+  "immediate_dialogue_prompt": 1080,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Learning about respiration, carbon dioxide, energy, and the meaning of the prefix 'cell' in 'cellular'",
+        "learning_goal": "Grasping specific technical terms and abstract concepts in Biology"
+      },
+      "context": {
+        "environment": "Biology lesson in School B, a CLIL classroom",
+        "materials": "",
+        "social_setting": "Teacher-student interaction",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When L2 academic language and abstract content knowledge impose considerable difficulties on L2 learners",
+        "observable_behavior": "Provides extremely brief, one-word English answers ('ENERGY', 'Cells') with a mean turn length of 1.8 s",
+        "internal_state": "May lag behind in academic and cognitive development due to the language barrier",
+        "related_quotes": [
+          "ENERGY",
+          "Cells"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When teachers ask questions in L2 and receive no responses",
+          "observable_behavior": "Remains silent until the teacher code-switches to L1 to elicit responses",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Encouragement Over Instruction
+  Check: The tutor provides positive reinforcement or general encouragement but explicitly avoids giving direct academic advice, specific answers, or step-by-step help.
+
+Criterion 2: Autonomy and Comfort Provision
+  Check: The tutor offers the student a choice in how they complete the activity, who they work with, or how they participate in the task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is a high-attaining student who does not need academic help but struggles with feelings of exclusion and validation-seeking when the teacher focuses on students with greater needs. They exhibit high dependence on teacher attention (keeping their hand raised for long periods) and fear peer judgment during performances, requiring a shift toward autonomy, comfortable peer groupings, and peer-reliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please begin your collaborative group work on the A Midsummer Night's Dream research project.
+
+STUDENT: (Raises hand immediately) Can you come over here and tell us if we are doing this right?
+
+TUTOR: What do you think your group should do?
+
+STUDENT: (Keeps hand raised) We need you to check it. You are spending all your time helping the other groups and ignoring us.
+
+TUTOR: Just keep working on it with your group for now.
+
+STUDENT: I always have my handup for so long and you always go to the same pepol and then dont give me anything. I'd rank the support I'm getting a 1 out of 5.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Collaborative group work during project-based research lessons studying A Midsummer Night's Dream.",
+      "learning_goal": "Increased autonomy, collaboration and engagement in drama-focused activities."
+    },
+    "context": {
+      "environment": "Five project-based research lessons requiring increased autonomy, collaboration and engagement in drama-focused activities.",
+      "materials": "",
+      "social_setting": "Collaborative group work where the teacher focuses individual support on students with greater needs.",
+      "time_context": "During project-based research lessons (R1-R5)."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher continues to focus individual support on students with greater needs and does not immediately respond to the student.",
+      "observable_behavior": "Having hand up for so long, expressing feelings of exclusion, and ranking level of support as 1/5 or 3/5 despite not requiring extra support.",
+      "internal_state": "Felt inadequately supported, indicated feelings of exclusion, and preoccupied with how much help they received.",
+      "related_quotes": [
+        "I always have my handup for so long and you always go to the same pepol and then dont give me anything."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When working in groups and desiring teacher input.",
+        "observable_behavior": "Seeking help immediately and having hand up for so long.",
+        "internal_state": "Very dependent upon teacher support and input; struggling to be resilient.",
+        "related_quotes": [
+          "I always have my handup for so long and you always go to the same pepol and then dont give me anything."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

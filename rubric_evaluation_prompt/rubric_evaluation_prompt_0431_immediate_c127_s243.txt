@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Spatial Autonomy
+  Check: The tutor explicitly establishes physical distance (e.g., stepping away, sitting across the room, or giving the student their own space) rather than hovering or sitting directly next to them.
+
+Criterion 2: Delayed Verbal Intervention
+  Check: The tutor provides adequate wait time for the student to process and attempt the task independently, explicitly avoiding jumping in immediately with verbal prompts or answers.
+
+Criterion 3: Intermittent Monitoring and Motivation
+  Check: The tutor frames their role as a monitor or uses structured motivational tools (e.g., 'first-then' phrasing, token boards) rather than providing continuous, step-by-step direct instruction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student strongly desires peer-like autonomy and social inclusion, actively rejecting constant adult proximity which they view as a barrier to independence. When seated too close or prompted too quickly, they either express explicit frustration or passively hand over their work. They uniquely require physical space, delayed intervention to allow processing time, and structured, intermittent monitoring to foster true psychological empowerment.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent work. Please open your book and start the assignment.
+
+STUDENT: I want to be like everyone else in the class . . . I don't want anyone sitting next to me.
+
+TUTOR: I am going to sit right beside you while you work. Go ahead and read the first question.
+
+STUDENT: I want my own space now. I want to be like the boys.
+
+TUTOR: Just look at your book and keep trying.
+
+STUDENT: (Sits back and hands the book to the tutor) I don't want to be dependent.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Periods of independent work",
+      "learning_goal": "Independent functioning"
+    },
+    "context": {
+      "environment": "Mainstream primary schools",
+      "materials": "Book, tick charts, token systems",
+      "social_setting": "Daily classroom activities",
+      "time_context": "Majority of the schoolday"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When SNAs were seated directly beside the target pupil for the majority of the schoolday",
+      "observable_behavior": "He could sit back . . . he’d hand you the book nearly",
+      "internal_state": "He doesn’t want to be dependent, he wants to be like the boys",
+      "related_quotes": [
+        "I want to be like everyone else in the class . . . I don’t want anyone sitting next to me",
+        "I have my own space now"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the SNA is sitting right next to him",
+        "observable_behavior": "He could sit back . . . he’d hand you the book nearly",
+        "internal_state": "Desires autonomous functioning and psychological empowerment",
+        "related_quotes": [
+          "I want to be like everyone else in the class . . . I don’t want anyone sitting next to me"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

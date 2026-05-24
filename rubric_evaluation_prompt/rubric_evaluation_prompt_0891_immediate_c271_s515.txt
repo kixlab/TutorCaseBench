@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Self-Interest Framing
+  Check: The tutor frames the consequences of the student's behavior in terms of how it impacts their own goals or how others will treat them, explicitly avoiding appeals to the victim's feelings.
+
+Criterion 2: Sanction-Free Redirection
+  Check: The tutor directs the student to stop the behavior, calm down, or return to the task without issuing any punishments, threats, or loss of privileges.
+
+Criterion 3: Proactive De-escalation
+  Check: The tutor offers a time-limited withdrawal (e.g., 'Quiet Time') or break at the first sign of dysregulation, rather than waiting to use it as a recovery tool after a meltdown.
+
+Criterion 4: Concrete State-to-Behavior Linking
+  Check: The tutor uses concrete tools or language (such as a thermometer or 'Smart Body' phrasing) to explicitly connect the student's current physical or emotional state to their observable behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits high callous-unemotional (CU) traits, engaging in proactive, goal-directed aggression and showing diminished empathy or remorse. They are highly unresponsive to traditional punishments or empathy-inducing corrections, which often escalate their behavior into emotional overloads. They uniquely require interventions that appeal directly to their self-interest, utilize concrete reward systems, and proactively manage emotional regulation through tools like 'Quiet Time' and emotion thermometers before meltdowns occur.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for playtime. You can go join the other children.
+
+STUDENT: I want to play with the ball that boy is playing with.
+
+TUTOR: He has the ball right now. What do you think you should do?
+
+STUDENT: Well he was doing that as well.
+
+TUTOR: Just go over there and try to get along.
+
+STUDENT: (Hurts the other child to take the ball) If I hurt him, he will stop playing with the ball, then I can use it to start my own game of football.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in playtime where another child has a desired object (a ball)",
+      "learning_goal": "Develop their social-emotional functioning and capacity for inhibition"
+    },
+    "context": {
+      "environment": "Playtime",
+      "materials": "Ball, video recording equipment",
+      "social_setting": "Other children present",
+      "time_context": "Playtime"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When wanting to play with the ball that another boy is playing with",
+      "observable_behavior": "Engaging in planned, goal-directed proactive aggression (hurting the other child)",
+      "internal_state": "Diminished affective empathy and remorse; calculating that hurting the child will result in getting the ball",
+      "related_quotes": [
+        "I want to play with the ball that boy is playing with. If I hurt him, he will stop playing with the ball, then I can use it to start my own game of football."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When corrected for a behavior while another child was doing the same thing",
+        "observable_behavior": "Deflecting blame to others",
+        "internal_state": "",
+        "related_quotes": [
+          "well he was doing that as well"
+        ]
+      },
+      {
+        "condition": "When engaging in planned, goal-directed antisocial behaviour",
+        "observable_behavior": "Engaging in persistent bullying",
+        "internal_state": "Showing reduced emotional responsiveness to others",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,76 @@
+{
+  "category_id": "077",
+  "category_title": "Braille-reading students with blindness and ASD who struggle with task initiation, sensory overload, and visually-based instructions",
+  "scenario_id": "150",
+  "scenario_title": "Math task initiation with visually-based instructions",
+  "minimal_context": "The student is expected to begin a math assignment in a noisy, fast-paced regular classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Alright, it is time to start the math assignment. Look up here at the front to see the problems we are doing today."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Sits still without taking out materials) The teacher needs to tell me exactly what to take out and what to do, otherwise I don't know where to start."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just get your math materials out quickly and look at the first section. We need to move fast today."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "It's difficult when you have to think fast and answer fast and do things fast all the time. The noise from the other students is making it hard to concentrate."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Try your best to focus on the assignment. Look here at this example, and then look there at the next page."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "They tell everyone to 'look here' and 'look there'... but I can't look so I don't understand what they mean. It's bad when they say that.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Alright, it is time to start the math assignment. Look up here at the front to see the problems we are doing today.\n\nSTUDENT: (Sits still without taking out materials) The teacher needs to tell me exactly what to take out and what to do, otherwise I don't know where to start.\n\nTUTOR: Just get your math materials out quickly and look at the first section. We need to move fast today.\n\nSTUDENT: It's difficult when you have to think fast and answer fast and do things fast all the time. The noise from the other students is making it hard to concentrate.\n\nTUTOR: Try your best to focus on the assignment. Look here at this example, and then look there at the next page.\n\nSTUDENT: They tell everyone to 'look here' and 'look there'... but I can't look so I don't understand what they mean. It's bad when they say that.",
+  "immediate_dialogue_prompt": 267,
+  "long_term_dialogue_prompt": 268,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Math assignment, which is considered difficult and boring",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Regular class with distracting noise and bustle",
+        "materials": "Math materials",
+        "social_setting": "Large class where other students disturb them",
+        "time_context": "Fast-paced classroom activities"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the teacher uses visually based language, telling everyone to 'look here' and 'look there'",
+        "observable_behavior": "Displays confusion and does not know what the teacher means",
+        "internal_state": "Feelings of exclusion",
+        "related_quotes": [
+          "They tell everyone to ‘look here’ and ‘look there’… but I can’t look so I don’t understand what they mean. It’s bad when they say that"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When given unstructured tasks or too much responsibility is left to the student",
+          "observable_behavior": "Neither knows how to begin, nor complete a task independently; requires someone to push the 'start button' all the time",
+          "internal_state": "Has no inner drive",
+          "related_quotes": [
+            "The teacher needs to tell me exactly what to take out and what to do, otherwise I don’t know where to start"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

@@ -1,0 +1,74 @@
+{
+  "category_id": "014",
+  "category_title": "Independent students who struggle with spatial visualization in three-dimensional geometry problems",
+  "scenario_id": "029",
+  "scenario_title": "3D Pythagorean Theorem straw-in-carton problem with line extension",
+  "minimal_context": "Lisa is working on a three-dimensional Pythagorean Theorem problem to find the length of a straw in a juice carton.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is the next three-dimensional Pythagorean Theorem problem about a straw in a juice carton."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Works independently on scratch paper) I will set up the problem and solve for the unknown hypotenuse to find where the straw would need to sit in the carton."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, what do you have so far?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I found the hypotenuse of this right triangle. I found the answer to the problem."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Look at the diagram again. Is there an additional step at the end?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Oh… Add. (Proceeds to solve for an irrelevant piece of the diagram, not realizing the straw extends further than the box)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is the next three-dimensional Pythagorean Theorem problem about a straw in a juice carton.\n\nSTUDENT: (Works independently on scratch paper) I will set up the problem and solve for the unknown hypotenuse to find where the straw would need to sit in the carton.\n\nTUTOR: Okay, what do you have so far?\n\nSTUDENT: I found the hypotenuse of this right triangle. I found the answer to the problem.\n\nTUTOR: Look at the diagram again. Is there an additional step at the end?\n\nSTUDENT: Oh… Add. (Proceeds to solve for an irrelevant piece of the diagram, not realizing the straw extends further than the box)",
+  "immediate_dialogue_prompt": 49,
+  "long_term_dialogue_prompt": 50,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "three-dimensional Pythagorean Theorem problem... straw-in-a-juice-carton problem",
+        "learning_goal": "required an additional step at the end"
+      },
+      "context": {
+        "environment": "",
+        "materials": "diagrams and equations displayed on paper",
+        "social_setting": "",
+        "time_context": "The following day"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "not realizing the straw extended further than the box",
+        "observable_behavior": "solved for an irrelevant piece of the diagram (i.e., the hypotenuse of a right triangle that was not needed for finding the answer)",
+        "internal_state": "thought she had found the answer to the problem",
+        "related_quotes": [
+          "Oh… Add"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When a student incorrectly identifies the mathematical operation needed for a line extension",
+          "observable_behavior": "proceeded to set up the problem and solve for the unknown hypotenuse (i.e., where the straw would need to sit in the carton)",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

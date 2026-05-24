@@ -1,0 +1,131 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Facilitation of Diction Testing
+  Check: The tutor's response allows, validates, or explicitly encourages the student to experiment with how the speech recognition tool hears specific words, rather than immediately redirecting her to finish the story.
+
+Criterion 2: Metacognitive Error Analysis
+  Check: The tutor uses a think-aloud strategy to analyze an SR inaccuracy, discussing the sounds, letters, or reasons why the device might have misinterpreted the spoken word.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Alyson is a first-grade struggling reader who becomes highly fixated on the accuracy of speech recognition (SR) technology, often abandoning composition to repeatedly test and correct her diction when the software misinterprets her. She needs dedicated space to explore how the technology processes her voice, alongside explicit metacognitive modeling to help her understand SR errors and transition back to meaningful storytelling.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's work on your version of Mary Had a Little Lamb. Go ahead and dictate your first sentence into the iPad.
+
+STUDENT: (Whispers to herself several times) Carla had a baby pit bull. (Launches SR and dictates) Carla had a baby pit bull.
+
+TUTOR: Okay, let's look at what the iPad wrote down.
+
+STUDENT: That’s not what I said! It says 'Carla had hey baby pit bull.' (Deletes the entire sentence)
+
+TUTOR: Just try dictating it again.
+
+STUDENT: (Deletes the incorrect text) a baby pit bull. (Deletes the text again) a baby pit bull. (Continues deleting and re-dictating the same phrase 10 to 15 times)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Alyson worked on her version of Mary Had a Little Lamb by dictating, 'Carla had a baby pit bull.'",
+      "learning_goal": "composing meaningful stories"
+    },
+    "context": {
+      "environment": "supervised writing center",
+      "materials": "iPad, speech recognition (SR) software, chart paper",
+      "social_setting": "working independently with teacher available for assistance",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "SR consistently wrote, 'Carla had hey baby pit bull.'",
+      "observable_behavior": "Ten to 15 times, Alyson deleted the incorrect text and dictated, 'a baby pit bull.' Students commonly tested their diction instead of composing stories.",
+      "internal_state": "She wanted to see SR transcribe what she said; she wanted her diction to be recognized.",
+      "related_quotes": [
+        "a baby pit bull",
+        "That’s not what I said!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when SR was inaccurate",
+        "observable_behavior": "they deleted entire sentences and drafts",
+        "internal_state": "Students wanted to skip brainstorming and drafting and go straight to revising.",
+        "related_quotes": []
+      },
+      {
+        "condition": "When participants were unsure of the appropriateness of a transcribed word",
+        "observable_behavior": "they consistently and quickly turned to me for assistance",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "As she brainstormed her version of the anonymous poem",
+        "observable_behavior": "She whispered this phrase to herself several times as she launched SR",
+        "internal_state": "Alyson thought aloud",
+        "related_quotes": [
+          "Five little kittens sat by the pond"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

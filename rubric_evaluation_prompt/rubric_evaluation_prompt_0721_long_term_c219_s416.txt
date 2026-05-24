@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Gradual Interaction Pacing
+  Check: The tutor's long-term plan includes a gradual, phased approach to increasing proximity or interaction, starting with mere presence before moving to direct engagement.
+
+Criterion 2: Low-Pressure Peer Scaffolding
+  Check: The tutor's long-term plan incorporates setting up 1-on-1, low-pressure interactions with a peer who shares similar interests.
+
+Criterion 3: Family Integration for Practice
+  Check: The tutor's long-term plan includes collaborating with the student's parents or family members to practice writing at home.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Lydia is a highly anxious and reserved student who exhibits severe writing avoidance and social withdrawal, often shrinking or moaning when pressured or touched. The evidence reveals she uniquely needs strict respect for her physical boundaries, enthusiastic validation of her spontaneous verbal ideas as 'authoring,' and low-pressure, gradual integration into peer interactions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our writing workshop. Please get out your blank sheet of paper and start writing.
+
+STUDENT: (Sits staring at the blank sheet of paper with a worried look, almost a scowl, on her face.)
+
+TUTOR: What do you think you should write about? Go ahead and try.
+
+STUDENT: (Writes a word or two on the paper and immediately erases them.)
+
+TUTOR: (Approaches Lydia and touches her on the shoulder) Let's see what you are working on.
+
+STUDENT: (Turns her head, shrinks in her seat, and moans with apparent anxiety.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working on writing during writing workshop and morning menu",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during workshops and morning menu",
+      "materials": "Blank sheet of paper",
+      "social_setting": "Interacting with observing researchers and teacher",
+      "time_context": "Morning menu and writing workshop"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When either of us approached Lydia or a touch on the shoulder from either of us",
+      "observable_behavior": "Turned her head and shrank in her seat; made Lydia moan with apparent anxiety",
+      "internal_state": "Apparent anxiety",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During our writing workshop observations",
+        "observable_behavior": "Usually sat staring at a blank sheet of paper or wrote a word or two and erased them",
+        "internal_state": "Worried look—almost a scowl— on her face",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

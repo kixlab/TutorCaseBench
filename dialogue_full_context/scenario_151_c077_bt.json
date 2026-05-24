@@ -1,0 +1,75 @@
+{
+  "category_id": "077",
+  "category_title": "Braille-reading students with blindness and ASD who struggle with task initiation, sensory overload, and visually-based instructions",
+  "scenario_id": "151",
+  "scenario_title": "Braille reading comprehension and sensory distraction",
+  "minimal_context": "The student is reading a spiral-bound Braille book in a busy classroom to answer reading comprehension questions.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's start the reading comprehension task. Please read the next page in your spiral-bound Braille book."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Runs fingers over the edge of the book) The spiral binding on this book is bothering my hands. And one bad thing with my school is when the other children disturb me."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just try your best to keep reading the words."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Turns the page slowly) I don't like the sound of turning the paper, and the feel of certain letters is distracting. I prefer audio books, because it is faster and easier to understand when you do not have to engage in tactile reading."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What did you understand from the paragraph you just read?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I don't know what it means. It is too difficult to concentrate on understanding what I am reading with all this distracting noise. If it’s not calm, sensible and quiet, I just cannot think!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's start the reading comprehension task. Please read the next page in your spiral-bound Braille book.\n\nSTUDENT: (Runs fingers over the edge of the book) The spiral binding on this book is bothering my hands. And one bad thing with my school is when the other children disturb me.\n\nTUTOR: Just try your best to keep reading the words.\n\nSTUDENT: (Turns the page slowly) I don't like the sound of turning the paper, and the feel of certain letters is distracting. I prefer audio books, because it is faster and easier to understand when you do not have to engage in tactile reading.\n\nTUTOR: What did you understand from the paragraph you just read?\n\nSTUDENT: I don't know what it means. It is too difficult to concentrate on understanding what I am reading with all this distracting noise. If it’s not calm, sensible and quiet, I just cannot think!",
+  "immediate_dialogue_prompt": 269,
+  "long_term_dialogue_prompt": 270,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Reading comprehension task",
+        "learning_goal": "Understanding what they were reading"
+      },
+      "context": {
+        "environment": "Classroom with distracting noise and bustle",
+        "materials": "Spiral-bound Braille book on paper",
+        "social_setting": "Many things going on and other students present",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When encountering tactile distractors such as the spiral binding of the book, the feel of certain letters, and the sound of turning the paper",
+        "observable_behavior": "Displays difficulty concentrating on understanding what they are reading",
+        "internal_state": "Finds it difficult to concentrate",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When exposed to distracting noise or when other students disturb them",
+          "observable_behavior": "Exhibits difficulties in sorting out stimuli, making it hard to concentrate",
+          "internal_state": "Noise and bustle generally had a very negative effect on them",
+          "related_quotes": [
+            "If it’s not calm, sensible and quiet, I just cannot think!",
+            "One bad thing with my school is when the other children disturb me"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Probing Student Logic
+  Check: The tutor asks a clarifying or open-ended question that directly uses or challenges Kristoff's stated logic, rather than correcting him or changing the subject.
+
+Criterion 2: Non-Punitive Response to Protest
+  Check: The tutor refrains from reprimanding Kristoff's physical or vocal protests (e.g., lying on the floor, calling out) and does not demand immediate behavioral compliance.
+
+Criterion 3: Collaborative Negotiation
+  Check: The tutor invites Kristoff's input or asks an open-ended question to help negotiate a compromise regarding the schedule or task transition.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kristoff is a highly engaged student who protests historical injustices and rigid schedule transitions through vocal and physical resistance, such as calling out or lying on the floor. He requires a facilitator who views his resistance as a productive challenge rather than a behavioral infraction. He uniquely needs tutors to probe his logic with open-ended questions and invite his input to negotiate classroom routines, rather than attempting to control or reprimand him.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the illustration on this page. The sign here says, 'No dogs or Mexicans allowed: Public pool.'
+
+STUDENT: (Lifts his hands in the air) The white people. I think, think… the white people were saying they were Mexicans but they were not.
+
+TUTOR: What makes you say that?
+
+STUDENT: I think… I think the white people should go on the other side of the earth!
+
+TUTOR: Let's just focus on what the book says next.
+
+STUDENT: (Calling out) Well… well… It’s just that the white people need to go over there until they learn their lesson and then they can come back. How they are is not okay. They are being unkind to the Brown people!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reacting to an illustration of a discriminatory sign during a whole-class read-aloud of 'Separate is Never Equal' and engaging in a critical dialogue about race and segregation",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-class read-aloud",
+      "materials": "Book 'Separate is Never Equal' with an illustration of a sign: 'No dogs or Mexicans allowed: Public pool.'",
+      "social_setting": "Whole-class discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Reacting to an illustration of a 'No Mexicans allowed' sign in a book",
+      "observable_behavior": "Lifted his hands in the air and called out, causing disorder to be thrown into the conversation and expressing an essentializing view of white people",
+      "internal_state": "",
+      "related_quotes": [
+        "The white people. I think, think… the white people were saying they were Mexicans but they were not.",
+        "I think… I think the white people should go on the other side of the earth!",
+        "Well… well… It’s just that the white people need to go over there until they learn their lesson and then they can come back. How they are is not okay. They are being unkind to the Brown people!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing how we treat people and care for those who have caused us harm",
+        "observable_behavior": "Interrupting and disrupting taken-for-granted assumptions about ways that young children can handle difficult topics",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

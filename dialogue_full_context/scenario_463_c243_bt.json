@@ -1,0 +1,95 @@
+{
+  "category_id": "243",
+  "category_title": "Kindergarten students with ASD who use classroom scripts and task-avoidance to seek social interaction",
+  "scenario_id": "463",
+  "scenario_title": "Math worksheet transition and peer interaction using scripts",
+  "minimal_context": "Jasmine is sitting at a round table with a peer and a paraprofessional, transitioning to a math worksheet where she needs to color objects in groups of 4.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Jasmine, it is time to color the objects on the page in groups of 4 on your math worksheet."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks at Jeff) Let’s do some colors! What color is the apple? What color is the boy? What color is the car? (Excitedly shakes her braids and rubs her fingers together quickly in front of the ABC book)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please look at your own paper and keep working."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Leans over the table reaching toward Jeff and, waving her arms) booga booga."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Points to the math worksheet) Jasmine, we have music next. You need to do your math."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Grabs the ABC book again) No! Aaahh!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Jasmine, it is time to color the objects on the page in groups of 4 on your math worksheet.\n\nSTUDENT: (Looks at Jeff) Let’s do some colors! What color is the apple? What color is the boy? What color is the car? (Excitedly shakes her braids and rubs her fingers together quickly in front of the ABC book)\n\nTUTOR: Please look at your own paper and keep working.\n\nSTUDENT: (Leans over the table reaching toward Jeff and, waving her arms) booga booga.\n\nTUTOR: (Points to the math worksheet) Jasmine, we have music next. You need to do your math.\n\nSTUDENT: (Grabs the ABC book again) No! Aaahh!",
+  "immediate_dialogue_prompt": 796,
+  "long_term_dialogue_prompt": 797,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "color the objects on the page in groups of 4",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "round table",
+        "materials": "math worksheet, ABC book, favorite color crayon, purple",
+        "social_setting": "sitting with a peer, Jeff, and a paraprofessional",
+        "time_context": "transitioning from a dice game to a math worksheet activity, before music"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The para redirects Jasmine to the math worksheet by pointing, and reminds her that they have music next and she needs to do her math",
+        "observable_behavior": "protesting by grabbing the ABC book again and loudly saying ‘‘no’’, protests by yelling, ‘‘aaahh’’",
+        "internal_state": "appears to want to escape a task that she possibly considered boring, and to subsequently interact with Jeff",
+        "related_quotes": [
+          "no",
+          "aaahh"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When attempting to gain the attention of a peer who is working on his worksheet",
+          "observable_behavior": "leans over the table reaching toward Jeff and, waving her arms, says, ‘‘booga booga’’",
+          "internal_state": "",
+          "related_quotes": [
+            "booga booga"
+          ]
+        },
+        {
+          "condition": "When engaging in a question-and-answer interaction with a peer using an ABC book",
+          "observable_behavior": "excitedly shakes her braids in anticipation of Jeff’s responses, occasionally rubbing her ﬁngers together quickly in front the book",
+          "internal_state": "",
+          "related_quotes": [
+            "Let’s do some colors!",
+            "What color is the apple? What color is the boy? What color is the car?"
+          ]
+        },
+        {
+          "condition": "When finishing the worksheet without assistance",
+          "observable_behavior": "turns to Jeff and says, ‘‘Write your name, Jeff.’’ ... Jasmine then tells him, ‘‘Write your name on the top’’, in a teacher voice",
+          "internal_state": "interest in maintaining her interaction with Jeff is clear by her continued application of a script and interaction style with which she is familiar",
+          "related_quotes": [
+            "Write your name, Jeff.",
+            "Write your name on the top"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

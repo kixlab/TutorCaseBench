@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Temporary Withdrawal
+  Check: The tutor's response must explicitly allow, validate, or provide space for Adam's temporary physical withdrawal (e.g., reading by the window, stepping away) without demanding immediate task compliance.
+
+Criterion 2: Environmental Noise Management
+  Check: The tutor's response must include an action to actively reduce or manage the classroom noise level (e.g., calling for quiet, utilizing a pedagogue, or addressing the class volume).
+
+Criterion 3: Peer-Mediated Re-engagement
+  Check: The tutor's response must facilitate, prompt, or suggest using a peer helper to approach Adam and guide him back into the activity.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Adam is an ADHD-diagnosed student who experiences severe sensory overload in noisy, unstructured environments, often coping by physically withdrawing (e.g., hiding under tables, reading by windows). He uniquely requires adults to validate his temporary breaks, actively manage classroom noise, and use structured peer support to help him reintegrate into tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, you may continue to work on your film. Go ahead and organise yourselves into groups and delegate the tasks.
+
+STUDENT: (As the other children cheer and begin to organise themselves, Adam walks away, sits by the windowsill, and takes pleasure in reading a book.)
+
+TUTOR: Adam, shouldn't you participate in the group work?
+
+STUDENT: There is too much to cope with right now as everyone is talking over each other.
+
+TUTOR: You still need to do the task with your group.
+
+STUDENT: I will go to the group as soon as they quiet down. (Continues reading his book at the windowsill)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "continue to work on their film",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Danish lesson",
+      "materials": "book, windowsill",
+      "social_setting": "The children cheer, begin to organise themselves into groups and delegate the tasks.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "as everyone is talking over each other",
+      "observable_behavior": "Adam sits by the windowsill and takes pleasure in reading a book.",
+      "internal_state": "there is too much to cope with right now",
+      "related_quotes": [
+        "there is too much to cope with right now as everyone is talking over each other.",
+        "he will go to the group as soon as they quiet down."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "The teacher asks Adam whether or not he should participate in the group work.",
+        "observable_behavior": "Adam replies that there is too much to cope with right now as everyone is talking over each other.",
+        "internal_state": "there is too much to cope with right now",
+        "related_quotes": [
+          "there is too much to cope with right now as everyone is talking over each other."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

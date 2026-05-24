@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sanctioned Rule-Breaking
+  Check: The tutor's long-term plan includes explicit mechanisms or agreements (such as 'poetic licenses' or custom rule-making) that officially permit the students to break conventional literacy rules.
+
+Criterion 2: Cultivation of Skilled Reader Identity
+  Check: The tutor's long-term plan includes strategies to explicitly connect the students' unconventional reading and writing processes to the identity of being a successful, skilled reader.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Bill and Kwame are highly energetic students who engage with literacy through embodied, rhythmic behaviors like tapping, singing, and moving. They uniquely need their physical energy and unconventional approaches to be legitimized as official reading strategies rather than suppressed as off-task behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Bill and Kwame, it is time for the whole-class share session. Please read your poem together.
+
+STUDENT: (Tapping pencils on desks and moving their bodies from side to side) This is the way / Hey! / we start the day / Hey!
+
+TUTOR: Read the next part.
+
+STUDENT: (Taking turns to read the poem in singing voices) we get the knowledge / Hey! / to go to college / Hey!
+
+TUTOR: Finish the last few lines.
+
+STUDENT: (Swinging the poetry packet over his head and continuing in a singing voice) we won ’t stop there / Hey! / go anywhere / Hey!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Sharing a poem during a whole-class share session at the end of a reading workshop.",
+      "learning_goal": "Noticing the rhythm of a poem."
+    },
+    "context": {
+      "environment": "Whole-class share session at the end of a reading workshop",
+      "materials": "Poetry packet",
+      "social_setting": "Collaborative partner reading in front of the whole class",
+      "time_context": "At the conclusion of a reading workshop"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When invited to read together and demonstrate how they read a poem",
+      "observable_behavior": "Take turns to read the poem in singing voices, swinging his poetry packet over his head",
+      "internal_state": "",
+      "related_quotes": [
+        "This is the way / Hey! / we start the day / Hey! / we get the knowledge / Hey! / to go to college / Hey! / we won ’t stop there / Hey! / go anywhere / Hey!",
+        "Don’t hurt the poems!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During partner readings",
+        "observable_behavior": "Keep the rhythm of poems by tapping pencils on desks and moving their bodies from side to side, joining their voices as they read the same text",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

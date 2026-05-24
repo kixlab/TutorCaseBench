@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Relatable Texts
+  Check: The long-term plan includes the purposeful selection of texts written by or featuring people of color, or highly relatable narratives.
+
+Criterion 2: Systemic Presumption of Competence
+  Check: The long-term plan focuses on adjusting interactional protocols to validate Jay's ideas and build his literate identity, explicitly avoiding traditional right/wrong evaluation cycles.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jay is a student labeled 'LD' who typically avoids traditional teacher-centric evaluations to protect himself from looking incompetent. However, he will actively engage and assert interpretations when discussing relatable texts if the teacher protects his speaking turn from peers ('turn sharks'). He uniquely needs the teacher to halt crosstalk, hold the interactional space, and invite him to repeat his ideas without evaluating them for 'rightness.'
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are discussing the book 'Teammates'. What does the phrase 'Pee Wee's legs felt heavy' mean?
+
+STUDENT: (Asserting his interpretation into the tumultuous crosstalk) He don't want to do it, and at the same time, he does.
+
+TUTOR: Is that the right answer?
+
+STUDENT: (Avoiding getting caught not knowing) I guess so.
+
+TUTOR: Explain what you mean.
+
+STUDENT: (Arranging to not look incompetent) I don't know. Just ask someone else.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Whole-group discussion of the book 'Teammates' by Peter Golenbock, specifically analyzing the figurative phrase 'Pee Wee’s legs felt heavy.'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-group read-aloud and reading minilesson with tumultuous crosstalk",
+      "materials": "The book 'Teammates' by Peter Golenbock",
+      "social_setting": "Whole-group discussion with 'turn sharks', or students ready to jump into the conversation if the speaker seemed unsure",
+      "time_context": "During 45 min of special education reading instruction daily, usually during independent reading time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asserting an interpretation of a figurative phrase into tumultuous crosstalk",
+      "observable_behavior": "Asserted an initial interpretation ('He don’t want to do it, and at the same time, he does.') into the tumultuous crosstalk",
+      "internal_state": "Avoiding getting caught not knowing and arranging to not look incompetent",
+      "related_quotes": [
+        "He don’t want to do it, and at the same time, he does."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During standard teacher-centric IRE (Initiation-Response-Evaluation) patterns where the teacher evaluates answers based on 'rightness'",
+        "observable_behavior": "Spends time avoiding getting caught not knowing and arranging to not look incompetent",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

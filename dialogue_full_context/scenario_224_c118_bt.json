@@ -1,0 +1,73 @@
+{
+  "category_id": "118",
+  "category_title": "High-risk students with chronic truancy and complex emotional/behavioral needs",
+  "scenario_id": "224",
+  "scenario_title": "Daily Check-In/Check-Out for behavior and attendance monitoring",
+  "minimal_context": "The student and CICO coordinator are reviewing the daily score card to set behavioral goals at the start of the school day.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's look at your score card for today and set your daily goals for meeting the school's behavior expectations."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I don't even want to look at the score card. I already have five unexcused absences this quarter, so being here today doesn't even matter."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We still need to fill it out. What should your goal be for your classes?",
+      "speaker_action": "Hands the score card to the student"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Whatever. Just put down that I'm going to fail. I'm already significantly behind in credits and off track to graduate anyway."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Let's just focus on the behavior expectations on the card right now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I'm not doing this stupid check-in anymore. Just give me another office discipline referral for disrespect. I already have six of them this month, so one more won't change anything. I'm leaving.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's look at your score card for today and set your daily goals for meeting the school's behavior expectations.\n\nSTUDENT: I don't even want to look at the score card. I already have five unexcused absences this quarter, so being here today doesn't even matter.\n\nTUTOR: We still need to fill it out. What should your goal be for your classes?\n\nSTUDENT: Whatever. Just put down that I'm going to fail. I'm already significantly behind in credits and off track to graduate anyway.\n\nTUTOR: Let's just focus on the behavior expectations on the card right now.\n\nSTUDENT: I'm not doing this stupid check-in anymore. Just give me another office discipline referral for disrespect. I already have six of them this month, so one more won't change anything. I'm leaving.",
+  "immediate_dialogue_prompt": 401,
+  "long_term_dialogue_prompt": 402,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Review the behavioral expectations and set daily goals based on a score card with teachers’ feedback",
+        "learning_goal": "Learn and demonstrate positive behaviors"
+      },
+      "context": {
+        "environment": "School setting",
+        "materials": "Score card with teachers’ feedback, ticket system",
+        "social_setting": "Checked in daily with a trained CICO coordinator",
+        "time_context": "At the start of their day and again near the end of the school day"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When experiencing difficulties meeting the school’s universal behavior expectations",
+        "observable_behavior": "An average of three ODRs per day for disrespect",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "After 6 weeks of monitoring with documentation that secondary-level interventions were implemented with fidelity",
+          "observable_behavior": "Nonresponse to tier 2 interventions, escalating ODRs with six or more in a 4-week period, and/or five or greater out-of-school or in-school suspensions in a 2-week period",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

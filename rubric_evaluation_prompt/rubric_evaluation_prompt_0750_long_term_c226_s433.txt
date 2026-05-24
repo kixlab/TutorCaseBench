@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Replacement Behavior Training
+  Check: The long-term plan includes explicitly teaching and reinforcing functional communication (e.g., signs or visual symbols) for requesting breaks or assistance.
+
+Criterion 2: High-Contrast Visual Accommodations
+  Check: The long-term plan specifies adapting materials to feature high contrast, single items, and no visual clutter, presented within his intact visual field.
+
+Criterion 3: Concrete Predictability Systems
+  Check: The long-term plan incorporates concrete scheduling tools, such as a communication shelf or object/picture schedules, to establish a predictable daily routine.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+David is an older adolescent with CHARGE syndrome, profound hearing loss, and severe visual deficits who engages in aggressive behaviors (kicking, scratching) to escape difficult or unstructured tasks. He uniquely requires high-contrast visual supports, concrete predictability, and functional communication alternatives, as traditional negative consequences inadvertently reinforce his escape behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: (Places a pile of mixed objects on the table) It is time to sort the objects.
+
+STUDENT: (Grinds his teeth and engages in visual self-stimulatory behavior instead of starting the task)
+
+TUTOR: (Points to the objects) Keep trying, put them in the right spots.
+
+STUDENT: (Stands up from the table and begins jumping)
+
+TUTOR: (Taps the table) Sit down and finish your table-top activity.
+
+STUDENT: (Scratches the tutor's arm and kicks the table, exhibiting problematic behaviors to escape the activity)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "completing table-top activities such as puzzles, sorting objects, and tracing",
+      "learning_goal": "programming that used principles of direct and systematic instruction"
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "table-top activities such as puzzles, sorting objects, and tracing; visual symbols; single leers or shapes; 12-point print",
+      "social_setting": "",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When David has diﬃculty with a task or activity",
+      "observable_behavior": "exhibit problematic behaviors... kicking, biting, scratching",
+      "internal_state": "escape/avoid them",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When David does not comprehend task demands",
+        "observable_behavior": "exhibit problematic behaviors... jumping, teeth grinding, visual self-stimulatory behavior",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

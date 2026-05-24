@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Interest-Driven Literacy Planning
+  Check: The tutor's long-term plan includes curating and utilizing high-interest reading materials tailored to the student's preferences.
+
+Criterion 2: Competence Demonstration Opportunities
+  Check: The tutor incorporates opportunities for the student to act as a mentor, role model, or demonstrator of skills to others (such as younger students).
+
+Criterion 3: Explicit Social Skills Instruction
+  Check: The tutor integrates explicit teaching of social rules, manners, or peer-interaction frameworks into the ongoing curriculum.
+
+Criterion 4: High Achievement Expectations
+  Check: The tutor explicitly sets and communicates goals that push the student beyond mediocre standards, framing them as highly capable of top-tier achievement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with inattention, anti-social behavior, and literacy underachievement, heavily triggered by prolonged sedentary tasks, 'boring' work, and a deep fear of peer ridicule. They uniquely require an environment that integrates physical movement, hands-on task reframing, and explicit psychological safety regarding mistakes. Long-term, they thrive on high-interest reading, explicit social skills instruction, and opportunities to demonstrate competence (e.g., reading to younger students) under high expectations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start on the maths worksheet on your desk. There are thirty problems to complete before the end of the period.
+
+STUDENT: That's lots of work. It's just boring stuff.
+
+TUTOR: Everyone has to complete it. Please get started.
+
+STUDENT: I don't even know how to do the first one. If I get it wrong, the kids that get on your nerves are going to see it. I want to be where no one laugh at you.
+
+TUTOR: Just try your best and write down an answer.
+
+STUDENT: (Crumples up the worksheet and throws it at the boy sitting at the next desk) I'm not doing it! I hate having to do stuff!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing 'lots of work' in subjects like maths or writing",
+      "learning_goal": "Strive to have achieved, by year's end, more than mediocre standards"
+    },
+    "context": {
+      "environment": "Classroom setting",
+      "materials": "Hands-on activities, maths materials",
+      "social_setting": "Boys only class where they have a lot in common with others",
+      "time_context": "Working in class all day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Making mistakes during learning or facing 'boring stuff' and 'lots of work'",
+      "observable_behavior": "Anti-social behaviour, getting told off, or behaviors that previously led to being removed from class",
+      "internal_state": "Lack of positive experiences in school; fear of being laughed at",
+      "related_quotes": [
+        "boring stuff",
+        "lots of work",
+        "getting told off",
+        "no one laugh at you"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When struggling with academic tasks or social interactions",
+        "observable_behavior": "Anti-social behaviour and inattention",
+        "internal_state": "Lacking confidence in their ability to complete planned tasks",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

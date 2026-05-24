@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Home-Language Network
+  Check: The long-term plan includes soliciting ongoing support from Korean-speaking parents, community members, peers, or online volunteers.
+
+Criterion 2: Multilingual Environmental Integration
+  Check: The long-term plan incorporates the student's home language into the physical or digital learning environment, such as using bilingual labels on classroom objects.
+
+Criterion 3: Holistic Comprehension Tracking
+  Check: The long-term plan includes a method for tracking her actual English language comprehension and expression, explicitly avoiding reliance on her success in non-verbal subjects as a proxy for understanding.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jessica is an English Multi-Language Learner (EMLL) who masks her severe anxiety and lack of English comprehension through passive compliance, silence, and mimicking peers. While she appears quietly cooperative in class and succeeds in non-verbal tasks, she experiences profound distress at home regarding school. She uniquely requires translanguaging (Korean/English) and explicit emotional scaffolding to bridge her complex home-language ideas into actionable English expressions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: The teacher has been reading 'What Do You Do with an Idea?' to the class for 30 minutes. Do you know what is happening in the story?
+
+STUDENT: (Makes a weak smile and nods quietly.)
+
+TUTOR: That's good. What did the boy do with his idea?
+
+STUDENT: (Sits quietly and says nothing, with a depressed and helpless look on her face.)
+
+TUTOR: You can tell me. What do you think?
+
+STUDENT: Umm…honestly…I have no idea what she’s talking about. I have been sitting quietly just like this. (Watches her classmates and gets up from her seat to move to the same area of the classroom when they do.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Listening to the teacher read a book for 30 minutes",
+      "learning_goal": "Understanding the story 'What Do You Do with an Idea?'"
+    },
+    "context": {
+      "environment": "Third-grade classroom during whole-class instruction",
+      "materials": "Picture book 'What Do You Do with an Idea?'",
+      "social_setting": "Whole-class setting with peers and teacher",
+      "time_context": "30 minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Faced with a lack of understanding of what was going on in the classroom",
+      "observable_behavior": "Chose to sit quietly rather than act out; said nothing during the whole class; used responses to non-visual cues given by her classmates (e.g. getting up when they got up from their seats; moving to the same area of the classroom when they did)",
+      "internal_state": "Feeling stressed and frustrated about her lack of English proficiency; cried at home almost every night, yelling at her mom that she did not want to go to school",
+      "related_quotes": [
+        "I have been sitting quietly just like this.",
+        "Umm…honestly…I have no idea what she’s talking about."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the classmates around her said something to help her or offered to play with her",
+        "observable_behavior": "Would just make a weak smile and nod or shake her head quietly",
+        "internal_state": "Depressed and helpless look",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Activity-to-Objective Bridging
+  Check: The tutor explicitly states the academic purpose of the current task or connects the specific activity directly to the overarching learning objective.
+
+Criterion 2: Academic Refocusing over Behavioral Correction
+  Check: The tutor responds to off-task behavior, emotional reactions, or confusion by clarifying the academic 'why' of the task, rather than issuing behavioral reprimands or focusing solely on instructions/mechanics.
+
+Criterion 3: Transitional Objective Reminders
+  Check: The tutor reiterates or references the main learning objective when transitioning between questions, sections, or steps of an activity.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly dependent on the clarity of instructional purpose; without it, they exhibit off-task behavior, emotional reactions, or superficial compliance. Their core differentiating characteristic is that their academic language and focus rapidly improve when specific activities are explicitly linked to clear learning objectives. They uniquely require constant, explicit bridging between what they are doing and why they are doing it, rather than behavioral reprimands or a focus on task mechanics.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at your anticipation-reaction guide for this geography lesson. I want you to read each statement, check the box for 'agree' or 'disagree', and then write down your justification on the lines below. Work quietly and independently.
+
+STUDENT: (Working quietly) I checked the box for the first map. Is this right?
+
+TUTOR: Yes, now make sure you fill out the written portion.
+
+STUDENT: I guess we have to prove our point. It's like court.
+
+TUTOR: Please continue working independently on the next statement.
+
+STUDENT: I know how we are supposed to behave and fill this out, but I'm trying to determine the academic goal. Why are we participating in justifying our opinions and what does that have to do with the written portion?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Using an anticipation-reaction guide where students check 'agree' or 'disagree' for statements and justify their opinions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Geography lesson",
+      "materials": "Anticipation-reaction guide",
+      "social_setting": "Classroom instruction",
+      "time_context": "Fourth period class"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Introducing the lesson with thorough directions about the mechanics of the activity, to the exclusion of explaining the connection to the objective",
+      "observable_behavior": "Students attempted to determine the academic goal for themselves; displayed an understanding of how to behave but questioned why they were participating in justifying opinions and what that had to do with the written portion",
+      "internal_state": "Seemed interested in knowing why they were participating",
+      "related_quotes": [
+        "It's like court"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the teacher actively sought to reduce discipline problems by increasing his level of control over the lessons and minimizing opportunities for student-student interaction",
+        "observable_behavior": "Students were quiet, worked independently, and sought approval from their teacher; were not allowed to work collaboratively to evaluate maps or draw different conclusions",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

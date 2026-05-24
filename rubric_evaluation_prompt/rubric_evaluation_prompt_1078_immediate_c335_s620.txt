@@ -1,0 +1,128 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Bilingual Recasting
+  Check: The tutor accepts the student's L1 or gestural response and explicitly provides the L2 English equivalent (recast) without reprimanding the use of L1.
+
+Criterion 2: L1 Conceptual Scaffolding with L2 Terms
+  Check: The tutor uses (or permits) L1 to explain abstract concepts or provide daily-life examples, while explicitly embedding or highlighting the L2 technical vocabulary.
+
+Criterion 3: Morphological Breakdown
+  Check: The tutor explicitly breaks down or draws attention to the structure of an L2 academic word (e.g., analyzing prefixes, roots, or related base words).
+
+Criterion 4: Scaffolded Question Modification
+  Check: When the student struggles to answer, the tutor modifies the question by providing clues, Socratic prompts, or making the topic more salient before simply translating the question into L1.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an English language learner in a CLIL (Content and Language Integrated Learning) environment who struggles with abstract academic content in L2, often responding with silence, gestures, or L1. They uniquely require a bilingual approach where L1 is used to secure conceptual understanding, while L2 is systematically integrated through recasts, technical vocabulary embedding, and morphological analysis.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: When plates move, why will it shake? How can plates move?
+
+STUDENT: (Remains silent)
+
+TUTOR: Can you try to answer the question?
+
+STUDENT: Move...
+
+TUTOR: Yes, but how can plates move?
+
+STUDENT: That way, that way, that way. [hands gesturing]
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Answering the questions: 'When plates move, why will it shake? (pause) How can plates move?'",
+      "learning_goal": "Explaining plate movement in a Geography lesson"
+    },
+    "context": {
+      "environment": "Geography lesson in School C, a Content and Language Integrated Learning (CLIL) classroom",
+      "materials": "",
+      "social_setting": "Teacher-student interaction during a content-subject lesson",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked an open-ended academic question in L2 ('How can plates move?')",
+      "observable_behavior": "Used L1 (translated as 'That way, that way, that way') and physical gestures ('hands gesturing') instead of L2 academic language",
+      "internal_state": "",
+      "related_quotes": [
+        "That way, that way, that way. [hands gesturing]"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participating in teacher-student interaction during observed lessons",
+        "observable_behavior": "Provides very short verbal responses, with a mean length of student turns at 1.9 s (SD = 1.6)",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When teachers ask questions in L2",
+        "observable_behavior": "Provides no responses to questions",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

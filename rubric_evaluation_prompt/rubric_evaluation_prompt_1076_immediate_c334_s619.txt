@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prioritization of Emotional Comfort
+  Check: The tutor's response must offer emotional support, comfort, or gentle understanding of the student's hesitation, and explicitly avoid issuing a strict command or reprimand.
+
+Criterion 2: Accommodation of Play or Comfort Items
+  Check: The tutor must allow, acknowledge, or gently integrate the student's play/comfort object rather than confiscating it or forbidding play.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an anxious, reticent child who withdraws, hides, and remains quiet when overwhelmed by strict environments, large groups, or conflictual interactions. The evidence reveals they uniquely require high teacher sensitivity, emotional comfort, and the integration of play to feel safe, rather than strict compliance-based discipline.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class is starting. Please put your play items away and sit quietly with the rest of the children.
+
+STUDENT: (Looks at the large group of children, holds onto a small wooden block, and remains completely quiet.)
+
+TUTOR: Playing is for free time. Put the block down and join the group.
+
+STUDENT: (Slowly steps backward away from the teacher, keeping their head down and not saying a word.)
+
+TUTOR: You are not following the rules. Come here and sit down right now.
+
+STUDENT: (Retreats further into the corner to hide, crouching down in isolation with an unhappy, fearful expression, completely withdrawing from the interaction.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Adapting to the social environment of pre-primary school, including forming relationships and following rules.",
+      "learning_goal": "Coping with the new social environment presented by school, involving such aspects as forming new relationships with teachers and other children, withstanding phobias, building confidence, avoiding inferiority, and observing and accepting school rules and regulations."
+    },
+    "context": {
+      "environment": "Tanzanian pre-primary classroom with a high teacher-child ratio (up to 1:88).",
+      "materials": "",
+      "social_setting": "Classes with many children compared to classes with few children, where children are required to remain quiet while in the classroom.",
+      "time_context": "Transitioning from the home setting to a new pre-primary school environment."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Responding to disharmonious interactions and misunderstandings with the teacher in the classroom.",
+      "observable_behavior": "Opt for self-withdrawal and become reticent, tend to hide, lives in isolation, and is always unhappy.",
+      "internal_state": "Anxiety, confusion, worries, and fear.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When teachers discourage children's play in the classroom and consider it a free-time activity.",
+        "observable_behavior": "Increased reticence, remaining quiet (which might be conceived as just following rules), and hiding compared to aggressive children.",
+        "internal_state": "Worry and fear while in the classroom.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Disproportionate Positive Reinforcement
+  Check: The tutor's long-term strategy must explicitly plan for delivering significantly more positive academic and behavioral feedback than reprimands or corrections.
+
+Criterion 2: Maximization of Active Teaching Time
+  Check: The tutor's long-term plan must focus on structuring sessions to maximize continuous, active teaching and interaction rather than relying on passive reading or extended independent practice.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is at-risk for or has an Emotional and Behavioral Disorder (EBD) and frequently engages in disruptive behaviors (wandering, making noises, texting) when their appropriate bids for attention are ignored. They uniquely require an exceptionally high pace of instruction (4-6 opportunities to respond per minute) and a heavily skewed positive feedback loop (3:1 or 4:1 praise-to-correction ratio) to prevent coercive cycles of negative behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's move on to the arithmetic section. Please complete the next five problems on your own.
+
+STUDENT: (Raises hand) I finished the first arithmetic problem.
+
+TUTOR: Keep working on the rest of the page.
+
+STUDENT: (Keeps hand raised) I don't know how to do the next one.
+
+TUTOR: Just try your best.
+
+STUDENT: (Drops hand, wanders out of seat to another student's desk while making a humming noise) Hey, what did you get for this one?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "arithmetic",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school classrooms during instructional times",
+      "materials": "",
+      "social_setting": "general classroom instruction",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when the student appropriately elicited such with a raised hand but teachers tended not to respond to students",
+      "observable_behavior": "wandering out of seat, noises, bothering peer",
+      "internal_state": "",
+      "related_quotes": [
+        "teachers tended not to respond to students even when the student appropriately elicited such with a raised hand",
+        "wandering out of seat, noises, bothering peer"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Under such conditions there would seen to be great incentive for students to act in a negative manner to garner teacher attention",
+        "observable_behavior": "act in a negative manner to garner teacher attention",
+        "internal_state": "",
+        "related_quotes": [
+          "great incentive for students to act in a negative manner to garner teacher attention"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

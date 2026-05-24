@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Tangible Pre-Inquiry Scaffolding
+  Check: The long-term plan includes physical, collaborative construction activities (e.g., 3D mind-maps, physical knowledge walls) as a precursor to digital or abstract inquiry.
+
+Criterion 2: Structured Metacognitive Prompts
+  Check: The long-term plan incorporates the regular use of structured prompt sheets or reflective journals to guide the student's self-assessment.
+
+Criterion 3: Collective Responsibility Framing
+  Check: The long-term plan explicitly designs goals, norms, and data-driven improvements around community or group performance rather than individual achievement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with low academic achievement, poor self-image, and limited metacognitive skills, often viewing assessments as competitive and fixating on superficial quantitative data. They uniquely require explicit explanations of data, highly structured metacognitive scaffolding, and a strong emphasis on collective responsibility to feel safe and engage in inquiry.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please take these index cards and write down your theories and questions about our Design topic so we can connect them with string on the physical knowledge wall.
+
+STUDENT: (Pushes the blank index cards away) I don't really care about this. I don't have any theories to share.
+
+TUTOR: What do you think you could write down to start?
+
+STUDENT: Nothing. I'm not smart enough to come up with good ideas like the other groups.
+
+TUTOR: Just try to reflect on what we discussed and write something down.
+
+STUDENT: I don't know how to reflect on it. This is stupid and I'm just going to sit here.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engage in and benefit from collaborative inquiry, and develop metacognitive skills such as monitoring and reflection",
+      "learning_goal": "Take responsibility for advancing collective knowledge, generate theories and questions, and build on each others' ideas"
+    },
+    "context": {
+      "environment": "Visual arts course focused on the topic of 'Design'",
+      "materials": "Wires of various colors for three-dimensional mind-maps, index cards and string for a physical 'knowledge wall', Knowledge Forum software",
+      "social_setting": "Small groups of students working collaboratively, augmented by whole-class and small-group discussion",
+      "time_context": "During the initial phase (weeks 1-5) to prepare students for online collaborative inquiry"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to engage in and benefit from collaborative inquiry",
+      "observable_behavior": "Exhibit little interest and negative attitudes toward their learning; not adequately engaged with their schoolwork",
+      "internal_state": "Poor self-image; limited metacognitive skills",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to engage in productive knowledge building",
+        "observable_behavior": "Experienced difficulties in developing metacognitive skills such as monitoring and reflection",
+        "internal_state": "Often one or more grade levels behind and have some learning difficulties",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

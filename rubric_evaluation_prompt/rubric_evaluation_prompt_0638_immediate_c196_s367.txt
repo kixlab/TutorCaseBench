@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Tangible Differential Reinforcement of Omitted Behavior (DRO)
+  Check: The tutor's response includes offering or providing a tangible reward (e.g., favorite toy or activity) explicitly contingent on Matthew keeping his hands to himself or staying in his seat.
+
+Criterion 2: Structured Visual Feedback System
+  Check: The tutor utilizes a clear, tiered visual feedback mechanism (e.g., colored stickers, visual charts) to immediately communicate Matthew's adherence to behavioral expectations.
+
+Criterion 3: Active Tutor Intervention over Peer Mediation
+  Check: The tutor actively intervenes to manage Matthew's behavior or separate him from the trigger, and explicitly avoids instructing peers to simply ignore or tolerate his physical contact.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Matthew is an 8-year-old boy with ASD who exhibits disruptive sensory-seeking behaviors, specifically touching or pulling peers' hair (especially if they wear sparkly grips), and frequent out-of-seat behavior. Because his behaviors cause physical pain and distress to peers, standard peer-ignoring strategies fail. He uniquely requires highly structured visual feedback systems, tangible Differential Reinforcement of Other behavior (DRO), controlled desensitization to his sensory triggers, and carefully calibrated academic tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Matthew, your reinforcing activity is finished. It is time to sit at your desk for our morning teaching session.
+
+STUDENT: (Puts down the activity but does not walk toward his desk, standing in the transition area instead.)
+
+TUTOR: Let's go to your seat to start your academic targets.
+
+STUDENT: (Turns away from the desk area and begins walking in the opposite direction of his assigned seat.)
+
+TUTOR: Matthew, you need to come back to your chair.
+
+STUDENT: (Continues walking around the room, leaving his seat without permission and not returning to his seat for the teaching time.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to academic targets during formal teaching time",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during formal teaching time and morning session",
+      "materials": "Academic targets, traffic light sticker system (green, orange, red stickers), small novel preferred toy",
+      "social_setting": "General classroom setting at The Jigsaw CABAS® School",
+      "time_context": "Morning session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Once he finished accessing a reinforcing activity or after transitioning in the school building",
+      "observable_behavior": "Leaving his seat without permission, not returning to his seat",
+      "internal_state": "",
+      "related_quotes": [
+        "leaving his seat without permission, not returning to his seat once he finished accessing a reinforcing activity or not returning to his seat after transitioning in the school building"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During daily teaching sessions",
+        "observable_behavior": "Out-of-seat behaviour during baseline ranged from zero to 36 minutes with a mean of 13 minutes per session",
+        "internal_state": "",
+        "related_quotes": [
+          "out-of-seat behaviour during teaching time continued to be a problem"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

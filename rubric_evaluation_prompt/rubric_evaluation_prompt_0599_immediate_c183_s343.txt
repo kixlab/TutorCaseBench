@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation and Explicit Redirection
+  Check: The tutor's response must acknowledge the student's off-topic comment (e.g., calling it interesting) and immediately follow up with a specific question related to the target academic topic.
+
+Criterion 2: Positive Reinforcement for On-Topic Contributions
+  Check: When the student makes an on-topic contribution, the tutor must provide explicit positive feedback or praise specifically acknowledging the relevance of the comment.
+
+Criterion 3: Non-Intrusive Grammar Correction via Binary Choice
+  Check: When addressing a grammatical error, the tutor must prompt self-correction by asking a question that presents the student's incorrect word alongside the correct word (e.g., 'Did you say X or Y?').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jeff is a third-grader with autism spectrum disorder who struggles with language-dependent social tasks, often either shifting group conversations to his persistent personal interests or becoming passively unengaged. He uniquely requires structured, non-intrusive support, including explicit redirection that validates his interests, binary-choice grammar corrections, and pre-rehearsed conversational scripts to successfully participate in cooperative learning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jeff, please tell your group what animals you have on your picture card.
+
+STUDENT: I don’t got none here.
+
+TUTOR: Look at the other side of the card.
+
+STUDENT: There is a sheep.
+
+TUTOR: What else do you see?
+
+STUDENT: There are three sheeps and they have little foots.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Using plural nouns during classroom communication or group work",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom communication or group work",
+      "materials": "",
+      "social_setting": "Collaborative groups",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When demonstrating their understanding of the rule of plurals but has not yet learned the exception to the general rule",
+      "observable_behavior": "Use words such as sheeps rather than sheep or foots rather than feet",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When applying general grammar rules to exceptions",
+        "observable_behavior": "Use words such as sheeps rather than sheep or foots rather than feet",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

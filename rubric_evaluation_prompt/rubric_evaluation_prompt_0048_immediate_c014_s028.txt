@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physical 3D Spatial Simulation
+  Check: The tutor's response must include or direct the use of physical gestures, body parts (e.g., arms), or real-world objects (e.g., a desk) to model the 3D shape or space.
+
+Criterion 2: Dynamic Line Tracing and Labeling
+  Check: The tutor must explicitly trace, slide fingers along, or actively draw and label specific lines, diagonals, or extensions on the diagram to highlight their relationship to the whole.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Lisa is an independent learner who struggles significantly with 3D spatial visualization, often guessing dimensions or solving for irrelevant pieces when looking at 2D representations of 3D objects. She uniquely requires dynamic physical gestures—such as blocking out space with arms or tracing lines—to bridge the gap between 2D diagrams and 3D realities.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the multistep word problem about fitting a long pole in the back of a loading truck. You can use this diagram of a rectangular prism with the labeled dimensions to solve it.
+
+STUDENT: (Looks at the diagram and her scratch paper) Is that supposed to be the way it is farthest in the truck?
+
+TUTOR: What do you think based on the picture?
+
+STUDENT: Is the next one going to be in here? Is it still Pythagorean Theorem?
+
+TUTOR: Just try your best to calculate the answer using the numbers provided in the diagram.
+
+STUDENT: (Starts to guess again using a different combination of dimensions.) I’m not sure yet, because we don’t know the whole truck.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "fitting a long pole in the back of a loading truck, but the provided diagram consisted only of a rectangular prism with some labeled dimensions",
+      "learning_goal": "solve a multistep, word problem that required three-dimensional use of the Pythagorean Theorem"
+    },
+    "context": {
+      "environment": "desk",
+      "materials": "diagram consisted only of a rectangular prism with some labeled dimensions",
+      "social_setting": "worked independently",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "multistep, word problem that required three-dimensional use of the Pythagorean Theorem",
+      "observable_behavior": "Starts to guess again using a different combination of dimensions.",
+      "internal_state": "difficulty visualizing the entire 3D space",
+      "related_quotes": [
+        "I’m not sure yet, because we don’t know the whole truck."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Even with the semiconcrete visual and verbal supports",
+        "observable_behavior": "continued to struggle",
+        "internal_state": "",
+        "related_quotes": [
+          "Is it still Pythagorean Theorem?",
+          "Is that supposed to be the way it is farthest in the truck?",
+          "Is the next one going to be in here?"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Multimodal Input Pairing
+  Check: The tutor's response must explicitly describe the use of gestures, hand movements, or signs alongside their spoken dialogue.
+
+Criterion 2: Explicit Sign Scaffolding
+  Check: The tutor must explicitly model, offer, or prompt the student to use a specific topic-related sign or gesture to expand on their limited verbal utterance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has severe expressive language impairments, relying on a vocabulary of fewer than 50 words and one-word sentences despite possessing complex cognitive concepts. They initially prefer verbal communication but become stuck when trying to express complex ideas, uniquely requiring Sign-supported Dutch (SSD) or similar multimodal communication to bridge the gap between their cognitive understanding and expressive capacity.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Look at this picture of the family with the toys. Tell me what is happening here.
+
+STUDENT: Papa.
+
+TUTOR: Okay, what else?
+
+STUDENT: Ja. (Uses a deictic gesture to point at another toy in the picture)
+
+TUTOR: Can you tell me more about that?
+
+STUDENT: Nee. (Makes an iconic hand movement without speech, relying on a one-word sentence because they cannot verbally express the complex concept they have in mind)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Communicating messages and expressing concepts that were already present cognitively, but which they could not yet express verbally",
+      "learning_goal": "Insert more complex elements into his or her message"
+    },
+    "context": {
+      "environment": "Therapy room",
+      "materials": "Toys present in the therapy room, picture-naming exercises",
+      "social_setting": "Interaction with a speech therapist",
+      "time_context": "During baseline recordings and subsequent sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to communicate with their conversational partner while having deficits in their verbal skills",
+      "observable_behavior": "Relied on the little verbal skills they had to communicate with their conversational partner by using one-word-sentences",
+      "internal_state": "Concepts that were already present cognitively, but which they could not yet express verbally",
+      "related_quotes": [
+        "ja",
+        "nee",
+        "mama",
+        "papa"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Throughout the study, despite limited verbal expression skills",
+        "observable_behavior": "Exhibited a strong preference to communicate verbally",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

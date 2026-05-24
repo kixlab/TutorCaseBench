@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Play Structuring
+  Check: The tutor's response establishes a clear play framework by defining a specific theme, assigning roles, or explicitly labeling how toys should be used.
+
+Criterion 2: Specific Linguistic Scaffolding
+  Check: The tutor provides exact phrases for the student to say to a peer, or asks highly specific, concrete questions about the play rather than general, open-ended questions.
+
+Criterion 3: Calibrated Interference
+  Check: If the student is actively engaged with a peer, the tutor refrains from intrusive prompting, limiting interventions to brief verbal re-directs or reflective statements to maintain the interaction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a mild language disorder and social skill deficits, causing them to withdraw, remain silent, or use repetitive questions during unstructured peer play. They uniquely require explicit play themes, assigned roles, and specific conversational scripts to initiate and sustain interactions, as they fail to respond to minimal adult scaffolding or broad, open-ended questions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for free play. You and your partner can play with the dramatic play toys and cars on the carpet.
+
+STUDENT: (Sits on the carpet, appearing lonely and making no comments to the peer.)
+
+TUTOR: What are you going to play?
+
+STUDENT: (Looks at the peer) Can I have the car?
+
+TUTOR: Keep playing together.
+
+STUDENT: (Does not engage in play with the peer) Can I have the car? Can I have the car? Can I have the car?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Playing with toys (dramatic play, careers, or manipulative toys) during 10-minute baseline sessions",
+      "learning_goal": "Producing peer-directed comments and verbal inquiries (requests)"
+    },
+    "context": {
+      "environment": "Space designated for project use on a carpeted floor",
+      "materials": "Dramatic play toys (e.g., kitchen, grocery store, hospital), materials associated with careers (e.g., school bus drive, teacher, gardener, doctor), and manipulative toys (e.g., cars, blocks, trains)",
+      "social_setting": "Dyad (two children) playing together with an interventionist present",
+      "time_context": "10 minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the interventionist invited the children to play with the toys arranged on the carpeted floor and engaged in minimal conversation with the children while they played, and did not prompt language",
+      "observable_behavior": "Decreased the frequency of comments to fewer than five comments in a session or no comments",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to make verbal inquiries or requests during the play session",
+        "observable_behavior": "Having a high rate of requests for one session, however the reason for this high rate was due to asking the same question repeatedly",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When expected to interact with peers without structured support",
+        "observable_behavior": "Demonstrated fewer social skills (e.g., making friends, following directions, initiating conversations with peers) and/or more problem behaviors (e.g. have temper tantrums)",
+        "internal_state": "Appears lonely, shows anxiety, is sad or depressed",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

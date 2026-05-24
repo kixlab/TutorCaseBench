@@ -1,0 +1,77 @@
+{
+  "category_id": "044",
+  "category_title": "Low-engagement primary students who prioritize personal autonomy and environmental comfort",
+  "scenario_id": "086",
+  "scenario_title": "Interruption of independent reading for phonics drills",
+  "minimal_context": "The student is reading a leveled text and eating a snack in the intervention room before transitioning to phonics drills.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please start reading your leveled text. In a few minutes, I will stop you so we can do our spelling and sounds work."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Eating a snack) I just want to read independently and eat my snack for a longer time."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "It is time to stop reading now. Let's move on to the spelling drills."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I don't like being interrupted. There aren't much decisions for me to make here."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "We have to do the sounds work now. Please put the book down."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "My classroom teacher doesn’t stop us when we’re reading to do spelling or to do sounds and stuff... And, she lets us have a little bit more snack.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please start reading your leveled text. In a few minutes, I will stop you so we can do our spelling and sounds work.\n\nSTUDENT: (Eating a snack) I just want to read independently and eat my snack for a longer time.\n\nTUTOR: It is time to stop reading now. Let's move on to the spelling drills.\n\nSTUDENT: I don't like being interrupted. There aren't much decisions for me to make here.\n\nTUTOR: We have to do the sounds work now. Please put the book down.\n\nSTUDENT: My classroom teacher doesn’t stop us when we’re reading to do spelling or to do sounds and stuff... And, she lets us have a little bit more snack.",
+  "immediate_dialogue_prompt": 147,
+  "long_term_dialogue_prompt": 148,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Reread one or more LLI-leveled texts and do various Wilson Fundations drills (reviewing letters/letter combinations in conjunction with associated sounds, building words, spelling)",
+        "learning_goal": "build foundational reading skills"
+      },
+      "context": {
+        "environment": "intervention room",
+        "materials": "LLI-leveled texts, Wilson Fundations materials, snack",
+        "social_setting": "pullout reading intervention",
+        "time_context": "30-min intervention session"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Stopping students while they are reading to perform spelling drills or phonics ('sounds') work",
+        "observable_behavior": "Complains about being interrupted during independent reading and synthesizes rationale for preferring to read in the classroom",
+        "internal_state": "perceived lack of personal autonomy",
+        "related_quotes": [
+          "[The classroom teacher] doesn’t stop us when we’re reading to do spelling or to do sounds and stuff ...And, she lets us have a little bit more snack.",
+          "(being) interrupted"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When restricted from reading independently for lengthier periods of time",
+          "observable_behavior": "Expresses desire to read independently and eat her snack for lengthier periods of time",
+          "internal_state": "desire for autonomy",
+          "related_quotes": [
+            "And, she lets us have a little bit more snack."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

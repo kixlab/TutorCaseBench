@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Material Accessibility Calibration
+  Check: The tutor's long-term plan includes consistently selecting or adapting texts and materials to match Mark's accessible reading level.
+
+Criterion 2: Integration of Collaborative Group Work
+  Check: The tutor's long-term strategy incorporates structured, ongoing opportunities for peer collaboration and group work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Mark is an active learner who is often mischaracterized as a behavior problem due to his out-of-turn talking, which he actually uses to help peers learn. He completely disengages and becomes socially distant when teachers do the work for him or police his behavior over providing meaningful instruction. He uniquely needs accessible texts and the autonomy to collaborate and take charge of his own learning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's go through this history text. I'm going to read it out loud and write down the answers for you, so just sit there quiet and pay attention.
+
+STUDENT: Can you try to let us do the work instead of sitting and watching you do it for us? And maybe try to keep the texts in our mid-range of reading?
+
+TUTOR: Just follow along with what I am doing on the board.
+
+STUDENT: (Turns to a classmate to talk) I can explain this part to you. I'm just making a comment to help the person learn.
+
+TUTOR: Please stop the side conversation and face forward.
+
+STUDENT: (Grows socially distant and reluctant to participate) We completely go off task because we feel what we're doing is just completely meaningless. Moore isn't helping me . . . I hear Lincoln High has a stronger program.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading history texts",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "U.S. History class",
+      "materials": "history texts",
+      "social_setting": "Teacher performing the work for the students while they are sitting and watching",
+      "time_context": "middle of the school year"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher is sitting and watching him do it for us and using texts outside their mid-range of reading",
+      "observable_behavior": "completely go off task, engage in out-of-turn talking and side conversation",
+      "internal_state": "feel what we're doing is just completely meaningless",
+      "related_quotes": [
+        "[We] completely go off task because we feel what we're doing is just completely meaningless.",
+        "comment[s] to help the person learn."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to sit there quiet and pay attention without meaningful instruction",
+        "observable_behavior": "grown socially distant from teachers and peers and was reluctant to participate in class",
+        "internal_state": "resisted a rendering of himself as noncompliant",
+        "related_quotes": [
+          "Moore isn't helping me . . . I hear Lincoln High has a stronger program."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

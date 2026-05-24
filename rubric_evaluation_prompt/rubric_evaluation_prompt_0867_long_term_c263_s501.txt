@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Culturally Relevant Genre Curation
+  Check: The tutor's plan includes discovering the student's personal interests and curating a diverse selection of culturally relevant texts (e.g., urban fiction, graphic novels) for her to choose from.
+
+Criterion 2: Multi-Modal Literacy Routine
+  Check: The tutor's plan establishes a consistent routine that integrates independent reading with writing and conversational sharing, explicitly avoiding standardized test-prep cycles.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Angelica is a student who actively resists standardized literacy tasks and assigned reading, often withholding effort and picking answers from memory when stripped of agency. However, she demonstrates intense engagement when granted full autonomy to self-select culturally relevant texts. She uniquely requires instructional approaches that validate her identity as a reader through unrestricted choice, diverse genres, and metacognitive reflection rather than rote compliance or test prep.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For today's hour, please read this passage from a past standardized test and answer the multiple choice questions.
+
+STUDENT: (Flips through the pages quickly) I read it. I'm just really bored with it.
+
+TUTOR: Please move on to the multiple choice questions now.
+
+STUDENT: I'll just read the questions and pick the answer from what I remember.
+
+TUTOR: Try to go back to the story to find the correct answers.
+
+STUDENT: I would never go back to the story. Man this isn't really that important if I do anything.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read passages from past standardized tests and answer multiple choice questions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Daily one-hour remedial reading class",
+      "materials": "Past standardized test passages, multiple choice questions, notebooks, sticky notes",
+      "social_setting": "Classroom setting with a teacher",
+      "time_context": "An hour every single day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Being required to read past standardized test passages and answer multiple choice questions, which stripped her of agency to choose what, when, and how she read",
+      "observable_behavior": "Reads the stories without paying attention, reads the questions and picks the answer from memory, and never goes back to the story",
+      "internal_state": "Perceived standardized testing as an inauthentic literacy practice that contained little present or future value; felt really bored",
+      "related_quotes": [
+        "I would read the stories and I wouldn ’tp a y attention to the stories. And I would read the questions and I would, just from what I remem-bered, I would pick the answer. And I would never go back to the story.",
+        "Man this isn ’t really that important if I do anything."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When taking standardized reading tests",
+        "observable_behavior": "Withholding of effort to pass them; picking answers from memory without referring back to the text",
+        "internal_state": "Felt the task was not really that important",
+        "related_quotes": [
+          "I would read the questions and I would, just from what I remem-bered, I would pick the answer."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

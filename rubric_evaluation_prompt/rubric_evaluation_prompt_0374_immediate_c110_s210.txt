@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Role-Based Task Assignment
+  Check: The tutor assigns Ben a specific, capability-aligned role (e.g., leader, note-taker, or logical organizer) or explicitly asks for his input on how to structure his role, rather than giving vague instructions.
+
+Criterion 2: Direct Positive Explanation
+  Check: The tutor provides immediate, conversational feedback that explicitly includes positive reinforcement or appreciation, and does NOT direct the student to rely on asynchronous digital comments.
+
+Criterion 3: Collaborative Visual Scaffolding
+  Check: The tutor prompts the use of a visual organization tool (like a mind map) or encourages Ben to connect his ideas with peers' contributions to develop his thoughts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ben is a student with mild intellectual disability who possesses strong logical thinking and leadership potential, but struggles with low motivation and nervousness during the initial phases of self-regulated learning. He requires specific role assignments that leverage his strengths and relies heavily on direct, face-to-face positive evaluation, as he tends to ignore asynchronous digital feedback.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Ben, for this Chinese class group discussion, you are assigned to be the leader and jot down the key points.
+
+STUDENT: I feel confused about this evaluation. What do I need to do?
+
+TUTOR: Just look at the materials and do what you think is best.
+
+STUDENT: I need to work hard, typing, rest, feeling nervous.
+
+TUTOR: Keep trying to monitor the group's progress.
+
+STUDENT: (Stops jotting down points) I am feeling nervous. I need to rest.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "work on a more complex task which requires more logical thinking skills... assigned to be the leader or to jot down key points during group discussions",
+      "learning_goal": "increase students’ self-monitoring and self-evaluation capability"
+    },
+    "context": {
+      "environment": "Chinese class",
+      "materials": "PowerPoint, internet",
+      "social_setting": "group discussions",
+      "time_context": "initial phase of implementing SRL strategies"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "initial phase of implementing SRL strategies",
+      "observable_behavior": "motivation of students’ self-regulated learning remains at a very low level",
+      "internal_state": "feeling nervous",
+      "related_quotes": [
+        "need to work hard, typing, rest, feeling nervous"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when they feel confused during evaluation",
+        "observable_behavior": "express their feelings... ask questions immediately",
+        "internal_state": "feel confused",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

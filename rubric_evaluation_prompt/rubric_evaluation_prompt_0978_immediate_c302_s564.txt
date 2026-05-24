@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Respecting Capacity Limits
+  Check: The tutor's response must allow the student to stop or significantly reduce demands if they show signs of reaching their limit, rather than forcing continued compliance.
+
+Criterion 2: Incorporating Natural Movement
+  Check: The tutor's response must integrate the student's current physical state or excitement (e.g., jumping, dancing) into the learning activity.
+
+Criterion 3: Rhythmic and Structured Cues
+  Check: The tutor's response must use clear, structured verbal cues or counting (e.g., '1, 2, 3') to guide the timing of a physical action.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits extreme task avoidance, including screaming on the floor and requesting excessive breaks, due to a very low tolerance for sustained instruction. They uniquely require highly structured micro-intervals of work and breaks, visual schedules for predictability, and the integration of their natural stereotypic movements (like jumping) into learning tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We finished jumping. Let's check the picture schedule. It says catch. Please stand on the spot.
+
+STUDENT: (Smiles and jumps up and down, looking really excited) Catch.
+
+TUTOR: (Kneels about 2 feet in front of the student) Hands out, look at the ball.
+
+STUDENT: (Catches the ball with two hands, then squeezes the ball)
+
+TUTOR: Okay, let's do that again.
+
+STUDENT: (Bounces on the ball, makes high pitch noises and flaps hands)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Practicing catching a ball while standing on a spot",
+      "learning_goal": "catch es with two hands, then squeezes the ball"
+    },
+    "context": {
+      "environment": "Gross motor area",
+      "materials": "Ball, picture schedule",
+      "social_setting": "S kneels about 2 feet in front of St",
+      "time_context": "After a fifth trial of jumping"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When using a ball in the gross motor area",
+      "observable_behavior": "Student bounces on the ball, makes high pitch noises and flaps hands.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When really excited during the lesson",
+        "observable_behavior": "will jump up and down",
+        "internal_state": "really excited",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

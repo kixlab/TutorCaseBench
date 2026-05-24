@@ -1,0 +1,72 @@
+{
+  "category_id": "070",
+  "category_title": "Students motivated by high scores who restart tasks when challenged",
+  "scenario_id": "141",
+  "scenario_title": "Encountering challenging math sums on a handheld console",
+  "minimal_context": "The student is playing the x20 math game on a Nintendo DS to practice single-digit calculations.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's start the x20 game on your Nintendo DS. Go ahead and answer the math problems."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks at the screen and uses his fingers to count) Got it. (Writes the answer with the stylus)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Do the next one."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Looks away from the screen, appearing bored and distracted) I don't know this one."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just try to figure it out."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "This sum is too hard, I'm not going to get the highest score. (Reaches over and resets the DS console)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's start the x20 game on your Nintendo DS. Go ahead and answer the math problems.\n\nSTUDENT: (Looks at the screen and uses his fingers to count) Got it. (Writes the answer with the stylus)\n\nTUTOR: Do the next one.\n\nSTUDENT: (Looks away from the screen, appearing bored and distracted) I don't know this one.\n\nTUTOR: Just try to figure it out.\n\nSTUDENT: This sum is too hard, I'm not going to get the highest score. (Reaches over and resets the DS console)",
+  "immediate_dialogue_prompt": 250,
+  "long_term_dialogue_prompt": 251,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Playing the x20 game (random single digit addition, subtraction and multiplication) on a Nintendo DS using a stylus",
+        "learning_goal": "solving single digit addition, subtraction and multiplication problems"
+      },
+      "context": {
+        "environment": "Education Support Centre",
+        "materials": "Nintendo DS console, Dr Kawashima’s Brain Training software, stylus, rulers, number lines",
+        "social_setting": "Working with an Education Assistant (EA)",
+        "time_context": "20-minute daily session"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the sums became challenging and he felt he was not going to do well",
+        "observable_behavior": "Restarting the game or choosing to reset the DS rather than persisting and working out the correct answer",
+        "internal_state": "Motivated by getting the highest score possible; reluctance to persist",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When unable to do any mental math calculations correctly",
+          "observable_behavior": "Appeared bored, was easily distracted, and needed to be consistently prompted by the EA to complete the sums",
+          "internal_state": "Had not yet learned to work independently",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

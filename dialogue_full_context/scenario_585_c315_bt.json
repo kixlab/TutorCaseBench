@@ -1,0 +1,74 @@
+{
+  "category_id": "315",
+  "category_title": "Struggling students needing remediation",
+  "scenario_id": "585",
+  "scenario_title": "Cognitive overload from English-language videos with Spanish subtitles",
+  "minimal_context": "The student is working individually in the computer lab, watching an English-language instructional video with Spanish subtitles about writing out math equations.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please watch the video on your computer screen to see how to write out the math equations."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I am trying to watch it, but the video is in English and I have to use the Spanish subtitles."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just keep watching and try your best to follow along."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "It is too fast. It requires me to read subtitles while also watching someone write out math equations, and the subtitles have unfamiliar terms and new words."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What do you think you should do next?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Visibly asking the teacher for help) I need you to show me how to do it. The teacher can teach me more than the video.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please watch the video on your computer screen to see how to write out the math equations.\n\nSTUDENT: I am trying to watch it, but the video is in English and I have to use the Spanish subtitles.\n\nTUTOR: Just keep watching and try your best to follow along.\n\nSTUDENT: It is too fast. It requires me to read subtitles while also watching someone write out math equations, and the subtitles have unfamiliar terms and new words.\n\nTUTOR: What do you think you should do next?\n\nSTUDENT: (Visibly asking the teacher for help) I need you to show me how to do it. The teacher can teach me more than the video.",
+  "immediate_dialogue_prompt": 1018,
+  "long_term_dialogue_prompt": 1019,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "watching someone write out math equations",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "computer labs",
+        "materials": "English videos with Spanish subtitles",
+        "social_setting": "working individually",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "require students to read subtitles while also watching someone write out math equations",
+        "observable_behavior": "visibly asking the teacher for help more frequently than in the traditional classes",
+        "internal_state": "presented a reading challenge to the student",
+        "related_quotes": [
+          "The teacher can teach me more than the video."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "The subtitles also frequently contained unfamiliar terms and new words",
+          "observable_behavior": "ask the teacher for help",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

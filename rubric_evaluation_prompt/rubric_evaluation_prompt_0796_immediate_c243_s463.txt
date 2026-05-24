@@ -1,0 +1,143 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Cognitive Challenge and Task Enrichment
+  Check: The tutor modifies the task by introducing higher-order questions, choices, or a more challenging alternative rather than simply repeating the original instruction.
+
+Criterion 2: Task-Based Social Integration
+  Check: The tutor provides a structured way for Jasmine to interact with a peer, such as offering a social script (e.g., 'Let's work together') or turning the assignment into a joint activity.
+
+Criterion 3: Preferred Material Integration
+  Check: The tutor offers a specific preferred item (such as a favorite color crayon) to encourage task initiation.
+
+Criterion 4: Absence of Strict Compliance Demands
+  Check: The tutor avoids using flat verbal redirections, reprimands, or strict compliance demands (e.g., 'look at your paper,' 'it is time for math').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jasmine is an academically advanced Kindergarten student with ASD who uses familiar 'teacher voice' scripts to initiate social interactions with peers. She exhibits task resistance and loud protests when redirected from these social attempts to tasks she finds boring. She uniquely requires interventions that leverage her high academic skills and desire for peer interaction—such as higher-order questions, choices, and structured social opportunities—rather than strict compliance-based redirection.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jasmine, it is time to color the objects on the page in groups of 4 on your math worksheet.
+
+STUDENT: (Looks at Jeff) Let’s do some colors! What color is the apple? What color is the boy? What color is the car? (Excitedly shakes her braids and rubs her fingers together quickly in front of the ABC book)
+
+TUTOR: Please look at your own paper and keep working.
+
+STUDENT: (Leans over the table reaching toward Jeff and, waving her arms) booga booga.
+
+TUTOR: (Points to the math worksheet) Jasmine, we have music next. You need to do your math.
+
+STUDENT: (Grabs the ABC book again) No! Aaahh!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "color the objects on the page in groups of 4",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "round table",
+      "materials": "math worksheet, ABC book, favorite color crayon, purple",
+      "social_setting": "sitting with a peer, Jeff, and a paraprofessional",
+      "time_context": "transitioning from a dice game to a math worksheet activity, before music"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The para redirects Jasmine to the math worksheet by pointing, and reminds her that they have music next and she needs to do her math",
+      "observable_behavior": "protesting by grabbing the ABC book again and loudly saying ‘‘no’’, protests by yelling, ‘‘aaahh’’",
+      "internal_state": "appears to want to escape a task that she possibly considered boring, and to subsequently interact with Jeff",
+      "related_quotes": [
+        "no",
+        "aaahh"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to gain the attention of a peer who is working on his worksheet",
+        "observable_behavior": "leans over the table reaching toward Jeff and, waving her arms, says, ‘‘booga booga’’",
+        "internal_state": "",
+        "related_quotes": [
+          "booga booga"
+        ]
+      },
+      {
+        "condition": "When engaging in a question-and-answer interaction with a peer using an ABC book",
+        "observable_behavior": "excitedly shakes her braids in anticipation of Jeff’s responses, occasionally rubbing her ﬁngers together quickly in front the book",
+        "internal_state": "",
+        "related_quotes": [
+          "Let’s do some colors!",
+          "What color is the apple? What color is the boy? What color is the car?"
+        ]
+      },
+      {
+        "condition": "When finishing the worksheet without assistance",
+        "observable_behavior": "turns to Jeff and says, ‘‘Write your name, Jeff.’’ ... Jasmine then tells him, ‘‘Write your name on the top’’, in a teacher voice",
+        "internal_state": "interest in maintaining her interaction with Jeff is clear by her continued application of a script and interaction style with which she is familiar",
+        "related_quotes": [
+          "Write your name, Jeff.",
+          "Write your name on the top"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

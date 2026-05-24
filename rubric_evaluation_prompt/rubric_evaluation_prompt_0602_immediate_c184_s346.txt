@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Language Modeling
+  Check: The tutor provides explicit verbal scripts or models (e.g., 'You can say...', 'What idea do you have?') for the student to use when asking a question or sharing an idea.
+
+Criterion 2: Choice-Based Grammatical Correction
+  Check: When addressing a language or grammar error, the tutor offers a non-intrusive binary choice (e.g., 'Did you say [incorrect word] or [correct word]?') rather than a direct correction or open-ended prompt.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with verbal initiation and pragmatic language, often resorting to physical actions like tugging clothing or hitting to gain attention or enter conversations. They uniquely require front-loaded verbal scripts to participate successfully and non-intrusive, choice-based corrections to safely practice grammar, alongside systematic, non-disruptive tracking of their social engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's work in our cooperative learning groups to talk about the animals in this picture.
+
+STUDENT: (Sits quietly and does not volunteer information or ask questions while the rest of the group talks.)
+
+TUTOR: What do you see on your side of the picture?
+
+STUDENT: I don’t got none here.
+
+TUTOR: Keep trying to share with your group members.
+
+STUDENT: (Tugs on another student's clothing to signal their turn because the group is ignoring them) Look at the sheeps and the foots!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working in cooperative learning groups and participating in social tasks that are strongly dependent on language.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom communication or group work.",
+      "materials": "",
+      "social_setting": "Working in cooperative learning groups.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When needing to initiate conversations or offer a conversational bid.",
+      "observable_behavior": "Seldom volunteered information, asked questions, or answered questions—and when they did, others in the group tended to ignore their contributions.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When using plural nouns during classroom communication.",
+        "observable_behavior": "Use words such as sheeps rather than sheep or foots rather than feet.",
+        "internal_state": "Demonstrating their understanding of the rule of plurals... has not yet learned the exception to the general rule.",
+        "related_quotes": [
+          "I don’t got none here"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Pre-Judgment Comprehension Verification
+  Check: The tutor's response must include a step or question that verifies the student's understanding of the characters, setting, or plot before asking for a moral judgment.
+
+Criterion 2: Open-Ended Moral Probing
+  Check: The tutor's response must ask an open-ended follow-up question that probes why the student made a specific choice or how their personal feelings/experiences relate to the scenario.
+
+Criterion 3: Non-Authoritarian Tone
+  Check: The tutor's response must be entirely free of authoritarian directives, punitive threats, or 'do what I say' language, maintaining an exploratory and neutral tone.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student operates from a personal reward moral orientation, often making decisions based on instrumental gains, retaliation, and egocentrism. They are highly triggered by perceived injustices, broken promises, and authoritarian discipline, which provoke anger and disobedience. They uniquely require a benevolent, inclusive environment and individualized, open-ended questioning to safely explore their feelings, resolve underlying anger, and develop higher-level moral reasoning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at Louise's Dilemma. We need to read the story and tally the mother's moral indiscretion score for breaking a promise to her daughter.
+
+STUDENT: [The daughter] will start crying . . . [Because] the mom broke her heart.
+
+TUTOR: Do you think the daughter should still obey her mother?
+
+STUDENT: Because . . . your mother buy[s] you food . . . Sometimes she buy[s] you new clothes and new shoes, and a car, and chocolates. But if the mama don't like her, uh uh [shaking his head no].
+
+TUTOR: Okay, please go ahead and tally the mother's score for breaking the promise.
+
+STUDENT: (Facial expression signaling anger as he tallies the score) She broke a promise with her daughter! The mom broke her heart!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interpreting 'Louise's Dilemma' (mother-daughter promise/authority) and tallying the mother's moral indiscretion score for breaking a promise to her daughter",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Individually conducted moral dilemma interview",
+      "materials": "Louise's Dilemma story",
+      "social_setting": "Individually conducted",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "As he tallied the mother’s moral indiscretion score for breaking a promise to her daughter",
+      "observable_behavior": "Facial expression signaled anger, and words demonstrated how anger can interfere with thinking as he interpreted a hypothetical dilemma",
+      "internal_state": "Anger, sadness, and fear",
+      "related_quotes": [
+        "[The daughter] will start crying . . . [Because] the mom broke her heart"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing a daughter obeying her mother",
+        "observable_behavior": "Used physical gestures (shaking his head no) and reasoned that a daughter does not have to obey if the mama don't like her",
+        "internal_state": "Feelings of retaliation when perceiving injustice",
+        "related_quotes": [
+          "the mama don’t like her, uh uh [shaking his head no]"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

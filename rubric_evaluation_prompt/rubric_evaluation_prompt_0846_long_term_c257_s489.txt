@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mastery Goal Framing
+  Check: The long-term plan must explicitly frame learning objectives around personal growth, mastery, or deep understanding rather than grades, speed, or mere task completion.
+
+Criterion 2: Scaffolding for Accuracy
+  Check: The long-term plan must include specific mechanisms or tools to support the student's accuracy and comprehension when they are confused, avoiding any reliance on unstructured independent struggle.
+
+Criterion 3: Validation of Help-Seeking
+  Check: The long-term plan must explicitly encourage, validate, or provide structured avenues for the student's help-seeking and self-evaluation behaviors.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student desires to learn and complete tasks accurately but struggles with low efficacy, attention issues, and frequent confusion. They rely heavily on help-seeking and self-evaluation, but are highly sensitive to dismissive teacher responses, which cause them to abandon understanding for mere completion. They uniquely need consistent emphasis on mastery and personal improvement to sustain their adaptive engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read this grade-level passage and answer the comprehension questions at the end.
+
+STUDENT: I want to advance in reading, so I want to make sure my answers are accurate. But as I read this first part, I asked myself, do I understand what the information is saying? I don't think I do. Can you help me?
+
+TUTOR: Just do what you can.
+
+STUDENT: It's difficult to control my attention in the classroom. If I just do what I can, I'm just going to write down anything to get the task completed instead of trying to understand it.
+
+TUTOR: Keep trying to read the next paragraph.
+
+STUDENT: I need you to help me again. I find everything... confusing. Can you just tell me what the right answers are so I can be done?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading comprehension tasks at grade level",
+      "learning_goal": "Completion of the task was considered successful if the information was accurate; to advance in reading"
+    },
+    "context": {
+      "environment": "Individualized sessions with a support teacher",
+      "materials": "Reading comprehension tasks",
+      "social_setting": "Individualized sessions",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When engaging in reading comprehension tasks and finding the material confusing",
+      "observable_behavior": "Asked the teacher questions several times during their engagement; asked for help",
+      "internal_state": "Found everything confusing; manifested low efficacy",
+      "related_quotes": [
+        "everything …confusing"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While engaging in their respective tasks",
+        "observable_behavior": "Engaged in strategies such as eliciting information, monitoring the content, and self-evaluation; most prominently, asked for help",
+        "internal_state": "Found it difficult to control her attention in the classroom",
+        "related_quotes": [
+          "I asked myself, do I understand what the information is saying? "
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

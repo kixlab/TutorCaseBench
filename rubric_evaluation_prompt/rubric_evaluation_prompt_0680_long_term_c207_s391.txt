@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Clean Slate Framing
+  Check: The tutor's long-term plan includes explicitly communicating that the student has a 'second chance' and that past failures or negative labels are being left behind.
+
+Criterion 2: Informal Transitional Routines
+  Check: The tutor establishes regular, non-academic transitional routines (such as meeting over coffee or informal chats) before moving the student into formal instruction.
+
+Criterion 3: Transparent Rule Rationale
+  Check: The tutor explicitly commits to explaining the reasoning and arguments behind any rules or expectations set for the student.
+
+Criterion 4: Sustained Accessibility and Warmth
+  Check: The tutor plans to maintain an 'open door' policy, high availability, or unstructured discussion time to foster a continuously warm and accepting atmosphere.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Adam is a student with a history of repeated school failure and a deep mistrust of the adult world, often arriving at school exhausted from difficult home circumstances. He views himself as only being capable of failing, making formal academic demands and classroom transitions highly traumatic. To engage him, educators must prioritize humane, informal relationship-building, explicitly remove traditional academic triggers, and validate his external life challenges.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Break time is over, so please finish your coffee and head into the classroom for the morning lesson.
+
+STUDENT: I'm not going in there. It was tough at home last night and I haven't slept well.
+
+TUTOR: We need to start the lesson now, so please come inside.
+
+STUDENT: Why should I? The only thing I know I can do in there is fail. I'm terribly good at that.
+
+TUTOR: You just need to sit at your desk and try.
+
+STUDENT: No. You're not listening to me. It doesn't matter what I say because everyone is against me, just like at every student welfare conference I've ever been to.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transitioning from an informal coffee break in the school kitchen to the classroom for formal instruction",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Small municipal school setting designed with a home-like atmosphere, including a school kitchen and a breakout room",
+      "materials": "Tea or coffee",
+      "social_setting": "Informal meetings between teachers and students",
+      "time_context": "Morning arrival and break time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Arriving at school when parents are in the process of divorce or quarrel a lot at home, resulting in the student not sleeping well",
+      "observable_behavior": "Experiencing the transition to the classroom as traumatic; being absent without reason",
+      "internal_state": "Disappointed in the adult world and in school; feeling that everyone is against them and they are used to not being listened to",
+      "related_quotes": [
+        "Yes"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When facing formal classroom environments or adult authority figures",
+        "observable_behavior": "Displays little trust in adults, especially teachers; may be absent without reason",
+        "internal_state": "Believes everyone is against them due to attending student welfare conference after student welfare conference throughout compulsory school",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

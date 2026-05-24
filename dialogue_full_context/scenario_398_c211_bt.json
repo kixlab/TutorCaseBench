@@ -1,0 +1,72 @@
+{
+  "category_id": "211",
+  "category_title": "At-risk Grade 9 students exhibiting learned helplessness and inconsistent engagement",
+  "scenario_id": "398",
+  "scenario_title": "Calculating wattage and power in science class",
+  "minimal_context": "The student is working on a worksheet calculating wattage and power in science class.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please complete the worksheet on calculating wattage and power."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I don't see why we have to do this. It's completely disconnected from my daily life. I'd rather just learn how circuits are wired into a house."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just focus on the calculation problems in front of you."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Stares at the paper) The mathematical aspect of calculating this wattage is too challenging."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Try your best to figure it out."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "There's no point. I'm just stupid, so I'm always going to fail these tests anyway. I'm not doing it.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please complete the worksheet on calculating wattage and power.\n\nSTUDENT: I don't see why we have to do this. It's completely disconnected from my daily life. I'd rather just learn how circuits are wired into a house.\n\nTUTOR: Just focus on the calculation problems in front of you.\n\nSTUDENT: (Stares at the paper) The mathematical aspect of calculating this wattage is too challenging.\n\nTUTOR: Try your best to figure it out.\n\nSTUDENT: There's no point. I'm just stupid, so I'm always going to fail these tests anyway. I'm not doing it.",
+  "immediate_dialogue_prompt": 690,
+  "long_term_dialogue_prompt": 691,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "calculating wattage and power",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "science class",
+        "materials": "wattage calculation problems, power meter examples",
+        "social_setting": "classroom",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when students found the mathematical aspect of calculating wattage challenging and disconnected from their daily lives",
+        "observable_behavior": "not completing or by failing previous course loads, demonstrating inconsistent attendance, and/or demonstrating inappropriate behaviour at school",
+        "internal_state": "assume that he or she failed the test because he or she was stupid (internal and global) and will always fail (stable)",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Given the lack of success experienced in the school setting",
+          "observable_behavior": "display learned helplessness with regard to their schoolwork",
+          "internal_state": "predisposed to attribute negative outcomes to internal, global, and stable factors",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

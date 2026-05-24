@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Immediate Precursor Intervention
+  Check: The tutor's response addresses the student's very first sign of off-task behavior or frustration immediately, without waiting for the behavior to escalate.
+
+Criterion 2: Proximal and Direct Engagement
+  Check: The tutor explicitly establishes closeness (e.g., moving to the student's desk, making direct eye contact, or using highly present, individualized language) rather than issuing distant or generalized directives.
+
+Criterion 3: Positive Behavioral Framing
+  Check: The tutor uses positive, encouraging language to redirect the student toward the task, completely avoiding negative reprimands, criticisms, or 'stop' commands.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe, rapid-escalation behavioral issues (shouting, leaving desk, hitting) triggered by delayed teacher responses, distant commands, and negative reprimands. They uniquely require a highly proactive approach characterized by immediate intervention at the first sign of a precursor, close physical proximity, and consistently positive, encouraging interactions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Look at the worksheet on your desk. We are going to order these numbers and identify which are odd and which are even.
+
+STUDENT: (Shifts head and body to a direction other than the location of the learning stimuli for more than 5 seconds)
+
+TUTOR: (Speaking from across the room) Turn back around and look at your math work.
+
+STUDENT: (Raises voice beyond an average volume practiced in the class) I don't want to do this!
+
+TUTOR: (Waiting a few moments before responding from a distance) Stop shouting and sit quietly.
+
+STUDENT: (Stands up, being away from the desk while no body part touches the chair for more than 5 seconds)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Math, speciﬁcally about properties of numbers, odd and even and ordering",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Self-contained classroom",
+      "materials": "Desk, chair",
+      "social_setting": "Teacher-led instruction",
+      "time_context": "10-minute segments"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher uses increased decreasing interactions, delayed contingent responding to students, and avoidance from proximity",
+      "observable_behavior": "Leaving (i.e., being away from one’s desk, while no body part touches the chair, for more than 5 seconds)",
+      "internal_state": "",
+      "related_quotes": [
+        "leaving (i.e., being away from one’s desk, while no body part touches the chair, for more than 5 seconds)"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During teacher-led instruction when appropriate classroom contingencies are weak",
+        "observable_behavior": "Shouting (i.e., raising voice beyond an average volume practiced in the class)",
+        "internal_state": "",
+        "related_quotes": [
+          "shouting (i.e., raising voice beyond an average volume practiced in the class)"
+        ]
+      },
+      {
+        "condition": "During teacher-led instruction when appropriate classroom contingencies are weak",
+        "observable_behavior": "Hitting (i.e., forcefully touching, pushing, or kicking other students)",
+        "internal_state": "",
+        "related_quotes": [
+          "hitting (i.e., forcefully touching, pushing, or kicking other students)"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

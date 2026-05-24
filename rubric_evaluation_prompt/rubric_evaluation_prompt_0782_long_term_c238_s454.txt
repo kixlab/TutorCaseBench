@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Layered Skill Scaffolding
+  Check: The long-term plan includes small, low-stakes practice assignments or micro-tasks (e.g., brief observations or mock coding) to build specific research skills prior to high-stakes data collection or analysis.
+
+Criterion 2: Structured Emotional Reflection
+  Check: The long-term plan establishes structured, ongoing opportunities (such as reflective journaling or peer team discussions) specifically designed for students to process and share their emotions about the research experience.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are high-achieving honors students who experience a severe drop in confidence and intense anxiety when transitioning from theoretical learning to the messy reality of qualitative research. Because they are accustomed to academic success, the non-linear cognitive demands of data collection, analysis, and writing trigger unexpected feelings of inadequacy and paralysis. They uniquely require explicit normalization of their emotional distress and a highly scaffolded, layered approach to skill development to rebuild their confidence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the qualitative data you collected for your critical ethnography. Please start processing the information to find patterns and make sense of it.
+
+STUDENT: I'm trying, but I'm really surprised at my feelings of frustration and inadequacy right now. I've always found my other honors courses relatively easy, so my confidence is really being tested.
+
+TUTOR: Just keep working on the analysis.
+
+STUDENT: It is much easier to regurgitate information than to process it, try to find patterns, make sense of it, and see it applied in the larger picture. The cognitive work of this analysis is causing me significant anxiety.
+
+TUTOR: What do you think you should write in your journal reflection about this?
+
+STUDENT: I'm sorry for venting. I shouldn't be bringing these emotions into the classroom. I'll just call it frustration, but I'm honestly stuck on how to actually do this analysis.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Performing data analysis, pattern finding, and synthesis in qualitative research",
+      "learning_goal": "Process information, try to find patterns, make sense of it, and see it applied in the larger picture"
+    },
+    "context": {
+      "environment": "Honors seminar on qualitative research methods",
+      "materials": "Qualitative data, weekly journal reflections, on-line discussions",
+      "social_setting": "Engaging simultaneously in data collection and analysis",
+      "time_context": "Throughout the 15-week honors seminar"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When faced with engaging in a critical ethnography using qualitative methods and the cognitive work of analysis",
+      "observable_behavior": "Surprised at their feelings of frustration and inadequacy given the relatively ease they experienced in other courses",
+      "internal_state": "The cognitive work of analysis caused students significant anxiety",
+      "related_quotes": [
+        "It is much easier to regurgitate information than to process it, try to find patterns, make sense of it, and see it applied in the larger picture"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing negative emotions about the learning process",
+        "observable_behavior": "Minimized her emotions by naming them as frustration rather than anger... posted an apology for her ‘venting’",
+        "internal_state": "Reinforcing the notion that emotions are inappropriate in the classroom",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,67 @@
+{
+  "category_id": "062",
+  "category_title": "Disengaged adolescent with behavioral history and word-skipping habits",
+  "scenario_id": "126",
+  "scenario_title": "Taking a World History exam",
+  "minimal_context": "Derek is taking a World History exam independently in the classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is your World History exam. Please read the questions and begin."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Slouches and crosses arms) I can never remember these lessons. It just makes me tense and uncomfortable."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just read the first section and try your best."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Reads the page very quickly) I'm just trying to finish this as fast as possible."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Look at question number three again."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I somehow just skip over words on tests. I look back at the question and realize I never knew it said that. I'm done with this.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is your World History exam. Please read the questions and begin.\n\nSTUDENT: (Slouches and crosses arms) I can never remember these lessons. It just makes me tense and uncomfortable.\n\nTUTOR: Just read the first section and try your best.\n\nSTUDENT: (Reads the page very quickly) I'm just trying to finish this as fast as possible.\n\nTUTOR: Look at question number three again.\n\nSTUDENT: I somehow just skip over words on tests. I look back at the question and realize I never knew it said that. I'm done with this.",
+  "immediate_dialogue_prompt": 224,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Taking tests, specifically World History exams",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom test setting",
+        "materials": "Tests",
+        "social_setting": "Independent test taking",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When reading questions or text on tests independently",
+        "observable_behavior": "Skips over words on tests and misses information",
+        "internal_state": "Unable to remember lessons had increased tensions and discomfort",
+        "related_quotes": [
+          "I somehow just skip over words on tests and then like I’ll go back through and someone will read it to me and like I realize I never knew it said that."
+        ]
+      },
+      "behavior_patterns": []
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

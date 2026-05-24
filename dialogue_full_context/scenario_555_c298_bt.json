@@ -1,0 +1,78 @@
+{
+  "category_id": "298",
+  "category_title": "Students with MLD using atypical multiples-list strategies for multiplication",
+  "scenario_id": "555",
+  "scenario_title": "Finding common multiples and list confusion",
+  "minimal_context": "The student and tutor are working one-on-one to find a common multiple for 6 and 12 by listing multiples.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We need to find a common multiple for 6 and 12. Let's start by listing some multiples of 6."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Raises fingers to keep track of her ordinal position) 6, 12, 18, 24, 36, 45, 54, 63, 72, 81."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Let's try reciting that list one more time."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Counting on fingers again) 6, 12, 18, 24, 36, 45, 54, 63, 72, 81? Or is that nines?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What do you think? Try it again."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "6, 12, 18, 24, 36, 45, 54, 63, 72, I’m confused, they are both nines. I just memorize them, and I don’t even know if it’s right.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We need to find a common multiple for 6 and 12. Let's start by listing some multiples of 6.\n\nSTUDENT: (Raises fingers to keep track of her ordinal position) 6, 12, 18, 24, 36, 45, 54, 63, 72, 81.\n\nTUTOR: Let's try reciting that list one more time.\n\nSTUDENT: (Counting on fingers again) 6, 12, 18, 24, 36, 45, 54, 63, 72, 81? Or is that nines?\n\nTUTOR: What do you think? Try it again.\n\nSTUDENT: 6, 12, 18, 24, 36, 45, 54, 63, 72, I’m confused, they are both nines. I just memorize them, and I don’t even know if it’s right.",
+  "immediate_dialogue_prompt": 963,
+  "long_term_dialogue_prompt": 964,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "attempting to find a common multiple for 6 and 12",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "tutoring sessions",
+        "materials": "",
+        "social_setting": "one-on-one tutoring session",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The tutor suggested that she start by listing some multiples of 6.",
+        "observable_behavior": "As she recites her sixes she inadvertently switches from the sixes to the nines list... Emily repeats this incorrect sequence four times during this brief episode.",
+        "internal_state": "Emily was clearly unable to determine whether she was reciting her nines or her sixes.",
+        "related_quotes": [
+          "6, 12, 18, 24, 36, 45, 54, 63, 72, 81.",
+          "6, 12, 18, 24, 36, 45, 54, 63, 72, 81? Or is that nines?",
+          "6, 12, 18, 24, 36, 45, 54, 63, 72, I’m confused, they are both nines."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When reciting multiples lists",
+          "observable_behavior": "miscounted as she recites her multiples list",
+          "internal_state": "",
+          "related_quotes": [
+            "I just memorize them, and I don’t even know if it’s right."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Active Structuring of Social Interaction
+  Check: The tutor actively provides specific guidance, prompts, or structured choices to facilitate social engagement, rather than leaving the student to unstructured independence.
+
+Criterion 2: Encouragement of Symbolic Play over Task Rigidity
+  Check: The tutor supports, joins, or expands upon the student's creative or symbolic use of objects, and avoids redirecting them solely to complete a rigid academic task.
+
+Criterion 3: Explicit Reinforcement of Joint Attention
+  Check: The tutor explicitly praises, validates, or positively responds to the student's attempts to look, point, or share attention, rather than merely commanding them to 'look' or physically forcing a point.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student spends a significant portion of their time (37%) in an unengaged state, often waiting passively or slipping away from object engagement. They manipulate toys rigidly, use pointing to regulate others rather than share interest, and lack spontaneous social initiation. They uniquely require direct adult facilitation to sustain attention, as well as explicit, separate instruction in symbolic play and joint attention to prevent them from defaulting to passive isolation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for snack. Here are your crackers and juice.
+
+STUDENT: (Eats the crackers and drinks the juice, then sits quietly looking at the table, waiting in a passive manner.)
+
+TUTOR: What do you want to do next?
+
+STUDENT: (Continues to sit at the table in an unengaged state, not purposefully attending to the remaining food or looking at the teacher.)
+
+TUTOR: You can go to the free play area now.
+
+STUDENT: (Walks to the unstructured play area and stands in the middle of the room, waiting in a passive manner without initiating any functional play acts.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "caregiving (e.g., toileting, snack)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "unstructured (e.g., free play, recess) or caregiving",
+      "materials": "",
+      "social_setting": "preschool special education classes",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "without direct adult facilitation",
+      "observable_behavior": "mostly eating/drinking or waiting in a passive manner",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "during caregiving activities",
+        "observable_behavior": "spent 37% of the observed time in an unengaged state, where, by deﬁnition, they were not purposefully attending to or interacting with objects or other people",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "in unstructured settings",
+        "observable_behavior": "initiated fewer functional play acts",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

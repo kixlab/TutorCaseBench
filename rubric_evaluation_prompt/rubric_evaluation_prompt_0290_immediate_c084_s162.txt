@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Strong Critiques
+  Check: The tutor's response must offer, encourage, or validate an opportunity for the student to provide a strong critique or opinion about a book, rather than strictly enforcing a standard written requirement.
+
+Criterion 2: Facilitation of Authentic Reader Dialogue
+  Check: The tutor's response must invite the student into an authentic conversation about their reading experience or actively connect them with peers for genuine dialogue, rather than just asking them to report on their progress.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a highly active reader who reads voluminously but strongly resists standard course requirements like written reading logs, leading to issues with timeliness and completion. They lack social support for their reading identity among outside peers, often masking their frustration with a playful affect when their book recommendations are ignored. The evidence reveals they uniquely need flexible assignment formats, opportunities to deliver strong verbal critiques, and an authentic, supportive reading community to thrive.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We have 30 minutes for independent reading or conferencing. Please complete your reading log and reflection for the book you just finished.
+
+STUDENT: I read over 100 books in this course, but I really do not enjoy these standard course requirements.
+
+TUTOR: What do you think you should write down?
+
+STUDENT: I'd rather just give a strong critique about the book in our reading group. I'm an active, engaged participant there.
+
+TUTOR: You need to finish the written reflection today.
+
+STUDENT: I'm just going to keep reading instead. I always have issues with timeliness and work completion for these logs anyway.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging with course requirements",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Students met every other school day for 84 minutes",
+      "materials": "reading logs, conferences, and reflections on students’ effort",
+      "social_setting": "conferencing quietly with peers or the teacher",
+      "time_context": "30 minutes independently reading self-selected texts or conferencing quietly"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When engaging with course requirements",
+      "observable_behavior": "issues with timeliness and work completion",
+      "internal_state": "reported not enjoying course requirements",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When engaging with course requirements",
+        "observable_behavior": "issues with timeliness and work completion",
+        "internal_state": "reported not enjoying course requirements",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Culturally Relevant Texts
+  Check: The tutor's long-term plan includes the deliberate selection of texts featuring or written by people of color to anchor discussions.
+
+Criterion 2: Sustained Presumption of Competence
+  Check: The tutor's long-term strategy explicitly focuses on highlighting Camilo's analytical strengths and counter-narratives rather than remediating perceived deficits.
+
+Criterion 3: Restructuring Interactional Protocols
+  Check: The tutor plans to establish and enforce new discussion norms or protocols that move away from traditional Initiation-Response-Evaluation (IRE) patterns.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Camilo is an analytical student who is often labeled as 'struggling' because he actively avoids situations where he might look incompetent, especially in chaotic group discussions. He uniquely requires a tutor who will actively protect his speaking turns from dominant peers, validate his insights, and provide low-stakes opportunities to formulate his thoughts before sharing them publicly.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now that we've finished our partner talk, let's interpret these few lines of 'Cathy, Queen of Cats' together with the whole group. Camilo, what visual image did you get?
+
+STUDENT: The cat lady.
+
+TUTOR: Okay. What else?
+
+STUDENT: She’s telling the kids how the street is.
+
+TUTOR: Can you explain that to the class?
+
+STUDENT: (Lets other students jump into the conversation to avoid getting caught not knowing) I don't know.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interpreting a few lines at a time of 'Cathy, Queen of Cats' and providing a visual image",
+      "learning_goal": "Interpreting this story and providing analysis of the story"
+    },
+    "context": {
+      "environment": "General education classroom during whole-group literacy discussion",
+      "materials": "Selection titled 'Cathy, Queen of Cats' from House on Mango Street (Cisneros, 1991)",
+      "social_setting": "Partner discussion followed by whole-group discussion with tumult and turn sharks",
+      "time_context": "After reading it once"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "In real classrooms when doing school tasks and facing turn sharks ready to jump into the conversation",
+      "observable_behavior": "Spend their time avoiding getting caught not knowing and arranging to not look incompetent",
+      "internal_state": "Unsure",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked for a visual image during interpretation of a challenging story",
+        "observable_behavior": "Provides brief analysis that can easily be lost across 43 lines of interceding talk",
+        "internal_state": "",
+        "related_quotes": [
+          "The cat lady.",
+          "She’s telling the kids how the street is.",
+          "Animals."
+        ]
+      },
+      {
+        "condition": "When taking the general education version of the test based on previous performance on HST",
+        "observable_behavior": "Requires taking the test in a small group, outside the general education classroom, so that portions of the test could be read aloud",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

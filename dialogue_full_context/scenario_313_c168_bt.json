@@ -1,0 +1,76 @@
+{
+  "category_id": "168",
+  "category_title": "Students who interject on-topic comments to avoid reading text",
+  "scenario_id": "313",
+  "scenario_title": "Shared reading of 'Where the wild things are'",
+  "minimal_context": "The student and tutor are looking at a page with pictures of monsters during a shared reading session of 'Where the wild things are'.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is the next page with the monsters. Pretty scary."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looking at the picture of the monsters) I'll kill it."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay. What else?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I'll kill them."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Let's try to read the words on the page now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I'll, I'll stab it in their eyes.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is the next page with the monsters. Pretty scary.\n\nSTUDENT: (Looking at the picture of the monsters) I'll kill it.\n\nTUTOR: Okay. What else?\n\nSTUDENT: I'll kill them.\n\nTUTOR: Let's try to read the words on the page now.\n\nSTUDENT: I'll, I'll stab it in their eyes.",
+  "immediate_dialogue_prompt": 553,
+  "long_term_dialogue_prompt": 554,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Shared reading session of 'Where the wild things are'. The student is expected to continue reading after the interventionist makes a comment about the story.",
+        "learning_goal": "Shared and reciprocal reading"
+      },
+      "context": {
+        "environment": "Shared reading session",
+        "materials": "Book ('Where the wild things are') with pictures of monsters and text",
+        "social_setting": "Session with an interventionist and a supervisor who is sitting in",
+        "time_context": "Fifth, sixth and seventh sessions"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The student has just finished reading a long section and is prompted by the interventionist saying 'pretty scary' (an implied invitation to read)",
+        "observable_behavior": "Offers a relevant comment regarding the picture of monsters ('I’ll kill it'), repeats his sentiment ('I’ll kill them'), and then expands it ('I’ll, I ’ll stab it in their eyes') rather than taking the implied invitation to read",
+        "internal_state": "Using the strategy to avoid reading actual text while still fulfilling interactional demands, showing engagement with the text without revealing reading incompetence or failure",
+        "related_quotes": [
+          "I ’ll kill it.",
+          "I ’ll kill them.",
+          "I’ll I’ll stab it in their eyes."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When receiving reading invitations",
+          "observable_behavior": "Avoids reading invitations by remaining on-topic, but he provides a comment about the story rather than attempting to read",
+          "internal_state": "Desires to fulfill the child's interactional turn at talk without exhibiting reading failure; finds it more socially appropriate than direct refusal to read",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

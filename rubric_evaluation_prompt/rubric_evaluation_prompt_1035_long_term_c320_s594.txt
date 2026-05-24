@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Positive Rapport Building
+  Check: The tutor's long-term plan includes specific strategies for building a supportive relationship and regularly providing positive feedback to motivate the student.
+
+Criterion 2: Consistent Rule Enforcement
+  Check: The tutor's long-term plan establishes clear classroom rules and logical consequences for misbehavior, explicitly distinguishing these from reactive, authoritarian punishments.
+
+Criterion 3: Active and Dynamic Lesson Planning
+  Check: The tutor's long-term plan incorporates frequent activity changes, games, and active learning strategies to prevent boredom and keep the student consistently engaged over time.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits a spectrum of disruptive behaviors, escalating from passive defiance to severe physical aggression and bullying, often triggered by environmental discomfort, academic frustration, or hidden peer conflicts. They require dynamic, fast-paced activities to prevent boredom and private, reflective conversations to address underlying issues, as authoritarian confrontations and public shaming severely exacerbate their defiance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit at your desks and begin the English assignment.
+
+STUDENT: I am not doing this. I can't work because he is bothering me again.
+
+TUTOR: Try to ignore him and just focus on your own work.
+
+STUDENT: (Yelling across the desks) Shut up! You are always insulting me!
+
+TUTOR: Everyone needs to calm down and be quiet right now.
+
+STUDENT: (Lunges at the other student) I said shut up! (The students get into a physical fight, knocking over seats and creating complete chaos in the classroom)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General classroom instruction and EFL lesson",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Secondary school classroom in chaos with seats and desks",
+      "materials": "Desks, seats, police officer's gun",
+      "social_setting": "Group of students in a secondary school setting",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a student was having conflicts with another boy who was bothering him, and the incident was getting out of control",
+      "observable_behavior": "Students got into a fight in class, yelling at each other, physical aggression, insulting or bullying other students, and got hold of the police officer's gun from the top of a desk",
+      "internal_state": "",
+      "related_quotes": [
+        "they had taken the gun just for fun"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing conflicts with peers",
+        "observable_behavior": "Not showing any progress or interest in class, engaging in major acts of misbehavior such as physical aggression and bullying",
+        "internal_state": "Feeling uncomfortable",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

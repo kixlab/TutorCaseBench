@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Initial Tool Guidance
+  Check: The long-term plan includes a phase of persistent, active teacher guidance and coaching specifically focused on how to properly navigate the scaffolding tool.
+
+Criterion 2: Paced Scaffold Fading
+  Check: The long-term plan explicitly outlines a strategy to gradually reduce or fade the use of the scaffolding tool as the student demonstrates mastery of the decomposition steps.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student tends to skip structural decomposition steps, jumping directly to incorrect multi-step expressions by reading left-to-right and ignoring parentheses. However, they have a strong capacity for self-correction when prompted to reflect on the logical meaning of quantities, specifically by checking if combining different measurement units (like hours and days) makes sense.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please use the Word Problem Cracker tool to write the expression for the Open air bath problem.
+
+STUDENT: Ok, 7 stands for 7 days in a week that it is usually open when the weather is good. Normally, when good weather by ….. ok …….
+
+TUTOR: What do you think comes next?
+
+STUDENT: Then … times parentheses opens …. no because of parentheses ….
+
+TUTOR: Go ahead and write it down.
+
+STUDENT: (Writes the expression 7 · (12 − x) immediately, neglecting the middle column and row structure) So, then in parentheses, there is then the 12 because of the pumps. Thus, these circulation pumps there, for the water, they ran at … at the open days they run for 12 hours.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working on the 'Open air bath problem' using a preliminary version of the 'Word Problem Cracker' (WPC) tool to construct a multi-step algebraic expression.",
+      "learning_goal": "Decomposing the problem in several steps and constructing the meaning of the expressions."
+    },
+    "context": {
+      "environment": "Working on the word problem with the preliminary WPC tool.",
+      "materials": "Preliminary version of the 'Word Problem Cracker' (WPC) tool with row structure and left, middle, and right columns.",
+      "social_setting": "Nathalie and Viviane, 14 and 15 year old girls, working together collaboratively.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When filling out the columns of the WPC tool while solving the 'Open air bath problem'.",
+      "observable_behavior": "The girls do not use the row structure for decomposing the problem in several steps. Nathalie immediately takes two steps and writes the expression 7 · (12 − x). She adopts the order of reading from left to right to the expression, first without considering the parentheses, and neglects the middle column in this moment.",
+      "internal_state": "",
+      "related_quotes": [
+        "Ok, 7 stands for 7 days in a week that it is usually open when the weather is good. Normally, when good weather by ….. ok ……. Then … times parentheses opens …. no because of parentheses ….",
+        "So, then in parentheses, there is then the 12 because of the pumps. Thus, these circulation pumps there, for the water, they ran at … at the open days they run for 12 hours."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to write the algebraic expression.",
+        "observable_behavior": "Adopts the order of reading from left to right to the expression, first without considering the parentheses, and neglects the middle column.",
+        "internal_state": "",
+        "related_quotes": [
+          "Ok, 7 stands for 7 days in a week that it is usually open when the weather is good. Normally, when good weather by ….. ok ……. Then … times parentheses opens …. no because of parentheses …."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

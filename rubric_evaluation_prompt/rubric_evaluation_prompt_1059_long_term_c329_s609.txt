@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Gradual Disciplinary Progression
+  Check: The long-term plan must include a structured, step-by-step escalation of consequences (e.g., providing clear warnings before moving to timeouts or suspensions) rather than jumping immediately to severe penalties.
+
+Criterion 2: Equitable Enforcement
+  Check: The long-term plan must explicitly ensure that rules and consequences are applied consistently to all students involved in an incident, avoiding any bias or targeting based on the student's past reputation.
+
+Criterion 3: Objective Expectation Setting
+  Check: The long-term plan must emphasize using clear, neutral language to communicate expectations or corrections, explicitly avoiding the use of sarcasm or dismissive remarks.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits intense emotional distress, such as crying or hiding under desks, in response to perceived unfairness, sarcasm, or rapid escalation of punishment. They are highly sensitive to differential treatment based on reputation and require predictable, equitable, and objective boundary-setting to avoid complete task refusal.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Taleisha, stop talking and go to the back of the room so we can start our science projects.
+
+STUDENT: But I didn’t do anything!
+
+TUTOR: You need to go to the back of the room right now and sit in the chair.
+
+STUDENT: (Gets up from her seat loudly, pushes her chair around angrily, and stomps to the back of the room. She refuses to sit in the chair and sits on top of a desk instead.) Man! I hate this class! I don’t know why I’m in trouble. I wasn’t doing anything!
+
+TUTOR: I am losing my patience. Go to Ms. Lewis’s room for a class suspension.
+
+STUDENT: (Refuses to get up and leave the room. She sits on the floor under the desk with her face in her hands, crying.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transition from a math lesson to a science lesson; teacher is attempting to start science projects while managing noise.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during a transition from a math lesson to a science lesson",
+      "materials": "Chair, desk",
+      "social_setting": "Tablemates are present and try to back up her story; other students (Gaby and Zachary) admit to talking",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Ms. Nazarov loses her patience and tells Taleisha to go to Ms. Lewis’s room for a class suspension.",
+      "observable_behavior": "Taleisha refuses to get up and leave the room. She sits on the floor under the desk with her face in her hands, crying.",
+      "internal_state": "Highly distressed",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Teacher gets mad and is harsher, insisting that Taleisha go to the back of the room despite her protests of innocence.",
+        "observable_behavior": "Gets up from her seat loudly, pushes her chair around angrily, stomps to the back of the room, and yells. Refuses to sit in the chair at the back of the room and instead sits on top of a desk, continuing to protest loudly.",
+        "internal_state": "",
+        "related_quotes": [
+          "But I didn’t do anything!",
+          "Man! I hate this class!",
+          "I don’t know why I’m in trouble. I wasn’t doing anything!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

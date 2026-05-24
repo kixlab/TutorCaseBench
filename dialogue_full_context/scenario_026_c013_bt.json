@@ -1,0 +1,75 @@
+{
+  "category_id": "013",
+  "category_title": "Quiet students who experience cognitive overload when processing multi-step algebraic equations",
+  "scenario_id": "026",
+  "scenario_title": "Initial struggle with distributive property and cognitive overload",
+  "minimal_context": "Greg is working on his classwork to solve the multi-step equation 2(2x + 9) = 50 during a one-on-one session.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's look at this equation on your paper: 2(2x + 9) = 50. What should we do first?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Um. The parentheses…?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, what do you want to do with the parentheses?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Times?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Times what? And how will you get the 2 outside across the terms inside?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(silence)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's look at this equation on your paper: 2(2x + 9) = 50. What should we do first?\n\nSTUDENT: Um. The parentheses…?\n\nTUTOR: Okay, what do you want to do with the parentheses?\n\nSTUDENT: Times?\n\nTUTOR: Times what? And how will you get the 2 outside across the terms inside?\n\nSTUDENT: (silence)",
+  "immediate_dialogue_prompt": 44,
+  "long_term_dialogue_prompt": 45,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Solve the multi-step equation 2(2x + 9) = 50",
+        "learning_goal": "Utilize the distributive property"
+      },
+      "context": {
+        "environment": "Working independently on his classwork",
+        "materials": "Diagrams and equations displayed on paper",
+        "social_setting": "One-on-one session with Jane, an occupational therapist and doctoral student",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When asked how to get the 2 outside the parentheses across the terms inside",
+        "observable_behavior": "Responds with silence",
+        "internal_state": "Cognitive overload due to the multi-step nature of the problem and the abundance of mathematical symbols; misconception that he needed to solve what was inside the parentheses first",
+        "related_quotes": [
+          "Um. The parentheses…?",
+          "Times?"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When facing multi-step problems with an abundance of mathematical symbols",
+          "observable_behavior": "Silence, pausing",
+          "internal_state": "Cognitive overload",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

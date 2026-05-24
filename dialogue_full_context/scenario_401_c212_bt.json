@@ -1,0 +1,79 @@
+{
+  "category_id": "212",
+  "category_title": "High school students with LD and ADHD who struggle to break down multi-step algebraic tasks and lack confidence in their accuracy",
+  "scenario_id": "401",
+  "scenario_title": "Multiplying linear expressions using abstract notation",
+  "minimal_context": "The student is working on multiplying the linear expressions (x + 3) and (x + 5) using only abstract notation during a one-on-one tutoring session.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's try multiplying (x + 3) and (x + 5) using only the abstract symbols today, moving away from the blocks."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "It’s so much more hard because it’s not broken up then."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just do your best to work through the problem."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I can’t break it down. I guess I’m not good at blending the steps."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Write down what you think the answer is."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Writes x2 + 15) I got x2 + 15. But when it’s all numbers then I forgot where to break it up and what’s what.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's try multiplying (x + 3) and (x + 5) using only the abstract symbols today, moving away from the blocks.\n\nSTUDENT: It’s so much more hard because it’s not broken up then.\n\nTUTOR: Just do your best to work through the problem.\n\nSTUDENT: I can’t break it down. I guess I’m not good at blending the steps.\n\nTUTOR: Write down what you think the answer is.\n\nSTUDENT: (Writes x2 + 15) I got x2 + 15. But when it’s all numbers then I forgot where to break it up and what’s what.",
+  "immediate_dialogue_prompt": 695,
+  "long_term_dialogue_prompt": 696,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Multiplying (x + 3) (x + 5) using only abstract symbolism",
+        "learning_goal": "Multiplying linear expressions"
+      },
+      "context": {
+        "environment": "Instructional session",
+        "materials": "Abstract notation, Algebra Lab Gear (ALG) concrete manipulatives available for reference",
+        "social_setting": "One-on-one tutoring session",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When using only abstract symbolism to multiply binomials",
+        "observable_behavior": "Responding with an incorrect solution that misses the middle terms (x2 + 15)",
+        "internal_state": "Forgetting where to break it up and what's what when it's all numbers",
+        "related_quotes": [
+          "It’s so much more hard because it’s not broken up then.",
+          "But when it’s all numbers then I forgot where to break it up and what’s what."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When presented with a task that has a lot of words and a lot of steps",
+          "observable_behavior": "Stating she is not good at blending the steps and forgetting parts of the problem once she understands another part",
+          "internal_state": "Feeling turned off by the task unless it is explained and broken down",
+          "related_quotes": [
+            "I think if it was broken down I would be able to do it. The problem is that there are a lot of words and a lot of steps and once I understand what to do with one part I forget the other – I guess I’m not good at blending the steps.",
+            "as I said this kind of stuff turns me off BUT I think that parts of it I really might know so again if it was explained and broken down I think there may be some hope.",
+            "I can’t break it down."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Relational Rapport Building
+  Check: The tutor's long-term plan includes specific strategies for getting to know Derek personally, showing care, and building a trusting relationship outside of just academic compliance.
+
+Criterion 2: Calibrated Text Selection
+  Check: The tutor's long-term plan includes a mechanism for identifying and selecting texts that hit the 'sweet spot' of Derek's personal interests and an appropriate difficulty level.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Derek is a disengaged student who masks his reading struggles by rushing through texts, skipping words and lines just to finish tasks quickly. He exhibits defensive body language and apathy, requiring relational trust-building and specific accommodations like having texts read aloud to bypass his visual tracking issues and ensure comprehension.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Welcome to General English. You are arriving late on the first day.
+
+STUDENT: (Walks in quietly and unassumingly with a scowl on his face, speaking quickly in short bursts) Is there going to be a seating chart in the class?
+
+TUTOR: No, there is no seating chart.
+
+STUDENT: Good. (Promptly sits in a seat, slouching down and crossing his arms across his chest)
+
+TUTOR: Now that you are seated, please take out your materials so we can begin the lesson.
+
+STUDENT: I do my work but at the same time I don’t do anything in class. I didn’t really care about anything or anyone.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Arrival on the first day of General English class",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General English class",
+      "materials": "Seating chart",
+      "social_setting": "Interacting with the teacher",
+      "time_context": "First day of school"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asking whether there was going to be a seating chart in the class and the teacher said no",
+      "observable_behavior": "Spoke quickly, in short bursts and with a scowl on his face... said, 'Good,' and then he promptly sat in a seat, slouching down and crossing his arms across his chest",
+      "internal_state": "Didn't really care about anything or anyone",
+      "related_quotes": [
+        "I do my work but at the same time I don’t do anything in class."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When facing school authority or expectations in the past",
+        "observable_behavior": "Cussed at a lot of teachers, threw stuff, didn't show up for class, ripped up homework",
+        "internal_state": "School had never been easy for him, and being unable to remember lessons had increased tensions and discomfort",
+        "related_quotes": [
+          "Coming from my first year here and in middle school I didn’t really care about anything or anyone."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

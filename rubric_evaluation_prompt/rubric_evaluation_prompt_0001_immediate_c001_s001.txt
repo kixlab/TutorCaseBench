@@ -1,0 +1,132 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Conditional Task Continuation
+  Check: The tutor allows the student to retain or finish incomplete work by establishing a specific condition or boundary (e.g., 'you can keep it if...').
+
+Criterion 2: Preferred-Activity Transition Bridging
+  Check: The tutor motivates a transition by explicitly promising a highly preferred activity or person immediately following the completion of the current task.
+
+Criterion 3: Environmental De-escalation
+  Check: The tutor directs or escorts the student to a separate, quiet environment away from the trigger to calm down during an active outburst.
+
+Criterion 4: Explicit Sequential Clarity
+  Check: The tutor provides a clear, unambiguous sequence of immediate actions without vague language to guide the student through a transition.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences intense emotional distress, physical tantrums, and sudden anger triggered by transitions, perceived loss of time, and unmet expectations. His profound perfectionism makes it nearly impossible for him to submit incomplete work without a breakdown. He uniquely requires conditional autonomy to finish tasks, highly structured routines, and transitions bridged by preferred activities to maintain emotional regulation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the working paper consisting of mind-games. Please start working on the questions.
+
+STUDENT: (Erases and re-writes over and over again, working on the details) I am not finished yet.
+
+TUTOR: Keep working on it. We will be breaking off for lunch soon.
+
+STUDENT: (In a high voice) I cannot do it but I will!
+
+TUTOR: The application is over now. Please return your paper so we can go to lunch.
+
+STUDENT: (Starts crying) I will not return my paper unless I solve all the questions! I cannot do it but I will!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing a working paper consisting of mind-games",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Development and Science Program",
+      "materials": "Working paper",
+      "social_setting": "Working with researchers, friends nearby",
+      "time_context": "Right before breaking off for lunch"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the application was over and he was asked to return his paper",
+      "observable_behavior": "SD did not want to return his paper and started crying that he would not return his paper unless he solved all the questions. Saying in a high voice 'I cannot do it but I will!'",
+      "internal_state": "Perfectionism and distress over incomplete work",
+      "related_quotes": [
+        "I cannot do it but I will!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When drawing and feeling his work isn't good enough",
+        "observable_behavior": "He erased and re-drawn over and over again, working on the details, and said: 'I am not finished yet.'",
+        "internal_state": "",
+        "related_quotes": [
+          "I am not finished yet."
+        ]
+      },
+      {
+        "condition": "Before starting a drawing/painting task",
+        "observable_behavior": "Told us that he was not able to draw/paint",
+        "internal_state": "Excited but anxious about performance",
+        "related_quotes": [
+          "My drawing/picture may be not-so-good and maybe you do not like it."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

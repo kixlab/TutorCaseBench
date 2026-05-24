@@ -1,0 +1,86 @@
+{
+  "category_id": "229",
+  "category_title": "Low-achieving students using superficial compensation strategies",
+  "scenario_id": "441",
+  "scenario_title": "Superficial modeling and explanation stagnation in algebraic word problems",
+  "minimal_context": "Meral is working with her peer Adile to find and explain an algebraic expression for the pump operation time in the Open air bath problem.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's look at the Open air bath problem. What algebraic expression did you write for the pump operation time?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Ehm, I have 7 times 12 minus x?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Can you tell me more about why you wrote that?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Because, there we have. Ehm, for good weather, it is open 7 days, and for rainy days it stays closed. That is why I have 7 times ehm. … No …. Yes. 7 times 12 and then minus x."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please explain the meaning of the numbers and variables in your expression."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Ehm, because here, we have… Ehm… That is, no. If –no. For good weather it is open seven days a week. Ehm (takes a 5 second break) well how shall I explain that? (takes a 16 second break) [to Adile] You continue, I will read again.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's look at the Open air bath problem. What algebraic expression did you write for the pump operation time?\n\nSTUDENT: Ehm, I have 7 times 12 minus x?\n\nTUTOR: Can you tell me more about why you wrote that?\n\nSTUDENT: Because, there we have. Ehm, for good weather, it is open 7 days, and for rainy days it stays closed. That is why I have 7 times ehm. … No …. Yes. 7 times 12 and then minus x.\n\nTUTOR: Please explain the meaning of the numbers and variables in your expression.\n\nSTUDENT: Ehm, because here, we have… Ehm… That is, no. If –no. For good weather it is open seven days a week. Ehm (takes a 5 second break) well how shall I explain that? (takes a 16 second break) [to Adile] You continue, I will read again.",
+  "immediate_dialogue_prompt": 761,
+  "long_term_dialogue_prompt": 762,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Working on the 'Open air bath problem' which asks for an algebraic expression for pump operation time given rainy days (x).",
+        "learning_goal": "Building a complete situation or problem model to find an algebraic expression."
+      },
+      "context": {
+        "environment": "Design experiment session",
+        "materials": "Cards with numbers and variables on a table, Word Problem Cracker (WPC) scaffolding tool",
+        "social_setting": "Working with a peer (Adile) and interacting with a tutor",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When attempting to explain her mathematical expression for the 'Open air bath problem' to the tutor.",
+        "observable_behavior": "Explanation stagnates after reciting the first sentence about 7 days from the text. Takes a 5 sec break, asks 'well how shall I explain that?', takes a 16 sec break, and tells peer 'You continue, I will read again.'",
+        "internal_state": "Trying hard, but implicitly applies compensation strategy without building a complete situation or problem model.",
+        "related_quotes": [
+          "Ehm, because here, we have… Ehm… That is, no. If –no. For good [weather] it is open seven days a week. Ehm [5 sec break] well how shall I explain that? [16 sec break] [to Adile] You continue, I will read again."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When writing or modifying algebraic expressions.",
+          "observable_behavior": "Orders numbers according to the order of numbers in the text (e.g., writes 7 · (x − 12), corrects to 7 · (12 − x), then modifies to 7 · x − 12) without referring to the meaning of the quantitative operation and relations.",
+          "internal_state": "Cannot overcome the obstacle of superficial modeling.",
+          "related_quotes": [
+            "Ehm, I have 7 times 12 minus x?",
+            "Because, there we have. Ehm, for good weather, it is open 7 days, and for rainy days it stays closed. That is why I have 7 times ehm. … No …. Yes. 7 times 12 and then minus x."
+          ]
+        },
+        {
+          "condition": "When asked to explain the meaning of the numbers and variables in the expression.",
+          "observable_behavior": "Attributes a meaning to 7 and 12, but does not refer to the meaning of x nor to the question of the task that includes the rainy days. Expresses uncertainty about why numbers were included.",
+          "internal_state": "Has built a partial situation model without proceeding to the problem model; neither focuses on the meaning of the underlying quantity nor on their relation.",
+          "related_quotes": [
+            "Ehm. Well, for good weather, seven days a week are open. Then I have written 7 here. And ehm… ehm, well the pump for the water runs on open days for 12 hours. Hence 7 times 12.",
+            "Thus, it runs 12 hours long. I don’t know, I have it anyway."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

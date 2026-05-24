@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Consistent Task Framing
+  Check: The tutor's long-term plan includes designing a standardized, reusable framework for tasks that the student can learn and rely on across different assignments.
+
+Criterion 2: Sensory Channel Optimization
+  Check: The tutor's plan incorporates identifying and consistently utilizing the student's preferred sensory channel (e.g., transitioning to audiobooks instead of tactile reading).
+
+Criterion 3: Pre-exposure to New Material
+  Check: The tutor plans for dedicated time to build pre-understanding, allowing the student to thoroughly explore new concepts or materials through their preferred sensory channel before formal tasks begin.
+
+Criterion 4: Real-World Generalization
+  Check: The tutor incorporates explicit explanations and demonstrations of how the academic skills being learned apply to real-life situations outside of school.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student faces significant executive functioning deficits, struggling to initiate or complete tasks independently without explicit, step-by-step structure. They are highly susceptible to sensory overload from noisy environments, tactile distractors in Braille materials, and fast-paced demands. Visually-based language and unstructured responsibilities cause immediate confusion and stress, requiring highly structured routines, immediate error correction, and the option to withdraw to quiet spaces to maintain focus.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start the reading comprehension task. Please read the next page in your spiral-bound Braille book.
+
+STUDENT: (Runs fingers over the edge of the book) The spiral binding on this book is bothering my hands. And one bad thing with my school is when the other children disturb me.
+
+TUTOR: Just try your best to keep reading the words.
+
+STUDENT: (Turns the page slowly) I don't like the sound of turning the paper, and the feel of certain letters is distracting. I prefer audio books, because it is faster and easier to understand when you do not have to engage in tactile reading.
+
+TUTOR: What did you understand from the paragraph you just read?
+
+STUDENT: I don't know what it means. It is too difficult to concentrate on understanding what I am reading with all this distracting noise. If it’s not calm, sensible and quiet, I just cannot think!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading comprehension task",
+      "learning_goal": "Understanding what they were reading"
+    },
+    "context": {
+      "environment": "Classroom with distracting noise and bustle",
+      "materials": "Spiral-bound Braille book on paper",
+      "social_setting": "Many things going on and other students present",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When encountering tactile distractors such as the spiral binding of the book, the feel of certain letters, and the sound of turning the paper",
+      "observable_behavior": "Displays difficulty concentrating on understanding what they are reading",
+      "internal_state": "Finds it difficult to concentrate",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When exposed to distracting noise or when other students disturb them",
+        "observable_behavior": "Exhibits difficulties in sorting out stimuli, making it hard to concentrate",
+        "internal_state": "Noise and bustle generally had a very negative effect on them",
+        "related_quotes": [
+          "If it’s not calm, sensible and quiet, I just cannot think!",
+          "One bad thing with my school is when the other children disturb me"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

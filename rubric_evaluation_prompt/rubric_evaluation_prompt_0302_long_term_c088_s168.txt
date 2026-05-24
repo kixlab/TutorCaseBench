@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-contingent Scheduled Breaks
+  Check: The tutor's long-term plan includes a system for providing regular, scheduled breaks that are free and not dependent on the student's performance or behavior.
+
+Criterion 2: Superhero Thematic Integration
+  Check: The tutor incorporates superhero themes into the writing curriculum, such as using superhero-related prompts or themed graphic organizers (e.g., shield shapes).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Benjamin is a student who finds writing sentences highly aversive, leading him to use continuous talking out and disruptive behaviors to delay or escape tasks. His motivation to escape increases with task length, and traditional discipline or task removal inadvertently reinforces his behavior. He uniquely requires functional communication systems to request help, task modifications (like interspersing drawing or offering dictation), non-contingent scheduled breaks, and the embedding of his strong interest in superheroes to reduce task aversiveness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Benjamin, it is time for independent work. Please start writing your topic sentence for the assignment.
+
+STUDENT: Did you know my favorite superhero has a shield that can block anything? I want to tell you all about the movie I saw!
+
+TUTOR: We need to focus on the assignment right now. Please write your sentence.
+
+STUDENT: Writing sentences is too hard. I'm not ready to learn. Can I just go to the calm down area instead?
+
+TUTOR: You need to stay in your seat and keep trying to write your topic sentence.
+
+STUDENT: (Turns away from the desk and talks out loudly to peers) Hey guys, I'm not doing this writing! Watch me make superhero noises instead! Whoosh! Pow!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing assignments involving writing sentences, broken into steps (i.e., topic sentence, detail sentence)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Independent work time in Ms. Lee's classroom",
+      "materials": "Writing prompts, graphic organizers in the shape of superhero shields, colored communication cards (red card, yellow card, green card), drawing materials, reinforcer menu",
+      "social_setting": "Independent work time with peers present",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The longer he engaged in a writing task, or when work tasks were combined with skill deficits",
+      "observable_behavior": "Escalate forms of problem behavior to escape the task",
+      "internal_state": "Writing sentences was aversive, and his motivation to get out of the task increased",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During writing assignments to delay the start of his writing task or avoid it entirely",
+        "observable_behavior": "Continuous talk outs and repeatedly engage in the same disruptive off-task and talking-out behaviors",
+        "internal_state": "Motivation to get out of the task increased",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

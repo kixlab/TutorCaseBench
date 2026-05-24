@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Information Filtering
+  Check: The tutor provides explicit, step-by-step guidance on how to evaluate or select valid information, rather than just telling the student to search or find answers.
+
+Criterion 2: Affirming Conversational Feedback
+  Check: The tutor delivers feedback in a direct, conversational manner that includes explicit positive reinforcement or appreciation before or while addressing areas for improvement.
+
+Criterion 3: Guided Goal Expansion
+  Check: The tutor actively prompts or helps the student to identify at least one specific, higher-level learning goal beyond basic task completion or physical execution.
+
+Criterion 4: Capability-Matched Tasking
+  Check: The tutor breaks down the immediate task or assigns a specific role that explicitly matches the student's current, limited practical skill level.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+William is a student who lacks foundational computer and research skills, leading to anxiety and task-shortcutting behaviors like copying and pasting large chunks of text without processing them. He uniquely requires explicit, step-by-step instruction on evaluating information, highly scaffolded goal-setting, and direct, affirming face-to-face feedback to build his confidence and self-regulated learning capabilities.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: William, please use the computer to search for information for your Chinese homework.
+
+STUDENT: I am feeling nervous... I need to work hard, typing, rest...
+
+TUTOR: What do you think you should do next?
+
+STUDENT: I lack confidence to find information with a computer. I didn't have practical learning skills training in my previous class.
+
+TUTOR: Just try looking on the Yahoo Knowledge forum.
+
+STUDENT: (Copies whole chunks of words from the Yahoo Knowledge forum and pastes them directly into the homework document)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to find information for homework using a computer and the Yahoo Knowledge forum during Chinese lessons.",
+      "learning_goal": "To choose the right information from the results found and determine what kind of information found on the internet is valid for use in their homework, not just to find any random information."
+    },
+    "context": {
+      "environment": "Form 5 class during Chinese lessons",
+      "materials": "Computer, Yahoo Knowledge forum, Google or Yahoo search engines",
+      "social_setting": "New student in this form 5 class",
+      "time_context": "1st term"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to find information with a computer without having a very complete practical learning skills training in his previous class",
+      "observable_behavior": "He just copied whole chunks of words from the Yahoo Knowledge forum.",
+      "internal_state": "Lacked confidence to find information with a computer",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked by the teacher about any difficulties that might be encountered",
+        "observable_behavior": "Expressed that they need to work hard, typing, rest",
+        "internal_state": "Feeling nervous",
+        "related_quotes": [
+          "need to work hard, typing, rest, feeling nervous ..."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

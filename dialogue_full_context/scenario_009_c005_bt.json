@@ -1,0 +1,72 @@
+{
+  "category_id": "005",
+  "category_title": "Students who exhibit frustration through crying and self-abusive behavior during long tasks",
+  "scenario_id": "009",
+  "scenario_title": "Long reading task presented as a stapled packet",
+  "minimal_context": "Shaun is sitting in his self-contained classroom at the beginning of an academic session, tasked with completing a stapled packet of reading worksheets.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is your stapled packet of reading worksheets for the beginning of our session. Please start working on them."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Stares at the stapled packet of worksheets and begins whining)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Let's just get started on the first page."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Pushes the packet away, exhibiting off-task behavior, and makes uninterpretable, garbled vocalizations)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Keep trying, you need to finish these worksheets."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Begins crying loudly, grunting, and engaging in self-abusive behavior)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is your stapled packet of reading worksheets for the beginning of our session. Please start working on them.\n\nSTUDENT: (Stares at the stapled packet of worksheets and begins whining)\n\nTUTOR: Let's just get started on the first page.\n\nSTUDENT: (Pushes the packet away, exhibiting off-task behavior, and makes uninterpretable, garbled vocalizations)\n\nTUTOR: Keep trying, you need to finish these worksheets.\n\nSTUDENT: (Begins crying loudly, grunting, and engaging in self-abusive behavior)",
+  "immediate_dialogue_prompt": 16,
+  "long_term_dialogue_prompt": 17,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "completed worksheets during reading",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "self-contained classroom for severe emotional disturbance",
+        "materials": "worksheets that were similar in content... presented all together at the beginning of the session in a stapled packet",
+        "social_setting": "academic sessions",
+        "time_context": "beginning of the session"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "presented with worksheets that were similar in content; however, these worksheets were presented all together at the beginning of the session in a stapled packet",
+        "observable_behavior": "Whining, crying, grunting, and other noise making and uninterpretable, garbled vocalizations, and self-abusive behavior",
+        "internal_state": "Easily frustrated",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When a student is easily frustrated by the perceived length or volume of academic tasks",
+          "observable_behavior": "Off-task behavior, Crying, whining, and self-abusive behavior",
+          "internal_state": "Easily frustrated",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

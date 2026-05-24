@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Physical and Multimodal Expression
+  Check: The tutor's response must encourage, validate, or provide opportunities for the student to use physical gestures, acting, or role-play to communicate his ideas.
+
+Criterion 2: Facilitative Encouragement Without Direct Intervention
+  Check: The tutor must provide broad encouragement or general check-ins without giving direct answers, specific academic corrections, or singling the student out for targeted help.
+
+Criterion 3: Space for Uninterrupted Perseverance
+  Check: The tutor must allow the student to attempt speaking or reading without interrupting to correct his pronunciation or explain the text.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Andrius is a student with severe Hearing Impairment and EAL who struggles with traditional written and verbal tasks, often writing only single sentences and showing high dependence on teacher support. However, he demonstrates profound cognitive understanding when allowed to use physical gestures and drama. He uniquely requires an 'encouraging facilitator' approach that avoids singling him out or providing direct, specific help, allowing him to persevere independently and build confidence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please write a paragraph about the story we just read, and then we will practice reading it out loud.
+
+STUDENT: (Sits very quietly and writes exactly one sentence on the paper.) Done.
+
+TUTOR: You need to write more than one sentence. What else can you add?
+
+STUDENT: (Looks at the paper, using very basic verbal communication) Help me.
+
+TUTOR: Just try your best to keep writing on your own.
+
+STUDENT: (Puts the pencil down and remains very quiet, struggling to be resilient and waiting dependently for the teacher's direct input instead of continuing the writing task.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Standard English lesson tasks requiring writing and verbal communication",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Standard English lessons over a six-month period",
+      "materials": "",
+      "social_setting": "Classroom setting",
+      "time_context": "Six months of teaching prior to the drama project"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When required to complete standard writing or verbal tasks during lessons",
+      "observable_behavior": "Writes no more than one sentence per task, verbal communication is very basic, is very quiet during lessons, and rarely verbally contributes",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with tasks requiring resilience",
+        "observable_behavior": "Struggles to be resilient; is very dependent upon teacher support and input",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Post-Exam Metacognitive Reflection
+  Check: The long-term plan includes a structured process for metacognitive reflection specifically following exam results.
+
+Criterion 2: Optimizing Combinations and Timing
+  Check: The long-term plan focuses on adjusting the timing and combination of the student's existing study habits rather than just introducing new, isolated skills.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is a high-achieving student who employs proactive study habits but struggles with confidence and reactionary beliefs after disappointing exam results. Because they already utilize 'A-student' habits, they uniquely require data-driven validation (anonymous peer data), shared vulnerability from the tutor, and metacognitive reflection to understand how to optimally combine and time their existing strategies.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the bar graphs of common study approaches by grade from the recent exam and discuss what might have caused any difficulties.
+
+STUDENT: I'm looking at the graph, and I already do what the A students do. I study alone primarily and complete the online practice exams on Mastering Bio, but my exam result was still disappointing.
+
+TUTOR: What do you think about that?
+
+STUDENT: I came to every class and made sure to take breaks while studying in a quiet environment. Seeing this anonymous data usually makes me feel more confident, but right now I just can't determine the causes of my difficulty.
+
+TUTOR: Try to think about other ways to study.
+
+STUDENT: I'm just lacking a confidence level in the course right now. Honestly, I'm having reactionary beliefs about the whole thing and feel like I should just go back to employing shallow methods instead of trying to combine all these habits.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing and reflecting on study habit combinations during a group SI session after viewing peer data",
+      "learning_goal": "determine the causes of my difficulty"
+    },
+    "context": {
+      "environment": "Biology 101/102 Supplemental Instruction group",
+      "materials": "anonymous results / everyday data from surveys, bar graphs of common approaches by grade, online practice exams on Mastering Bio, study guides",
+      "social_setting": "group SI session / peer fellow study sessions",
+      "time_context": "after their tests"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After students receive disappointing exam results",
+      "observable_behavior": "express reactionary beliefs",
+      "internal_state": "lacking confidence level in the course",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "before these conversations took place",
+        "observable_behavior": "employed shallow methods",
+        "internal_state": "reactionary",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

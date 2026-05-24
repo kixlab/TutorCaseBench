@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Peer Education
+  Check: The tutor's long-term plan includes a structured method (e.g., a presentation, film, or dedicated session) to educate classmates about Shaffer's communication style and experiences.
+
+Criterion 2: Deliberate Peer Partnerships
+  Check: The tutor's long-term plan involves intentionally identifying, recruiting, or assigning specific classmates to act as consistent partners for Shaffer.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shaffer is an honor roll student with autism who uses typed communication and exhibits slower physical response times, often sitting quietly, staring straight ahead, and tapping his thumbs. Because he cannot compete with the fast pace of peers shouting out answers or rapidly raising hands, he frequently appears unable to participate. He uniquely requires adults to manage the pacing of academic tasks through pre-alerting and protected wait time, and to act as a temporary social bridge to initiate peer interactions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Shaffer, it is time for group work. Please initiate the conversation questions with your classmates.
+
+STUDENT: (Sits as a silent young man in the front row staring straight ahead, tapping his thumbs together.)
+
+TUTOR: Go ahead and start working together with them.
+
+STUDENT: (Types on his communication device) I think it’s so difficult to initiate conversation questions if you don’t have a teacher in the introduction. I look to an adult to really make the bridge.
+
+TUTOR: Just try your best to talk to them on your own.
+
+STUDENT: (Remains silent, staring straight ahead and tapping his thumbs together, experiencing the distances of inconsolation of the sad feelings because the teacher did not act as a bridge.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "initiate conversation questions and working together with Shaffer",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "group work, free periods",
+      "materials": "short film about Shaffer’s experience of autism and his typed communication",
+      "social_setting": "working with classmates",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "if you don’t have a teacher in the introduction",
+      "observable_behavior": "silent young man in the front row staring straight ahead, tapping his thumbs together",
+      "internal_state": "willing and ready to connect with other kids",
+      "related_quotes": [
+        "I think it’s so difficult to initiate conversation questions if you don’t have a teacher in the introduction. I look to an adult to really make the bridge."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "a lot of students did not intentionally ignore Shaffer, but they did not know how to approach him",
+        "observable_behavior": "they did not approach him",
+        "internal_state": "sad feelings",
+        "related_quotes": [
+          "distances of inconsolation of the sad feelings"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

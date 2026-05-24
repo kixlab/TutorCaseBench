@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Encouragement Over Instruction
+  Check: The tutor provides positive reinforcement or general encouragement but explicitly avoids giving direct academic advice, specific answers, or step-by-step help.
+
+Criterion 2: Autonomy and Comfort Provision
+  Check: The tutor offers the student a choice in how they complete the activity, who they work with, or how they participate in the task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is a high-attaining student who does not need academic help but struggles with feelings of exclusion and validation-seeking when the teacher focuses on students with greater needs. They exhibit high dependence on teacher attention (keeping their hand raised for long periods) and fear peer judgment during performances, requiring a shift toward autonomy, comfortable peer groupings, and peer-reliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to practice performing your scene from A Midsummer Night's Dream in front of the class.
+
+STUDENT: I really don't want to do this. I have a strong dislike of drama.
+
+TUTOR: The goal is to read your lines with confidence and use body language and gestures.
+
+STUDENT: I know the lines, but I don't want to stand up and do the performance part.
+
+TUTOR: Everyone needs to practice performing in front of people today.
+
+STUDENT: Some people judge you... I just don’t like performing in front of people.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Performing in front of people during drama-focused activities.",
+      "learning_goal": "Read lines with confidence, and use body language and gestures to convey understanding."
+    },
+    "context": {
+      "environment": "Project-based research lessons studying A Midsummer Night's Dream.",
+      "materials": "Scripts of key scenes from the play, resources provided to confidently access the text's language.",
+      "social_setting": "Performing in front of people / peers.",
+      "time_context": "During drama-focused activities and final performances."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The requirement to perform in front of people.",
+      "observable_behavior": "Expressing a dislike of drama and stating they do not like performing.",
+      "internal_state": "Feared being judged, which acted as a large barrier to social inclusion.",
+      "related_quotes": [
+        "Some people judge you [. . .] I just don’t like performing in front of people."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to participate in drama or perform in front of others.",
+        "observable_behavior": "Expressing a dislike of drama.",
+        "internal_state": "Feared being judged.",
+        "related_quotes": [
+          "Some people judge you [. . .] I just don’t like performing in front of people."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

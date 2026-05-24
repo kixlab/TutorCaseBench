@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Provision of Meaningful Choices
+  Check: The tutor provides the student with explicit options regarding the selection of reading materials or the sequence of intervention activities.
+
+Criterion 2: Protection of Independent Reading Time
+  Check: The tutor allows the student to read without interrupting them to perform isolated phonics, spelling, or skill drills.
+
+Criterion 3: Accommodation of Environmental Preferences
+  Check: The tutor validates or accommodates the student's requests for physical comfort, such as allowing them to use preferred seating or addressing environmental noise.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits task resistance driven by a strong need for personal autonomy and physical comfort. They frequently attempt to control the flow of activities and become dissatisfied when interrupted during reading or forced into rigid, uncomfortable environments. They uniquely require opportunities to make choices about their materials and activity sequence, uninterrupted reading time, and accommodations for their physical comfort.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are going to be introduced to and begin reading this new LLI book.
+
+STUDENT: I brought one of my favorite books from home. I think we should make use of my book instead.
+
+TUTOR: We need to read the LLI book right now.
+
+STUDENT: I want more of a say in what is read. There's not much decisions for me to make here.
+
+TUTOR: Let's just open this book and start reading.
+
+STUDENT: No, I'm going to read my book from home first, and then maybe we can do your book later. I don't like that I don't get to make much decisions about what we do.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Be introduced to and begin reading a new LLI book",
+      "learning_goal": "build foundational reading skills"
+    },
+    "context": {
+      "environment": "intervention room",
+      "materials": "LLI books, favorite books from home",
+      "social_setting": "pullout reading intervention",
+      "time_context": "30-min intervention session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Restricting student choice in reading materials",
+      "observable_behavior": "Frequent attempts to control the flow of intervention activities and takes issue with there not being much decisions for him to make",
+      "internal_state": "desired more of a say in what was read",
+      "related_quotes": [
+        "not much decisions"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When not given a say in what is read",
+        "observable_behavior": "Takes issue with the lack of choices, suggests that the intervention make use of some of his favorite books from home",
+        "internal_state": "perceives a lack of personal autonomy",
+        "related_quotes": [
+          "(not being able to make) much decisions"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

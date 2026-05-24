@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Relational Trust via Personal Narrative
+  Check: The long-term plan must include structured opportunities for mutual sharing of personal stories, family photographs, or life experiences to build a human-to-human connection.
+
+Criterion 2: Explicit Tiered Behavior Tracking
+  Check: The long-term plan must incorporate a clear, multi-level tracking system (such as a color-coded chart) to monitor and reinforce his behavioral choices.
+
+Criterion 3: Visual Arts Integration
+  Check: The long-term plan must integrate visual arts activities (e.g., drawing, painting, pottery) into his regular academic or therapeutic routine.
+
+Criterion 4: Non-Exclusionary Engagement
+  Check: The long-term plan must explicitly avoid exclusionary discipline (e.g., sending him out of the room) and instead focus on keeping him present and supported during behavioral episodes.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jamal is a first-grader who exhibits severe, trauma-induced emotional distress and task resistance, often crying, tearing paper, or shouting about his trauma when faced with basic academic demands. His behaviors stem from a deep need for attention and connection, making exclusionary discipline highly ineffective. He uniquely requires mutual sharing of personal narratives, visual arts integration to leverage his spatial intelligence, and explicit, tiered behavior tracking to build trust and prolong his concentration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jamal, please sit at your desk and write your numbers.
+
+STUDENT: (Loudly, seeking attention from the rest of the class) I don't want to write numbers!
+
+TUTOR: You need to practice writing them. Go ahead and start on your paper.
+
+STUDENT: (Tears his paper)
+
+TUTOR: Let's get a new piece of paper and try again.
+
+STUDENT: (Falls into a heap and cries) My daddy was killed! (Kicks at his desk)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "write his numbers",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "at his desk",
+      "materials": "desk, paper, photographs, drawing, painting, water coloring, and pottery making materials, color-coded behavior chart",
+      "social_setting": "class of 25 students",
+      "time_context": "all day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when asked to write his numbers",
+      "observable_behavior": "fall into a heap and cry",
+      "internal_state": "",
+      "related_quotes": [
+        "My daddy was killed!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "followed by falling into a heap",
+        "observable_behavior": "do this for five minutes followed by kicking at his desk and tearing paper all day",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

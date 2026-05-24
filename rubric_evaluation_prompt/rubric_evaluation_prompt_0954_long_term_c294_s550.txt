@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 3: Family-Collaborative Goal Setting
+  Check: The long-term plan includes a specific action to partner with Darin's family to define and align on targeted social-emotional goals.
+
+Criterion 4: Natural Context Integration
+  Check: The long-term plan embeds social skills practice directly into regular, daily classroom routines rather than relying on isolated pull-out instruction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Darin is a capable student who works well independently but exhibits highly possessive behaviors (hiding objects, taking from peers) during collaborative tasks with shared materials. The evidence reveals he uniquely needs proactive, externalized role-play—specifically teaching a prop like a puppet how to share—before entering triggering collaborative environments, as well as consistent, natural-context practice aligned with family-defined goals.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Darin, it is center time. You and your friend need to build a tower together. Here are some square blocks for you, and some triangle blocks for your friend.
+
+STUDENT: (Pulls all the square blocks toward himself and does not share)
+
+TUTOR: Remember to work together to accomplish your common goal.
+
+STUDENT: (Reaches over and takes a triangle block from his friend's pile) Give me that.
+
+TUTOR: Your friend is asking to use that block. What should you do?
+
+STUDENT: (Hides the block behind his back) That’s mine! I had that first.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Accomplish a common goal (e.g., building something, creating something) when given different materials",
+      "learning_goal": "Politely share his objects with a friend when asked and/or offer objects to his friend (e.g., 'Here's the ____, may I use it when you're finished?' 'Would you like___?' 'May I have ____,' 'Do you have ____?') throughout the entire two minute interval"
+    },
+    "context": {
+      "environment": "Center time activity",
+      "materials": "Different materials for building/creating, hand puppet",
+      "social_setting": "Working with a friend",
+      "time_context": "10-minute center time activity divided into 2-minute intervals"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the friend makes a request for an object",
+      "observable_behavior": "Not giving an object when the friend makes a request",
+      "internal_state": "",
+      "related_quotes": [
+        "Give me that",
+        "I had that first",
+        "That’s mine"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When Darin and a friend are given different materials and asked to accomplish a common goal",
+        "observable_behavior": "Does not share throughout the entire two minute interval and may be observed taking the friends’ objects, hiding objects behind his back",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Discreet Support Delivery
+  Check: The tutor's response offers a private channel for communication (e.g., direct message, email) or explicitly frames the help as a one-on-one, confidential interaction.
+
+Criterion 2: Alternative Explanations and Examples
+  Check: The tutor provides an alternative explanation, a different method to approach the problem, or an external resource/example rather than just repeating the original instructions or text.
+
+Criterion 3: Pre-Task Scaffolding
+  Check: The tutor provides concrete examples, review materials, or interactive tools specifically designed to help the student prepare before they attempt a new module or pretest.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an at-risk high schooler in a credit recovery program who struggles with self-discipline, heavy reading demands, and peer distraction. They are highly sensitive to looking 'dumb' in front of peers, which often leads to task avoidance and shutting down. To succeed, they uniquely require a blend of private, discreet support channels, alternative explanations to bypass reading overwhelm, and a highly monitored yet self-paced environment that allows for mastery-based retakes.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please log into the NovaNET online courseware and begin today's reading assignment.
+
+STUDENT: I can't do this, there is too much reading demanded of us.
+
+TUTOR: Just do your best to read through the text.
+
+STUDENT: I didn’t do the homework. I didn’t study for test.
+
+TUTOR: You need to pay attention to the screen and finish the work.
+
+STUDENT: I'm done with this. (Stops paying attention, turns away from the computer in the school lab, and starts 'playing around' and being distracted by friends)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Navigating reading-intensive online courseware (NovaNET or Apex Learning)",
+      "learning_goal": "Achieve course completion with a minimum 8th grade reading level needed for success"
+    },
+    "context": {
+      "environment": "Online credit recovery course, accessing from non-home computers and Internet access (e.g., before-school lab, during school lab, after school lab)",
+      "materials": "Reading-intensive online courseware, Pronto, email",
+      "social_setting": "Working online with peers present in the lab, but interacting with teacher remotely",
+      "time_context": "Summer session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When facing difficulties from the amount of reading demanded of them and needing help",
+      "observable_behavior": "Not doing homework or turning in assignments, not paying attention in class or sleeping, and 'playing around' in class or being distracted by friends",
+      "internal_state": "Embarrassed to constantly ask questions and look 'dumb'",
+      "related_quotes": [
+        "I didn’t do the homework. I didn’t study for test."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When struggling with course material in front of peers",
+        "observable_behavior": "Not paying attention in class or sleeping, and 'playing around' in class or being distracted by friends",
+        "internal_state": "Embarrassed to constantly ask questions and look 'dumb'",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

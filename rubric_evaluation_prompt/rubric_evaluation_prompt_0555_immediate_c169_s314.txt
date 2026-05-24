@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Seamless Tutor Takeover
+  Check: The tutor responds to the student's refusal by seamlessly taking over the reading aloud or providing the narrative themselves, rather than forcing the student to read.
+
+Criterion 2: Absence of Direct Negative Feedback
+  Check: The tutor's response is completely free of direct negative feedback regarding the student's reading accuracy or comprehension (e.g., avoiding phrases like 'that didn't make sense').
+
+Criterion 3: Non-Punitive Response to Refusal
+  Check: The tutor accepts the student's refusal without reprimand, behavioral warnings, or treating the avoidance as defiance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This 9-year-old male with a language-learning disability uses direct refusal (e.g., slumping, whispering 'No') to mask his severe reading difficulties. He is highly sensitive to direct negative feedback about his reading and requires a constructivist approach that prioritizes meaning over decoding. His avoidance must be treated as a compensatory strategy rather than defiance to maintain effective mediation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: That last part you read did not make sense. Let's look at the next section of 'Miss Nelson is missing!'.
+
+STUDENT: (Looks down at the desk silently.)
+
+TUTOR: The kids are acting up in the classroom. I will read this part out loud to get us started.
+
+STUDENT: (Remains quiet and avoids looking at the page.)
+
+TUTOR: You wanta start this page?
+
+STUDENT: (Slumps back in the chair with a frown and whispers) No.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Shared reading of 'Miss Nelson is missing!'. The interventionist leads the interaction by contextualizing the story and reading out loud, then provides a direct reading invitation by asking, 'You wanta start this page?'",
+      "learning_goal": "Shared and reciprocal reading turns"
+    },
+    "context": {
+      "environment": "Shared reading session",
+      "materials": "Book: 'Miss Nelson is missing!' (Allard and Marshall, 1977)",
+      "social_setting": "One-on-one interaction with an interventionist",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Following feedback from the interventionist that the child's last reading attempt did not make sense, and receiving a direct reading invitation ('You wanta start this page?')",
+      "observable_behavior": "Verbally refuses to read by whispering 'No' and slumping back in chair with a frown",
+      "internal_state": "Direct refusal makes his reading difficulty transparent; opts out of the next reading invitation",
+      "related_quotes": [
+        "No"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When given a direct reading invitation after experiencing a loss of fluency or meaning",
+        "observable_behavior": "Overt or direct refusal to read by the child, using verbal or nonverbal means",
+        "internal_state": "Direct avoidance strategy to opt out of reading",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,113 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Goal Expansion Routine
+  Check: The tutor's long-term plan includes the recurring use of a structured self-evaluation tool (e.g., 'Go for Goal!' reports) across academic terms to systematically track and expand her goal-setting skills.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Nancy is a student with mild cerebral palsy who experiences anxiety and resistance during isolated, 1-on-1 self-evaluations before rapport is established. She uniquely requires group-based initial evaluations, highly interactive and positively framed feedback to bypass her resistance to direct advice, and structured, incremental scaffolding to build her self-monitoring skills over time.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our individual interview for the first term and fill out your 'Go for Goal!' self-evaluation report.
+
+STUDENT: (Looks down at the desk) I don't want to do this self-evaluation right now.
+
+TUTOR: Are there any difficulties that you might encounter?
+
+STUDENT: I need to work hard, typing, rest... feeling nervous...
+
+TUTOR: Just try your best to answer the questions on the report.
+
+STUDENT: (Pushes the paper away and refuses to speak further) I can't do this interview. I don't know how to evaluate myself.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to conduct a research interview and self-evaluation activity",
+      "learning_goal": "increase students’ self-monitoring and self-evaluation capability"
+    },
+    "context": {
+      "environment": "Initial phase of implementing SRL strategies",
+      "materials": "Go for Goal! self-evaluation report",
+      "social_setting": "Individual interview with researcher/teacher",
+      "time_context": "first term"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to conduct the interview individually before the researcher builds up rapport with the participants",
+      "observable_behavior": "incapable of handling a self-evaluation activity",
+      "internal_state": "motivation of students’ self-regulated learning remains at a very low level",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked about difficulties they might encounter",
+        "observable_behavior": "Expresses need to work hard, typing, rest",
+        "internal_state": "feeling nervous",
+        "related_quotes": [
+          "need to work hard, typing, rest, feeling nervous ..."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

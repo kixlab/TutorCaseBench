@@ -1,0 +1,72 @@
+{
+  "category_id": "314",
+  "category_title": "Preschool students engaging in disruptive behavior to obtain attention and escape group activities",
+  "scenario_id": "583",
+  "scenario_title": "Answering questions during circle time",
+  "minimal_context": "Delon is sitting with his peers during circle time while the teacher asks another student a question.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Alright everyone, let's start circle time. Sarah, can you tell me what the weather is like today?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Makes loud noises and touches the boy sitting next to him)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Let's listen to Sarah right now."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Shouts) I want to answer!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "I asked Sarah the question, please wait."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Hits the peer sitting next to him)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Alright everyone, let's start circle time. Sarah, can you tell me what the weather is like today?\n\nSTUDENT: (Makes loud noises and touches the boy sitting next to him)\n\nTUTOR: Let's listen to Sarah right now.\n\nSTUDENT: (Shouts) I want to answer!\n\nTUTOR: I asked Sarah the question, please wait.\n\nSTUDENT: (Hits the peer sitting next to him)",
+  "immediate_dialogue_prompt": 1014,
+  "long_term_dialogue_prompt": 1015,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Ms. Beth asks another student a question.",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Circle time in his preschool classroom",
+        "materials": "",
+        "social_setting": "Group setting with peers sitting next to him",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Ms. Beth asks another student a question.",
+        "observable_behavior": "Hits the peer sitting next to him.",
+        "internal_state": "Obtaining her attention and avoiding circle time",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "If she did not intervene",
+          "observable_behavior": "Escalated to hitting, kicking, and throwing items",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

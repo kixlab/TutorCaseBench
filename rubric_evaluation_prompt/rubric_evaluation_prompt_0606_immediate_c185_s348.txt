@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Discreet Support Delivery
+  Check: The tutor's response offers a private channel for communication (e.g., direct message, email) or explicitly frames the help as a one-on-one, confidential interaction.
+
+Criterion 2: Alternative Explanations and Examples
+  Check: The tutor provides an alternative explanation, a different method to approach the problem, or an external resource/example rather than just repeating the original instructions or text.
+
+Criterion 3: Pre-Task Scaffolding
+  Check: The tutor provides concrete examples, review materials, or interactive tools specifically designed to help the student prepare before they attempt a new module or pretest.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an at-risk high schooler in a credit recovery program who struggles with self-discipline, heavy reading demands, and peer distraction. They are highly sensitive to looking 'dumb' in front of peers, which often leads to task avoidance and shutting down. To succeed, they uniquely require a blend of private, discreet support channels, alternative explanations to bypass reading overwhelm, and a highly monitored yet self-paced environment that allows for mastery-based retakes.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start the pretest for the next module. You need to pass it to move forward in your summer credit recovery course.
+
+STUDENT: I tried the pretest. I just think I concentrate better when it's just me and the work, but I still failed it.
+
+TUTOR: You need to review the module and do the homework assignments.
+
+STUDENT: I need the ability to keep doing the homework until I understand why I got the problems wrong. Right now I'm just getting stressed.
+
+TUTOR: Just keep reading the text and try your best on the assignments.
+
+STUDENT: I'm not doing the homework. Well the number one reason I didn't pass the course is because I was a lazy kid, and I'm just not going to study if I don't understand it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Taking pretests to review and pass out of modules",
+      "learning_goal": "Review until mastery was achieved"
+    },
+    "context": {
+      "environment": "Online credit recovery course",
+      "materials": "Internet sites with examples, interactive Web tools, pretests, modules",
+      "social_setting": "Working on a single CR course in the summer, just the student and the work",
+      "time_context": "Summer session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When getting problems wrong and not understanding why",
+      "observable_behavior": "Being 'lazy' and not studying, not doing homework",
+      "internal_state": "Stressed",
+      "related_quotes": [
+        "Well the number one reason I didn’t pass the course is because I was a lazy kid.",
+        "The ability to keep doing the homework until I understand why I got the problems wrong."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When facing difficult material without understanding",
+        "observable_behavior": "Being 'lazy' and not studying, not doing homework or turning in assignments",
+        "internal_state": "",
+        "related_quotes": [
+          "Well the number one reason I didn’t pass the course is because I was a lazy kid."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

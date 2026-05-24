@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Anchored Shared Experiences
+  Check: The tutor's long-term plan must include creating shared, real-world experiences (e.g., trips, activities) and documenting them visually to serve as the foundation for future discussions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+John is a highly verbal student who monopolizes conversations, frequently interrupts, and struggles to listen to peers in unstructured settings. The evidence reveals he uniquely needs physical and visual structuring of ideas—such as writing notes and placing them next to photos—to regulate his impulses. He also requires high-interest hooks, specifically humor, to motivate him to value and listen to peer contributions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the photos laid out on the tables and suggest some dialogue and ideas about the plot for our story.
+
+STUDENT: I want to suggest the dialogue! Write my idea down and put it next to the pictures!
+
+TUTOR: Let's listen to your classmate's suggestion for the story first.
+
+STUDENT: No, I'm not listening to them! My plot idea is better!
+
+TUTOR: What do you think about what your peer just said?
+
+STUDENT: (Interrupting) That's a bad idea! I'm not waiting until you ask me to respond, I want to talk about my ideas now!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Group discussions and collaborative story-creation process suggesting dialogue and ideas about the plot",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Class tables",
+      "materials": "Photos laid out on the tables, notes with ideas, props, and costumes",
+      "social_setting": "Group discussions with peers and teacher",
+      "time_context": "Baseline behavior during group discussions before the structured iPad activity"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During group discussions before the structured iPad activity",
+      "observable_behavior": "He is unable to wait until asked to respond by teacher; does not listen to peers; does not respond appropriately to what peers say.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When peers speak or make suggestions",
+        "observable_behavior": "does not listen to peers; does not respond appropriately to what peers say",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "Before being asked to respond by teacher",
+        "observable_behavior": "unable to wait until asked to respond by teacher",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

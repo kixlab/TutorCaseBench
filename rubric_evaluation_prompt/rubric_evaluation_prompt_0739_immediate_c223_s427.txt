@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physiological Grounding
+  Check: The tutor directs the student's attention to concrete physical sensations (e.g., breathing, counting, body parts) and avoids asking them to 'clear their mind' or visualize letting go of thoughts.
+
+Criterion 2: Pre-Task Settling
+  Check: The tutor initiates a brief calming or focusing practice immediately before asking the student to start a high-stakes or frustrating academic task.
+
+Criterion 3: Unstructured Emotional Expression
+  Check: The tutor provides an opportunity or medium (like journaling, drawing, or open sharing) for the student to express their current feelings without pressure to change or clear them.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with emotional regulation and prolonged anger when facing academic frustration, particularly getting answers wrong or taking high-stakes tests. They are prone to cognitive overload and rumination when asked to 'clear their mind' or use abstract visualizations. The evidence reveals they uniquely require concrete, physiological grounding techniques (like body scans and belly breathing) and proactive settling practices before stressful tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our helium balloon visualization exercise to clear our minds.
+
+STUDENT: I'm trying to put everything in my helium balloon so I can let it go.
+
+TUTOR: Keep trying to clear your mind and let the thoughts float away.
+
+STUDENT: I tried to clear my mind but I'm still worried... my head is filled with lots of things.
+
+TUTOR: Just try not to think about those things right now.
+
+STUDENT: But the more I try not to think about it, the more I keep thinking about it. It's like I'm holding two big pots filled with hundreds of heavy things. I just feel a pile of stress coming on me.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "bubble-blowing or helium balloon visualization exercise to clear my mind",
+      "learning_goal": "enables children to slow down, observe their thoughts and let them go without judgment"
+    },
+    "context": {
+      "environment": "Classroom mindfulness session",
+      "materials": "bubbles, self-reflective journals",
+      "social_setting": "Classroom",
+      "time_context": "Week three"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to clear the mind during a mindfulness session",
+      "observable_behavior": "Struggled to conquer their ruminations, the more I try not to think about it, the more I keep thinking about it",
+      "internal_state": "still worried... my head is filled with lots of things. It's like I'm holding two big pots filled with hundreds of heavy things, felt a pile of stress coming on him",
+      "related_quotes": [
+        "I tried to clear my mind but I'm still worried... my head is filled with lots of things. It's like I'm holding two big pots filled with hundreds of heavy things",
+        "after putting everything in my helium balloon, I feel very happy, but I'm still very worried about it since I keep thinking about it, but the more I try not to think about it, the more I keep thinking about it",
+        "a pile of stress"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When instructed to observe thoughts and let them go",
+        "observable_behavior": "Expressing that the technique did not work, persistent rumination",
+        "internal_state": "Increased stress and some sadness",
+        "related_quotes": [
+          "even though he put his stress in the balloon it did not work, and instead he felt 'a pile of stress' coming on him"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validating Spontaneous Text Connections
+  Check: The tutor acknowledges and explores the student's unprompted verbal contributions about the text rather than redirecting them to be quiet or sit still.
+
+Criterion 2: Accepting Movement and Talk as Drafting
+  Check: The tutor permits or encourages the student's physical movement or peer conversation as a valid preparatory step for a writing task, avoiding commands to simply 'focus' or 'sit still'.
+
+Criterion 3: Providing Gamified or Digital Alternatives
+  Check: The tutor offers or supports the use of interactive, digital, or gamified reading tools when the student shows resistance to traditional reading formats.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a linguistically sophisticated learner who expresses engagement through non-normative behaviors like moving, talking out of turn, and verbalizing ideas before writing. Because they struggle with traditional expectations of silence and stillness, they are often mislabeled as struggling and self-identify as a poor writer. They uniquely require environments that validate their physical and oral processing as legitimate literacy practices, alongside high-support digital tools to rebuild their academic identity.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our reading practice. Please read this book out loud to me.
+
+STUDENT: (Withdrawn from the activity and resistant to reading out loud) I don't want to.
+
+TUTOR: Let's move to the computer station and use the Starfall reading program with Enrique instead.
+
+STUDENT: (Demonstrating to Enrique how to chunk words in order to decode them) It's like video game levels and adventures.
+
+TUTOR: Keep going with the program.
+
+STUDENT: (Shouting out his responses and trying to sound out words in unison with the computer voice over) See? Se:::e? I can read thi:::is much! I got like 63!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Using an interactive reading program (starfall.com) on a computer",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "computer station",
+      "materials": "computer, interactive reading program (starfall.com)",
+      "social_setting": "collaborating with peers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Initially, before using computer-mediated reading",
+      "observable_behavior": "withdrawn from activities and resistant to reading out loud",
+      "internal_state": "resistant",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "while reading online",
+        "observable_behavior": "shouting out his responses or trying to sound out words in unison with the computer voice over",
+        "internal_state": "high interest and enthusiasm",
+        "related_quotes": [
+          "See? Se:::e? I can read thi:::is much."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

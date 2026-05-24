@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Bilingual Behavioral Expectations
+  Check: The long-term plan includes developing and utilizing a behavior rubric or set of classroom expectations translated into Shen's native language (Mandarin).
+
+Criterion 2: Token-Based Reward System
+  Check: The long-term plan establishes a structured token economy where Shen earns tangible markers (like stickers) for meeting behavioral standards to eventually trade for a prize.
+
+Criterion 3: Daily Behavior Reflection Routine
+  Check: The long-term plan incorporates a daily routine for Shen to review the behavior rubric and reflect on whether he met the established expectations for that day.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shen is an English Multi-Lingual Learner whose primary barrier to compliance and task engagement is a profound language gap. When he does not understand English instructions or rules, he exhibits task refusal ('I don't understand, so I won't do it') and externalizing behaviors like wandering the room or swinging objects. He uniquely requires native language (Mandarin) support, multimodal visual aids, and explicitly translated behavioral rubrics tied to a token economy to understand expectations and feel secure enough to engage.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit in your seat so we can go over the classroom rules.
+
+STUDENT: (Looks antsy, gets up out of his seat, and begins to walk around the classroom without permission.)
+
+TUTOR: You need to come back to your desk and follow the rules.
+
+STUDENT: (Continues to walk around the room, not understanding the rules being spoken to him.)
+
+TUTOR: Please stand still and hold your bag quietly.
+
+STUDENT: (Starts swinging his bag around in a circle, hitting the substitute teacher with the bag.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "understanding and following the school’s behavioral expectations",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school setting",
+      "materials": "a bag, supplies, behavior rubric in Mandarin",
+      "social_setting": "with a substitute teacher",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "interaction with a substitute teacher",
+      "observable_behavior": "hit a substitute teacher with a bag that he was swinging around in a circle",
+      "internal_state": "not understanding the rules",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "not understanding the rules",
+        "observable_behavior": "behavior ‘didn’t seem respectful by our standards’",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

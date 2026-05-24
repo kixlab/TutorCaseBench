@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Teacher-Led Primary Instruction
+  Check: The long-term plan explicitly outlines how the main classroom teacher will take primary responsibility for the student's instruction, planning, and pedagogical support, reducing reliance on TA-led teaching.
+
+Criterion 2: Classroom and Peer Reintegration
+  Check: The long-term plan includes specific structural or organizational strategies to keep the student in the mainstream classroom and interacting with peers, explicitly avoiding routine withdrawal.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits high dependency on Teaching Assistants (TAs) and takes a passive, often harmlessly off-task role (e.g., daydreaming or fiddling) in mainstream settings. They are frequently separated from the main classroom and peers, requiring a shift from TA-led task completion to teacher-led instruction, active cognitive engagement, and genuine classroom integration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: The teacher is teaching the whole class right now. Please listen to the instructions.
+
+STUDENT: (Sits quietly at the table with the small group of lower-attaining pupils, taking a completely passive role while the teacher talks.)
+
+TUTOR: What did the teacher just say we need to do?
+
+STUDENT: I don't know.
+
+TUTOR: Try asking your classmates in our group.
+
+STUDENT: (Remains completely passive and silent, making no attempt to interact with the peers in the group, just waiting for the adult to provide the answer.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "listening to the teacher teach the whole class",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "in the mainstream class",
+      "materials": "",
+      "social_setting": "in small groups of lower-attaining pupils",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During whole-class teaching sessions.",
+      "observable_behavior": "passive role",
+      "internal_state": "",
+      "related_quotes": [
+        "the extent to which the role of pupils in the classroom is passive"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Social interaction and collaboration with classmates during lessons and group work.",
+        "observable_behavior": "far fewer peer interactions",
+        "internal_state": "",
+        "related_quotes": [
+          "Statemented pupils had far fewer peer interactions as control pupils (18 vs. 32%)."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

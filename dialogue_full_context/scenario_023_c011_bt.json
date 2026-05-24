@@ -1,0 +1,72 @@
+{
+  "category_id": "011",
+  "category_title": "Low-achieving middle school students with behavioral challenges",
+  "scenario_id": "023",
+  "scenario_title": "Formulating questions from stimulus materials",
+  "minimal_context": "The student is participating in a group discussion to analyze newspaper clippings and formulate questions.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please look at the newspaper clippings on the table. I want you to collaborate with your group and ask questions based on the materials."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Wait, you want us to ask questions and collaborate? We are used to being told to stay quiet and listen to the teachers."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Yes, please work together to write down your questions."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Why did you select our class for this? Can we propose games that we would like to play and activities we would like to do in class instead?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Let's just focus on the reading task right now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Stands up from the U-shaped seating arrangement) If we can't suggest our own ideas, I'm not doing this. I'm going to walk out.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please look at the newspaper clippings on the table. I want you to collaborate with your group and ask questions based on the materials.\n\nSTUDENT: Wait, you want us to ask questions and collaborate? We are used to being told to stay quiet and listen to the teachers.\n\nTUTOR: Yes, please work together to write down your questions.\n\nSTUDENT: Why did you select our class for this? Can we propose games that we would like to play and activities we would like to do in class instead?\n\nTUTOR: Let's just focus on the reading task right now.\n\nSTUDENT: (Stands up from the U-shaped seating arrangement) If we can't suggest our own ideas, I'm not doing this. I'm going to walk out.",
+  "immediate_dialogue_prompt": 39,
+  "long_term_dialogue_prompt": 40,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "read, observe, watch and analyse the stimulus materials and they are encouraged to ask questions based on the stimulus materials",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "classroom",
+        "materials": "U-shaped seating arrangement, whiteboard, stimulus materials in forms of stories, pictures, poems, newspaper clippings, and videos",
+        "social_setting": "group discussion",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when they were told to ask questions and collaborate to answer questions",
+        "observable_behavior": "surprised when they were told to ask questions and collaborate because they were used to be told to stay quiet and listen to the teachers",
+        "internal_state": "surprised",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "On the second session",
+          "observable_behavior": "asked reasons for selecting their class and asked permission to suggest some ideas. They asked if they can propose games that they would like to play and activities they would like to do in class.",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

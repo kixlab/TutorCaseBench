@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Fact-First Foundation
+  Check: The tutor's response must focus on gathering, sequencing, or confirming concrete facts and people involved in the story, explicitly avoiding direct demands for emotional expression at the outset.
+
+Criterion 2: Gradual Emotional Expansion
+  Check: When transitioning to emotions, the tutor must use repetition or expansion of Sally's previously stated facts to explore feelings, rather than asking abrupt, direct questions about her emotional state.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sally is a 12-year-old student with a receptive language delay who struggles with direct emotional expression, often presenting personal stories as emotionless lists of facts. She requires a highly structured, phased approach to storytelling that builds a secure foundation of concrete events before gently exploring emotions through repetition and expansion.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's use the 'Our Story' app on the iPad to tell a personal story about an achievement. Please start by telling me what happened when you presented to your class.
+
+STUDENT: (Manipulates the app independently to sequence and save content) I went to the front of the class. I read my work.
+
+TUTOR: Okay, you went to the front and read your work. How did you feel when you did that?
+
+STUDENT: (Appears withdrawn and self-contained) I stood there. The teacher listened. Then I sat down.
+
+TUTOR: Try to tell me about your feelings. Were you happy or scared?
+
+STUDENT: (Remains withdrawn, avoiding the question about feelings) I finished reading. Will you keep it? Will it be on the iPad forever?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Tell a personal story about an achievement, a target reached, or a wish for the future",
+      "learning_goal": "Compose a multimodal story and express feelings about the story"
+    },
+    "context": {
+      "environment": "One-to-one sessions",
+      "materials": "iPad with 'Our Story' app",
+      "social_setting": "Working directly with a therapist/researcher",
+      "time_context": "During the initial 'gathering' stage of story development"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the story was first presented",
+      "observable_behavior": "Presented as a straightforward reportage-style list of what happened when Sally presented to her class, with little emotional content; could appear as withdrawn and self-contained",
+      "internal_state": "Had difficulties in expressing her feelings",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to share personal experiences that she found challenging",
+        "observable_behavior": "Appears withdrawn and self-contained",
+        "internal_state": "Difficulties in expressing her feelings",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

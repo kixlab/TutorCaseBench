@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Youth-Driven Alternative Credit Pathways
+  Check: The long-term plan must incorporate alternative credit-earning opportunities (e.g., internships, independent study, work-based learning) that are explicitly driven by the student's personal future goals.
+
+Criterion 2: Community Mentoring Integration
+  Check: The long-term plan must include strategies for connecting the student with community linkages, natural supports, or workplace/career mentors.
+
+Criterion 3: Team-Based Behavioral Support
+  Check: The long-term plan must involve a collaborative, team-driven approach to assess behavior (e.g., brief FBA) and implement a consistent Behavioral Support Plan across settings.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with chronic truancy, escalating discipline referrals, and severe disengagement driven by stress, anxiety, and the hopelessness of being significantly behind in credits. They require unconditional, strengths-based positive adult attention to counter their expectation of failure, alongside highly individualized alternative pathways for credit recovery and community mentoring.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your score card for today and set your daily goals for meeting the school's behavior expectations.
+
+STUDENT: I don't even want to look at the score card. I already have five unexcused absences this quarter, so being here today doesn't even matter.
+
+TUTOR: We still need to fill it out. What should your goal be for your classes?
+
+STUDENT: Whatever. Just put down that I'm going to fail. I'm already significantly behind in credits and off track to graduate anyway.
+
+TUTOR: Let's just focus on the behavior expectations on the card right now.
+
+STUDENT: I'm not doing this stupid check-in anymore. Just give me another office discipline referral for disrespect. I already have six of them this month, so one more won't change anything. I'm leaving.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Review the behavioral expectations and set daily goals based on a score card with teachers’ feedback",
+      "learning_goal": "Learn and demonstrate positive behaviors"
+    },
+    "context": {
+      "environment": "School setting",
+      "materials": "Score card with teachers’ feedback, ticket system",
+      "social_setting": "Checked in daily with a trained CICO coordinator",
+      "time_context": "At the start of their day and again near the end of the school day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When experiencing difficulties meeting the school’s universal behavior expectations",
+      "observable_behavior": "An average of three ODRs per day for disrespect",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "After 6 weeks of monitoring with documentation that secondary-level interventions were implemented with fidelity",
+        "observable_behavior": "Nonresponse to tier 2 interventions, escalating ODRs with six or more in a 4-week period, and/or five or greater out-of-school or in-school suspensions in a 2-week period",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Positive Rapport Building
+  Check: The tutor's long-term plan includes specific strategies for building a supportive relationship and regularly providing positive feedback to motivate the student.
+
+Criterion 2: Consistent Rule Enforcement
+  Check: The tutor's long-term plan establishes clear classroom rules and logical consequences for misbehavior, explicitly distinguishing these from reactive, authoritarian punishments.
+
+Criterion 3: Active and Dynamic Lesson Planning
+  Check: The tutor's long-term plan incorporates frequent activity changes, games, and active learning strategies to prevent boredom and keep the student consistently engaged over time.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits a spectrum of disruptive behaviors, escalating from passive defiance to severe physical aggression and bullying, often triggered by environmental discomfort, academic frustration, or hidden peer conflicts. They require dynamic, fast-paced activities to prevent boredom and private, reflective conversations to address underlying issues, as authoritarian confrontations and public shaming severely exacerbate their defiance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Everyone, please settle down and take your seats so we can listen to the instructions for our English communicative activity.
+
+STUDENT: (Standing by the window instead of sitting) I don't want to do this right now. The ceiling fans don't work and it was very hot in here.
+
+TUTOR: We need to practice expressing our ideas in English today. Please go to your seat.
+
+STUDENT: I don't understand how to say anything in English anyway. I'm not participating.
+
+TUTOR: Just try your best to listen to the instructions first.
+
+STUDENT: (Yelling across the room to another student) I'm not doing it, viejo! You can't make us sit down and listen in this heat!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "EFL activities requiring comprehension and production of English using the communicative methodology",
+      "learning_goal": "Understanding or expressing their ideas in English"
+    },
+    "context": {
+      "environment": "Large, hot classroom with windows, broken ceiling fans, and no air conditioning",
+      "materials": "Attractive materials, games, students' records folder, notebooks",
+      "social_setting": "Relatively large groups of 40 students",
+      "time_context": "Forty minutes allotted time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When getting the students to settle down, to be seated, to listen to the instructions",
+      "observable_behavior": "Students were unsettled, out of their seats, not listening to instructions, engaged in disruptive talking, and addressed the teacher as 'viejo' (old man)",
+      "internal_state": "Feelings of boredom and frustration, lack of attention and motivation",
+      "related_quotes": [
+        "viejo",
+        "it was very hot"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When students had difficulties understanding or expressing their ideas in English",
+        "observable_behavior": "Unwillingness to participate, lack of attention, and disruptive talking",
+        "internal_state": "Feelings of boredom and frustration",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

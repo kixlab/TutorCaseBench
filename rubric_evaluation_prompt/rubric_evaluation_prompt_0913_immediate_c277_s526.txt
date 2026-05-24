@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prioritization of Mastered Tasks
+  Check: The tutor's immediate response assigns or redirects the student to mastered academic activities rather than introducing or forcing compliance on novel or unfamiliar tasks.
+
+Criterion 2: Explicit Prompting for Physical Positioning
+  Check: The tutor provides explicit, frequent prompts for the student to remain seated, stay in designated areas, or follow the immediate physical routine.
+
+Criterion 3: Utilization of Adult Supervision
+  Check: The tutor's response includes calling for, utilizing, or adjusting the presence of additional adult support to safely manage the student's behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kyle is a nonverbal student who exhibits extreme activity levels, severe physical aggression (hitting, biting, head-butting), and elopement. He uses these behaviors to protest nonpreferred activities, unfamiliar work, or breaks in his routine. The evidence reveals he uniquely requires a focus on mastered tasks, frequent prompting for physical positioning, and highly structured environments with adequate adult supervision to maintain safety and engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our one-on-one work. Let's sit at the workspace and order the numbers 1 to 10.
+
+STUDENT: (Screams and falls to the floor.)
+
+TUTOR: Please stand up and look at the numbers.
+
+STUDENT: (Kicks from the floor.)
+
+TUTOR: We need to finish ordering the numbers.
+
+STUDENT: (Hits and attempts to head-butt to protest the nonpreferred activity.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Academic activities such as Ordering numbers 1-10, Matching pictures of the same item, Matching items, Handing a picture of a requested common object, Identifying letters in his name, Copying the letters in his name, Identifying shapes",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom workspace",
+      "materials": "Pictures of items, common objects, numbers 1-10, letters, shapes",
+      "social_setting": "One-on-one work with an assigned educator",
+      "time_context": "During this 30-min work time after the calendar activity"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When presented with nonpreferred activities or unfamiliar work",
+      "observable_behavior": "Screaming, falling to the floor, head-butting, biting, kicking, and hitting",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "To protest nonpreferred activities",
+        "observable_behavior": "Used maladaptive behaviors... including hitting, biting, and head-butting",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

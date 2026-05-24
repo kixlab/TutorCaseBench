@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physical and Collaborative Activation
+  Check: The tutor's response prompts physical movement (e.g., standing, moving around) or peer collaboration rather than requiring the student to sit alone at a desk.
+
+Criterion 2: Visual or Real-World Grounding
+  Check: The tutor introduces a visual aid (picture, video, drawing) or connects the abstract concept to a tangible, real-world scenario.
+
+Criterion 3: Active, Inclusive Experimentation
+  Check: The tutor shifts the task from passive observation or copying to an active, hands-on experiment or exploratory activity where the student is directly involved.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly kinesthetic and social, struggling severely with passive, solitary learning environments (like sitting still and copying from a whiteboard), which trigger boredom, frustration, and physical altercations with peers. They uniquely require constant physical movement, visual or real-world grounding for abstract concepts, and inclusive, inquiry-based group activities where they can actively participate rather than passively observe.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit down at your desk and copy the trigonometry formulas from the whiteboard.
+
+STUDENT: I feel bored all the time sitting down. Why do we have to copy all the time from the whiteboard and gaze at it?
+
+TUTOR: Just focus on the board and write down what you see.
+
+STUDENT: Mentally I cannot understand this. I can't just sit here and be like a statue.
+
+TUTOR: You need to work alone and finish copying the notes.
+
+STUDENT: I prefer standing up and working in groups rather than alone! (Stands up abruptly and starts fighting with the student at the next desk)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing trigonometry and being expected to copy all the time from the whiteboard and gaze at it",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mainstream mathematics class, with access to school grounds",
+      "materials": "Whiteboard, pictures, videos, computer programmes",
+      "social_setting": "Sitting down and working alone",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to be like statues, sit down in class and see things on the whiteboard, and understand concepts mentally without visual aids",
+      "observable_behavior": "Fights with the other students and sometimes even with teachers",
+      "internal_state": "Feels bored all the time sitting down; mentally cannot understand",
+      "related_quotes": [
+        "Here [i.e., core programme mathematics class] I never fight with the other students or with the teacher...but in the other class [i.e., mainstream] I fight with the other students and sometimes even with teachers.",
+        "In the other class [i.e., mainstream] I feel bored all the time sitting down.",
+        "Mentally I cannot understand, but visually I can cope...pictures make a big difference for me...I wouldn’t have understood without them."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When required to sit still and work alone on abstract concepts",
+        "observable_behavior": "Exhibits disruptive behaviour and fights with peers or teachers",
+        "internal_state": "Boredom and inability to cope mentally",
+        "related_quotes": [
+          "I prefer standing up and working in groups rather than alone.",
+          "Mentally I cannot understand, but visually I can cope"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

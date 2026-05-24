@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Gross Motor Instrument Adaptation
+  Check: The tutor's long-term plan incorporates modified instruments (e.g., melody bells on the floor) that bypass the need for fine motor coordination and articulation.
+
+Criterion 2: Flexible, Expectation-Free Environment
+  Check: The tutor designs informal activities that do not demand a specific, fixed response, allowing Zack's participation to vary based on his responsiveness.
+
+Criterion 3: Fostering a Celebratory Peer Climate
+  Check: The tutor implements strategies to actively teach peers to support, accept, and celebrate Zack's unique forms of participation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Zack is a non-verbal student with moderate to severe cognitive and fine motor impairments who communicates primarily through physical actions and vocalizations. He uniquely requires gross-motor instrument modifications, highly simplified phrase-based musical cues, and an expectation-free environment where his non-verbal contributions are echoed and validated, alongside direct adult support for peer boundaries.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright Zack, it's time for recorder instruction. Let's look at the standard sheet music for 'Hot Cross Buns' and play the melody.
+
+STUDENT: (Remains completely silent and does not attempt to speak or sing while looking at the standard music notation.)
+
+TUTOR: Go ahead and pick up the recorder. Try to cover the holes with your fingers to make the notes.
+
+STUDENT: (Attempts to hold the standard recorder but lacks the fine motor coordination to cover the holes with his fingers.)
+
+TUTOR: Keep trying. Just read the notes on the page and use your tongue to play the sounds.
+
+STUDENT: (Is unable to use his tongue to control articulation on the mouthpiece and shows he does not have the cognitive skills required to decode the standard music notation.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in recorder instruction and playing songs like 'Hot Cross Buns'",
+      "learning_goal": "Play the chord roots or the melody, depending on the song being played"
+    },
+    "context": {
+      "environment": "Inclusive fourth-grade music class",
+      "materials": "Standard recorder, standard music notation, melody bells placed on the floor, color-coded notation",
+      "social_setting": "With the assistance of a musically proficient paraprofessional",
+      "time_context": "During recorder instruction"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When faced with standard recorder instruction and standard music notation",
+      "observable_behavior": "Lacked the fine motor coordination to cover holes on a recorder or use the tongue to control articulation; did not have the cognitive skills required to decode music notation",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During vocal or standard notation tasks",
+        "observable_behavior": "Rarely used words, let alone attempted to sing; neither of them matched pitch with their voices",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

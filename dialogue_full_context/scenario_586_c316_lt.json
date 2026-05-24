@@ -1,0 +1,75 @@
+{
+  "category_id": "316",
+  "category_title": "Low-achieving students who disengage while waiting for teacher assistance",
+  "scenario_id": "586",
+  "scenario_title": "Initiating a multi-week work plan",
+  "minimal_context": "The tutor presents a new three-week math and science work plan to the student in the classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is the new math and science work plan for the next three weeks. You can go ahead and choose which tasks to begin with."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "We use work plans, so it is not, like, do task 1, 2, 3 till tomorrow. We do what we want when we want."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Yes, you manage your own pace. What do you think you will work on first?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "This is how I normally work: At school, the first couple of weeks, I do nothing, but sometimes I manage to complete a couple of tasks every lesson."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You should try to get started on something today."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Puts the work plan aside) I find it hard to plan and organize my work. I struggle to get started, so I'll just delay it until the last few days.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is the new math and science work plan for the next three weeks. You can go ahead and choose which tasks to begin with.\n\nSTUDENT: We use work plans, so it is not, like, do task 1, 2, 3 till tomorrow. We do what we want when we want.\n\nTUTOR: Yes, you manage your own pace. What do you think you will work on first?\n\nSTUDENT: This is how I normally work: At school, the first couple of weeks, I do nothing, but sometimes I manage to complete a couple of tasks every lesson.\n\nTUTOR: You should try to get started on something today.\n\nSTUDENT: (Puts the work plan aside) I find it hard to plan and organize my work. I struggle to get started, so I'll just delay it until the last few days.",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 1020,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Approaching math and science tasks listed on a work plan over a multi-week period.",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Norwegian lower secondary classrooms",
+        "materials": "work plans (2-3 week task lists)",
+        "social_setting": "Students managing their own learning pace and task selection",
+        "time_context": "first weeks of the work-plan period"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Initiating work on math and science assignments during the first week of a work plan period.",
+        "observable_behavior": "doing little required schoolwork within the first weeks of the work-plan period and delaying their required work until the last few days.",
+        "internal_state": "find it hard to plan and organize their work",
+        "related_quotes": [
+          "This is how I normally work: At school, the first couple of weeks, I do nothing, but sometimes I manage to complete a couple of tasks every lesson.",
+          "We use work plans, so it is not, like, do task 1, 2, 3 till tomorrow. We do what we want when we want."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Organizing work pace and meeting deadlines for the work plan period.",
+          "observable_behavior": "procrastinate because they struggle to get started.",
+          "internal_state": "struggle to get started",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

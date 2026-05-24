@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Amalgamation of Play Scenarios
+  Check: The long-term plan includes a deliberate mix of both Free Play and Structured Toy Play scenarios rather than exclusively relying on unstructured environments or purely academic tasks.
+
+Criterion 2: Play-Based Executive Function Goals
+  Check: The long-term plan incorporates specific play-based objectives aimed at progressively developing executive functions such as cognitive flexibility, inhibition, or working memory.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This older pre-schooler is highly imaginative but shuts down verbally and socially when forced to use high-structure toys with predetermined rules. They exhibit a core behavioral pattern of withdrawing into silent, non-interactive play when their cognitive flexibility is constrained by adult-led or rule-bound activities. The evidence reveals they uniquely need open-ended, everyday classroom materials (like chalk or dusters) and the autonomy to symbolically transform these objects to unlock their verbal and gestural pre-play behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the toy kit. We have a doctor's kit, a doll, and a superhero toy. Let's play with them here on the mat.
+
+STUDENT: (Picks up the stethoscope from the doctor's kit and places it on the doll's chest, engaging in object-directed play silently without looking up.)
+
+TUTOR: What is happening in your game?
+
+STUDENT: (Takes the plastic thermometer and presses it against the doll's head, continuing the object-based play without speaking or making eye contact.)
+
+TUTOR: Can you play something else with them?
+
+STUDENT: (Stares at the superhero toy and the doctor's kit, appearing restricted by the standard rules for using these high-structure toys. Pushes the toys away and sits silently on the mat, demonstrating completely non-interactive play with a total reduction of verbal and gestural behaviors.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Structured Toy Play scenario (SP) using a toy kit containing high-structure toys (Doctor’s Kit, Doll, Super Hero Toy)",
+      "learning_goal": "elicit a variety of pretend play acts"
+    },
+    "context": {
+      "environment": "classroom which had limited auditory and visual distractions... adequate space, lighting, ventilation, and play mats to sit comfortably and play",
+      "materials": "toy kits which were placed in the centre of the classroom... combination of gender-neutral (lego blocks, ball, miniature doctor’s kit) and gender-specific toys (Male: superhero toy, Female: doll)... materials that were available in the classroom (chalk, duster, board, charts, etc.)",
+      "social_setting": "children were already familiar with their play partners",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "challenges that the child faces in violating the rules of toy usage",
+      "observable_behavior": "reduction of gestural and verbal behaviours exhibited by children... higher frequencies of object-directed pretend play and non-interactive type of play than socio-dramatic forms of pretend play",
+      "internal_state": "cognitive flexibility and working memory is critical for switching back and forth between the make-believe world and to remember the rules of pretence",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "usage of toys... of high structure",
+        "observable_behavior": "reduced verbal and gestural behaviours... types of pretend play demonstrated by the children could be limited",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

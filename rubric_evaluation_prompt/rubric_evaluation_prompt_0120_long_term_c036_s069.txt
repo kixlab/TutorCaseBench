@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Physical Material Organization System
+  Check: The tutor implements or reinforces a specific, physical organizational system for the student's materials, such as a two-pocket 'to-do/done' folder or specific desk/bag compartments.
+
+Criterion 5: Tripartite Accountability Loop
+  Check: The tutor establishes a daily communication and accountability tool, such as a homework journal requiring signatures from the teacher, student, and parent.
+
+Criterion 6: Medication and Routine Prompting
+  Check: The tutor integrates a reliable prompting system (such as alarms, timers, or journal notes) to ensure the student adheres to her school-hour medication or critical daily routines.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Gail is a highly intelligent student with inattentive-type ADHD who struggles with severe distractibility, executive dysfunction, and multi-step tasks. She frequently loses focus to engage in off-task motor behaviors (drawing on herself, rearranging objects) and requires explicit organizational systems, one-on-one step clarification, and subtle nonverbal redirection to maintain focus.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Gail, please put your extra credit poster board away and start your Science test.
+
+STUDENT: (Takes an inordinate amount of time to put her poster board along the wall, then sits down and takes a long time choosing a different pen while watching the girl beside her put her hair in a ponytail holder)
+
+TUTOR: Please focus on your paper and keep working.
+
+STUDENT: (Gets up to use the restroom, spends two minutes rearranging the keys on the hooks, and takes a circuitous route back to her desk after signing back in)
+
+TUTOR: There are 15 minutes remaining in the Science period. Please finish your test.
+
+STUDENT: (Starts writing on her hand, marks one answer on her test, then goes across the room to wash the stuff off her hands at the sink. She comes back and begins to draw on her knee, below her skirt)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Taking a Science test today",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "1:30 pm Science",
+      "materials": "Science test, pen, poster board, restroom keys on hooks, clock, sink",
+      "social_setting": "The class is taking a Science test today. As the papers are handed out the students that have done extra credit projects are turning them in. Girl beside her, girls whispering quietly behind her.",
+      "time_context": "1:30 pm"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "For the 15 minutes remaining of this Science period",
+      "observable_behavior": "goes off task again 3 minutes later and starts writing on her hand... marks one answer on her test and then goes across the room to wash the stuff off her hands at the sink. Then she begins to draw on her knee, below her skirt.",
+      "internal_state": "Breaks in her focus occur",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When turning in extra credit projects at the start of the test",
+        "observable_behavior": "taking an inordinate amount of time to put her poster board with the other projects along the wall closest to her desk... misses part of the instructions regarding the test",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When choosing materials or seated near peers",
+        "observable_behavior": "takes a longer time than necessary to choose a different pen, watches the girl beside her put her hair in a ponytail holder",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When going to the restroom",
+        "observable_behavior": "spends two minutes (timed) rearranging the keys on the hooks that hold them... is gone four minutes... spends another minute signing back in by reading the time on the clock, and taking a circuitous route back to her desk.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

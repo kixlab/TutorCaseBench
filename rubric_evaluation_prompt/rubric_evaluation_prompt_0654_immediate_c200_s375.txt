@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Academic Choice Provision
+  Check: The tutor offers the student a specific, academic choice regarding how or what to work on (e.g., choosing which picture to write about or which worksheet to start).
+
+Criterion 2: Multi-Modal Task Scaffolding
+  Check: The tutor provides visual examples, models a written response, or explicitly rephrases the question to make the task more accessible.
+
+Criterion 3: Enthusiastic Reinforcement
+  Check: The tutor uses highly enthusiastic, specific verbal praise (e.g., exaggerated positive feedback or expressions of pride) when the student makes an effort or completes a step.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is eager to participate in multi-sensory routines but defaults to passive engagement during standard instruction. They uniquely require Universal Design for Learning (UDL) adaptations—such as visual supports, assistive technology, and adapted materials—alongside academic choices and enthusiastic praise to initiate and sustain active learning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the worksheet. Please look at the picture and write about it.
+
+STUDENT: (Sits quietly at the table group, looking at the worksheet but not picking up the iPad to take notes.)
+
+TUTOR: Go ahead and start writing.
+
+STUDENT: (Remains passively engaged, watching the other classmates in the small group instead of working.)
+
+TUTOR: Keep trying, you need to fill in your responses.
+
+STUDENT: (Continues to show passive engagement, sitting silently without using the iPad or label maker to fill in responses on the worksheet.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "working on a worksheet, writing about a picture, taking notes, or reading a book",
+      "learning_goal": "address a variety of Individualized Education Program (IEP) goals in an inclusive setting"
+    },
+    "context": {
+      "environment": "general education classroom",
+      "materials": "worksheet, iPad, label maker, magnifying device, books at lower readability levels, large fonts with supporting pictures, word banks, speech-generating devices",
+      "social_setting": "working with peers in small table groups",
+      "time_context": "majority of these classroom observations"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the majority of these classroom observations",
+      "observable_behavior": "passive engagement was observed",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the majority of these classroom observations",
+        "observable_behavior": "passive engagement",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

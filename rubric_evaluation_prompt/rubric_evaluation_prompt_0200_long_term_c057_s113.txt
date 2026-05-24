@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Bridging to Behavioral Expectations
+  Check: The tutor's long-term plan includes explicitly connecting the student's active engagement style to procedural norms (e.g., framing listening as a part of reading) without chastising their natural behavior.
+
+Criterion 2: Rebuilding Literacy Identity
+  Check: The tutor incorporates sustained use of high-support tools (like interactive reading programs) specifically aimed at shifting the student's self-perception from a struggling student to a successful reader/writer.
+
+Criterion 3: Asset-Based Interest Integration
+  Check: The tutor's plan demonstrates an ongoing effort to discover and integrate the student's specific interests, cultural background, and preferred processes into literacy tasks, rather than forcing compliance with standard narratives.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a linguistically sophisticated learner who expresses engagement through non-normative behaviors like moving, talking out of turn, and verbalizing ideas before writing. Because they struggle with traditional expectations of silence and stillness, they are often mislabeled as struggling and self-identify as a poor writer. They uniquely require environments that validate their physical and oral processing as legitimate literacy practices, alongside high-support digital tools to rebuild their academic identity.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Welcome to the after-school program. Let's gather on the rug so I can read Visiting Day.
+
+STUDENT: (comes closer and points to the picture) Oh, he’s wearing jail clothes!
+
+TUTOR: Please sit in your designated rug spot.
+
+STUDENT: (talking out of turn and turning the page) In the back page there was cup, brushes in his room. Se:::e? He is living there. He brushes his teeth there and he …
+
+TUTOR: We need to sit still. I am going to read Chrysanthemum instead before we begin.
+
+STUDENT: (sighs heavily, slumps over, turns back away, and averts gaze) I’ve already heard it four times!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Listening to a read aloud of Kevin Henkes’ (1991) Chrysanthemum and Visiting Day (Woodson, 2002)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "rug during the beginning of an after-school program session",
+      "materials": "books (Chrysanthemum, Visiting Day)",
+      "social_setting": "group setting with co-lead teacher and peers",
+      "time_context": "beginning of an after-school program session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Before I even begin reading",
+      "observable_behavior": "sighs heavily before shouting out, bodies slumping over, backs turned away from me, eyes averting my gaze",
+      "internal_state": "resistance, a challenge",
+      "related_quotes": [
+        "I’ve already heard it four times!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During read aloud time",
+        "observable_behavior": "talking out of turn and did not sit in their designated rug spots, comes closer to the book and turns the page",
+        "internal_state": "enthusiasm for the story",
+        "related_quotes": [
+          "Ooh, ooh! I knew it! The father is in jail and little girl’s visiting her father."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

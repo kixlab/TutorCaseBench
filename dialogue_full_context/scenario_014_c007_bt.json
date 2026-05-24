@@ -1,0 +1,72 @@
+{
+  "category_id": "007",
+  "category_title": "Young students with high-intensity disruptive behaviors (running, hitting) during non-preferred tasks",
+  "scenario_id": "014",
+  "scenario_title": "General academic tasks assigned without student choice",
+  "minimal_context": "Ann is presented with a typical academic worksheet chosen by her teacher in the self-contained classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Ann, here is the academic worksheet I chose for you to complete today. Please start working on it."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Does not look at the paper or start the task for 5 seconds) I don't want this one! Give me a different one!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "This is the task we are doing right now. Please begin."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Stands up, leaving contact with her designated chair for more than 3 seconds) No! You can't make me do it!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You need to sit back down in your chair and finish your work."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Throws the worksheet at the teacher and runs toward the classroom door) I'm leaving!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Ann, here is the academic worksheet I chose for you to complete today. Please start working on it.\n\nSTUDENT: (Does not look at the paper or start the task for 5 seconds) I don't want this one! Give me a different one!\n\nTUTOR: This is the task we are doing right now. Please begin.\n\nSTUDENT: (Stands up, leaving contact with her designated chair for more than 3 seconds) No! You can't make me do it!\n\nTUTOR: You need to sit back down in your chair and finish your work.\n\nSTUDENT: (Throws the worksheet at the teacher and runs toward the classroom door) I'm leaving!",
+  "immediate_dialogue_prompt": 24,
+  "long_term_dialogue_prompt": 25,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "comparable academic tasks which were typically assigned in the class",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "self-contained classroom for severe emotional disturbance",
+        "materials": "menu of six comparable academic tasks",
+        "social_setting": "academic activities with teacher",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "no choice conditions... the tasks were chosen by her teacher.",
+        "observable_behavior": "Leaving assigned area, talking out, and inappropriate staff interactions (ordering, yelling)",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "failure to comply with instruction within 5 seconds",
+          "observable_behavior": "Off-task behavior",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Micro-Chunking of Tasks
+  Check: The tutor breaks the current academic task into a single, small, manageable step rather than giving multi-step or open-ended instructions.
+
+Criterion 2: Affirmation-Anchored Instruction
+  Check: The tutor explicitly includes positive reinforcement, praise, or a reminder of a past success when giving an instruction or encouraging him to continue.
+
+Criterion 3: Low-Friction Redirection
+  Check: The tutor addresses distraction or restlessness without using direct reprimands or repeatedly calling his name, instead using subtle redirection or offering a sanctioned short break.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Yiannis is a highly active student who struggles significantly with sustained attention and physical restlessness, finding independent tasks like writing extremely daunting. He uniquely requires tasks to be micro-chunked to prevent refusal, thrives on explicit praise and reminders of past success, and needs subtle, non-verbal redirection rather than direct verbal reprimands.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are starting our 90-minute Literacy block now. Please sit at your desk and open your reading book.
+
+STUDENT: (Moves back and forth in his chair in a nervous manner) Okay.
+
+TUTOR: Please keep reading the story.
+
+STUDENT: (Stumps his feet and nervously moves his palms back and forth on his thighs) Are we done yet?
+
+TUTOR: We still have a lot of time left in the Literacy block. Just stay in your seat.
+
+STUDENT: (Flaps his arms, leaves his seat, and starts moving around the classroom) I can't sit down anymore!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Remain seated for Literacy hour",
+      "learning_goal": "Remain seated for 90 minutes (two sessions)"
+    },
+    "context": {
+      "environment": "Sat very close to the teacher's desk; classroom includes a 'book corner'",
+      "materials": "Class rules pinned on a board close to Yiannis' seat (reader friendly, with different colours, pictures and bold letters); sticker chart",
+      "social_setting": "Mainstream classroom during instructional time",
+      "time_context": "Literacy hour (ninety minutes)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "As the time to remain seated increased",
+      "observable_behavior": "Left his seat and moved around in the classroom",
+      "internal_state": "He found it more difficult to sit down",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While sitting on his chair",
+        "observable_behavior": "Constantly moved back and forth in a nervous manner; would flap his arms or stump his feet, or nervously move back and forth his palms on his thighs",
+        "internal_state": "Seemed to have great difficulty sitting",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

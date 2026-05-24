@@ -1,0 +1,72 @@
+{
+  "category_id": "298",
+  "category_title": "Students with MLD using atypical multiples-list strategies for multiplication",
+  "scenario_id": "556",
+  "scenario_title": "Fraction reduction and cognitive overload",
+  "minimal_context": "The student is reducing the fraction 8/12 on paper during a one-on-one tutoring session.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please reduce the fraction 8/12."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Counts on fingers) Four, eight. The top number is 2."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, go on to the denominator."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Looks at the 2, then counts on fingers again) Two, four, six, eight, ten, twelve. That's six."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Write down your final answer."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "The reduced fraction is 2/6.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please reduce the fraction 8/12.\n\nSTUDENT: (Counts on fingers) Four, eight. The top number is 2.\n\nTUTOR: Okay, go on to the denominator.\n\nSTUDENT: (Looks at the 2, then counts on fingers again) Two, four, six, eight, ten, twelve. That's six.\n\nTUTOR: Write down your final answer.\n\nSTUDENT: The reduced fraction is 2/6.",
+  "immediate_dialogue_prompt": 965,
+  "long_term_dialogue_prompt": 966,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "reducing the fraction 8/12",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "tutoring sessions",
+        "materials": "paper",
+        "social_setting": "one-on-one tutoring session",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The process of reducing the numerator",
+        "observable_behavior": "reducing the fraction 8/12 to 2/6 or 4/3",
+        "internal_state": "The numerator of the reduced fraction disrupted Emily’s ability to attend to the appropriate multiples list. The process of reducing the numerator seemed to cue a new list corresponding, not to the factor of reduction, but to the numerator of the reduced fraction",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "when Emily reduced fractions",
+          "observable_behavior": "she often recited the list twice, once for the numerator value and once for the denominator value, keeping track of her position in the list on her fingers",
+          "internal_state": "Because she was potentially accessing and reciting several multiples lists during this solution process, and must cycle through her chosen multiples list twice, this approach is considered to be cognitively cumbersome.",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

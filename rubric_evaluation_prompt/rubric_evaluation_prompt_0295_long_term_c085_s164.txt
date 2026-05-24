@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Effort-Based Personal Assessment
+  Check: The tutor's long-term plan includes individualized conferences or reflections focused on the student's effort and personal goals rather than standardized skill acquisition.
+
+Criterion 2: Authentic One-on-One Discourse
+  Check: The tutor plans for regular, genuine one-on-one conversations about the reading material instead of assigning group work or traditional comprehension worksheets.
+
+Criterion 3: Validation of Reading for Pleasure
+  Check: The tutor incorporates strategies to validate the student's reading for pleasure and encourages them to question or reframe negative institutional labels.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student actively resists traditional, required reading tasks and internalizes negative institutional labels like 'slow reader' or 'ADHD' when faced with time constraints, uninteresting texts, or group work. They uniquely require complete autonomy in text selection, self-paced reading without time pressure, and authentic one-on-one conversations to build engagement and reading efficiency.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your required English book to the next chapter. You have twenty minutes to complete the reading before the assignment is due.
+
+STUDENT: The reading parts, I suffer in 'cause I just don't like school reading. When it's required, I think that it just feels like a chore, something I have to do.
+
+TUTOR: Just try to read as much as you can right now.
+
+STUDENT: I’m a really slow reader, and I have a lot of issues with reading, so when I have a specific time, it puts more pressure on me.
+
+TUTOR: Keep trying. We need to stick to the schedule.
+
+STUDENT: It makes it a lot more difficult for me to read. I don't want to do it, so I'm just not going to complete this required reading.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Complete the required reading",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Traditional English or remedial reading courses",
+      "materials": "Required reading books, traditional English assignments",
+      "social_setting": "Traditional class setting",
+      "time_context": "Specific time constraints and deadlines"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When given a specific time to complete the reading",
+      "observable_behavior": "Refused to complete the required reading",
+      "internal_state": "Puts more pressure on me and makes it a lot more difficult for me to read",
+      "related_quotes": [
+        "I’m a really slow reader, and I have a lot of issues with reading, so when I have a specific time, it puts more pressure on me and makes it a lot more difficult for me to read."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reading is required",
+        "observable_behavior": "I suffer in ‘cause I just don’t like school reading",
+        "internal_state": "It just feels like a chore, something I have to do, and I don’t want to do it",
+        "related_quotes": [
+          "When it’s required, I think that it just feels like a chore, something I have to do, and I don’t want to do it."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

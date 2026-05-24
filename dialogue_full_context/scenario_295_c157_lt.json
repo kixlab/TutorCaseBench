@@ -1,0 +1,72 @@
+{
+  "category_id": "157",
+  "category_title": "Adolescent student with blindness and selective mutism who uses voice-output devices for communication",
+  "scenario_id": "295",
+  "scenario_title": "Establishing basic communication and social greetings",
+  "minimal_context": "The tutor enters the classroom to greet the student and begin the morning routine.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Hello Sally, I just walked into the room."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Immediately stops singing as she becomes aware that someone else is in the room.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Good morning. Can you say hello back to me?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Does not choose to communicate using spoken language or gestures.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Let's try one more time. How are you today?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Remains selectively mute, not communicating using any spoken language or gestures while at school.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Hello Sally, I just walked into the room.\n\nSTUDENT: (Immediately stops singing as she becomes aware that someone else is in the room.)\n\nTUTOR: Good morning. Can you say hello back to me?\n\nSTUDENT: (Does not choose to communicate using spoken language or gestures.)\n\nTUTOR: Let's try one more time. How are you today?\n\nSTUDENT: (Remains selectively mute, not communicating using any spoken language or gestures while at school.)",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 523,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Communicate using spoken language or gestures while at school",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "General school environment",
+        "materials": "",
+        "social_setting": "Presence of others in the room",
+        "time_context": "Before the introduction of the voice output devices"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when she became aware that someone else was in the room.",
+        "observable_behavior": "immediately stopped singing",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Before the introduction of the voice output devices",
+          "observable_behavior": "did not choose to communicate using spoken language or gestures while at school.",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Physical and Multimodal Expression
+  Check: The tutor's response must encourage, validate, or provide opportunities for the student to use physical gestures, acting, or role-play to communicate his ideas.
+
+Criterion 2: Facilitative Encouragement Without Direct Intervention
+  Check: The tutor must provide broad encouragement or general check-ins without giving direct answers, specific academic corrections, or singling the student out for targeted help.
+
+Criterion 3: Space for Uninterrupted Perseverance
+  Check: The tutor must allow the student to attempt speaking or reading without interrupting to correct his pronunciation or explain the text.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Andrius is a student with severe Hearing Impairment and EAL who struggles with traditional written and verbal tasks, often writing only single sentences and showing high dependence on teacher support. However, he demonstrates profound cognitive understanding when allowed to use physical gestures and drama. He uniquely requires an 'encouraging facilitator' approach that avoids singling him out or providing direct, specific help, allowing him to persevere independently and build confidence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please get into your collaborative groups and start reading your scripts for A Midsummer Night's Dream.
+
+STUDENT: sometime um there are people that they are don’t take the [cope]
+
+TUTOR: Let's just focus on the script for now. It is your turn to read the next part.
+
+STUDENT: (Stays very quiet, points to the script, and writes down exactly one sentence on his paper instead of speaking.)
+
+TUTOR: You need to read the lines aloud to the class, not just write them down. Go ahead and speak.
+
+STUDENT: (Attempts to read the Shakespearean text aloud to the class but has great difficulty with pronouncing words, resulting in very basic verbal communication that is hard to understand.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Collaborative group work and independently reading and acting scripts from A Midsummer Night's Dream",
+      "learning_goal": "Access and enjoy Shakespearean language"
+    },
+    "context": {
+      "environment": "Project-based research lessons",
+      "materials": "Scripts, text of A Midsummer Night's Dream, resources provided by teacher to access language",
+      "social_setting": "Collaborative groups and reading aloud to the class",
+      "time_context": "During the five project-based research lessons (R1-R5)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When reading the text aloud to the class",
+      "observable_behavior": "Has great difficulty with pronouncing words",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participating in drama/group work",
+        "observable_behavior": "Expresses dislike for group work due to peer dynamics",
+        "internal_state": "Dislikes drama/group work because of how peers cope",
+        "related_quotes": [
+          "sometime um there are people that they are don’t take the [cope]"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

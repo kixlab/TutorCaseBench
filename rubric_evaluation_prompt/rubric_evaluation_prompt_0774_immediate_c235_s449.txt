@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Relational Reassurance and De-stigmatization
+  Check: The tutor's response must include encouraging, friendly language that builds trust and explicitly or implicitly reassures Martin that he is not in trouble.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Martin is an 11-year-old student with ADHD who experiences significant anxiety about being stigmatized or labeled a 'trouble-maker' when selected for interventions. In group settings, he tends to dominate discussions and struggles to let others participate. He uniquely requires a highly reassuring, non-judgmental environment to alleviate his fears, alongside structured autonomy (such as group pledges and target-setting) to help him self-regulate and reflect on peer turn-taking.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our group discussion to come up with ideas for our support group pledge.
+
+STUDENT: I was a bit shocked when I got told to come here. Didn't know what it was for a start. Wasn't too sure about it.
+
+TUTOR: Just go ahead and share your thoughts with the group.
+
+STUDENT: Okay, well I think the pledge should be about playing games. And we also need a rule about snacks. And I have another idea about...
+
+TUTOR: Let's hear what the others think.
+
+STUDENT: (Interrupting another pupil) Wait, I'm still talking! I don't think other people are entitled to make a contribution until I'm completely done. I'm just worried about getting into trouble and being branded as a trouble-maker if we mess this up!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating within the discussions and collaborative activities",
+      "learning_goal": "Development of intrapersonal (understanding of self) and interpersonal (understanding of others) intelligences"
+    },
+    "context": {
+      "environment": "Secure, safe and non-judgemental environment within a support group (SG)",
+      "materials": "Support group pledge which the group had devised, target-setting materials",
+      "social_setting": "Group discussions with other pupils and a support group leader",
+      "time_context": "16 one-hour sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When approached about participation within the SG and during initial group discussions",
+      "observable_behavior": "Pupils were initially anxious, and sometimes confused; expressed fear of 'getting into trouble' and of being branded as a 'trouble-maker'",
+      "internal_state": "Anxious, shocked, and worried about being stigmatised",
+      "related_quotes": [
+        "I was a bit shocked. Didn’t know what it was for a start. Wasn’t too sure about it",
+        "fear of 'getting into trouble' and of being branded as a 'trouble-maker'",
+        "worried it was going tae single him out"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During group discussions when other people are present",
+        "observable_behavior": "Struggling to 'give everyone else a chance to participate'",
+        "internal_state": "Lacking the initial understanding that 'other people are entitled to make a contribution'",
+        "related_quotes": [
+          "to give everyone else a chance to participate. I’ve learned that other people are entitled to make a contribution."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

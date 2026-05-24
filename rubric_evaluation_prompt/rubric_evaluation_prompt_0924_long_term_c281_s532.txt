@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Tangible Goal Tracking System
+  Check: The long-term plan includes a system for the student to write down personal goals, track them tangibly (e.g., with checkmarks on goal cards), and celebrate when they are met.
+
+Criterion 2: School-Wide Reinforcement Integration
+  Check: The long-term plan incorporates the school-wide reinforcement system (e.g., a ticket system) alongside behavior-specific praise.
+
+Criterion 3: Homework-Conscious Scheduling
+  Check: The long-term plan explicitly avoids scheduling the intervention block during the student's homeroom homework or preferred classwork time.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has adequate cognitive and literacy skills but struggles with work completion and motivation, often resisting pull-out interventions because they resent missing homeroom homework time. They exhibit a positive illusory bias, believing they are already highly competent, which requires shifting focus to behavioral goals, tangible tracking, and school-wide reinforcement to build self-management without triggering defensiveness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's take out our goal cards. Today we are learning about Strengthening Your Memory, so please write down a goal to remember one fact learned in class tomorrow.
+
+STUDENT: I don't really need to write a goal for that. I'm already really competent at remembering things. I'd give myself a 90% on that already.
+
+TUTOR: What do you think you could write down? Just try to put one goal on your card.
+
+STUDENT: (Pushes the goal card away) I have a lot of class assignments and homework I haven't finished yet. I should be doing that.
+
+TUTOR: We need to finish this activity for our intervention block. Keep trying.
+
+STUDENT: I'm not enjoying being in this small group. Everyone else in homeroom is using this time to work on their homework. I don't like that I 'missed intervention' in the classroom. If you ask me what I like about being pulled out here, I'd say 'Nothing except leaving.'
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a character development intervention focused on improving goal setting, decision making, and self-management skills, or a reading practice activity using 'The Tale of Despereaux'",
+      "learning_goal": "Improving self-regulation skills, engagement, and motivation to meet behavioral and instructional needs"
+    },
+    "context": {
+      "environment": "Small group setting during a 30 min intervention block built into the regular school day",
+      "materials": "Goal cards, school-wide reinforcement tickets, 'The Tale of Despereaux' book",
+      "social_setting": "Small group instruction pulling students out of their homeroom classes",
+      "time_context": "During a 30-minute intervention block when other students in homeroom classes are working on homework and classwork"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the student realizes other students in their homeroom classes are using the time to work on homework and classwork during the intervention block",
+      "observable_behavior": "Made informal comments to the instructor indicating they were dissatisfied, stated they did not like that they missed intervention in the classroom, and indicated they were not enjoying being in the small group",
+      "internal_state": "Dissatisfied; feeling they are missing other experiences viewed as preferable or highly valued",
+      "related_quotes": [
+        "missed intervention",
+        "Nothing except leaving."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to evaluate their own skills or need for improvement prior to intervention",
+        "observable_behavior": "Rated their pre-intervention scores quite high, close to 90%, indicating they perceived little room for improvement",
+        "internal_state": "Positive illusory bias meaning they tend to see themselves as more competent than do their teachers, parents, and peers",
+        "related_quotes": []
+      },
+      {
+        "condition": "During general academic performance tasks",
+        "observable_behavior": "Exhibits limited work completion, off-task behavior, and difficulty completing assignments according to teacher-maintained records",
+        "internal_state": "Low academic engagement, limited motivation, and limited self-determined behaviors",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

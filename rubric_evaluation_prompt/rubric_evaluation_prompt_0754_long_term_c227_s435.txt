@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Strategic Integration of Controlled Drop-outs
+  Check: The tutor's long-term strategy explicitly accommodates or plans for short, controlled breaks or 'drop-outs' as a tool to maintain the student's overall engagement.
+
+Criterion 2: Sustainable Intervention Economy
+  Check: The tutor's long-term plan minimizes the frequency of disciplinary actions, reserving them only for critical boundaries to preserve authority and ensure follow-through.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly active and prone to frequent, brief off-task behaviors—such as joking with peers or wandering—to cope with boredom during passive moments. Because their disengagement is ephemeral and they naturally return to work, they uniquely require a tutor who tolerates benign drop-outs while reserving strict authority exclusively for physical safety risks or widespread social contagion.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Look at the instruction sheet and practice the gymnastics jump using the trampoline and the mat.
+
+STUDENT: (Makes a correct jump and puts up the equipment) Okay, done. (Gives a kick to a mat and chats with friends in the group)
+
+TUTOR: Please get back in line and practice the jump again.
+
+STUDENT: I work a bit but in the end it’s boring to do the same thing over and over again, so I have a laugh with my mates ...It’s no big deal, and after that I work as well.
+
+TUTOR: Just wait idly in line until it is your turn to go.
+
+STUDENT: (Doubles up while standing in line, then lies on the mats) This is taking too long. (Scans the environment and begins wandering about the gym in search of an opportunity for change)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "learn several motor skills at each workshop / gymnastics jump task",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "gymnastics workshops were organized in parallel",
+      "materials": "instruction sheets and equipment like mats and trampolines",
+      "social_setting": "Students should work in groups of three to five people",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "experiencing boredom during passive moments (waiting in line)",
+      "observable_behavior": "made a correct jump, put up the equipment, chatted with friends, gave a kick to a mat, made another jump, wandered around, waited idly, did some off-task behavior, read the exercise sheet, and called to the teacher",
+      "internal_state": "scanned their environment looking for opportunities to escape boredom",
+      "related_quotes": [
+        "I work a bit but in the end it’s boring to do the same thing over and over again, so I have a laugh with my mates ...It’s no big deal, and after that I work as well."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when students doubled up while standing in line",
+        "observable_behavior": "lying on the mats, or began wandering about the gym in search of an opportunity for change",
+        "internal_state": "passive or apathetic",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

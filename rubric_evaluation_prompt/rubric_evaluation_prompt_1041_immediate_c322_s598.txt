@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Scaffolding vs. Passive Checking
+  Check: The tutor provides a concrete starting tool or structure (e.g., a graphic organizer, a specific guiding question) rather than just asking how he is doing or telling him to keep trying.
+
+Criterion 2: Concrete Metaphorical Instruction
+  Check: The tutor uses a concrete, tangible metaphor or physical analogy (like 'writer's soup' or building blocks) to explain abstract writing concepts.
+
+Criterion 3: Personal Experience Connection
+  Check: The tutor explicitly prompts Tyrone to connect the writing task to his own life experiences, family, or personal interests.
+
+Criterion 4: Low-Burden Revision Tactics
+  Check: The tutor introduces a revision strategy that minimizes rewriting (such as 'cut and paste' or adding inserts) rather than asking him to rewrite large sections or entire drafts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Tyrone is a quiet, independent student who masks his severe difficulties with idea generation and language fluency by claiming he is doing 'Great' while sitting silently. He gives up easily when overwhelmed by blank pages or extensive rewriting. He uniquely requires proactive, structured support (like graphic organizers), concrete metaphors for abstract concepts, and multimodal tools (like digital storytelling) to bypass his writing blocks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to revise your first draft. Please add actions, feelings, and precise nouns to make the description more vivid.
+
+STUDENT: Great.
+
+TUTOR: How is your writing going?
+
+STUDENT: (Sits quietly without being able to start writing and does not ask for help) Great.
+
+TUTOR: Keep trying. Write down some more details about what you would do.
+
+STUDENT: (Gives up writing easily) I would read a book . play vido [sic] games with my brother . I would play football with my friends .
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Revise their work by adding actions, feelings, similes, metaphors, and using active verbs and precise nouns to engage the reader with vivid description",
+      "learning_goal": "Improving language fluency and adding creativity, interesting language, and feeling to writing"
+    },
+    "context": {
+      "environment": "Classroom during writing time",
+      "materials": "Student's first draft, ingredients for a 'writer's soup' (broth, carrots, and beans)",
+      "social_setting": "One-on-one help with the teacher",
+      "time_context": "During the revision phase of the writing process"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When struggling with language fluency and questions involving higher order comprehension during revision",
+      "observable_behavior": "Gives up writing easily and produces brief, simple lists instead of descriptive text",
+      "internal_state": "",
+      "related_quotes": [
+        "I would read a book . play vido [sic] games with my brother . I would play football with my friends ."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with the task of rewriting or expanding a draft",
+        "observable_behavior": "Does not like to ask for help during writing time",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

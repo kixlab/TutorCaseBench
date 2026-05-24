@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Dynamic Visual Anchoring
+  Check: The tutor's response incorporates or references dynamic visual or multimedia elements (e.g., digital slides, sound effects, or digital highlighting/doodling) rather than relying on static physical books.
+
+Criterion 2: Unrestricted Expressive Delivery
+  Check: The tutor utilizes or explicitly plans for free body language, varied vocal tones, and gestures to animate the content without being anchored to a physical book.
+
+Criterion 3: Pre-Performance Rehearsal
+  Check: The tutor provides an opportunity to practice or rehearse the specific target skill (e.g., reading a sentence aloud together) before requiring the student to perform or record it independently.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student initially exhibits severe task resistance and disruptive behavior (running, fighting, ignoring instruction) when presented with traditional physical books. However, their behavior transforms into quiet participation when instruction utilizes multimedia technology, dynamic visual tracking, and structured pre-performance rehearsal. They uniquely require digital visual anchors, unrestricted expressive delivery, and a strong sense of peer community to sustain engagement and overcome performance anxiety.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please use the VoiceThread system to read aloud and record the simple summarizing sentences.
+
+STUDENT: I feel particularly nervous before recording.
+
+TUTOR: Go ahead and press the record button.
+
+STUDENT: I want to try to imitate your pronunciation when practicing and recording, but I am too nervous to start.
+
+TUTOR: Just do your best and read the sentence.
+
+STUDENT: Can you help me practice the sentence before recording? I don't want to record it yet.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Review keywords and read aloud simple summarizing sentences",
+      "learning_goal": "Practice reading aloud and recording"
+    },
+    "context": {
+      "environment": "Classroom during online practicing",
+      "materials": "VoiceThread online system, audio and visual aids, color marker for doodling function",
+      "social_setting": "Peers staying around to hear each other record and give support",
+      "time_context": "Week 3 of the storytelling cycle"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Before recording their reading of the summary sentences",
+      "observable_behavior": "Asked the storyteller to help him practice the sentence before recording",
+      "internal_state": "Felt particularly nervous before recording",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Before recording their reading of the summary sentences",
+        "observable_behavior": "Asked the storyteller to help him practice the sentence before recording",
+        "internal_state": "Felt particularly nervous before recording",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

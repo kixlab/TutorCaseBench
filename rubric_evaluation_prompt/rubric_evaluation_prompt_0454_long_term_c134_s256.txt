@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prioritizing Meaning Over Correction
+  Check: The tutor's long-term plan focuses on strategies to achieve shared understanding and active participation, explicitly avoiding goals related to correcting her pronunciation or stuttering.
+
+Criterion 2: Proactive Communication Scaffolding
+  Check: The tutor's long-term plan includes the systematic use of alternative communication tools (like picture cards, gestures, or structured choices) to ensure she can participate in activities without relying solely on spontaneous speech.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Maliha is a persistent communicator who struggles with expressive language, often stuttering or freezing when trying to find words. She relies on physical touch and gestures to maintain connection when words fail. She uniquely requires educators to act as 'living auxiliary tools' by providing undivided attention, specific verbal choices, and multimodal support rather than rushing her or asking broad open-ended questions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Maliha, look out from the spaceship tent. Tell us what you see.
+
+STUDENT: I saw sta-ar.
+
+TUTOR: Okay, you saw a star. Tell me more about it.
+
+STUDENT: …ig stars. (shows with hands)
+
+TUTOR: What else do you see out there?
+
+STUDENT: (Stutters and repeats sounds, appearing to struggle to find appropriate words) Mummy and daddy... (continues to show with hand gestures)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "describing what she 'sees' from the ship using verbal language and gestures",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Indoors",
+      "materials": "imaginary spaceship (cube-shaped silver tent), picture cards",
+      "social_setting": "Teacher-led activity / Circle time group activity",
+      "time_context": "circle time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "engaging in conversation using abstract tools (verbal language) or imaginary situations",
+      "observable_behavior": "prolonged words, show with hands, continued to show with hand gestures",
+      "internal_state": "",
+      "related_quotes": [
+        "I saw sta-ar",
+        "…ig[big] stars"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "pronunciations of some words were not clear enough",
+        "observable_behavior": "stuttered and had to repeat words and sounds during her communications",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Collaborative Goal Setting for Preparedness
+  Check: The long-term plan includes collaboratively setting goals with Chris that specifically target preparedness, on-task behavior, and anticipating barriers to success.
+
+Criterion 2: Structured Daily Self-Evaluation
+  Check: The long-term plan establishes a daily routine (e.g., a check-in/check-out period) where Chris rates his own performance, receives feedback on specific choices, and identifies an area for improvement.
+
+Criterion 3: Gradual Fading of External Aids
+  Check: The long-term plan explicitly includes a strategy for fading the use of physical aids (like printed acronyms or templates) once Chris learns them, while maintaining the underlying check-in routine.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Chris is a sixth-grade student with a learning disability who masks his low math self-efficacy by doodling and acting as the class clown, resulting in poor orientation to learning. He requires highly structured, preemptive routines—such as acronym-based readiness checklists and daily check-in/check-out self-evaluations—to anticipate barriers and build a sense of control over his academic performance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's get started on your math homework. Please complete the first problem-solving procedure on the worksheet.
+
+STUDENT: (Digs through backpack) I can't find my math notebook or my pencil.
+
+TUTOR: Here is a pencil and some paper. Go ahead and try the first problem.
+
+STUDENT: (Draws a picture of a basketball on the corner of the paper) I don't remember how we did this in class today.
+
+TUTOR: Look at the problem again and see what you can figure out.
+
+STUDENT: (Pushes the paper away) It's too hard and I keep making mistakes. Math is just not my subject.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Homework completion and problem-solving procedure",
+      "learning_goal": "Accurate completion of each step in the problem-solving procedure"
+    },
+    "context": {
+      "environment": "Voluntary homework support time after school and home room period",
+      "materials": "Math homework, task-specific checklists tailored to mistake patterns, MARS template",
+      "social_setting": "One-on-one with special education teacher",
+      "time_context": "After school and later in the day during home room"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When showing poor math test results or specific mistake patterns",
+      "observable_behavior": "Difficulty managing classroom materials, poor engagement",
+      "internal_state": "Low academic self-efficacy",
+      "related_quotes": [
+        "Math is just not my subject"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During independent work",
+        "observable_behavior": "Works independently only 50–75% of the time, poor engagement",
+        "internal_state": "Low academic self-efficacy",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

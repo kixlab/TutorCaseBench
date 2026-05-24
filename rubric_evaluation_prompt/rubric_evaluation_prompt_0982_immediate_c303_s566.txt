@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Judgmental Inquiry
+  Check: The tutor asks at least one open-ended question to explore or understand the student's play theme/rules, explicitly avoiding direct verbal disapproval or censorship of the scenario.
+
+Criterion 2: Firm Safety Boundaries
+  Check: When physical aggression is present or threatened, the tutor establishes a clear, direct boundary against physical harm (e.g., stopping hitting) without lecturing or shutting down the underlying imaginative play.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kiara and Liza are highly social leaders who use a 'sassy girl' persona involving relational and physical aggression to control their play space and establish power. Direct adult censorship backfires by pushing their behavior underground, meaning they uniquely require adults to use open-ended inquiry to understand their play, eye-level interventions for physical safety, and strategies that empower their peers to set social boundaries.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Kiara, I see you chasing the boys with that large plastic bat. I hope you're not actually hitting people.
+
+STUDENT: (Walks with her head down toward the teacher)
+
+TUTOR: You're not actually hitting people with the bat, are you? You need to put it away.
+
+STUDENT: (Walks over to the toy bin with the bat over her head and throws the bat into the bin) I don’t want to go in our castle. Come on Kim Bear ... let’s go.
+
+TUTOR: Okay, just make sure you are playing nicely with the others.
+
+STUDENT: (Walks quickly back, swinging hands aggressively) You can’t get it. (Walks over to the edge of the sidewalk, holding hands up on either side of face, wiggling them in a taunting manner) AHHHH HAAAA. (Walks up to Mary and pulls her arm down forcefully)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in physical play, chasing, and mock fighting on the playground",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Playground and sidewalk edge",
+      "materials": "Large plastic bat, toy bin",
+      "social_setting": "Interacting with male and female peers (Bill, Mary, Kim Bear) and the researcher",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After being confronted by the teacher for hitting a peer (Bill) with a large plastic bat",
+      "observable_behavior": "Walks to the toy bin with the bat over her head, throws the bat into the bin, walks quickly back to the camera swinging hands aggressively at the researcher, taunts with hands on face, and covertly pulls a younger peer's arm down forcefully",
+      "internal_state": "",
+      "related_quotes": [
+        "I don’t want to go in our castle. Come on Kim Bear ... let’s go.",
+        "You can’t get it.",
+        "AHHHH HAAAA"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Prior to teacher intervention during playground free play",
+        "observable_behavior": "Chasing boys, engaging in mock fighting, and teasing and hitting other male and female children with a large plastic bat",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When the teacher initially calls out 'I hope you're not actually hitting people'",
+        "observable_behavior": "Walks with her head down toward the teacher",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

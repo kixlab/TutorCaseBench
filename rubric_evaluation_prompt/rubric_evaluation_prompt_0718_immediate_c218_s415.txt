@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Equal-Status Interaction
+  Check: The tutor's response adopts an informal, collaborative, or peer-like tone, avoiding authoritative, top-down directives.
+
+Criterion 2: Constructive Help-Seeking Validation
+  Check: The tutor explicitly acknowledges and supports Derek's request for help without using dismissive language, predicting failure, or telling him to just figure it out himself.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Derek is a student who actively seeks help when struggling but is highly vulnerable to traditional teacher-student power dynamics and fatalistic feedback, which cause him to internalize failure and completely disengage. He uniquely requires an informal, equal-status learning environment to feel safe. Furthermore, he thrives when given full autonomy over his learning pace through upfront access to comprehensive materials.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your binder and continue working on your English paper.
+
+STUDENT: I was working on a paper and I couldn’t—I didn’t get it.
+
+TUTOR: Try to review the instructions again and see what you can do.
+
+STUDENT: I'm trying to talk to you that I didn't get it, to help me out.
+
+TUTOR: You need to figure it out yourself. If you just stop trying, you're going to fail anyways.
+
+STUDENT: (Closes the binder) Fine, then I'm just a failure. I'm completely soured on this class and I'm leaving.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working on a paper",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "English class",
+      "materials": "Materials for the entire year in a binder",
+      "social_setting": "Classroom work environment",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When working on a paper and realizing he 'didn't get it'",
+      "observable_behavior": "Trying to talk to the teacher to explain that he didn't get it, asking to 'help me out'",
+      "internal_state": "Feeling completely soured on the teacher and her class if discouraged",
+      "related_quotes": [
+        "And see, I was working on a paper and I couldn’t—I didn’t get it. And I was trying to talk to her that I didn’t get it, to help me out."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When receiving overtly negative feedback suggesting effort is futile and failure is inevitable",
+        "observable_behavior": "Left school for a period of time following this incident",
+        "internal_state": "Took on this persona of a failure; played into his self-concept as a learner",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

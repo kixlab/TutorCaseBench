@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Specific, Behavior-Contingent Praise
+  Check: The tutor's response includes praise that explicitly names the specific action, strategy, or behavior the student successfully executed, avoiding generic 'good job' statements.
+
+Criterion 2: High-Frequency Opportunities to Respond
+  Check: The tutor breaks down the instruction by asking frequent, targeted questions that require immediate, manageable responses from the student.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This 9th-grade student with a learning disability exhibits low motivation, poor frustration tolerance, and task resistance, often shutting down when facing difficult tasks or errors. The evidence reveals they uniquely require highly specific, contingent praise rather than generic encouragement, frequent opportunities to respond (OTRs) to maintain engagement, and peer-mediated learning structures that respect their adolescent need for autonomy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's go over the warm-up activity and share our thinking. What was the first procedural step you took for problem one?
+
+STUDENT: (Standing halfway out of the seat) I just added the numbers together.
+
+TUTOR: That's a common misconception. You actually need to follow the order of operations and multiply first.
+
+STUDENT: (Looks away from the teacher and stares at the wall) Oh.
+
+TUTOR: So, what do you get when you multiply those numbers?
+
+STUDENT: (Puts head down on the desk, completely disengaging from the discussion) I don't know, I'm done with this.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a teacher-led discussion of the warm-up activity during which students presented their work and shared their thinking",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole group instruction in co-taught high school freshman core academic classes",
+      "materials": "Warm-up activity",
+      "social_setting": "General education teacher led a discussion to the whole class",
+      "time_context": "Next phase of the 45-55 minute instructional routine, following the independent warm-up"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When teachers clariﬁed misconceptions or errors in procedural steps",
+      "observable_behavior": "Low engagement and disengagement",
+      "internal_state": "Adolescent youth tend to seek autonomy and rely on peers more often in this developmental period",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While instructor was talking or another student was answering a question",
+        "observable_behavior": "Not looking at instructor, not looking at another student who was answering a question, not sitting in seat while verbally responding",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

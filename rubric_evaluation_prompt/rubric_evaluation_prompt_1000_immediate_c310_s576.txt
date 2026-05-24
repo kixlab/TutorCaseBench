@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Accommodation Provision
+  Check: The tutor's response must proactively offer or provide the necessary accommodations (e.g., having tools ready) without requiring the student to initiate the request or apologize for needing them.
+
+Criterion 2: Normalization of Support
+  Check: The tutor must frame the accommodation as a standard, natural tool or right, explicitly avoiding any comparison to peers or implication that it reflects on her intelligence.
+
+Criterion 3: Pacing for Emotional Readiness
+  Check: The tutor must acknowledge the student's emotional state regarding the accommodations, allowing her space to process the diagnosis rather than forcing immediate, unreflective compliance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ofra is a determined student with a late-diagnosed learning disability who relies on academic work-arounds to succeed. She experiences a 'special block' and emotional distress when accommodations are introduced too rapidly, often apologizing for needing help before eventually fiercely insisting on her rights. She uniquely requires educators to proactively provide accommodations as a natural right, sparing her the burden of constantly asking for help or educating unprepared teachers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your first matriculation exam. You have extra time and the option for me to read the questions aloud to you.
+
+STUDENT: Come on, who needs it? I don’t always need the reading aloud.
+
+TUTOR: Okay, you can start the exam now.
+
+STUDENT: I did not understand why I was given these things, and like everything happens so quickly... until you take the time to digest the fact that you have such accommodations and these are the first matriculation exams and everything is new, everything goes quickly.
+
+TUTOR: Try to read the first question and see how it goes.
+
+STUDENT: It inhibits very much when I come to the exam with discomfort and with a special block... nothing was really stable to let me really calm myself. I sometimes felt as if I asked too much... Sorry, but can someone read aloud to me? Sorry, but I need extra time.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Taking the first matriculation exams",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Exam setting",
+      "materials": "Accommodations including reading aloud and extra time",
+      "social_setting": "Taking exams after a recent, late diagnosis of a learning disability",
+      "time_context": "During the first matriculation exams, when everything happens quickly"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When coming to the exam before taking the time to digest the fact that she has accommodations",
+      "observable_behavior": "Experiences a special block, expresses discomfort, and apologizes for needing help ('Sorry, but can someone read aloud to me?')",
+      "internal_state": "Feels a mental block, discomfort, feels like she asks too much, and feels nothing is stable to let her calm herself",
+      "related_quotes": [
+        "I did not understand why I was given these things, and like everything happens so quickly, as if before the diagnosis and until you take the time to digest the fact that you have such accommodations and these are the first matriculation exams and everything is new, everything goes quickly […] nothing was really stable to let me really calm myself.",
+        "inhibits very much when I come to the exam with discomfort and with a special block"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When needing to use accommodations like reading aloud or extra time",
+        "observable_behavior": "Apologizes repeatedly for needing the accommodations",
+        "internal_state": "Feels as if she asked too much",
+        "related_quotes": [
+          "I sometimes felt as if I asked too much … Sorry, but can someone read aloud to me? Sorry, but I need extra time"
+        ]
+      },
+      {
+        "condition": "When initially offered accommodations",
+        "observable_behavior": "Questions the need for them, saying 'Come on, who needs it?'",
+        "internal_state": "Hesitant to accept the diagnosis, viewing acceptance as a never-ending process",
+        "related_quotes": [
+          "So in the beginning, I said: ‘Come on, who needs it?’ I don’t always need the reading aloud"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

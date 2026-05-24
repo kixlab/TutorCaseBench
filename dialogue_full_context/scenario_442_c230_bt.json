@@ -1,0 +1,77 @@
+{
+  "category_id": "230",
+  "category_title": "Students using measurement units to verify mathematical relations",
+  "scenario_id": "442",
+  "scenario_title": "Skipping decomposition steps in the Word Problem Cracker",
+  "minimal_context": "Nathalie and Viviane are working on the 'Open air bath problem' using the Word Problem Cracker tool to construct a multi-step algebraic expression.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please use the Word Problem Cracker tool to write the expression for the Open air bath problem."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Ok, 7 stands for 7 days in a week that it is usually open when the weather is good. Normally, when good weather by ….. ok ……."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think comes next?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Then … times parentheses opens …. no because of parentheses …."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Go ahead and write it down."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Writes the expression 7 · (12 − x) immediately, neglecting the middle column and row structure) So, then in parentheses, there is then the 12 because of the pumps. Thus, these circulation pumps there, for the water, they ran at … at the open days they run for 12 hours.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please use the Word Problem Cracker tool to write the expression for the Open air bath problem.\n\nSTUDENT: Ok, 7 stands for 7 days in a week that it is usually open when the weather is good. Normally, when good weather by ….. ok …….\n\nTUTOR: What do you think comes next?\n\nSTUDENT: Then … times parentheses opens …. no because of parentheses ….\n\nTUTOR: Go ahead and write it down.\n\nSTUDENT: (Writes the expression 7 · (12 − x) immediately, neglecting the middle column and row structure) So, then in parentheses, there is then the 12 because of the pumps. Thus, these circulation pumps there, for the water, they ran at … at the open days they run for 12 hours.",
+  "immediate_dialogue_prompt": 763,
+  "long_term_dialogue_prompt": 764,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Working on the 'Open air bath problem' using a preliminary version of the 'Word Problem Cracker' (WPC) tool to construct a multi-step algebraic expression.",
+        "learning_goal": "Decomposing the problem in several steps and constructing the meaning of the expressions."
+      },
+      "context": {
+        "environment": "Working on the word problem with the preliminary WPC tool.",
+        "materials": "Preliminary version of the 'Word Problem Cracker' (WPC) tool with row structure and left, middle, and right columns.",
+        "social_setting": "Nathalie and Viviane, 14 and 15 year old girls, working together collaboratively.",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When filling out the columns of the WPC tool while solving the 'Open air bath problem'.",
+        "observable_behavior": "The girls do not use the row structure for decomposing the problem in several steps. Nathalie immediately takes two steps and writes the expression 7 · (12 − x). She adopts the order of reading from left to right to the expression, first without considering the parentheses, and neglects the middle column in this moment.",
+        "internal_state": "",
+        "related_quotes": [
+          "Ok, 7 stands for 7 days in a week that it is usually open when the weather is good. Normally, when good weather by ….. ok ……. Then … times parentheses opens …. no because of parentheses ….",
+          "So, then in parentheses, there is then the 12 because of the pumps. Thus, these circulation pumps there, for the water, they ran at … at the open days they run for 12 hours."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When attempting to write the algebraic expression.",
+          "observable_behavior": "Adopts the order of reading from left to right to the expression, first without considering the parentheses, and neglects the middle column.",
+          "internal_state": "",
+          "related_quotes": [
+            "Ok, 7 stands for 7 days in a week that it is usually open when the weather is good. Normally, when good weather by ….. ok ……. Then … times parentheses opens …. no because of parentheses …."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

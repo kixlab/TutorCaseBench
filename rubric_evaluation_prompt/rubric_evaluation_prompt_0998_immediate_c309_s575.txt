@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Open-Ended Task Framing
+  Check: The tutor's response must frame the immediate task or question as open-ended, discovery-based, or having multiple valid perspectives, explicitly avoiding single-correct-answer formats.
+
+Criterion 2: Process-Oriented Probing
+  Check: The tutor's response must include probing questions that ask the group to explain their process, apply concepts, or synthesize ideas, rather than just asking for a final answer.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is vulnerable to being dominated and demeaned by faster-paced peers, leading them to adopt a passive, 'jobless' role and withdraw from collaborative tasks. The evidence reveals they uniquely need open-ended tasks without a single 'right' answer, explicitly divided group roles, and formal peer accountability to feel safe enough to contribute.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: How is your group doing with the multiple-choice test? Remember to make your decisions together.
+
+STUDENT: The better students are going too fast. I got stuck trying to explain my idea and they just jumped into my mouth.
+
+TUTOR: Make sure you are participating and sharing your thoughts for the next questions.
+
+STUDENT: I feel uncomfortable. My opinions aren't respected and the group decisions are mostly made by only one or two members.
+
+TUTOR: If they are going too fast, you should ask them to explain the information to you.
+
+STUDENT: (Exhibits off-task behavior by turning away from the test) I'm not going to risk asking for additional explanations. I'm in a jobless situation with nothing to do but listen passively, so I'm just going to fall to sleep.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Group decision-making for multiple-choice test answers",
+      "learning_goal": "Review the lesson and explore more information"
+    },
+    "context": {
+      "environment": "Mixed-ability groups that consisted of a balance of five low- to five high-achievers",
+      "materials": "Multiple-choice tests",
+      "social_setting": "Working with others in group sessions where higher status individuals were often more active and dominated the group",
+      "time_context": "During the second part of the lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When they got stuck expressing their ideas to others and higher-achieving students usually 'jumped into their mouth' (i.e., demeaned them)",
+      "observable_behavior": "Listen passively to others, 'fall to sleep', and exhibit off-task behaviour (14% of the time)",
+      "internal_state": "Felt uncomfortable, felt bored, and lost confidence",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When better students went faster and did not always clearly explain information to the lower-achieving students",
+        "observable_behavior": "Might not risk asking for additional explanations because they were usually not encouraged to do that",
+        "internal_state": "Felt discounted or ignored, and dissatisfied",
+        "related_quotes": []
+      },
+      {
+        "condition": "When put into a 'jobless' situation where group decisions were mostly made by only one or two members",
+        "observable_behavior": "Had nothing to do but listen passively to others, having no chance to contribute their voice to the decision-making",
+        "internal_state": "Felt their opinions were not respected",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

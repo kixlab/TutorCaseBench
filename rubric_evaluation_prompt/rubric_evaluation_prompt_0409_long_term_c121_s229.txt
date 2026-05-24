@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Exam-Focused Pragmatism
+  Check: The tutor's long-term plan explicitly incorporates strategies to highlight crucial, exam-relevant points to build the student's perception of the tutor's value.
+
+Criterion 2: Avoidance of Forced Seating Relocation
+  Check: The tutor's long-term plan avoids relying on forced seating arrangements or moving the student to the front of the class to manage behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly defiant, occupies the back of the classroom to engage in off-task behaviors (sleeping, phone use, makeup), and treats aggressive pushback against teachers as an entertaining game. They uniquely require transactional, extrinsic rewards to engage in immediate tasks and highly pragmatic, exam-focused instruction to build long-term respect, while strictly avoiding formal disciplinary systems that trigger extreme escalation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now that we have watched the video-clip, let's start going through the textbook.
+
+STUDENT: (Sitting at the back of the classroom without a textbook on the desk, continuing to talk) Oh, teacher, please forgive me this once!
+
+TUTOR: You are still talking instead of looking at the textbook. I am giving you a minus point.
+
+STUDENT: (Slumps over the desk) Right! I’m going to sleep!
+
+TUTOR: I am insisting on the penalty point. Please open your book.
+
+STUDENT: (Stands up again, saying it in fun but not stopping talking) Oh, I won’t study, I will sue the teacher for giving me a penalty point!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Going through the textbook after having watched a video-clip",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during a Korean history lesson",
+      "materials": "Textbook, video-clip",
+      "social_setting": "Sitting at the back of the classroom without textbooks on their desks",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher insisted on the penalty point",
+      "observable_behavior": "Slumped over the desk, stood up again, did not stop talking, did not even open her books",
+      "internal_state": "Said it in fun",
+      "related_quotes": [
+        "Right! I’m going to sleep!",
+        "Oh, I won’t study, I will sue the teacher for giving me a penalty point!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When teachers point out misbehaviour and tell students to study",
+        "observable_behavior": "Do not take this seriously and regularly defy their teachers",
+        "internal_state": "Being aggressive to teachers is fun",
+        "related_quotes": [
+          "Oh, teacher, please forgive me this once!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

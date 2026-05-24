@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual and Alternative Expression
+  Check: The tutor offers or accepts a non-traditional, visual, or spoken method for the student to demonstrate their understanding (e.g., drawing, comic strip, acting) rather than forcing extensive writing.
+
+Criterion 2: Accessible Resource Scaffolding
+  Check: The tutor provides or directs the student toward reading materials, sites, or alternative resources that are specifically tailored to be accessible for their reading level.
+
+Criterion 3: Questions-as-Suggestions Feedback
+  Check: The tutor frames corrections or improvements as positive, open-ended questions (e.g., 'What could you add here?') and avoids explicitly stating the student's current work is wrong.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with traditional academic writing and research due to limited English proficiency, often feeling overwhelmed by vocabulary demands. They thrive when allowed to express their knowledge through visual arts, acting, or speaking. They require reading-level appropriate resources and respond best to positive, open-ended 'questions-as-suggestions' rather than direct criticism, which causes them to shut down and merely regurgitate information.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please continue working on constructing your summative project.
+
+STUDENT: (Drawing) I am making my artwork. Collecting information and finding the English vocabulary was hard.
+
+TUTOR: That part of your drawing is wrong.
+
+STUDENT: Wrong? I wanted to communicate my knowledge through drawing.
+
+TUTOR: Change it to look like this picture in the book.
+
+STUDENT: (Erases drawing) Okay. I will just regurgitate the information from the book and take your specific directive.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "working on constructing a summative",
+      "learning_goal": "deeper comprehension"
+    },
+    "context": {
+      "environment": "art class",
+      "materials": "artwork",
+      "social_setting": "",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "affirming that students were “wrong”",
+      "observable_behavior": "simply regurgitating information or taking a teacher’s specific directive",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "affirming that students were “wrong”",
+        "observable_behavior": "simply regurgitating information or taking a teacher’s specific directive",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

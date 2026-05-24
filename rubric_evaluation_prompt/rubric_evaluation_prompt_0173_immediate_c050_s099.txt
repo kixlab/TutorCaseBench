@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Empathetic Concept Breakdown
+  Check: The tutor responds to the student's frustration, confusion, or self-deprecation by patiently breaking down the concept or task, avoiding reprimands or dismissive platitudes like 'just try harder'.
+
+Criterion 2: Active Material and Progress Checking
+  Check: The tutor explicitly asks to see the student's work, notes, or materials to verify their state, rather than relying on the student's verbal confirmation or using low-intensity proximity control.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This adolescent student with ADHD struggles with severe disorganization, task resistance, and procrastination, frequently self-labeling as 'lazy' and becoming overwhelmed by large projects. They uniquely require intensive, systematic interventions, including phased accountability, explicit organizational skills training, and a highly structured, distraction-free environment to overcome their executive function deficits.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's check your notebooks today to look at completeness, dated pages, and neatness.
+
+STUDENT: I started off having, like, a separate section for each thing but then... it wore on and... like, maybe I ran out of room or something so I'd just start writing in a different one... and now I just have different notes in different things and it's kind of hard to find.
+
+TUTOR: Let's look at the homework assignments you have in there.
+
+STUDENT: You go to school for six hours and they give you homework that lasts another six. I hate homework so much. It's the most meaningless thing in the world. I just... don't do it!
+
+TUTOR: Please take out whatever notes you do have from your backpack so we can review them.
+
+STUDENT: Like... I write everything down, I just don't keep it organized. Like, it's not in order of date, in order of anything. Like, there's sheets ripped out, crumpled up in the bottom of my backpack. I'm disorganized.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "checking notebooks (e.g., completeness, dated pages, neatness, titles, underlining)",
+      "learning_goal": "keep notes for relevant subjects"
+    },
+    "context": {
+      "environment": "Reviewing binders, notebooks, and work samples",
+      "materials": "notebooks, agendas, backpack",
+      "social_setting": "One-on-one tutoring session or teacher check-in",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "ran out of room or something so I’d just start writing in a different one",
+      "observable_behavior": "sheets ripped out, crumpled up in the bottom of my backpack",
+      "internal_state": "I’m disorganized.",
+      "related_quotes": [
+        "Like … I write everything down, I just don’t keep it organized. … Like, it’s not in order of date, in order of anything. … Like, there’s sheets ripped out, crumpled up in the bottom of my backpack. … I’m disorganized."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When assigned homework",
+        "observable_behavior": "completing parts of their homework, then tiring and stopping",
+        "internal_state": "I hate homework so much. … It’s the most meaningless thing in the world.",
+        "related_quotes": [
+          "You go to school for six hours and they give you homework that lasts another six. … I hate homework so much. … It’s the most meaningless thing in the world. I just … don’t do it!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

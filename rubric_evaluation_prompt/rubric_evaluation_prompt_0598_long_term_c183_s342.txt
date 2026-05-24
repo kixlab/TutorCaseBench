@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Front-Loading Conversational Scripts
+  Check: The long-term plan must include modeling and rehearsing specific conversational phrases or Q&A scripts with the student prior to cooperative group activities.
+
+Criterion 5: Systematic Engagement Monitoring
+  Check: The long-term plan must incorporate a systematic method for regularly assessing or screening the student's level of engagement or peer inclusion during group work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jeff is a third-grader with autism spectrum disorder who struggles with language-dependent social tasks, often either shifting group conversations to his persistent personal interests or becoming passively unengaged. He uniquely requires structured, non-intrusive support, including explicit redirection that validates his interests, binary-choice grammar corrections, and pre-rehearsed conversational scripts to successfully participate in cooperative learning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jeff, please share your ideas with your cooperative learning group for this activity.
+
+STUDENT: (Sits quietly with the peers and does not volunteer information or ask questions.)
+
+TUTOR: Go ahead and tell them what you think.
+
+STUDENT: The sheeps went... (Offers a conversational bid, but the others in the group ignore his contribution.)
+
+TUTOR: Keep trying to talk to your group.
+
+STUDENT: (Remains passively unengaged, does not answer questions, and does not initiate any further conversations with the group.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in social tasks that are strongly dependent on language",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Working in cooperative learning groups",
+      "materials": "",
+      "social_setting": "Cooperative groups with peers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When needing to initiate conversations or offer a conversational bid",
+      "observable_behavior": "Seldom volunteered information, asked questions, or answered questions—and when they did, others in the group tended to ignore their contributions",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participating in social tasks that are strongly dependent on language",
+        "observable_behavior": "Less likely to initiate conversations or be acknowledged when they do offer a conversational bid",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

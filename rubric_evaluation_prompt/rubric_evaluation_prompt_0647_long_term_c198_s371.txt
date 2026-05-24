@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Dedicated Play and Joint Attention Goals
+  Check: The long-term plan establishes specific, separate learning objectives for teaching symbolic play and joint attention skills, distinct from general academic or compliance targets.
+
+Criterion 5: Systematic Minimization of Passive Waiting
+  Check: The long-term plan includes proactive strategies to reduce unstructured 'down time' and prevent the student from slipping into prolonged states of passive waiting.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student spends a significant portion of their time (37%) in an unengaged state, often waiting passively or slipping away from object engagement. They manipulate toys rigidly, use pointing to regulate others rather than share interest, and lack spontaneous social initiation. They uniquely require direct adult facilitation to sustain attention, as well as explicit, separate instruction in symbolic play and joint attention to prevent them from defaulting to passive isolation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at these shape cards. Point to the blue square.
+
+STUDENT: (Sits passively and does not look at the cards.)
+
+TUTOR: (Points to the cards) Look.
+
+STUDENT: (Points to a toy car on the shelf to indicate he wants it, rather than looking at the cards to share interest.)
+
+TUTOR: Try again. Look at the shapes.
+
+STUDENT: (Fails to respond to the bid for joint attention and remains unengaged, staring blankly away from the table.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "identify the correct answer to their question... labeling, color/shape/ letter identiﬁcation",
+      "learning_goal": "to test comprehension"
+    },
+    "context": {
+      "environment": "teaching other academic or language skills",
+      "materials": "an object or picture",
+      "social_setting": "preschool special education classes",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when teachers showed or pointed to something and told children to 'look'",
+      "observable_behavior": "responded to 58.31% of opportunities",
+      "internal_state": "",
+      "related_quotes": [
+        "look"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when initiating joint attention acts",
+        "observable_behavior": "use pointing and attention skills to regulate others’ behaviors rather than to share interest",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "across all activity types in the classroom",
+        "observable_behavior": "initiated fewer joint attention skills than children in the mixed disability group",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

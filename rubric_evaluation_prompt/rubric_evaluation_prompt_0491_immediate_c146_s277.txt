@@ -1,0 +1,128 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Content-Anchored Redirection
+  Check: The tutor redirects the student's attention by asking a specific, accessible question about the lesson content rather than giving a generic behavioral command.
+
+Criterion 2: Direct Task Initiation Support
+  Check: The tutor explicitly helps the student initiate the task by reading the question aloud, breaking down the first step, or directly reteaching the immediate concept.
+
+Criterion 3: Avoidance of Generic Check-Ins
+  Check: The tutor provides specific, actionable support when the student expresses confusion, rather than offering generic encouragement (e.g., 'try your best') or leaving them to figure it out alone.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits significant task resistance and off-task behaviors (playing games, copying peers) when faced with challenging academic vocabulary or inquiry tasks they cannot easily search for online. They require direct read-aloud support, specific content-based redirection, and a concept-first approach to vocabulary to successfully engage and avoid frustration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to work on your science quiz. Please write a testable question about your investigation.
+
+STUDENT: (Turns to a classmate) Where do we go on the iPad? What do I need to copy off the board?
+
+TUTOR: Let's focus on your own quiz right now. What was the question your group was trying to answer?
+
+STUDENT: I forgot. We went to the forest and looked to see.
+
+TUTOR: Well, tell me what you think you were trying to say here on your paper.
+
+STUDENT: Why are there bubbles in the pond? What? It doesn’t make any sense. Oh, okay. I was, I don’t know. I get frustrated with that too.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Write a testable question",
+      "learning_goal": "Demonstrate knowledge of her investigation"
+    },
+    "context": {
+      "environment": "In the classroom",
+      "materials": "Quiz",
+      "social_setting": "General science instruction and inquiry activities",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked specifically about the question her group was trying to answer or to tell what she was trying to say on the quiz",
+      "observable_behavior": "Response was minimal: “We went to the forest and looked to see.” Wrote a question that doesn't make any sense: “Why are there bubbles in the pond?”",
+      "internal_state": "I get frustrated with that too",
+      "related_quotes": [
+        "Why are there bubbles in the pond? What? It doesn’t make any sense.",
+        "Oh, okay. I was, I don’t know. I get frustrated with that too.",
+        "I forgot.",
+        "We went to the forest and looked to see."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When it came to understanding the science material",
+        "observable_behavior": "Copied off friends or just stared off during class",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "Navigating instructional materials on the iPad and copying notes",
+        "observable_behavior": "Asking peers questions such as where to go on the iPad or what she needed to copy off the board",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

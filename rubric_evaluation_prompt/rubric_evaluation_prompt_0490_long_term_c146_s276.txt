@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Concept-First Vocabulary Sequencing
+  Check: The tutor's plan introduces concepts through examples, charts, or inquiry activities before explicitly providing the formal academic vocabulary.
+
+Criterion 2: Early-Stage Inquiry Scaffolding
+  Check: The tutor's plan includes structured check-ins at the very beginning of inquiry tasks to catch and address misconceptions before the student works independently.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits significant task resistance and off-task behaviors (playing games, copying peers) when faced with challenging academic vocabulary or inquiry tasks they cannot easily search for online. They require direct read-aloud support, specific content-based redirection, and a concept-first approach to vocabulary to successfully engage and avoid frustration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your iPads and start working on the informal science assessment.
+
+STUDENT: Some of these questions were hard for me ’cuz I didn’t—like biodiversity, I didn’t know what it meant.
+
+TUTOR: Just think about it and try your best to answer.
+
+STUDENT: I try to remember. But if I can’t ‘Google’ the answer then I just don’t do it.
+
+TUTOR: You need to finish the questions on your screen.
+
+STUDENT: (Switches to playing a game on the iPad) I usually just wait for the answer. (Turns to peer) Hey, what did you put for this one?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Taking an informal assessment on their iPads",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "In the classroom",
+      "materials": "iPads",
+      "social_setting": "General science instruction",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Responding to challenging science content where they didn't know what academic vocabulary like biodiversity meant",
+      "observable_behavior": "Playing a game on the iPad, talking to other students during instruction",
+      "internal_state": "",
+      "related_quotes": [
+        "Some of these questions were hard for me ’cuz I didn’t—like biodiversity, I didn’t know what it meant.",
+        "If I can’t ‘Google’ the answer then I just don’t do it."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When it came to understanding the science material",
+        "observable_behavior": "I usually just wait for the answer",
+        "internal_state": "",
+        "related_quotes": [
+          "I try to remember. I usually just wait for the answer."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual and Cinematic Anchoring
+  Check: The tutor provides or references visual media (e.g., film clips, images) or uses explicit visualization exercises before asking the student to analyze the text.
+
+Criterion 2: Emotional Elicitation
+  Check: The tutor asks the student to describe their emotional response to a scene, character, or quote rather than solely asking for factual recall.
+
+Criterion 3: Structured Element Mapping
+  Check: The tutor introduces a structured format (like a graphic organizer or specific categorized list) to help the student break down cinematic or literary elements.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are at-risk special education students who struggle with traditional reading and writing, often rushing through texts efferently without visualizing or emotionally connecting to the material. They experience severe anxiety and articulation difficulties with standard reports, but thrive when historical narratives are anchored in visual media and when assessments leverage their generational literacies (like texting or music).
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We just finished reading the opening chapter of Night aloud. Let's look at the homework questions. Can you describe why Moishe the Beadle was an important character?
+
+STUDENT: (Remains silent and apprehensive) I just tried to get through the reading as quickly as possible.
+
+TUTOR: What do you think about what happened in the chapter?
+
+STUDENT: I felt confused by it at first. Why didn't any of the people stick up for themselves?
+
+TUTOR: Let's focus on the question about Moishe the Beadle. What makes him important to the story?
+
+STUDENT: I don't know why he's important. I wasn't really sure what the gas chambers and the cattle cars looked like just from reading. It was hard to picture all of it and what it looked like.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing independent reading assignments, homework questions, and quizzes based on chapters of the novel Night by Elie Wiesel, and identifying specific nuances or details, such as why Moishe the Beadle was an important character.",
+      "learning_goal": "Appreciate texts as literary works of art through engaging in aesthetic reading that connects the reader to the text both personally and emotionally."
+    },
+    "context": {
+      "environment": "Classroom during introductory lessons",
+      "materials": "Elie Wiesel’s (1960) autobiographical novel Night, blackboard, Cinego digital movie projector, sheet of paper with quotes from Night",
+      "social_setting": "Class discussion and small group discussion",
+      "time_context": "First half of the school year"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher paused now and again to ask questions after reading aloud the opening chapter, despite the author’s vivid descriptions.",
+      "observable_behavior": "Homework answers and quizzes based on the novel contained answers that were incorrect and vague. Could not describe why Moishe the Beadle was an important character.",
+      "internal_state": "Confused and had trouble understanding the gravity of the subject material.",
+      "related_quotes": [
+        "I wasn’t really sure what the gas chambers and the cattle cars looked like just from reading. It was hard to picture all of it and what it looked like but it was easier after watching the film."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to respond to each other collaboratively about the topic.",
+        "observable_behavior": "Exhibited silent, apprehensive and ambiguous responses to each other collaboratively.",
+        "internal_state": "Uncertain about the topic and disconnected.",
+        "related_quotes": [
+          "I felt confused by the poem at first and then we reread it and I understood it a little better."
+        ]
+      },
+      {
+        "condition": "When assigned reading materials as efferent readers.",
+        "observable_behavior": "Attention is focused primarily on extracting information: getting through the reading as quickly as possible for practical purposes.",
+        "internal_state": "Much confusion about why Jews were targeted, hated and segregated.",
+        "related_quotes": [
+          "Why didn’t any of the people stick up for themselves?"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

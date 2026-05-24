@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Narrative Integration
+  Check: The long-term plan must include structured methods to incorporate Alyssa's personal stories or home-related items into literacy activities, ensuring her narrative communication style is validated rather than shut down.
+
+Criterion 2: Repetitive Modeling Routine
+  Check: The long-term plan must incorporate frequent repetition and explicit teacher modeling, providing Alyssa with consistent opportunities to watch, listen, and repeat sounds and blending.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Alyssa is a struggling reader who views reading as a process of remembering and repeating rather than decoding print, often watching the teacher instead of the text. She relies heavily on personal narratives and attempts to impose meaning on nonsense words. The evidence reveals she uniquely needs instruction that leverages her reliance on repetition while actively validating and incorporating her personal narratives, rather than silencing them through strict adherence to scripted drills.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: [points to o] Here is a new sound. My turn: /o/. Your turn. Get ready.
+
+STUDENT: /o/ [holding sound until the tutor lifts their finger] Last night, I found a—
+
+TUTOR: Let's look at the assessment now. Please read this syllable: lom.
+
+STUDENT: lock... lock... lock-m.
+
+TUTOR: Let's try the next one on the list: af.
+
+STUDENT: Is af an animal?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a scripted intensive intervention program involving step-by-step instruction and repetition of letter sounds, and attempting to read a nonsense syllable ('lom') during a weekly literacy assessment",
+      "learning_goal": "repetition of letter sounds (specifically the sound /o/)"
+    },
+    "context": {
+      "environment": "Title I services",
+      "materials": "scripted intervention program manual",
+      "social_setting": "small group intensive intervention with a classmate",
+      "time_context": "weekly assessment and scripted phonics drill"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When presented with nonsense syllables during scripted Title I instruction or weekly assessment",
+      "observable_behavior": "persistent in her attempts to impose meaning on some of the texts... read 'lock,' 'lock,' 'lock-m.' and questioning the meaning of a nonsense syllable",
+      "internal_state": "persistent in her attempts to impose meaning on some of the texts",
+      "related_quotes": [
+        "Is af an animal?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During a scripted phonics drill in Title I",
+        "observable_behavior": "attempting to share a personal narrative",
+        "internal_state": "",
+        "related_quotes": [
+          "Last night, I found a—"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

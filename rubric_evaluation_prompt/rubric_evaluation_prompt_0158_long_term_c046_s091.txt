@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Public Celebration of Learner Identity
+  Check: The long-term plan must include specific strategies for publicly celebrating the student's achievements, improvements, or new learner identity across different settings or with peers.
+
+Criterion 2: Sustained Narrative Integration
+  Check: The long-term plan must outline how the narratives or life lessons of high-interest role models will be consistently interwoven into the curriculum over weeks or months.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly anxious and extremely shy, often refusing work or remaining silent due to the overwhelming nature of unstructured social interactions. She uniquely requires the 'hidden rules' of communication to be made explicit through structured protocols, alongside thematic integration of high-interest role models (like athletes) to safely engage in learning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to create your digital picture using the drawing software. Please make a visual representation showing your ideas about fairness and honesty, like 'no cheating' in rugby league.
+
+STUDENT: (Stares at the blank screen on the drawing software, shrinking back slightly in her chair and remaining completely silent in the peer group setting.)
+
+TUTOR: Go ahead and start drawing your picture.
+
+STUDENT: (Keeps her hands in her lap, looking down anxiously and avoiding any interaction with the other students at the table.)
+
+TUTOR: You need to finish your designated work before this lunch time option is over.
+
+STUDENT: (Pushes the mouse away, crosses her arms, and turns her body away from the computer, exhibiting complete work refusal and high anxiety.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Creating a digital picture using a drawing software tool depicting their ideas and key message about the topic (visual representation of fair play and ‘no cheating’ in rugby league)",
+      "learning_goal": "Building upon their learning so far about fairness and honesty"
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Drawing software tool",
+      "social_setting": "Peer group settings",
+      "time_context": "Alternative ‘lunch time’ option to playing handball"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When tasked with completing normal classroom work such as journaling, interpreting texts, graphing, drawing, computing",
+      "observable_behavior": "Showing signs of disengagement from school, work refusal",
+      "internal_state": "Highly anxious",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with standard classroom participation requirements",
+        "observable_behavior": "Exhibiting behaviours that made full-participation in the classroom difficult, truancy or work refusal",
+        "internal_state": "Highly anxious",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

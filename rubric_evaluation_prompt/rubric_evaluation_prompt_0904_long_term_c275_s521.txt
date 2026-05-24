@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: heterogeneous_peer_collaboration
+  Check: The tutor's long-term plan includes structuring regular, heterogeneous group discussions where the student can collaboratively make sense of texts with peers.
+
+Criterion 2: explicit_schema_instruction
+  Check: The tutor's long-term plan incorporates explicit teaching of comprehension strategies, specifically focusing on using schema and making text-to-self or text-to-world connections.
+
+Criterion 3: normalize_and_utilize_confusion
+  Check: The tutor's long-term plan includes strategies for building a safe environment that explicitly encourages students to share their confusion and questions without judgment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jennifer is a struggling reader who frequently experiences cognitive overload ('a lot of stuff in my head') when encountering complex texts, leading her to disengage, skim, or avoid reading altogether. She uniquely requires alternative text access (like audio or read-alouds) and collaborative peer discussion to help her externalize her confusion, negotiate meaning, and adapt her schema.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your booklet and discuss the chapter in 'Jeremy Fink and the Meaning of Life' where the mailman delivers the box without an adult's signature.
+
+STUDENT: Did the mom really want Jeremy to have the box?
+
+TUTOR: What do you think about her motives?
+
+STUDENT: Yeah, but Oswald said that, um, that mail dude was following along with it because he…
+
+TUTOR: Keep reading the text to see if you can figure it out.
+
+STUDENT: (Skims the pictures in the text) I'm confused by it. I get to the point that I barely understand it. I have a lot of stuff in my head that I don't know what it means.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a literature discussion group (LDG) focused on analyzing character motives in the novel 'Jeremy Fink and the Meaning of Life', specifically discussing why the mailman delivered a box without an adult's signature and Jeremy's mom's motives.",
+      "learning_goal": "Synthesizing information across chapters of a novel during a peer discussion to understand complex character actions and authorial intent."
+    },
+    "context": {
+      "environment": "7th-grade English Language Arts class",
+      "materials": "Novel 'Jeremy Fink and the Meaning of Life', handmade booklets made of four 8.5 x 11 in. sheets of copy paper, folded in half and stapled down the middle with construction paper covers",
+      "social_setting": "Literature discussion group with heterogeneous peers including Donnie, a student who dislikes school reading, and Ray, an honors student",
+      "time_context": "During a 90-minute class period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When her schema had to readjust and adapt to new information from this chapter regarding adult characters' motives",
+      "observable_behavior": "Questioned Jeremy’s mother’s motives to be sure she understood what was happening in the chapter",
+      "internal_state": "Having a lot of stuff in my head that I don't know what it means",
+      "related_quotes": [
+        "Did the mom really want Jeremy to have the box?",
+        "Yeah, but Oswald said that, um, that mail dude was following along with it because he…",
+        "Oh, and he [the mailman] could be sneaky about him [Jeremy] trying to find out what it [the box] was.",
+        "b/c [because] it cleans my head out because if we don’t do it [literature discussion] then I have a lot of stuff in my head that I don't know what it means."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When encountering complex thinking or hard words in content area text",
+        "observable_behavior": "Disengaged from reading, choosing to either skim the text pictures and captions or spend large amounts of time 'finding' a book",
+        "internal_state": "Confused by it, don't get it, barely understand it",
+        "related_quotes": [
+          "confused by it [content area text]",
+          "don’t get it",
+          "get to the point that I barely understand it",
+          "some of the words are hard."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Pre-Correction
+  Check: The tutor's long-term plan must include delivering reminders or class announcements about hand-raising expectations immediately prior to independent work time.
+
+Criterion 2: Explicit Functional Instruction
+  Check: The tutor's long-term plan must include explicitly teaching Tom the connection between raising his hand and successfully getting his needs (teacher attention) met.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Tom disrupts independent work with high-pitched noises to gain teacher attention because he finds it easier than remembering to raise his hand. He uniquely requires strict differential attention (ignoring noises, attending to hand-raising), intermittent proximity, and proactive reminders of the functional benefits of hand-raising, rather than artificial rewards or constant hovering.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent math work. Please work on your assignment while I help another student.
+
+STUDENT: (Does not raise his hand) Hoo! (Makes a short, high-pitched noise)
+
+TUTOR: I am busy working with another student right now.
+
+STUDENT: (Forgets to raise his hand) Eeee! (Makes another high-pitched noise to get the teacher to come over)
+
+TUTOR: Please continue your independent math work quietly.
+
+STUDENT: (Makes a series of high-pitched noises that occur in short bursts, like a shriek, a hoot, and a yell)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "independent math work",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom during independent math work time",
+      "materials": "independent math work",
+      "social_setting": "the teacher is working with someone else",
+      "time_context": "independent math work time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when the teacher is busy working with another student",
+      "observable_behavior": "makes a series of high-pitched noises that occur in short bursts, like a shriek or a hoot or a yell",
+      "internal_state": "wants power from the teacher to get teacher attention; finds it too easy to just make the noises and cannot remember to raise hand",
+      "related_quotes": [
+        "when I’m busy working with another student I hear it a lot",
+        "he does get me to come over to him every time, so there is a lot of power",
+        "it’s too easy for him to just make the noises, and I can’t get him to remember"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when he wants teacher attention during independent work",
+        "observable_behavior": "makes a series of high-pitched noises that occur in short bursts instead of raising his hand",
+        "internal_state": "seeks teacher attention",
+        "related_quotes": [
+          "Tom doesn’t do that very often",
+          "a series of high-pitched noises that occur in short bursts"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

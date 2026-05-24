@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Pre-Judgment Comprehension Verification
+  Check: The tutor's response must include a step or question that verifies the student's understanding of the characters, setting, or plot before asking for a moral judgment.
+
+Criterion 2: Open-Ended Moral Probing
+  Check: The tutor's response must ask an open-ended follow-up question that probes why the student made a specific choice or how their personal feelings/experiences relate to the scenario.
+
+Criterion 3: Non-Authoritarian Tone
+  Check: The tutor's response must be entirely free of authoritarian directives, punitive threats, or 'do what I say' language, maintaining an exploratory and neutral tone.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student operates from a personal reward moral orientation, often making decisions based on instrumental gains, retaliation, and egocentrism. They are highly triggered by perceived injustices, broken promises, and authoritarian discipline, which provoke anger and disobedience. They uniquely require a benevolent, inclusive environment and individualized, open-ended questioning to safely explore their feelings, resolve underlying anger, and develop higher-level moral reasoning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's talk about the Boxcar Children story where Violet is sick. What should they do?
+
+STUDENT: If they want Violet to die, well don’t take her to the hospital, but if they want her to live . . . take her.
+
+TUTOR: Would there be a situation where you wanted someone to die?
+
+STUDENT: No. Well, yeah, once . . . If they like killed somebody or something. If they killed somebody and I wanted them to die.
+
+TUTOR: Okay. Now let's look at the Father's Pen story. The boy finds his father's lost pen. What will he do?
+
+STUDENT: (Smiles with pride and a grin) He wouldn't return it. Because he wanted the pen and so his father wouldn’t know that he found it, but he did.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to the 'Father’s Pen' dilemma (finding a lost item) and the 'Boxcar Children' dilemma (sick sister Violet)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Individually conducted moral dilemma interview",
+      "materials": "Father's Pen dilemma and Boxcar Children dilemma stories",
+      "social_setting": "Individually conducted",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When determining if a child would return his father’s lost pen",
+      "observable_behavior": "Displayed pride and a grin while explaining the child would keep the pen so his father wouldn't know",
+      "internal_state": "Egocentrism",
+      "related_quotes": [
+        "Because he wanted the pen and so his father wouldn’t know that he found it, [with pride and a grin] but he did."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing a situation where you wanted someone to die in the Boxcar Children Dilemma",
+        "observable_behavior": "Advised that if they want her to die, don't take her to the hospital, and stated he would want someone to die if they killed somebody",
+        "internal_state": "Retaliatory feelings",
+        "related_quotes": [
+          "If they want [Violet] to die, well don’t take her [to the hospital], but if they want her to live . . . take her.",
+          "If they killed somebody and I wanted them to die."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

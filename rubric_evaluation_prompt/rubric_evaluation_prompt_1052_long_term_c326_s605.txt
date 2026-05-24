@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Expertise Building
+  Check: The long-term plan includes structures (such as jigsaw activities or specialized research roles) where the student becomes the expert on a specific topic and is responsible for teaching it to peers.
+
+Criterion 2: Critical Demographic Data Analysis
+  Check: The long-term curriculum incorporates opportunities for the student to examine and critique disaggregated data (e.g., by race, gender, or age) and challenge scientific representations.
+
+Criterion 3: Sustained Authentic Investigation
+  Check: The long-term plan allocates extended time and access to authentic tools (e.g., laboratory materials, raw data sets) for in-depth, student-directed exploration rather than brief, discrete assignments.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is typically a passive, silent bystander in traditional science classrooms, often limiting their participation to logistical questions (e.g., 'Where do I turn this in?') and shutting down when forced to guess the 'right' answer. However, they transform into a highly engaged participant when science is connected to their lived experiences, such as acting as a health advocate for family, critiquing demographic data, or being positioned as an expert among peers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to start your group investigation to test environmental impacts on plants.
+
+STUDENT: I have a suggestion for a more authentic study design we could try instead.
+
+TUTOR: Your classmates have already decided they want to test pouring Windex on the plants. Let's just go with their idea.
+
+STUDENT: (Watches silently as the group members talk about pouring Windex on the plants.)
+
+TUTOR: Are you going to help them with the experiment?
+
+STUDENT: Where should the assignments be turned in?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Group investigation to test environmental impacts on plants",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Biology class",
+      "materials": "Plants, Windex™",
+      "social_setting": "Group investigation with classmates",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When her suggestions for a more authentic study design were dismissed by classmates",
+      "observable_behavior": "Watched as group members talked about pouring Windex™ on plants; did not interact with her biology teacher other than to ask where assignments should be turned in",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During a group investigation",
+        "observable_behavior": "More typically was a silent bystander in biology; classroom interactions with others were limited and constraining",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

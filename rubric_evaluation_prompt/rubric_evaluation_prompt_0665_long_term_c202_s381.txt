@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Discourse Role Training
+  Check: The tutor's long-term plan includes explicitly teaching the student the purpose of discussions and specific behaviors for active listening and participation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This low-attaining student becomes easily overwhelmed and exhibits overt off-task behaviors (e.g., tearing paper, shutting down, prolonged silence) during fast-paced, multi-strategy discussions. They uniquely require narrowed focus, explicit processing time, and individualized scaffolding that presses them to articulate their own thinking rather than being rescued with explanations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, let's quickly share our solutions for the decimals, fractions, and percentages task. Who has a strategy to share first?
+
+STUDENT: (Watches the teacher and the board for a moment, but does not raise a hand to participate.)
+
+TUTOR: Carl, what do you think about the strategy that was just shared for the fractions?
+
+STUDENT: (Remains silent, not participating as a listener or a speaker.)
+
+TUTOR: Just look at your answer sheet and tell us what you wrote down.
+
+STUDENT: (Puts his head down on the desk and begins tearing up the answer sheet.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Sharing solutions for tasks involving decimals, fractions, and percentages",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Ms. B's Year 6 classroom",
+      "materials": "Answer sheet, board, overhead projector",
+      "social_setting": "Whole-class discussion",
+      "time_context": "10-minute fast-paced student-led discussion at the end of mathematics lessons"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During fast-paced discussions where up to nine students briefly shared their strategy or thinking",
+      "observable_behavior": "Colouring the answer sheet green or tearing up the answer sheet, putting their heads down, throwing objects or playing with cards",
+      "internal_state": "Confusion and difficulty in interpreting other students' contributions",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "For about half of the concluding whole class discussions",
+        "observable_behavior": "Not participating either as listeners or speakers; occasionally watching the teacher or the board",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

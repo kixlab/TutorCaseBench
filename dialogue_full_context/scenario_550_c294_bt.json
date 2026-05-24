@@ -1,0 +1,76 @@
+{
+  "category_id": "294",
+  "category_title": "Preschoolers who struggle with sharing materials during collaborative tasks",
+  "scenario_id": "550",
+  "scenario_title": "Collaborative building task during center time",
+  "minimal_context": "Darin and a friend are working together during center time to build a tower using different sets of blocks.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Darin, it is center time. You and your friend need to build a tower together. Here are some square blocks for you, and some triangle blocks for your friend."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Pulls all the square blocks toward himself and does not share)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Remember to work together to accomplish your common goal."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Reaches over and takes a triangle block from his friend's pile) Give me that."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Your friend is asking to use that block. What should you do?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Hides the block behind his back) That’s mine! I had that first.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Darin, it is center time. You and your friend need to build a tower together. Here are some square blocks for you, and some triangle blocks for your friend.\n\nSTUDENT: (Pulls all the square blocks toward himself and does not share)\n\nTUTOR: Remember to work together to accomplish your common goal.\n\nSTUDENT: (Reaches over and takes a triangle block from his friend's pile) Give me that.\n\nTUTOR: Your friend is asking to use that block. What should you do?\n\nSTUDENT: (Hides the block behind his back) That’s mine! I had that first.",
+  "immediate_dialogue_prompt": 953,
+  "long_term_dialogue_prompt": 954,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Accomplish a common goal (e.g., building something, creating something) when given different materials",
+        "learning_goal": "Politely share his objects with a friend when asked and/or offer objects to his friend (e.g., 'Here's the ____, may I use it when you're finished?' 'Would you like___?' 'May I have ____,' 'Do you have ____?') throughout the entire two minute interval"
+      },
+      "context": {
+        "environment": "Center time activity",
+        "materials": "Different materials for building/creating, hand puppet",
+        "social_setting": "Working with a friend",
+        "time_context": "10-minute center time activity divided into 2-minute intervals"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the friend makes a request for an object",
+        "observable_behavior": "Not giving an object when the friend makes a request",
+        "internal_state": "",
+        "related_quotes": [
+          "Give me that",
+          "I had that first",
+          "That’s mine"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When Darin and a friend are given different materials and asked to accomplish a common goal",
+          "observable_behavior": "Does not share throughout the entire two minute interval and may be observed taking the friends’ objects, hiding objects behind his back",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

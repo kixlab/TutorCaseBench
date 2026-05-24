@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: heterogeneous_peer_collaboration
+  Check: The tutor's long-term plan includes structuring regular, heterogeneous group discussions where the student can collaboratively make sense of texts with peers.
+
+Criterion 2: explicit_schema_instruction
+  Check: The tutor's long-term plan incorporates explicit teaching of comprehension strategies, specifically focusing on using schema and making text-to-self or text-to-world connections.
+
+Criterion 3: normalize_and_utilize_confusion
+  Check: The tutor's long-term plan includes strategies for building a safe environment that explicitly encourages students to share their confusion and questions without judgment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jennifer is a struggling reader who frequently experiences cognitive overload ('a lot of stuff in my head') when encountering complex texts, leading her to disengage, skim, or avoid reading altogether. She uniquely requires alternative text access (like audio or read-alouds) and collaborative peer discussion to help her externalize her confusion, negotiate meaning, and adapt her schema.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent reading. Please choose a content area text from the science bin and begin reading.
+
+STUDENT: (Spends a large amount of time digging through the bin without selecting anything) I hate reading. Reading is boring.
+
+TUTOR: Please just pick a book and start.
+
+STUDENT: (Takes a book and starts skimming the text pictures and captions) Some of the words are hard. I don't get it.
+
+TUTOR: Keep trying to read the paragraphs.
+
+STUDENT: (Closes the book and stops reading) I'm confused by it. I get to the point that I barely understand it. My interest has gone down in middle school.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent reading time focusing on content area nonfiction texts (science, social studies, math) or finding a book.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "7th-grade classroom",
+      "materials": "Content area text, short story 'Rikki-Tikki-Tavi' on CD",
+      "social_setting": "Independent reading time prior to the implementation of literature discussion groups",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When encountering complex thinking or hard words in content area text",
+      "observable_behavior": "Disengaged from reading, choosing to either skim the text pictures and captions or spend large amounts of time 'finding' a book",
+      "internal_state": "Avoids the effort of complex thinking, feels confused and barely understands it",
+      "related_quotes": [
+        "I hate reading. Reading is boring.",
+        "My interest has gone down in middle school.",
+        "confused by it [content area text]",
+        "don’t get it",
+        "get to the point that I barely understand it",
+        "some of the words are hard."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to read independently without peer interaction",
+        "observable_behavior": "Reports that they neither liked to read nor enjoyed reading",
+        "internal_state": "Hates reading, finds it boring",
+        "related_quotes": [
+          "I hate reading. Reading is boring."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Substantive Text Selection
+  Check: The tutor's long-term plan explicitly incorporates substantive, complex texts (e.g., YA literature, novels) and abandons prescribed 'babyish' remedial materials.
+
+Criterion 2: Disciplinary Inquiry Focus
+  Check: The tutor's long-term strategy shifts the focus away from basic skill-building toward high-level disciplinary inquiry, such as analyzing multiple perspectives or making text-based claims.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits task resistance (refusing to read, reading unsanctioned texts) because they feel demeaned by remedial, 'babyish' materials. They are highly capable and uniquely need intellectual stimulation, substantive texts, and tasks framed as high-level critical thinking rather than basic skill compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent reading. Please find your book from the class library and get started.
+
+STUDENT: (Spends a long time searching through the books without picking one) I'm still looking.
+
+TUTOR: Hurry up and find your book.
+
+STUDENT: They are like tiny kid books that they make us read. Skinny little books about that big.
+
+TUTOR: Just pick one and get started reading.
+
+STUDENT: (Refuses to read) I'm not reading these. Dang, this class makes me feel stupid. It makes me a little mad n stupid to b in this class right now!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent reading period using the program's prescribed library of 'skinny' books",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Read 180 class",
+      "materials": "Prescribed library of 'skinny' books ('tiny kid books'), substantive novel about the military, contemporary young adult literature",
+      "social_setting": "Independent reading time",
+      "time_context": "During independent reading"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Interacting with the Read 180 texts and being forced to read 'tiny kid books'",
+      "observable_behavior": "Refused to read, spent a long time searching for their books and avoiding reading",
+      "internal_state": "Felt positioned as 'stupid' and 'mad'",
+      "related_quotes": [
+        "They were like tiny kid books that they made us read . . . I was like, dang this class makes me feel stupid. Skinny little books about that big.",
+        "it makes [me] a little mad n stupid to b in this class right now!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During independent reading when expected to read prescribed texts",
+        "observable_behavior": "Spent a long time searching for their books and avoiding reading",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

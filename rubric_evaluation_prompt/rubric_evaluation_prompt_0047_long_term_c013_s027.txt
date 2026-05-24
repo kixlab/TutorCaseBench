@@ -1,0 +1,113 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Working Memory Offloading via Visuals
+  Check: The tutor's long-term plan includes a consistent strategy for using visual supports, such as diagrams, spatial formatting, or writing out equations step-by-step on paper, to reduce cognitive load.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Greg is a quiet, generally proficient student who experiences cognitive overload and goes silent when faced with multi-step equations and abundant mathematical symbols. The evidence reveals he uniquely requires multi-modal instruction—specifically visual/spatial cues like arching motions paired with verbal explanations—and explicit pacing to help him process operations like distributing to the 'far term'.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the next problem on your paper: 3(x + 5) = 33. Go ahead and solve it.
+
+STUDENT: (Writes 3x under the equation)
+
+TUTOR: Okay, what is the next step?
+
+STUDENT: (Works quietly for about a minute, staring at the equation but not writing anything else.)
+
+TUTOR: Just keep going. What do you think you should do with the 5?
+
+STUDENT: Um... So, 3 plus…
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solve the equation 3(x + 5) = 33",
+      "learning_goal": "Distribute the multiplier to all terms inside the parentheses"
+    },
+    "context": {
+      "environment": "Working independently on his classwork",
+      "materials": "Diagrams and equations displayed on paper",
+      "social_setting": "One-on-one session with Jane",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After successfully distributing the 3 to the x, needing to process across the equation to the far term, the 5",
+      "observable_behavior": "Worked quietly for about a minute, seemed stuck, and incorrectly identified the operation for the second term",
+      "internal_state": "Trouble processing across the equation to the far term",
+      "related_quotes": [
+        "So, 3 plus…"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When needing to distribute to terms that are not right next to each other (the far term)",
+        "observable_behavior": "Gets stuck for a moment, pauses, works quietly without progressing",
+        "internal_state": "Trouble processing across the equation",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

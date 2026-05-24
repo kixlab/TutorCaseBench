@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Accommodation Provision
+  Check: The tutor's response must proactively offer or provide the necessary accommodations (e.g., having tools ready) without requiring the student to initiate the request or apologize for needing them.
+
+Criterion 2: Normalization of Support
+  Check: The tutor must frame the accommodation as a standard, natural tool or right, explicitly avoiding any comparison to peers or implication that it reflects on her intelligence.
+
+Criterion 3: Pacing for Emotional Readiness
+  Check: The tutor must acknowledge the student's emotional state regarding the accommodations, allowing her space to process the diagnosis rather than forcing immediate, unreflective compliance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ofra is a determined student with a late-diagnosed learning disability who relies on academic work-arounds to succeed. She experiences a 'special block' and emotional distress when accommodations are introduced too rapidly, often apologizing for needing help before eventually fiercely insisting on her rights. She uniquely requires educators to proactively provide accommodations as a natural right, sparing her the burden of constantly asking for help or educating unprepared teachers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Ofra, please start reading the assigned text for today's lesson so we can go over the questions.
+
+STUDENT: In the beginning, I said: 'Come on, who needs it?' but slowly I saw that I'll take it. I need my accommodations like being read to aloud.
+
+TUTOR: I see. Do you have your tape-recorder with you to use for the reading?
+
+STUDENT: No. I really insisted on this. I knew that this was what I deserved and needed to bypass my difficulties.
+
+TUTOR: If you didn't bring the tape-recorder yourself, you will just have to read the text on your own today.
+
+STUDENT: The student does not always have to run, bring the tape-recorder and say sorry for needing to be read aloud to. No! It is a thing that he deserves. It is the school’s commitment. I have so much anger towards the educational system that they don’t prepare the teachers for this thing!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Bypassing difficulties or compensating for them using academic work-arounds",
+      "learning_goal": "Displaying full range of personal competencies despite the learning disability"
+    },
+    "context": {
+      "environment": "Daily classroom environment",
+      "materials": "Tape-recorder, reading aloud accommodations",
+      "social_setting": "Interacting with teachers who may not be prepared for a variety of student needs",
+      "time_context": "12th grade, after a late diagnosis (after ten years of school)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When having to secure her own accommodations (e.g., bringing the tape-recorder) and apologize for needing them",
+      "observable_behavior": "Insists on her rights, states 'No! It is a thing that he deserves', and expresses anger at the educational system",
+      "internal_state": "Feels anger that teachers aren't prepared, believes the commitment belongs to the school",
+      "related_quotes": [
+        "The student does not always have to run … bring the tape-recorder and say sorry for needing to be read aloud to. No! It is a thing that he deserves. It is the school’s commitment.",
+        "I have so much anger towards the educational system, again, that they don’t prepare the teachers for this thing"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reflecting on the lack of teacher preparation for learning disabilities",
+        "observable_behavior": "Expresses anger towards the educational system",
+        "internal_state": "Angry that teachers are not prepared to cope with or approach a student with a certain problem",
+        "related_quotes": [
+          "And this makes me angry every time I remember it… that how come that a student in school, only after ten years they discover that she has such things."
+        ]
+      },
+      {
+        "condition": "When passing a stage in the never-ending process of self-acceptance",
+        "observable_behavior": "Insists on her rights and accommodations like being read to aloud",
+        "internal_state": "Demands less from herself while insisting on what she deserves and needs",
+        "related_quotes": [
+          "I really insisted. I knew that this was what I deserved and needed, and slowly I began to use things like extra time."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

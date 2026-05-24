@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Task Demand Adjustment
+  Check: The tutor reduces task expectations, avoids introducing new skills, or explicitly stops pushing for lesson completion when the student is overwhelmed or in a busy space.
+
+Criterion 2: Physical Grounding and Assistance
+  Check: The tutor offers direct physical support (e.g., offering hands to hold, guiding into position, or using hand-over-hand assistance) to help the student ground themselves or complete a movement.
+
+Criterion 3: Pausing for Emotional Regulation
+  Check: The tutor pauses the activity, movement, or instruction entirely when the student is crying, waiting for the crying to cease before proceeding.
+
+Criterion 4: Visual and Environmental Shielding
+  Check: The tutor physically repositions or turns the student away from visual distractions, noises, and busy areas to help them focus.
+
+Criterion 5: Structured Rhythmic Cueing
+  Check: The tutor uses structured counting (e.g., '1, 2, 3') paired with concise, specific directions to guide the student's timing and focus during a task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly sensitive to loud, crowded environments, which trigger severe emotional and physical distress such as crying, falling to the floor, and scooting. They uniquely require physical grounding (like holding the teacher's hands), environmental shielding (facing away from distractions), and immediate adjustments to task expectations to successfully navigate overwhelming spaces.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's check the picture schedule to see what is next.
+
+STUDENT: Catch. (Gets the picture schedule out, then stands on a spot)
+
+TUTOR: Hands out, look at the ball.
+
+STUDENT: (Catches with two hands, then squeezes the ball)
+
+TUTOR: Let's try another one. Hands out.
+
+STUDENT: (Looking everywhere, easily distracted by the million noises and people coming in and out)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Practicing catching a ball while standing on a spot",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Environment that has a lot of distractions in it, a lot of kids, a million noises and people coming in and out",
+      "materials": "Picture schedule, ball, spot to stand on",
+      "social_setting": "One-on-one with teacher (S), other kids in the environment",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "In an environment that has a lot of distractions in it, a lot of kids or a lot of things going on",
+      "observable_behavior": "Looking everywhere, easily distracted",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When checking what's next on the picture schedule",
+        "observable_behavior": "Gets the picture schedule out again, what's next. St says Catch. St stands on a spot.",
+        "internal_state": "",
+        "related_quotes": [
+          "Catch"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Opt-Out Autonomy
+  Check: The tutor's long-term plan must explicitly provide a low-risk safety net, assuring Anne she has the freedom to leave or change a placement without penalty if it doesn't suit her.
+
+Criterion 2: Positive Environment Matching
+  Check: The tutor's long-term strategy must prioritize vetting and selecting placements based on positive team dynamics and strict alignment with Anne's specific interests.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Anne is a Grade 12 student who struggles with impatience but deeply desires to be treated as a mature professional. She is highly motivated by a sense of responsibility to a positive team but carries anxiety from past unsuccessful placements. She uniquely requires a low-risk 'fresh start' with the explicit freedom to drop out if a placement is a poor fit, which paradoxically secures her commitment and attendance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Anne, please handle the cash and schedule this client's tanning sessions for the week.
+
+STUDENT: Okay. I'm trying to get it done, but they keep changing their mind. I want to be treated like an adult instead of just like some kid, but they aren't listening to my scheduling options.
+
+TUTOR: Just keep working on the schedule.
+
+STUDENT: I know I need to show up and do my work. I'm trying to be more grown up about it, but this is taking a really long time.
+
+TUTOR: What do you think you should say to them?
+
+STUDENT: I didn't know that I was so impatient. I know I have to be the bigger person, but I'm really struggling not to be rude to this customer right now.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Handling cash, scheduling clients’ tanning sessions, cleaning, and learning about managing a business",
+      "learning_goal": "Learning about managing a business"
+    },
+    "context": {
+      "environment": "Tanning salon",
+      "materials": "",
+      "social_setting": "Interacting with adult co-workers and customers",
+      "time_context": "5 hours per day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When dealing with customers at the tanning salon",
+      "observable_behavior": "Acting impatient and having to suppress the urge to be rude to a customer",
+      "internal_state": "I didn’t know that I was so impatient",
+      "related_quotes": [
+        "You just definitely learn so much about yourself. Like I didn’t know that I was so impatient.… I learned I can’t be rude to a customer. Like, you just have to be more grown up … You have to be the bigger person."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When interacting with customers",
+        "observable_behavior": "Struggling with impatience and needing to consciously act more grown up and be the bigger person",
+        "internal_state": "Realizing personal impatience",
+        "related_quotes": [
+          "Like I didn’t know that I was so impatient.… I learned I can’t be rude to a customer."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

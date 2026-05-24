@@ -1,0 +1,131 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Positive Behavioral Reinforcement
+  Check: The long-term plan explicitly incorporates positive behavioral intervention supports (PBIS) or positive reinforcement strategies rather than relying on punitive disciplinary measures.
+
+Criterion 2: Relational Trust Cultivation
+  Check: The long-term plan includes deliberate strategies for building trusting, respectful relationships between the student, peers, and authority figures.
+
+Criterion 3: Cooperative Community Integration
+  Check: The long-term plan involves integrating the student into a diverse, cooperative learning community or group setting to foster shared social norms and community-building values.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Violet is a student who behaves cooperatively in nurturing environments but becomes disruptive and defensively egocentric in punitive ones. When faced with moral reasoning tasks, she struggles with true perspective-taking, often projecting her own self-interest onto others. She uniquely requires forced perspective shifts to challenge her egocentrism, delivered within a strictly non-punitive, relationship-focused context.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at this story. Judy saved up her money to go to a concert, but her mother told her she has to use the money to buy school clothes instead. What do you think the mother should do?
+
+STUDENT: I can answer that! If I was the mother, yes, I would have told her no because she probably paid for Judy’s school clothes every year and she gonna be getting tired of that.
+
+TUTOR: Why do you think the mother would be tired of paying for the clothes?
+
+STUDENT: She probably want to buy her[self] some new outfits or something.
+
+TUTOR: Let's try to take Judy's perspective now. How do you think Judy feels about missing the concert?
+
+STUDENT: Probably not for her, but for me, yeah. If I was Judy, I wouldn't care about the concert. I would just want to keep the money to buy myself some new outfits or something.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaged in perspective taking during hypothetical moral dilemmas such as The Long Walk, Louise's Dilemma, and The Heinz Dilemma",
+      "learning_goal": "Reasoning about the effectiveness of punishment versus explanation and attempting to take the perspective of characters"
+    },
+    "context": {
+      "environment": "Individual interview sessions",
+      "materials": "Hypothetical moral dilemmas",
+      "social_setting": "Interacting with the researcher during individual interview sessions",
+      "time_context": "30-minute individual interview sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When she engaged in perspective taking",
+      "observable_behavior": "Attempts that usually amounted to nothing more than a projection of her own wants and desires onto another",
+      "internal_state": "Calculating the liabilities and projecting self-interest",
+      "related_quotes": [
+        "If I was the mother, yes, I would have told her no because she probably paid for Judy’s school clothes every year and she gonna be getting tired of that. She probably want to buy her[self] some new outfits or something.",
+        "That doesn’t make no sense because even if he do get the medicine and give it to his wife, he’s still not going to get away with that. They gonna catch him eventually. . . If his wife do get unsick or she do get well, he’s not gonna be able to see her."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to decide how to fairly divide one lunch between two children when one child is younger than the other",
+        "observable_behavior": "Assumed the role of the older child and said that she would split the lunch evenly with the younger one",
+        "internal_state": "Egocentrism serving as an adaptive response",
+        "related_quotes": [
+          "Probably not for her, but for me, yeah."
+        ]
+      },
+      {
+        "condition": "When reasoning about the effectiveness of punishment versus explanation",
+        "observable_behavior": "Concluded that a parent explaining the impropriety of his actions to a child would do no good. The child would do it again unless he was punished.",
+        "internal_state": "Personal reward moral orientation prioritizing affiliation and avoiding trouble",
+        "related_quotes": [
+          "Your father won’t whip you if he don’t love you, but like he do whip you and then he love you anyways.",
+          "Well he should say the boy didn’t do anything cause that’s his brother and he might do something like his brother did and he wouldn’t want nobody to tell on him, what he did."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

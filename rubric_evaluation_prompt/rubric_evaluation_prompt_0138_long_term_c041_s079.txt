@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Scaffolded Independence
+  Check: The tutor's long-term plan must include a strategy for providing heavy initial one-to-one instruction on the environment followed by a deliberate fading of support to allow for independent navigation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly motivated by social interaction, choice, and age-relevant content, but exhibits task resistance when forced into non-preferred activities. They require heavy initial one-to-one support to master digital environments but quickly become independent navigators. Their unique needs include validation of their choices, active teacher participation in social discussions to mitigate disappointment over absent peer interactions, and targeted help with spelling and mechanics rather than platform usability.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open the Udio platform and select one of the articles about historical disasters to read, then create a project.
+
+STUDENT: (Accesses the Udio environment independently) I don’t do the sad ones.
+
+TUTOR: Just pick one of the articles from the list and read it.
+
+STUDENT: I am going to read this article about the ethics of renting pets instead.
+
+TUTOR: Okay, read that one, but then you need to publish a project about it.
+
+STUDENT: I only want to comment on people’s projects.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Selecting reading materials and engaging in particular activities around their reading",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Literacy activities using the Udio environment",
+      "materials": "Udio platform, articles, projects, discussion areas, audio-assisted reading, sentence starters, text, draw, and audiorecord response options",
+      "social_setting": "Independent reading sessions",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When selecting articles to read or activities to engage in",
+      "observable_behavior": "Voiced their preferences of what to read and were intent on exercising their right to make individual choices around their reading. Expressed preference for reading particular types of articles or engaging in particular activities.",
+      "internal_state": "",
+      "related_quotes": [
+        "I don’t do the sad ones",
+        "I only want to comment on people’s projects."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When selecting articles",
+        "observable_behavior": "Selecting articles based on their interests, not letting the reading level of the article influence whether or not they read it",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

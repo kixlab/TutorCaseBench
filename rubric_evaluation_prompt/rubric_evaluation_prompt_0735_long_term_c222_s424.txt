@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Masked Monitoring Routine
+  Check: The tutor's long-term plan includes strategies for observing the student's behavior indirectly (e.g., strategic positioning, listening) without making the student feel constantly or directly surveilled.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student rapidly cycles between disruptive peer play and on-task work, using 'ostentation' to demand approval and 'masking' to hide misbehavior. They require a delicate balance of discreet monitoring and highly visible praise of peers, as constant direct correction triggers anger and complete disengagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For this tumbling workshop, please practice your somersaults and rolls on the mats.
+
+STUDENT: (Performs a somersault) Teacher, look! Is it good? I want to be sure I'm doing it right!
+
+TUTOR: Keep practicing. I am going to check on the other group of students now.
+
+STUDENT: (Quickly shoves Ines just when she does the exercise so she falls, and laughs with friends) Watch this, I'm going to do the most spectacular jump!
+
+TUTOR: Make sure you are focusing on the required exercises.
+
+STUDENT: (Takes a long run before jumping, does the required somersault without getting up afterwards, stays lying down on his back, then lightly slaps Alice who is about to do a roll) Teacher, come here! I need help for the stall turn! See, I'm working!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Performing exercises in the 'Tumbling' workshop, specifically somersaults and rolls on mats",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "PE classes in a shared work space",
+      "materials": "Mats for somersaults and rolls",
+      "social_setting": "Small workshops where students are in greater contact, teacher taking care of another group of students",
+      "time_context": "Within a 50-second period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher is taking care of another group of students or looking in the other direction",
+      "observable_behavior": "Changed his behavior eight times. He performed the required somersault, stayed 10 seconds lying down on his back, tripped up Maureen, laughed, pushed Alice who was about to do a roll, messed up with Alice by lightly slapping her, took a long run before jumping, then did the required somersault without getting up afterwards.",
+      "internal_state": "Wants to play while pretending to fulfill the teacher's expectations; wants to show the teacher they are working when observed.",
+      "related_quotes": [
+        "Here, we are playing (they play at who will do the most spectacular jump), then I see the teacher coming so I do the exercise and I take the opportunity to ask him if it’s good.",
+        "Yes, I know, but I want to be sure ...and I want to show him that I’m working !"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a peer is doing the exercise and the student believes they won't get caught",
+        "observable_behavior": "Quickly shoves a peer just when she does the exercise so she falls, laughs with friends, then goes back to work.",
+        "internal_state": "Desire to have a good laugh with friends while remaining discreet to avoid being caught by the teacher.",
+        "related_quotes": [
+          "In fact, I shove Ines just when she does the exercise so she falls and ...me and my friends have a good laugh.",
+          "Yes, I do it quickly and discreetly so I don’t get caught by the teacher. ( ...) After that we go back to work and the teacher won’t say anything to us."
+        ]
+      },
+      {
+        "condition": "When wanting to prove compliance to the teacher after playing",
+        "observable_behavior": "Calling the teacher so he can see them working, asking for help for an exercise to show they are working.",
+        "internal_state": "Wants to ensure the teacher cannot say they are not working; wants to make the teacher happy.",
+        "related_quotes": [
+          "Here, I’m calling the teacher so he can see me working. I ask him for help for the stall turn ( ...), so he can’t say I’m not working. I show him I’m working and he’s happy."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

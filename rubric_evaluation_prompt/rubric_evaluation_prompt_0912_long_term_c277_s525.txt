@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Environmental and Routine Structuring
+  Check: The long-term plan includes strategies for maintaining a structured program, clarifying expectations, and minimizing disruptions to the student's daily routine.
+
+Criterion 5: Data-Driven Functional Behavior Analysis
+  Check: The long-term plan incorporates conducting a Functional Behavior Analysis (FBA) or using data-based hypothesis testing to track and analyze the variables influencing the student's behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kyle is a nonverbal student who exhibits extreme activity levels, severe physical aggression (hitting, biting, head-butting), and elopement. He uses these behaviors to protest nonpreferred activities, unfamiliar work, or breaks in his routine. The evidence reveals he uniquely requires a focus on mastered tasks, frequent prompting for physical positioning, and highly structured environments with adequate adult supervision to maintain safety and engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Kyle, it is time for the group calendar activity. Please look at the SmartBoard so we can review the days of the week and the weather.
+
+STUDENT: (Stands up from his designated area, remaining extremely active, and makes a loud vocal noise that does not serve a functional communication purpose.)
+
+TUTOR: You need to stay seated and follow directions.
+
+STUDENT: (Falls to the floor, continuing to make various vocal noises while refusing to look at the interactive icons on the board.)
+
+TUTOR: Let's try to finish the calendar time.
+
+STUDENT: (Screams and attempts to leave the classroom, protesting the activity by hitting and attempting to head-butt when approached.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participated in a group calendar time activity where the date, days of the week, and weather were reviewed",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-group activity",
+      "materials": "SmartBoard with interactive icons and words for the days and weather",
+      "social_setting": "Group setting with teacher and varying number of adults in attendance",
+      "time_context": "During the designated observation time (9:00 to 10:00 a.m.)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "If unsupervised or during breaks in the routine",
+      "observable_behavior": "Attempted to leave the classroom; hitting, biting, and head-butting; made various vocal noises that did not appear to serve a functional communication purpose",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When required to follow classroom routines and stay in designated areas",
+        "observable_behavior": "Extremely active; required frequent prompts to follow classroom routines, remain seated, stay in designated areas, and follow directions",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

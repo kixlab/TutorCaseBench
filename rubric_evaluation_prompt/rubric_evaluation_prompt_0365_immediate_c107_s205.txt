@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physiological De-escalation Prompting
+  Check: The tutor prompts a specific breathing exercise or physical emotion-release technique to help the student regulate his immediate physiological state.
+
+Criterion 2: Structured Metaphorical Reflection
+  Check: The tutor uses a poem, metaphor, or structured reflective prompt to help the student process his emotions without direct, confrontational questioning.
+
+Criterion 3: Small-Group or Private Framing
+  Check: The tutor ensures the intervention is delivered privately or explicitly within a small-group context, avoiding any whole-class attention or public reprimand.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Archie is a student who experiences severe emotional volatility and aggressive outbursts (e.g., throwing chairs) triggered by perceived teacher judgment and trauma from an accident that ended his defining hobbies. He uniquely requires small-group mindfulness interventions, immediate physiological de-escalation, and explicit self-compassion training to regulate his emotions and reconstruct his fragmented sense of identity.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your journal so we can complete your reflection on how things have been going recently and your personal history.
+
+STUDENT: I've been feeling really really happy. My confidence has definitely gone up.
+
+TUTOR: Okay, write that down. What else comes to mind?
+
+STUDENT: Well, before the accident I was doing my hobbies... but then it happened. I'm just slow now. I used to just feel awful.
+
+TUTOR: Keep going with your reflection.
+
+STUDENT: It's a struggle. I don't know who I am anymore without my hobbies. It's just a weighty depression and I'm worried. I keep, falling into depression.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing a narrative interview or journal reflecting on how things have been going recently and personal history",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mainstream secondary school",
+      "materials": "Journal, poems aimed at promoting reflection",
+      "social_setting": "One-to-one interview or independent homework setting",
+      "time_context": "After intervention sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When reflecting on an event in which he was involved in an accident that impacted his capacity to undertake hobbies which had defined his sense of self",
+      "observable_behavior": "Presents disjointed narrative structures, uses language that implies dissatisfaction with himself (struggle, weighty depression worried, slow), and favours polarised descriptions of his feelings",
+      "internal_state": "Disempowered position, unstable current sense of self, lack of sense of 'who he is'",
+      "related_quotes": [
+        "I keep, falling into depression"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When describing his current emotional state",
+        "observable_behavior": "Fluctuates in his descriptors of his current state (e.g., 'falling into depression' versus 'feeling really happy')",
+        "internal_state": "Unstable current sense of self",
+        "related_quotes": [
+          "I keep, falling into depression"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

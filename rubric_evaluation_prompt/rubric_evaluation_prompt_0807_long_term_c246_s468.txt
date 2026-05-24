@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Teacher-Led Primary Instruction
+  Check: The long-term plan explicitly outlines how the main classroom teacher will take primary responsibility for the student's instruction, planning, and pedagogical support, reducing reliance on TA-led teaching.
+
+Criterion 2: Classroom and Peer Reintegration
+  Check: The long-term plan includes specific structural or organizational strategies to keep the student in the mainstream classroom and interacting with peers, explicitly avoiding routine withdrawal.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits high dependency on Teaching Assistants (TAs) and takes a passive, often harmlessly off-task role (e.g., daydreaming or fiddling) in mainstream settings. They are frequently separated from the main classroom and peers, requiring a shift from TA-led task completion to teacher-led instruction, active cognitive engagement, and genuine classroom integration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the mathematics worksheet we need to finish. Let's start with the first question.
+
+STUDENT: Can you help me with it?
+
+TUTOR: What do you think you should do first?
+
+STUDENT: I don't know.
+
+TUTOR: Just look at the numbers and try your best to do it on your own for a minute.
+
+STUDENT: (Looks away from the worksheet, starts fiddling with a pencil and daydreaming instead of working)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing physical tasks (e.g., worksheets) in English and Mathematics lessons, where the task was compared to the core task given to the rest of the class",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "away from the classroom (e.g. in shared areas between classrooms, corridors or other rooms)",
+      "materials": "worksheets",
+      "social_setting": "working on an individual basis with a TA",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When not interacting",
+      "observable_behavior": "harmlessly off-task (e.g. fiddling or daydreaming)",
+      "internal_state": "",
+      "related_quotes": [
+        "When not interacting, pupils could be harmlessly off-task (e.g. fiddling or daydreaming)."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Initiating communication or seeking help from adults (teachers or TAs) during classroom activities.",
+        "observable_behavior": "directed thrice as many of their adult-focussed interactions to TAs than teachers",
+        "internal_state": "",
+        "related_quotes": [
+          "pupils with Statements directed thrice as many of their adult-focussed interactions to TAs than teachers (6 vs. 2%)."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

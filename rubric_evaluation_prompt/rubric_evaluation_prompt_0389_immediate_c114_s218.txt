@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Immediate Precursor Intervention
+  Check: The tutor's response addresses the student's very first sign of off-task behavior or frustration immediately, without waiting for the behavior to escalate.
+
+Criterion 2: Proximal and Direct Engagement
+  Check: The tutor explicitly establishes closeness (e.g., moving to the student's desk, making direct eye contact, or using highly present, individualized language) rather than issuing distant or generalized directives.
+
+Criterion 3: Positive Behavioral Framing
+  Check: The tutor uses positive, encouraging language to redirect the student toward the task, completely avoiding negative reprimands, criticisms, or 'stop' commands.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe, rapid-escalation behavioral issues (shouting, leaving desk, hitting) triggered by delayed teacher responses, distant commands, and negative reprimands. They uniquely require a highly proactive approach characterized by immediate intervention at the first sign of a precursor, close physical proximity, and consistently positive, encouraging interactions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please review the reading materials about the upcoming holiday on your desk. Read it quietly to yourself, and then we will have a classroom discussion.
+
+STUDENT: (Speaking to the student next to him while performing the learning assignment that does not require talking) I don't want to read this holiday story.
+
+TUTOR: Just focus on your reading material.
+
+STUDENT: (Speaking to himself) This is boring. The holiday is stupid anyway.
+
+TUTOR: Please keep trying to read.
+
+STUDENT: (Shifts his entire body away from the reading materials and the white board, twisting around in his chair to look at the back of the room for more than 5 seconds.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading and storytelling. The topics were related to an upcoming holiday and nature events. Each segment included a brief reading task, in which students were asked to review the reading materials, ask questions, and then participate in classroom discussion.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Self-contained classroom with learning stimuli displayed on the white board",
+      "materials": "Reading materials, white board",
+      "social_setting": "Teacher-led instruction",
+      "time_context": "10-minute segments"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher exhibits lower frequencies of interactions with the students, delayed contingent responding to students, and avoidance from proximity",
+      "observable_behavior": "Moving (i.e., head or body shift or twist to directions other than the location of the learning stimuli for more than 5 seconds)",
+      "internal_state": "",
+      "related_quotes": [
+        "moving (i.e., head or body shift or twist to directions other than the location of the learning stimuli for more than 5 seconds)"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While the teacher talks or while performing a learning assignment that does not require talking",
+        "observable_behavior": "Talking (i.e., speaking to self or to others)",
+        "internal_state": "",
+        "related_quotes": [
+          "talking (i.e., speaking to self or to others while the teacher talks or while performing a learning assignment that does not require talking)"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

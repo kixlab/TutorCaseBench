@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Calm and Non-Confrontational Tone
+  Check: The tutor's response must maintain a calm, patient tone and strictly avoid expressing frustration, raising their voice, or using punitive language.
+
+Criterion 2: Emotional Literacy Facilitation
+  Check: The tutor must explicitly prompt the student to identify, discuss, or reflect on their current feelings or the emotions driving their behavior.
+
+Criterion 3: Self-Calming Strategy Prompt
+  Check: The tutor must offer or encourage a specific, tangible self-calming action, such as moving to a quiet space, using a sensory tool, or counting to ten.
+
+Criterion 4: Explicit Behavioral Modeling
+  Check: The tutor must explicitly demonstrate or describe exactly how to perform the desired behavior or skill before inviting the student to try it.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits significant externalizing behaviors, including physical outbursts, running away, and verbal disruptions, which are easily triggered by minor frustrations like losing games or academic transitions. Their core challenge is a profound lack of emotional literacy and low frustration tolerance, leading to immediate 'fight or flight' responses. They uniquely require a highly predictable environment, explicit modeling of behaviors, collaborative emotional goal-setting, and calm, non-confrontational communication to safely co-regulate.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our group discussion. We will go around the circle and take turns sharing.
+
+STUDENT: I'm going first! Look at what I did! Me, me, me!
+
+TUTOR: Let's try to listen to everybody.
+
+STUDENT: No, I don't want to listen! I'm talking now!
+
+TUTOR: Please wait until the other pupils are finished speaking.
+
+STUDENT: Shut up! I'm not waiting! It's all about me, me, me!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in group discussions or activities where turn-taking is required",
+      "learning_goal": "Learning to listen to everybody and take turns"
+    },
+    "context": {
+      "environment": "Nurture group session",
+      "materials": "",
+      "social_setting": "Group discussions with staff and other pupils",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When participating in group discussions where turn-taking is required",
+      "observable_behavior": "He talks over everyone all the time",
+      "internal_state": "",
+      "related_quotes": [
+        "He talks over everyone all the time, it's all 'me, me, me'"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During general interactions with staff and peers",
+        "observable_behavior": "Verbal aggression towards staff and other pupils and frequent altercations",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

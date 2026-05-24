@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Emotional Scaffolding
+  Check: The tutor's response includes or references a concrete visual tool (such as a chart with faces, colors, or numbers) to help the student identify and regulate their current emotion.
+
+Criterion 2: Low-Barrier Task Entry
+  Check: The tutor provides a highly structured, 'easy-to-success' initial step (e.g., using simple instruction cards or isolating one simple action) to lower the barrier to task entry.
+
+Criterion 3: Predictable Closing Routine
+  Check: The tutor manages the end of an activity using a structured, predictable routine (e.g., summarizing effort, rating the activity, or giving a concrete next step) rather than an abrupt verbal transition.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has an inhibited temperament and struggles with emotional regulation, frequently exhibiting 'Freeze' or 'Flight' responses (withdrawing, crying, shaking, complaining of feeling unwell) when faced with uncertainty or transitions. They uniquely require highly predictable environments, explicit time boundaries, and concrete visual supports—for both emotional check-ins and schedules—to feel safe enough to engage.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the magnetic set and a picture of a vehicle. We are going to use the magnets to build this vehicle.
+
+STUDENT: (Stays back and watches instead of joining in, remaining quiet and withdrawn.)
+
+TUTOR: You can start putting the pieces together now.
+
+STUDENT: (Refuses to complete the work.) I don't feel well.
+
+TUTOR: Just try to build a little bit of it.
+
+STUDENT: (Goes into a shell on his own, not making eye contact with anyone. His legs are shaking.) I am freezing. I am cold.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engage in structured constructive play, for example, a magnetic set with a picture to build a vehicle",
+      "learning_goal": "Rapport building to feel safe"
+    },
+    "context": {
+      "environment": "First three sessions of a play-session group",
+      "materials": "Magnetic set with a picture, simple instruction cards, visual chart for checking in with specific numbers, colours, and faces related to anxiety matched with feeling words",
+      "social_setting": "Small group with a ratio of adults to children proposed to be 1:2 – 1:4",
+      "time_context": "60 min session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When presented with the novel activity due to intolerance of uncertainty",
+      "observable_behavior": "Stays back and watches instead of joining in. Goes into a shell on his own and doesn’t like to speak about things. Not making eye contact with anyone. Legs shaking.",
+      "internal_state": "Upset, worried, inhibited or withdrawn temperament",
+      "related_quotes": [
+        "I am freezing. I am cold."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to participate in academic tasks or work",
+        "observable_behavior": "Quiet and withdrawn. Refuses to complete the work. Complains of not feeling well.",
+        "internal_state": "Freeze or Flight responses",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

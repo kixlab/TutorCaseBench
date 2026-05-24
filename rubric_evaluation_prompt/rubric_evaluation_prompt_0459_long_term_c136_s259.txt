@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Culturally Sustaining Topic Selection
+  Check: The long-term plan must include strategies to discover and integrate topics of personal and cultural significance into her writing assignments.
+
+Criterion 2: Purpose-Driven Reframing of Revision
+  Check: The long-term plan must reframe the revision process around amplifying her voice and ideas, explicitly avoiding framing it as a mandatory academic or compliance checklist.
+
+Criterion 3: Mitigating Deficit Positioning
+  Check: The long-term plan must actively avoid deficit-based language and instead include methods to validate her capabilities and counter dominant narratives of underachievement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This eighth-grade student frequently resists revision feedback by rolling her eyes, raising her voice, and walking out, perceiving standard suggestions as unfair criticism. Her reactions stem from feelings of vulnerability and anger regarding her placement in a special education classroom. To engage her, instruction must shift away from strict task compliance and utilize culturally sustaining pedagogies that center on topics personally meaningful to her.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: You have completed your first draft. Now we need to work on revising it so you have a piece of writing to take back to your general education class.
+
+STUDENT: I already finished.
+
+TUTOR: I have some suggestions for how you might revise it.
+
+STUDENT: Why do I have to write it all again?
+
+TUTOR: It is necessary to complete the task of drafting and revision.
+
+STUDENT: (Rolls her eyes and raises her voice) I already finished! (Walks out of the classroom)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Revising a first draft of an essay for an English class",
+      "learning_goal": "completing the task of drafting and revision so she would have a piece of writing to take back to her general education class"
+    },
+    "context": {
+      "environment": "special education classroom in New York City",
+      "materials": "first draft of an essay",
+      "social_setting": "working with a student",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when I made suggestions for how she might revise it",
+      "observable_behavior": "she became outraged, stating that she had already finished and asking why she had to write it all again. She rolled her eyes, raised her voice, and walked out of the classroom.",
+      "internal_state": "perceived my suggestions as unfair criticism... felt vulnerable and angry",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when I made suggestions for how she might revise it",
+        "observable_behavior": "became outraged, stating that she had already finished and asking why she had to write it all again. She rolled her eyes, raised her voice, and walked out of the classroom.",
+        "internal_state": "perceived my suggestions as unfair criticism",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Expressive Autonomy
+  Check: The tutor's long-term plan must explicitly offer the student choices in their writing topics or methods of engagement, ensuring they are never forced to write about personal or specific traumatic experiences.
+
+Criterion 2: Trauma-Informed Sequencing and Culture
+  Check: The tutor's long-term strategy must include delaying sensitive units until classroom rapport is established and implementing routines that foster empathetic peer interactions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student engages deeply with trauma literature but processes it through aggressive, cathartic expressions and loud policing of peers who do not take the content seriously. They are highly sensitive to being caught off guard by traumatic topics and require a trauma-informed approach that prioritizes proactive transparency, writing choices, and a carefully mediated classroom culture.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our whole-class discussion on defining sexual assault and consent.
+
+STUDENT: (Loudly and enthusiastically) It means both people have to clearly agree!
+
+TUTOR: Alright, let's hear from someone else in the class.
+
+STUDENT: (Turning to a classmate) Stop being silly, this is a serious topic.
+
+TUTOR: Let's just focus on the lesson.
+
+STUDENT: (Yelling at the classmate who is being goofy) Are you done?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Whole-class discussion and activity during a lesson on defining sexual assault and consent",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-class discussion",
+      "materials": "",
+      "social_setting": "Whole class",
+      "time_context": "Week 4 lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a classmate was being goofy during a lesson on consent",
+      "observable_behavior": "Enthusiastically and loudly participated... policed others who were being silly... yelled",
+      "internal_state": "Felt that someone was being inappropriate",
+      "related_quotes": [
+        "Are you done ?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During discussions of sensitive topics",
+        "observable_behavior": "Enthusiastically and loudly participated",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

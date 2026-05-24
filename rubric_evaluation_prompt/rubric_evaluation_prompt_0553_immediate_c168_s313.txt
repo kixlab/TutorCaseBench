@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Synopsis and Direct Questioning
+  Check: The tutor's response must include a short synopsis of the current story context followed by a direct question that requires the student to look at the text to answer.
+
+Criterion 2: Visual and Physical Redirection
+  Check: The tutor must explicitly mention or include a physical gesture (e.g., pointing, tapping) directed at the text alongside their verbal prompt.
+
+Criterion 3: In-the-Moment Fluency Support
+  Check: The tutor must provide immediate, specific scaffolding or intervention techniques to support fluency or meaning when the student struggles, rather than simply prompting them to 'try reading'.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This 9-year-old male with a language-learning disability masks his reading difficulties by making aggressive, on-topic comments about story pictures (e.g., 'I'll kill it') to avoid reading invitations. He needs to fulfill interactional demands without exposing his reading incompetence. The evidence reveals he uniquely requires a constructivist approach using short synopses, direct text-related questions, and physical gestures to safely scaffold his attention back to the words.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the next page with the monsters. Pretty scary.
+
+STUDENT: (Looking at the picture of the monsters) I'll kill it.
+
+TUTOR: Okay. What else?
+
+STUDENT: I'll kill them.
+
+TUTOR: Let's try to read the words on the page now.
+
+STUDENT: I'll, I'll stab it in their eyes.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Shared reading session of 'Where the wild things are'. The student is expected to continue reading after the interventionist makes a comment about the story.",
+      "learning_goal": "Shared and reciprocal reading"
+    },
+    "context": {
+      "environment": "Shared reading session",
+      "materials": "Book ('Where the wild things are') with pictures of monsters and text",
+      "social_setting": "Session with an interventionist and a supervisor who is sitting in",
+      "time_context": "Fifth, sixth and seventh sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The student has just finished reading a long section and is prompted by the interventionist saying 'pretty scary' (an implied invitation to read)",
+      "observable_behavior": "Offers a relevant comment regarding the picture of monsters ('I’ll kill it'), repeats his sentiment ('I’ll kill them'), and then expands it ('I’ll, I ’ll stab it in their eyes') rather than taking the implied invitation to read",
+      "internal_state": "Using the strategy to avoid reading actual text while still fulfilling interactional demands, showing engagement with the text without revealing reading incompetence or failure",
+      "related_quotes": [
+        "I ’ll kill it.",
+        "I ’ll kill them.",
+        "I’ll I’ll stab it in their eyes."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When receiving reading invitations",
+        "observable_behavior": "Avoids reading invitations by remaining on-topic, but he provides a comment about the story rather than attempting to read",
+        "internal_state": "Desires to fulfill the child's interactional turn at talk without exhibiting reading failure; finds it more socially appropriate than direct refusal to read",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

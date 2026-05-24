@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Flexible and Individualized Assessment
+  Check: The tutor's long-term plan must include flexible assignment formats or individualized assessment methods (e.g., alternatives to standard reading logs) to evaluate the student's progress.
+
+Criterion 2: Unrestricted Text Self-Selection
+  Check: The tutor's long-term plan must explicitly protect and emphasize the student's ability to self-select all of their reading materials.
+
+Criterion 3: Cultivation of a Supportive Reading Community
+  Check: The tutor's long-term plan must include strategies for building or sustaining a reading community that respects individual perspectives and provides social support for the student's reading identity.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a highly active reader who reads voluminously but strongly resists standard course requirements like written reading logs, leading to issues with timeliness and completion. They lack social support for their reading identity among outside peers, often masking their frustration with a playful affect when their book recommendations are ignored. The evidence reveals they uniquely need flexible assignment formats, opportunities to deliver strong verbal critiques, and an authentic, supportive reading community to thrive.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For the next 15 minutes, please discuss your book recommendations with your book group.
+
+STUDENT: I guess I can tell them about the book I am reading right now.
+
+TUTOR: What do you usually say to them?
+
+STUDENT: Oh, well some people are, like, 'Oh, what is the book you are reading right now?' And I tell them about it, and they are like, 'Oh, that’s cool, I’ll read it.'
+
+TUTOR: How does that work out?
+
+STUDENT: (Donning a playful affect) And then they never do! It's frustrating because of their unwillingness to read my explicit recommendations, but I just take it in stride.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "discussing book recommendations",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "YAL course",
+      "materials": "self-selected texts",
+      "social_setting": "meeting with book groups",
+      "time_context": "15 minutes discussing book recommendations"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when she shared explicit recommendations",
+      "observable_behavior": "took this in stride, donning a sort of playful affect",
+      "internal_state": "noted frustration resulting from their unwillingness to read",
+      "related_quotes": [
+        "And then they never do!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when she shared explicit recommendations",
+        "observable_behavior": "donning a sort of playful affect",
+        "internal_state": "noted frustration resulting from their unwillingness to read",
+        "related_quotes": [
+          "And then they never do!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

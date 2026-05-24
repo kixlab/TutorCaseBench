@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Clean Slate Framing
+  Check: The tutor's long-term plan includes explicitly communicating that the student has a 'second chance' and that past failures or negative labels are being left behind.
+
+Criterion 2: Informal Transitional Routines
+  Check: The tutor establishes regular, non-academic transitional routines (such as meeting over coffee or informal chats) before moving the student into formal instruction.
+
+Criterion 3: Transparent Rule Rationale
+  Check: The tutor explicitly commits to explaining the reasoning and arguments behind any rules or expectations set for the student.
+
+Criterion 4: Sustained Accessibility and Warmth
+  Check: The tutor plans to maintain an 'open door' policy, high availability, or unstructured discussion time to foster a continuously warm and accepting atmosphere.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Adam is a student with a history of repeated school failure and a deep mistrust of the adult world, often arriving at school exhausted from difficult home circumstances. He views himself as only being capable of failing, making formal academic demands and classroom transitions highly traumatic. To engage him, educators must prioritize humane, informal relationship-building, explicitly remove traditional academic triggers, and validate his external life challenges.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Welcome to class. For our Swedish subject, we are going to read novels every day in school.
+
+STUDENT: No. I do not want to work.
+
+TUTOR: Are you motivated to start reading your book today?
+
+STUDENT: No. The only thing I know that I can do is fail.
+
+TUTOR: Just try reading the first chapter, and then you can write a report about what you read.
+
+STUDENT: I'm not doing that. You always make us write about it. I'm so disappointed in school and the adult world, I'm just going to fail anyway.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading novels every day in school",
+      "learning_goal": "Obtaining pass grades with a special focus on the core subjects of Swedish"
+    },
+    "context": {
+      "environment": "Classroom during the beginning of the autumn term",
+      "materials": "Novels and literature",
+      "social_setting": "Classroom setting with the teacher",
+      "time_context": "Beginning of the autumn term"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the initial phase of the school year when the teacher introduces literature requirements",
+      "observable_behavior": "Answer no to that question [whether they are motivated], do not want to work",
+      "internal_state": "Connect reading to the practice of having to write about it; feel that the only thing they know that they can do is fail",
+      "related_quotes": [
+        "no"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked whether they are motivated to do school work",
+        "observable_behavior": "Surprisingly many are honest and answer no to that question; do not want to work",
+        "internal_state": "Motivation is often tied to an extrinsic goal, such as getting pass grades, or limited to turning up at school each day",
+        "related_quotes": [
+          "no"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

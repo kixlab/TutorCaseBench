@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Peer Group Autonomy
+  Check: The tutor allows or encourages the student to select their own group members or partners rather than forcing a specific grouping.
+
+Criterion 2: Facilitative Encouragement
+  Check: The tutor responds to requests for help by offering encouragement and redirecting the student to collaborate with their peers, explicitly avoiding giving direct answers or specific instructional advice.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with traditional literacy tasks, exhibiting low resilience, high dependence on teacher support, and a strong fear of peer judgment during performances. However, they thrive when learning is reframed as a collaborative creative project where they have autonomy, can choose their peers and roles (such as designing), and receive general encouragement rather than direct instruction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now that the acting scheme is over, please look at your scripts for A Midsummer Night's Dream and start the traditional written work.
+
+STUDENT: (Sighs and moans) Can we just do more acting? Acting is fun, work is boring.
+
+TUTOR: Let's just focus on the first question on your worksheet.
+
+STUDENT: I don't get it. Come over here and help us.
+
+TUTOR: Try to read the text with your group and see what you can find.
+
+STUDENT: We can't do it, it's too hard. You haven't given me any help yet and I need you to tell me what to write.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Collaborative group work studying A Midsummer Night's Dream",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "English classroom",
+      "materials": "Scripts, resources to access the text's language",
+      "social_setting": "Collaborative group work",
+      "time_context": "During project-based research lessons"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When encountering difficulty during classwork",
+      "observable_behavior": "Seeking teacher help immediately, very dependent upon support and input, preoccupied with how much help they received",
+      "internal_state": "Struggled to be resilient",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When they realised the scheme was over and returning to traditional work",
+        "observable_behavior": "Began sighing and moaning, asked for 'more acting'",
+        "internal_state": "Felt that the project had not been 'work'",
+        "related_quotes": [
+          "acting is fun, work is boring"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

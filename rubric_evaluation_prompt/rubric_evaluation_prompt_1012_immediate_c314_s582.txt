@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Differential Reinforcement via Peer Praise
+  Check: The tutor ignores Delon's minor disruptions and instead explicitly praises another student's appropriate behavior.
+
+Criterion 2: Escape Prevention
+  Check: The tutor ensures Delon remains in the activity, explicitly avoiding sending him away, giving him a timeout, or removing him from the group.
+
+Criterion 3: Contingent Descriptive Praise
+  Check: The tutor provides specific, descriptive praise and allows Delon to participate immediately when he demonstrates on-task behavior or raises his hand.
+
+Criterion 4: Low-Attention Redirection for Escalation
+  Check: If intervening for unsafe behavior, the tutor uses a brief, neutral redirection that minimizes verbal and physical attention.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Delon is a 5-year-old who engages in disruptive behaviors like shouting, making noises, and hitting peers during circle time to gain teacher or peer attention and to escape the activity. He uniquely requires adults to strictly withhold attention for disruptions and prevent his escape from the activity, while providing heavy descriptive praise for on-task behavior and managing the peer attention that reinforces his actions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: (Opens a circle time book and begins to read) Alright everyone, let's sit quietly while I read our story for today.
+
+STUDENT: (Makes an animal noise and starts shouting) I can’t see the book!
+
+TUTOR: (Sits next to Delon) Please sit still and be quiet.
+
+STUDENT: (Hums a song and pretends to touch the peer sitting in front of him)
+
+TUTOR: Delon, be quiet and look at the book.
+
+STUDENT: (Shouts) this is boring!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Ms. Beth opens a circle time book and begins to read.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Circle time in his preschool classroom",
+      "materials": "Circle time book, pictures and words defining classroom expectations posted",
+      "social_setting": "Seated within a group of boys who played with him and encouraged his disruptive behavior",
+      "time_context": "20 min (the length of the circle)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Ms. Beth begins to read.",
+      "observable_behavior": "Makes an animal noise and starts shouting, hums a song and pretends to touch the peer sitting in front of him, shouts 'this is boring!'",
+      "internal_state": "Did not know the classroom rules or expected behaviors",
+      "related_quotes": [
+        "I can’t see the book!",
+        "this is boring!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During circle time activities",
+        "observable_behavior": "Shouting at adults and other children, making noises, and talking to and touching children sitting near him",
+        "internal_state": "Obtaining access to teacher/peer attention and to escape from circle time activities",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

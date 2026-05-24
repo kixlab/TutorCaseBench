@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Digital Access Points
+  Check: The long-term plan includes the consistent use of digital platforms (e.g., forums, blogs) as a primary, acceptable mode of academic participation for Wei.
+
+Criterion 2: Mediated Transition to Physical Participation
+  Check: The long-term plan outlines a gradual strategy that uses Wei's online interactions and the teacher-student bond to slowly encourage and scaffold his physical classroom participation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Wei is an English Language Learner who is completely silent in the physical classroom due to intense anxiety about his language skills and fear of causing peers to fail. However, he is highly expressive and confident in digital spaces, often using pseudonyms and 'leet speak'. He uniquely needs teachers to engage with the intellectual substance of his digital communication without judging its form, and requires explicit emotional reassurance to bridge his online confidence into physical classroom participation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For our unit on Transcendentalism, please post any questions you have about the readings on the class discussion forum.
+
+STUDENT: (Posts on the forum as W..WIIIIIIIIIiii) HeY hEy HEy Is Me........!!! me mEEEEeEE mEeEEEEeee ....!! teacher~~~I wAnt tO aSk YoU Is tHiS fReE tHouGht O r s e l f - r E l i A n C e “ i j U s T … W a N t T o l I v E w H i L e i Am aLiVe~~~~ .....!!!!!”
+
+TUTOR: (Replies on forum) That is an interesting quote. Why don't you share your thoughts on it?
+
+STUDENT: (Replies on forum) hahaha.....!!! no one want to talk here.....!!! just the one that never talk in class.....!!
+
+TUTOR: (In the traditional English classroom) Wei, I saw your question on the blog. Can you tell the class if you think that quote is about free thought or self-reliance?
+
+STUDENT: (Exhibits an absolute lack of communication in the traditional English classroom environment, literally not talking at all.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Unit on Transcendentalism; asking a question about whether a concept is 'free thought or self-reliance'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Traditional English classroom environment vs. class website",
+      "materials": "Class website, public discussion forum",
+      "social_setting": "11th-grade English class",
+      "time_context": "First several weeks in the classroom / The week Jared’s class began a unit on Transcendentalism"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Being in the traditional English classroom environment where he felt he did not know enough English",
+      "observable_behavior": "Absolute lack of communication; never spoke; literally would not talk",
+      "internal_state": "Own sense of inadequacy in class or discomfort",
+      "related_quotes": [
+        "hahaha.....!!! no one want to talk here.....!!! just the one that never talk in class.....!!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When engaging with academic content on the class discussion forum",
+        "observable_behavior": "Posts using 'leet speak', changing pseudonyms, and unconventional formatting to ask academic questions",
+        "internal_state": "Humorous, self-aware, confident online, and willing to seek help",
+        "related_quotes": [
+          "HeY hEy HEy Is Me........!!! me mEEEEeEE mEeEEEEeee ....!! teacher~~~I wAnt tO aSk YoU Is tHiS fReE tHouGht O r s e l f - r E l i A n C e “ i j U s T … W a N t T o l I v E w H i L e i Am aLiVe~~~~ .....!!!!!”"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

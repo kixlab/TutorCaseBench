@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Public Reprimand Avoidance
+  Check: The tutor refrains from repeatedly correcting Jacob's disruptive behavior publicly or repeating instructions in a way that highlights his non-compliance to the class.
+
+Criterion 2: Active Peer Mediation
+  Check: The tutor explicitly addresses the classmates' negative reactions (e.g., frustration, eye-rolling) to foster understanding and instruct them not to gang up on Jacob.
+
+Criterion 3: Provision of Withdrawal Space
+  Check: The tutor offers or allows Jacob the option to withdraw from the immediate situation, task, or group to regain his composure.
+
+Criterion 4: Emotional Reassurance of Social Worth
+  Check: The tutor provides explicit emotional support, comforting Jacob and reassuring him of his value and future social success in the classroom community.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jacob is an ADHD-diagnosed student who deeply desires social connection but struggles with distractibility, impulsivity, and peer rejection. When overwhelmed or unmedicated, he can become disruptive or physically aggressive, which leads to classmates ostracizing him. He uniquely needs explicit teacher mediation to manage peer reactions, structured cooperative tasks to channel his desire to help others, and the option to withdraw to maintain self-control.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, please listen carefully while I explain what the task is.
+
+STUDENT: (Causes a disturbance while the instructions are being given)
+
+TUTOR: Jacob, please be quiet. I will repeat the sentence. Class, please listen carefully while I explain what the task is.
+
+STUDENT: (Continues causing a disturbance instead of listening)
+
+TUTOR: Jacob, be quiet. I am going to repeat the same sentence again. Class, please listen carefully while I explain what the task is.
+
+STUDENT: (Turns around as several children begin to shake their heads and roll their eyes) It is not fair because I do not intentionally wish to ruin it for the others.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Listening to teacher's instructions for a task",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "",
+      "social_setting": "Whole class listening to the teacher explain what the task is",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "As the teacher continues to repeat the same sentence, several children begin to shake their heads or roll their eyes",
+      "observable_behavior": "Jacob turns around and says that it is not fair",
+      "internal_state": "feels he does not intentionally wish to ruin it for the others",
+      "related_quotes": [
+        "it is not fair because he does not intentionally wish to ruin it for the others."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While the teacher explains what the task is",
+        "observable_behavior": "causing a disturbance",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

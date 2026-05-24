@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Emotional Vocabulary Expansion
+  Check: The long-term plan includes specific goals, exercises, or milestones for teaching and expanding the student's vocabulary of emotion and appropriate social language.
+
+Criterion 2: Self-Appraisal Calibration
+  Check: The long-term plan incorporates methods for safely comparing the student's self-assessments with external feedback (from peers, teachers, or parents) to build accurate self-awareness.
+
+Criterion 3: Structured Relationship Curriculum
+  Check: The long-term plan outlines a structured, multi-lesson approach (rather than just reactive interventions) dedicated to emotional intelligence and relationship management.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This learner has an inflated perception of their own emotional intelligence but severely lacks the ability to process social-emotional cues, often dominating peers or refusing to cooperate. They uniquely require explicit instruction linking physical cues to emotional labels, delivered through a highly supportive and nurturing approach to bypass their defensiveness and build accurate self-awareness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to review your self-report measure and discuss the feedback provided by your teacher and your mother.
+
+STUDENT: I already know I did well. I appraised myself as having higher emotional intelligence than my peers who did not have ADD.
+
+TUTOR: Let's look at what your teacher wrote here about your interactions in class.
+
+STUDENT: I don't agree with my teacher's perceptions of my emotional states.
+
+TUTOR: Here is the feedback your mother provided about your behavior at home.
+
+STUDENT: I do not show agreement with either my individual teachers or my individual mothers’ perceptions of my emotional states or my symptoms and behaviour! My emotional intelligence is at a higher level than that of my peer group.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "semi-structured interview",
+      "learning_goal": "accurately appraise their emotional intelligence"
+    },
+    "context": {
+      "environment": "semi-structured interview",
+      "materials": "Bar-On EQ-iYV self-report measure",
+      "social_setting": "individual teachers or their individual mothers",
+      "time_context": "At the beginning of the study"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "evaluating themselves with regard to emotional intelligence",
+      "observable_behavior": "did not show agreement with either their individual teachers or their individual mothers’ perceptions of their emotional states or their symptoms and behaviour",
+      "internal_state": "displayed an unrealistically high perception of their emotional intelligence",
+      "related_quotes": [
+        "did not show agreement with either their individual teachers or their individual mothers’ perceptions of their emotional states or their symptoms and behaviour"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "evaluating themselves with regard to emotional intelligence",
+        "observable_behavior": "appraised themselves as having higher emotional intelligence than their peers who did not have ADD",
+        "internal_state": "inaccurate appraisal of their emotional intelligence as being at a higher level than that of their peer group",
+        "related_quotes": [
+          "appraised themselves as having higher emotional intelligence than their peers who did not have ADD"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

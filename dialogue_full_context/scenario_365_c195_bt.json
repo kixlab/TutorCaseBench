@@ -1,0 +1,80 @@
+{
+  "category_id": "195",
+  "category_title": "Adolescents with ASD exhibiting attention-seeking out-of-seat and assaultive behaviors",
+  "scenario_id": "365",
+  "scenario_title": "Morning academic lessons and difficult tasks",
+  "minimal_context": "Brian is working with his teacher during morning lessons to complete five academic programmes while his peers are present at their tables.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Brian, it is time for our morning lessons. We need to work successfully through these five academic programmes."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Stops working on the difficult task and leaves the table without permission)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please sit back down and keep trying."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Walks to the door, looking back to see if the teacher is watching) I made the wrong choice."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "We have to finish the programmes."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Approaches a peer at their table and exhibits physically abusive behaviour against them)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Brian, it is time for our morning lessons. We need to work successfully through these five academic programmes.\n\nSTUDENT: (Stops working on the difficult task and leaves the table without permission)\n\nTUTOR: Please sit back down and keep trying.\n\nSTUDENT: (Walks to the door, looking back to see if the teacher is watching) I made the wrong choice.\n\nTUTOR: We have to finish the programmes.\n\nSTUDENT: (Approaches a peer at their table and exhibits physically abusive behaviour against them)",
+  "immediate_dialogue_prompt": 634,
+  "long_term_dialogue_prompt": 635,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "work successfully through five academic programmes",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "school setting at The Jigsaw CABAS® School",
+        "materials": "behaviour contract, computer for preferred activities",
+        "social_setting": "peers present at their tables, working with his teacher",
+        "time_context": "morning lessons (reported as minutes per morning session where total possible time was 160 minutes)"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "during difficult tasks",
+        "observable_behavior": "leaving the table without permission, walking to the door, and exhibiting physically abusive behaviour against another person",
+        "internal_state": "attention-seeking",
+        "related_quotes": [
+          "I made the right/wrong choice(s)"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "at any time during his morning lessons",
+          "observable_behavior": "leaving the table without permission",
+          "internal_state": "attention-seeking",
+          "related_quotes": []
+        },
+        {
+          "condition": "once the behaviour contract was implemented",
+          "observable_behavior": "initial increase in assaults to 25 in one session",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

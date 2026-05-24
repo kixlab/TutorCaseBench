@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Culturally Relevant Text Integration
+  Check: The tutor's long-term plan consistently incorporates texts written by or featuring people of color.
+
+Criterion 2: Systemic Presumption of Competence
+  Check: The tutor's overarching strategy actively elevates the student's counter-narratives and frames him as an expert, rather than focusing on remediating deficits.
+
+Criterion 3: Protocol Adaptation Over Remediation
+  Check: The tutor's plan focuses on modifying discussion rules, participation frameworks, and environmental norms to support the student, rather than attempting to 'fix' the student's behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Raymond is an African American student labeled 'LD' who frequently avoids traditional teacher-centric evaluation to protect himself from looking incompetent. However, he demonstrates deep comprehension through creative, intertextual contributions when reading culturally relevant texts. He uniquely requires a tutor who actively defends his speaking turn from interruptions and validates his divergent thinking rather than evaluating for a single 'right' answer.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We just finished reading the end of 'Crazy Loco'. What is the correct main idea of the ending?
+
+STUDENT: Really? I wish there was more. It got so interesting.
+
+TUTOR: That is not the main idea. What is the right answer?
+
+STUDENT: I wish there was, like, more. Like, they went back to the dance, like, to the place, and then other people would say, 'You were a liar,' and they’d be like, 'You were a liar, little boy' and stuff like that. And then they run away into the sunset.
+
+TUTOR: That is incorrect. We need the right answer from the text. Does anyone else know?
+
+STUDENT: (Looks down at his desk and stays silent, arranging to not look incompetent and avoiding getting caught not knowing the right answer.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Whole-group discussion responding to the end of the story 'Crazy Loco' by David Rice",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-group discussion during read-aloud and reading minilesson",
+      "materials": "The book 'Crazy Loco' by David Rice, a text by a Latino author",
+      "social_setting": "Whole-group discussion with 'turn sharks', or students ready to jump into the conversation if the speaker seemed unsure",
+      "time_context": "45 min of special education reading instruction daily"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher uses the teacher-centric IRE pattern (Initiation-Response-Evaluation) taking every other turn and evaluating answers based on his conception of 'rightness'",
+      "observable_behavior": "Spending their time 'avoiding getting caught not knowing' and 'arranging to not look incompetent'",
+      "internal_state": "Positioned as 'struggling' readers",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When focal students voluntarily contribute to whole-group discussions and 'turn sharks' try to claim the floor while they are speaking",
+        "observable_behavior": "Contributed to the tumult",
+        "internal_state": "Displays an affinity for books and reading, positioning him as an engaged reader with the authority to disagree with the author's ending",
+        "related_quotes": [
+          "Really? I wish there was more.",
+          "It got so interesting.",
+          "I wish there was, like, more. Like, they went back to the dance, like, to the place, and then other people would say, 'You were a liar,' and they’d be like, 'You were a liar, little boy' and stuff like that.",
+          "And then they run away into the sunset."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

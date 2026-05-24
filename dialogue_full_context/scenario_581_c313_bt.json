@@ -1,0 +1,85 @@
+{
+  "category_id": "313",
+  "category_title": "Students with persistent wariness and environmental sensory preoccupations",
+  "scenario_id": "581",
+  "scenario_title": "Play session with therapy dog in the dinner hall",
+  "minimal_context": "The student and teacher are in the school dinner hall attempting to play simple games with a therapy dog.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's play a simple game with the dog."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(The student is very preoccupied with touching surfaces in the room and following markings on the floor in a repetitive manner, initiating no interactions.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Come over here and sit down."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(The student sits close, holding hands and looking to the teacher for reassurance, responding briefly to the request.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "The dog is walking over to us now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Showing wariness, the student watches the dog in order to move away as it gets too close.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's play a simple game with the dog.\n\nSTUDENT: (The student is very preoccupied with touching surfaces in the room and following markings on the floor in a repetitive manner, initiating no interactions.)\n\nTUTOR: Come over here and sit down.\n\nSTUDENT: (The student sits close, holding hands and looking to the teacher for reassurance, responding briefly to the request.)\n\nTUTOR: The dog is walking over to us now.\n\nSTUDENT: (Showing wariness, the student watches the dog in order to move away as it gets too close.)",
+  "immediate_dialogue_prompt": 1010,
+  "long_term_dialogue_prompt": 1011,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "play simple games with them",
+        "learning_goal": "encourage interactions (through verbal, gestural or physical prompts) between dog and child"
+      },
+      "context": {
+        "environment": "school dinner hall",
+        "materials": "surfaces in the room, markings on the floor, dog",
+        "social_setting": "teacher alone for the first two minutes, then with the dog as well",
+        "time_context": "20 minutes"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "if it [the dog] got too close",
+        "observable_behavior": "wariness, watching the dog in order to move away",
+        "internal_state": "wariness",
+        "related_quotes": [
+          "awareness and visual interest in the dog was accompanied by wariness, watching the dog in order to move away if it got too close."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "with teacher alone",
+          "observable_behavior": "very preoccupied with touching surfaces in the room, or following markings on the floor in a repetitive manner",
+          "internal_state": "",
+          "related_quotes": [
+            "levels of playing alone and repetitive/sensory interests were also higher with teacher alone than when the dog was present.",
+            "the student was very preoccupied with touching surfaces in the room, or following markings on the floor in a repetitive manner."
+          ]
+        },
+        {
+          "condition": "In both assessments",
+          "observable_behavior": "slightly more passive... initiating fewer interactions (in showing objects or initiating joint attention)",
+          "internal_state": "",
+          "related_quotes": [
+            "sensory interests and ritualistic behaviour and mannerisms impacted greatly on the student’s capacity to engage."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

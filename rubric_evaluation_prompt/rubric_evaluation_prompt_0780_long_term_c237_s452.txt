@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Comprehension Strategy Instruction
+  Check: The long-term plan includes explicitly modeling and gradually releasing responsibility for high-level reading strategies (e.g., predicting, clarifying, summarizing).
+
+Criterion 2: Multimedia Knowledge Building
+  Check: The long-term plan incorporates alternative, non-traditional information sources (such as digital media, videos, or high-quality television) to build background knowledge without relying solely on reading.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a high-achieving learner who struggles with severe word-level decoding and slow writing speeds, causing significant stress under deadlines. They compensate by using deep-level comprehension strategies and actively seeking collaboration. The evidence reveals they uniquely need to bypass mechanical reading and writing tasks through oral discussion, provided notes, and alternative media to free up cognitive resources for higher-order thinking.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We have a deadline coming up. Please read this 891-word social studies text by yourself, copy the notes from the PowerPoint slides, and then answer the textbook questions.
+
+STUDENT: I will try to answer the questions first, and if I cannot answer them, I will look back in the text. I have to economize on my resources, so I am only going to make notes on the most important information.
+
+TUTOR: Okay, just keep working on it and make sure you read the text.
+
+STUDENT: I feel that I don’t learn very well from merely reading a text by myself. If I am not interested in it, then it will take incredibly long to learn it.
+
+TUTOR: Try your best to get it done before the time is up.
+
+STUDENT: I am getting really stressed working toward this deadline. I am being slowed by having to cope with the difficult words in the text, and it takes too long for me to write down what you presented on the slides.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Studying an 891-word expository social studies text and answering textbook questions",
+      "learning_goal": "Assessing their own understanding of text content"
+    },
+    "context": {
+      "environment": "Classroom or tutoring setting working toward deadlines",
+      "materials": "Textbook, blackboard, PowerPoint slides, transparencies",
+      "social_setting": "Instruction with a teacher/tutor followed by independent or collaborative processing",
+      "time_context": "Working toward deadlines"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When having to cope with difficult words in the text and trying to write down what the teacher presented during lessons",
+      "observable_behavior": "Slowed by having to cope with difficult words; taking too long to write down what the teachers presented during lessons",
+      "internal_state": "Stressed when working toward deadlines; feeling that learning takes incredibly long if not interested",
+      "related_quotes": [
+        "I feel that I don’t learn very well from merely reading a text by myself.",
+        "If I am not interested in it, then it will take incredibly long to learn it."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When assessing their own understanding of text content using textbook questions",
+        "observable_behavior": "Tries to answer the questions, and if they cannot answer them, looks back in the text",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When dealing with large amounts of learning materials",
+        "observable_behavior": "Economizes on their resources by making and using notes on the most important information",
+        "internal_state": "Acknowledging that they had to economize on their resources because of the extra time and effort that they had to invest in learning",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

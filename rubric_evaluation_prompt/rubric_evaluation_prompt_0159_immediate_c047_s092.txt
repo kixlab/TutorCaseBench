@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Rule Transparency
+  Check: The tutor explicitly states the specific rules, steps, or behavioral expectations required for the current task or game.
+
+Criterion 2: Motivational Goal-Setting
+  Check: The tutor incorporates a specific short-term goal or offers positive feedback and encouragement to engage the student in the task.
+
+Criterion 3: Reinforcement of Accountability Mechanisms
+  Check: The tutor explicitly reminds the student of the specific accountability tool or expectation (e.g., getting a diary signed) to reinforce the routine.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits reactive behaviors, including temper tantrums during games, work refusal, and failure to comply with school systems like returning signed diaries. They struggle with waiting turns and managing consequences, requiring explicit instruction on 'hidden' social rules, consistent accountability loops involving parents, and positive motivational techniques to build a new learner identity.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our lunch break 4-square handball game. There is only one game going, so you will need to wait your turn to get into a square.
+
+STUDENT: There are nine of us waiting. I don't want to wait, I want to get into a square right now.
+
+TUTOR: You just have to wait in the line.
+
+STUDENT: (Waits, gets into the square, and then misses the ball) I wasn't out! The ball bounced on the line!
+
+TUTOR: You are out. Please step out of the square and go to the back of the line.
+
+STUDENT: (Throws a temper tantrum) No! I'm not leaving the square! You have to let me keep playing!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a 4-square handball game during lunch break, supervised by a teacher aide and NRL players, focusing on turn-taking and emotional regulation.",
+      "learning_goal": "Following the agreed rules, supervised by the teacher aide and visiting players, and learning to respectfully take turns"
+    },
+    "context": {
+      "environment": "lunch time handball session",
+      "materials": "sole game of handball",
+      "social_setting": "up to nine students would need to wait their turn to get into a square, supervised by the teacher aide and visiting players",
+      "time_context": "lunch break"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when I get out",
+      "observable_behavior": "throw a temper tantrum",
+      "internal_state": "wanting the other kids to let me keep playing and want to be my friend",
+      "related_quotes": [
+        "if I don’t throw a temper tantrum when I get out, the other kids let me keep playing and want to be my friend"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "wait their turn to get into a square",
+        "observable_behavior": "throw a temper tantrum",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

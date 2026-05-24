@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Private Affirmation and Connection
+  Check: The tutor's long-term plan must include methods for building a 1-on-1 relationship and delivering praise privately (e.g., dialogue journals, private check-ins, learning about his outside life).
+
+Criterion 2: Direct Confrontation of Indifference
+  Check: The tutor's long-term strategy must include direct, firm accountability (e.g., stern conversations) that explicitly challenges the student's attempts to fake distraction or indifference.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+José is a highly intelligent and curious student who deliberately masks his academic abilities through rushing, faking distraction, and mischievous behavior to avoid the social stigma of being a 'schoolboy'. The evidence reveals he uniquely needs private affirmation, direct accountability that confronts his 'faked' indifference, and validation of his advanced curiosity without public exposure.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, let's review our science lesson while the principal is visiting. Who can tell me the answer to the first question?
+
+STUDENT: (Screaming out the answer) I know it!
+
+TUTOR: Please remember to raise your hand.
+
+STUDENT: Because I want to answer the questions. You tell me to raise my hand, but you always pick other persons.
+
+TUTOR: Okay. Let other people talk.
+
+STUDENT: (Screaming out the answers to the next questions) I know the rest of them! I'm going to say everything that I know!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Answering questions during a science lesson",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mr. Ortiz's science class",
+      "materials": "Science lesson materials, dialogue journals",
+      "social_setting": "Whole class instruction with the principal visiting the classroom",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When wanting to showcase his intelligence in front of his peers and other adults in a seemingly safe way",
+      "observable_behavior": "Screaming out answers in front of the principal instead of raising his hand",
+      "internal_state": "Seemed to enjoy the fact that Mr. Ortiz recognized his intelligence, but sought visibility and notoriety through travesuras (mischievous behaviors)",
+      "related_quotes": [
+        "I even screamed it out. And he said, 'Okay. Let other people talk.' But I still said everything that I knew.",
+        "Because I want to answer the questions. ...Because [Mr. Ortiz] was telling me to raise my hand, but they [the teachers] always pick other persons."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When confronted about his academic performance or when trying to mask his intelligence",
+        "observable_behavior": "Exaggeratedly turned his head away to follow a distraction with his gaze, smiled, and claimed he was distracted",
+        "internal_state": "Downplaying intelligence to avoid being authored as a schoolboy",
+        "related_quotes": [
+          "It’s because I get distracted.",
+          "What did you say? See! I got distracted!",
+          "I’m distracted…. I can’t concentrate…. I have ADD, Miss!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

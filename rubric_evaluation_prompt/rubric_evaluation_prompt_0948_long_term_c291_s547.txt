@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Modeling and Role-Playing of Regulation Skills
+  Check: The long-term plan includes dedicated strategies for modeling, role-playing, or explicitly teaching emotional regulation and clean-up behaviors.
+
+Criterion 2: Embedded Practice in Natural Contexts
+  Check: The long-term plan embeds the practice of transition and regulation skills within Olivia's daily routines and natural play contexts rather than solely in isolated instruction.
+
+Criterion 3: Collaborative Behavioral Goal Setting
+  Check: The long-term plan involves collaborating with parents or caregivers to define specific, measurable goals regarding Olivia's transition and emotional regulation behaviors.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Olivia is a creative student who enjoys dramatic play but experiences severe emotional distress during transitions, specifically when asked to clean up. Her core behavioral pattern involves dropping to the floor, sobbing, and screaming when playtime ends abruptly. The evidence reveals she uniquely requires explicit advance warnings and structured visual supports to regulate her emotions and successfully navigate transitions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Olivia, it is time to clean up the dramatic play center.
+
+STUDENT: No! I want to keep playing!
+
+TUTOR: You need to put the toys away now.
+
+STUDENT: (Starts crying loudly) I don't want to clean up!
+
+TUTOR: Please start picking up the items.
+
+STUDENT: (Drops to the floor sobbing and screaming)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Cleaning up after dramatic play activities",
+      "learning_goal": "clean up centers without fighting"
+    },
+    "context": {
+      "environment": "classroom dramatic play centers",
+      "materials": "visual supports, transition cues, choice board, first/then board",
+      "social_setting": "Mr. Cho (teacher) and Olivia",
+      "time_context": "transition from playtime to clean-up"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when Mr. Cho prompts her to clean up",
+      "observable_behavior": "Dropping to the floor sobbing, crying loudly, or screaming.",
+      "internal_state": "",
+      "related_quotes": [
+        "At home she throws a fit when we ask her to clean up with her brothers."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "request to stop playing and start cleaning",
+        "observable_behavior": "Dropping to the floor sobbing, crying loudly, or screaming.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

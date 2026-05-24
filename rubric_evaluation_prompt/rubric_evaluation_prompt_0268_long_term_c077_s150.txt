@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Consistent Task Framing
+  Check: The tutor's long-term plan includes designing a standardized, reusable framework for tasks that the student can learn and rely on across different assignments.
+
+Criterion 2: Sensory Channel Optimization
+  Check: The tutor's plan incorporates identifying and consistently utilizing the student's preferred sensory channel (e.g., transitioning to audiobooks instead of tactile reading).
+
+Criterion 3: Pre-exposure to New Material
+  Check: The tutor plans for dedicated time to build pre-understanding, allowing the student to thoroughly explore new concepts or materials through their preferred sensory channel before formal tasks begin.
+
+Criterion 4: Real-World Generalization
+  Check: The tutor incorporates explicit explanations and demonstrations of how the academic skills being learned apply to real-life situations outside of school.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student faces significant executive functioning deficits, struggling to initiate or complete tasks independently without explicit, step-by-step structure. They are highly susceptible to sensory overload from noisy environments, tactile distractors in Braille materials, and fast-paced demands. Visually-based language and unstructured responsibilities cause immediate confusion and stress, requiring highly structured routines, immediate error correction, and the option to withdraw to quiet spaces to maintain focus.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright, it is time to start the math assignment. Look up here at the front to see the problems we are doing today.
+
+STUDENT: (Sits still without taking out materials) The teacher needs to tell me exactly what to take out and what to do, otherwise I don't know where to start.
+
+TUTOR: Just get your math materials out quickly and look at the first section. We need to move fast today.
+
+STUDENT: It's difficult when you have to think fast and answer fast and do things fast all the time. The noise from the other students is making it hard to concentrate.
+
+TUTOR: Try your best to focus on the assignment. Look here at this example, and then look there at the next page.
+
+STUDENT: They tell everyone to 'look here' and 'look there'... but I can't look so I don't understand what they mean. It's bad when they say that.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Math assignment, which is considered difficult and boring",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Regular class with distracting noise and bustle",
+      "materials": "Math materials",
+      "social_setting": "Large class where other students disturb them",
+      "time_context": "Fast-paced classroom activities"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher uses visually based language, telling everyone to 'look here' and 'look there'",
+      "observable_behavior": "Displays confusion and does not know what the teacher means",
+      "internal_state": "Feelings of exclusion",
+      "related_quotes": [
+        "They tell everyone to ‘look here’ and ‘look there’… but I can’t look so I don’t understand what they mean. It’s bad when they say that"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When given unstructured tasks or too much responsibility is left to the student",
+        "observable_behavior": "Neither knows how to begin, nor complete a task independently; requires someone to push the 'start button' all the time",
+        "internal_state": "Has no inner drive",
+        "related_quotes": [
+          "The teacher needs to tell me exactly what to take out and what to do, otherwise I don’t know where to start"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

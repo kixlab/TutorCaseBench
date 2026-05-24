@@ -1,0 +1,76 @@
+{
+  "category_id": "253",
+  "category_title": "Disruptive and disengaged students who run around, fight, or ignore instruction",
+  "scenario_id": "482",
+  "scenario_title": "Initial storytelling session with physical books",
+  "minimal_context": "The student is in a classroom listening to a storyteller read and act out a story from a physical book.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "I am going to hold this book and act out the story for you to listen to."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Completely ignores the storyteller and plays with a pencil and strips of paper.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please look at the pages of the book."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Becomes impatient and starts fighting with Ted.) This story is boring."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "We need to sit down and finish listening to the story."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Runs around the room, continuing to complain that the story is boring.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: I am going to hold this book and act out the story for you to listen to.\n\nSTUDENT: (Completely ignores the storyteller and plays with a pencil and strips of paper.)\n\nTUTOR: Please look at the pages of the book.\n\nSTUDENT: (Becomes impatient and starts fighting with Ted.) This story is boring.\n\nTUTOR: We need to sit down and finish listening to the story.\n\nSTUDENT: (Runs around the room, continuing to complain that the story is boring.)",
+  "immediate_dialogue_prompt": 833,
+  "long_term_dialogue_prompt": 834,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Listening to a story read aloud and acted out by the storyteller",
+        "learning_goal": "Help children concentrate better and view the pages more clearly and comfortably"
+      },
+      "context": {
+        "environment": "Classroom during a remedial storytelling session",
+        "materials": "Physical books, pencils, strips of papers, power point slides projected to a big white board",
+        "social_setting": "Large class of children with storytellers",
+        "time_context": "Once a week for 35 minutes"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When storytellers held the book and acted out the story at the same time",
+        "observable_behavior": "Ran around the room or fought with others (Tim and Ted), and some just completely ignored the storytellers and played whatever they had brought with them, even a pencil, or strips of papers",
+        "internal_state": "Easily distracted and became impatient",
+        "related_quotes": [
+          "complaining that the story was boring"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When storytellers held the book and acted out the story at the same time",
+          "observable_behavior": "Ran around the room or fought with others, completely ignored the storytellers and played whatever they had brought with them",
+          "internal_state": "Easily distracted and became impatient",
+          "related_quotes": [
+            "complaining that the story was boring"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

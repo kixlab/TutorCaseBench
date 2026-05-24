@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Decoupling Auditory from Visual Tracking
+  Check: The tutor provides information or reads aloud without requiring, prompting, or encouraging the student to visually track the text.
+
+Criterion 2: Strict Task Simplification
+  Check: The tutor explicitly limits the immediate workload, breaking tasks into highly manageable, bite-sized pieces rather than presenting a large packet or long text.
+
+Criterion 3: Short-Segment Pacing
+  Check: The tutor keeps reading or instructional segments brief and focused, avoiding prolonged focus on tedious details or extended narrative buildup.
+
+Criterion 4: Protection from Peer Judgment
+  Check: The tutor accommodates his need for a safe, quiet environment (e.g., not forcing him to read aloud, validating his distraction from noise) rather than telling him to just ignore his peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Harry is an energetic student with severe decoding and reading fluency issues, compounded by intense social anxiety that leads to school avoidance. He distinguishes between 'trying' (succeeding at manageable tasks) and 'trying to try' (failing because the workload is overwhelming despite his effort). He uniquely requires auditory reading support without visual tracking, strictly simplified assignments, and a highly protected social environment to prevent shutdown.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Harry, please open your book and follow along with the text while I read aloud to the class.
+
+STUDENT: I really dislike reading. English has always been a historic struggle for me.
+
+TUTOR: Let's just focus on the page. Try to follow the words as I read.
+
+STUDENT: I'm losing my place. When you read aloud, looking at the words just becomes a distraction and I can't focus.
+
+TUTOR: Just keep trying to track the sentences with your eyes.
+
+STUDENT: I can't do it with everyone here. If I try, it's just going to sound like, 'The du ...du ...duck cr ...crossed the br ...bridge.' I’m afraid to come to the class and get judged.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Follow along with the text while someone read aloud",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "English 9E—with modified objectives for readers identified to be reading at the third- to fifth-grade levels",
+      "materials": "Text to follow along with",
+      "social_setting": "Classroom with peers present, where he has a contentious social life and troubles with peers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When he was asked to follow along with the text while someone read aloud",
+      "observable_behavior": "The words became a distraction, leading to his inability to focus. He reported losing his place and struggling to follow along with the words. He mimicked his own struggling reading fluency.",
+      "internal_state": "Inability to focus; afraid to come to the class and get judged",
+      "related_quotes": [
+        "The du ...du ...duck cr ...crossed the br ...bridge.",
+        "I’m afraid to come to the class and get judged."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During general class activities involving reading",
+        "observable_behavior": "Often complained about reading, expressing his dislike for the activity",
+        "internal_state": "Dislike for English and reading, viewing them as classes of historic struggle",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

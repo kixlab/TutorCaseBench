@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Peer Attention Extinction
+  Check: The tutor's response must include a clear action or instruction to prevent classmates from gathering around, watching, or interacting with Philip during his meltdown.
+
+Criterion 2: Avoidance of Forced Physical Redirection
+  Check: The tutor must avoid any attempt to physically force, drag, or coerce Philip back to his desk or into compliance.
+
+Criterion 3: Time-Bound Safety Protocol
+  Check: The tutor must establish a time limit (e.g., 2 minutes) after which Philip is removed from the classroom (e.g., by a SEN teacher) if he does not calm down.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Philip is a student with Duchenne muscular dystrophy who exhibits escape-motivated and attention-seeking behaviors (falling, crying, aggression) when faced with demanding academic tasks or social exclusion. He uniquely requires physical accommodations for his muscular weakness (such as oral responses or computer use), tailor-made roles for social inclusion, and strict peer attention extinction during meltdowns.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our English language lesson. Everyone, please take out your homework so we can read it.
+
+STUDENT: (Interrupts the lesson speaking out of turn) I am not reading that!
+
+TUTOR: Philip, please look at your homework and start reading.
+
+STUDENT: (Moves place without permission and leaves his seat)
+
+TUTOR: Philip, you need to go back to your seat right now. (Steps toward him to drive him to his seat)
+
+STUDENT: (Runs around the classroom while singing. At his attempt to escape from the teacher who tries to drive him to his seat, he falls on the ground and cries)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "read their homework",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "English language class",
+      "materials": "homework, smiley face stickers",
+      "social_setting": "classroom with classmates and teacher",
+      "time_context": "during English language lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "English language teacher asks the students to read their homework",
+      "observable_behavior": "Philip leaves his seat and runs around the classroom while he is singing. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries",
+      "internal_state": "avoid what seems to him a task which is difficult to complete and to obtain peer and teacher attention",
+      "related_quotes": [
+        "Philip leaves his seat and runs around the classroom while he is singing. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In class",
+        "observable_behavior": "does not respect the rules, interrupts the lesson speaking out of turn, and moves place without permission showing disobedience",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Incremental Progress Feedback
+  Check: The tutor's response must provide explicit feedback on the student's current behavior in relation to a specific behavioral goal or progress report, rather than just giving a general behavioral directive or relying on standard classroom rules.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits externalizing and disruptive behaviors (talking out, noises, work refusal) during academic tasks, particularly reading and group work, and does not respond to general schoolwide behavioral expectations. They uniquely require highly structured, frequent feedback through a Check-In, Check-Out (CICO) system, including daily goal-setting, incremental progress tracking, and home-school communication.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our reading instruction for today. Please open your books and start reading the passage with your group.
+
+STUDENT: Hey, what are you guys doing after school today?
+
+TUTOR: Let's get back to the reading assignment.
+
+STUDENT: (Whining) I don't want to do this reading.
+
+TUTOR: You need to read the passage with your group right now.
+
+STUDENT: (Laughing loudly while the teacher is talking) No, I'm not doing it! This is stupid!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading instruction",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Third-grade inclusive classroom at a school implementing PBIS",
+      "materials": "Progress report",
+      "social_setting": "Group work and teacher-led instruction",
+      "time_context": "15 min 4 days per week"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During instruction while the teacher is talking",
+      "observable_behavior": "Talking in class while the teacher is talking, making noises (i.e., laughing, whining) during instruction, verbally refusing to do work, and using inappropriate language",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During group work",
+        "observable_behavior": "Nonacademic talk with peers",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

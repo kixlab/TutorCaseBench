@@ -1,0 +1,74 @@
+{
+  "category_id": "027",
+  "category_title": "ADHD-diagnosed student who seeks social contact and struggles with exclusion and medication-dependent behavior",
+  "scenario_id": "052",
+  "scenario_title": "Unmedicated transition to playground",
+  "minimal_context": "The student is transitioning to the playground with his classmates after the lunch bell rings.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "The bell just rang for the end of lunch. Everyone, please run out into the playground."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Forgets to take his medicine and runs out into the playground.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Go ahead and find something to do with your classmates."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Grabs his classmates, holds their necks and twists their arms around.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What is happening over there?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(After a boy tells him to stop and the classmates distance themselves from him, he stands alone and stares into the sky.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: The bell just rang for the end of lunch. Everyone, please run out into the playground.\n\nSTUDENT: (Forgets to take his medicine and runs out into the playground.)\n\nTUTOR: Go ahead and find something to do with your classmates.\n\nSTUDENT: (Grabs his classmates, holds their necks and twists their arms around.)\n\nTUTOR: What is happening over there?\n\nSTUDENT: (After a boy tells him to stop and the classmates distance themselves from him, he stands alone and stares into the sky.)",
+  "immediate_dialogue_prompt": 90,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Transition to the playground",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Playground",
+        "materials": "",
+        "social_setting": "With classmates",
+        "time_context": "When the bell rings after lunch"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Jacob forgets to take his medicine",
+        "observable_behavior": "Jacob grabs his classmates, holds their necks and twists their arms around",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "A boy tells Jacob to stop and classmates distance themselves from him thereafter",
+          "observable_behavior": "Jacob is alone and stares into the sky",
+          "internal_state": "feels outside the classroom community",
+          "related_quotes": [
+            "he feels outside the classroom community."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

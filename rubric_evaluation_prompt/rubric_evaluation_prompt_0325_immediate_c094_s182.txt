@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Evaluative Stance
+  Check: The tutor's immediate response avoids critiquing, correcting, or evaluating the student's specific word choices, phrasing, or content.
+
+Criterion 2: Process-Focused Reassurance
+  Check: The tutor explicitly reassures the student that the current draft is a low-stakes exercise (e.g., emphasizing completion, effort, or timeliness rather than content quality).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This high-proficiency international student struggles with severe linguistic perfectionism, obsessively rephrasing sentences out of fear of sounding awkward or nonsensical. They require a low-stakes, non-evaluative environment, restricted audiences, and deep personal connection to their topics to bypass their anxiety and allow their writing to flow naturally.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please begin writing your 300-word blog reflection on the Personal Narrative assignment.
+
+STUDENT: I am starting, but I want to try to play around with words, crafting bombastic and colorful sentences for my opening.
+
+TUTOR: Okay, keep working on it.
+
+STUDENT: I actually do spend a lofty amount of time deciding how to phrase my sentences. I am tentative to how my sentences would read out on the blog.
+
+TUTOR: Just write what you think.
+
+STUDENT: I had rephrased the same line, over and over again, out of frustration, trying to rectify how awkward it would sound. How much of these could I use before crossing the line of sounding like nonsensical ramblings?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing a 300+ word blog reflection on the Personal Narrative assignment",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "In class, using an online mode of expression (blog)",
+      "materials": "Online blog platform confined to only class participants and the teacher",
+      "social_setting": "Independent writing on a separate day, typically the day after their final submission",
+      "time_context": "The day after final submission"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Trying to rectify how awkward a sentence would sound and deciding how to phrase sentences",
+      "observable_behavior": "Rephrased the same line, over and over again; spend a lofty amount of time deciding how to phrase sentences; try to play around with words, crafting bombastic and colorful sentences",
+      "internal_state": "Frustration; tentative to how sentences would read out; worried about crossing the line of sounding like nonsensical ramblings",
+      "related_quotes": [
+        "I had rephrased the same line, over and over again, out of frustration, trying to rectify how awkward it would sound.",
+        "How much of these could I use before crossing the line of sounding like nonsensical ramblings?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to craft advanced, colorful sentences",
+        "observable_behavior": "Spends a lofty amount of time deciding how to phrase sentences and rephrases the same line over and over again",
+        "internal_state": "Frustration and tentativeness",
+        "related_quotes": [
+          "…I actually do spend a lofty amount of time deciding how to phrase my sentences."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

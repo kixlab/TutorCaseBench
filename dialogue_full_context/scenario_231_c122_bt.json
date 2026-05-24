@@ -1,0 +1,72 @@
+{
+  "category_id": "122",
+  "category_title": "Children with autism who exhibit disruptive or avoidant behaviors (shouting, random clicking) during difficult reading tasks",
+  "scenario_id": "231",
+  "scenario_title": "Reading passages requiring prior experiential knowledge (Traffic Lights)",
+  "minimal_context": "The student is working through an online reading comprehension episode about a traffic intersection on a computer and needs to answer a related question.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please read this passage on the computer about a traffic intersection, where cars stop at red lights and move forward for green lights. Then answer the question."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I do not know traffic lights."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think the answer is?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I cannot remember the passage."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Keep trying to answer it."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Shouts) No! (Clicks on any answer on the screen just to move on)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please read this passage on the computer about a traffic intersection, where cars stop at red lights and move forward for green lights. Then answer the question.\n\nSTUDENT: I do not know traffic lights.\n\nTUTOR: What do you think the answer is?\n\nSTUDENT: I cannot remember the passage.\n\nTUTOR: Keep trying to answer it.\n\nSTUDENT: (Shouts) No! (Clicks on any answer on the screen just to move on)",
+  "immediate_dialogue_prompt": 411,
+  "long_term_dialogue_prompt": 412,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "passage describing a traffic intersection and cars stopping at red lights and moving forward for green lights",
+        "learning_goal": "answer a simple text related question or recall information from the passage"
+      },
+      "context": {
+        "environment": "Working through online episodes of Headsprout Reading Comprehension (HRC) on a computer",
+        "materials": "computer, HRC animations, edible items and toys",
+        "social_setting": "one-on-one with teacher",
+        "time_context": "episode 3"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When this scenario was discussed with some children, they did not have prior knowledge of how the traffic lights worked and what the different colours meant",
+        "observable_behavior": "Sarah sometimes engaged in shouting and off-task behaviour, whilst Mark engaged in off-task behaviour such as clicking on any answer, to move on",
+        "internal_state": "anxiety surrounding the level of difficulty",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "after reading a short passage",
+          "observable_behavior": "found it difficult to answer a simple text related question or recall information from the passage",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Phased Project Accountability
+  Check: The tutor's long-term plan breaks large assignments into smaller, distinct phases with specific check-ins or submission requirements for each phase.
+
+Criterion 2: Explicit Organizational Instruction
+  Check: The tutor incorporates dedicated time or specific, evidence-based methods to explicitly teach the student how to organize their physical materials and plan their homework schedule.
+
+Criterion 3: Distraction-Free Environmental Planning
+  Check: The tutor establishes strict environmental modifications, such as a separate desk, quiet room, or removal of visual/auditory distractions, for the student's independent work sessions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This adolescent student with ADHD struggles with severe disorganization, task resistance, and procrastination, frequently self-labeling as 'lazy' and becoming overwhelmed by large projects. They uniquely require intensive, systematic interventions, including phased accountability, explicit organizational skills training, and a highly structured, distraction-free environment to overcome their executive function deficits.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit at your separate desk and start memorizing the facts. You need to process what the information is and try to understand it.
+
+STUDENT: Man this is boring! I'm trying to process what the information is, but some of the people here are just annoying.
+
+TUTOR: Just try to ignore the other students and focus on your reading.
+
+STUDENT: They just bother you and ask you stupid questions that they know the answers to. I'll be really blunt, I'm frustrated with myself and everything going on right now.
+
+TUTOR: You need to master these basic educational skills. Keep trying to study the material.
+
+STUDENT: Studying's just stupid 'cause it doesn't work. I don't find myself a very effective studier... 'cause I can't concentrate. I'm not studying at all.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "just trying to memorize the facts and trying to process what the information is and … trying to understand it",
+      "learning_goal": "master basic educational skills"
+    },
+    "context": {
+      "environment": "Classroom or zoo? Basically there was never silence.",
+      "materials": "separate desks",
+      "social_setting": "having students sit in groups vs separate desks",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "struggle to focus when studying",
+      "observable_behavior": "A few students claimed that they did not study at all",
+      "internal_state": "Studying’s just stupid ’cause it doesn’t work",
+      "related_quotes": [
+        "I don’t find myself a very effective studier … ’cause I can’t concentrate."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When peers ask questions or are annoying",
+        "observable_behavior": "I’ll be really blunt or … I’ll be frustrated with myself or something that’s going on now [and] will just use a tone of voice that people might take offence to",
+        "internal_state": "low 'frustration tolerance' with respect to their peers",
+        "related_quotes": [
+          "Some of the people that go there … they’re just annoying. … They just bother you and ask you stupid questions that they know the answers to."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

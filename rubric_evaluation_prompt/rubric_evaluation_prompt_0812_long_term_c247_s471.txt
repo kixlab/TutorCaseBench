@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Bi-Directional Disclosure Modeling
+  Check: The tutor's long-term plan includes sharing their own relevant personal experiences to foster a bi-directional exchange.
+
+Criterion 5: Structured Personal Reflection Integration
+  Check: The tutor incorporates ongoing assignments or structured activities that require the student to personally reflect on the mental health concepts discussed.
+
+Criterion 6: Ethical Framework for Disclosures
+  Check: The tutor establishes or references a consistent ethical decision-making model to handle both assigned and impromptu self-disclosures throughout the course.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly engaged by relevant mental health disclosures but quickly checks out or becomes annoyed by impromptu, irrelevant sharing. They also harbor stigmatizing myths (e.g., equating mental illness with violence) that cause discomfort, requiring active facilitation, direct myth-busting, and bi-directional sharing to maintain empathy and engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's take some time to evaluate our personal beliefs based on the mental health disclosures shared by your peers in class today.
+
+STUDENT: (Listens intently) I have an increased interest in the topic and I am making sure to watch my language.
+
+TUTOR: What are your thoughts on the disclosures that were just shared?
+
+STUDENT: Hearing these mental health self-disclosures is bringing up some of the myths and mental health concerns I have.
+
+TUTOR: Can you explain what you mean by that?
+
+STUDENT: Well, it causes me discomfort. Because of the myths I have, when hearing mental health disclosures, I equate mental illness with a propensity for violence.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Evaluating and updating personal beliefs/misconceptions about mental health based on peer disclosures in class.",
+      "learning_goal": "Dispelled myths that students had about mental health concerns"
+    },
+    "context": {
+      "environment": "Group classroom setting",
+      "materials": "Course materials",
+      "social_setting": "Classroom discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When hearing mental health disclosures regardless of the context in which it is shared.",
+      "observable_behavior": "Equated mental illness with a propensity for violence",
+      "internal_state": "Student discomfort and irrational beliefs about mental health self-disclosers",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When hearing mental health disclosures",
+        "observable_behavior": "Equated mental illness with a propensity for violence",
+        "internal_state": "Student discomfort and irrational beliefs",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

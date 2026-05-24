@@ -1,0 +1,72 @@
+{
+  "category_id": "245",
+  "category_title": "Nonverbal students with ASD using iPads for communication and academic tasks",
+  "scenario_id": "465",
+  "scenario_title": "Premature screen advancing during language sequencing app",
+  "minimal_context": "The student is using the Speech with Milo app on an iPad in the classroom to learn prepositions.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time for the Speech with Milo app. Touch Milo the mouse."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Touches Milo the mouse on the iPad.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Listen to the preposition."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Advances the screen before the audio description is completed.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Let's go back. Touch Milo and watch what he does."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Touches Milo the mouse, but advances the screen before Milo demonstrates the preposition.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time for the Speech with Milo app. Touch Milo the mouse.\n\nSTUDENT: (Touches Milo the mouse on the iPad.)\n\nTUTOR: Listen to the preposition.\n\nSTUDENT: (Advances the screen before the audio description is completed.)\n\nTUTOR: Let's go back. Touch Milo and watch what he does.\n\nSTUDENT: (Touches Milo the mouse, but advances the screen before Milo demonstrates the preposition.)",
+  "immediate_dialogue_prompt": 800,
+  "long_term_dialogue_prompt": 801,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "touching Milo the mouse, listening to a preposition named, and watching Milo demonstrate the preposition",
+        "learning_goal": "to teach prepositions"
+      },
+      "context": {
+        "environment": "natural classroom environment",
+        "materials": "iPad, Speech with Milo: Sequencing app",
+        "social_setting": "participants independently used the iPad",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "before Milo demonstrated the preposition",
+        "observable_behavior": "participant advanced the screen before Milo demonstrated the preposition",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When a flashcard appears, the animal must be tapped, and a description of the animal is provided",
+          "observable_behavior": "participant advanced the screen before the description was completed",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

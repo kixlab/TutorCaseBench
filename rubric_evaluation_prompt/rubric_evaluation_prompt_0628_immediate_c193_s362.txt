@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Cinematic Framing
+  Check: The tutor's response must frame the reading task visually or cinematically (e.g., asking the student to imagine the story as a movie, or visualizing the plot unfolding on screen).
+
+Criterion 2: Scene-by-Scene Chunking
+  Check: The tutor's response must break the reading material down into smaller, manageable parts, explicitly framing them as 'scenes' or short script segments, rather than assigning a whole text or paragraph at once.
+
+Criterion 3: Active Scripting and Collaboration
+  Check: The tutor's response must prompt the student to actively translate the text into a script, dialogue, or physical action, ideally collaborating with a peer or the tutor to do so.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These students struggle significantly with standard reading tasks, exhibiting either active disruption (leaving seats, hitting) or passive withdrawal (head on desk, floating away) due to overwhelm and focus anxiety. They uniquely require reading to be transformed into highly scaffolded, collaborative, and visual/kinesthetic tasks, such as script-writing, storyboarding, and dramatic performance, to maintain engagement and self-control.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your book and start reading the story from our required curriculum.
+
+STUDENT: I don't have any supplies for the first day of school. Besides, this is boring and I'm worried that I won't be able to focus on reading a book.
+
+TUTOR: Here is a borrowed pencil. Please just try your best to read.
+
+STUDENT: (Puts head on the desk) I can't do it.
+
+TUTOR: Please sit up and keep trying to read the story.
+
+STUDENT: (Falls out of their seat, then gets up to sharpen the borrowed pencil for the fourth time in 10 minutes, 'accidentally' hitting another student on the way)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "reading a book and taking a story from the required curriculum",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "sixth-grade English class",
+      "materials": "book, borrowed pencil, required curriculum story, script",
+      "social_setting": "class",
+      "time_context": "first day of school / prior to the action research"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "prior to the action research when asked to read",
+      "observable_behavior": "head on the desk, falling out of their seat, no supplies for the first day of school, ‘accidentally’ hitting someone as they leave their seat for the fourth time in 10 minutes to sharpen the pencil they borrowed",
+      "internal_state": "found it boring and worried that she would not be able to focus on reading a book",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Usually during class",
+        "observable_behavior": "disruptive in class, struggles with motivation, self-control, and organization",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Immediate Idea Restoration
+  Check: The tutor provides an exact verbal reminder of the phrase David just said, or offers to dictate it for him, rather than just prompting him to 'keep trying'.
+
+Criterion 2: Metacognitive Error Modeling
+  Check: When an SR error occurs, the tutor models thinking aloud about the word's sounds or spelling instead of instructing David to manually navigate the device's text editing tools.
+
+Criterion 3: Swift Technical Buffering
+  Check: The tutor swiftly intervenes to manage, delete, or bypass disruptive SR transcriptions rather than letting David struggle with the interface.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+David is a first-grade struggling reader who experiences severe cognitive overload when transitioning from brainstorming to using speech recognition (SR) technology. The mechanical act of launching the app causes him to 'go blank' and forget his ideas, and he quickly abandons tasks or deletes entire drafts when faced with transcription errors or cumbersome editing tools. He uniquely needs immediate verbal scaffolding to hold his ideas in working memory, swift teacher intervention to bypass technical hurdles, and a shift away from using SR for full-sentence drafting toward generating word banks and messy drafts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's write your version of 'Brown Bear, Brown Bear, What Do You See?'. What sentence do you want to write?
+
+STUDENT: I see a Transformer driving by me.
+
+TUTOR: Okay, press the dictation button on the Dragon app to record that.
+
+STUDENT: (Touches the dictation button and goes blank) ...
+
+TUTOR: Keep trying.
+
+STUDENT: (Dragon times out. He repeats the process three times, but Dragon incorrectly transcribes the words. He pushes the iPad away.) I don't want to do this anymore.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Composing a version of 'Brown Bear, Brown Bear, What Do You See?' using the Dragon SR app. The student intended to write, 'I see a Transformer driving by me.'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Writing center activity",
+      "materials": "iPads with SR apps (Dragon/Siri)",
+      "social_setting": "Supervised writing center with teacher present",
+      "time_context": "mid-February"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "He touched the dictation button to launch SR",
+      "observable_behavior": "Went blank. Dragon timed out. Repeated this process three times only to have Dragon incorrectly transcribe. He then lost interest.",
+      "internal_state": "Struggled to remember what they wanted to dictate to SR",
+      "related_quotes": [
+        "I see a Transformer driving by me"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When initiating speech-to-text dictation",
+        "observable_behavior": "Touched the button to launch SR and then went blank. SR commonly timed out just as they recalled their ideas.",
+        "internal_state": "Cognitive overload from the multitasking requirements of speech recognition",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

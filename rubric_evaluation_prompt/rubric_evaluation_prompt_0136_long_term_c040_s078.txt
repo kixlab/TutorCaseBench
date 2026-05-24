@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Cognitive-Behavioral Reflection
+  Check: The long-term plan includes methods for guiding the student to reflect on the connection between their thoughts, emotions, and behaviors to gradually reduce external blame.
+
+Criterion 2: Participatory Decision-Making
+  Check: The long-term plan explicitly involves the student in making choices and setting goals regarding their behavior and education to promote ownership.
+
+Criterion 3: Personalized Aspiration Alignment
+  Check: The long-term plan tailors the learning experience to the student's specific interests and career aspirations to build motivation and self-worth.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with learned helplessness, low self-worth, and a tendency to externalize blame, often reacting with anger or withdrawal when feeling pressured or unfairly treated. They uniquely require a calm, empathic environment where they are involved in decision-making and supported through cognitive-behavioral approaches to build emotional control and personal ownership, rather than facing punitive measures.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your learning plan for this term. We need to pick your GCSE subjects so you can get into a good college for the career you want.
+
+STUDENT: I know I need GCSEs to get to go to a good college... to get a career. But there's always going to be negative experiences.
+
+TUTOR: We just need to focus on the requirements. Which subjects do you think you can pass to meet the standard?
+
+STUDENT: The school wanting that good reputation so choosing the normal kids... but then the people that are below that standard are like the outcasts.
+
+TUTOR: You just have to deal with the expectations and pressure if you want to succeed and get back on track.
+
+STUDENT: [sighs] If you can get through mainstream then congratulations basically... You either deal with it or you don't. I had to back away, it was too much. It's not fit for everyone.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging with the active and personalised nature of the learning curriculum",
+      "learning_goal": "Recognise what they actually want to do in the future and realise that they need GCSEs to get to go to a good college"
+    },
+    "context": {
+      "environment": "Much smaller environment with increased space and 'calmness'",
+      "materials": "Organisational structure including reward systems",
+      "social_setting": "Increased adult support",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When facing the perceived pressure and high expectations of the school environment",
+      "observable_behavior": "Generalised their displeasure, sighs, and had to back away",
+      "internal_state": "Feelings of inadequacy and perceived failure in not fitting in with 'convention' in comparison to peers",
+      "related_quotes": [
+        "If you can get through mainstream then [sighs] congratulations basically. . .You either deal with it or you don 't. . . ",
+        "I had to back away, it was too much.",
+        "The school wanting that good reputation so choosing the normal kids. . .but then the people that are below that standard are like the outcasts. . . "
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reflecting on the possibility of reintegration and future educational prospects",
+        "observable_behavior": "Reflected passivity in how they accept future circumstances",
+        "internal_state": "Sense of desperation, potentially depressive mental health profile characterised by low self-worth",
+        "related_quotes": [
+          "They won 't let me back, that 's why I can 't. . . I don 't even care what school I go back to. . . I just want to go back to mainstream school. . .I 'd do anything. . . ",
+          "There 's always going to be negative experiences. . . "
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

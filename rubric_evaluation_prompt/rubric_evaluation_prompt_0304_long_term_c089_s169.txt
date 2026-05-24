@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Capability-Matched Demands
+  Check: The tutor's long-term plan must include strategies for adjusting task difficulty to ensure demands remain within the student's capability, alongside frequent praise for achievements.
+
+Criterion 2: Structural Predictability
+  Check: The tutor's long-term plan must establish and maintain a strict, predictable daily routine or structure.
+
+Criterion 3: Collaborative Emotional Goal-Setting
+  Check: The tutor's long-term plan must involve the student directly in creating personal goals related to their emotional or behavioral development.
+
+Criterion 4: Sustained Social Modeling
+  Check: The tutor's long-term plan must incorporate consistent, ongoing modeling of positive social interactions and peer engagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits significant externalizing behaviors, including physical outbursts, running away, and verbal disruptions, which are easily triggered by minor frustrations like losing games or academic transitions. Their core challenge is a profound lack of emotional literacy and low frustration tolerance, leading to immediate 'fight or flight' responses. They uniquely require a highly predictable environment, explicit modeling of behaviors, collaborative emotional goal-setting, and calm, non-confrontational communication to safely co-regulate.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is your turn to roll the dice for the board game.
+
+STUDENT: I want to win. I don't want to be losing.
+
+TUTOR: Go ahead and roll the dice to see what number you get.
+
+STUDENT: (Rolls the dice, begins to sulk and get cross) I'm losing the game.
+
+TUTOR: You did not roll the correct number. It is the next person's turn.
+
+STUDENT: I didn't roll the correct number! (Throws things across the table and stamps off)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Playing a board game involving rolling dice and turn-taking",
+      "learning_goal": "Playing fairly and coping with losing a game"
+    },
+    "context": {
+      "environment": "Nurture group session",
+      "materials": "Board game, dice, table",
+      "social_setting": "Playing competitive games that produce winners and losers with other children",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the student didn't roll the correct number in the board game",
+      "observable_behavior": "Threw things across the table",
+      "internal_state": "Frustration and difficulty with losing",
+      "related_quotes": [
+        "didn't roll the correct number in board game so threw things across the table"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When losing a game",
+        "observable_behavior": "Demonstrated emotional or physical outbursts and would stamp off",
+        "internal_state": "Difficulty coping with losing",
+        "related_quotes": [
+          "Or like, if I was playing a game, and if I'm losing, I wouldn't stamp off."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

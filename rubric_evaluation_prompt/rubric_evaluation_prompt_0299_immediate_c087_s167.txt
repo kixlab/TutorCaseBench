@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Redirection to Scheduled Social Time
+  Check: The tutor's response must redirect Craig to use a structured method for peer interaction (e.g., filling out an appointment card for later) rather than relying on generic rule reminders or punitive seating changes.
+
+Criterion 2: Reinforcement of Peer Ignoring
+  Check: The tutor must explicitly prompt or praise the peers/class for ignoring Craig's off-task comments and staying focused on their own work.
+
+Criterion 3: Visual Boundary Precorrection
+  Check: The tutor must reference or establish a clear visual signal (e.g., color-coded signs, specific classroom zones) to clarify the current talk/no-talk expectation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Craig is a student whose disruptive talking-out behavior is functionally driven by a desire for peer attention during independent work. Traditional punitive measures like seating changes or rule reminders fail because they do not address this underlying social need. He uniquely requires proactive, scheduled social opportunities, structured replacement behaviors like appointment cards, and clear visual boundaries to manage his interactions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent work. Please start working quietly on your assigned tasks.
+
+STUDENT: (Turns to a peer) Hey, did you see the game last night?
+
+TUTOR: Craig, remember the rules for independent work time.
+
+STUDENT: I am just asking a question. (Turns back to peer) Seriously though, what did you think of that last play?
+
+TUTOR: Please focus on your own assignment.
+
+STUDENT: (Laughs as peer responds back) I know, right? It was crazy! Look at this drawing I did of it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working on assigned tasks",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General classroom setting during independent work time",
+      "materials": "Assigned tasks, business-size appointment cards with checklists, color-coded signs (green and red) placed in classroom zones",
+      "social_setting": "Peers present in the classroom",
+      "time_context": "Nondesignated times for talking"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During nondesignated times",
+      "observable_behavior": "Repeatedly engage in disruptive off-task and talking-out behaviors, making verbal comments or questions unrelated to the task",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When peers respond back",
+        "observable_behavior": "Results in a persistent pattern of talk outs and contingent access to peer interactions",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,76 @@
+{
+  "category_id": "287",
+  "category_title": "Elementary students with emotional/behavioral disorders who yell and throw objects",
+  "scenario_id": "541",
+  "scenario_title": "Independent practice with difficult math, reading, or writing worksheets",
+  "minimal_context": "Malcolm is assigned an independent math worksheet at his desk in the pull-out special education classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is your math worksheet. Please complete these problems at your desk by yourself."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Stands up and walks away from the desk) This is stupid. Hey, your drawing looks like garbage!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Malcolm, please go back to your desk and work on your math."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I don't know how to do this! Come help me right now!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just try your best on your own. I need to check on the others right now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Throws his pencil across the room and drops to the ground) NO! I'm not doing it!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is your math worksheet. Please complete these problems at your desk by yourself.\n\nSTUDENT: (Stands up and walks away from the desk) This is stupid. Hey, your drawing looks like garbage!\n\nTUTOR: Malcolm, please go back to your desk and work on your math.\n\nSTUDENT: I don't know how to do this! Come help me right now!\n\nTUTOR: Just try your best on your own. I need to check on the others right now.\n\nSTUDENT: (Throws his pencil across the room and drops to the ground) NO! I'm not doing it!",
+  "immediate_dialogue_prompt": 938,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Independent assignments (math/reading/writing worksheets) that the student, with assistance, was unlikely to complete with 50% or better accuracy",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Third-grade pull-out special education classroom during instructional time",
+        "materials": "Math, reading, or writing worksheets; timer worn by teacher",
+        "social_setting": "Independent work with absent teacher attention",
+        "time_context": "10 min trials"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When presented with difficult tasks and teacher attention is absent",
+        "observable_behavior": "Yelling during class, throwing objects, rolling on the floor",
+        "internal_state": "Attempting to escape and avoid difficult tasks due to repeated failure experienced across schooling",
+        "related_quotes": [
+          "displayed clear patterns of escaping difficult tasks when teacher attention was absent"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "During instruction time when teacher attention is absent",
+          "observable_behavior": "Wandering the classroom during instruction time, and making rude comments to other students",
+          "internal_state": "Attempting to engage the teacher for attention and assistance potentially lessens the aversive nature of the task (i.e., escape)",
+          "related_quotes": [
+            "when presented with difficult tasks, both students engaged in problem behavior to avoid the work"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

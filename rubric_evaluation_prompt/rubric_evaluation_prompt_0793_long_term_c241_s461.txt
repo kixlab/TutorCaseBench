@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Task Accommodation for Physical Weakness
+  Check: The tutor's long-term plan must include modifying academic tasks to accommodate his physical limitations, such as allowing oral responses, computer use, or adjusting the academic difficulty.
+
+Criterion 2: Functional Communication Training
+  Check: The tutor's plan must explicitly include teaching, prompting, or reinforcing Philip to ask for help when he encounters a demanding task.
+
+Criterion 3: Tailor-Made Social Roles
+  Check: The tutor's plan must involve creating and assigning specific, accessible roles (e.g., goalkeeper) that allow Philip to actively participate in peer activities without his physical weakness being a barrier.
+
+Criterion 4: Proactive Attention and Reinforcement System
+  Check: The tutor's plan must incorporate noncontingent attention throughout the day or a structured reinforcement system (e.g., token economy/stickers) tied to positive behaviors like completing work or asking for help.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Philip is a student with Duchenne muscular dystrophy who exhibits escape-motivated and attention-seeking behaviors (falling, crying, aggression) when faced with demanding academic tasks or social exclusion. He uniquely requires physical accommodations for his muscular weakness (such as oral responses or computer use), tailor-made roles for social inclusion, and strict peer attention extinction during meltdowns.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: The bell just rang for break time. The other students are taking the ball to the school yard to play soccer.
+
+STUDENT: (Intrudes on the classmates' game and annoys them) Hey, look at me!
+
+TUTOR: Philip, please step back from their game.
+
+STUDENT: (Continues to intrude on the game to seek attention) Give me the ball!
+
+TUTOR: They are playing their game right now.
+
+STUDENT: (Falls on the ground and cries, yelling at his classmates) You didn't invite me to play with you!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "play soccer",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school yard",
+      "materials": "ball, gloves",
+      "social_setting": "with classmates during break",
+      "time_context": "During breaks"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The bell rings for break and Philip's classmates take a ball and run to the school yard to play soccer",
+      "observable_behavior": "Philip falls on the ground yelling at his classmates for not inviting him to play with them and cries",
+      "internal_state": "does not permit Philip to engage in common activities with his classmates",
+      "related_quotes": [
+        "Philip falls on the ground yelling at his classmates for not inviting him to play with them and cries"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During breaks",
+        "observable_behavior": "intrudes on their games and annoys them seeming to seek attention",
+        "internal_state": "cannot initiate and keep social interaction with peers",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

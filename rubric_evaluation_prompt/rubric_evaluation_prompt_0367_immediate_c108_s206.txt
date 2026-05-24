@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prompting the 'Step Back' Technique
+  Check: The tutor explicitly prompts James to pause, 'step back,' or take a moment to consider the consequences before acting on his current impulse.
+
+Criterion 2: Redirection to Adult Support
+  Check: The tutor explicitly directs James to communicate with an adult (e.g., offering to listen to him or telling him to speak to a teacher) as an alternative to engaging with the peer.
+
+Criterion 3: Addressing the Defensive Narrative
+  Check: The tutor's response addresses James's defensive narrative by validating his frustration or challenging the assumption that he is inherently an 'angry person' or being judged for his brother's actions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+James is a Year 8 student at risk of exclusion due to aggressive and confrontational behavior, which stems from feeling judged for his sibling's actions and internalizing an identity as an 'angry person.' He tends to act impulsively on his first thought during peer conflicts. The evidence reveals he uniquely needs small-group mindfulness interventions that explicitly teach him to 'step back,' seek adult help, and develop self-compassion to reshape his personal narrative.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, for this small group activity, please open your journals and write a short poem about your weekend.
+
+STUDENT: I'm not writing about my weekend. It was just stress at home. I thought I'd just lost an hour just sitting there.
+
+TUTOR: Just try to write down whatever comes to mind on the page, James.
+
+STUDENT: (Glares at a peer across the table) What are you looking at? You think I took your pen? Just because of my brother? Twenty quid doesn't just go randomly missing and you forget about it, is that what you're thinking? Why can't you just be good?
+
+TUTOR: James, please ignore the others and look at your own journal.
+
+STUDENT: (Slams hands on the desk) No! Everyone just expects me to be this angry person! I'm not doing this! (Stands up aggressively towards the peer) I'm just going to go in on the first thought that I've had!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in general classroom activities alongside peers",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Journal, poems",
+      "social_setting": "Small group format",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When experiencing conflict with peers or feeling judged based on Sibling one's actions",
+      "observable_behavior": "Aggressive behaviour towards peers and disruptive, confrontational behaviour in the classroom; acting on the first thought",
+      "internal_state": "Feels judged based on Sibling one's actions; identifies as an angry person; struggling to understand the impact of Sibling one's actions",
+      "related_quotes": [
+        "I'm, just calming down … being myself instead of, this angry person.",
+        "gone in on the first thought that I've had."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing his own actions or feeling stress and confusion at home",
+        "observable_behavior": "Interlaces stories about Sibling one into stories about his own actions; uses humour and recounts trips away for escapism",
+        "internal_state": "Feels his own sense of self is intrinsically linked to the actions of Sibling one; experiencing unresolved feelings",
+        "related_quotes": [
+          "why can't you just be good?",
+          "I thought I'd just lost an hour"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

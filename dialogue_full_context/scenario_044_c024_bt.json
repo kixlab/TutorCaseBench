@@ -1,0 +1,74 @@
+{
+  "category_id": "024",
+  "category_title": "Student with ASD and intellectual disabilities who relies on visual modeling and struggles with multiplicative comparison language",
+  "scenario_id": "044",
+  "scenario_title": "Cartesian Product problem with lack of conceptual understanding",
+  "minimal_context": "Peter is taking a baseline test and working on a math problem about finding the number of ways to dress with 8 shirts and 3 pants.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is the next problem for the baseline test. You have 8 shirts and 3 pants. How many different ways can you dress?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks at the problem statement and writes down the number 8.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Keep trying. What else should you write?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Writes text related to the problem situation on the paper.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What is your final answer for the problem?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Pants, shirts, socks, and underwear.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is the next problem for the baseline test. You have 8 shirts and 3 pants. How many different ways can you dress?\n\nSTUDENT: (Looks at the problem statement and writes down the number 8.)\n\nTUTOR: Keep trying. What else should you write?\n\nSTUDENT: (Writes text related to the problem situation on the paper.)\n\nTUTOR: What is your final answer for the problem?\n\nSTUDENT: Pants, shirts, socks, and underwear.",
+  "immediate_dialogue_prompt": 77,
+  "long_term_dialogue_prompt": 78,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "8 shirts and 3 pants... how many ways to dress",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "baseline tests",
+        "materials": "model diagram, visual representation",
+        "social_setting": "interaction with the teacher",
+        "time_context": "baseline tests"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When encountering difficulties understanding the problem statements",
+        "observable_behavior": "provided responses using one of the numbers given in the problem or wrote text related to the problem situation",
+        "internal_state": "showing a clear lack of conceptual understanding for these problems",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When answering all the problems in the baseline tests incorrectly",
+          "observable_behavior": "responded with all possible clothing combinations, mentioning items such as “pants, shirts, socks, and underwear.”",
+          "internal_state": "encountered difficulties understanding the problem statements",
+          "related_quotes": [
+            "pants, shirts, socks, and underwear."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

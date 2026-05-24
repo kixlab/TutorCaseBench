@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mastery-Based Progression
+  Check: The long-term plan ensures that the student is not introduced to new academic content until the current content has been fully mastered.
+
+Criterion 2: Structured Silent Music Therapy
+  Check: The long-term plan incorporates dedicated sessions of music therapy paired with quiet activities (e.g., puzzles, picture books) in a completely silent environment.
+
+Criterion 3: Protection of Therapy Efficacy
+  Check: The long-term plan explicitly avoids combining the student's music therapy with pharmacological interventions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly sensitive to unexpected changes, reacting with severe emotional distress and self-harm (punching his head) when his routine is disrupted. He struggles with a short attention span, hyperactivity, and elopement risks, but is highly intelligent and responsive to non-verbal cues. The evidence reveals he uniquely needs continuous task redirection, strategic ignoring for undesirable behaviors, and structured music-based therapies and rewards to maintain focus and emotional regulation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We need to stop working on the puzzle now because the schedule changed, and we have to read the picture book instead.
+
+STUDENT: (Starts to cry uncontrollably.)
+
+TUTOR: Please put the puzzle away and open the book.
+
+STUDENT: (Continues crying uncontrollably and starts screaming.)
+
+TUTOR: We have to move on to the next activity now.
+
+STUDENT: (Starts punching his head and throws himself on the floor.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "any change happens by chance",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school environment",
+      "materials": "puzzles, picture books, device for changing frequencies",
+      "social_setting": "with educators or parents",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When his condition worsens or when he gets upset",
+      "observable_behavior": "starts screaming, crying, punching his head, and throwing himself on the floor",
+      "internal_state": "upset",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "if any change happens by chance",
+        "observable_behavior": "starts to cry uncontrollably",
+        "internal_state": "easily and strongly connects with things and people",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

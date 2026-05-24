@@ -1,0 +1,72 @@
+{
+  "category_id": "315",
+  "category_title": "Struggling students needing remediation",
+  "scenario_id": "584",
+  "scenario_title": "Avoiding hints to preserve mastery streak during individualized practice",
+  "minimal_context": "The student is working individually on math exercises on a computer in the lab, trying to achieve five correct answers in a row.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please continue working individually on your math exercises on the computer."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looking at the computer screen) I am trying to get five-in-a-row, but I just got this answer wrong. I'm going to try using the same strategy again for the next problem."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Keep trying your best."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I got it wrong again. I don't want to click the hint button because it will automatically give me an X."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What do you think you should do next?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I'm wary of using the embedded hints because it interrupts my accumulation of check marks and I'll have to rebuild back towards five-in-a-row. Can you just help me with it so I don't lose my points?",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please continue working individually on your math exercises on the computer.\n\nSTUDENT: (Looking at the computer screen) I am trying to get five-in-a-row, but I just got this answer wrong. I'm going to try using the same strategy again for the next problem.\n\nTUTOR: Keep trying your best.\n\nSTUDENT: I got it wrong again. I don't want to click the hint button because it will automatically give me an X.\n\nTUTOR: What do you think you should do next?\n\nSTUDENT: I'm wary of using the embedded hints because it interrupts my accumulation of check marks and I'll have to rebuild back towards five-in-a-row. Can you just help me with it so I don't lose my points?",
+  "immediate_dialogue_prompt": 1016,
+  "long_term_dialogue_prompt": 1017,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "doing math exercises, each with different sets of problems",
+        "learning_goal": "achieving five-in-a-row"
+      },
+      "context": {
+        "environment": "computer labs",
+        "materials": "computer screens",
+        "social_setting": "working individually",
+        "time_context": "30-40 minutes"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "If students get the answer wrong",
+        "observable_behavior": "continued with the same strategy for a problem or two. However, since they continued getting answers wrong, they soon sought help",
+        "internal_state": "wary of using the embedded hints for assistance because it meant they would not earn points for that exercise",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Once a student clicks on the “hint” button, they automatically receive an ✗. This interrupts their accumulation of ✔ marks",
+          "observable_behavior": "preferred turning to peers and teachers. The most common first step we observed was to ask a more math-savvy peer for help",
+          "internal_state": "motivating and gave them a sense that they are mastering different procedures",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

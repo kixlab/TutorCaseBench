@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Anxiety Externalization
+  Check: The tutor prompts the student to journal, write down, or explicitly discuss their anxieties and fears before pushing them into an assessment or adaptive task.
+
+Criterion 2: Collaborative Framing
+  Check: The tutor frames the immediate task as a collaborative activity (e.g., working together, peer-based learning) and explicitly avoids delivering a one-sided lecture.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has high prior math ability but suffers from severe anxiety and fear of failure, leading them to avoid adaptive learning platforms and rely on last-minute cramming with static LMS resources. They uniquely require interventions that de-escalate the perceived threat of learning (such as journaling or collaborative work) and explicit, modeled training in self-regulated learning to replace ineffective habits like rereading.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's log into the ALEKS adaptive learning platform so we can work on your course assignments for this week.
+
+STUDENT: I don't want to look at it. I already scored 10%, 0%, and 0% on the first three quizzes.
+
+TUTOR: We should still try to do a few problems on the platform to practice.
+
+STUDENT: I can't do it. Whenever I try, I just get so anxious and everyone knows I am "dumb".
+
+TUTOR: You just need to spend a little more time working through the modules.
+
+STUDENT: No, I'm not going to use the adaptive learning platform. I didn't attempt to make up any lost time or meet other times beyond in-class, and I'm just going to stop attending these class sessions.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging with the ALEKS adaptive learning platform for course assignments that build problem solving skills and math knowledge",
+      "learning_goal": "build problem solving skills and math knowledge"
+    },
+    "context": {
+      "environment": "7-week 'Introductory Algebra – Revisited' course",
+      "materials": "ALEKS adaptive learning platform, LMS course site, journal",
+      "social_setting": "modular preparatory mathematics course, collaborative learning activities, traditional lecture formats",
+      "time_context": "first 3 weeks of the course"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When placed in an adaptive environment that regulates on behalf of the learner",
+      "observable_behavior": "failed to use the adaptive learning platform until the end of the term (for 2 hours), stopped attending class sessions after 3 weeks, and missed most assignments thereafter",
+      "internal_state": "low self-efficacy and self-concept, and high anxiety and fear of failure",
+      "related_quotes": [
+        "She keeps saying everyone knows she is “dumb”."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing initial failure in university mathematics despite high prior math-ability",
+        "observable_behavior": "scored 10%, 0%, and 0% on the first three quizzes, Didn’t attempt to make up any lost time or meet other times beyond in-class",
+        "internal_state": "high anxiety and fear of failure",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 5: Micro-Paced Monthly Goal Setting
+  Check: The tutor's long-term plan includes setting small, specific monthly academic targets (e.g., learning 2-5 items per month) with an assessment at the end of the month.
+
+Criterion 6: Pictorial Transition Management
+  Check: The tutor incorporates the use of pictorial schedules to guide the student through daily routines and transitions between activities.
+
+Criterion 7: Personalized Social Story Integration
+  Check: The tutor plans for the creation and use of personalized stories to teach social skills, behavioral expectations, or personal cues.
+
+Criterion 8: Trial-Based Equipment Evaluation
+  Check: The tutor proposes testing or loaning new devices or apps to verify their effectiveness for the student before recommending a permanent purchase.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is a non-verbal student with classic autism who struggles with face-to-face instruction because his tendency to seek eye contact and socialize directly interferes with his visual learning style. He does not use traditional AAC devices functionally but is highly responsive to tablet-based interventions (like iPads) that offer multi-sensory input, visual symbols, and instant auditory or textual rewards. He requires a learning environment that bypasses interpersonal social barriers by mediating instruction and communication through engaging, picture-based technology.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's practice letter recognition. Please use your AAC device to identify the letter A.
+
+STUDENT: (Remains non-verbal and does not touch the AAC device to communicate.)
+
+TUTOR: Try to show me the letter on your device.
+
+STUDENT: (Sits without using the device for communicating or in recognition and identification of letters.)
+
+TUTOR: Please use the device to give your answer.
+
+STUDENT: (Continues to remain non-verbal, not using his device as a functional use of communication.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "functional use of communication",
+      "learning_goal": "communicating and in recognition and identification of letters"
+    },
+    "context": {
+      "environment": "General classroom setting",
+      "materials": "Springboard Lite, iPad, picture-based Proloquo2Go, visual symbols",
+      "social_setting": "General classroom setting",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "observation of the use of his device",
+      "observable_behavior": "not using his device as a functional use of communication",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "use of his device",
+        "observable_behavior": "not using his device as a functional use of communication",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

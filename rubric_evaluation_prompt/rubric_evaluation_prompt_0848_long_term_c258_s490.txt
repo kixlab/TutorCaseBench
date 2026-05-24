@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mastery Goal Framing
+  Check: The tutor's long-term plan includes consistent messaging that values personal improvement, skill mastery, and deep understanding over grades, speed, or peer comparisons.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly motivated and attempts to use self-regulation strategies, but often struggles with disorganization, reading difficulties, and attention interference due to social comparison. They uniquely require tasks matched to their ability level, explicit instructional clarity, and a strong emphasis on mastery and deep learning rather than performance or grades.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the grammar quiz. Please read the straightforward questions and write your answers.
+
+STUDENT: I want to get a really high grade on this quiz to demonstrate my ability to you and to my peers.
+
+TUTOR: Okay, go ahead and start working.
+
+STUDENT: (Looks around the classroom) Are the other kids already on the next section? I want to make sure I'm doing better than them.
+
+TUTOR: Keep trying to answer the questions.
+
+STUDENT: I can't pay attention to my own questions. I keep watching everyone else because I need to see if they are finishing before me.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "grammar quiz with clear and straightforward questions and answers",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "2nd grade whole-class language arts lesson",
+      "materials": "grammar quiz",
+      "social_setting": "whole-class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "comparison with others during engagement",
+      "observable_behavior": "encountered difficulties in regulating attention away from comparison with others during engagement, which interfered with his attention during engagement in the task",
+      "internal_state": "wanting to achieve high grades and to demonstrate their ability to the teacher and to peers",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During engagement in the task",
+        "observable_behavior": "interfered with his attention during engagement in the task",
+        "internal_state": "stronger emphasis on performance-approach goals",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

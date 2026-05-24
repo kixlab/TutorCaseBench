@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Process-Oriented Framing
+  Check: The tutor explicitly frames writing as a process, using terms related to practice, creativity, or risk-taking rather than innate ability.
+
+Criterion 2: Explicit Task Guidelines
+  Check: The tutor provides clear, explicit guidelines, expectations, or immediate goals for the specific writing task at hand.
+
+Criterion 3: Specific Correctional Feedback
+  Check: The tutor provides specific comments detailing exactly what the student did well and where they made errors, explicitly avoiding assigning a grade without context.
+
+Criterion 4: Low-Stakes Draft Evaluation
+  Check: The tutor evaluates the student's current draft on a credit/no-credit or completion basis rather than assigning a formal letter or percentage grade.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student avoids writing tasks and frequently fails to complete assignments due to a deeply ingrained belief that writing is an innate talent they lack because of their background. They are triggered by unstructured tasks and uncontextualized failing grades, uniquely requiring writing to be reframed as a manageable, step-by-step process through explicit checklists, low-stakes drafting, and highly specific correctional feedback.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the worksheet that lists our assignments for the next ten weeks. Your task today is to start working on the first assigned essay.
+
+STUDENT: In my opinion I don’t feel writing is important if I want to be a doctor I’m not going to write a five paragraph essay on why their ankle is broken. I will just scribble some notes and still get paid.
+
+TUTOR: We still need to complete this assignment for the class. What do you think you could write about to get started?
+
+STUDENT: Writing is never going to be easy for me. I never know what to write about or how to start it. I’m not good at spelling and I think that I would rather just talk to people. Writing is just kinda dumb.
+
+TUTOR: Just try to put some words on the paper. You have the rest of the 45-minute class to work on it.
+
+STUDENT: I’ve never passed an English class in my life. And don’t plan on it now. I’m Mexican so how am I really supposed to be good at this stuff? I'm not doing it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "First writing assignment",
+      "learning_goal": "Complete the first assigned essay"
+    },
+    "context": {
+      "environment": "45-minute writing class",
+      "materials": "Worksheet that listed each assignment and writing goal for the ten-week period",
+      "social_setting": "Classroom environment",
+      "time_context": "At the beginning of the study / first week"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When assigned the first writing assignment without explicit steps or checklists",
+      "observable_behavior": "Did not turn in an essay for the first assignment, resulting in a grade of zero; attributed writing failures to personal characteristics such as native tongue, family make-up, cultural background, and innate talent",
+      "internal_state": "Believed writing is an ability that only comes naturally; perceived writing as difficult",
+      "related_quotes": [
+        "Writing is never going to be easy for me. I never know what to write about or how to start it. I’m not good at spelling and I think that I would rather just talk to people. Writing is just kinda dumb.",
+        "I’ve never passed an English class in my life. And don’t plan on it now. I’m Mexican so how am I really supposed to be good at this stuff?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked about the importance or utility of writing",
+        "observable_behavior": "Dismissed the value of writing for future careers, stating they would rather just talk to people or scribble notes",
+        "internal_state": "Did not feel writing is important; viewed it only as a way to act smart",
+        "related_quotes": [
+          "Writing is only important when you want to look like you know what you’re talking about or want to act smart.",
+          "In my opinion I don’t feel writing is important if I want to be a doctor I’m not going to write a five paragraph essay on why their ankle is broken. I will just scribble some notes and still get paid."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

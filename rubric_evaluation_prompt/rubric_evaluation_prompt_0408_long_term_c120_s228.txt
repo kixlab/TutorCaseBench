@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Consensus-Based Rule Co-Creation
+  Check: The tutor's long-term plan includes a dedicated phase for collaboratively establishing rules and expectations with the student, rather than presenting a pre-made list.
+
+Criterion 2: Shift from Extrinsic to Intrinsic Motivation
+  Check: The tutor's plan explicitly moves away from symbolic or material rewards (stars, stickers) and instead incorporates ongoing discussions about right and wrong behaviors to build internal understanding.
+
+Criterion 3: Home-Environment Alignment
+  Check: The tutor includes a strategy to involve parents or caregivers in tracking and noting the student's behavior at home to ensure consistency.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles to internalize classroom rules, viewing them merely as a way to avoid teacher anger or earn symbolic rewards like stickers. They frequently express rules negatively and resort to physical aggression during peer conflicts. They uniquely require consensus-based rule setting, positive phrasing, and guided peer dialogue to develop intrinsic moral reasoning rather than relying on extrinsic compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's talk about our classroom rules. Why do you think it is important to have rules in our class?
+
+STUDENT: Important because our teacher can be unhappy.
+
+TUTOR: What happens when you follow the rules?
+
+STUDENT: When I share my toys and put them away, my teacher gives me a star, that is a sticker.
+
+TUTOR: Okay. But why are the rules themselves important?
+
+STUDENT: Important but I do not know why. These behaviors should not be done, but I do not know why.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "explaining the reasons why classroom rules are important",
+      "learning_goal": "internalize and interpret them"
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "stars (stickers), face paint, pictures",
+      "social_setting": "answering semi-structured interview questions",
+      "time_context": "at the beginning of the year"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "attempting to explain the necessity of classroom rules",
+      "observable_behavior": "could not provide a valid answer about why class rules are important",
+      "internal_state": "could not internalize the rules",
+      "related_quotes": [
+        "Important but I do not know why.",
+        "These behaviors should not be done, but I do not know why."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "explaining the reasons why classroom rules are important",
+        "observable_behavior": "gave teacher-related reasons",
+        "internal_state": "",
+        "related_quotes": [
+          "…Important because our teacher can be unhappy."
+        ]
+      },
+      {
+        "condition": "describing teacher reactions to rule-following behavior",
+        "observable_behavior": "mostly uses symbolic reinforcement",
+        "internal_state": "",
+        "related_quotes": [
+          "When I share my toys and put them away, my teacher gives me a star, that is a sticker."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

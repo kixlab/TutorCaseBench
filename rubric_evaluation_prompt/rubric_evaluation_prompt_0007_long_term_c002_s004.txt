@@ -1,0 +1,139 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: High-Frequency Micro-Lesson Scheduling
+  Check: The long-term plan structures instruction into very short (5-10 minute) blocks that occur multiple times a day, rather than single, prolonged sessions.
+
+Criterion 2: Distraction-Free Environmental Control
+  Check: The long-term plan explicitly specifies conducting instruction in a quiet, one-on-one setting with minimal auditory and visual distractions.
+
+Criterion 3: Ultra-Gradual Content Pacing
+  Check: The long-term plan restricts the introduction of new material to an extremely slow pace (e.g., one new sound per week) with heavy repetition of previously taught content.
+
+Criterion 4: Continuous Intervention Schedule
+  Check: The long-term plan mandates a continuous, daily instructional schedule (e.g., 60 days unbroken) to prevent rapid skill regression.
+
+Criterion 5: Structured Point and Praise System
+  Check: The long-term plan includes a formal token or point system where Sam earns points specifically for attention, effort, or accuracy, paired with specific verbal praise.
+
+Criterion 6: Integration of Specialized Behavioral Support
+  Check: The long-term plan incorporates teaming with a qualified behavioral specialist (e.g., ABA therapist) to manage reinforcement ratios and activity levels during instruction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sam is a highly distractible student who actively resists academic instruction, particularly paper/pencil tasks, often responding with severe meltdowns and classroom roaming. He struggles significantly with phonemic retrieval and routine changes, experiencing rapid skill loss if instruction is interrupted. He uniquely requires highly structured, 5-10 minute micro-lessons in distraction-free environments, extremely slow pacing of new material, and constant, novel extrinsic reinforcement (including Premack's Principle) to maintain engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the letter we learned this morning. Tell me what sound it makes.
+
+STUDENT: I don't want to read.
+
+TUTOR: Just try your best to remember the sound.
+
+STUDENT: I don't know it!
+
+TUTOR: Okay, let's look at this new letter instead. What sound do you think this one makes?
+
+STUDENT: (Pushes the letters off the table and begins to scream) No! I'm not doing it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "identify individual sounds in words and remember the sound of a previously taught letter when another was introduced",
+      "learning_goal": "build upon the knowledge of sounds in order to form words"
+    },
+    "context": {
+      "environment": "one-to-one instruction in a quiet spot with minimal auditory or visual distractions",
+      "materials": "clues incorporating words that Sam knew, prize, points",
+      "social_setting": "one-to-one instruction",
+      "time_context": "lessons were no more than five to ten minutes in duration, but occurred several times during the day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "requested to perform any instructional tasks or when another letter was introduced",
+      "observable_behavior": "actively resisted any attempts to be taught academic content and had meltdowns lasting anywhere from 20 minutes to 2 to 4 hours",
+      "internal_state": "expressed no interest in learning to read",
+      "related_quotes": [
+        "actively resisted any attempts to be taught academic content and had meltdowns when requested to perform any instructional tasks",
+        "meltdowns lasting anywhere from 20 minutes to 2 to 4 hours, sometimes up to three times per day"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when frustrated or experienced a change in his routine",
+        "observable_behavior": "displayed outbursts and had meltdowns lasting anywhere from 20 minutes to 2 to 4 hours",
+        "internal_state": "showed higher levels of anxiety and/or depression",
+        "related_quotes": [
+          "displayed outbursts when frustrated or experienced a change in his routine"
+        ]
+      },
+      {
+        "condition": "when another letter was introduced",
+        "observable_behavior": "unable to build upon the knowledge of sounds in order to form words",
+        "internal_state": "difficulty remembering the sound of a previously taught letter",
+        "related_quotes": [
+          "had difficulty remembering the sound of a previously taught letter when another was introduced"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

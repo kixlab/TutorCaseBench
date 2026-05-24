@@ -1,0 +1,76 @@
+{
+  "category_id": "093",
+  "category_title": "Reluctant Presenter",
+  "scenario_id": "181",
+  "scenario_title": "Presenting in front of the class",
+  "minimal_context": "The student is in Spanish class and is expected to make a presentation in front of the class to show their knowledge.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We're making presentations today to show our knowledge in Spanish class. It is your turn to present."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I don't want to go up there."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please walk to the front of the room to begin."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "No, I really don't want to go up there in front of the class."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You need to do your presentation now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I can't. I don't want to go up there by myself.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We're making presentations today to show our knowledge in Spanish class. It is your turn to present.\n\nSTUDENT: I don't want to go up there.\n\nTUTOR: Please walk to the front of the room to begin.\n\nSTUDENT: No, I really don't want to go up there in front of the class.\n\nTUTOR: You need to do your presentation now.\n\nSTUDENT: I can't. I don't want to go up there by myself.",
+  "immediate_dialogue_prompt": 324,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "making presentations",
+        "learning_goal": "show our knowledge"
+      },
+      "context": {
+        "environment": "Spanish class",
+        "materials": "",
+        "social_setting": "in front of the class",
+        "time_context": "The other day"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "go up there [in front of the class]",
+        "observable_behavior": "didn’t want to go up there",
+        "internal_state": "",
+        "related_quotes": [
+          "Alicia didn’t want to go up there [in front of the class] and I told her if she went up there, I’d go up there with her."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "go up there [in front of the class]",
+          "observable_behavior": "didn’t want to go up there",
+          "internal_state": "",
+          "related_quotes": [
+            "Alicia didn’t want to go up there [in front of the class] and I told her if she went up there, I’d go up there with her."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

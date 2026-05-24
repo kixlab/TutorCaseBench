@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Process-Oriented Instruction
+  Check: The tutor explicitly explains, models, or guides the student through the process of the task rather than merely stating the final objective.
+
+Criterion 2: Low-Pressure Basic Scaffolding
+  Check: The tutor provides a foundational starting point (e.g., a basic outline or first step) and allows the student to practice without imposing strict time limits or rigid micro-management.
+
+Criterion 3: Encouraging and Validating Tone
+  Check: The tutor maintains a supportive tone and explicitly avoids dismissive or discouraging language (e.g., avoiding phrases like 'just do it' or 'just complete the work').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+John is a relationship-dependent student who is highly sensitive to teacher attitude and the perceived relevance of his work. He becomes angry when told what to do without being shown how, and experiences distress when material lacks real-world application. To succeed, he requires explicit connections to his life, encouraging instruction focused on the process, and basic scaffolding that allows for independent, low-pressure practice.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your math task. You need to graph that problem.
+
+STUDENT: I need help with this.
+
+TUTOR: You gotta like, graph that problem with there.
+
+STUDENT: You're just telling me what I need to do, not how to do it.
+
+TUTOR: You just need to complete the work.
+
+STUDENT: [voice sounds angry] You aren't really teaching me anything useful! I don't know, it's just negative all the time, just attitude.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "graph that problem",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Math task",
+      "materials": "",
+      "social_setting": "Interacting with a teacher when asking for help",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when they would ask for help they would say you gotta like, graph that problem with there and just tell them what they need to do not how to do it",
+      "observable_behavior": "[voice sounds angry]",
+      "internal_state": "felt discouraged and put down",
+      "related_quotes": [
+        "you gotta like, graph that problem with there and just tell them what they need to do not how to do it"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When interacting with a teacher with a negative attitude",
+        "observable_behavior": "states he did not learn much from them",
+        "internal_state": "generally seemed angry with school and felt that his teachers had mistreated him",
+        "related_quotes": [
+          "I don’t know, just attitude.",
+          "Just negative all the time."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

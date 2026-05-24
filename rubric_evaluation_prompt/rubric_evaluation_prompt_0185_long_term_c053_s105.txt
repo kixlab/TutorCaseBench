@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Disciplinary Role Immersion
+  Check: The tutor's long-term plan organizes learning around the student assuming a professional or disciplinary role (e.g., acting as a historian, scientist, or critic).
+
+Criterion 2: Inquiry-Based Complexity
+  Check: The tutor's long-term strategy centers on guiding questions that require the student to analyze multiple perspectives and make evidence-based claims.
+
+Criterion 3: Separation of Behavior and Academic Identity
+  Check: The tutor's long-term plan evaluates and supports the student's academic progress independently of her behavioral compliance or past disciplinary data.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Janice is a student who strongly resists deficit labels (like 'slow' or 'struggling') and prescriptive remedial tasks, often reacting with verbal outbursts when treated as a behavior problem. She uniquely needs to be positioned as a capable learner through restorative practices, detailed academic questioning, and having her work framed as rigorous, disciplinary inquiry (e.g., 'hard critical thinking').
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Janice, please begin the district-mandated reading activities for today's Read 180 class.
+
+STUDENT: I'm not participating in this.
+
+TUTOR: You need to complete the assigned reading.
+
+STUDENT: I'm not doing it. You're just treating me like a behavior problem instead of a learner.
+
+TUTOR: If you keep refusing to participate, I will have to call security to escort you to the office.
+
+STUDENT: (Starts screaming) The only reason this happens is because I do have anger issues! But I just don't seem to get mad in history because she doesn't make me mad!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participate in district-mandated reading activities",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Read 180 class",
+      "materials": "district-mandated reading activities",
+      "social_setting": "Classroom setting with teacher (Ms. French)",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to participate in district-mandated reading activities and getting into a conflict with the teacher",
+      "observable_behavior": "Refusing to participate and started screaming",
+      "internal_state": "Anger issues, feeling mad",
+      "related_quotes": [
+        "Remember when [Ms. French and I] got into something and I just started screaming. The only reason that happens is because I do have anger issues . . . but in [history] I just don’t seem to get mad because [Ms. Talbot] doesn’t make me mad."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When refusing to participate in prescribed reading activities",
+        "observable_behavior": "Refusing to participate, getting into something with the teacher, and screaming",
+        "internal_state": "Anger issues",
+        "related_quotes": [
+          "Remember when [Ms. French and I] got into something and I just started screaming."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

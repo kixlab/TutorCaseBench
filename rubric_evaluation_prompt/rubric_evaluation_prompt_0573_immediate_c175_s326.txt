@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Foundational Comprehension Verification
+  Check: The tutor asks the student to recall or confirm the basic facts of the scenario before prompting them for a moral interpretation.
+
+Criterion 2: Open-Ended Reasoning Probes
+  Check: The tutor asks an open-ended, individualized follow-up question that prompts the student to explain the 'why' behind their choice or feeling.
+
+Criterion 3: Absence of Authoritarian Directives
+  Check: The tutor's response is entirely free of punitive threats, demands for blind obedience, or 'do what I say' language.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student relies on egocentric, punishment-avoidant moral reasoning and circular logic ('Because'). They are highly sensitive to perceived injustices and authoritarian discipline, which trigger intense anger, visible agitation, and retaliatory thinking. They uniquely require foundational comprehension checks, open-ended probing to articulate their reasoning, and a benevolent, non-punitive environment to resolve underlying emotional distress.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Can you tell me about a time when you felt really angry about something that happened to you?
+
+STUDENT: My other little brother, my stepbrother Ned, he... I had this action figure.
+
+TUTOR: Go on.
+
+STUDENT: He doesn’t really know what my dad’s hammer does, but he took my dad’s hammer out of his tool belt and slammed in on my action figure and he broke it into pieces that were like an inch tall.
+
+TUTOR: What happened next?
+
+STUDENT: (Visibly agitated) I was just so mad that my pressure just got out of rage and I yelled at him! Then they’ll try to do something that they weren’t supposed to do.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Recalling a personal experience of anger and injustice",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Individually conducted moral dilemma interview",
+      "materials": "",
+      "social_setting": "One-on-one interview",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Describing when his little brother took his dad's hammer and slammed it on his action figure, breaking it into pieces",
+      "observable_behavior": "Became visibly agitated and yelled",
+      "internal_state": "Intense feelings of anger; pressure got out of rage",
+      "related_quotes": [
+        "I was just so mad that my pressure just got out of rage and I yelled at him"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In response to a mother’s broken promise",
+        "observable_behavior": "Described motives to retaliate, predicting that 'Then they’ll try to do something that they weren’t supposed to do'",
+        "internal_state": "Anger",
+        "related_quotes": [
+          "Then they’ll try to do something that they weren’t supposed to do"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

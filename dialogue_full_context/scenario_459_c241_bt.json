@@ -1,0 +1,80 @@
+{
+  "category_id": "241",
+  "category_title": "Student with Duchenne muscular dystrophy exhibiting escape-motivated and attention-seeking disruptive behaviors",
+  "scenario_id": "459",
+  "scenario_title": "Written language exercise triggering escape and aggression",
+  "minimal_context": "Philip is in language class and is asked by the teacher to write a language exercise.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Class, it is time for our language lesson. Please sit at your desks and write the language exercise."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Leaves his seat without permission and wanders around the classroom annoying his classmates)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Philip, please go back to your seat and start writing."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "No! (Looks angry and continues to wander around the classroom, avoiding the demanding task)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Come here, let's go back to your desk. (Tries to drive him to his seat)"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "You're stupid! (Falls on the ground at his attempt to escape from the teacher, cries, and refuses to stand up. He exhibits physical and verbal aggression, trying to throw nearby objects to hurt anyone who is nearby)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Class, it is time for our language lesson. Please sit at your desks and write the language exercise.\n\nSTUDENT: (Leaves his seat without permission and wanders around the classroom annoying his classmates)\n\nTUTOR: Philip, please go back to your seat and start writing.\n\nSTUDENT: No! (Looks angry and continues to wander around the classroom, avoiding the demanding task)\n\nTUTOR: Come here, let's go back to your desk. (Tries to drive him to his seat)\n\nSTUDENT: You're stupid! (Falls on the ground at his attempt to escape from the teacher, cries, and refuses to stand up. He exhibits physical and verbal aggression, trying to throw nearby objects to hurt anyone who is nearby)",
+  "immediate_dialogue_prompt": 789,
+  "long_term_dialogue_prompt": 790,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "write a language exercise",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Language class",
+        "materials": "language exercise, computer, scissors",
+        "social_setting": "classroom with classmates and teacher",
+        "time_context": "during language lesson"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Philip's teacher asks the students to write a language exercise",
+        "observable_behavior": "Philip leaves his seat and wanders around the classroom annoying his classmates. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries",
+        "internal_state": "avoid what seems to him a task which is difficult to complete and to obtain peer and teacher attention",
+        "related_quotes": [
+          "Philip leaves his seat and wanders around the classroom annoying his classmates. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "While on the ground",
+          "observable_behavior": "exhibits physical and verbal aggression. In particular, he often tries to throw objects to hurt anyone who is nearby and insults his classmates and the teacher",
+          "internal_state": "always seems angry",
+          "related_quotes": []
+        },
+        {
+          "condition": "teacher's attempt to seat him again",
+          "observable_behavior": "falling, crying, and refusing to stand up",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

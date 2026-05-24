@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Student-Led Pacing and Structure
+  Check: The tutor's long-term plan explicitly avoids rigid schedules or forced activities, instead allowing the student to dictate the choice, pace, and duration of activities.
+
+Criterion 2: Triadic Social Bridging
+  Check: The tutor's long-term plan includes strategies to build social connection indirectly by joining in, observing, or praising the student's interaction with the dog/object rather than forcing direct teacher-student engagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Student A is a highly sensory-driven learner who initially explores living beings as 'part-objects' and is prone to sudden disengagement when overwhelmed or when interaction limits are reached. He uniquely requires a non-directive, child-led environment where the tutor uses declarative language (commenting) and shared pleasure rather than direct questions or instructions to foster joint attention.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the dog and the ball. Let's play together.
+
+STUDENT: (Looks at the dog and throws the ball, showing an expression of pleasure.)
+
+TUTOR: The dog brought the ball back. Throw it again.
+
+STUDENT: (Takes the ball but just holds it, looking at the dog without throwing it.)
+
+TUTOR: It is time to keep playing with the dog.
+
+STUDENT: (Suddenly drops the ball, turns completely away from the dog, and begins engaging in repetitive sensory behaviors, switching off from the interaction.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Sustaining interaction during the 20-minute session with the dog and teacher",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "School dinner hall",
+      "materials": "Dog, rope, balls, brushes, blankets, toys, biscuits, leads and harness",
+      "social_setting": "Session with a teacher and a dog",
+      "time_context": "At the end of the last two sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "At the end of the last two sessions, almost as if he had ‘had enough’",
+      "observable_behavior": "Suddenly switch off from his interactions with the dog and return to sensory behaviours",
+      "internal_state": "Almost as if he had ‘had enough’",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reaching the limit for interaction",
+        "observable_behavior": "Suddenly switch off from his interactions with the dog and return to sensory behaviours",
+        "internal_state": "Almost as if he had ‘had enough’",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Youth-Driven Alternative Credit Pathways
+  Check: The long-term plan must incorporate alternative credit-earning opportunities (e.g., internships, independent study, work-based learning) that are explicitly driven by the student's personal future goals.
+
+Criterion 2: Community Mentoring Integration
+  Check: The long-term plan must include strategies for connecting the student with community linkages, natural supports, or workplace/career mentors.
+
+Criterion 3: Team-Based Behavioral Support
+  Check: The long-term plan must involve a collaborative, team-driven approach to assess behavior (e.g., brief FBA) and implement a consistent Behavioral Support Plan across settings.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with chronic truancy, escalating discipline referrals, and severe disengagement driven by stress, anxiety, and the hopelessness of being significantly behind in credits. They require unconditional, strengths-based positive adult attention to counter their expectation of failure, alongside highly individualized alternative pathways for credit recovery and community mentoring.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's work on your written action plan to figure out some alternative activities to help you obtain credits, like an internship or independent study.
+
+STUDENT: I don't see the point of writing any of this down. I'm already significantly behind in credits and totally off track to graduate.
+
+TUTOR: What kind of work-based learning experience do you think you might like to try?
+
+STUDENT: I don't know. Thinking about school and graduation just gives me a lot of stress and anxiety. I don't really want to work with any mentors or adults right now.
+
+TUTOR: We just need to write down at least one goal for your plan today.
+
+STUDENT: (Stands up from the desk) I'm not doing this, I'm just going to leave. I already have five unexcused absences this quarter anyway, so it doesn't even matter.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Develop written action plans targeting goals identified by the youth and individualized alternative activities to obtain credits, including community- and work-based learning experiences, independent study, and internships",
+      "learning_goal": "Obtain credits"
+    },
+    "context": {
+      "environment": "Individualized school-to-career services",
+      "materials": "Written action plans",
+      "social_setting": "Individualized team development and workplace or career-related mentoring",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Being off track to graduate due to being significantly behind in credits",
+      "observable_behavior": "Exhibited chronic discipline or truancy issues, and a high absenteeism rate reflected by five or more unexcused absences in a quarter",
+      "internal_state": "Cognitive impairments related to stress and anxiety",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing difficulty forming positive relationships with peers and adults",
+        "observable_behavior": "Greater likelihood to be disengaged from school, disproportionally high rates of school discipline referrals, and high placement rates in alternative classrooms and schools",
+        "internal_state": "Stress and anxiety",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

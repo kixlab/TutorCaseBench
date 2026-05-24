@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Consistent Complete Sentence Modeling
+  Check: The tutor's long-term communication strategy relies exclusively on complete, grammatically correct sentences, intentionally avoiding fragmented or one-word replies to the student.
+
+Criterion 2: Facilitation of Extended Play-Based Dialogue
+  Check: The tutor's long-term plan incorporates dramatic play or dedicated one-on-one time designed specifically to elicit extended, multi-turn conversations rather than just academic quizzing.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is an at-risk four-year-old student with delayed language development who relies on one-word responses with adults due to a fear of making grammatical errors, despite using more complex language with peers. They occasionally resort to aggressive language during conflicts. To build their expressive language confidence, they uniquely need adults to avoid direct corrections and compliance-based commands, instead requiring open-ended questions, recasts of their errors, and elaborations on their short statements.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for center play. What are you doing in the block center?
+
+STUDENT: (To peer) I am going to build a castle in the block center. (To tutor) Castle.
+
+TUTOR: What is going to go inside the castle?
+
+STUDENT: Dogs.
+
+TUTOR: Tell me more about that.
+
+STUDENT: Big dogs. (To peer) If you don’t give me that toy, you’ll be sorry!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Child selected learning experiences in which children choose the direction of the experience",
+      "learning_goal": "Use expressive language to convey a thought, want, or need"
+    },
+    "context": {
+      "environment": "Block center or dramatic play",
+      "materials": "Blocks, toys, books",
+      "social_setting": "Non-teaching directed experiences, communicating with peers and adults",
+      "time_context": "During non-teaching directed times"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When speaking to adults during non-teaching directed experiences",
+      "observable_behavior": "Used one word responses 28.8% of the time, phrases 15.4% of the time",
+      "internal_state": "",
+      "related_quotes": [
+        "I like dogs."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When trying to get ones way",
+        "observable_behavior": "Uses aggressive/bullying language defined as threatening words",
+        "internal_state": "",
+        "related_quotes": [
+          "If you don’t give me that toy, you’ll be sorry!",
+          "I want this book. You can get one off the shelf."
+        ]
+      },
+      {
+        "condition": "When communicating with peers compared to adults",
+        "observable_behavior": "Demonstrated significantly more desired language usage when communicating with peers",
+        "internal_state": "",
+        "related_quotes": [
+          "I am going to build a castle in the block center."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

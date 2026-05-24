@@ -1,0 +1,76 @@
+{
+  "category_id": "015",
+  "category_title": "Students who become bored and disruptive or sleepy during constant lecturing",
+  "scenario_id": "031",
+  "scenario_title": "Constant dictation and lecturing for over 20 minutes",
+  "minimal_context": "The student is participating in an algebra class where the teacher is dictating notes for over 20 minutes.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please copy down the next set of algebra rules as I dictate them to you."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Yawns) You just tell and tell and tell... we only dictate even in algebra."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just keep writing what I am saying."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Puts head on desk) It's been 20 minutes of just focusing on the course, I feel sleepy."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Sit up and focus on the algebra."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Hey, did anyone watch the game last night? I'm bored.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please copy down the next set of algebra rules as I dictate them to you.\n\nSTUDENT: (Yawns) You just tell and tell and tell... we only dictate even in algebra.\n\nTUTOR: Just keep writing what I am saying.\n\nSTUDENT: (Puts head on desk) It's been 20 minutes of just focusing on the course, I feel sleepy.\n\nTUTOR: Sit up and focus on the algebra.\n\nSTUDENT: Hey, did anyone watch the game last night? I'm bored.",
+  "immediate_dialogue_prompt": 52,
+  "long_term_dialogue_prompt": 53,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Participating in an algebra class characterized by constant lecturing and dictation without student interaction.",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Attending a general classroom lecture",
+        "materials": "",
+        "social_setting": "teacher focuses exclusively on the course content",
+        "time_context": "after 20 minutes"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "after 20 minutes",
+        "observable_behavior": "all of the students feel sleepy after 20 minutes, apart from some few in the front, the rest sleeps",
+        "internal_state": "feel sleepy",
+        "related_quotes": [
+          "As most of the teachers focus only on the course, all of the students feel sleepy after 20 minutes, apart from some few in the front, the rest sleeps"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "One of the students who get bored",
+          "observable_behavior": "wants to disrupt the class, changes the subject",
+          "internal_state": "bored",
+          "related_quotes": [
+            "One of the students who get bored wants to disrupt the class, changes the subject, the teacher gets angry and send the student out of the classroom"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

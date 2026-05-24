@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Functional Communication via Choice-Making
+  Check: The tutor's long-term plan must include offering the student specific choices regarding destinations, activities, or rewards to encourage appropriate requesting.
+
+Criterion 2: Strict Contingent Reinforcement
+  Check: The tutor must explicitly state that reinforcers or rewards will only be provided after the student successfully demonstrates a desired behavior.
+
+Criterion 3: Foundational Goal Modification
+  Check: The tutor's instructional plan must focus on foundational concepts (e.g., spatial relationships, concept development, laterality) rather than advanced mobility routes.
+
+Criterion 4: Antecedent Management for Diverted Attention
+  Check: The tutor must include a strategy for identifying, modifying, or preparing for situations where their attention will be taken off the student.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has visual and cognitive impairments and exhibits severe physical aggression (hitting) specifically to regain instructor attention when it is diverted to a third party. She requires strict extinction procedures where aggression is ignored and attention is withheld, as any reprimand or redirection inadvertently reinforces the violence. She also needs structured choices to appropriately express her wants and needs.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to travel your familiar route to the music room. Go ahead and trail the wall.
+
+STUDENT: (Gets up from her seat, finds the door, and opens it independently to enter the hallway.)
+
+TUTOR: Keep trailing the wall down the hallway.
+
+STUDENT: (Travels down the hallway, trailing the wall while the instructor follows a few feet behind.)
+
+TUTOR: Please stop for a moment. (Turns to another service provider who just walked up) Hello, what was your question?
+
+STUDENT: (Realizes the instructor is not providing full attention and hits the O&M instructor in the chest.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Travel a familiar route leading from her classroom to the music room. She travels down the hallway and will trail the wall while being given verbal cues.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Hallway during an O&M lesson",
+      "materials": "Wall to trail",
+      "social_setting": "The instructor follows behind the student by a few feet. Another service provider is present.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Another service provider interrupts the lesson to ask the instructor a question. The instructor asks the student to stop for a moment. While the instructors are talking...",
+      "observable_behavior": "The student hits the O&M instructor in the chest.",
+      "internal_state": "The student realizes that the instructor is not providing his or her full attention.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the focus is taken off the student",
+        "observable_behavior": "Acts out with physical violence. This is demonstrated when the student hits the instructor.",
+        "internal_state": "Goal of receiving attention",
+        "related_quotes": []
+      },
+      {
+        "condition": "When given a cane (though not using it appropriately)",
+        "observable_behavior": "She will swing the cane and hit other people and will hold the cane tip in the air, tripping others.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

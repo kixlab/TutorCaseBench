@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Real-World Relevance
+  Check: The tutor's long-term plan incorporates consistent methods for tying the subject matter directly to the student's personal life or real-world utility, rather than teaching for mere exposure.
+
+Criterion 2: Transition to Independent Problem-Solving
+  Check: The tutor's long-term plan deliberately includes opportunities for the student to work through challenges independently by avoiding continuous over-structuring or 'hand-holding'.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+John is a relationship-dependent student who is highly sensitive to teacher attitude and the perceived relevance of his work. He becomes angry when told what to do without being shown how, and experiences distress when material lacks real-world application. To succeed, he requires explicit connections to his life, encouraging instruction focused on the process, and basic scaffolding that allows for independent, low-pressure practice.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today in language arts, we are going to learn about Greek mythology. The goal is just to expose you to it.
+
+STUDENT: Because quite frankly, many things in language arts I really don’t really care about.
+
+TUTOR: Let's just focus on the reading for now.
+
+STUDENT: I could have done without Greek mythology unless I really planned on getting on Jeopardy.
+
+TUTOR: Just try your best to get through the material.
+
+STUDENT: There’s a lot of things that you don’t really necessarily need in life they just say that they want to expose you to it. I have trouble learning from that and don't enjoy it, and that can be quite stressful in school.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "learning about Greek mythology",
+      "learning_goal": "expose you to it"
+    },
+    "context": {
+      "environment": "Language arts class",
+      "materials": "",
+      "social_setting": "",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when presented with material that has a lack of relevance and that you don't really necessarily need in life",
+      "observable_behavior": "hindered his ability to learn the material",
+      "internal_state": "caused him distress, felt it was pointless, did not care about it",
+      "related_quotes": [
+        "I could have done without Greek mythology unless I really planned on getting on Jeopardy",
+        "that can be quite stressful in school."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "if you have trouble learning from that and uh, don't really enjoy learning about it",
+        "observable_behavior": "experiences distress in school",
+        "internal_state": "finds it quite stressful",
+        "related_quotes": [
+          "there’s a lot of things that you don’t really necessarily need in life they just say that they want to expose you to it"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Activity Pivoting
+  Check: The tutor immediately pivots away from the current task to a new activity rather than insisting on completing the original task.
+
+Criterion 2: Interest Integration
+  Check: The tutor incorporates the student's stated interest or desired object directly into the new instructional activity.
+
+Criterion 3: Avoidance of Compliance Directives
+  Check: The tutor does not use verbal reminders of rules, expectations, or compliance directives to prompt participation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Chuck is a student in a self-contained CI classroom who experiences anxiety and fixation regarding missing preferred scheduled activities, such as gym. When triggered, he stops participating and verbally expresses dissatisfaction; the evidence shows he uniquely requires an immediate instructional pivot that tangibly incorporates his fixated interest (e.g., a ball) rather than verbal reminders of expectations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to sing 'Look who's here' and play the bongos.
+
+STUDENT: (Stops singing) I am not having fun.
+
+TUTOR: Please keep trying to participate with the song.
+
+STUDENT: I want to go to gym. I am worried I missed it.
+
+TUTOR: You are expected to participate in music class right now.
+
+STUDENT: (Not singing) I want to go to gym. I would like to play with a ball.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participate in the song 'Look who's here' using bongos",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Self-contained CI music class",
+      "materials": "Bongos, ball",
+      "social_setting": "Teacher (Ms. Davis), paraprofessional, and student (Chuck)",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the song 'Look who's here' while worrying about missing gym class",
+      "observable_behavior": "Chuck is not singing, and says he is not having fun. He says he wants to go to gym",
+      "internal_state": "worried he missed it",
+      "related_quotes": [
+        "not having fun",
+        "wants to go to gym"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In the course of worrying about gym class",
+        "observable_behavior": "Chuck mentioned that he would like to play with a ball",
+        "internal_state": "anxious about other schedules",
+        "related_quotes": [
+          "would like to play with a ball"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Creative Project Framing
+  Check: The tutor's long-term plan structures learning objectives as collaborative, creative endeavors (e.g., drama, design projects) rather than traditional written assignments.
+
+Criterion 2: Self-Assigned Non-Traditional Roles
+  Check: The tutor incorporates opportunities for the student to select and assume specific leadership or creative roles (e.g., director, designer) within their group.
+
+Criterion 3: Proactive Resource Scaffolding
+  Check: The tutor plans to provide specific, accessible resources or foundational text reviews before independent work begins, enabling the student to access the material without direct teacher intervention.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with traditional literacy tasks, exhibiting low resilience, high dependence on teacher support, and a strong fear of peer judgment during performances. However, they thrive when learning is reframed as a collaborative creative project where they have autonomy, can choose their peers and roles (such as designing), and receive general encouragement rather than direct instruction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright, it is time for your group to stand up and practice your drama performance for the rest of the class.
+
+STUDENT: I don't want to do the drama activity.
+
+TUTOR: You need to practice with your group.
+
+STUDENT: I just don’t like performing in front of people.
+
+TUTOR: It is part of the lesson, so please stand up and try.
+
+STUDENT: No, some people judge you. I'm not doing the performance.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in drama and performance activities",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "English classroom",
+      "materials": "Creative design materials",
+      "social_setting": "Collaborative group work",
+      "time_context": "Before the research lessons"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to perform in front of people",
+      "observable_behavior": "Expressed a dislike of drama and showed reluctance to engage in lesson activities",
+      "internal_state": "Feared being judged",
+      "related_quotes": [
+        "Some people judge you [. . .] I just don’t like performing in front of people."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with traditional lesson activities",
+        "observable_behavior": "Reluctance to engage",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

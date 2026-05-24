@@ -1,0 +1,80 @@
+{
+  "category_id": "335",
+  "category_title": "Lower-proficiency students who use L1 and gestures to express concepts in content-subject lessons",
+  "scenario_id": "620",
+  "scenario_title": "Explaining plate tectonics using gestures and L1",
+  "minimal_context": "The student is answering questions about how tectonic plates move during a Geography lesson.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "When plates move, why will it shake? How can plates move?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Remains silent)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Can you try to answer the question?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Move..."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Yes, but how can plates move?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "That way, that way, that way. [hands gesturing]",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: When plates move, why will it shake? How can plates move?\n\nSTUDENT: (Remains silent)\n\nTUTOR: Can you try to answer the question?\n\nSTUDENT: Move...\n\nTUTOR: Yes, but how can plates move?\n\nSTUDENT: That way, that way, that way. [hands gesturing]",
+  "immediate_dialogue_prompt": 1078,
+  "long_term_dialogue_prompt": 1079,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Answering the questions: 'When plates move, why will it shake? (pause) How can plates move?'",
+        "learning_goal": "Explaining plate movement in a Geography lesson"
+      },
+      "context": {
+        "environment": "Geography lesson in School C, a Content and Language Integrated Learning (CLIL) classroom",
+        "materials": "",
+        "social_setting": "Teacher-student interaction during a content-subject lesson",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When asked an open-ended academic question in L2 ('How can plates move?')",
+        "observable_behavior": "Used L1 (translated as 'That way, that way, that way') and physical gestures ('hands gesturing') instead of L2 academic language",
+        "internal_state": "",
+        "related_quotes": [
+          "That way, that way, that way. [hands gesturing]"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When participating in teacher-student interaction during observed lessons",
+          "observable_behavior": "Provides very short verbal responses, with a mean length of student turns at 1.9 s (SD = 1.6)",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "When teachers ask questions in L2",
+          "observable_behavior": "Provides no responses to questions",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

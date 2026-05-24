@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Digital Media Integration
+  Check: The tutor's long-term plan must incorporate the use of electronic media (e.g., computers, video editing, storyboarding, or scriptwriting) as the primary mode of task completion.
+
+Criterion 2: Dynamic, Student-Selected Curriculum
+  Check: The tutor's long-term plan must explicitly grant the student autonomy to select their own research topics, demonstrating flexibility rather than enforcing a pre-planned syllabus.
+
+Criterion 3: Pedagogical Adaptation over Exclusion
+  Check: The tutor's long-term strategy must address task resistance by adapting the pedagogy or task format, explicitly avoiding reliance on disciplinary exclusion or behavioral referrals.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These students are highly disengaged from traditional schooling, frequently walking out and dismissing teacher-selected tasks as boring or stupid. They uniquely require extreme flexibility, the suspension of traditional classroom rules regarding language and taboo topics, and the ability to use digital media to explore self-selected topics related to their lived experiences (e.g., gangs, drugs).
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read the next chapter of the novel independently and then answer the literal-level comprehension questions on your worksheet.
+
+STUDENT: I'm tired. I don't care about this novel.
+
+TUTOR: You need to finish the reading and the grammar worksheets.
+
+STUDENT: (Wanders over to one of the four classroom computers) I'm going to watch video clips on YouTube instead.
+
+TUTOR: Please sit back down and do your work on your own.
+
+STUDENT: I'm not doing it. If you keep trying to make me do this, I'm walking out of the classroom.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read a chapter, answer literal-level questions on it, and complete vocabulary and grammar worksheets",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Alternative education classroom",
+      "materials": "Novel, literal-level questions, vocabulary worksheets, punctuation and grammar worksheets, four classroom computers",
+      "social_setting": "Working independently",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Whenever given work to do on their own using traditional transmission pedagogy",
+      "observable_behavior": "Consistently resisted by not complying, walking out of the classroom, or not attending school, and challenged the teacher's authority",
+      "internal_state": "Tired, unmotivated, and very disengaged; don't care about the novel",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When sent to work with the counselor as a disciplinary practice",
+        "observable_behavior": "The students often withdrew",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "At every opportunity during unstructured time or transitions",
+        "observable_behavior": "Wandered to the four classroom computers to surf for information on various music groups, search for song lyrics, send e-mails, download pictures of basketball players, watch video clips on YouTube, and play interactive video games",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prompting Concrete/Visual Self-Correction
+  Check: The tutor's immediate response must direct or invite Marcia to use concrete manipulatives (blocks) or a graphic organizer (Box Method) to explain, check, or break down her work.
+
+Criterion 2: Conceptual Grounding over Mimicry
+  Check: The tutor must ask a guiding question about the underlying mathematical concept (e.g., area) rather than demonstrating the steps or telling her exactly how to move the manipulatives.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Marcia is a student who struggles with abstract multi-step algebra, frequently doubting her own correct answers and seeking teacher validation. The evidence reveals she uniquely needs simultaneous access to concrete manipulatives and graphic organizers to visually 'break down' problems and verify her own accuracy, rather than relying on direct instruction or mimicry.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's use the Box Method on your paper to multiply x minus 3 times x using only the abstract symbols.
+
+STUDENT: I don't know if I am doing this right. I'm not good at that.
+
+TUTOR: Just keep trying and write down your steps.
+
+STUDENT: Oh, the parenthesis. Oh you do the inside outside. This is supposed to be x – 3 times x. I don’t get this.
+
+TUTOR: You filled out the box. What do you think?
+
+STUDENT: (Hands paper to the teacher) This is all wrong.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transitioning from ALG to abstract symbols using the Box Method during Lesson 4",
+      "learning_goal": "Transition to abstract notation only"
+    },
+    "context": {
+      "environment": "Instructional session",
+      "materials": "Graphic organizer (the Box Method), paper",
+      "social_setting": "One-on-one tutoring session with teacher-researcher",
+      "time_context": "Lesson 4"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After accurately completing the Box Method with abstract symbols",
+      "observable_behavior": "Handing the paper to the teacher, stating 'This is all wrong', and looking disbelieving when told it is correct",
+      "internal_state": "Faulty evaluations of the accuracy of her solutions",
+      "related_quotes": [
+        "Oh, the parenthesis. Oh you do the inside outside. This is supposed to be x – 3 times x. I don’t get this.",
+        "This is all wrong"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When evaluating her own performance and accuracy during problem-solving tasks",
+        "observable_behavior": "Making frequent comments doubting her accuracy despite having an accurate solution and being able to justify her answer",
+        "internal_state": "Lacks confidence",
+        "related_quotes": [
+          "I’m not good at that",
+          "I don’t know if I am doing this right"
+        ]
+      },
+      {
+        "condition": "When regularly encouraged to rely on the tools more than the teacher",
+        "observable_behavior": "Being resistant and accusing the teacher of not helping her",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

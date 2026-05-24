@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Data-Driven Metacognitive Reflection
+  Check: The long-term plan includes a structured process for using accessible test data to objectively analyze the root causes of missed questions.
+
+Criterion 2: Implementation of Deep Study Strategies
+  Check: The long-term plan involves explicitly modeling and practicing specific, efficient study strategies to replace the student's previous shallow methods.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an 'entity learner' who reacts to academic setbacks with self-defeating beliefs ('I'm stupid') and external blame ('The professor is bad'). They uniquely require tutors to model vulnerability by sharing their own past academic struggles to build relatedness, followed by a structured shift toward data-driven metacognitive reflection and deeper study strategies.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your recent Biology 101 exam results and reflect on the questions you missed.
+
+STUDENT: I can’t do this. I’m not a Biology person.
+
+TUTOR: Why do you feel that way about the exam?
+
+STUDENT: The professor talks too fast, and the test didn’t cover the lectures in class. I’m stupid.
+
+TUTOR: Let's try to go through the test data anyway to see what happened.
+
+STUDENT: She doesn’t teach, care, or want us to pass, so I’m not going to. She's too difficult to understand and everyone agrees with me.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reflecting on disappointing exam results in Biology 101-102",
+      "learning_goal": "Determine the causes of their difficulty and become less reactionary and more proactive in facing subsequent exams"
+    },
+    "context": {
+      "environment": "Stressful environments where grades and self-esteem are at stake",
+      "materials": "Accessible data from tests, content including steps of photosynthesis, glycolysis, and the Krebs cycle",
+      "social_setting": "Study sessions with a peer fellow or supplemental instructor",
+      "time_context": "After disappointing exam results"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After disappointing exam results when students have reacted strongly to disappointing grades",
+      "observable_behavior": "Reflect on their performance in unproductive ways, circulating scripted beliefs about why they did poorly",
+      "internal_state": "Fear-inducing beliefs that result in negative emotion, believing they were not born with the necessary gift to excel and that their grades are beyond their control",
+      "related_quotes": [
+        "The professor talks too fast",
+        "The test didn’t cover the lectures in class",
+        "I’m not smart enough",
+        "I can’t do this. I’m not a math (or Biology or Chemistry) person",
+        "I’m stupid",
+        "this course is too hard for me"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing the teacher or course difficulty",
+        "observable_behavior": "Gathering only that evidence that reinforces his untested beliefs, claiming the professor doesn't teach or care, leading to increased perceived difficulty and often a self-fulfilling prophecy",
+        "internal_state": "Self-serving bias and confirmation bias; mental shortcuts arise in stressful environments",
+        "related_quotes": [
+          "He’s too difficult to understand and everyone agrees with me",
+          "She [the professor] doesn’t teach, care, or want us to pass, so I’m not going to"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

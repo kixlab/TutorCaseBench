@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained 1:1 Academic Anchoring
+  Check: The tutor provides continuous, side-by-side support during challenging academic tasks rather than giving a prompt and disengaging.
+
+Criterion 2: Validation-Based Redirection
+  Check: The tutor redirects interruptions or disruptive behavior by explicitly stating that Edward's thoughts are important and will be heard at the appropriate time, avoiding punitive or argumentative language.
+
+Criterion 3: In-the-Moment Expertise Positioning
+  Check: The tutor highlights Edward's specific knowledge, praises a successful strategy he used, or refers a peer to him for advice.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Edward is an energetic and boisterous student who uses disruptive behaviors—such as loud interruptions, silly noises, and task avoidance—to gain attention and escape challenging work like independent writing. His oppositional behavior often alienates peers, but he uniquely requires intense 1:1 academic support to stay on task, explicit validation of his ideas to prevent oppositional spirals, and structured opportunities to be viewed as a classroom expert rather than a nuisance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Edward, it is time for independent writing. Please begin writing on your notepad.
+
+STUDENT: (Breaks pencil tip) I need to sharpen my pencil first.
+
+TUTOR: Okay, sharpen it and then get to work.
+
+STUDENT: (Writes one word and stands up) I have a question.
+
+TUTOR: Please sit back down and keep trying to write.
+
+STUDENT: (Breaks pencil again and whispers conspiratorially) You should warn teachers to keep an eye on your students.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent writing during writing workshop",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Writing workshop in the classroom",
+      "materials": "Paper, notepad, pencil",
+      "social_setting": "Independent work while teacher confers with other students",
+      "time_context": "During writing workshop"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher prompts him to begin writing and then walks away to talk to another student",
+      "observable_behavior": "He hasn't written anything. He breaks and sharpens his pencil three times in five minutes. He stands up and asks a question after writing only one word. He whispers conspiratorially to a researcher.",
+      "internal_state": "Apparently to avoid writing; excellent at distracting from what his needs really are",
+      "related_quotes": [
+        "keep an eye on your students"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to write independently",
+        "observable_behavior": "Edward still does not write. He breaks and sharpens his pencil multiple times, stands up, and asks questions to distract.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

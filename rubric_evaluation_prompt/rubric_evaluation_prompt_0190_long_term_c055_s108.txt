@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Collective Responsibility Framing
+  Check: The tutor's long-term plan explicitly frames assessments, data analysis, and improvements as a collective, community-driven responsibility rather than individual achievements.
+
+Criterion 5: Structured Metacognitive Scaffolding
+  Check: The tutor incorporates the consistent use of structured prompt sheets, reflection tasks, or explicit knowledge-building principles to guide the student's ongoing self- and peer-assessment.
+
+Criterion 6: Offline-to-Online Transitioning
+  Check: The tutor plans for offline or synchronous collaborative culture-building activities (e.g., a physical 'knowledge wall' or whole-class discussion) prior to or alongside online forum work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with a poor self-image, low academic achievement, and a fear that their ideas are inadequate, which initially manifests as disengagement or a hyper-focus on competitive, quantitative metrics. They uniquely require tangible, visual collaborative tasks to lower the barrier to participation, explicit translation of data into qualitative learning opportunities, and a sustained framing of learning as a collective, community responsibility rather than an individual competition.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the Knowledge Connections Analyzer data and the prompt sheets for our discussion.
+
+STUDENT: Okay, I am looking at the bar graphs and pie charts. I can see exactly how many posts I made.
+
+TUTOR: What do you think about the results?
+
+STUDENT: My individual performance is really good. I have the highest numbers on the chart, so I am doing better than the rest of the group.
+
+TUTOR: Try to look at the rest of the information provided by the tool.
+
+STUDENT: I only notice the quantitative data. I don't really get the qualitative information, I just want to use these numbers to reflect on my own performance and compare it to the others.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interpreting KCA data during reflective assessment sessions",
+      "learning_goal": "focus on the main learning goals of knowledge building such as idea improvement, synthesis and rise-above, community knowledge"
+    },
+    "context": {
+      "environment": "Visual arts curriculum",
+      "materials": "Knowledge Forum software, Knowledge Connections Analyzer (KCA) tool, pie charts, bar graphs, tables, prompt sheets",
+      "social_setting": "reflective assessment using the KCA in a knowledge building environment",
+      "time_context": "Initial use of the Knowledge Connections Analyzer (KCA) tool"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Initial use of the Knowledge Connections Analyzer (KCA) tool to interpret data about their online discourse",
+      "observable_behavior": "noticed only the quantitative data generated by the KCA; they did not recognize the cognitive opportunities afforded by the qualitative information provided",
+      "internal_state": "perceive the assessment data from Knowledge Forum ’ integrated tools as individual-based for comparative purpose",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when using the KCA data that intended to direct students ’ attention on community performance",
+        "observable_behavior": "reflect on their own performance",
+        "internal_state": "created a competitive culture",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

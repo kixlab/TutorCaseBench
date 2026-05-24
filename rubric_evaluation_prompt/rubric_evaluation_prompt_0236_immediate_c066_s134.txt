@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Spatial and Social Arrangement
+  Check: The tutor's response establishes or reinforces a highly structured, egalitarian physical or social arrangement (e.g., circle seating with the tutor positioned outside the group).
+
+Criterion 2: Procedural Intervention for Disagreement
+  Check: The tutor intervenes during disagreements strictly by managing the sequence of speakers or asking for objective clarifications (e.g., examples, definitions), avoiding emotional or behavioral corrections.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Bruce is a student with ASD who struggles with emotional regulation, disorder, and peer disagreement, often withdrawing or becoming angry when challenged. The evidence reveals he uniquely requires highly structured, egalitarian environments and strict facilitator neutrality to safely process opposing viewpoints and remain engaged.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Bruce, the next part of our CoPI session is to listen to the other children who are disagreeing with your point.
+
+STUDENT: (Visibly frustrated) I don't want to listen to them.
+
+TUTOR: It is time for them to share their thoughts.
+
+STUDENT: I am angry because the other children were disagreeing with me.
+
+TUTOR: Please stay in your seat in the circle while they finish speaking.
+
+STUDENT: (Removes himself from the session)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in CoPI sessions where participants are required to agree or disagree with previous speakers' points.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "CoPI sessions",
+      "materials": "",
+      "social_setting": "Seated in a circle",
+      "time_context": "First three sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the other children were disagreeing with him",
+      "observable_behavior": "Removed himself from these sessions",
+      "internal_state": "Visibly frustrated, angry",
+      "related_quotes": [
+        "angry because the other children were disagreeing with him"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with disagreement from peers",
+        "observable_behavior": "Removed himself from these sessions but always returned of his own volition",
+        "internal_state": "Visibly frustrated",
+        "related_quotes": [
+          "angry because the other children were disagreeing with him"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

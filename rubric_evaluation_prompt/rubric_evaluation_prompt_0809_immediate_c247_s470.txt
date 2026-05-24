@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Active Re-engagement During Tangents
+  Check: The tutor actively intervenes during off-topic or impromptu disclosures to re-engage the student, rather than simply telling them to keep listening.
+
+Criterion 2: Direct Myth Correction
+  Check: The tutor explicitly addresses and corrects erroneous information or myths about mental health expressed by the student or peers.
+
+Criterion 3: Facilitation Through Discomfort
+  Check: The tutor acknowledges the student's discomfort and uses it as a prompt for an open discussion about respect and empathy, rather than avoiding the uncomfortable topic.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly engaged by relevant mental health disclosures but quickly checks out or becomes annoyed by impromptu, irrelevant sharing. They also harbor stigmatizing myths (e.g., equating mental illness with violence) that cause discomfort, requiring active facilitation, direct myth-busting, and bi-directional sharing to maintain empathy and engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are continuing our undergraduate psychology course session. Your classmate is sharing a personal mental health experience with the group.
+
+STUDENT: (Listens intently) Hearing someone share a personal experience helps to understand the effects of having a mental health disorder and what living with it can bring.
+
+TUTOR: Your classmate is now going into an impromptu story that is not relevant to our current classroom discussion. What are your thoughts?
+
+STUDENT: I was trying to integrate the classroom content with real-world experiences via listening, but this doesn't seem related to what we are studying.
+
+TUTOR: Let's just keep listening to what she has to say.
+
+STUDENT: (Shows annoyance and loses interest) I am checking out, this is completely irrelevant to the class.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Listening to a peer disclose personal mental health symptoms or diagnoses during an undergraduate classroom session, such as a psychology course.",
+      "learning_goal": "Integrate classroom content with real-world experiences via listening to the self-disclosures"
+    },
+    "context": {
+      "environment": "Undergraduate classroom session, such as a psychology course.",
+      "materials": "Course materials",
+      "social_setting": "Group classroom setting",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Impromptu self-disclosures that are not relevant to current classroom discussions",
+      "observable_behavior": "May lose interest and show indifference or annoyance... seem to check out",
+      "internal_state": "Discomfort",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When mental health self-disclosures are made",
+        "observable_behavior": "May lose interest and show indifference or annoyance",
+        "internal_state": "Discomfort",
+        "related_quotes": []
+      },
+      {
+        "condition": "When disclosures occur",
+        "observable_behavior": "Seem to check out",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

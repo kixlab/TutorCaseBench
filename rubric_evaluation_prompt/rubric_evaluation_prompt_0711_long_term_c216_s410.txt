@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Reinforcer Restriction
+  Check: The tutor's long-term plan restricts access to the preferred reinforcer (music) outside of targeted lessons, ensuring it is only available as a reward for desired behavior.
+
+Criterion 2: Foundational Skill Prioritization
+  Check: The tutor's long-term plan modifies mobility objectives to focus on foundational skills like concept development, spatial relationships, or laterality rather than advanced independent travel.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe task avoidance during mobility transitions by dropping to the floor, becoming 'dead weight,' and crying. They are highly motivated by musical reinforcement but will use avoidance to gain it if allowed. They uniquely require a strict differential reinforcement environment where music is exclusively contingent on compliance and immediately withdrawn upon resistance, alongside opportunities to make choices to replace avoidance behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for your O&M lesson. Please rise up from your chair.
+
+STUDENT: (Immediately begins to scream and cry, and will not stand up.)
+
+TUTOR: Come on, let's get going.
+
+STUDENT: (Immediately drops to the floor and starts screaming.)
+
+TUTOR: (Picks the child up, puts her feet under the child's, and holds him while physically prompting him to walk) We need to walk now.
+
+STUDENT: (Acts as dead weight and continues crying.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transitioning from a classroom chair to start an Orientation and Mobility lesson",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Student's classroom",
+      "materials": "Classroom chair",
+      "social_setting": "One-on-one with O&M instructor",
+      "time_context": "Pick-up time from the classroom"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the O&M instructor tells him to rise up from his chair and that it is time for his O&M lesson",
+      "observable_behavior": "The student immediately begins to scream and cry, and will not stand up. The child immediately drops to the floor and starts screaming.",
+      "internal_state": "Avoidance reasons",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the instructor picks the child up and puts her feet under the child's and holds him while physically prompting him to walk",
+        "observable_behavior": "The child is still dead weight and is crying.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

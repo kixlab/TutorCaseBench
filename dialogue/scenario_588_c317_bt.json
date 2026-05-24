@@ -1,0 +1,44 @@
+{
+  "category_id": "317",
+  "category_title": "Non-compliant students who knowingly disregard directives and persist in misbehavior",
+  "scenario_id": "588",
+  "scenario_title": "Refusal to turn around during instructional interactions",
+  "minimal_context": "The student is seated in the classroom during an instructional Q&A session.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are starting the class discussion now. Please turn around in your seat and face the front."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Continues facing the back of the room, talking to a classmate)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "I asked you to turn around."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Does not respond or move for over 20 seconds, continuing to face away)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You need to turn around so we can continue."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I'm not turning around.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are starting the class discussion now. Please turn around in your seat and face the front.\n\nSTUDENT: (Continues facing the back of the room, talking to a classmate)\n\nTUTOR: I asked you to turn around.\n\nSTUDENT: (Does not respond or move for over 20 seconds, continuing to face away)\n\nTUTOR: You need to turn around so we can continue.\n\nSTUDENT: I'm not turning around.",
+  "immediate_dialogue_prompt": 1023,
+  "long_term_dialogue_prompt": 1024,
+  "challenge_type": "Task Resistance"
+}

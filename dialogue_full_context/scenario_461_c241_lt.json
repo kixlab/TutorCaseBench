@@ -1,0 +1,74 @@
+{
+  "category_id": "241",
+  "category_title": "Student with Duchenne muscular dystrophy exhibiting escape-motivated and attention-seeking disruptive behaviors",
+  "scenario_id": "461",
+  "scenario_title": "Social exclusion during break time soccer game",
+  "minimal_context": "Philip is in the school yard during break time while his classmates are playing soccer.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "The bell just rang for break time. The other students are taking the ball to the school yard to play soccer."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Intrudes on the classmates' game and annoys them) Hey, look at me!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Philip, please step back from their game."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Continues to intrude on the game to seek attention) Give me the ball!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "They are playing their game right now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Falls on the ground and cries, yelling at his classmates) You didn't invite me to play with you!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: The bell just rang for break time. The other students are taking the ball to the school yard to play soccer.\n\nSTUDENT: (Intrudes on the classmates' game and annoys them) Hey, look at me!\n\nTUTOR: Philip, please step back from their game.\n\nSTUDENT: (Continues to intrude on the game to seek attention) Give me the ball!\n\nTUTOR: They are playing their game right now.\n\nSTUDENT: (Falls on the ground and cries, yelling at his classmates) You didn't invite me to play with you!",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 793,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "play soccer",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "school yard",
+        "materials": "ball, gloves",
+        "social_setting": "with classmates during break",
+        "time_context": "During breaks"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The bell rings for break and Philip's classmates take a ball and run to the school yard to play soccer",
+        "observable_behavior": "Philip falls on the ground yelling at his classmates for not inviting him to play with them and cries",
+        "internal_state": "does not permit Philip to engage in common activities with his classmates",
+        "related_quotes": [
+          "Philip falls on the ground yelling at his classmates for not inviting him to play with them and cries"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "During breaks",
+          "observable_behavior": "intrudes on their games and annoys them seeming to seek attention",
+          "internal_state": "cannot initiate and keep social interaction with peers",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

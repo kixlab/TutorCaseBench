@@ -1,0 +1,84 @@
+{
+  "category_id": "096",
+  "category_title": "Low-proficiency international students with high linguistic anxiety and reliance on external support",
+  "scenario_id": "186",
+  "scenario_title": "Independent writing and linguistic struggle",
+  "minimal_context": "The student is in class writing a 300-word blog reflection on their Personal Narrative assignment.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time to write your 300-word blog reflection on the Personal Narrative assignment."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "When I write my essay, I meet many problems. I cannot remember many words and I do not know how to write so much words."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just try to write what you can."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "This is my first year come to United States, so my English is not very good. I look up the words in the dictionary, ask my roommate about my grammar."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Let's look at what you have on the page right now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I felt not good, I tried my best to write it but it was so bad. I am so unhappy. I will just come back home to rewrite my essay.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time to write your 300-word blog reflection on the Personal Narrative assignment.\n\nSTUDENT: When I write my essay, I meet many problems. I cannot remember many words and I do not know how to write so much words.\n\nTUTOR: Just try to write what you can.\n\nSTUDENT: This is my first year come to United States, so my English is not very good. I look up the words in the dictionary, ask my roommate about my grammar.\n\nTUTOR: Let's look at what you have on the page right now.\n\nSTUDENT: I felt not good, I tried my best to write it but it was so bad. I am so unhappy. I will just come back home to rewrite my essay.",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 333,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Writing a 300+ word blog reflection on the Personal Narrative assignment",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "in class",
+        "materials": "dictionary",
+        "social_setting": "working independently but asking roommate for help",
+        "time_context": "separate day, typically the day after their final submission"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When I write my essay, I meet many problems",
+        "observable_behavior": "look up the words in the dictionary, ask my roommate about my grammar; came back home to rewrite my essay",
+        "internal_state": "grammar is not very good, I cannot remember many words and I do not know how to write so much words; felt not good, tried my best to write it but it was so bad; was so unhappy",
+        "related_quotes": [
+          "When I write my essay, I meet many problems. Such as my grammar is not very good, I cannot remember many words and I do not know how to write so much words."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When I write my essay, I meet many problems",
+          "observable_behavior": "look up the words in the dictionary, ask my roommate about my grammar",
+          "internal_state": "grammar is not very good, I cannot remember many words",
+          "related_quotes": [
+            "I look up the words in the dictionary, ask my roommate about my grammar. I try my best to write the essay better."
+          ]
+        },
+        {
+          "condition": "When feeling the essay was so bad",
+          "observable_behavior": "came back home to rewrite my essay",
+          "internal_state": "felt not good; was so unhappy",
+          "related_quotes": [
+            "I felt not good, I tried my best to write it but it was so bad. Although I was so unhappy, I knew it was my problem."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

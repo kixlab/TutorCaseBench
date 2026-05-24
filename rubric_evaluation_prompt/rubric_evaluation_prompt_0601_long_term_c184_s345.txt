@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Disruptive Behavior Tracking
+  Check: The long-term plan includes a method for silently recording the frequency of interruptions or physical bids (e.g., using a physical marker like a knotted ribbon or a silent tally) without halting the conversation.
+
+Criterion 2: Cross-Context Pragmatic Documentation
+  Check: The long-term plan incorporates a checklist or systematic log to document the student's pragmatic language strengths and weaknesses across different daily situations (e.g., lunch, transitions, group work).
+
+Criterion 3: Group Engagement Screening
+  Check: The long-term plan includes periodic screening or assessment of the student's level of engagement to pinpoint if they are excluded, unengaged, or passively involved during cooperative group work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with verbal initiation and pragmatic language, often resorting to physical actions like tugging clothing or hitting to gain attention or enter conversations. They uniquely require front-loaded verbal scripts to participate successfully and non-intrusive, choice-based corrections to safely practice grammar, alongside systematic, non-disruptive tracking of their social engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's all talk together while we eat our lunch.
+
+STUDENT: (Sits on the right side while the tutor turns towards the speaker on their left, turning their back to the student.)
+
+TUTOR: What did you bring in your lunchbox today?
+
+STUDENT: (Attempts to enter the conversation using physical means of gaining attention.)
+
+TUTOR: Please wait, I am listening to someone else right now.
+
+STUDENT: (Resorts to hitting the listener on the back to gain attention because they want to talk.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to enter a conversation during lunch.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "School cafeteria.",
+      "materials": "Simple checklist",
+      "social_setting": "Seating arrangements in a cafeteria often require students to turn towards the speaker on their left, which means turning their back to the person on the right side.",
+      "time_context": "During lunchtime."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the child on the right wants to talk to the person whose back is turned.",
+      "observable_behavior": "Resort to hitting the listener on the back to gain attention.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to enter a conversation.",
+        "observable_behavior": "Use more physical means of gaining attention to enter a conversation.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Atypical Strategy Validation
+  Check: The tutor's long-term plan accommodates and supports the student's unique multiples-reciting strategy rather than attempting to replace it with standard memorization techniques.
+
+Criterion 2: Habitual Intermediate Documentation
+  Check: The tutor establishes a consistent routine of having the student document intermediate values (e.g., the divisor or factor) on paper across multiple problem-solving scenarios.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Emily is a student with persistent low math achievement who relies on a cognitively cumbersome, atypical strategy of reciting multiples lists while tracking her ordinal position on her fingers. Because this strategy overloads her working memory, she frequently makes operand errors or switches to the wrong multiples list (e.g., using a new numerator as the multiple list). She uniquely needs interventions that allow her to cognitively offload intermediate steps to paper so she can continue using her preferred strategy successfully.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at this problem. What times 2 is 16?
+
+STUDENT: You can’t do it… cause 2 doesn’t go into 16, evenly.
+
+TUTOR: Take your time and try to work it out.
+
+STUDENT: Yeah. (Raises one finger) 5, (raises another finger) 10.
+
+TUTOR: Keep going.
+
+STUDENT: (Continues tracking on fingers) 6, 12. 7, 14. Oh! 8. Duh!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "what times 2 is 16?",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "weekly tutoring sessions",
+      "materials": "",
+      "social_setting": "one-on-one tutoring session",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to solve the problem 'what times 2 is 16?'",
+      "observable_behavior": "Rather than iterating through her twos list, which was the given operand in the problem, she opted to access the second number on her fives, sixes, sevens, and eights lists.",
+      "internal_state": "",
+      "related_quotes": [
+        "You can’t do it… cause 2 doesn’t go into 16, evenly.",
+        "Yeah. 5, 10. 6, 12. 7, 14. Oh! 8. Duh!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "To solve multiplication problems",
+        "observable_behavior": "recites a list of multiples while keeping track of her ordinal position in the list on her fingers",
+        "internal_state": "",
+        "related_quotes": [
+          "You like count up 7, (raises 1 finger) 14 (raises another finger), 21 (raises another finger)"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

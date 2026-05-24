@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Cognitive Barrier Reduction
+  Check: The tutor's long-term plan must incorporate detailed scaffolding templates and concrete models to support the student's independent work.
+
+Criterion 2: Dynamic Task Segmentation
+  Check: The tutor's long-term plan must break down long blocks of independent work into tightly paced, varied instructional segments (e.g., shifting between direct instruction, group work, and short tasks).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student views school negatively as a mere shelter from unemployment and struggles with curriculum they find irrelevant or overly difficult. They frequently exhibit task resistance during long periods of independent work by swearing, leaving their desk, and refusing to work. They require highly structured academic support, dynamic pacing to prevent stagnation, and pragmatic, non-punitive behavioral redirection.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your scaffolding template on the computer and start researching and drafting the text for your marketing brochure.
+
+STUDENT: This is stupid. I find this curriculum completely irrelevant and it's too hard.
+
+TUTOR: Just look at the models provided and try to write something down.
+
+STUDENT: I don't even want to be here. School is just a shelter from unemployment anyway.
+
+TUTOR: You need to complete the tasks to pass the subject. Please keep working.
+
+STUDENT: (Stands up and leaves the desk) This is fucking bullshit. I'm not doing any more work, that's all I'm doing for the whole 70 minutes.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Researching their individual topics and drafting their texts for a persuasive marketing brochure or a script for a business proposal to be delivered in a speech",
+      "learning_goal": "Complete the tasks to pass the subject"
+    },
+    "context": {
+      "environment": "Computer laboratory",
+      "materials": "Detailed scaffolding templates, models",
+      "social_setting": "Individual seatwork with teacher monitoring and individual teacher-student dialogue",
+      "time_context": "70 minutes of class time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During individual seatwork when expected to focus and actually do some work on the assignment",
+      "observable_behavior": "Leaving desks, engaging in off-task behaviour, swearing, and completing minimal work over 70 minutes",
+      "internal_state": "Finds the curriculum irrelevant or too hard; school has become a shelter from unemployment",
+      "related_quotes": [
+        "That's it? All you've done in 70 minutes?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to work independently on assignments in the computer lab",
+        "observable_behavior": "Swearing and using inappropriate language",
+        "internal_state": "Experience of schooling is negative; they do not get on with teachers",
+        "related_quotes": [
+          "Language!",
+          "Can you please stop the language. I don't like it!",
+          "Watch your language . . . that's not appropriate!"
+        ]
+      },
+      {
+        "condition": "During extended periods of individual seatwork",
+        "observable_behavior": "Leaving their desk, acting inappropriately, and avoiding the assignment task",
+        "internal_state": "",
+        "related_quotes": [
+          "Can you please come back to your desk and actually do some work on your assignment?",
+          "Stop being inappropriate and get on with your work!",
+          "Come on, focus! Sh!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

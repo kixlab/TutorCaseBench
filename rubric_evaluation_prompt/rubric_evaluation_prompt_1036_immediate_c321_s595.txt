@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Verbal Processing Facilitation
+  Check: The tutor engages Julia in a collaborative dialogue to talk through her ideas or specific trouble areas, rather than simply encouraging her to 'keep trying' or work independently.
+
+Criterion 2: Concrete and Tactile Scaffolding
+  Check: The tutor provides or prompts the use of a concrete tool or strategy (such as a graphic organizer, a physical metaphor like 'writer's soup', or a 'cut and paste' method) to help her structure or revise her writing.
+
+Criterion 3: Personal Experience Integration
+  Check: The tutor encourages Julia to connect the writing prompt to her personal life, experiences, or allows her autonomy in choosing her specific topic.
+
+Criterion 4: Absence of Rote Drilling
+  Check: The tutor avoids using repetitive drills, rigid grammar corrections without discussion, or forcing her to push through the block entirely on her own.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Julia is a highly social 11-year-old who experiences severe blocks with independent writing, frequently raising her hand for immediate help because she struggles with planning, organization, and sentence structure. Her core behavioral pattern is an inability to start or move past the first paragraph without direct teacher intervention and verbal processing. However, her struggles dissipate when she is allowed to connect writing to her personal life, use concrete organizational tools, or leverage digital storytelling where she feels like an expert.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now that our mini-lesson is over, please work independently to analyze the prompt, use your graphic organizers to plan, and begin writing your first draft.
+
+STUDENT: (Raises hand immediately) I need help. I can't get started on my writing.
+
+TUTOR: Just look at the graphic organizer and try your best to fill in the first section.
+
+STUDENT: But I struggle with the planning part. I have difficulty working independently on this.
+
+TUTOR: Keep trying. Just write down whatever ideas come to your mind first.
+
+STUDENT: (Complaining) I can't! I don't know how to organize it, and my sentence structure and spelling are all wrong. I need you to come over here and talk through my trouble areas with me, or I won't be able to write anything at all!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Analyze the prompt, plan their writing using graphic organizers, write a first draft",
+      "learning_goal": "Improve writing skills of children with LD"
+    },
+    "context": {
+      "environment": "Daily writing instruction (8:00-9:00 am) and afternoon sessions during February",
+      "materials": "Graphic organizers, computer applications, Garage Band software",
+      "social_setting": "Working independently in a class where she enjoyed friendships with several girls",
+      "time_context": "Ten to twenty minute mini-lesson followed by thirty minutes of writing time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to work independently to get started on her writing",
+      "observable_behavior": "Her hand was often the first one to go up for help; complaining",
+      "internal_state": "Struggled with planning, organization, sentence structure, grammar, and spelling",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Without help from the teacher",
+        "observable_behavior": "Would not be able to get started on her writing",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Concrete Object Referencing
+  Check: The tutor's immediate response includes presenting a concrete physical object related to the activity to verify understanding or repair the communication breakdown.
+
+Criterion 2: De-escalation Space and Time
+  Check: The tutor explicitly provides physical distance and a designated calm-down time (e.g., 10 minutes) in response to his spitting or dropping to the floor, avoiding forced proximity.
+
+Criterion 3: Low-Demand Re-engagement
+  Check: The tutor attempts to re-engage Adam by introducing a highly motivating alternative activity (e.g., massage box) and using non-verbal cues (e.g., tapping the floor) to invite interaction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Adam is an 8-year-old who communicates through pre-symbolic behaviors, AAC, and physical actions, often protesting non-preferred transitions by sitting on the floor and spitting. The evidence reveals he uniquely requires adults to respect his need for physical space and a 10-minute calm-down period during dysregulation, as forcing proximity escalates his behavior. He also relies on concrete objects of reference to repair communication breakdowns and highly motivating sensory activities paired with non-verbal cues to successfully re-engage.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Adam, it is time to transition and go outside for horse riding.
+
+STUDENT: (Adam pushes the horse riding picture away and shows a distressed facial expression.)
+
+TUTOR: We need to go outside now. Let's get your riding boots.
+
+STUDENT: (Adam drops down and sits on the floor in the lounge, refusing to move.)
+
+TUTOR: Come on, Adam, you need to stand up.
+
+STUDENT: (As the teacher comes near him, Adam spits at them, showing an intense protest against the activity.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transitioning to go outside for horse riding",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Lounge",
+      "materials": "Symbol, riding boots, cupboard, massage box, chair",
+      "social_setting": "One-on-one with teacher",
+      "time_context": "10:05am"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When his teacher came near him after he decided that he didn't want to go",
+      "observable_behavior": "Sat on the floor in the lounge and spat",
+      "internal_state": "Adam seemed to have decided that he didn’t want to go; clear and often strong views about how he wanted to spend his time",
+      "related_quotes": [
+        "Adam seemed to have decided that he didn’t want to go; he sat on the floor in the lounge and spat when his teacher came near him."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When presented with a non-preferred activity or communication breakdown",
+        "observable_behavior": "Intensity of his protests, pushing away, spitting, and refusals",
+        "internal_state": "Clear and often strong views about how he wanted to spend his time",
+        "related_quotes": [
+          "intensity of his protests at school regarding horse riding",
+          "pushing away, spitting"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Tangible Reinforcement and Break Provision
+  Check: The tutor offers a tangible reinforcer (e.g., toy, edible) or explicitly grants/suggests a break when the student shows signs of frustration or task avoidance.
+
+Criterion 2: Alternative Modality Vocabulary Redirection
+  Check: The tutor shifts away from the main reading task/interface to explicitly teach the unknown word using an alternative method (e.g., picture matching, sentence construction) before returning to the question.
+
+Criterion 3: Visual Step-by-Step Prompting
+  Check: The tutor provides or refers to a visual aid (such as a cue card or numbered list) and directs the student to the specific next step required to answer the question.
+
+Criterion 4: Simplified Instructional Language
+  Check: The tutor uses highly simplified, short sentences and accessible language to deliver instructions or explanations.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has expressive language deficits and lacks prior experiential knowledge, making abstract reading comprehension highly frustrating. When confronted with unknown vocabulary or unfamiliar scenarios, they quickly resort to task avoidance behaviors such as shouting or rapidly clicking random answers to escape the demand. They require highly concrete interventions, including tangible reinforcers, off-screen vocabulary building, visual step-by-step prompts, and real-world experiential learning to build necessary background knowledge.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read this passage on the computer about a traffic intersection, where cars stop at red lights and move forward for green lights. Then answer the question.
+
+STUDENT: I do not know traffic lights.
+
+TUTOR: What do you think the answer is?
+
+STUDENT: I cannot remember the passage.
+
+TUTOR: Keep trying to answer it.
+
+STUDENT: (Shouts) No! (Clicks on any answer on the screen just to move on)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "passage describing a traffic intersection and cars stopping at red lights and moving forward for green lights",
+      "learning_goal": "answer a simple text related question or recall information from the passage"
+    },
+    "context": {
+      "environment": "Working through online episodes of Headsprout Reading Comprehension (HRC) on a computer",
+      "materials": "computer, HRC animations, edible items and toys",
+      "social_setting": "one-on-one with teacher",
+      "time_context": "episode 3"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When this scenario was discussed with some children, they did not have prior knowledge of how the traffic lights worked and what the different colours meant",
+      "observable_behavior": "Sarah sometimes engaged in shouting and off-task behaviour, whilst Mark engaged in off-task behaviour such as clicking on any answer, to move on",
+      "internal_state": "anxiety surrounding the level of difficulty",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "after reading a short passage",
+        "observable_behavior": "found it difficult to answer a simple text related question or recall information from the passage",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

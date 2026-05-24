@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Concept-Motor Decoupling
+  Check: The tutor's long-term plan must explicitly separate conceptual learning from motor execution, prioritizing the understanding of geometric relationships before practicing the physical use of tools.
+
+Criterion 2: Sustained Interface Customization
+  Check: The tutor's plan must include ongoing adjustments to Dynamic Geometry programs or TUIs based on the student's personal learning characteristics and motor needs.
+
+Criterion 3: Inclusive Social Integration
+  Check: The tutor's plan must incorporate structured peer collaboration or group work where the student uses their supportive interface to participate equally with classmates.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has low fine motor skills, making standard geometry tools (compasses, rulers) and computer mice inaccessible and stressful. They tend to rely on assistants to draw for them, which excludes them from active, concrete-experiential learning. They uniquely require Tangible User Interfaces (TUIs), customized movement sensitivity, and a pedagogical approach that separates conceptual geometric learning from motor skill development to achieve independence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start the geometry activity on the computer. Please use the mouse to click and drag the shape to the correct spot on the screen.
+
+STUDENT: (Tries to move the mouse but the cursor shoots across the screen) I can't get it to go where I want. It's moving too fast.
+
+TUTOR: Just try to move it a little slower and click the button.
+
+STUDENT: (Presses the mouse button heavily and misses the shape) I missed it again. I am not an active user of computers, I don't know how to do this.
+
+TUTOR: Keep trying, you just need to practice using the mouse.
+
+STUDENT: (Pushes the mouse away, looking stressed) I can't do this! It's too hard to control the speed and intensity, and I keep messing up the geometry task. I don't want to do this anymore.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Using a computer with mouse and keyboard as the interface for learning",
+      "learning_goal": "Geometry teaching"
+    },
+    "context": {
+      "environment": "Inclusive classroom",
+      "materials": "Desktop computers, mouse and keyboard, tangible user interface (TUI)",
+      "social_setting": "Computer-supported activities",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Because they are not active users of computers",
+      "observable_behavior": "Have difﬁculties using a computer with mouse and keyboard as the interface for learning",
+      "internal_state": "Lack conﬁdence and are stressed",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When handling physical objects with specific direction, intensity, and speed during geometry tasks",
+        "observable_behavior": "Less precise in their ability to determine the direction and intensity of movement handling descent, loading and speed",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

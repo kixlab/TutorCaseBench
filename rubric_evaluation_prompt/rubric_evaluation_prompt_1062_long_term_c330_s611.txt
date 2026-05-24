@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Maintenance of Trust and Privileges
+  Check: The tutor's long-term plan must explicitly allow the student to retain their normal privileges, environment, or autonomy (e.g., keeping their seat) without imposing ongoing restrictions.
+
+Criterion 2: Framing Behavior as an Isolated Anomaly
+  Check: The tutor's long-term strategy must frame the misbehavior as an uncharacteristic, isolated incident rather than proposing a chronic behavior management plan or ongoing behavioral tracking.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student generally has a 'good' reputation but occasionally exhibits severe, uncharacteristic misbehaviors ranging from cheeky defiance to potentially dangerous physical acts. Because they experience strong internal remorse after acting out, they uniquely require a 'light touch' approach—ignoring minor infractions and giving simple warnings for major ones—rather than escalating discipline.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's continue with our language arts lesson. Please read the next paragraph.
+
+STUDENT: (Sits near the second-story window, holding a heavy metal pencil sharpener dispenser) Okay.
+
+TUTOR: What do you think about the story so far?
+
+STUDENT: (Looks out the window at the kindergarten class at recess in the yard below) It's fine.
+
+TUTOR: Let's keep going with the lesson.
+
+STUDENT: (Throws the heavy metal pencil sharpener dispenser out the second-story window near his desk, narrowly missing a cluster of kindergartners playing in the yard below)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a language arts lesson",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom, student is seated near a second-story window with a cluster of kindergartners playing in the yard below",
+      "materials": "Heavy metal pencil sharpener dispenser",
+      "social_setting": "Whole class lesson with Ms. Williams",
+      "time_context": "In the middle of a language arts lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "In the middle of a language arts lesson",
+      "observable_behavior": "Threw a heavy metal pencil sharpener dispenser out the second-story window near his desk, narrowly missing a cluster of kindergartners playing in the yard below",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "After committing a serious infraction and getting in trouble",
+        "observable_behavior": "Looks absolutely frightened, sits wide-eyed and mute, blushes",
+        "internal_state": "Scared and sorry",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

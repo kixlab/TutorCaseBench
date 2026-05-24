@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Natural Communication Temptation
+  Check: The tutor creates a communication temptation (e.g., providing an 'inadequate portion' of a preferred item or briefly pausing a fun activity) and waits for the student to initiate.
+
+Criterion 2: Playful Parallel Engagement
+  Check: The tutor engages in parallel play, uses animated/silly actions, or sings alongside the student without demanding direct eye contact or forced participation.
+
+Criterion 3: Elimination of Behavior Directives
+  Check: The tutor's response contains zero commands, behavioral directives, or demands for compliance (e.g., no 'look at me', 'say help', or 'sit down').
+
+Criterion 4: Strategic Use of Silence
+  Check: The tutor intentionally leaves pauses and silences unfilled after an action, rather than continuously talking, prompting, or dominating the interaction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has minimal to no functional speech and communicates primarily through non-verbal requests when they need help accessing motivating items. They are highly sensitive to demands, expectations, and adult-dominated interactions, frequently ignoring or protesting when given directives. To engage successfully, the student requires adults to follow their lead, use natural communication temptations (like inadequate portions), and leave silences unfilled to encourage spontaneous initiation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the party string and the balloon pump. Press the nozzle to spray the string.
+
+STUDENT: (Tries to press the nozzle but cannot push it down. Hands the can to the tutor.)
+
+TUTOR: What do you say? Tell me what you want.
+
+STUDENT: (Looks away from the tutor and stares at the wall, ignoring the question.)
+
+TUTOR: Look at me. You need to say 'help' if you want the string.
+
+STUDENT: (Pushes the tutor's hand away and makes a loud grunting noise, turning his back to the table.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Access a motivating item independently, specifically interacting with party string and pumping up balloons",
+      "learning_goal": "Encourage the pupil to use his words to request more"
+    },
+    "context": {
+      "environment": "1:1 interaction sessions",
+      "materials": "Motivating items including party string and balloons",
+      "social_setting": "One-on-one interaction with a classroom adult",
+      "time_context": "10-minute videoed 1:1 interaction sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Immediately followed their adults' directive communication",
+      "observable_behavior": "Ignoring or protesting at what the adults did or said at a rate ranging from 0.42 - 4.6 incidences per minute",
+      "internal_state": "Did not like demands and expectations placed on them",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When unable to access a motivating item independently",
+        "observable_behavior": "Occasionally requests help non-verbally from adult",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When adults used 'Behaviour Directives' (directive actions and utterances that sought to control pupils' behaviour/attention)",
+        "observable_behavior": "Ignoring or protesting at what the adults did or said",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

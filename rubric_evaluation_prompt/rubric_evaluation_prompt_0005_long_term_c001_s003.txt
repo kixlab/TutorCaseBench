@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Predictable Routine Integration
+  Check: The tutor's long-term plan includes establishing fixed, predictable routines and explicitly communicating the student's specific role within that daily cycle.
+
+Criterion 2: Stability-Focused Instruction
+  Check: The tutor plans to maximize academic instruction and behavioral reflection exclusively during periods when the student is emotionally stable and calm.
+
+Criterion 3: Modeling Patience for Peer Culture
+  Check: The tutor's plan includes explicitly modeling calm, patient responses to the student's outbursts to teach peers how to support and tolerate him.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences intense emotional distress, physical tantrums, and sudden anger triggered by transitions, perceived loss of time, and unmet expectations. His profound perfectionism makes it nearly impossible for him to submit incomplete work without a breakdown. He uniquely requires conditional autonomy to finish tasks, highly structured routines, and transitions bridged by preferred activities to maintain emotional regulation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here are your drawing materials and the prize chocolates you won in the mind-game. You can start drawing your picture titled 'Dragon Tower'.
+
+STUDENT: (Sits at the desk, appearing calm and focused as he begins to draw the picture.)
+
+TUTOR: You have been working for a short while. Keep going.
+
+STUDENT: (Stops drawing and suddenly raises his head in a burst of anger.)
+
+TUTOR: Remember, you wanted to draw pictures.
+
+STUDENT: My time! My time lost in vain! (Starts shouting inside the classroom and throws the prize chocolates.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Drawing a picture titled 'Dragon Tower'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Inside the classroom",
+      "materials": "Prize chocolates won in a mind-game, drawing materials",
+      "social_setting": "Working with researchers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After a short while of being calm and focused drawing",
+      "observable_behavior": "Rose his head in a burst of anger. And started yelling: 'My time! My time lost in vain!'... started shouting inside the classroom and threw those prize chocolates at us",
+      "internal_state": "Burst of anger, conviction and transition issues",
+      "related_quotes": [
+        "My time! My time lost in vain!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "If he does not get an extra piece of food (tangerine)",
+        "observable_behavior": "He starts insisting if he does not get that extra one. He starts having nervous breakdowns.",
+        "internal_state": "Getting that piece of food is vital for him",
+        "related_quotes": []
+      },
+      {
+        "condition": "When playing a game and not getting the cards he wanted",
+        "observable_behavior": "He did not enjoy the game at all and he kept on complaining",
+        "internal_state": "",
+        "related_quotes": [
+          "Why not the knight, why can I not draw the dragon card?"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

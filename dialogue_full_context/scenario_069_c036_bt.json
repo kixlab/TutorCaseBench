@@ -1,0 +1,84 @@
+{
+  "category_id": "036",
+  "category_title": "High-intelligence student with inattentive-type ADHD working below potential",
+  "scenario_id": "069",
+  "scenario_title": "Unmedicated during a Science test",
+  "minimal_context": "Gail is taking a Science test in her classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Gail, please put your extra credit poster board away and start your Science test."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Takes an inordinate amount of time to put her poster board along the wall, then sits down and takes a long time choosing a different pen while watching the girl beside her put her hair in a ponytail holder)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please focus on your paper and keep working."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Gets up to use the restroom, spends two minutes rearranging the keys on the hooks, and takes a circuitous route back to her desk after signing back in)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "There are 15 minutes remaining in the Science period. Please finish your test."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Starts writing on her hand, marks one answer on her test, then goes across the room to wash the stuff off her hands at the sink. She comes back and begins to draw on her knee, below her skirt)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Gail, please put your extra credit poster board away and start your Science test.\n\nSTUDENT: (Takes an inordinate amount of time to put her poster board along the wall, then sits down and takes a long time choosing a different pen while watching the girl beside her put her hair in a ponytail holder)\n\nTUTOR: Please focus on your paper and keep working.\n\nSTUDENT: (Gets up to use the restroom, spends two minutes rearranging the keys on the hooks, and takes a circuitous route back to her desk after signing back in)\n\nTUTOR: There are 15 minutes remaining in the Science period. Please finish your test.\n\nSTUDENT: (Starts writing on her hand, marks one answer on her test, then goes across the room to wash the stuff off her hands at the sink. She comes back and begins to draw on her knee, below her skirt)",
+  "immediate_dialogue_prompt": 119,
+  "long_term_dialogue_prompt": 120,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Taking a Science test today",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "1:30 pm Science",
+        "materials": "Science test, pen, poster board, restroom keys on hooks, clock, sink",
+        "social_setting": "The class is taking a Science test today. As the papers are handed out the students that have done extra credit projects are turning them in. Girl beside her, girls whispering quietly behind her.",
+        "time_context": "1:30 pm"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "For the 15 minutes remaining of this Science period",
+        "observable_behavior": "goes off task again 3 minutes later and starts writing on her hand... marks one answer on her test and then goes across the room to wash the stuff off her hands at the sink. Then she begins to draw on her knee, below her skirt.",
+        "internal_state": "Breaks in her focus occur",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When turning in extra credit projects at the start of the test",
+          "observable_behavior": "taking an inordinate amount of time to put her poster board with the other projects along the wall closest to her desk... misses part of the instructions regarding the test",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "When choosing materials or seated near peers",
+          "observable_behavior": "takes a longer time than necessary to choose a different pen, watches the girl beside her put her hair in a ponytail holder",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "When going to the restroom",
+          "observable_behavior": "spends two minutes (timed) rearranging the keys on the hooks that hold them... is gone four minutes... spends another minute signing back in by reading the time on the clock, and taking a circuitous route back to her desk.",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

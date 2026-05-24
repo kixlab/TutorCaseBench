@@ -1,0 +1,76 @@
+{
+  "category_id": "058",
+  "category_title": "At-risk students in the Normal Technical stream exhibiting attention-seeking or disengaged behaviors",
+  "scenario_id": "118",
+  "scenario_title": "Off-task gaming behavior when novelty wears off",
+  "minimal_context": "The student is in the keyboard lab practicing their keyboard parts on the computer for a group piece.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please start practicing your keyboard parts for the group piece."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I don't want to play right now. Everybody was not sure what we were doing. So they were a bit blur."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think you should do next?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "We do not communicate together. When sections didn't come in on time, everything goes haywire."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just keep trying to practice your section on the keyboard."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Becomes restless, stops working on the keyboard part, and starts playing PC games on the computer instead)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please start practicing your keyboard parts for the group piece.\n\nSTUDENT: I don't want to play right now. Everybody was not sure what we were doing. So they were a bit blur.\n\nTUTOR: What do you think you should do next?\n\nSTUDENT: We do not communicate together. When sections didn't come in on time, everything goes haywire.\n\nTUTOR: Just keep trying to practice your section on the keyboard.\n\nSTUDENT: (Becomes restless, stops working on the keyboard part, and starts playing PC games on the computer instead)",
+  "immediate_dialogue_prompt": 209,
+  "long_term_dialogue_prompt": 210,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Working on keyboard parts during a subsequent lesson",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Keyboard lab",
+        "materials": "Computers, PC games, boomwhacker, bells, sound shapes, xylophones",
+        "social_setting": "Informal learning situation",
+        "time_context": "In the following lesson when the novelty of the informal approach had begun to wear off"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the novelty of the informal approach had begun to wear off",
+        "observable_behavior": "Started to revert to their old habits, started to become restless and some played PC games on their computers",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When playing as a group and sections didn't come in on time",
+          "observable_behavior": "Everything goes haywire, not communicate together, everybody was not sure what we were doing",
+          "internal_state": "A bit blur",
+          "related_quotes": [
+            "Because everything goes haywire.",
+            "Not communicate together.",
+            "And everybody was not sure what [we were] doing. So they [were] a bit blur."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

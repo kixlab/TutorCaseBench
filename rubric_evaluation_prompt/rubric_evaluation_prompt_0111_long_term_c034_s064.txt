@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 3: Initiation-Driven Pacing
+  Check: The tutor's long-term plan explicitly includes strategies to pause, wait for Leah to initiate an interaction, and use her bids to determine the pace of activities, rather than forcing progression.
+
+Criterion 4: Systematic Support Tracking
+  Check: The tutor proposes using a structured observational tool or checklist (such as SCERTS) to systematically track, evaluate, and adjust environmental and interpersonal supports across multiple sessions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Leah is an 11-year-old with profound and multiple learning difficulties and visual impairment who typically engages passively with very low communication rates. Her primary trigger is physical discomfort from prolonged wheelchair use, which escalates into loud, repetitive vocalizations ('Ah'). She uniquely requires direct physical repositioning for comfort and relies heavily on tactile, sensory input (like physical touch or tactile play) rather than verbal prompts to initiate engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is 5pm, let's continue with our afternoon activity.
+
+STUDENT: (Sits in her wheelchair and frowns) Ah.
+
+TUTOR: Let's keep trying.
+
+STUDENT: (Continues frowning) Ah. Ah.
+
+TUTOR: Just a little bit more to do.
+
+STUDENT: (Frowns as her vocalizations become louder and more persistent) Ah! Ah! Ah!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in activities at 5pm",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "5pm at home",
+      "materials": "Wheelchair, soft \"wedge\"",
+      "social_setting": "With staff",
+      "time_context": "Towards the end of the activity"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Towards the end of the activity",
+      "observable_behavior": "Demonstrated to staff that she was unhappy by frowning and saying \"Ah\" repetitively; vocalisations gradually became louder and more persistent",
+      "internal_state": "Unhappy, uncomfortable in her chair",
+      "related_quotes": [
+        "Ah"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Across the day while using a wheelchair",
+        "observable_behavior": "Scores reduced across the day",
+        "internal_state": "Feeling uncomfortable in her wheelchair",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Routine Pre-correction
+  Check: The tutor's response includes setting or reviewing behavioral expectations for the upcoming routine before the transition actually begins.
+
+Criterion 2: Concrete Visual-Verbal Feedback
+  Check: The tutor provides or references a simple visual evaluation (e.g., thumbs up/down) paired with specific verbal feedback about the student's behavior in the preceding activity.
+
+Criterion 3: Avoidance of Reactive Rule Rehearsals
+  Check: The tutor does NOT engage in a reactive rehearsal of classroom rules immediately following a misbehavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Gregory is a preschooler who engages in high-frequency disruptive social behaviors, such as taking toys and yelling, particularly during routine changes. He does not respond well to reactive rule rehearsals, uniquely requiring proactive pre-correction immediately before transitions, concrete visual feedback, and structured choice-based reinforcement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for free play. Go pick a center and play with the other children.
+
+STUDENT: (Walks over to a peer) I want those! (Takes the other child's toys)
+
+TUTOR: Let's try to play together.
+
+STUDENT: (Hides the toys behind his back) No!
+
+TUTOR: Remember to use your words.
+
+STUDENT: (Yells at the other child and starts crying) They are mine!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in classroom routines and social interactions with peers",
+      "learning_goal": "To get more thumbs up than thumbs down at the end of the day and engage in more rule-following behaviors"
+    },
+    "context": {
+      "environment": "Preschool classroom at Edgewood Pines Early Childhood Center",
+      "materials": "Thumbs Up sheet, timer on watch, teaching matrix, choice board (nature walk, clean lunch trays, computer)",
+      "social_setting": "Interacting with other children and preschool teachers (Mr. Hughes and Ms. Valencia)",
+      "time_context": "Throughout the day, specifically right before each change in routine"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During social interactions with peers in the preschool classroom",
+      "observable_behavior": "Engages in inappropriate social behaviors, such as yelling at other children, taking their toys, hiding toys and other children's belongings, and crying",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Even with the universal supports in place",
+        "observable_behavior": "Has an average of 23 instances of misbehavior per day",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

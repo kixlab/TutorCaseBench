@@ -1,0 +1,72 @@
+{
+  "category_id": "226",
+  "category_title": "Students with CHARGE syndrome exhibiting challenging behaviors (kicking, biting, scratching) to escape tasks or due to lack of structure",
+  "scenario_id": "433",
+  "scenario_title": "Table-top activities and task comprehension difficulties",
+  "minimal_context": "David is in the classroom presented with a table-top object sorting activity.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "(Places a pile of mixed objects on the table) It is time to sort the objects."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Grinds his teeth and engages in visual self-stimulatory behavior instead of starting the task)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "(Points to the objects) Keep trying, put them in the right spots."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Stands up from the table and begins jumping)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Taps the table) Sit down and finish your table-top activity."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Scratches the tutor's arm and kicks the table, exhibiting problematic behaviors to escape the activity)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: (Places a pile of mixed objects on the table) It is time to sort the objects.\n\nSTUDENT: (Grinds his teeth and engages in visual self-stimulatory behavior instead of starting the task)\n\nTUTOR: (Points to the objects) Keep trying, put them in the right spots.\n\nSTUDENT: (Stands up from the table and begins jumping)\n\nTUTOR: (Taps the table) Sit down and finish your table-top activity.\n\nSTUDENT: (Scratches the tutor's arm and kicks the table, exhibiting problematic behaviors to escape the activity)",
+  "immediate_dialogue_prompt": 749,
+  "long_term_dialogue_prompt": 750,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "completing table-top activities such as puzzles, sorting objects, and tracing",
+        "learning_goal": "programming that used principles of direct and systematic instruction"
+      },
+      "context": {
+        "environment": "classroom",
+        "materials": "table-top activities such as puzzles, sorting objects, and tracing; visual symbols; single leers or shapes; 12-point print",
+        "social_setting": "",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When David has diﬃculty with a task or activity",
+        "observable_behavior": "exhibit problematic behaviors... kicking, biting, scratching",
+        "internal_state": "escape/avoid them",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When David does not comprehend task demands",
+          "observable_behavior": "exhibit problematic behaviors... jumping, teeth grinding, visual self-stimulatory behavior",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

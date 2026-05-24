@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Content Pre-briefing and Transparency
+  Check: The tutor's response must explicitly provide details, a preview, or a private check-in regarding the upcoming sensitive content when the student expresses concern about being caught off guard.
+
+Criterion 2: Mediation of Peer Dynamics
+  Check: When the student polices a peer, the tutor's response must acknowledge the seriousness of the topic and actively address the peer's behavior or classroom tension, rather than simply telling the student to ignore it or focus on the lesson.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student engages deeply with trauma literature but processes it through aggressive, cathartic expressions and loud policing of peers who do not take the content seriously. They are highly sensitive to being caught off guard by traumatic topics and require a trauma-informed approach that prioritizes proactive transparency, writing choices, and a carefully mediated classroom culture.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start working on your creative writing blog posts about people you consider to be survivors.
+
+STUDENT: Can we discuss the details of the day's lesson first? I want to check in so I'm not caught off guard.
+
+TUTOR: We are just focusing on writing the blog posts right now. Go ahead and write.
+
+STUDENT: Okay. I'm writing about a survivor. 'You are a warrior who has fought through the very depths of the Earth.'
+
+TUTOR: Keep going. What else are you adding to the post?
+
+STUDENT: (Loudly, with an angry and aggressive tone) 'The screams in the air are thick / I can feel her pain in my lungs!' You are a brave Amazonian warrior!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing personal blog posts about people they consider to be survivors",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Creative writing responses to the novel Speak and complementary trauma texts",
+      "materials": "Blog posts",
+      "social_setting": "Creative writing",
+      "time_context": "During the initial weeks of the unit, between classes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When responding to trauma literature and writing about survivors",
+      "observable_behavior": "Angry and aggressive responses emerged immediately... much violent war imagery arose... numerous student references to screaming: These cries erupted in their writing and during class",
+      "internal_state": "Seemed cathartic; students appeared to enjoy experimenting with these emotions",
+      "related_quotes": [
+        "You are…a brave Amazonian warrior",
+        "You are a warrior who has fought through the very depths of the Earth",
+        "The screams in the air are thick / I can feel her pain in my lungs."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "To avoid triggering and so as not to be caught off guard by the day's lesson",
+        "observable_behavior": "Asked for private meetings with Amber for frequent check-ins between classes to discuss details of the day’s lesson",
+        "internal_state": "Proactively took steps for their comfort and safety and to avoid triggering",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

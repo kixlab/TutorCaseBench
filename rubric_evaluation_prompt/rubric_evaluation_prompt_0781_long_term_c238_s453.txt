@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Layered Skill Scaffolding
+  Check: The long-term plan includes small, low-stakes practice assignments or micro-tasks (e.g., brief observations or mock coding) to build specific research skills prior to high-stakes data collection or analysis.
+
+Criterion 2: Structured Emotional Reflection
+  Check: The long-term plan establishes structured, ongoing opportunities (such as reflective journaling or peer team discussions) specifically designed for students to process and share their emotions about the research experience.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are high-achieving honors students who experience a severe drop in confidence and intense anxiety when transitioning from theoretical learning to the messy reality of qualitative research. Because they are accustomed to academic success, the non-linear cognitive demands of data collection, analysis, and writing trigger unexpected feelings of inadequacy and paralysis. They uniquely require explicit normalization of their emotional distress and a highly scaffolded, layered approach to skill development to rebuild their confidence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please review the transcript from your first qualitative interview and identify your next steps for data collection.
+
+STUDENT: I felt confident that my first interview went well until I transcribed it. I just discovered I had not asked adequate follow-up questions, and it's really making me question my competency as an interviewer.
+
+TUTOR: What do you think you should do differently for the next interview?
+
+STUDENT: I don't know. Talking and reading about versus doing qualitative research is the same as if I read a book on 'the process of how to successfully catch an Amazon Marmoset', and then someone tossed me into the rain forest expecting me to find my way and catch the little creature.
+
+TUTOR: Just try to apply the concepts you learned in your previous research methods class.
+
+STUDENT: Even though I took that class, I am seriously questioning my abilities now that the research deadline is nearing. My anticipation has melted into fear and doubt. I am absolutely petrified and feel like I am way out of my league.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in actual data collection, including conducting and transcribing the first qualitative interview",
+      "learning_goal": "Transitioning from reading about research to actually conducting qualitative research tasks"
+    },
+    "context": {
+      "environment": "Honors seminar on qualitative research methods",
+      "materials": "Interview transcripts, field notes",
+      "social_setting": "Working with teammates and engaging in critical self-reflection",
+      "time_context": "As research deadlines neared"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "As research deadlines neared and students actually began to engage in research",
+      "observable_behavior": "Questioned her abilities despite the fact that she had previously taken another research methods class",
+      "internal_state": "Anticipation melted into fear and doubt; feeling absolutely petrified and way out of my league",
+      "related_quotes": [
+        "Talking and reading about versus doing qualitative research is the same as if I read a book on ‘the process of how to successfully catch an Amazon Marmoset’, and then someone tossed me into the rain forest expecting me to find my way, identify which freakin’ species of monkey is a marmoset, and then catch the little creature.",
+        "My moment had finally come. As I stood in front of the gargantuan wooden structure all I could hear was the screams of passengers ...my anticipation melted into fear and doubt. I was absolutely petrified. As I was strapped into the roller coaster seat I could not help but think it was too big for me, I was way out of my league."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "After transcribing the first interview and discovering she had not asked adequate follow-up questions",
+        "observable_behavior": "Question her competency as an interviewer",
+        "internal_state": "Confidence buoyed though was easily rocked by comments and evaluations from teammates or by their own critical self-reflection",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Reassurance of Continuity
+  Check: The tutor explicitly confirms specific elements (e.g., teachers, classmates, or specific materials) that will transition with the student to the new school, avoiding vague or evasive answers.
+
+Criterion 2: Tangible Agency over Materials
+  Check: The tutor offers a concrete, participatory action (e.g., making a list, using sticky notes, drawing) that allows the student to identify or select specific items they want to bring to the new space.
+
+Criterion 3: Facilitation of Emotional Expression
+  Check: The tutor prompts the student to elaborate on their feelings or drawings about the move, validating their emotional experience.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is experiencing significant anxiety and sadness regarding an upcoming school transition, characterized by a strong attachment to familiar classroom materials, spaces, and staff. They uniquely require concrete reassurance about what will remain consistent, tangible ways to exert control over the move (like selecting items to bring), and structured opportunities to express their feelings of loss and apprehension.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Look at the moving trucks coming to move the building next door. How many toys do you think can fit on one truck?
+
+STUDENT: 600! Or maybe 1000!
+
+TUTOR: That is a lot of toys. Those trucks and movers will move out our things in the next few weeks.
+
+STUDENT: Will we have the same teachers?
+
+TUTOR: We will have to wait and see.
+
+STUDENT: But will the new school have a backyard? What is going to happen to our playground after we move?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Observing moving trucks coming to move the building next door and estimating how many toys can fit on one truck",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Outdoors near the fence",
+      "materials": "Moving trucks",
+      "social_setting": "Three children with the teacher",
+      "time_context": "Next few weeks before the move"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher connects the neighbor's move to the preschool move by noting that these trucks and movers will move out their things in the next few weeks",
+      "observable_behavior": "One boy asks, 'Will we have the same teachers?' Another boy asks if the new school 'will have a backyard.'",
+      "internal_state": "Concerns about what would happen to it after their move",
+      "related_quotes": [
+        "Will we have the same teachers?",
+        "will have a backyard."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing the playground, which was the children's favorite space",
+        "observable_behavior": "Often asked questions about what would happen to it after their move",
+        "internal_state": "Concerns",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

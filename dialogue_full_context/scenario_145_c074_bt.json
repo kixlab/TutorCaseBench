@@ -1,0 +1,74 @@
+{
+  "category_id": "074",
+  "category_title": "First-grade struggling readers who experience cognitive overload and blank out when initiating speech-to-text dictation",
+  "scenario_id": "145",
+  "scenario_title": "Initiating dictation and cognitive overload",
+  "minimal_context": "David is using the Dragon speech recognition app on an iPad to compose his own version of 'Brown Bear, Brown Bear, What Do You See?'.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's write your version of 'Brown Bear, Brown Bear, What Do You See?'. What sentence do you want to write?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I see a Transformer driving by me."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, press the dictation button on the Dragon app to record that."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Touches the dictation button and goes blank) ..."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Keep trying."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Dragon times out. He repeats the process three times, but Dragon incorrectly transcribes the words. He pushes the iPad away.) I don't want to do this anymore.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's write your version of 'Brown Bear, Brown Bear, What Do You See?'. What sentence do you want to write?\n\nSTUDENT: I see a Transformer driving by me.\n\nTUTOR: Okay, press the dictation button on the Dragon app to record that.\n\nSTUDENT: (Touches the dictation button and goes blank) ...\n\nTUTOR: Keep trying.\n\nSTUDENT: (Dragon times out. He repeats the process three times, but Dragon incorrectly transcribes the words. He pushes the iPad away.) I don't want to do this anymore.",
+  "immediate_dialogue_prompt": 258,
+  "long_term_dialogue_prompt": 259,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Composing a version of 'Brown Bear, Brown Bear, What Do You See?' using the Dragon SR app. The student intended to write, 'I see a Transformer driving by me.'",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Writing center activity",
+        "materials": "iPads with SR apps (Dragon/Siri)",
+        "social_setting": "Supervised writing center with teacher present",
+        "time_context": "mid-February"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "He touched the dictation button to launch SR",
+        "observable_behavior": "Went blank. Dragon timed out. Repeated this process three times only to have Dragon incorrectly transcribe. He then lost interest.",
+        "internal_state": "Struggled to remember what they wanted to dictate to SR",
+        "related_quotes": [
+          "I see a Transformer driving by me"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When initiating speech-to-text dictation",
+          "observable_behavior": "Touched the button to launch SR and then went blank. SR commonly timed out just as they recalled their ideas.",
+          "internal_state": "Cognitive overload from the multitasking requirements of speech recognition",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Delayed Intervention Threshold
+  Check: The long-term plan explicitly states that the tutor will allow unruly play to develop and only intervene when it reaches extreme raucousness, destruction, or disputes.
+
+Criterion 2: Covert Monitoring
+  Check: The long-term plan includes a strategy for the tutor to observe and listen to the play from a distance without actively joining or directing the game.
+
+Criterion 3: Tolerance for Cyclical Disruption
+  Check: The long-term plan demonstrates acceptance of the daily build-and-destroy cycle, avoiding the implementation of inflexible, preventative disciplinary rules against the play itself.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These preschoolers are highly imaginative but prone to escalating their collaborative play into loud, chaotic, and destructive 'trashing' within self-constructed hidden spaces. They require a delicate balance of 'leaky' classroom management that allows their complex play to develop, paired with firm, specific boundaries when the play becomes indiscriminately messy or disruptive.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: The game is over. It is time to clean up the toys and put your clothes back on.
+
+STUDENT: (Trudging slowly and wearily) I don't know how to put things away.
+
+TUTOR: Just start picking them up.
+
+STUDENT: (Still sitting without clothes on after playing the animal game) I'm hungry.
+
+TUTOR: Please get dressed first.
+
+STUDENT: (Complaining and taking considerable time to get dressed) I need to use the toilet.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to the teacher's instruction to clean up the 'trashing' mess and get dressed after the 'Sleeping Family Game'.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom play area, surrounded by indiscriminately dumped small toys, plastic food, and removed clothing.",
+      "materials": "Massive pile of dumped toys, plastic food, dress-up clothes, and the children's own removed clothing and shoes.",
+      "social_setting": "Group of preschoolers transitioning out of free play.",
+      "time_context": "At the end of the 'Sleeping Family Game' when the teacher breaks up the escalating unruliness."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher announced that it was time to clean up.",
+      "observable_behavior": "The formerly energetic children trudged slowly and wearily and complained that they did not know how to put things away, and that they were hungry or needed to use the toilet.",
+      "internal_state": "Weary.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When required to put their clothes back on after the game ends.",
+        "observable_behavior": "It took considerable time to get everyone dressed again after they had removed their clothes to become joyous animals.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

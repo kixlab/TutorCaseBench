@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Systemic Recognition of Covert Aggression
+  Check: The long-term plan must explicitly incorporate methods (e.g., training, vocabulary building, or tracking lenses) to identify and monitor indirect relational aggression as a serious, systematic pattern.
+
+Criterion 2: Proactive Social Dynamics Discussions
+  Check: The long-term plan must include facilitating explicit classroom discussions, lessons, or activities focused on social exclusion, relational dynamics, and peer treatment.
+
+Criterion 3: Direct Intervention Commitment
+  Check: The long-term plan must establish a clear commitment or protocol to directly confront and address peer degradation (e.g., 'slagging off' or intellectual put-downs) rather than ignoring it or telling the student to ignore it.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences covert, systematic social exclusion and relational aggression from peers, such as intellectual put-downs and the 'glass wall' effect. Because they internalize shame and remain mute rather than seeking help, they are highly vulnerable to withdrawing completely if educators ignore peer degradation or fail to recognize the subtle dynamics at play. They uniquely require educators who possess the specific vocabulary to identify male relational aggression and who actively intervene rather than dismissing it.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Adrian, it is your turn to share your answer for the history assignment with the class.
+
+STUDENT: I think the answer is that the trade routes changed. I think that's right because...
+
+TUTOR: I hear some of your classmates calling out 'No, it's wrong, it's wrong!' out of turn. Just ignore them and continue your answer.
+
+STUDENT: I don't want to say anything anymore.
+
+TUTOR: We still have a few minutes left for this topic. What else did you write down?
+
+STUDENT: (Remains completely mute, staring down at the desk and withdrawing from participation without explaining why he is upset.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to answer a question or contribute to a whole-class discussion while the teacher is present.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting during a lesson",
+      "materials": "",
+      "social_setting": "Whole-class discussion with peers and teacher present",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the student tries to say something they think is right, and peers interrupt out of turn to say 'No, it's wrong, it's wrong!'",
+      "observable_behavior": "Stops speaking, withdraws from participation, and refrains from showing they are hurt or telling the teacher.",
+      "internal_state": "Feels sad, feels stupid, and internalizes shame by attributing the exclusion to individual flaws.",
+      "related_quotes": [
+        "when you try to say something in class and you think that it ’s right – and then everybody says ‘No, it ’s wrong, it ’s w r o n g ! ’. But it’ s n o t t h e i r turn to speak. And then you get sort of sad and you don’ t want to say anything anymore.",
+        "Things that sort of means that you ’re stupid, that they sort of try to make you feel stupid."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing friendship conflicts or social exclusion",
+        "observable_behavior": "Refrains from telling teachers or classmates, maintaining muteness on expressing their experiences and not showing they are hurt, sad or upset.",
+        "internal_state": "Feels their position painfully, with a decided impression of being 'insignificant'.",
+        "related_quotes": [
+          "boys do not want to show that they are hurt, sad or upset because of friendship conflicts, and therefore refrain from telling teachers or class mates.",
+          "their muteness on expressing their experiences does not mean that they do not feel their position painfully, like Jon ’s decided impression of being ‘insignificant ’."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

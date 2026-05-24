@@ -1,0 +1,76 @@
+{
+  "category_id": "062",
+  "category_title": "Disengaged adolescent with behavioral history and word-skipping habits",
+  "scenario_id": "127",
+  "scenario_title": "Classroom arrival and authority interaction",
+  "minimal_context": "The student arrives late on the first day of General English class and interacts with the teacher about the seating arrangements.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Welcome to General English. You are arriving late on the first day."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Walks in quietly and unassumingly with a scowl on his face, speaking quickly in short bursts) Is there going to be a seating chart in the class?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "No, there is no seating chart."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Good. (Promptly sits in a seat, slouching down and crossing his arms across his chest)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Now that you are seated, please take out your materials so we can begin the lesson."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I do my work but at the same time I don’t do anything in class. I didn’t really care about anything or anyone.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Welcome to General English. You are arriving late on the first day.\n\nSTUDENT: (Walks in quietly and unassumingly with a scowl on his face, speaking quickly in short bursts) Is there going to be a seating chart in the class?\n\nTUTOR: No, there is no seating chart.\n\nSTUDENT: Good. (Promptly sits in a seat, slouching down and crossing his arms across his chest)\n\nTUTOR: Now that you are seated, please take out your materials so we can begin the lesson.\n\nSTUDENT: I do my work but at the same time I don’t do anything in class. I didn’t really care about anything or anyone.",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 225,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Arrival on the first day of General English class",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "General English class",
+        "materials": "Seating chart",
+        "social_setting": "Interacting with the teacher",
+        "time_context": "First day of school"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When asking whether there was going to be a seating chart in the class and the teacher said no",
+        "observable_behavior": "Spoke quickly, in short bursts and with a scowl on his face... said, 'Good,' and then he promptly sat in a seat, slouching down and crossing his arms across his chest",
+        "internal_state": "Didn't really care about anything or anyone",
+        "related_quotes": [
+          "I do my work but at the same time I don’t do anything in class."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When facing school authority or expectations in the past",
+          "observable_behavior": "Cussed at a lot of teachers, threw stuff, didn't show up for class, ripped up homework",
+          "internal_state": "School had never been easy for him, and being unable to remember lessons had increased tensions and discomfort",
+          "related_quotes": [
+            "Coming from my first year here and in middle school I didn’t really care about anything or anyone."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

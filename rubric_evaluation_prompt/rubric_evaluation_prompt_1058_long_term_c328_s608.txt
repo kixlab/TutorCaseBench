@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Progressive Discipline Framework
+  Check: The tutor's long-term plan outlines a clear, tiered system of consequences that begins with a warning before escalating to more serious measures (e.g., a timeout).
+
+Criterion 2: Consistent Boundary Maintenance
+  Check: The tutor's strategy includes a commitment to applying established rules consistently over time to maintain clear, predictable boundaries.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is generally cooperative, polite, and eager to participate, but occasionally commits minor, impulsive rule infractions like leaving her seat. Because she is highly sensitive to harsh public scolding, which causes immediate embarrassment and withdrawal, she uniquely requires calm, predictable corrections that start with a simple warning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are at the end of the lesson. Students on traffic guard duty, please get ready.
+
+STUDENT: (Sits at her desk, as she does not have traffic duty.)
+
+TUTOR: I am going to give the traffic guards their instructions now.
+
+STUDENT: (Waits while the instructions are being given.)
+
+TUTOR: The rest of you, please wait for your final instructions.
+
+STUDENT: (Jumps out of her seat to get something from her backpack.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transition period at the end of a lesson where some students are preparing for traffic guard duty and others are receiving final instructions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during transition period",
+      "materials": "Backpack",
+      "social_setting": "Whole class setting with teacher giving instructions to multiple students",
+      "time_context": "End of a lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When needing to get something from her backpack during a transition period",
+      "observable_behavior": "Jumps out of her seat to get something from her backpack",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When scolded harshly by the teacher",
+        "observable_behavior": "Blushes and quickly takes her seat",
+        "internal_state": "Embarrassment (indicated by blushing)",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

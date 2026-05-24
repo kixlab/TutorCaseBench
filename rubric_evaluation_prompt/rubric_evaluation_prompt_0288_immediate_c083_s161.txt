@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Volunteering Reminder
+  Check: The tutor's response must include a clear reminder or instruction for Sidney to raise her hand or wait to be called on to volunteer her thoughts.
+
+Criterion 2: Home-Life Connection Prompt
+  Check: The tutor's response must prompt Sidney to relate the target vocabulary word or concept specifically to her own personal experiences or home life.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sidney is a kindergarten student who seeks peer attention by spontaneously yelling out answers and mimicking her classmates during discussions. She uniquely requires explicit reminders to raise her hand to manage her impulsivity, as well as specific prompts to connect vocabulary to her own home life to encourage authentic elaboration rather than copying peers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our small group discussion about the word 'declared' from the book Rocket Writes a Story.
+
+STUDENT: (Demonstrates a strong desire to share her thoughts spontaneously) I want to share my thoughts!
+
+TUTOR: Let's listen to Helen first. Helen says her mom declared she had to do homework so she could watch SpongeBob and play with the dog.
+
+STUDENT: (Competes with other peers for attention) Listen to me, I have a sentence too!
+
+TUTOR: Okay Sidney, what is your example for the word 'declared'?
+
+STUDENT: (Echoes Helen's response) My mom declared I would get homework done so that I could watch SpongeBob and play with the dog.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Peer talk session about the word 'declared' during the reading of Rocket Writes a Story",
+      "learning_goal": "Application of the words during peer discussions"
+    },
+    "context": {
+      "environment": "Small group discussions",
+      "materials": "Rocket Writes a Story book, Bear's Loose Tooth book",
+      "social_setting": "Times allocated for peer talk",
+      "time_context": "During the collaborative conversation"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After a peer shares their response during the times allocated for peer talk",
+      "observable_behavior": "Repeats her peers' responses, echoing the specific example provided by the peer",
+      "internal_state": "Longs for peer attention",
+      "related_quotes": [
+        "My mom declared I would get homework done so that I could watch SpongeBob and play with the dog."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a peer gives an off-topic response during discussion",
+        "observable_behavior": "Competes with other peers and corrects their responses",
+        "internal_state": "Competition with other peers",
+        "related_quotes": [
+          "No, we are trying to speak anything about savoring."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

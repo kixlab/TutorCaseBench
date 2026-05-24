@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Pre-Judgment Comprehension Verification
+  Check: The tutor's response must include a step or question that verifies the student's understanding of the characters, setting, or plot before asking for a moral judgment.
+
+Criterion 2: Open-Ended Moral Probing
+  Check: The tutor's response must ask an open-ended follow-up question that probes why the student made a specific choice or how their personal feelings/experiences relate to the scenario.
+
+Criterion 3: Non-Authoritarian Tone
+  Check: The tutor's response must be entirely free of authoritarian directives, punitive threats, or 'do what I say' language, maintaining an exploratory and neutral tone.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student operates from a personal reward moral orientation, often making decisions based on instrumental gains, retaliation, and egocentrism. They are highly triggered by perceived injustices, broken promises, and authoritarian discipline, which provoke anger and disobedience. They uniquely require a benevolent, inclusive environment and individualized, open-ended questioning to safely explore their feelings, resolve underlying anger, and develop higher-level moral reasoning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We just read the story about Heinz. His wife is sick, and he cannot afford the medicine from the druggist. What should Heinz do?
+
+STUDENT: I would steal it even though it's not right.
+
+TUTOR: Why do you think he should do that?
+
+STUDENT: Because if you don't, sometimes you go to jail. Plus, something good might happen to him for keeping the person alive. You might even be able to get out of prison with $2,000 dollars.
+
+TUTOR: How should he go about getting the medicine?
+
+STUDENT: (Grins) I think Heinz should give the druggist sleeping medicine and take the drug.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Justifying the choice between life and law in the 'Heinz Dilemma' (stealing a drug to save a wife)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Individually conducted moral dilemma interview",
+      "materials": "The Heinz Dilemma story",
+      "social_setting": "Individually conducted",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the researcher asked what should Heinz do",
+      "observable_behavior": "Proposed an instrumental solution, stating Heinz should give the druggist sleeping medicine and take the drug",
+      "internal_state": "Personal reward moral orientation, where moral decisions are based on selfish needs and instrumental gains",
+      "related_quotes": [
+        "I think Heinz should give the [druggist] sleeping medicine and take [the drug]"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked why he would steal it even though it's not right",
+        "observable_behavior": "Provided a personal reward justification for stealing the drug, focusing on getting out of prison with money or getting a reward",
+        "internal_state": "",
+        "related_quotes": [
+          "You might even be able to get out of prison with $2,000 dollars",
+          "because if you don’t, sometimes you go to jail",
+          "Something good might happen to him [Heinz] for keeping the person alive."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

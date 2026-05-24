@@ -1,0 +1,76 @@
+{
+  "category_id": "109",
+  "category_title": "Disruptive and ideologically oppositional student in a teacher education course",
+  "scenario_id": "209",
+  "scenario_title": "Post-exam grade dispute and boundary testing",
+  "minimal_context": "The student is taking the final exam in person and subsequently communicating with the lecturer via email regarding her final grade.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Hello Shelli, here is the final exam. Please take your seat and begin."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Smiles) You were right. If one does not come to the course he cannot pass the exam."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please focus on completing the test now."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Takes the exam)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "[Email] Hello Shelli, your final exam has been graded. Your score is 73."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "[Email] I do not understand why I got such a low grade. I want to sit and read the exam with you.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Hello Shelli, here is the final exam. Please take your seat and begin.\n\nSTUDENT: (Smiles) You were right. If one does not come to the course he cannot pass the exam.\n\nTUTOR: Please focus on completing the test now.\n\nSTUDENT: (Takes the exam)\n\nTUTOR: [Email] Hello Shelli, your final exam has been graded. Your score is 73.\n\nSTUDENT: [Email] I do not understand why I got such a low grade. I want to sit and read the exam with you.",
+  "immediate_dialogue_prompt": 373,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Completing the final exam and communicating via email regarding the resulting grade (73).",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Email communication",
+        "materials": "Final exam",
+        "social_setting": "One-on-one communication with lecturer",
+        "time_context": "On the day of the exam and subsequent email"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Got 73",
+        "observable_behavior": "Wrote me an e-mail saying that she did not understand why she 'got such a low grade' and that she wanted to sit and read the exam with me.",
+        "internal_state": "Shelli did not interpret my attitude properly",
+        "related_quotes": [
+          "got such a low grade"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "On the day of the exam",
+          "observable_behavior": "She smiled at me saying: 'you were right. If one does not come to the course he cannot pass the exam'.",
+          "internal_state": "",
+          "related_quotes": [
+            "you were right. If one does not come to the course he cannot pass the exam"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

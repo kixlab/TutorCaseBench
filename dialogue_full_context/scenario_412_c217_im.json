@@ -1,0 +1,77 @@
+{
+  "category_id": "217",
+  "category_title": "Relationship-dependent students sensitive to teacher attitude",
+  "scenario_id": "412",
+  "scenario_title": "Asking for help with a graphing problem",
+  "minimal_context": "John is working on a math assignment and asks the tutor for help with a graphing problem.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is your math task. You need to graph that problem."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I need help with this."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You gotta like, graph that problem with there."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "You're just telling me what I need to do, not how to do it."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You just need to complete the work."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "[voice sounds angry] You aren't really teaching me anything useful! I don't know, it's just negative all the time, just attitude.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is your math task. You need to graph that problem.\n\nSTUDENT: I need help with this.\n\nTUTOR: You gotta like, graph that problem with there.\n\nSTUDENT: You're just telling me what I need to do, not how to do it.\n\nTUTOR: You just need to complete the work.\n\nSTUDENT: [voice sounds angry] You aren't really teaching me anything useful! I don't know, it's just negative all the time, just attitude.",
+  "immediate_dialogue_prompt": 714,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "graph that problem",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Math task",
+        "materials": "",
+        "social_setting": "Interacting with a teacher when asking for help",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when they would ask for help they would say you gotta like, graph that problem with there and just tell them what they need to do not how to do it",
+        "observable_behavior": "[voice sounds angry]",
+        "internal_state": "felt discouraged and put down",
+        "related_quotes": [
+          "you gotta like, graph that problem with there and just tell them what they need to do not how to do it"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When interacting with a teacher with a negative attitude",
+          "observable_behavior": "states he did not learn much from them",
+          "internal_state": "generally seemed angry with school and felt that his teachers had mistreated him",
+          "related_quotes": [
+            "I don’t know, just attitude.",
+            "Just negative all the time."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 5: Contingent Responsiveness
+  Check: The tutor's long-term plan explicitly prioritizes reacting to and expanding upon the student's spontaneous actions, utterances, and intentions rather than executing a pre-planned adult agenda.
+
+Criterion 6: Student-Led Attentional Focus
+  Check: The tutor's strategy consistently builds learning opportunities by commenting on the student's current attentional focus and allowing the student to choose the activity.
+
+Criterion 7: Autonomy Over Compliance
+  Check: The tutor's plan explicitly avoids physical holding, forced compliance, and high ratios of commands, focusing instead on voluntary engagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has minimal to no functional speech and communicates primarily through non-verbal requests when they need help accessing motivating items. They are highly sensitive to demands, expectations, and adult-dominated interactions, frequently ignoring or protesting when given directives. To engage successfully, the student requires adults to follow their lead, use natural communication temptations (like inadequate portions), and leave silences unfilled to encourage spontaneous initiation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our music activity. Sit down in the chair and listen to the song.
+
+STUDENT: (Ignores the adult, keeping their head turned away and looking at the wall.)
+
+TUTOR: Look at me. You need to clap your hands to the music.
+
+STUDENT: (Makes a brief protesting sound and continues to ignore the adult's instructions.)
+
+TUTOR: Stand up now, let's do some rough and tumble play together.
+
+STUDENT: (Immediately protests loudly at the command, turning completely away from the adult to avoid the interaction.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in all kinds of rough and tumble play, singing, and music",
+      "learning_goal": "Improve communication skills by using these activities during the interaction sessions"
+    },
+    "context": {
+      "environment": "1:1 interaction sessions",
+      "materials": "Music and singing activities",
+      "social_setting": "One-on-one interaction with a classroom adult",
+      "time_context": "10-minute videoed 1:1 interaction sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Immediately followed their adults' directive communication",
+      "observable_behavior": "Ignoring or protesting at what the adults did or said",
+      "internal_state": "Did not like demands and expectations placed on them",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When adults direct the interaction, seek the child's attention more than follow the interest of the child, or give more commands than suggestions",
+        "observable_behavior": "Ignoring or protesting at a rate ranging from 0.42 - 4.6 incidences per minute",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

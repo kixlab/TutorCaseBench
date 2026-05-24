@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mastered Task Integration
+  Check: The tutor's response includes or pivots to a familiar, mastered academic activity (e.g., matching, ordering numbers) rather than forcing engagement with a novel assignment.
+
+Criterion 2: Direct 1:1 Scaffolding
+  Check: The tutor provides direct, individualized assistance or proximity (e.g., guiding her hands, sitting directly with her, step-by-step co-participation) rather than issuing standalone verbal commands.
+
+Criterion 3: Interactive Visual Supports
+  Check: The tutor incorporates interactive or visual elements (e.g., pointing to icons, using a SmartBoard, offering visual choices) to facilitate her participation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sylvia is a 5-year-old student with ASD who has severely limited spontaneous verbal communication and relies on echolalic phrases to request help. She exhibits severe behavioral protests (screaming, crying, aggression) when faced with unfamiliar or nonpreferred tasks. The evidence reveals she uniquely requires one-on-one adult assistance, highly structured routines, and the use of mastered academic tasks to mitigate her anxiety and facilitate participation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Sylvia, it is time for the group calendar activity. Please come to the SmartBoard and touch the interactive icon for today's weather.
+
+STUDENT: Wonder Pets to the rescue.
+
+TUTOR: Look at the board. Just pick one of the weather words.
+
+STUDENT: (Steps away from the SmartBoard) Wonder Pets to the rescue.
+
+TUTOR: You need to remain in the designated area and follow directions for calendar time.
+
+STUDENT: (Screams, cries, and falls to the floor on her knees)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Group calendar time activity where the date, days of the week, and weather were reviewed",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Group calendar time activity",
+      "materials": "SmartBoard with interactive icons and words for the days and weather",
+      "social_setting": "Whole-group activity",
+      "time_context": "During the designated observation time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Required to participate in appropriate activities, remain in designated school and classroom areas, focus on tasks, and follow classroom directions and directives",
+      "observable_behavior": "Screamed, cried, and fell to the floor on her knees to protest nonpreferred activities",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When she wanted adult assistance",
+        "observable_behavior": "Say occasional echolalic phrases",
+        "internal_state": "",
+        "related_quotes": [
+          "Wonder Pets to the rescue"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Tight Pacing and Activity Variation
+  Check: The tutor's long-term plan includes structuring lessons with rapid shifts between diverse formats, such as multimedia presentations, small group work, and short written tasks.
+
+Criterion 5: Explicit Positive Reinforcement
+  Check: The tutor's long-term strategy includes deliberate, routine mechanisms for noticing and explicitly praising the student's focus or appropriate behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a 'reluctant stayer' who masks their academic insecurity and boredom by derailing class discussions with exuberant, inappropriate outbursts about sex, crime, or drugs. They are highly reactive to public reprimands, rule-quoting, and institutional sanctions, requiring a tutor who can manage their energy through tight pacing, humor, private corrections, and explicit positive reinforcement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our class discussion on life skills. Please look at the PowerPoint slide about income management and share one way to budget your money.
+
+STUDENT: Budgeting? I don't need to learn this! I already know how to make fast cash on the street!
+
+TUTOR: What does the slide say about managing income?
+
+STUDENT: It says a bunch of boring stuff! The real way to manage income is selling drugs! You make way more money that way!
+
+TUTOR: We need to follow the classroom rules and stay on the topic of banking.
+
+STUDENT: (Yelling) I don't care about your fucking rules! This curriculum is irrelevant bullshit! I'm gonna make my money dealing drugs, not sitting in this stupid class!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Class discussion about life skills (budgeting, banking, income management)",
+      "learning_goal": "Develop ideas and create a cumulative record of curricular topics in the students' books"
+    },
+    "context": {
+      "environment": "Social science class in a prevocational setting",
+      "materials": "PowerPoint slides, video clips, students' books",
+      "social_setting": "Class discussions, shifting between teacher presentation, pair work or small group tasks, and short individual written tasks",
+      "time_context": "70 min classes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During class discussions at any opportunity",
+      "observable_behavior": "Exuberant participation that introduced inappropriate content referencing sex, crime or drugs; yelling and swearing",
+      "internal_state": "Experience of schooling is negative: they do not get on with teachers, they find the curriculum irrelevant or too hard, and they find the school environment unsupportive",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When classroom expectations are set or reasserted",
+        "observable_behavior": "Continually flouted them",
+        "internal_state": "Don't want to be there; school has become a shelter from unemployment",
+        "related_quotes": []
+      },
+      {
+        "condition": "When energetic or completing tasks at different speeds",
+        "observable_behavior": "Offtask or disruptive student behaviour",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

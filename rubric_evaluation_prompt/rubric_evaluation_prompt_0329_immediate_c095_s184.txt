@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Evaluative Drafting Support
+  Check: The tutor responds to the student's draft or ideas without assigning a grade, using evaluative language, or attempting to correct all grammatical errors at once.
+
+Criterion 2: Normalizing Iterative Revision
+  Check: The tutor explicitly frames the current errors as a natural part of the drafting process that will be addressed over multiple, low-stakes revision cycles.
+
+Criterion 3: Anchoring in Personal Interest
+  Check: The tutor encourages the student to focus on their chosen topic's content, personal connection, or what makes it inspiring, rather than solely focusing on the mechanics of the writing.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is a medium-proficiency international student who struggles with English sentence structure (specifically run-ons and repeated words) and organizing their thoughts, leading to severe losses in confidence when reviewing their errors. However, they remain highly engaged and find writing 'fun' when given agency over their topics and when working in low-stress, non-evaluative environments that allow for multiple revisions and safe peer empathy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please write your 300-word blog reflection on the Personal Narrative assignment and a 100-word comment on your peer's blog post.
+
+STUDENT: If there is no specific requirement, I know how to select a topic that I am interested in and will can inspire me. The good thing is that I felt that writing is interesting.
+
+TUTOR: Keep going with your reflection.
+
+STUDENT: I don’ t have perfect grammar skills or writing skills, but when I wrote about personal narrative assignment, I felt that writing was fun. I just need to practice more on grammer and use of English language.
+
+TUTOR: Now try writing the comment for your peer.
+
+STUDENT: As an international student, I understand that writing is hard, especially with second language. I understand how hard to organize thoughts and choose the correct words. I ’m from Korea. They don't teach how to organize thoughts and write an essay. I am losing confidence because I cannot fix all the run-on sentences in my comment.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing a 300+ word blog reflection on the Personal Narrative assignment and a 100+ word comment on a peer's blog post",
+      "learning_goal": "Reflecting on learning research and topic selection skills"
+    },
+    "context": {
+      "environment": "Online mode of expression",
+      "materials": "Blog reflection, journal assignment",
+      "social_setting": "Groups of three, each comprising of a high, medium and a low level student",
+      "time_context": "Separate day, typically the day after their final submission"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When writing about the personal narrative assignment and reflecting on the problems with the use of the English language",
+      "observable_behavior": "Expressing empathy to peers about how hard it is to organize thoughts and choose correct words",
+      "internal_state": "I felt that writing is interesting. I don't have perfect grammar skills or writing skills, but when I wrote about personal narrative assignment, I felt that writing was fun.",
+      "related_quotes": [
+        "As an international student, I understand that writing is hard, especially with second language. I understand how hard to organize thoughts and choose the correct words."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "If there is no specific requirement",
+        "observable_behavior": "Selecting a topic that they are interested in and will inspire them",
+        "internal_state": "I felt that writing was fun",
+        "related_quotes": [
+          "Also, if there is no specific requirement, I know how to select a topic that I am interested in and will can inspire me."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

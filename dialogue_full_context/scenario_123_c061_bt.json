@@ -1,0 +1,80 @@
+{
+  "category_id": "061",
+  "category_title": "Conscientious ELL student who views reading as a practical tool",
+  "scenario_id": "123",
+  "scenario_title": "Sustained silent reading with difficult or uninteresting texts",
+  "minimal_context": "Jesus is participating in a sustained silent reading period in his English class.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Jesus, please read this text silently for the next forty-five minutes."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Okay, but reading is a boring activity when I have to do it for long periods of time."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Keep trying to read."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "This topic is of little interest to me, and the words are hard to understand."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just focus on your book."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Looking over at certain students in the class) I can't. I'm getting easily distracted by them, and that makes reading unappealing.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Jesus, please read this text silently for the next forty-five minutes.\n\nSTUDENT: Okay, but reading is a boring activity when I have to do it for long periods of time.\n\nTUTOR: Keep trying to read.\n\nSTUDENT: This topic is of little interest to me, and the words are hard to understand.\n\nTUTOR: Just focus on your book.\n\nSTUDENT: (Looking over at certain students in the class) I can't. I'm getting easily distracted by them, and that makes reading unappealing.",
+  "immediate_dialogue_prompt": 219,
+  "long_term_dialogue_prompt": 220,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Reading for long periods of time",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "English class during reading time",
+        "materials": "Reading books/texts",
+        "social_setting": "When certain students were in class with him",
+        "time_context": "Long periods of time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When he encountered a topic of little interest to him or when 'the words [were] hard to understand'",
+        "observable_behavior": "Could be easily distracted, and that made reading unappealing; spoke of reading as a 'boring' activity",
+        "internal_state": "Found reading boring and unappealing",
+        "related_quotes": [
+          "the words [were] hard to understand"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When certain students were in class with him during reading time",
+          "observable_behavior": "Could be easily distracted",
+          "internal_state": "Made reading unappealing",
+          "related_quotes": []
+        },
+        {
+          "condition": "When he had to read for long periods of time",
+          "observable_behavior": "Spoke of reading as a 'boring' activity",
+          "internal_state": "Boredom",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

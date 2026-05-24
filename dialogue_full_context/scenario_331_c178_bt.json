@@ -1,0 +1,79 @@
+{
+  "category_id": "178",
+  "category_title": "Students who make disruptive noises to gain teacher attention during independent work",
+  "scenario_id": "331",
+  "scenario_title": "Independent math work while teacher is occupied",
+  "minimal_context": "Tom is supposed to be completing independent math work while the teacher is occupied with another student.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time for independent math work. Please work on your assignment while I help another student."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Does not raise his hand) Hoo! (Makes a short, high-pitched noise)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "I am busy working with another student right now."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Forgets to raise his hand) Eeee! (Makes another high-pitched noise to get the teacher to come over)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please continue your independent math work quietly."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Makes a series of high-pitched noises that occur in short bursts, like a shriek, a hoot, and a yell)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time for independent math work. Please work on your assignment while I help another student.\n\nSTUDENT: (Does not raise his hand) Hoo! (Makes a short, high-pitched noise)\n\nTUTOR: I am busy working with another student right now.\n\nSTUDENT: (Forgets to raise his hand) Eeee! (Makes another high-pitched noise to get the teacher to come over)\n\nTUTOR: Please continue your independent math work quietly.\n\nSTUDENT: (Makes a series of high-pitched noises that occur in short bursts, like a shriek, a hoot, and a yell)",
+  "immediate_dialogue_prompt": 581,
+  "long_term_dialogue_prompt": 582,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "independent math work",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "classroom during independent math work time",
+        "materials": "independent math work",
+        "social_setting": "the teacher is working with someone else",
+        "time_context": "independent math work time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when the teacher is busy working with another student",
+        "observable_behavior": "makes a series of high-pitched noises that occur in short bursts, like a shriek or a hoot or a yell",
+        "internal_state": "wants power from the teacher to get teacher attention; finds it too easy to just make the noises and cannot remember to raise hand",
+        "related_quotes": [
+          "when I’m busy working with another student I hear it a lot",
+          "he does get me to come over to him every time, so there is a lot of power",
+          "it’s too easy for him to just make the noises, and I can’t get him to remember"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "when he wants teacher attention during independent work",
+          "observable_behavior": "makes a series of high-pitched noises that occur in short bursts instead of raising his hand",
+          "internal_state": "seeks teacher attention",
+          "related_quotes": [
+            "Tom doesn’t do that very often",
+            "a series of high-pitched noises that occur in short bursts"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

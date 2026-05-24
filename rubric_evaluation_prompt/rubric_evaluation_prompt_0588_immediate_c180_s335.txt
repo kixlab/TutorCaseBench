@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Constant Affirmation and Validation
+  Check: The tutor provides explicit positive affirmations or compliments the student's effort, even if the student's answer or approach is incorrect.
+
+Criterion 2: Visual Concept Representation
+  Check: The tutor incorporates visual aids, animations, or descriptive visual analogies to explain the material rather than relying solely on text or verbal definitions.
+
+Criterion 3: Direct Guided Assistance
+  Check: The tutor provides direct, step-by-step guided practice or personalized scaffolding rather than simply telling the student to 'keep trying' or 'do your best.'
+
+Criterion 4: Alternative to Automated Platforms
+  Check: The tutor avoids forcing the use of the Novanet program or similar unengaging automated platforms, instead offering a human-led or alternative instructional method.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly active and vocal but struggles with self-doubt during difficult assignments while juggling work, family, and school. They vehemently resist unengaging automated instruction like the Novanet program. The evidence reveals they uniquely need constant positive affirmations, visual learning tools, direct one-on-one assistance, and structural flexibility to maintain motivation and focus.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at your worksheet. Your task today is solving for the sides of a triangle.
+
+STUDENT: Okay, I'm looking at the worksheet now. I see the triangle, but there are a lot of missing numbers here.
+
+TUTOR: What do you think you should do first?
+
+STUDENT: I'm trying to figure out the formula to find the different sides, but this is a really difficult assignment. I'm not sure if I'm setting it up right.
+
+TUTOR: Just keep trying your best to solve it.
+
+STUDENT: I can't! I always doubt myself when the math gets like this. I need more assistance from you, not just 'keep trying.' I don't even know if I'm doing it right and it's frustrating!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "solving for the sides of a triangle",
+      "learning_goal": "how to find the different sides of a triangle"
+    },
+    "context": {
+      "environment": "Mathematics class was teacher directed",
+      "materials": "worksheets",
+      "social_setting": "small class sizes",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When facing difficult assignments",
+      "observable_behavior": "active and vocal in responding to teacher’s questions",
+      "internal_state": "doubt myself",
+      "related_quotes": [
+        "sometimes when I doubt myself they encourage me and tell me positive things."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When responding to teacher's questions",
+        "observable_behavior": "active and vocal in responding",
+        "internal_state": "doubt myself",
+        "related_quotes": [
+          "sometimes when I doubt myself they encourage me and tell me positive things."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,79 @@
+{
+  "category_id": "210",
+  "category_title": "Adolescent with Down's syndrome exhibiting verbal outbursts to escape demands or gain tangibles",
+  "scenario_id": "397",
+  "scenario_title": "Access to preferred food items during lunch",
+  "minimal_context": "Dennis is sitting in the cafeteria at the beginning of lunch while the teacher places his preferred food item in sight but out of reach.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "(Sits next to Dennis and places his preferred food item in sight but out of reach) You can have this in a minute."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Reaches toward the food item) No."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We just need to wait a little bit."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Gestures at the food) Stop it."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Almost time."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "That's enough! No!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: (Sits next to Dennis and places his preferred food item in sight but out of reach) You can have this in a minute.\n\nSTUDENT: (Reaches toward the food item) No.\n\nTUTOR: We just need to wait a little bit.\n\nSTUDENT: (Gestures at the food) Stop it.\n\nTUTOR: Almost time.\n\nSTUDENT: That's enough! No!",
+  "immediate_dialogue_prompt": 689,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "access to preferred items (tangible)",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "lunch in the cafeteria",
+        "materials": "preferred food item",
+        "social_setting": "teacher sat next to the participant",
+        "time_context": "beginning of meal time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "teacher sat next to the participant and placed the preferred food item in sight but out of the participant’s reach. The teacher then told the participant, “You can have this in a minute.”",
+        "observable_behavior": "verbal outbursts such as “No” or “Stop it.”",
+        "internal_state": "hunger state",
+        "related_quotes": [
+          "No",
+          "Stop it",
+          "That’s enough"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "During the tangible test condition",
+          "observable_behavior": "engaged in the highest levels of challenging behavior during the tangible test condition (35% of trials)",
+          "internal_state": "hunger state",
+          "related_quotes": [
+            "No",
+            "Stop it"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Inquiry Methodology
+  Check: The long-term plan explicitly replaces traditional textbook/lecture instruction with inquiry-based science methods.
+
+Criterion 2: Structured Peer Tutoring (CWPT)
+  Check: The long-term plan incorporates ClassWide Peer Tutoring (CWPT) where Sam alternates between tutor and tutee roles in a structured peer group.
+
+Criterion 3: Integrated Academic and Behavioral Goal Tracking
+  Check: The long-term plan includes the ongoing use and collaborative development of a checklist that tracks both academic and behavioral goals for each unit.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sam is a student with a behavioral disorder and reading difficulties who experiences severe emotional distress when asked to read aloud, often leading to outbursts and office referrals. He requires instructional approaches that bypass traditional textbook reading, specifically thriving on inquiry-based learning, visual supports (mnemonics, graphic organizers), structured peer tutoring, and integrated academic-behavioral checklists.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your academic task checklist and use the letter mnemonic to study the vocabulary words for the key characteristics of matter.
+
+STUDENT: I don't want to read these words. The time I spent out of class has left me too far behind.
+
+TUTOR: What do you think the first word says? Just try your best.
+
+STUDENT: I don't know! I struggle with reading and I can't figure out what this mnemonic means.
+
+TUTOR: Keep trying to sound it out so we can finish the checklist.
+
+STUDENT: (Pushes the academic task checklist off the desk and shouts) I said I'm not reading it! I'm not doing this stupid science work anymore!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "studying vocabulary words, or memorizing facts",
+      "learning_goal": "remember the key characteristics of matter"
+    },
+    "context": {
+      "environment": "inclusive science classrooms",
+      "materials": "academic task checklist, graphic organizers, letter mnemonic",
+      "social_setting": "paired by the teacher and then meet in their peer group",
+      "time_context": "15 to 30 minutes, three times a week"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "struggles with reading",
+      "observable_behavior": "behavior and academic challenges have interfered with his science learning",
+      "internal_state": "disappointing",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During peer learning",
+        "observable_behavior": "nonacademic performance issues requiring behavior checkpoints",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

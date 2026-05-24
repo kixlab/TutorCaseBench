@@ -1,0 +1,72 @@
+{
+  "category_id": "035",
+  "category_title": "Students with complex learning and behavioral disabilities (developmental delay)",
+  "scenario_id": "066",
+  "scenario_title": "Group instruction with repetitive questioning",
+  "minimal_context": "Dang is sitting in her group in the classroom listening to the teacher's instruction for the day's activity.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Alright everyone, please sit in your groups while I give the instructions for our next activity."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Teacher, what are we doing? What are we doing today?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "I am about to tell the class."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "But what are we doing? Are we doing an activity? What activity?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please just listen."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Teacher, what are we doing? What activity? Teacher, what are we doing?",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Alright everyone, please sit in your groups while I give the instructions for our next activity.\n\nSTUDENT: Teacher, what are we doing? What are we doing today?\n\nTUTOR: I am about to tell the class.\n\nSTUDENT: But what are we doing? Are we doing an activity? What activity?\n\nTUTOR: Please just listen.\n\nSTUDENT: Teacher, what are we doing? What activity? Teacher, what are we doing?",
+  "immediate_dialogue_prompt": 113,
+  "long_term_dialogue_prompt": 114,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Participating in group instruction",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom",
+        "materials": "",
+        "social_setting": "Sitting in groups",
+        "time_context": "During the instruction"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "During the instruction",
+        "observable_behavior": "Disrupted the classes with frequent and repetitive questioning",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "During the instruction",
+          "observable_behavior": "Frequent and repetitive questioning",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

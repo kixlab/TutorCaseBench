@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Small-Group Collaborative Structuring
+  Check: The tutor's long-term plan organizes the student into small, structured groups (e.g., 3-4 peers) for collaborative discourse and shared tasks.
+
+Criterion 2: Integration of Culturally Familiar Texts
+  Check: The tutor's long-term plan incorporates culturally relevant or familiar narratives (such as local legends or culturally resonant stories) as the primary material for reading and retelling practice.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with social-interpersonal dynamics during group work, frequently interrupting peers to provide immediate corrections and arguing over turn-taking. The evidence reveals they uniquely require explicit rules for delayed feedback to manage their impulse to interrupt, alongside small collaborative groups and culturally familiar texts to foster cooperation (inafa'maolek) and engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to practice reading and retelling 'The Old Lady in the Vinegar Bottle' to one another in your small group.
+
+STUDENT: It's not your turn, it's my turn, it's not your turn.
+
+TUTOR: Please decide who will go first.
+
+STUDENT: Okay whose turn? Your turn.
+
+TUTOR: Listen quietly while he begins to retell the story.
+
+STUDENT: Juan, you're supposed to start from the beginning.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Practice reading and retelling a favorite tale titled 'The Old Lady in the Vinegar Bottle' to one another",
+      "learning_goal": "To help remember and understand what you read or what is read to you, starting from the beginning to the end of the story"
+    },
+    "context": {
+      "environment": "Collaborative setting conducive to working together in the spirit of inafa'maolek",
+      "materials": "Individual copies of the legend, Brown and Cambourne's book Read and Retell (1990)",
+      "social_setting": "Small group of three or four people",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a peer begins to retell the story but does not start from the beginning",
+      "observable_behavior": "Interrupts the reteller immediately to correct them",
+      "internal_state": "",
+      "related_quotes": [
+        "Juan, you're supposed to start from the beginning."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When determining whose turn it is to participate in a group",
+        "observable_behavior": "Complain and fight about whose turn it is",
+        "internal_state": "",
+        "related_quotes": [
+          "It's not your turn, it's my turn, it's not your turn.",
+          "Always fighting about it."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

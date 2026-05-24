@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Cognitive Modeling
+  Check: The tutor models the thought process aloud (e.g., narrating step-by-step how to break down the text or interpret a quantity) rather than just giving instructions or asking the student to perform the step.
+
+Criterion 2: Scaffold Navigation Guidance
+  Check: The tutor explicitly directs or guides the student on how to interact with the structural scaffold (e.g., prompting them to fill specific columns or organize information into distinct parts) before moving to complex expressions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a formerly low-achieving learner with limited academic language proficiency who hesitates when faced with complex, multi-step word problems. However, once provided with structural scaffolding (like columns), they show strong self-regulation and goal-oriented behavior. The evidence reveals they uniquely need explicit cognitive modeling and persistent initial guidance to use organizational tools, followed by a gradual, self-paced fading of these scaffolds.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's work on this four-step word problem about the costs for meals, drinks, and bowling. Please try to mathematize it by writing a complex expression.
+
+STUDENT: Six euros times persons, ok. What do I get then? …. the costs of the pizza.
+
+TUTOR: Okay, what do you think you should do next?
+
+STUDENT: I am not going to write in the trial and error space. Let's just switch between the columns and start with the easiest aspect.
+
+TUTOR: How will you put the rest of the costs together into the expression?
+
+STUDENT: This would be 6 times … well, this here and this here (hints to costs for meals and drinks and bowling). There we must first … mmhm … now we have to fill yellow and blue before writing the expression.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Work on a four-step word problem with high textual complexity involving costs for meals and drinks and bowling, and mathematize by a complex expression",
+      "learning_goal": "Focus on the meaning of the variable and the mental construction of quantities as well as the final questions as part of working forward and backward"
+    },
+    "context": {
+      "environment": "Working on mathematization and comprehension processes",
+      "materials": "Word Problem Cracker (WPC) tool, featuring yellow and blue columns (left and middle column) and a trial and error space",
+      "social_setting": "Two boys (Benjamin and Konstantin) working together",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to combine multiple pieces of information (costs for meals, drinks, and bowling) into a single subexpression",
+      "observable_behavior": "Hesitates, says 'mmhm', hints to different parts of the problem text ('this here and this here'), and delays writing the expression to focus on filling columns first",
+      "internal_state": "Experiencing high textual complexity requiring strong control by strategy S3",
+      "related_quotes": [
+        "This would be 6 times … well, this here and this here [hints to costs for meals and drinks and bowling]. There we must first … mmhm … now we have to fill yellow and blue [i.e. the left and middle column] before writing the expression."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When navigating the columns of the scaffolding tool",
+        "observable_behavior": "Switch between the order of columns quite flexibly, always starting with the easiest aspect",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When working forward through the problem pathway",
+        "observable_behavior": "Often ask, 'What do we get? What does it mean?' with a consequent focus on quantities",
+        "internal_state": "",
+        "related_quotes": [
+          "Six euros times persons, ok. What do I get then? …. the costs of the pizza"
+        ]
+      },
+      {
+        "condition": "When tentatively building sub-expressions",
+        "observable_behavior": "Untypically, they do not use the trial and error space, whereas other students tentatively write sub-expressions in it; they do not repeat the steps made in the trial and error space if they are successful, but continue their way forward",
+        "internal_state": "Strong control by strategy S3",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

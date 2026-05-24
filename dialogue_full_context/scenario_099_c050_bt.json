@@ -1,0 +1,76 @@
+{
+  "category_id": "050",
+  "category_title": "Adolescents with ADHD exhibiting low agency and performance deficits",
+  "scenario_id": "099",
+  "scenario_title": "Reviewing disorganized notebooks and incomplete homework",
+  "minimal_context": "The student and tutor are reviewing the student's notebooks and backpack to check for completeness and organization.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's check your notebooks today to look at completeness, dated pages, and neatness."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I started off having, like, a separate section for each thing but then... it wore on and... like, maybe I ran out of room or something so I'd just start writing in a different one... and now I just have different notes in different things and it's kind of hard to find."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Let's look at the homework assignments you have in there."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "You go to school for six hours and they give you homework that lasts another six. I hate homework so much. It's the most meaningless thing in the world. I just... don't do it!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please take out whatever notes you do have from your backpack so we can review them."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Like... I write everything down, I just don't keep it organized. Like, it's not in order of date, in order of anything. Like, there's sheets ripped out, crumpled up in the bottom of my backpack. I'm disorganized.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's check your notebooks today to look at completeness, dated pages, and neatness.\n\nSTUDENT: I started off having, like, a separate section for each thing but then... it wore on and... like, maybe I ran out of room or something so I'd just start writing in a different one... and now I just have different notes in different things and it's kind of hard to find.\n\nTUTOR: Let's look at the homework assignments you have in there.\n\nSTUDENT: You go to school for six hours and they give you homework that lasts another six. I hate homework so much. It's the most meaningless thing in the world. I just... don't do it!\n\nTUTOR: Please take out whatever notes you do have from your backpack so we can review them.\n\nSTUDENT: Like... I write everything down, I just don't keep it organized. Like, it's not in order of date, in order of anything. Like, there's sheets ripped out, crumpled up in the bottom of my backpack. I'm disorganized.",
+  "immediate_dialogue_prompt": 173,
+  "long_term_dialogue_prompt": 174,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "checking notebooks (e.g., completeness, dated pages, neatness, titles, underlining)",
+        "learning_goal": "keep notes for relevant subjects"
+      },
+      "context": {
+        "environment": "Reviewing binders, notebooks, and work samples",
+        "materials": "notebooks, agendas, backpack",
+        "social_setting": "One-on-one tutoring session or teacher check-in",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "ran out of room or something so I’d just start writing in a different one",
+        "observable_behavior": "sheets ripped out, crumpled up in the bottom of my backpack",
+        "internal_state": "I’m disorganized.",
+        "related_quotes": [
+          "Like … I write everything down, I just don’t keep it organized. … Like, it’s not in order of date, in order of anything. … Like, there’s sheets ripped out, crumpled up in the bottom of my backpack. … I’m disorganized."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When assigned homework",
+          "observable_behavior": "completing parts of their homework, then tiring and stopping",
+          "internal_state": "I hate homework so much. … It’s the most meaningless thing in the world.",
+          "related_quotes": [
+            "You go to school for six hours and they give you homework that lasts another six. … I hate homework so much. … It’s the most meaningless thing in the world. I just … don’t do it!"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

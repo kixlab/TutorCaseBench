@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Granular Task Scheduling
+  Check: The long-term plan must break down broader goals into specific, short-term tasks with tight, explicit deadlines rather than allowing self-paced, open-ended timelines.
+
+Criterion 2: Systematic Progress Monitoring
+  Check: The long-term plan must include a clear mechanism for the tutor to systematically check task completion at regular, frequent intervals, rather than relying on the student to self-monitor or report their own progress.
+
+Criterion 3: Wait-Time Mitigation Strategy
+  Check: The long-term plan must establish explicit protocols for what the student should do when stuck or waiting for help (e.g., fallback tasks, alternative resources, or peer support) to prevent them from using wait time as an excuse to disengage.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles profoundly with self-regulation, planning, and task initiation when given autonomy over their learning pace. They exhibit a pattern of extreme procrastination on multi-week assignments and actively use obstacles, such as waiting for teacher assistance, as an excuse to completely disengage. The evidence reveals they uniquely require a highly structured environment with granular, short-term deadlines, continuous external monitoring, and strategies to eliminate 'wait time' excuses.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the new math and science work plan for the next three weeks. You can go ahead and choose which tasks to begin with.
+
+STUDENT: We use work plans, so it is not, like, do task 1, 2, 3 till tomorrow. We do what we want when we want.
+
+TUTOR: Yes, you manage your own pace. What do you think you will work on first?
+
+STUDENT: This is how I normally work: At school, the first couple of weeks, I do nothing, but sometimes I manage to complete a couple of tasks every lesson.
+
+TUTOR: You should try to get started on something today.
+
+STUDENT: (Puts the work plan aside) I find it hard to plan and organize my work. I struggle to get started, so I'll just delay it until the last few days.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Approaching math and science tasks listed on a work plan over a multi-week period.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Norwegian lower secondary classrooms",
+      "materials": "work plans (2-3 week task lists)",
+      "social_setting": "Students managing their own learning pace and task selection",
+      "time_context": "first weeks of the work-plan period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Initiating work on math and science assignments during the first week of a work plan period.",
+      "observable_behavior": "doing little required schoolwork within the first weeks of the work-plan period and delaying their required work until the last few days.",
+      "internal_state": "find it hard to plan and organize their work",
+      "related_quotes": [
+        "This is how I normally work: At school, the first couple of weeks, I do nothing, but sometimes I manage to complete a couple of tasks every lesson.",
+        "We use work plans, so it is not, like, do task 1, 2, 3 till tomorrow. We do what we want when we want."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Organizing work pace and meeting deadlines for the work plan period.",
+        "observable_behavior": "procrastinate because they struggle to get started.",
+        "internal_state": "struggle to get started",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

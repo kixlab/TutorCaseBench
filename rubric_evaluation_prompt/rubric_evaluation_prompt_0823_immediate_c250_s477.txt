@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physical Resource Supplementation
+  Check: The tutor provides an additional physical resource (e.g., offering their own hand, bringing in tangible manipulatives) when the problem requires more units than the student currently has available.
+
+Criterion 2: Joint Attention on Embodied Tools
+  Check: The tutor explicitly draws shared focus to physical hands or body parts as mathematical tools (e.g., via touch, gesture, or direct reference to the hands).
+
+Criterion 3: Deictic Tracing and Pointing
+  Check: The tutor physically points to, touches, or traces the connections between words, columns, and numbers on the learning materials.
+
+Criterion 4: Multimodal Over Oral-Only Instruction
+  Check: The tutor ensures that verbal questions or instructions are accompanied by a physical, spatial, or gestural action rather than relying solely on spoken words.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Liliana is an English language learner who struggles with oral-only instruction and verbalizing math explanations, often shutting down or shrugging when she lacks physical resources to count. She uniquely requires embodied practices—such as haptic touch, physical tracing, and 'loaning' body parts—to bridge the gap between her language proficiency and mathematical conceptual demands.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the data chart on your paper. Can you identify the title of the problem?
+
+STUDENT: (Looks at the chart but is unable to recognize and state the title)
+
+TUTOR: Let's move on to answering the math problem itself. What is your answer?
+
+STUDENT: (Puts LH palm up, fingers extended, over the paper on the desk with the RH holding the pencil. Looks at palm of hand with fingers extended) One.
+
+TUTOR: You have to be able to explain to me why you said that.
+
+STUDENT: (Shrugs shoulders up and down, with LH still up in the air with elbow resting on desk. Looks at hand, LH palm rotated out over desk and then opens palm towards her face) Because the number... mmmm, I don’t know.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "math problem using a data chart titled “Hands and Fingers”",
+      "learning_goal": "explain the reasoning behind a math answer"
+    },
+    "context": {
+      "environment": "working at desk",
+      "materials": "paper and pencil activity answering questions from the whiteboard",
+      "social_setting": "one-on-one interaction between Mrs. Dee and Liliana",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to explain the reasoning behind a math answer at her desk",
+      "observable_behavior": "Shrugs shoulders up and down, with LH still up in the air with elbow resting on desk",
+      "internal_state": "uncertainty or difficulty in verbalizing the explanation",
+      "related_quotes": [
+        "mmmm, I don’t know."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "At the beginning of the interaction, Mrs. Dee asked Liliana to identify the title of the problem",
+        "observable_behavior": "unable to recognize and state it",
+        "internal_state": "struggling to answer",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

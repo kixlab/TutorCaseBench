@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Expectation Referencing
+  Check: The response must explicitly reference a visual expectation, rule, or chart (e.g., 'polite words', 'respect others') to guide the student's immediate behavior.
+
+Criterion 2: Relational Boundary Setting
+  Check: The response must set a clear limit on the unsafe or unkind behavior (e.g., throwing, mean words) while using supportive, non-punitive language that maintains a safe connection with the student.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits 'Fight' behaviors—such as aggression, throwing, blaming, and using mean words—during group play with shared materials. These behaviors are manifestations of anxiety rather than pure opposition. They uniquely require a highly predictable session structure, explicit visual expectations, and relational boundary-setting that frames their behavior as anxiety-driven to foster positive coping.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's build a track together using these plastic pieces so the motor car can move.
+
+STUDENT: (Sings in a high-pitched, changed voice) I get to build it! Give me all the pieces right now!
+
+TUTOR: We need to share the pieces to build the track.
+
+STUDENT: No, you're messing it up! It's your fault the car won't go!
+
+TUTOR: Let's just keep trying to put the track together.
+
+STUDENT: (Throws a plastic track piece) You are stupid! I am controlling the car, not you!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Group play sessions involving shared materials like marble runs or train tracks, such as unstructured constructive play with a set of plastic tracks with a motor car that could move",
+      "learning_goal": "facilitate positive interactions among the children and to facilitate effective problem-solving and/or emotional regulation skills"
+    },
+    "context": {
+      "environment": "Children’s Groups",
+      "materials": "shared materials like marble runs or train tracks, plastic tracks with a motor car that could move, visual expectations, visual attendance chart with stickers",
+      "social_setting": "group play sessions",
+      "time_context": "45-60 minute play session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During group play when social conflicts or negative interactions occur",
+      "observable_behavior": "Crossed the boundaries. Irritable, offended. Using mean words. Blaming. Throwing. Demanding, controlling.",
+      "internal_state": "anxiety manifesting as 'Fight' responses",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Observations in Children’s Groups",
+        "observable_behavior": "Singing, changing their voices, ‘aggression’ and ‘hyperactivity’",
+        "internal_state": "anxiety",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

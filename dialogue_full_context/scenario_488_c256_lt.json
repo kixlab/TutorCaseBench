@@ -1,0 +1,78 @@
+{
+  "category_id": "256",
+  "category_title": "Students who prioritize task completion over accuracy and avoid help-seeking",
+  "scenario_id": "488",
+  "scenario_title": "Encountering a difficult reading comprehension question",
+  "minimal_context": "The student is working independently on a reading comprehension worksheet in a noisy classroom and needs to complete the second question.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "I see you skipped the second question on your reading comprehension worksheet. Please go back and complete it."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I went on to do the third question because I saw this was too difficult for me and so that I would not waste time."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You still need to answer it. Try to figure out what the question is asking."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Sits for a minute facing the text sheet without doing anything) I tried to find out the answer… I didn’t understand the question."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Read the text again and see what you can find to write down."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Looks at the assignment sheet while holding her head between her hands, reads the text, returns to the assignment sheet, picks up her pencil, puts it down. Sits silently without asking for help.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: I see you skipped the second question on your reading comprehension worksheet. Please go back and complete it.\n\nSTUDENT: I went on to do the third question because I saw this was too difficult for me and so that I would not waste time.\n\nTUTOR: You still need to answer it. Try to figure out what the question is asking.\n\nSTUDENT: (Sits for a minute facing the text sheet without doing anything) I tried to find out the answer… I didn’t understand the question.\n\nTUTOR: Read the text again and see what you can find to write down.\n\nSTUDENT: (Looks at the assignment sheet while holding her head between her hands, reads the text, returns to the assignment sheet, picks up her pencil, puts it down. Sits silently without asking for help.)",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 845,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Attempting the second question of a reading comprehension task",
+        "learning_goal": "Obtaining good grades and task completion (filling the space with words)"
+      },
+      "context": {
+        "environment": "Noisy 4th grade classroom",
+        "materials": "Text sheet, worksheet, assignment sheet, pencil",
+        "social_setting": "Working independently, boy sitting next to her",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Returning to the second question after skipping it",
+        "observable_behavior": "Looked at the assignment sheet while holding her head between her hands, read the text, returned to the assignment sheet, wiped her nose, picked up her pencil, put it down. Did not ask for help.",
+        "internal_state": "Experiencing difficulties",
+        "related_quotes": [
+          "I tried to find out the answer… I didn’t understand the question .",
+          "I went on to do the third question because I saw this was too difficult for me and so that I would not waste time"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When encountering a challenge",
+          "observable_behavior": "Sat for another minute facing the text sheet without doing anything. Avoided asking for the teacher's help.",
+          "internal_state": "Not concerned with the accuracy of their responses, felt successful when they simply filled the space with words",
+          "related_quotes": [
+            "I work according to what is easy for me and what is difficult for me I do later on",
+            "Only to write the answer."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

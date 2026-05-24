@@ -1,0 +1,77 @@
+{
+  "category_id": "015",
+  "category_title": "Students who become bored and disruptive or sleepy during constant lecturing",
+  "scenario_id": "030",
+  "scenario_title": "Plain lecturing without visual aids or discussion",
+  "minimal_context": "The student is reading from the course book during a plain lecture to complete the assigned chapter.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's open our course books and read the next chapter together."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "We just read from our course books, thus the classes are boring and I don’t like paying attention to the course."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please continue reading the next paragraph."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "The teachers sometimes lecture the classes so boring. When they lecture and pass it, it is not persistent."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Let's move on to the problems at the end of the reading."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "When the teacher lectures in a plain way, I cannot solve the problems in that course.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's open our course books and read the next chapter together.\n\nSTUDENT: We just read from our course books, thus the classes are boring and I don’t like paying attention to the course.\n\nTUTOR: Please continue reading the next paragraph.\n\nSTUDENT: The teachers sometimes lecture the classes so boring. When they lecture and pass it, it is not persistent.\n\nTUTOR: Let's move on to the problems at the end of the reading.\n\nSTUDENT: When the teacher lectures in a plain way, I cannot solve the problems in that course.",
+  "immediate_dialogue_prompt": 51,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Reading from course books during a plain lecture that lacks visual aids, discussion, or interpretation.",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "General classroom setting",
+        "materials": "course books",
+        "social_setting": "Plain lecture that lacks visual aids, discussion, or interpretation",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the teacher lectures in a plain way",
+        "observable_behavior": "I cannot solve the problems in that course",
+        "internal_state": "boring and I don’t like paying attention",
+        "related_quotes": [
+          "When the teacher lectures in a plain way, I cannot solve the problems in that course",
+          "we just read from our course books, thus the classes are boring and I don’t like paying attention to the course"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When they lecture and pass it",
+          "observable_behavior": "it is not persistent",
+          "internal_state": "bored",
+          "related_quotes": [
+            "The teachers sometimes lecture the classes so boring, they can make the classes more amusing, this does not mean just games, when they lecture and pass it, it is not persistent"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

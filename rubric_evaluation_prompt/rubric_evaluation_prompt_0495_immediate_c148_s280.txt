@@ -1,0 +1,133 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Personal Gravity
+  Check: The tutor's response must include a summarizing question or statement that explicitly acknowledges the severe, personal impact of the topic on the student's family.
+
+Criterion 2: Relational Connection to Multiracial Reality
+  Check: The tutor must offer a personal connection, shared experience, or explicit affirmation of multiracial family structures to build a supportive environment.
+
+Criterion 3: Suspension of Lesson Transition
+  Check: The tutor must refrain from redirecting the student to a scheduled academic task and instead explicitly encourage the continuation of the current dialogue.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly engaged but experiences emotional distress when applying historical concepts of segregation to their own multiracial family, realizing it would mean family separation. They uniquely need educators who will validate their complex racial realities and prioritize these critical, emotionally heavy discussions over scheduled lesson transitions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We've finished our read-aloud about segregation. Kristoff just suggested that dividing white and Black people could be a way to solve the problem of people doing horrible things. Let's think about that for a minute before we get our math books out.
+
+STUDENT: You know, they are not even really white. It is just their skin is a little lighter and more like tan. It is just a lighter color of Brown.
+
+TUTOR: That's an observation about the illustrations. What do you think about Kristoff's idea of dividing people?
+
+STUDENT: So, like think about Black people—some Black people wouldn’t be able to see other people, people in their family, that are like—more tan. That are lighter. That means my brother and me and my mom would be on one side of the earth but my dad would be on the other side.
+
+TUTOR: I hear what you are saying about your family. Alright, it is time to wrap this up and transition to our scheduled math lesson.
+
+STUDENT: (pauses) If white people went on the other side of the world, that means my dad would go on the other side of the world. And my grandparents too. Sad, because then my family would be torn apart like that. But talking about race is important. I might forget what I want to say.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing the implications of racial segregation on multiracial families during a whole-class read-aloud debrief and applying the concept of racial segregation to her own multiracial family",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-class read-aloud debrief",
+      "materials": "Book illustrations",
+      "social_setting": "Classroom dialogue involving peers (Kristoff, Marshall) and teacher (Oona/Ms. R)",
+      "time_context": "During a read-aloud discussion and transitioning to a scheduled math lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a peer (Kristoff) suggests the division of white and Black people as a way to solve the problem of 'white people who say and do horrible things'",
+      "observable_behavior": "Challenged the suggestion, created a disruption in Black/white binary that initially emerged in the conversation, and observed skin tones in book illustrations stating 'they are not even really white. It is just their skin is a little lighter and more like tan'",
+      "internal_state": "",
+      "related_quotes": [
+        "You know, they are not even really white. It is just their skin is a little lighter and more like tan. It is just a lighter color of Brown.",
+        "So, like think about Black people—some Black people wouldn’t be able to see other people, people in their family, that are like—more tan. That are lighter."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When applying the concept of racial segregation to their own multiracial family",
+        "observable_behavior": "Articulates complex family divisions ('my brother and me and my mom would be on one side of the earth but my dad would be on the other side') and pauses during speech",
+        "internal_state": "Expressing emotional distress and feeling sad about the hypothetical separation of her multiracial family",
+        "related_quotes": [
+          "That means my brother and me and my mom would be on one side of the earth but my dad would be on the other side.",
+          "So ( pauses ). If white people went on the other side of the world, that means my dad would go on the other side of the world. And my grandparents too.",
+          "Sad, because then my family would be torn apart like that.",
+          "Yeah, I am."
+        ]
+      },
+      {
+        "condition": "When a scheduled math lesson is supposed to begin",
+        "observable_behavior": "Argues for the priority of writing about race over the scheduled math lesson",
+        "internal_state": "Fear of forgetting their thoughts on the important topic",
+        "related_quotes": [
+          "But talking about race is important. I might forget what I want to say."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

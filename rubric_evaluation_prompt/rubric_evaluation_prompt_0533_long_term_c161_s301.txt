@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structural Integration of Movement
+  Check: The long-term plan includes routines or lesson structures that guarantee constant change of pace and physical movement throughout the curriculum.
+
+Criterion 2: Gradual Inquiry Scaffolding
+  Check: The long-term plan outlines a step-by-step progression for introducing inquiry skills (like posing questions or designing experiments) rather than expecting immediate mastery.
+
+Criterion 3: Collaborative Norm-Building
+  Check: The long-term plan explicitly includes teaching and reinforcing peer interaction skills, such as turn-taking, active listening, and mutual respect.
+
+Criterion 4: Psychological Safety and Risk-Taking
+  Check: The long-term plan incorporates strategies to build mutual trust and encourage academic risk-taking without penalizing mistakes.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly kinesthetic and social, struggling severely with passive, solitary learning environments (like sitting still and copying from a whiteboard), which trigger boredom, frustration, and physical altercations with peers. They uniquely require constant physical movement, visual or real-world grounding for abstract concepts, and inclusive, inquiry-based group activities where they can actively participate rather than passively observe.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the whiteboard, copy down the math problem, and work it out quietly at your desk.
+
+STUDENT: I don't want to do this. It is better that one involves himself rather than just look at the whiteboard.
+
+TUTOR: What do you think the first step to solve it is?
+
+STUDENT: I don't know. I cannot keep up with the rest of the class. Usually the same four students work everything out anyway.
+
+TUTOR: You need to do your own work. Keep trying.
+
+STUDENT: (Pushes chair back loudly and stands up) I'm not doing it! I'm tired of just sitting here looking at the board while everyone else does it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Mathematical problem solving where usually the same four students work everything out",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom environment",
+      "materials": "Experiments",
+      "social_setting": "Whole class setting where only a few students typically participate",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When activities are either too challenging or too easy, and the student lacks the opportunity to participate",
+      "observable_behavior": "Disruptive behaviour",
+      "internal_state": "Feels unmotivated; feels they cannot keep up with the rest of the class",
+      "related_quotes": [
+        "Usually the same four students work everything out.",
+        "Before, I could not keep up with the rest of the class."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When not actively involved in the lesson and just looking at the whiteboard",
+        "observable_behavior": "Disruptive behaviour",
+        "internal_state": "Lack of motivation to learn or search for the solution",
+        "related_quotes": [
+          "It is better that one involves himself rather than just look at the whiteboard."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

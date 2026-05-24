@@ -1,0 +1,77 @@
+{
+  "category_id": "161",
+  "category_title": "Students with SEBD (ADHD/ADD) who struggle with passive learning and traditional instruction",
+  "scenario_id": "301",
+  "scenario_title": "Mathematical problem solving with inappropriate difficulty and lack of participation",
+  "minimal_context": "The student is asked to copy and solve a math problem from the whiteboard while sitting at their desk in the classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please look at the whiteboard, copy down the math problem, and work it out quietly at your desk."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I don't want to do this. It is better that one involves himself rather than just look at the whiteboard."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think the first step to solve it is?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I don't know. I cannot keep up with the rest of the class. Usually the same four students work everything out anyway."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You need to do your own work. Keep trying."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Pushes chair back loudly and stands up) I'm not doing it! I'm tired of just sitting here looking at the board while everyone else does it!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please look at the whiteboard, copy down the math problem, and work it out quietly at your desk.\n\nSTUDENT: I don't want to do this. It is better that one involves himself rather than just look at the whiteboard.\n\nTUTOR: What do you think the first step to solve it is?\n\nSTUDENT: I don't know. I cannot keep up with the rest of the class. Usually the same four students work everything out anyway.\n\nTUTOR: You need to do your own work. Keep trying.\n\nSTUDENT: (Pushes chair back loudly and stands up) I'm not doing it! I'm tired of just sitting here looking at the board while everyone else does it!",
+  "immediate_dialogue_prompt": 532,
+  "long_term_dialogue_prompt": 533,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Mathematical problem solving where usually the same four students work everything out",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom environment",
+        "materials": "Experiments",
+        "social_setting": "Whole class setting where only a few students typically participate",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When activities are either too challenging or too easy, and the student lacks the opportunity to participate",
+        "observable_behavior": "Disruptive behaviour",
+        "internal_state": "Feels unmotivated; feels they cannot keep up with the rest of the class",
+        "related_quotes": [
+          "Usually the same four students work everything out.",
+          "Before, I could not keep up with the rest of the class."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When not actively involved in the lesson and just looking at the whiteboard",
+          "observable_behavior": "Disruptive behaviour",
+          "internal_state": "Lack of motivation to learn or search for the solution",
+          "related_quotes": [
+            "It is better that one involves himself rather than just look at the whiteboard."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

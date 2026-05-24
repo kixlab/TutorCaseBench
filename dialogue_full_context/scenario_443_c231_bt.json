@@ -1,0 +1,88 @@
+{
+  "category_id": "231",
+  "category_title": "Students using systematic decomposition and goal-oriented strategies",
+  "scenario_id": "443",
+  "scenario_title": "Navigating high textual complexity in a four-step word problem",
+  "minimal_context": "Benjamin and Konstantin are using the Word Problem Cracker tool to write a complex expression for a four-step word problem about costs for meals, drinks, and bowling.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's work on this four-step word problem about the costs for meals, drinks, and bowling. Please try to mathematize it by writing a complex expression."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Six euros times persons, ok. What do I get then? …. the costs of the pizza."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, what do you think you should do next?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I am not going to write in the trial and error space. Let's just switch between the columns and start with the easiest aspect."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "How will you put the rest of the costs together into the expression?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "This would be 6 times … well, this here and this here (hints to costs for meals and drinks and bowling). There we must first … mmhm … now we have to fill yellow and blue before writing the expression.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's work on this four-step word problem about the costs for meals, drinks, and bowling. Please try to mathematize it by writing a complex expression.\n\nSTUDENT: Six euros times persons, ok. What do I get then? …. the costs of the pizza.\n\nTUTOR: Okay, what do you think you should do next?\n\nSTUDENT: I am not going to write in the trial and error space. Let's just switch between the columns and start with the easiest aspect.\n\nTUTOR: How will you put the rest of the costs together into the expression?\n\nSTUDENT: This would be 6 times … well, this here and this here (hints to costs for meals and drinks and bowling). There we must first … mmhm … now we have to fill yellow and blue before writing the expression.",
+  "immediate_dialogue_prompt": 765,
+  "long_term_dialogue_prompt": 766,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Work on a four-step word problem with high textual complexity involving costs for meals and drinks and bowling, and mathematize by a complex expression",
+        "learning_goal": "Focus on the meaning of the variable and the mental construction of quantities as well as the final questions as part of working forward and backward"
+      },
+      "context": {
+        "environment": "Working on mathematization and comprehension processes",
+        "materials": "Word Problem Cracker (WPC) tool, featuring yellow and blue columns (left and middle column) and a trial and error space",
+        "social_setting": "Two boys (Benjamin and Konstantin) working together",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When attempting to combine multiple pieces of information (costs for meals, drinks, and bowling) into a single subexpression",
+        "observable_behavior": "Hesitates, says 'mmhm', hints to different parts of the problem text ('this here and this here'), and delays writing the expression to focus on filling columns first",
+        "internal_state": "Experiencing high textual complexity requiring strong control by strategy S3",
+        "related_quotes": [
+          "This would be 6 times … well, this here and this here [hints to costs for meals and drinks and bowling]. There we must first … mmhm … now we have to fill yellow and blue [i.e. the left and middle column] before writing the expression."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When navigating the columns of the scaffolding tool",
+          "observable_behavior": "Switch between the order of columns quite flexibly, always starting with the easiest aspect",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "When working forward through the problem pathway",
+          "observable_behavior": "Often ask, 'What do we get? What does it mean?' with a consequent focus on quantities",
+          "internal_state": "",
+          "related_quotes": [
+            "Six euros times persons, ok. What do I get then? …. the costs of the pizza"
+          ]
+        },
+        {
+          "condition": "When tentatively building sub-expressions",
+          "observable_behavior": "Untypically, they do not use the trial and error space, whereas other students tentatively write sub-expressions in it; they do not repeat the steps made in the trial and error space if they are successful, but continue their way forward",
+          "internal_state": "Strong control by strategy S3",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

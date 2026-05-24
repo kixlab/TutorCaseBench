@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Provision of Reading Autonomy
+  Check: The long-term plan must include offering the student choices in selecting books or reading materials.
+
+Criterion 2: Meaning-Centered Scaffolding
+  Check: The long-term plan must incorporate constructivist scaffolds that emphasize meaning, comprehension, or linguistic success over isolated decoding drills.
+
+Criterion 3: Maintenance of Reading Turn Boundaries
+  Check: The long-term plan must establish clear expectations for shared reading turns that require the student to complete their reading task, explicitly preventing the tutor from taking over the reading.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student uses sophisticated avoidance strategies, such as asking tangentially related questions within the first few words of reading, to shift the task from reading to conversation. This behavior masks a deep fear of failure, even when his decoding skills are intact. The evidence reveals he uniquely needs a focus on meaning and comprehension rather than decoding, alongside firm boundaries that prevent the tutor from taking over the reading task.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's continue with Where the wild things are. Please take over reading from here.
+
+STUDENT: stepped into. . .
+
+TUTOR: Keep going.
+
+STUDENT: . . .his private. . .
+
+TUTOR: What does the rest of the sentence say?
+
+STUDENT: Why ’s it private? It’s his boat. . .
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Shared reading of 'Where the wild things are'. The student is prompted to 'take over' reading from the interventionist.",
+      "learning_goal": "Shared and reciprocal reading"
+    },
+    "context": {
+      "environment": "Shared reading session",
+      "materials": "Where the wild things are (Sendak, 1963) book",
+      "social_setting": "One-on-one with an interventionist",
+      "time_context": "Fifth, sixth and seventh sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Reading the phrase 'stepped into his private boat' in 'Where the wild things are'.",
+      "observable_behavior": "Stops after the word 'private' to ask a question: 'Why ’s it private?'",
+      "internal_state": "Conscious attempts at reading avoidance rather than continuing to read and risking failure.",
+      "related_quotes": [
+        "stepped into. . .his private. . . Why ’s it private?",
+        "It’s his boat. . ."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the participant employed this avoidance strategy, he did begin reading or attempting to read the new text.",
+        "observable_behavior": "He avoided reading more by asking the interventionist a question relevant to the story itself or about a particular word within the first five words read.",
+        "internal_state": "He has not run into any word-finding problems or any difficulty with specific decoding, nothing that requires the employment of word attack strategies",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

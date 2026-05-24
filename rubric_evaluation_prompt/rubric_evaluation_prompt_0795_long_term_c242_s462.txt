@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Concealment of Reading Choices
+  Check: The long-term plan must include the use of privacy-enhancing tools (such as e-readers, digital apps, or opaque covers) that keep the student's reading material secret during independent reading time.
+
+Criterion 2: Protection from Peer Interference
+  Check: The long-term plan must ensure individual assignment or secure profiles for reading materials so that peers cannot access, view, or alter the student's reading progress.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jeff is a reluctant reader who avoids public participation regarding his personal reading choices due to a deep fear of peer reprisal and teasing about sensitive topics. The evidence reveals that his reluctance is rooted in a need for safety, and he uniquely requires strict privacy—such as one-on-one conferencing and discreet reading tools—to feel secure enough to engage genuinely with texts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, let's take some time to talk about our independent reading choices in class today. Jeff, what book are you reading on your Nook?
+
+STUDENT: I don't really want to share.
+
+TUTOR: Just tell the class a little bit about the plot.
+
+STUDENT: I don't want my classmates to know which book I'm reading.
+
+TUTOR: Everyone needs to participate in the discussion. Just give us a brief overview.
+
+STUDENT: I'm not going to speak about it right now. Can I just talk to you after class?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "talk about their reading in class",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "whole-class discussion during an English class session",
+      "materials": "Barnes and Noble Simple Touch Nook e-readers",
+      "social_setting": "whole-class setting with classmates",
+      "time_context": "during class one day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asking students to talk about their reading in class one day",
+      "observable_behavior": "declined to speak, requesting to talk to her after class",
+      "internal_state": "feared reprisal: being teased or questioned about his sexuality",
+      "related_quotes": [
+        "This is the first book I ’ ve actually read because I wanted to do so"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asking students to talk about their reading in class",
+        "observable_behavior": "declined to speak, requesting to talk to her after class",
+        "internal_state": "feared reprisal: being teased or questioned about his sexuality",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

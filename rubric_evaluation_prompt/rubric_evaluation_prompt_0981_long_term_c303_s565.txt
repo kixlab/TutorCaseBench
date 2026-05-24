@@ -1,0 +1,141 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Theme Tolerance and Observation
+  Check: The tutor's long-term plan includes observing and permitting the student's controversial or power-based play themes rather than implementing a blanket ban on 'mean' play.
+
+Criterion 2: Peer-Mediated Boundary Setting
+  Check: The tutor's long-term plan includes strategies to empower peers to stand up to the student, set their own boundaries, or exclude her if she becomes physically or relationally violent.
+
+Criterion 3: Co-Direction of Play
+  Check: The tutor's long-term plan positions the student as a leader or co-director, allowing her to take the lead in creating learning opportunities based on her interests.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kiara and Liza are highly social leaders who use a 'sassy girl' persona involving relational and physical aggression to control their play space and establish power. Direct adult censorship backfires by pushing their behavior underground, meaning they uniquely require adults to use open-ended inquiry to understand their play, eye-level interventions for physical safety, and strategies that empower their peers to set social boundaries.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I see you girls are playing in the dark room with the mirror. What are you doing?
+
+STUDENT: We're playing sassy girls! We're still sassy girls, and you don't even know that, silly. (looks in the mirror and fixes hair)
+
+TUTOR: What are sassy girls?
+
+STUDENT: They be mean, and selfish, they hurt people. You can play with us, but you have to be mean! (laughs loudly)
+
+TUTOR: Luke is walking over to your area and says he will be Iron Man.
+
+STUDENT: I don’t care, we have real power. Get away from our castle, we don’t want you to play with us.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in free play, specifically performing the 'sassy girl' persona, defining play rules, and interacting with peers",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Underneath the loft area and in the dark room",
+      "materials": "Mirror",
+      "social_setting": "Group of girls (Kiara, Mia, Jackie, Liza) playing together and interacting with a male peer (Luke) and the teacher",
+      "time_context": "During free play and lunch"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a male peer (Luke) approaches their play area and states 'I will be iron man'",
+      "observable_behavior": "Expressing a desire for power and explicitly excluding the male peer from their play area",
+      "internal_state": "",
+      "related_quotes": [
+        "I don’t care, we have real power. Get away from our castle, we don’t want you to play with us."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When defining the rules of their play to the teacher or researcher",
+        "observable_behavior": "Laughs loudly, states that they hurt people, knock people over, and require others to be mean to join",
+        "internal_state": "",
+        "related_quotes": [
+          "They’re mean. You can play with us, but you have to be mean!",
+          "They be mean, and selfish, they hurt people.",
+          "We knock people over.",
+          "And we’re naughty people."
+        ]
+      },
+      {
+        "condition": "When engaging in status aggression and discussing who can visit their imaginary house",
+        "observable_behavior": "Turns and spits, sticking her tongue out at the camera",
+        "internal_state": "",
+        "related_quotes": [
+          "And you can’t come to her house."
+        ]
+      },
+      {
+        "condition": "When playing underneath the loft area and looking in the mirror",
+        "observable_behavior": "Fixing hair in the mirror while planning covert aggression and trickery against a peer",
+        "internal_state": "",
+        "related_quotes": [
+          "We’re still sassy girls (looking in the mirror and fixing hair), and you don’t even know that, silly.",
+          "We’ll make Luke eat poison. He will eat it and die. We will trick him."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

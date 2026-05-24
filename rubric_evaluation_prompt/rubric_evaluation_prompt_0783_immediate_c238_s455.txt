@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Emotional Distress
+  Check: The tutor explicitly acknowledges, validates, or normalizes the student's feelings of fear, frustration, or inadequacy before pushing for task completion.
+
+Criterion 2: Collaborative Strategy Generation
+  Check: The tutor proposes or collaboratively brainstorms specific, alternative strategies to tackle the immediate roadblock rather than simply telling the student to 'keep working' or 'apply concepts.'
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are high-achieving honors students who experience a severe drop in confidence and intense anxiety when transitioning from theoretical learning to the messy reality of qualitative research. Because they are accustomed to academic success, the non-linear cognitive demands of data collection, analysis, and writing trigger unexpected feelings of inadequacy and paralysis. They uniquely require explicit normalization of their emotional distress and a highly scaffolded, layered approach to skill development to rebuild their confidence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your academic paper draft. You need to clarify your ideas and support your claims through referencing the qualitative data.
+
+STUDENT: I'm trying to write this section, but I'm really struggling when I am asked to clarify my ideas and support my claims with the data.
+
+TUTOR: Keep working on it. What do you think you should write next?
+
+STUDENT: I don't know. My confidence is really diminishing because I'm experiencing a complete lack of immediate writing success with this draft.
+
+TUTOR: Just try to put your thoughts down on the paper.
+
+STUDENT: I can't do it. I'm having a lot of negative emotions about this whole writing experience right now, and I just feel completely inadequate trying to reference this data.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing a formal academic paper that requires supporting claims with qualitative data",
+      "learning_goal": "Clarify ideas and support claims through referencing data"
+    },
+    "context": {
+      "environment": "Honors seminar on qualitative research methods",
+      "materials": "Academic paper drafts, qualitative data references",
+      "social_setting": "Class discussion and research teams",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to clarify ideas and to support claims through referencing data",
+      "observable_behavior": "Disclosed negative emotions about the writing experience",
+      "internal_state": "Confidence diminished; feelings associated with the lack of immediate writing success",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with a lack of immediate writing success",
+        "observable_behavior": "Disclosed negative emotions about the writing experience",
+        "internal_state": "Diminished confidence",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

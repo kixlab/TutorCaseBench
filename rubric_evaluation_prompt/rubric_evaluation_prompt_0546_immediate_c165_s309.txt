@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Indirect or Private Redirection
+  Check: The tutor addresses low-level misbehavior indirectly (e.g., using proximity, praising peers) or through gentle, private reminders, completely avoiding public reprimands, sarcasm, or coercion.
+
+Criterion 2: Frustration De-escalation via Breaks
+  Check: The tutor offers or allows a brief break (e.g., 'Taking Time') when the student exhibits frustration with a task, rather than forcing immediate task completion.
+
+Criterion 3: Simplified, Paced Directives
+  Check: The tutor delivers instructions that are brief and limited to one step at a time, explicitly or implicitly providing wait time for the student to comply.
+
+Criterion 4: In-the-Moment Replacement Prompting
+  Check: The tutor prompts the student to identify or practice an alternative appropriate behavior (e.g., asking how they could signal for help differently next time).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a history of school failure and poor adult relationships, making them highly reactive to coercion, sarcasm, or public punishment. They easily become frustrated by difficult assignments or social misunderstandings, which can escalate from low-level disruptions to severe aggression. The evidence reveals they uniquely require brief, single-step directives, private or indirect corrections, and structured opportunities to take breaks and reflect on replacement behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your laptops and begin working on the assignment with your group.
+
+STUDENT: (Looks at the screen and begins playing with items inside the desk instead of typing) This is too hard.
+
+TUTOR: You need to focus on your work.
+
+STUDENT: (Calls out loudly across the table) I said I don't get it! It's too long!
+
+TUTOR: Just keep trying your best to figure it out.
+
+STUDENT: (Pushes the laptop away, makes a disrespectful vocalization, and stands up, leaving the small group area) I'm not doing this stupid assignment!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging with a difficult assignment requiring task-analysis of content",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Small group instruction",
+      "materials": "iPads, lap top computers",
+      "social_setting": "Working with peers and teacher in a small group",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When they experience difficulty with an assignment",
+      "observable_behavior": "Call-outs, disrespectful vocalizations, playing with items in their desks, leaving seat or area",
+      "internal_state": "Anger responses",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When confronted with a difficult assignment or other provocation",
+        "observable_behavior": "Playing with items in their desks, leaving seat or area",
+        "internal_state": "Frustrating situation",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

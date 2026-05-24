@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Empathic Validation of Grievances
+  Check: The tutor acknowledges and validates the student's feelings of being wronged or unfairly treated without immediately correcting, dismissing, or punishing them.
+
+Criterion 2: Pressure Reduction and Calmness
+  Check: The tutor actively reduces immediate demands, offering a calm, low-pressure interaction rather than forcing compliance or emphasizing rigid expectations.
+
+Criterion 3: Emotional Control Scaffolding
+  Check: The tutor provides strategies, prompts, or space specifically aimed at helping the student manage their anger and regain emotional control in the moment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with learned helplessness, low self-worth, and a tendency to externalize blame, often reacting with anger or withdrawal when feeling pressured or unfairly treated. They uniquely require a calm, empathic environment where they are involved in decision-making and supported through cognitive-behavioral approaches to build emotional control and personal ownership, rather than facing punitive measures.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your life grid timeline and discuss the events that led to your exclusion from the mainstream school.
+
+STUDENT: It wasn't my fault. They got me excluded.
+
+TUTOR: Why do you think that happened?
+
+STUDENT: The internal exclusion happened. . .I can 't avoid it. . . The teachers just dislike me and blame me for everything.
+
+TUTOR: Let's look at this specific incident on the timeline where the physical fight occurred. What are your thoughts on how you responded?
+
+STUDENT: She pushed me over so I punched her in the face. The school 's corrupt. . . 
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing triggers for physical aggression and behavioral responses",
+      "learning_goal": "Encourage students to reflect on their behaviour"
+    },
+    "context": {
+      "environment": "Quiet room at the PRU",
+      "materials": "Life grid visual timeline",
+      "social_setting": "One-on-one interview with increased adult support, specifically a youth worker",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When discussing behavioral difficulties and perceived treatment by others",
+      "observable_behavior": "Justifying their behavioural responses, exhibiting anger and 'revenge style' behaviour",
+      "internal_state": "Predominant perception of feeling 'wronged' by others, highlighting a lack of perceived responsibility for their behaviour",
+      "related_quotes": [
+        "She pushed me over so I punched her in the face.",
+        "The school 's corrupt. . . "
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reflecting on past exclusions and school disciplinary actions",
+        "observable_behavior": "Attributes their behavioural difficulties to external factors, such as being annoyed or targeted by peers, feeling unsupported and disliked by teachers or being unfairly blamed",
+        "internal_state": "Sense of learned helplessness in capacity to change",
+        "related_quotes": [
+          "The internal exclusion happened. . .I can 't avoid it. . . ",
+          "They got me excluded. . . "
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

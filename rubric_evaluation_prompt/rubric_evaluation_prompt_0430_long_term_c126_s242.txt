@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Cooperative Learning Integration
+  Check: The long-term plan includes specific strategies to transition the student from 1-1 support into cooperative learning groups or peer-assisted activities.
+
+Criterion 5: General Education Teacher Partnership
+  Check: The long-term plan explicitly outlines how the general education teacher will remain actively involved in the student's instruction and behavior management, rather than delegating solely to a specialized tutor.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student requires a delicate balance between individualized academic support and social integration. They easily fall off-task without adapted curriculum and direct instructions, but become frustrated and socially isolated if given excessive 1-1 support when capable of independent work. They uniquely need a support system that provides targeted help to initiate tasks while actively promoting peer collaboration and sustained interaction with general education teachers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: The class is starting the mainstream worksheet activity. I am going to sit right here with you so we can do it one-on-one.
+
+STUDENT: I know how to do it by myself.
+
+TUTOR: That's good. Let's just do the first problem together.
+
+STUDENT: (Watches the peers at the next table working together, but stays silent and completely isolated from them)
+
+TUTOR: Focus on your own paper. What is the answer to number one?
+
+STUDENT: (Pushes the desk away, throws the pencil on the floor, and crosses arms, acting out while the general education teacher continues teaching the rest of the class)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "mainstream classroom activities",
+      "learning_goal": "independently complete the activities"
+    },
+    "context": {
+      "environment": "co-taught classes",
+      "materials": "",
+      "social_setting": "individual teaching to students with SEN by the SET",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "frequent implementation of individual teaching to students with SEN by the SET, even in cases where the child could independently complete the activities",
+      "observable_behavior": "decreased interactions between students with SEN and their peers",
+      "internal_state": "",
+      "related_quotes": [
+        "decreased interactions between students with SEN and their peers in co-taught settings"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when both teachers were present",
+        "observable_behavior": "problem behaviours dealt with exclusively by the SET",
+        "internal_state": "",
+        "related_quotes": [
+          "SET was the one dealing with their problem behaviours when both teachers were present"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

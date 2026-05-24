@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Environmental Consistency Plan
+  Check: The long-term plan includes provisions for ensuring a consistently quiet and comfortable physical learning environment (e.g., a quiet room, comfy seating).
+
+Criterion 2: Tangible Reward Structure
+  Check: The long-term plan incorporates a structured system of tangible rewards (such as stickers) tied to task completion or at-home assignments.
+
+Criterion 3: Motivation Monitoring and Adaptation
+  Check: The long-term plan includes a specific mechanism for regularly assessing the student's motivation levels and modifying instructional strategies based on those findings.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is generally engaged and values instructional support but is prone to distractibility when they feel incompetent or overwhelmed. They uniquely require a quiet, comfortable environment and immediate, no-wait teacher assistance to maintain concentration, alongside motivational boosters like fun games, clear reading purposes, and tangible rewards.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our phonics drill by building some words with these letters, and then we will reread our leveled text.
+
+STUDENT: Okay. I like sitting in these comfy blue chairs. It’s really quiet in the intervention room.
+
+TUTOR: Yes, it is. Go ahead and try building the first word.
+
+STUDENT: (Moves a few letters around) I don't know this one. I need getting help from the teacher so I don't have to wait a long time for help.
+
+TUTOR: What do you think the next letter is? Just keep trying your best to figure it out.
+
+STUDENT: (Becomes somewhat less engaged and shows distractibility) I can't do it. (Stops looking at the letters and starts playing with the fabric on the chair instead).
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "do various Wilson Fundations drills including reviewing sight words, reviewing letters/letter combinations in conjunction with associated sounds and key words, building words, sorting words, and writing words, and reread one or more LLI-leveled texts",
+      "learning_goal": "build foundational reading skills"
+    },
+    "context": {
+      "environment": "quieter room with comfy blue chairs within the intervention setting as compared to the classroom",
+      "materials": "LLI-leveled texts, Wilson Fundations drills, stickers",
+      "social_setting": "getting help from the teacher, (making and) being with friends",
+      "time_context": "within a 30-min intervention session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During videotaped intervention sessions involving reading and phonics tasks",
+      "observable_behavior": "exhibits distractibility and is somewhat less engaged",
+      "internal_state": "appreciates the quiet room because it enabled her to concentrate on completing her reading",
+      "related_quotes": [
+        "It’s really quiet [in the intervention room]"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the intervention session",
+        "observable_behavior": "shows distractibility",
+        "internal_state": "needs to feel competent",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

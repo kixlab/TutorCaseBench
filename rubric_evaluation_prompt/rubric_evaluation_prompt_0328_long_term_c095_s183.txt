@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Thematic Continuity Planning
+  Check: The tutor's long-term plan includes sequencing assignments so the student writes about the same core subject or topic across multiple iterations.
+
+Criterion 2: Data-Driven Linguistic Targeting
+  Check: The tutor's long-term plan includes creating or modifying specific instructional materials that directly target the run-on sentences and repeated words observed in the student's recent writing.
+
+Criterion 3: Facilitating Protected Peer Empathy
+  Check: The tutor's long-term plan incorporates private, non-public peer interaction spaces (like closed blogs or heterogeneous groups) designed to foster shared reflection on the writing process.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is a medium-proficiency international student who struggles with English sentence structure (specifically run-ons and repeated words) and organizing their thoughts, leading to severe losses in confidence when reviewing their errors. However, they remain highly engaged and find writing 'fun' when given agency over their topics and when working in low-stress, non-evaluative environments that allow for multiple revisions and safe peer empathy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review the second draft of your essay and work on correcting the run-on sentences and repeated words.
+
+STUDENT: When you revised my essay I understood all my errors and those were mostly the run-on and repeated sentences. So, I have to work a lot to improve my essay.
+
+TUTOR: What do you think you should do next to fix them?
+
+STUDENT: Writing was very hard as I imagined. Since I am not a good talker, I had troubles with expressing my thoughts in a proper way.
+
+TUTOR: Just keep trying to rewrite the sentences.
+
+STUDENT: But after the revision of my second draft, I found more errors and they were the same, but this time it was run-on sentences and repeated words. I found it hard because there were errors in almost all my essay and I was difficult for me to correct my essay. Because of the problems with use of English language, I lost confidence in writing.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Revising the second draft of an essay to correct run-on sentences and repeated words",
+      "learning_goal": "Improve the essay by correcting errors"
+    },
+    "context": {
+      "environment": "Sequenced writing project",
+      "materials": "Essay, second draft, blog reflection",
+      "social_setting": "Instructor revised the essay",
+      "time_context": "After the revision of the second draft"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After the revision of the second draft, finding more errors and they were the same, specifically run-on sentences and repeated words",
+      "observable_behavior": "Expressing difficulty in correcting the essay, stating 'I found it hard because there were errors in almost all my essay'",
+      "internal_state": "Because of the problems with use of English language, I lost confidence in writing.",
+      "related_quotes": [
+        "I found it hard because there were errors in almost all my essay and I was difficult for me to correct my essay.",
+        "But after the revision of my second draft, I found more errors and they were the same, but this time it was run-on sentences and repeated words."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Because of the problems with use of English language",
+        "observable_behavior": "Having troubles with expressing thoughts in a proper way",
+        "internal_state": "Writing was very hard as I imagined.",
+        "related_quotes": [
+          "Since I am not a good talker, I had troubles with expressing my thoughts in a proper way."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

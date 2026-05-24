@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visible Continuous Assessment
+  Check: The tutor's long-term strategy includes a system for daily, highly visible tracking of completion and grading, such as public checklists or immediate blog checks.
+
+Criterion 2: Visual and Creative Task Design
+  Check: The tutor plans a curriculum that consistently incorporates visual media, drawing, or photo editing rather than relying solely on traditional text-based answers.
+
+Criterion 3: Calibrated Challenge Level
+  Check: The tutor explicitly plans to adjust the difficulty of assignments to ensure they provide room for creativity while remaining strictly within the student's current abilities.
+
+Criterion 4: Sustained Positive Expectancy
+  Check: The tutor's long-term approach includes strategies to maintain a positive, encouraging environment that avoids projecting frustration over the student's past or present failures.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is a low-achieving vocational student who quickly disengages, gets bored, or resorts to copying when tasks feel repetitive, difficult, or high-pressure. They are highly motivated by digital tools, gaming (like Counterstrike), and visible daily assessment, but will completely withdraw into gaming if they sense teacher frustration. To succeed, they require chunked tasks, creative visual assignments, and strong extrinsic motivators like contingent gaming privileges.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start working on your PCs to complete the design of a laptop flyer using Photoshop.
+
+STUDENT: (Turns to a classmate) Can you help me understand the required assignment and how to implement it? These regular assignments make me get bored very quickly.
+
+TUTOR: Try to figure it out together with your peer.
+
+STUDENT: I perceive this task to be difficult to achieve. I don't know how to do the design.
+
+TUTOR: Just keep trying your best on the flyer.
+
+STUDENT: (Did not participate) I'm not doing this. I'm going to open YouTube and then play collectively on Counterstrike.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "design of a laptop flyer using Photoshop",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school setting",
+      "materials": "PCs, Photoshop",
+      "social_setting": "collaborating in their effort to finish the assignment",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "perceived some of the tasks to be difficult to achieve",
+      "observable_behavior": "did not participate",
+      "internal_state": "perceived some of the tasks to be difficult",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "regular assignments",
+        "observable_behavior": "get bored very quickly",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Open-Ended Material Utilization
+  Check: The tutor's response must encourage the use of everyday, non-toy classroom materials (e.g., chalk, boxes, charts) rather than focusing on high-structure toys.
+
+Criterion 2: Absence of Predetermined Play Rules
+  Check: The tutor's response must allow the student to dictate the direction of play without imposing adult-led rules, specific goals, or restrictions on how materials should be used.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This younger pre-schooler tends to engage in silent, solitary, and repetitive play when given high-structure toys, as they struggle to break the 'rules' of how those toys should be used. The evidence reveals they uniquely need open-ended, everyday classroom materials and a lack of adult-imposed rules to stimulate creativity and verbal interaction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the toy kit with the miniature doctor's kit, the superhero toy, and the doll. You can sit on the play mat and play with them.
+
+STUDENT: (Picks up the miniature stethoscope from the doctor's kit and puts it in their ears, looking down at the toys without speaking.)
+
+TUTOR: What are you going to do next?
+
+STUDENT: (Takes the plastic thermometer and repeatedly pokes the doll's mouth, still not looking up or saying anything to the play partner.)
+
+TUTOR: Can the superhero use the doctor's kit too?
+
+STUDENT: (Shakes head and pushes the superhero toy away, refusing to mix the toys. Continues to silently tap the thermometer on the doll in a repetitive, solitary manner.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Structured Toy Play scenario (SP) using a toy kit containing lego blocks, a ball, a miniature doctor’s kit, a superhero toy, and a doll",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "An appropriate classroom was selected which had limited auditory and visual distractions to ensure high quality pretend play. The classroom had adequate space, lighting, ventilation, and play mats to sit comfortably and play.",
+      "materials": "Toy kits which were placed in the centre of the classroom (lego blocks, ball, miniature doctor’s kit, superhero toy, doll) and other materials that were available in the classroom (chalk, duster, board, charts, etc.)",
+      "social_setting": "Children were already familiar with their play partners",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When facing challenges in violating the rules of toy usage with high-structure toys",
+      "observable_behavior": "Exhibited fewer occurrences of CPP with higher occurrences of SPP, and demonstrated higher frequencies of object-directed pretend play and non-interactive type of play",
+      "internal_state": "Pretend play mainly consists of activities that are comprehendible and controllable by them",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the SP scenario with the usage of toys",
+        "observable_behavior": "Witnessed reduced verbal and gestural behaviours",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

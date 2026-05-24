@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Demand Pacing and Modification
+  Check: The tutor's immediate response avoids rapid, repetitive prompting and instead adjusts the pacing, breaks down the task, or alters the demand presentation to reduce the drive to escape.
+
+Criterion 2: Tangible Visibility Management
+  Check: The tutor avoids placing preferred items in sight but out of reach, either by keeping the item out of sight until it is time to eat or by managing access in a way that does not provoke tangible-seeking outbursts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Dennis is a 15-year-old student with Down's syndrome and an intellectual disability who communicates via short utterances and gestures. He frequently engages in verbal outbursts ('No', 'Stop it') to escape rapid instructional demands or to gain access to preferred food items when he is hungry. His behavior is highly susceptible to observational reactivity, meaning his true behavioral patterns only emerge in his natural environment rather than in artificial or analogue settings.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your paper. Pick up your pencil and start tracing the letters.
+
+STUDENT: (Shakes head) No.
+
+TUTOR: Try to trace the first letter.
+
+STUDENT: (Puts pencil down) Stop it.
+
+TUTOR: We need to finish writing these letters.
+
+STUDENT: (Waves hands away) That’s enough! No!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "writing and tracing letters",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "self-contained classroom for students with severe disabilities at his local high school",
+      "materials": "instructional materials",
+      "social_setting": "one-on-one instruction",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "teacher placed instructional materials on the table and verbally instructed the student to complete specific tasks once every 10 s using least-to-most prompting",
+      "observable_behavior": "verbal outbursts such as “No” or “Stop it.”",
+      "internal_state": "",
+      "related_quotes": [
+        "No",
+        "Stop it",
+        "That’s enough"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the escape test condition",
+        "observable_behavior": "demonstrated high levels of challenging behavior in the escape test condition (40%)",
+        "internal_state": "",
+        "related_quotes": [
+          "No",
+          "Stop it"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

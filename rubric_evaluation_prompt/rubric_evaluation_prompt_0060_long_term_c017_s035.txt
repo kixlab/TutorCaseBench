@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Sustained Cross-Curricular Simulation
+  Check: The tutor's long-term plan integrates the radio station simulation (or a similar continuous role-play environment) across multiple subjects or extended learning modules.
+
+Criterion 5: Contextually Situated Curriculum
+  Check: The tutor's long-term plan explicitly incorporates topics, language, or scenarios tailored to the student's specific background or interests (e.g., local news, culturally relevant talk shows) rather than relying on generic, standardized texts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is a Grade 7 Jamaican Creole speaker reading at a pre-primer level who experiences severe anxiety, crying, and task resistance when faced with traditional reading tasks due to repeated past failures. The evidence reveals they uniquely need an oral-first 'talk-write-read' scaffolding approach embedded within a continuous radio station role-play to bypass their trauma and build self-efficacy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We need to prepare a news script to be read by the newscaster. Take up this book and read the story so we can write the headline.
+
+STUDENT: (Pushes the book away) I am not doing that.
+
+TUTOR: Please open the book and start reading.
+
+STUDENT: (Slouches at the news desk) No. I don't want to read it.
+
+TUTOR: You need to try your best to read the words on the page.
+
+STUDENT: (Starts crying) I can't read it! I always fail!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Prepare a news script to be read by the newscaster",
+      "learning_goal": "Make connections between reading and writing through listening and speaking activities"
+    },
+    "context": {
+      "environment": "In a corner of the classroom, make-believe radio station called ASTEP 101 FM",
+      "materials": "News desk, old microphones and headsets, cassette tape-recorder, recycled material",
+      "social_setting": "Classroom with a cooperating teacher and student teachers paired to practice peer/team teaching",
+      "time_context": "Module 1 in the Radio-Active Classroom unit"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When told to 'take up a book and read' using a standardized one size-fit-all approach",
+      "observable_behavior": "Crying because they have failed again, misbehave, disruptive, nonchalant",
+      "internal_state": "Discouraged, low self-esteem, not motivated to read and learn",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When facing literacy achievement challenges after failing the Grade 4 Literacy Test at least four times",
+        "observable_behavior": "Under-achieve and misbehave, disruptive",
+        "internal_state": "Failure-proofed, discouraged, low self-esteem",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

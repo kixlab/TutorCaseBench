@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Gradual Workload Scaling
+  Check: The tutor's long-term plan explicitly starts with minimal, easily achievable assignments to build a feeling of accomplishment before gradually increasing the workload.
+
+Criterion 2: Relational Trust Building
+  Check: The tutor incorporates strategies to know Harry personally and build a non-judgmental, caring relationship over time.
+
+Criterion 3: Proactive Social Dynamics Management
+  Check: The tutor's plan includes active monitoring and management of peer interactions and classroom noise to ensure Harry feels socially secure.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Harry is an energetic student with severe decoding and reading fluency issues, compounded by intense social anxiety that leads to school avoidance. He distinguishes between 'trying' (succeeding at manageable tasks) and 'trying to try' (failing because the workload is overwhelming despite his effort). He uniquely requires auditory reading support without visual tracking, strictly simplified assignments, and a highly protected social environment to prevent shutdown.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read the next chapter of the novel independently, and then complete the packet of worksheets for your homework.
+
+STUDENT: It's not quiet enough in here for me to read. Plus, this book is boring. I just want it to quickly get to the good part.
+
+TUTOR: Try to ignore the noise in the classroom and keep reading.
+
+STUDENT: I can't focus on it. I'm getting impatient with all this detailed storyline and the rising and falling action. And looking at all these worksheets you gave me... it's too much.
+
+TUTOR: You just need to try your best to finish the assignment.
+
+STUDENT: I try to try, but again, like, the homework is just overwhelming. I'm not doing this.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading independently texts with detailed storylines of rising and falling action, and completing assignments and homework",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting that is not quiet and calm",
+      "materials": "Assignments, homework, and reading texts",
+      "social_setting": "Independent work",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When he became overwhelmed with the amount of work teachers gave him",
+      "observable_behavior": "Expressed a strong dislike for reading, grew impatient with detailed storylines, and wanted stories to quickly 'get to the good part.'",
+      "internal_state": "Overwhelmed, viewing reading as boring, feeling unsuccessful in spite of how hard he tried ('trying to try')",
+      "related_quotes": [
+        "I try to try, but again, like, the homework is just overwhelming."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reading independently in an environment that is not quiet and calm",
+        "observable_behavior": "Struggles with decoding and reading fluency, unable to enjoy the reading",
+        "internal_state": "Frustrated, unable to focus",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

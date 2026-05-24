@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: ICT-Integrated Methodological Variety
+  Check: The tutor's long-term plan explicitly outlines a rotation of diverse teaching methods that consistently integrate Information and Communication Technology (ICT) tools to sustain his interest.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+M is a shy student with AD/HD who frequently daydreams and makes careless mistakes during passive, theory-heavy instruction. He uniquely requires highly visual, interactive learning tools (like simulations) to maintain focus, and needs to be prompted to answer first in group settings to prevent him from passively agreeing with peers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the explanatory presentation and use it to fill out your worksheet about the basic points of Lamarck's theory and the giraffe's neck.
+
+STUDENT: I am not very interested . . . but OK . . . it is a relatively nice course.
+
+TUTOR: What do you think the first basic point is?
+
+STUDENT: (Looks away toward the door) I missed the directions. No matter how good is the teacher’s intention, a student cannot accept all these theories without seeing them happen.
+
+TUTOR: Just try to read the presentation text and write down an answer on your worksheet.
+
+STUDENT: (Stares blankly, daydreaming, and leaves the worksheet blank) This course is very demanding and needs a lot of analysis... I can't focus my attention to these details.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reconstruction of students’ ideas through an explanatory presentation of the basic points of Lamarck’s theory with the use of appropriate worksheets, and explain with it some examples like as giraffe’s neck",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Biology classroom equipped with interactive whiteboard and software 'PhET: Natural Selection', during a 2-hour lesson",
+      "materials": "Explanatory presentation, appropriate worksheets, interactive whiteboard, software 'PhET: Natural Selection', PowerPoint file",
+      "social_setting": "In-class activities with teacher and other students",
+      "time_context": "First 2 hours’ lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During in-class activities that demanded mental efforts and explanatory presentations of theory",
+      "observable_behavior": "Could not focus his attention to details, he made a lot of mistakes due to failure to concentrate, he was finding difficulties to maintain his attention to his duties, and he was also finding difficulties to complete his duties and tasks. He also seemed to daydream during the class",
+      "internal_state": "Not interested, considered the biology course being very demanding and needing a lot of analysis",
+      "related_quotes": [
+        "I am not very interested . . . but OK . . . it is a relatively nice course",
+        "a student cannot accept all these theories without seeing them happen."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Due to distraction caused by external stimuli",
+        "observable_behavior": "Showed difficulties in fully following teacher’s directions, loses points that may be necessary to complete an activity",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

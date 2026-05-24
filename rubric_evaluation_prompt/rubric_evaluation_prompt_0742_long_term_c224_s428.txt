@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Instructional Modality Variation
+  Check: The tutor's long-term plan incorporates multiple lesson delivery strategies, explicitly balancing verbal discussion time with structured creative tasks.
+
+Criterion 2: Extended Discussion Allocation
+  Check: The tutor's long-term plan schedules extended time blocks (e.g., doubling standard lesson time) specifically to allow the student to fully share and process personal experiences without being cut short.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly engaged and eager to share personal experiences but struggles with abstract vocabulary and becomes easily overwhelmed or aggressive when discussing emotionally charged topics like bullying. They rely heavily on provided templates rather than generating original work unless given structured brainstorming support. They uniquely require psychological distance (e.g., using animal characters) and extended discussion time to safely process volatile issues.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now that we have read the cartoon captions, please use your blank worksheets to create a new, original cartoon showing a way to prevent bullying.
+
+STUDENT: (Waving hands high) Oh! oh! I want to share what happened to me on the playground! I would rather discuss that than make a cartoon right now.
+
+TUTOR: Let's focus on drawing the cartoon for now.
+
+STUDENT: But some of these phrases are hard to understand. I need more ideas before I can make my cartoon.
+
+TUTOR: Just try your best to draw something new.
+
+STUDENT: I'm just going to use the half-completed example cartoon on the worksheet instead of creating a new original one.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading cartoon captions and attempting to create original cartoons depicting bullying prevention strategies",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Small-group lessons (3-8 students)",
+      "materials": "Worksheets with partly-made cartoons or creating original cartoons",
+      "social_setting": "Small-group lessons",
+      "time_context": "15-minute practicum lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Before they could make their cartoons",
+      "observable_behavior": "Using the example cartoons and half-completed cartoons in their work rather than creating new original cartoons",
+      "internal_state": "Students needed more ideas",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When tasked with making cartoons",
+        "observable_behavior": "Students would rather discuss issues than make cartoons",
+        "internal_state": "Some vocabulary/ idioms/ phrases with multiple meanings were difficult for our students with cognitive difficulties",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

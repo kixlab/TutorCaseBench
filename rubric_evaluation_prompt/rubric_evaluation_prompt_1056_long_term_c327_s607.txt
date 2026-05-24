@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Advice-Giving Frameworks
+  Check: The long-term plan must structure scientific inquiries around authentic problems where the student is tasked with giving advice to a real or hypothetical person.
+
+Criterion 2: Sustained Expert Positioning
+  Check: The long-term plan must include structural opportunities (such as jigsaw activities or designated specialization areas) where the tutor defers to the student as the primary knowledge source.
+
+Criterion 3: Identity-Driven Investigation Design
+  Check: The long-term plan must provide opportunities for the student to design or direct scientific investigations based on their own lived experiences or personal interests.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a 'loud' classroom presence and frequently shares personal stories that may initially seem disconnected from the academic content. They are marginalized by traditional, passive science instruction but thrive when their lived experiences are validated and they are positioned as 'experts' solving authentic problems or giving advice to others.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are going to read this newspaper article about asthma and lung capacity differences between men and women.
+
+STUDENT: Wait, I need to speak up about this! My uncle has asthma really bad and I need to find out what to tell him so I can help him out.
+
+TUTOR: Let's look at what the text says.
+
+STUDENT: But I'm asking a clarifying question! He was at my house yesterday coughing, and I told him he needs to check his lungs. Does it matter that he's a man instead of a woman for his asthma?
+
+TUTOR: Read the second paragraph to find the answer.
+
+STUDENT: (Speaking loudly) I don't get what this paragraph has to do with him! Last week he was eating spicy chips and started coughing, and my grandma said it was the chips, not his asthma. So I'm trying to figure out if the chips messed up his lung capacity or what!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in group discussions about asthma and lung capacity and processing scientific information",
+      "learning_goal": "Acquiring information for others and building extensive narratives around helping and teaching others"
+    },
+    "context": {
+      "environment": "Lunchtime Science (LS) intervention",
+      "materials": "Laboratory materials and scientific information (from newspaper articles, science texts, and specialists in the fields of midwifery and asthma research)",
+      "social_setting": "Group discussions",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When they did share everyday stories it was difficult for these girls and the instructors to infer how their stories were relevant to the conversation",
+      "observable_behavior": "Having a 'loud' presence in the classroom, telling personal stories, and asking questions; Being someone who 'speaks up'",
+      "internal_state": "Imagined acquiring information for others without having built extensive narratives around helping and teaching others",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participating in science and other subjects where they struggled academically",
+        "observable_behavior": "Sharing personal stories and asking clarifying questions",
+        "internal_state": "Becoming outsiders in both school and school science",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

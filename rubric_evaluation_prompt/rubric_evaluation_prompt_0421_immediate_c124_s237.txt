@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Delivery of Direct Opportunities to Respond (OTR)
+  Check: The tutor's response includes at least one direct instructional question, prompt, or directive for the student to respond to, even if the student is currently noncompliant.
+
+Criterion 2: Maintenance of Instructional Demands
+  Check: The tutor maintains the expectation that the student complete the task, rather than dropping, delaying, or removing the demand in response to the student's resistance.
+
+Criterion 3: Absence of Negative Feedback
+  Check: The tutor avoids using punitive language, reprimands, or negative feedback when addressing the student's challenging behavior.
+
+Criterion 4: Provision of Approval for Engagement
+  Check: The tutor provides verbal or nonverbal approval immediately following any compliant behavior, or explicitly sets up a prompt where compliance will be immediately praised.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe, socially mediated challenging behaviors (aggression, disruption, elopement) triggered by task demands, driven by a desire for attention or escape. They uniquely require frequent, structured Opportunities to Respond (OTRs) to maintain engagement and access positive attention, while needing the tutor to firmly maintain instructional demands without resorting to negative feedback.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent work. Please start the math problems on your desk.
+
+STUDENT: (Puts head down on desk) I don't want to do this.
+
+TUTOR: You need to complete your math assignment now.
+
+STUDENT: (Leaves seat without permission) No.
+
+TUTOR: Please return to your seat and finish your work.
+
+STUDENT: (Shouting and throwing the math materials across the room) I'm not doing it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "math",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "independent work",
+      "materials": "desk, instructional materials",
+      "social_setting": "naturally occurring instructional routines in elementary classrooms",
+      "time_context": "30-min observations"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "delivering task demands",
+      "observable_behavior": "putting head down on desk, leaving seat without permission, throwing objects, damaging instructional materials",
+      "internal_state": "social negative reinforcement (i.e., escape from tasks/activities)",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "delivering task demands",
+        "observable_behavior": "active noncompliance",
+        "internal_state": "social negative reinforcement (i.e., escape from tasks/activities)",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

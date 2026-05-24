@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Interest-Based Peer Engagement
+  Check: The long-term plan includes strategies to showcase Edward's personal interests (e.g., reading excerpts from his books from home) to naturally draw peers to him in a positive context.
+
+Criterion 2: Facilitated and Monitored Group Inclusion
+  Check: The long-term plan involves actively persuading peers to include Edward in collaborative work while explicitly planning to monitor the group's social dynamics.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Edward is an energetic and boisterous student who uses disruptive behaviors—such as loud interruptions, silly noises, and task avoidance—to gain attention and escape challenging work like independent writing. His oppositional behavior often alienates peers, but he uniquely requires intense 1:1 academic support to stay on task, explicit validation of his ideas to prevent oppositional spirals, and structured opportunities to be viewed as a classroom expert rather than a nuisance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, let's continue reading 'Ereth's Birthday' on the carpet. Ereth just said his usual grumpy phrase. What do we think about what just happened?
+
+STUDENT: (Repeats the phrase from the book, guffaws, and looks around at the other students) Um, unnecessary?
+
+TUTOR: Let's keep reading to see what happens to him next.
+
+STUDENT: (Fidgets, faces away from the teacher, and makes a funny face to get another student's attention) He didn’t get killed. ... You mean the cage trap.
+
+TUTOR: Please remember to raise your hand if you want to share your thoughts.
+
+STUDENT: (Laughs loudly and interrupts again) No! ... The weak don’t always have to help the strong because if they’re a criminal or something, that might make it worse.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Listening to and discussing the book 'Ereth’s Birthday' and Greek mythology",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-class read aloud on the carpet",
+      "materials": "Book ('Ereth’s Birthday'), book about Greek mythology",
+      "social_setting": "Whole group sitting together on the carpet",
+      "time_context": "After lunch"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher pronounces phrases from the book or when other students raise their hands to speak",
+      "observable_behavior": "Repeats phrases, guffaws, looks around hoping to enlist others in silliness. Interrupts 17 times during a single read aloud to say something silly, laugh loudly, or make a smart-aleck comment.",
+      "internal_state": "Hoping to enlist others in the silliness",
+      "related_quotes": [
+        "Um, unnecessary?",
+        "He didn’t get killed. ... You mean the cage trap.",
+        "No! ... The weak don’t always have to help the strong because if they’re a criminal or something, that might make it worse."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During read-aloud time on the carpet",
+        "observable_behavior": "Fidgeting, facing away from the teacher, and trying to get the attention of other students through funny faces, gestures, and noises.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

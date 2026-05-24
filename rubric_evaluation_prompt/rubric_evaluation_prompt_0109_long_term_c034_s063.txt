@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 3: Initiation-Driven Pacing
+  Check: The tutor's long-term plan explicitly includes strategies to pause, wait for Leah to initiate an interaction, and use her bids to determine the pace of activities, rather than forcing progression.
+
+Criterion 4: Systematic Support Tracking
+  Check: The tutor proposes using a structured observational tool or checklist (such as SCERTS) to systematically track, evaluate, and adjust environmental and interpersonal supports across multiple sessions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Leah is an 11-year-old with profound and multiple learning difficulties and visual impairment who typically engages passively with very low communication rates. Her primary trigger is physical discomfort from prolonged wheelchair use, which escalates into loud, repetitive vocalizations ('Ah'). She uniquely requires direct physical repositioning for comfort and relies heavily on tactile, sensory input (like physical touch or tactile play) rather than verbal prompts to initiate engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Leah, I have the toy fish here. Who shall we squirt?
+
+STUDENT: (Leah encounters the activity passively and does not initiate communication.)
+
+TUTOR: We have Sarah on this side (splashes in the water) and Mark on this side (splashes in the water).
+
+STUDENT: (Leah remains passive, maintaining her low rate of communication.)
+
+TUTOR: Which one should we squirt?
+
+STUDENT: (Leah does not indicate a choice, continuing to not initiate any bids for communication.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engage Leah during the hydrotherapy session by showing her a toy fish and asking her, \"Who shall we squirt?\"",
+      "learning_goal": "Indicate a choice"
+    },
+    "context": {
+      "environment": "Hydrotherapy session",
+      "materials": "Toy fish, water",
+      "social_setting": "Two staff members present, splashing water on either side",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When staff showed her a toy fish and asked, \"Who shall we squirt? We have [staff member] on this side (splashes in the water) and [staff member] on this side (splashes in the water)\"",
+      "observable_behavior": "Leah did not indicate a choice",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Over the course of the structured observation across different activities",
+        "observable_behavior": "Rate of communication was relatively low (0.17 per minute), with her initiating communication only 23 times over the 134 minutes of observation",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

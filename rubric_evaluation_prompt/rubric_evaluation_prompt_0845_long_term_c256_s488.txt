@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mastery-Oriented Goal Setting
+  Check: The long-term plan must include strategies to explicitly value and measure personal improvement, deep understanding, or mastery, rather than focusing on grades, speed, or peer comparison.
+
+Criterion 2: Cultivation of Help-Seeking Behavior
+  Check: The long-term plan must incorporate methods to explicitly encourage, normalize, or scaffold help-seeking behaviors when she encounters difficult tasks.
+
+Criterion 3: Protection of Academic Focus
+  Check: The long-term plan must keep her engaged directly with the academic material and explicitly avoid assigning her administrative or classroom management tasks (e.g., handing out papers).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student masks her academic struggles by focusing on rote task completion and avoiding help-seeking, often shutting down passively when faced with difficult questions. She uniquely needs an environment that shifts her focus from grades and completion to deep learning, while avoiding non-academic distractions that allow her to escape cognitive effort.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I see you skipped the second question on your reading comprehension worksheet. Please go back and complete it.
+
+STUDENT: I went on to do the third question because I saw this was too difficult for me and so that I would not waste time.
+
+TUTOR: You still need to answer it. Try to figure out what the question is asking.
+
+STUDENT: (Sits for a minute facing the text sheet without doing anything) I tried to find out the answer… I didn’t understand the question.
+
+TUTOR: Read the text again and see what you can find to write down.
+
+STUDENT: (Looks at the assignment sheet while holding her head between her hands, reads the text, returns to the assignment sheet, picks up her pencil, puts it down. Sits silently without asking for help.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting the second question of a reading comprehension task",
+      "learning_goal": "Obtaining good grades and task completion (filling the space with words)"
+    },
+    "context": {
+      "environment": "Noisy 4th grade classroom",
+      "materials": "Text sheet, worksheet, assignment sheet, pencil",
+      "social_setting": "Working independently, boy sitting next to her",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Returning to the second question after skipping it",
+      "observable_behavior": "Looked at the assignment sheet while holding her head between her hands, read the text, returned to the assignment sheet, wiped her nose, picked up her pencil, put it down. Did not ask for help.",
+      "internal_state": "Experiencing difficulties",
+      "related_quotes": [
+        "I tried to find out the answer… I didn’t understand the question .",
+        "I went on to do the third question because I saw this was too difficult for me and so that I would not waste time"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When encountering a challenge",
+        "observable_behavior": "Sat for another minute facing the text sheet without doing anything. Avoided asking for the teacher's help.",
+        "internal_state": "Not concerned with the accuracy of their responses, felt successful when they simply filled the space with words",
+        "related_quotes": [
+          "I work according to what is easy for me and what is difficult for me I do later on",
+          "Only to write the answer."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

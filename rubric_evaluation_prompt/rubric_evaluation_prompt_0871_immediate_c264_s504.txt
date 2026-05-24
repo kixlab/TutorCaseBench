@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual and Cinematic Anchoring
+  Check: The tutor provides or references visual media (e.g., film clips, images) or uses explicit visualization exercises before asking the student to analyze the text.
+
+Criterion 2: Emotional Elicitation
+  Check: The tutor asks the student to describe their emotional response to a scene, character, or quote rather than solely asking for factual recall.
+
+Criterion 3: Structured Element Mapping
+  Check: The tutor introduces a structured format (like a graphic organizer or specific categorized list) to help the student break down cinematic or literary elements.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are at-risk special education students who struggle with traditional reading and writing, often rushing through texts efferently without visualizing or emotionally connecting to the material. They experience severe anxiety and articulation difficulties with standard reports, but thrive when historical narratives are anchored in visual media and when assessments leverage their generational literacies (like texting or music).
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please write a short report in your notebook explaining the characterization and setting of the story we just read.
+
+STUDENT: (Looks down at the blank notebook, appearing very shy and reluctant to participate) I don't really know how to start this.
+
+TUTOR: What do you think about the main character? Just write your ideas down.
+
+STUDENT: I know what happened in the story, but I can't get it down right. I'm not good at writing reports.
+
+TUTOR: Keep trying. Just do your best to remember the information and put it on the paper.
+
+STUDENT: Writing assignments are more difficult because you have to remember all the information and then put it how you want to say it on paper. But it doesn’t always come out how you want it to. (Stops writing, unable to articulate the literary elements)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Teach students to recognize literary elements (for example, characterization, setting, foreshadowing, irony, etc.), the parts of a short story, and basic poetic elements through various writing assignments.",
+      "learning_goal": "Prepare students for standardized state tests and college by articulating their ideas both orally and in writing."
+    },
+    "context": {
+      "environment": "Classroom during English department required curriculum",
+      "materials": "Traditional writing assignments, tests, reports, graphic organizers, notebooks",
+      "social_setting": "Independent work",
+      "time_context": "Throughout the first half of the school year"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When required to use traditional methods to measure the students’ progress, such as tests and reports.",
+      "observable_behavior": "Very shy, reluctant to participate and ask questions, and had difficulties articulating their ideas both orally and in writing. Does not typically exhibit strong writing skills.",
+      "internal_state": "",
+      "related_quotes": [
+        "Writing assignments are more difficult because you have to remember all the information and then put it how you want to say it on paper. But it doesn’t always come out how you want it to."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to remember all the information and put it on paper.",
+        "observable_behavior": "Produces work where it doesn’t always come out how they want it to, resulting in lower grades on traditional writing assignments.",
+        "internal_state": "Finds writing assignments more difficult.",
+        "related_quotes": [
+          "Writing assignments are more difficult because you have to remember all the information and then put it how you want to say it on paper."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

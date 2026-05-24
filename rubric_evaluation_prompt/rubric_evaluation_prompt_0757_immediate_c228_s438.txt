@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Advanced Curiosity
+  Check: The tutor's response must directly engage with, elevate, or seek answers to the student's advanced inquiries rather than shutting them down to force basic task compliance.
+
+Criterion 2: Refusal of Remedial Framing
+  Check: The tutor must maintain high academic expectations and avoid simplifying the material or treating the student's rushing/avoidance as a cognitive deficit.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+José is a highly intelligent and curious student who deliberately masks his academic abilities through rushing, faking distraction, and mischievous behavior to avoid the social stigma of being a 'schoolboy'. The evidence reveals he uniquely needs private affirmation, direct accountability that confronts his 'faked' indifference, and validation of his advanced curiosity without public exposure.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: José, please read this passage about dinosaurs and oil, and then complete the corresponding questions.
+
+STUDENT: (Taps his pencil on the desk) I'm done with the questions. I'm going to visit with my classmates.
+
+TUTOR: We need to check your work first. Let's look at the passage.
+
+STUDENT: How does oil get in the ground?
+
+TUTOR: Let's read the passage together to find the answer.
+
+STUDENT: (Starts stomping his feet and gets up to walk around the room) Oh, I didn’t ever read it. I was just faking...
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading a passage about dinosaurs and oil and completing corresponding questions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Ms. Schaffer's fifth grade language arts class",
+      "materials": "Reading passages, pencil, classroom telephone",
+      "social_setting": "Whole class instruction",
+      "time_context": "During regular class time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to engage in 'school-like' work and demonstrate reading comprehension",
+      "observable_behavior": "Rushing through the reading passages and corresponding questions, 'faking' reading, tapping his pencil, stomping his feet, talking, and walking around the room",
+      "internal_state": "Did not like others to see him get excited by or engaged in academic work; feared being labeled a 'schoolboy'",
+      "related_quotes": [
+        "Oh, I didn’t ever read it. I was just faking..."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "After reading a passage about dinosaurs and oil",
+        "observable_behavior": "Asked advanced questions that went beyond the scope of Ms. Schaffer’s knowledge base and the information in the passage",
+        "internal_state": "Insatiable curiosity and deep reflection on topics",
+        "related_quotes": [
+          "How does oil get in the ground?"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

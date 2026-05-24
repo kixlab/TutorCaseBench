@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Metacognitive Error Evaluation
+  Check: The tutor uses a think-aloud strategy to explicitly compare the student's dictated word with the inaccurate transcribed word (e.g., analyzing sounds, letters, or meanings) rather than just telling her it is wrong.
+
+Criterion 2: Swift Management of Inappropriate Transcriptions
+  Check: If an inappropriate or distressing word is transcribed, the tutor immediately deletes or alters it, or directs the student to do so swiftly without dwelling on the mistake.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Maggie is a highly engaged struggling reader who uses speech recognition (SR) to bypass spelling difficulties but treats dictated text as a final draft. When SR produces errors, she becomes frustrated and deletes entire sentences or drafts rather than editing them. She uniquely requires explicit metacognitive modeling to evaluate transcription errors and physical chart paper modeling to understand drafting as a malleable, multi-step process.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's use the iPad to write the final sentence for your story, 'Victoria Had a Little Dog'.
+
+STUDENT: (Speaks into the iPad) The dog would say, hello.
+
+TUTOR: Let's look at what the screen says.
+
+STUDENT: That’s not what I said! It wrote 'Follow dog I don’t know that for'.
+
+TUTOR: What do you think you should do next?
+
+STUDENT: (Deletes the entire sentence from the screen) I'm not copying that to my paper. I'm just going to delete the whole thing.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Evaluating the accuracy of an SR transcription for the final sentence of her story 'Victoria Had a Little Dog' on an iPad.",
+      "learning_goal": "Navigating the stages of the writing process (brainstorming, drafting, revising) while using SR technology."
+    },
+    "context": {
+      "environment": "Supervised writing center sessions",
+      "materials": "iPad, SR technology (Dragon), chart paper",
+      "social_setting": "Supervised writing center with teacher available for dialogue",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When SR transcribed, 'Follow dog I don’t know that for' instead of the dictated sentence 'The dog would say, hello'.",
+      "observable_behavior": "Recognized that the transcription was inaccurate, and therefore did not copy it to her paper. Deleted entire sentences and drafts.",
+      "internal_state": "To them, what they dictated was the final composition.",
+      "related_quotes": [
+        "That’s not what I said!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When navigating the stages of the writing process with SR.",
+        "observable_behavior": "Consistently ignored the writing process. Wanted to skip brainstorming and drafting and go straight to revising. Dictated complete ideas.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

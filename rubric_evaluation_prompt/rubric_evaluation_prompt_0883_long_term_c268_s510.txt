@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Systematic Skill Instruction Cycle
+  Check: The long-term plan must outline a clear cycle of explicit instruction, rehearsal, and feedback/reinforcement for specific social behaviors.
+
+Criterion 2: Gradual Environmental Generalization
+  Check: The long-term plan must include a deliberate progression from practicing skills in a regulated, structured setting to applying them in a broader classroom setting with diverse peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits significant language delays and struggles to initiate or maintain peer interactions, often producing very few comments or requests during unstructured play. They uniquely require highly structured play plans, explicit role assignments, and specific reflective questioning to prompt and sustain verbal engagement, as unstructured free play leads to minimal communication.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to play with the grocery store toys on the carpet for ten minutes. You and your partner can play together.
+
+STUDENT: (Picks up a plastic apple) Red apple.
+
+TUTOR: Your partner has the shopping basket.
+
+STUDENT: (Looks at the basket) Basket.
+
+TUTOR: What can you say to your partner?
+
+STUDENT: (Reaches for the basket without asking) Put apple.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in free play with toys (themes like grocery store, kitchen, doctor) and Attempting to use verbal requests",
+      "learning_goal": "Producing verbal dialogue during play sessions"
+    },
+    "context": {
+      "environment": "sectioned-off hallway area",
+      "materials": "toys arranged on the carpeted floor",
+      "social_setting": "Dyad (peer play) with an interventionist present",
+      "time_context": "10-minute play session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to use verbal requests during the 10-minute play component",
+      "observable_behavior": "produced one or no requests throughout the intervention phase",
+      "internal_state": "",
+      "related_quotes": [
+        "Child 1A1 and Child 2B3 produce d one or no requests throughout the intervention phase."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the interventionist invited the children to play with the toys arranged on the carpeted floor and engaged in minimal conversation",
+        "observable_behavior": "consistent decrease over the baseline sessi ons producing five or fewer com ments at the end of the baseline phase",
+        "internal_state": "",
+        "related_quotes": [
+          "both partners had a consistent decrease over the baseline sessi ons producing five or fewer com ments at the end of the baseline phase."
+        ]
+      },
+      {
+        "condition": "Producing complex language during play sessions",
+        "observable_behavior": "average number of four or more word utterances was unchange d... and there were decreases in the average number of four or mor e word utterances",
+        "internal_state": "",
+        "related_quotes": [
+          "The average number of four or more word utterances was unchange d from three of the participan ts and there were decreases in the average number of four or mor e word utterances for two of t he participants."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

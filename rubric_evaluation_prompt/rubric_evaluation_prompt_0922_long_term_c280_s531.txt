@@ -1,0 +1,113 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Consistent and Embedded Manipulative Use
+  Check: The tutor's long-term plan explicitly embeds manipulatives as a consistent, ongoing requirement across lessons rather than treating them as occasional interventions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sophie is a Year 5 student who relies on inefficient math strategies, such as repeated addition for multi-digit multiplication, and becomes confused when learning tools are presented as optional. She uniquely needs to experience the inefficiency of her own methods firsthand before being guided through questioning toward conceptually linked, efficient strategies like subtraction-based multiplication.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's play the multiplication game. Draw some playing cards to make an equation and find the product. The cards are here on the table to use if you choose to.
+
+STUDENT: (Looks at the cards) I drew an 8 and a 7. I'm having difficulty understanding how this game is supposed to work.
+
+TUTOR: What do you think you should do next?
+
+STUDENT: I know I need to multiply them, but I'm struggling to correctly answer the equation to find the product.
+
+TUTOR: Keep trying to work it out.
+
+STUDENT: I’m still figuring out what to do, still a little bit confused about finding the answers. I don't really want to use these cards.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Playing a multiplication game using playing cards to generate random numbers for equations to find products",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Year 5 classroom",
+      "materials": "Playing cards (manipulatives)",
+      "social_setting": "Manipulatives available but their use was dependent upon the students making the choice to use them; neither the tasks themselves nor the teacher required such use",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to play the multiplication game with playing cards",
+      "observable_behavior": "Has difficulty understanding the game and struggles to correctly answer the multiplication equations to find products",
+      "internal_state": "Still figuring out what to do, still a little bit confused about finding the answers; did not express a positive response toward using the cards",
+      "related_quotes": [
+        "I’m still figuring out what to do, still a little bit confused about finding the answers."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When manipulatives are provided as an optional extra rather than a planned part of the task",
+        "observable_behavior": "Struggles with the task, fails to correctly answer equations, and does not express a positive response toward using the materials",
+        "internal_state": "Recognises her struggle with the task and feels confused",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

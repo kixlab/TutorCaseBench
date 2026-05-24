@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Schedule and Reinforcer Integration
+  Check: The tutor's response must reference or utilize a visual schedule that explicitly links the requested activity to a contingent reinforcer.
+
+Criterion 2: Mastered Task Presentation
+  Check: The tutor must initiate the work session by presenting academic activities the student has already mastered, explicitly avoiding the introduction of novel or unfamiliar assignments.
+
+Criterion 3: Interactive Visual Engagement
+  Check: The tutor must incorporate or direct the student toward interactive visual supports (e.g., a SmartBoard, interactive icons, or visual words) rather than relying solely on verbal instructions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Evan is a student with limited expressive language who exhibits severe avoidance behaviors (eloping, dropping to the floor, physical aggression) when transitioning to structured or group tasks. He uniquely requires visual schedules paired with systematic reinforcement, interactive visual technology, and the presentation of mastered (rather than novel) tasks to successfully engage and comply.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Evan, it is time to transition to the work area. We need to write the answers to five addition and five subtraction problems with two-digit numerals.
+
+STUDENT: (Does not follow the direction to move. Stands in place and flips a straw back and forth in front of his eyes.)
+
+TUTOR: Please walk over to the table so we can begin your math assignment.
+
+STUDENT: (Drops down and lies flat on the floor instead of walking to the structured task area.)
+
+TUTOR: You need to get up off the floor and sit at the table to do your work.
+
+STUDENT: (Crawls under the table to avoid the activity and begins kicking at the educator's legs.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing the answer to five addition and five subtraction problems with two-digit numerals",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Area to work on structured tasks",
+      "materials": "Visual schedule that identified activities of the day and the reinforcers he was eligible to receive, and a straw",
+      "social_setting": "One-on-one work with an assigned educator",
+      "time_context": "30-min work time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to transition or move to an area to work on structured tasks",
+      "observable_behavior": "Tended to lie on the floor or crawl under a table; protested nonpreferred activities by running away, and kicking and hitting adults",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When assigned work tasks",
+        "observable_behavior": "Commonly failed to independently follow directions and complete assigned work tasks; engaged in self-stimulatory behavior, especially flipping a straw back and forth in front of his eyes",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

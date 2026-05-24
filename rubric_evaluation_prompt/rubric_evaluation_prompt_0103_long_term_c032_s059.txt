@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Student-Led Interaction Framework
+  Check: The tutor's long-term plan must establish a routine or framework that prioritizes allowing Evie to initiate bids for interaction to set the pace and tone of activities.
+
+Criterion 2: Systematic Communication Tracking
+  Check: The tutor's long-term plan must incorporate the use of SCERTS checklists (or a similar systematic tracking tool) to identify and refine communication supports across activities.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Evie is a non-ambulant adolescent with profound learning difficulties who communicates through non-verbal cues and becomes highly distressed during rigid transitions or 'must do' activities. She uniquely requires communication partners who wait for her physical initiations, offer explicit choices to provide autonomy, and utilize specific sensory or environmental soothing strategies (like hair brushing or a change of scenery) to regulate her prolonged crying.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your Weetabix for breakfast.
+
+STUDENT: (Takes a mouthful of Weetabix but holds it in her mouth without chewing.)
+
+TUTOR: You need to chew your food.
+
+STUDENT: (Continues holding the food in her mouth for eleven minutes while watching television.)
+
+TUTOR: What are you doing?
+
+STUDENT: (Starts pushing the Weetabix out so that it falls onto her chin, looks towards the tutor holding eye contact, struggles to wipe her face, and makes short vocalizations.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Eating breakfast independently",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Lounge, watching television",
+      "materials": "Weetabix, yoghurt, drink",
+      "social_setting": "Alone initially, then interacting with staff member/observer",
+      "time_context": "7.30am"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After eleven minutes of holding Weetabix in her mouth, which she was not chewing",
+      "observable_behavior": "She started pushing her Weetabix out so that it fell on to her chin. Evie looked towards me and held eye contact. She started to struggle to wipe her face and made short vocalisations.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expressing herself for behavior regulation or expressing emotions",
+        "observable_behavior": "Displayed an almost complete range of non-verbal social communicative behaviors... including eye gaze, facial expression, simple motor actions, crying, reaching, pushing away, showing, headshakes, nods and differentiated vocalizations",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

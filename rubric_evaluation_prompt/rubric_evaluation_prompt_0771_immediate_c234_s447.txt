@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Phonemic Segmentation
+  Check: The tutor's response includes explicit segmentation of individual sounds (e.g., /v/-/e/-/t/) when addressing a decoding or spelling error.
+
+Criterion 2: Rhythmic or Choral Scaffolding
+  Check: The tutor incorporates rhythmic, choral, or shared reading strategies that allow Luis to participate alongside or slightly behind a guiding voice.
+
+Criterion 3: Avoidance of Unmanageable Text
+  Check: The tutor ensures any text or script presented in the moment is appropriately leveled and avoids overwhelming him with unmanageable reading parts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Luis is an eager student who relies heavily on physical movement, rhythm, and memory rather than text-based decoding. He frequently guesses words based on illustrations or reads slightly behind his peers' voices. He uniquely requires explicit phonemic segmentation, rhythmic reading structures, and carefully leveled texts to prevent cognitive overload and peer frustration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the photo in this book. Who can write vet on the board?
+
+STUDENT: (Points to the illustration) Hey, this is a vet.
+
+TUTOR: Yes, it is. Go ahead and write the word on the board.
+
+STUDENT: (Writes a v) I think the next letter is a.
+
+TUTOR: Let's try another one. Can you change vet to pet, Luis?
+
+STUDENT: (Taps the board and writes p-i)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing the word 'vet' on the board and attempting to change the word 'vet' to 'pet'",
+      "learning_goal": "Improve word recognition through the use of sight word instruction, letter tiles, and writing"
+    },
+    "context": {
+      "environment": "Title I intervention session",
+      "materials": "Board, letter tiles, book with a photo of a vet",
+      "social_setting": "Small group or one-on-one with Title I teacher",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked: 'Who can write vet on the board?'",
+      "observable_behavior": "Writes a 'v' and guesses the next letter verbally instead of sounding it out",
+      "internal_state": "Privileges his memory, illustrations, and his common sense over text",
+      "related_quotes": [
+        "I think the next letter is a.",
+        "Hey, this is a vet."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked: 'Can you change vet to pet, Luis?'",
+        "observable_behavior": "Writes incorrect vowel letters (writes p-i instead of p-e-t)",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

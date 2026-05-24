@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Active Interruption of Incorrect Actions
+  Check: The tutor explicitly interrupts or stops Rico's incorrect action (e.g., by describing a physical block/redirection or using a firm verbal halt) rather than passively letting him guess again.
+
+Criterion 2: Comparative Visual Pointing
+  Check: The tutor explicitly directs Rico's attention back and forth between the target shape and the options (alternate pointing) or repeatedly points to the target to highlight similarities.
+
+Criterion 3: Sensory and Focus Regulation
+  Check: The tutor includes cues for noise suppression, minimizing auditory input, or intense visual focusing when Rico becomes distracted or repetitive.
+
+Criterion 4: Explicit Non-Verbal Cueing
+  Check: The tutor explicitly describes using their own facial expressions or hand gestures to reinforce the verbal instruction and convey implied meaning.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Rico is a student who struggles with partial mathematical processing, characterized by discrepancy gestures where his verbalizations and physical pointing often mismatch. He is highly susceptible to spatial distractions and echolalia, uniquely requiring a dominant, highly structured teaching approach that includes physical interruption of incorrect actions, alternate pointing to highlight similarities, and noise suppression to maintain focus on concrete visual media.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your task sheet. Please point to the picture that is a ball.
+
+STUDENT: Ball. (Gestures hand toward the image of the cap)
+
+TUTOR: Let's try to mark the correct picture with a check mark.
+
+STUDENT: (Moves hand to give a '√' sign in the image space for the canned milk)
+
+TUTOR: Look closely at the pictures. Which one is the ball?
+
+STUDENT: (Continues hand movement to give a '√' in the image space for the milk cans, and then tries to give the '√' sign in the picture of the hat)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Identify the forms of concrete objects that resemble geometric shapes 'ball'",
+      "learning_goal": "Identify the forms of concrete objects that resemble geometric shapes"
+    },
+    "context": {
+      "environment": "Structured task setting",
+      "materials": "Task sheet with images of 'ball', 'cap', 'canned milk', and 'hat'",
+      "social_setting": "One-on-one teacher and student interaction",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Master points to pictures 'ball'",
+      "observable_behavior": "Rico call picture 'ball' accompanied by hand gestures toward an image 'cap' on the 'beam'.",
+      "internal_state": "Discrepancy gesture indicating Rico still distracted on spatial relations, so the difficulty repeating ideas visually perceived forms 'balls' on the choice of concrete objects specified.",
+      "related_quotes": [
+        "ball"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the movement to mark the task sheet",
+        "observable_behavior": "Wanted to give a sign of identity '√' in the image space 'canned milk', and even tried to give the sign '√' in the picture 'hat' again.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

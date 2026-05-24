@@ -1,0 +1,109 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Auditory Text Delivery
+  Check: The tutor reads the text aloud to the student or provides an auditory alternative, explicitly avoiding requiring the student to read the text independently.
+
+Criterion 2: Short-Segment Task Pacing
+  Check: The tutor breaks the reading or task into short, manageable segments and models the process, rather than assigning a large block of text at once.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Derek is a disengaged student who masks his reading struggles by rushing through texts, skipping words and lines just to finish tasks quickly. He exhibits defensive body language and apathy, requiring relational trust-building and specific accommodations like having texts read aloud to bypass his visual tracking issues and ensure comprehension.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your World History exam. Please read the questions and begin.
+
+STUDENT: (Slouches and crosses arms) I can never remember these lessons. It just makes me tense and uncomfortable.
+
+TUTOR: Just read the first section and try your best.
+
+STUDENT: (Reads the page very quickly) I'm just trying to finish this as fast as possible.
+
+TUTOR: Look at question number three again.
+
+STUDENT: I somehow just skip over words on tests. I look back at the question and realize I never knew it said that. I'm done with this.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Taking tests, specifically World History exams",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom test setting",
+      "materials": "Tests",
+      "social_setting": "Independent test taking",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When reading questions or text on tests independently",
+      "observable_behavior": "Skips over words on tests and misses information",
+      "internal_state": "Unable to remember lessons had increased tensions and discomfort",
+      "related_quotes": [
+        "I somehow just skip over words on tests and then like I’ll go back through and someone will read it to me and like I realize I never knew it said that."
+      ]
+    },
+    "behavior_patterns": []
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

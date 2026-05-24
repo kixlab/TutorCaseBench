@@ -1,0 +1,72 @@
+{
+  "category_id": "215",
+  "category_title": "Students who exhibit physical aggression to regain teacher attention during instructional interruptions",
+  "scenario_id": "409",
+  "scenario_title": "Music room reward interrupted by conversation with music teacher",
+  "minimal_context": "The student is playing the tambourine as a reward in the music room while the instructor and music teacher are present.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are in the music room now. Do you want to play on the drums or the tambourine?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Chooses the tambourine and begins playing with it)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, go ahead. (Turns to the music teacher sitting at the desk) Do you have a minute to talk?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Notices the conversation and realizes the instructor is not providing full attention)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Continues speaking to the music teacher) We just finished our travel route."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Acts out with physical violence and strikes the instructor)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are in the music room now. Do you want to play on the drums or the tambourine?\n\nSTUDENT: (Chooses the tambourine and begins playing with it)\n\nTUTOR: Okay, go ahead. (Turns to the music teacher sitting at the desk) Do you have a minute to talk?\n\nSTUDENT: (Notices the conversation and realizes the instructor is not providing full attention)\n\nTUTOR: (Continues speaking to the music teacher) We just finished our travel route.\n\nSTUDENT: (Acts out with physical violence and strikes the instructor)",
+  "immediate_dialogue_prompt": 708,
+  "long_term_dialogue_prompt": 709,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Playing on the tambourine as a reward.",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Music room",
+        "materials": "Tambourine",
+        "social_setting": "The instructor is present, and the music teacher is sitting at his desk nearby.",
+        "time_context": "Once they are in the music room after completing a travel route"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "As she is playing with it, the instructor has a word with the music teacher who is sitting at his desk.",
+        "observable_behavior": "The student, who is nearby, once again strikes the instructor.",
+        "internal_state": "The student realizes that the instructor is not providing his or her full attention.",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When the activity is taking attention away from the student",
+          "observable_behavior": "The student acts out with physical violence.",
+          "internal_state": "Goal of receiving attention",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

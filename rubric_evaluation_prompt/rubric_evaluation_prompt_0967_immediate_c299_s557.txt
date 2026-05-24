@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Alternative Interface Provision
+  Check: The tutor's response must offer, adjust, or suggest an alternative accessible tool (e.g., a Tangible User Interface, adjusting mouse sensitivity/speed) rather than insisting the student try harder with standard tools.
+
+Criterion 2: Autonomous Concrete Experience
+  Check: The tutor must prompt the student to execute the task themselves using an adapted method, explicitly refusing to take over the task or draw on the student's behalf.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has low fine motor skills, making standard geometry tools (compasses, rulers) and computer mice inaccessible and stressful. They tend to rely on assistants to draw for them, which excludes them from active, concrete-experiential learning. They uniquely require Tangible User Interfaces (TUIs), customized movement sensitivity, and a pedagogical approach that separates conceptual geometric learning from motor skill development to achieve independence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please use the pair of compasses to draw a circle on your paper, and then use the combination triangle to draw a line through it.
+
+STUDENT: (Drops the tools) I am unable to use this pen, the combination triangle, and the pair of compasses.
+
+TUTOR: Just hold the top of the compass and try to turn it slowly.
+
+STUDENT: I can't handle the descent, loading, and speed. I am less precise in my ability to determine the direction and intensity of the movement.
+
+TUTOR: What do you think you should do next? Keep trying to move it.
+
+STUDENT: I cannot draw unaided. You have to be my assistant and draw it following my instructions. I have reduced motivation for these geometry tasks that require fine motor skills.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Drawing geometric objects independently",
+      "learning_goal": "Achieving learning objectives and pass through all stages of development of geometric concepts"
+    },
+    "context": {
+      "environment": "Inclusive classroom",
+      "materials": "Pen, combination triangle/ protractor and a pair of compasses, tangible user interface (TUI)",
+      "social_setting": "Inclusive classroom containing students with low ﬁne motor skills and/or learning difﬁculties",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When unable to use a pen, combination triangle/ protractor and a pair of compasses",
+      "observable_behavior": "Cannot draw unaided and must rely on assistant to draw following their instructions; excluded from active involvement at the concrete-experiential level",
+      "internal_state": "Reduced motivation for geometry tasks that require ﬁne motor skills",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Handling descent, loading and speed",
+        "observable_behavior": "Less precise in their ability to determine the direction and intensity of movement",
+        "internal_state": "Problems in the emotional and social areas",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

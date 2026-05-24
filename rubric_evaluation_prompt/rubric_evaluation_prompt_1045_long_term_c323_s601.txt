@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Cognitive Self-Regulation Training
+  Check: The long-term plan includes explicitly teaching and practicing a structured problem-solving routine where the student identifies the problem, states the reason, and suggests a solution.
+
+Criterion 2: Proactive Cross-Teacher Consistency
+  Check: The long-term plan incorporates methods for sharing the student's specific needs and effective strategies with all their teachers (e.g., creating an 'IEP at a Glance' or scheduling collaborative planning).
+
+Criterion 3: Facilitated Peer Mediation
+  Check: The long-term plan utilizes structured social skills groups or adult-facilitated peer-mediated interventions rather than forcing independent, unstructured group work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This high school student struggles with chaotic environments, schedule changes, and inconsistent teacher expectations, often resulting in school avoidance, executive functioning paralysis, and repetitive physical behaviors (stimming). They uniquely require visually presented expectations prior to transitions, explicit instruction in cognitive self-regulation, and structured peer-mediated support to navigate social anxiety and bullying.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for the group project. Please go join your assigned peer group.
+
+STUDENT: I don't want to go over there. Kids are not nice from my experience.
+
+TUTOR: You need to work with your classmates for this assignment.
+
+STUDENT: I might say someone in class is my friend, but I don't do anything with people alone.
+
+TUTOR: Just go sit with them and try to participate.
+
+STUDENT: (Exhibits varying degrees of aggression) No! If I am in a situation with them, the other kids will bully me and test me, and there will be fights!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in social interactions and peer groups within the high school setting",
+      "learning_goal": "foster relationships with their peers"
+    },
+    "context": {
+      "environment": "social environment of high school",
+      "materials": "",
+      "social_setting": "peer groups",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "in a situation and then other kids would bully him, and even though the teacher knew he was being 'tested' the teacher did not know what to do",
+      "observable_behavior": "there were fights, varying degrees of aggression",
+      "internal_state": "social anxiety, growing self-awareness of social difficulties",
+      "related_quotes": [
+        "There were times that he [her son] would be in a situation and then other kids would bully him, and so there were fights",
+        "kids are not nice from my experience."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "attempting to form friendships and engage in social activities with peers",
+        "observable_behavior": "limited social interactions with their peers, struggled to make friends, did not have any friends",
+        "internal_state": "negative experiences with peers may exacerbate social anxiety",
+        "related_quotes": [
+          "[if you] ask him who his friend is, he’ll say someone in class but he doesn’t do anything with people alone.",
+          "engaging in social situations"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

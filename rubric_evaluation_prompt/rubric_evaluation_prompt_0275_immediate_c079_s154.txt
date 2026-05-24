@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual First/Then Contingency
+  Check: The tutor's immediate response explicitly includes the use of visual supports, such as a 'First/Then' board or visual rules, to frame the transition expectation.
+
+Criterion 2: Active Timer Routine
+  Check: The tutor incorporates a timer to signal the transition and includes Chris in the process by having him turn it off or actively hand back the item.
+
+Criterion 3: Pre-Loaded Token Economy
+  Check: The tutor utilizes a token system that is pre-loaded (e.g., starting with 4 out of 5 tokens already earned) to provide near-immediate access to the reinforcer upon following the instruction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Chris is a 4-year-old preschooler with Autism and significant communication delays who engages in physical aggression and elopement to avoid transitions. Because generic classroom strategies fail for him, he uniquely requires highly individualized visual supports, pre-loaded token economies to bridge the gap to reinforcement, and functional communication training to replace his behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Chris, it is time to put the iPad away and come to the table for work time.
+
+STUDENT: (Drops to the floor) No.
+
+TUTOR: We have to do our work now. Please stand up.
+
+STUDENT: (Elopes from the activity area, making vocalizations with poor articulation that are difficult to understand.)
+
+TUTOR: Chris, you need to come back and sit at the table.
+
+STUDENT: (Engages in physical aggression by kicking the table leg hard and throwing classroom items across the room to delay the transition.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "transition to a non-preferred activity or when he was instructed to terminate a preferred activity",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "public-school pre-kindergarten classroom",
+      "materials": "token board, first- then card, timer, stickers/stars, preferred tangible items, such as an iPad, visuals",
+      "social_setting": "interactions with peers and adults",
+      "time_context": "throughout the school day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Chris is asked to transition to a non-preferred activity, or terminate a preferred activity",
+      "observable_behavior": "engaging in hitting, kicking, and/or throwing items in the classroom with or without targeting another peer or adult in the room",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Christian’s warning signs",
+        "observable_behavior": "will drop to the floor, or elope from activity",
+        "internal_state": "",
+        "related_quotes": [
+          "no"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

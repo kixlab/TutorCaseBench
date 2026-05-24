@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Provision of Independent 'Sponge' Activities
+  Check: The tutor's immediate response provides or directs the student to a low-stakes, independent activity (e.g., puzzle, journaling, coloring) that keeps them occupied at their desk without requiring teacher input.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe disruptive behavior and extremely low academic engagement during independent work, often leaving their seat, hitting peers, and ignoring instructions. The evidence reveals they are highly triggered by unstructured space, visual distractions, and congested pathways, uniquely requiring strict physical boundaries, at-desk material storage, and continuous low-stakes independent tasks to remain seated and engaged.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: The mini-reading lesson is over, so please start working independently on your assigned reading task.
+
+STUDENT: (Gets out of seat and walks through the congested pathway toward the teacher's desk to get supplies, stopping to stare at the computer screens facing the class)
+
+TUTOR: Please sit down at your desk and work on the assigned task.
+
+STUDENT: (Shows noncompliance to the teacher direction, making unwanted physical contact by bumping into a peer in the pathway) Move out of my way!
+
+TUTOR: We need to go back to our seats and focus on our own work.
+
+STUDENT: (Pushes the peer, throws a pencil across the room, and calls out a profanity, showing complete disregard for the teacher's instruction)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Students worked independently on the assigned task after Ms. Thompson would direct a mini-reading lesson",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Fourth-grade inclusive classroom where there was no distinction between group and individual space, pathways were not clearly defined, and the arrangement of the computer area had computers facing the students",
+      "materials": "Supplies kept on the teacher's desk, computers, desks, independent reading books",
+      "social_setting": "General student body with peers in an inclusive setting",
+      "time_context": "During 15-minute observation sessions of reader's workshop"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When needing to leave their seats to access supplies or when distracted by peers and the environment",
+      "observable_behavior": "Getting out of seat, making unwanted physical contact, throwing objects, hitting, and pushing",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When given the teacher's request to sit down at his desk and work on the assigned task",
+        "observable_behavior": "Noncompliance to teacher direction, speaking without permission, calling out answers and profanities, and complete disregard for teacher direction or instruction",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

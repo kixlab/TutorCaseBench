@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Concrete-Representational-Abstract (CRA) Sequencing
+  Check: The tutor's long-term plan explicitly sequences instruction from concrete objects to representational drawings, and finally to abstract symbols.
+
+Criterion 5: Cross-Context Mapping to a Single Model
+  Check: The tutor incorporates a variety of real-world contextualized problems and explicitly maps them back to a consistent conceptual equation (e.g., Unit rate x # of Units = Product).
+
+Criterion 6: Explicit Strategy Instruction for Transitions
+  Check: The tutor plans for explicit, direct instruction on how to translate semiconcrete models into abstract equations, rather than relying on implicit discovery.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Chris is an eager but slow-processing student who relies heavily on semiconcrete strategies like finger counting and drawing. He struggles significantly with abstract mathematical sentences and gets easily confused when generalizing concepts across different real-world contexts (e.g., mapping 'flowers and boxes' to 'towers and cubes'). He uniquely requires explicit concrete-to-abstract sequencing, opportunities to verbalize his counting to self-correct, and direct mapping of diverse contexts to a single conceptual model.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the next word problem about flowers and boxes. Please go ahead and solve it.
+
+STUDENT: (Looks at the paper but does not make any attempt to solve the problem)
+
+TUTOR: What do you think you should do first?
+
+STUDENT: I get confused when I say, when I think that [points to flowers and boxes in the problem] is like towers or cubes...
+
+TUTOR: Keep trying to figure it out.
+
+STUDENT: ...and that is towers when I think it wrong. So, I don’t know what to do when that happens. It take a while to get me to solve it because sometimes I am going to need help.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solving word problems involving flowers and boxes",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Word problem solving session",
+      "materials": "Word problems with real-world contexts (flowers and boxes)",
+      "social_setting": "Exit interview reflection on learning and difficulties",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when I think that [points to flowers and boxes in the problem] is like towers or cubes and that is towers when I think it wrong",
+      "observable_behavior": "It take a while to get me to solve it because sometimes I am going to need help... I don’t know what to do when that happens",
+      "internal_state": "I get confused",
+      "related_quotes": [
+        "It take a while to get me to solve it because sometimes I am going to need help because I get confused when I say, when I think that [points to flowers and boxes in the problem] is like towers or cubes and that is towers when I think it wrong. So, I don’t know what to do when that happens."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Prior to the intervention on the AM pretest",
+        "observable_behavior": "did not make any attempt on most of the problems",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

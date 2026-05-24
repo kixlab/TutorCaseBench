@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Qualitative Data Translation
+  Check: The tutor explicitly explains or prompts the student to explore the qualitative meaning behind data or outputs, rather than allowing them to focus solely on numbers or rankings.
+
+Criterion 2: Tangible Visual Collaboration
+  Check: The tutor introduces or encourages the use of tangible, visual, or hands-on collaborative tools (e.g., mind-maps, colored wires, drawing) to help the student express ideas without the pressure of formal writing.
+
+Criterion 3: Explicit Gap Identification
+  Check: The tutor explicitly points out or guides the student toward specific gaps in their current knowledge or discussion to prompt deeper inquiry.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with a poor self-image, low academic achievement, and a fear that their ideas are inadequate, which initially manifests as disengagement or a hyper-focus on competitive, quantitative metrics. They uniquely require tangible, visual collaborative tasks to lower the barrier to participation, explicit translation of data into qualitative learning opportunities, and a sustained framing of learning as a collective, community responsibility rather than an individual competition.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our collaborative inquiry task by building a three-dimensional mind-map with these colored wires.
+
+STUDENT: (Pushes the wires away) I don't want to do this.
+
+TUTOR: What do you think you could add to the group's map?
+
+STUDENT: Nothing. I'm not good at this and my ideas are probably wrong anyway.
+
+TUTOR: Just keep trying to work with your group.
+
+STUDENT: (Puts head on the desk) I don't care about this schoolwork, I'm not doing it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in collaborative knowledge-building discourse",
+      "learning_goal": "increase the students ’motivation and enhance their communication and collaboration skills"
+    },
+    "context": {
+      "environment": "Band-3 schools",
+      "materials": "wires of various colors, three-dimensional mind-maps, knowledge wall",
+      "social_setting": "small groups of students",
+      "time_context": "prior to the intervention"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "General academic context of students in Band-3 schools in Hong Kong prior to the intervention",
+      "observable_behavior": "not adequately engaged with their schoolwork and academic achievement",
+      "internal_state": "poor self-image",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "prior to the intervention",
+        "observable_behavior": "exhibit little interest and negative attitudes toward their learning",
+        "internal_state": "limited metacognitive skills",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

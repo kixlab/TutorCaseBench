@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Unwavering Pedagogical Consistency
+  Check: The long-term plan must explicitly state that the tutor will continue teaching the same content and using the same methods, ignoring the student's demands for ideological changes.
+
+Criterion 2: Sustained Emotional Restraint
+  Check: The long-term plan must include a commitment to remaining patient and explicitly avoiding public anger, insults, or retaliatory disciplinary actions over time.
+
+Criterion 3: Routine Rule Reiteration
+  Check: The long-term plan must involve consistently repeating basic classroom rules (e.g., punctuality, raising hands) to all students to reinforce a structured, predictable environment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shelli is a middle-aged, ultra-orthodox student who experiences culture shock in a secular university, reacting with ideological rebellion, disruptive outbursts, and public protests against the course content. She uniquely requires strict professional distance, emotionally neutral communication (the 'journalist method'), and unwavering consistency in rules and teaching style to eventually feel secure and adopt a respectful tone.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class is over now. Did you need to hand something in?
+
+STUDENT: (Approaches the desk and hands over a copy of a letter) I could not find your box and did not have your address.
+
+TUTOR: Thank you for handing this to me. What is this letter regarding?
+
+STUDENT: It is the manifesto I published on the course's internet forum. Today’s lesson was no different from previous lessons. I want to protest against the level, the conduct of the teacher and the way the material is taught.
+
+TUTOR: I see. What specific concerns are you raising in this document?
+
+STUDENT: There are discussions of observations, which may have been conducted without obtaining consent. The course is conducted in a theatrical and joking manner, what I would call worthless psychology. I consider this to be inappropriate for a religious university and unsuitable for the students.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Posting a 'Manifesto' on the course's internet forum to protest the instructional methods and ethical basis of the course material.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Course's internet forum and lecturer's desk",
+      "materials": "Internet forum, physical copy of a letter",
+      "social_setting": "Forum of 80 students, and a few students staying behind after class",
+      "time_context": "A month or so later at the end of the lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Discussions of observations, which may have been conducted without obtaining consent, and the theatrical mode of teaching",
+      "observable_behavior": "Published the following letter that Shelli had published on the course’s internet forum",
+      "internal_state": "Consider this to be inappropriate for a religious university and unsuitable for the students",
+      "related_quotes": [
+        "Today’s lesson was no different from previous lessons. I want to protest against the level, the conduct of the teacher and the way the material is taught. There are discussions of observations, which may have been conducted without obtaining consent. The course pretends to be scientific and practical, but I personally do not see any scientifically organized or methodical instruction. The course is conducted in a theatrical and joking manner, what I would call worthless psychology."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Without any advance notice, a month or so later",
+        "observable_behavior": "Approached my desk at the end of the lesson and handed me a copy of a letter.",
+        "internal_state": "",
+        "related_quotes": [
+          "she could not find my box",
+          "did not have my address"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

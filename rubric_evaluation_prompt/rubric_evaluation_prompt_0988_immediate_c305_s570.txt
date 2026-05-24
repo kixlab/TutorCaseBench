@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Communication Prompting (FCT)
+  Check: The tutor reminds Charlie before or at the very beginning of the task that he can appropriately ask for a break or delay if he needs one.
+
+Criterion 2: Task Interspersal
+  Check: The tutor intersperses easier or shorter tasks (e.g., reading a single sentence) with the more difficult target tasks (e.g., reading a paragraph).
+
+Criterion 3: Demand Maintenance
+  Check: The tutor does NOT remove the work demand or reading material in response to Charlie's avoidance behaviors or tantrums.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Charlie is an 8-year-old boy with ASD and profound hearing loss who engages in escape-motivated tantrums (screaming, pounding fists, leaving his chair) when faced with difficult reading tasks. He uniquely needs proactive functional communication training (e.g., signing 'break') to appropriately request delays, task interspersal to reduce task aversion, and pre-selected reinforcers to build tolerance for work demands.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Charlie, it is time for reading class. Please look at this book and read the first paragraph.
+
+STUDENT: (Shakes his head and pushes the reading material away, refusing to work.)
+
+TUTOR: We need to finish this reading lesson.
+
+STUDENT: (Turns his body away from the table, continuing to show avoidance behaviors toward the difficult work assignment.)
+
+TUTOR: Please turn around and read the paragraph.
+
+STUDENT: (Screams, pounds his fist on the table, and leaves his chair to avoid the reading work.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read a paragraph from a book aloud",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom with peers of similar age, hearing status, and cognitive ability",
+      "materials": "Reading material, book",
+      "social_setting": "Teaching adult presenting a reading lesson",
+      "time_context": "Reading class"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Whenever a reading lesson was presented",
+      "observable_behavior": "Screamed, pounded his ﬁst on the table, and left his chair",
+      "internal_state": "Motivated to escape the work and activities that Charlie apparently disliked",
+      "related_quotes": [
+        "melt down"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When difﬁcult work assignments were given",
+        "observable_behavior": "Engage in tantrums and avoidance behaviors, and refuse to work",
+        "internal_state": "Tantrummed to avoid the reading work being presented to him",
+        "related_quotes": [
+          "melt down"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

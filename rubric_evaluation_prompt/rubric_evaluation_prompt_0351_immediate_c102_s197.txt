@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Affirmation of Material Agency
+  Check: The tutor explicitly validates the student's proposed small-scale or material action as a meaningful and worthwhile endeavor, without dismissing it as superficial or overly risky.
+
+Criterion 2: Bridging Action to Structure
+  Check: The tutor frames the student's concrete action as a valid starting point, stepping stone, or foundation for eventually addressing larger structural or systemic issues.
+
+Criterion 3: Protection from Abstract Overrides
+  Check: The tutor does not reject the student's concrete observations by substituting an abstract systemic root cause (e.g., 'it's not the building, it's racism') or demanding they immediately 'complicate' their critique.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is overwhelmed by intractable societal problems and copes by focusing on concrete, small-scale, material actions (e.g., fixing school bathrooms, feeding the homeless). They require validation that these accessible interventions are meaningful starting points for change. When adults dismiss their ideas as superficial or push them to immediately adopt abstract systemic critiques, the student shuts down and falls into stunned silence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For your social justice project, what recommendations for action are you proposing based on your observations of Montañita High School?
+
+STUDENT: We want to propose a project to remediate the dilapidated physical condition of the school itself. We observed that the bathrooms have no stall doors or soap in the dispensers.
+
+TUTOR: What else did you include in your observations?
+
+STUDENT: There is un-remediated graffiti everywhere. Also, we were shocked to learn that in some schools, the vending machines are not in cages!
+
+TUTOR: Why do you want to make these specific issues the focus of your project?
+
+STUDENT: Because this dilapidation lowers morale and makes the school seem downgraded. We just need to fix these material elements so these conditions don't make Montañita look bad to outsiders.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Proposing social justice projects and 'recommendations for action' based on observations of their school environment",
+      "learning_goal": "Remediation of the roots of manifest symptoms and subterranean foundations of hegemony"
+    },
+    "context": {
+      "environment": "Mr. Clemente’s third-period UEJP class",
+      "materials": "Observations of Montañita High School's physical condition (bathrooms with no stall doors or soap in the dispensers, un-remediated graffiti, vending machines in cages)",
+      "social_setting": "Classroom conversation and dialogue across cohorts",
+      "time_context": "Third-period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When discussing various aspects of Montañita’s relative lack of resources and upkeep",
+      "observable_behavior": "Fixation on the material elements themselves, agreeing that the dilapidation lowers morale, makes the school seem downgraded, and makes it look bad to outsiders.",
+      "internal_state": "Shocked to learn that in some schools, vending machines are not in cages",
+      "related_quotes": [
+        "in some schools, the vending machines are not in cages!",
+        "lowers morale",
+        "downgraded"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to propose social justice projects",
+        "observable_behavior": "Frequently proposed projects involved recognizing and remediating the dilapidated physical condition of Montañita High School itself, attending to superficial effects rather than subterranean foundations.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

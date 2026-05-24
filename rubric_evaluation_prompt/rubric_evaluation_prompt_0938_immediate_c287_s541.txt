@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Continuous Specific Performance Feedback
+  Check: The tutor provides immediate, specific positive feedback or proactive attention for Malcolm's effort, rather than ignoring him, withholding attention, or leaving him to work unmonitored.
+
+Criterion 2: Independent Task Accessibility
+  Check: The tutor ensures the immediate task is highly accessible (e.g., breaking it into easy steps, providing an easier alternative) or offers direct assistance, rather than forcing him to complete a difficult task independently.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Malcolm is a 9-year-old third-grader who engages in severe externalizing behaviors (yelling, throwing objects, wandering) to escape difficult tasks, especially when teacher attention is absent. Due to a history of repeated academic failure, he uniquely requires highly accessible independent tasks and continuous, specific positive adult attention to lessen the aversive nature of work.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your math worksheet. Please complete these problems at your desk by yourself.
+
+STUDENT: (Stands up and walks away from the desk) This is stupid. Hey, your drawing looks like garbage!
+
+TUTOR: Malcolm, please go back to your desk and work on your math.
+
+STUDENT: I don't know how to do this! Come help me right now!
+
+TUTOR: Just try your best on your own. I need to check on the others right now.
+
+STUDENT: (Throws his pencil across the room and drops to the ground) NO! I'm not doing it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent assignments (math/reading/writing worksheets) that the student, with assistance, was unlikely to complete with 50% or better accuracy",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Third-grade pull-out special education classroom during instructional time",
+      "materials": "Math, reading, or writing worksheets; timer worn by teacher",
+      "social_setting": "Independent work with absent teacher attention",
+      "time_context": "10 min trials"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When presented with difficult tasks and teacher attention is absent",
+      "observable_behavior": "Yelling during class, throwing objects, rolling on the floor",
+      "internal_state": "Attempting to escape and avoid difficult tasks due to repeated failure experienced across schooling",
+      "related_quotes": [
+        "displayed clear patterns of escaping difficult tasks when teacher attention was absent"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During instruction time when teacher attention is absent",
+        "observable_behavior": "Wandering the classroom during instruction time, and making rude comments to other students",
+        "internal_state": "Attempting to engage the teacher for attention and assistance potentially lessens the aversive nature of the task (i.e., escape)",
+        "related_quotes": [
+          "when presented with difficult tasks, both students engaged in problem behavior to avoid the work"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

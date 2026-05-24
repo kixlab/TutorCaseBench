@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Anger Management Instruction
+  Check: The tutor's long-term plan includes dedicated time or curriculum for explicitly teaching and practicing specific self-calming and anger management techniques.
+
+Criterion 2: Art-Based Skill Integration
+  Check: The tutor incorporates art projects (e.g., creating posters, drawing visual aids) as a medium for Amy to process and express her calming strategies.
+
+Criterion 3: Peer-Teaching and Leadership
+  Check: The tutor creates structured opportunities for Amy to present, share, or co-teach the emotional regulation skills she has learned to other students.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Amy is a 9-year-old student who struggles with anger management, frequently escalating to verbal and physical aggression toward peers when she feels 'out of control.' Lacking prior social-emotional interventions, she uniquely requires explicit instruction in self-calming techniques, structured reflection to understand her behavioral triggers, and empowering opportunities—such as art projects and peer-teaching—to build her confidence and emotional regulation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Amy, please join the other students for the after-school program activity.
+
+STUDENT: They aren't doing what I say. I feel out of control.
+
+TUTOR: Just keep working with your group.
+
+STUDENT: I'm getting angry! I'm going to end up 'getting in trouble' again.
+
+TUTOR: Please try to get along with them.
+
+STUDENT: (Verbally threatens a peer and physically hits another student) Leave me alone!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in the school's after-school program",
+      "learning_goal": "Increase Amy's knowledge and ability to calm down when angry"
+    },
+    "context": {
+      "environment": "After-school program",
+      "materials": "Cool Down Worksheet",
+      "social_setting": "Interacting with peers",
+      "time_context": "After-school hours"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When she felt out of control",
+      "observable_behavior": "Physically hit another student",
+      "internal_state": "Got angry",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In response to being angry",
+        "observable_behavior": "She became aggressive with peers",
+        "internal_state": "Felt out of control",
+        "related_quotes": [
+          "getting in trouble"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

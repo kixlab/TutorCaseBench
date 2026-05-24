@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Collaborative Intellectual Partnership
+  Check: The long-term plan must include co-designed or shared academic activities (e.g., joint dialogue journals, collaborative inquiry projects) rather than relying solely on top-down, teacher-directed assignments.
+
+Criterion 2: Integration of Artistic and Literary Identity
+  Check: The plan must explicitly incorporate his specific interests in advanced reading, art, or comic books into his core academic tasks, projects, or incentive structures.
+
+Criterion 3: Systemic Wraparound Support
+  Check: The plan must involve connecting Yusef with external resources or stakeholders, such as counseling services, family outreach, or specialized youth art programs.
+
+Criterion 4: Non-Coercive Autonomy Building
+  Check: The plan must explicitly avoid traditional punitive measures, forced compliance tactics (like mandated seat changes), or formal disciplinary meetings to address his disengagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Yusef is a highly capable but alienated student with a history of trauma who masks his vulnerability with defiance and superiority. He is deeply triggered by forced compliance and traditional authority, but thrives when his sophisticated identity as an artist and reader is validated through high-level, co-designed intellectual partnerships.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please close the internet browser on the class computer and join the rest of the class in completing the regular class work.
+
+STUDENT: (Continues surfing the Internet) I already finished the assigned book. The rest of these guys are just slow.
+
+TUTOR: You still need to participate. Please take your old seat right now, and we will have a meeting later to discuss your engagement.
+
+STUDENT: (Refuses to move) I'm not going to any meeting.
+
+TUTOR: We need to have this meeting. Please move to your seat.
+
+STUDENT: Don't talk to me. I hate you, you're a bastard.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in whole-class instruction and completing regular class work",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "10th grade English class during whole-class instruction",
+      "materials": "Class computer, regular class work, joint journal, books by Franz Kafka and Gabriel García Márquez",
+      "social_setting": "Whole-class setting with classmates present",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher forced him to rejoin the class by asking him to take his old seat and planned a meeting to discuss intellectual engagement",
+      "observable_behavior": "Reaction to his seat change was extremely negative. He refused to talk to the teacher, refused to come to the meeting, and told several colleagues in the English Department that he 'hates' the teacher and that the teacher is a 'bastard.'",
+      "internal_state": "Extremely negative reaction",
+      "related_quotes": [
+        "hates",
+        "bastard"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While the teacher was teaching",
+        "observable_behavior": "Exhibiting disrespectful behavior toward his classmates, disengaged from the class, and began surfing the Internet on the class computer",
+        "internal_state": "Expressed feelings of superiority over them and feelings of racism toward African Americans, despite the fact that Yusef is African American himself",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

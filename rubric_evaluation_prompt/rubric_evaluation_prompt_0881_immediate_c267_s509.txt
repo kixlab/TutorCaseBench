@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Play Structuring
+  Check: The tutor's response establishes a clear play framework by defining a specific theme, assigning roles, or explicitly labeling how toys should be used.
+
+Criterion 2: Specific Linguistic Scaffolding
+  Check: The tutor provides exact phrases for the student to say to a peer, or asks highly specific, concrete questions about the play rather than general, open-ended questions.
+
+Criterion 3: Calibrated Interference
+  Check: If the student is actively engaged with a peer, the tutor refrains from intrusive prompting, limiting interventions to brief verbal re-directs or reflective statements to maintain the interaction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a mild language disorder and social skill deficits, causing them to withdraw, remain silent, or use repetitive questions during unstructured peer play. They uniquely require explicit play themes, assigned roles, and specific conversational scripts to initiate and sustain interactions, as they fail to respond to minimal adult scaffolding or broad, open-ended questions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to talk about the play session we just finished. What did you play with today?
+
+STUDENT: (Looks at the toys on the floor and does not answer.)
+
+TUTOR: Did you have fun playing?
+
+STUDENT: (Nods slightly but does not initiate any conversation.)
+
+TUTOR: Tell me what happened during play time.
+
+STUDENT: (Sits quietly and remains completely silent, failing to respond to the general question about the play session.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing the play that occurred in the preceding component",
+      "learning_goal": "Reflecting on the social interaction and verbalizing what was played with and what exchanges occurred"
+    },
+    "context": {
+      "environment": "Play area immediately following the play session",
+      "materials": "Toys used during the preceding play session",
+      "social_setting": "Interventionist sitting near the children",
+      "time_context": "Approximately 5 minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the interventionist asked the children a general question about what they played with during the play session",
+      "observable_behavior": "The general question did not elicit a response from the children",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to recall and articulate past events without specific prompts",
+        "observable_behavior": "Demonstrated fewer social skills (e.g., initiating conversations with peers)",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

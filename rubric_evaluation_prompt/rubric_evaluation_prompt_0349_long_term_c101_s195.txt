@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Silence as Active Engagement
+  Check: The long-term plan must include methods for assessing or validating the student's engagement through non-vocal means (e.g., judicious listening, writing, intimate settings) without requiring her to 'speak up' in whole-class discussions.
+
+Criterion 2: Reframing Contradictions as Agentive Navigation
+  Check: The long-term plan must explicitly frame the student's contradictory or fatalistic statements as active, complex navigation of cultural/familial dissonance rather than treating them as deficits in understanding or critical thought.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student expresses active engagement through silence and discursive contradictions, often subverting her own critiques when they clash with her familial or cultural allegiances. She uniquely needs educators to practice judicious listening and recognize her silence and inconsistencies as complex, agentive navigation rather than apathy or a lack of critical consciousness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our discussion on male power and privilege. Who would like to share their thoughts first?
+
+STUDENT: (Leans on her zipped-up backpack, remaining silent while the boys in the class talk and take notes.)
+
+TUTOR: I'm noticing that only the boys are talking right now. What do the rest of you think?
+
+STUDENT: (Maintains her silence, continuing to lean on her backpack instead of joining the vocal conversation.)
+
+TUTOR: ¡Mujeres! This is what I'm talking about! You don't need to wait to be given permission by the guys to speak up.
+
+STUDENT: We like to listen– Shut up, Alex! –we’re paying attention, but the guys are just talking back.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a whole-class discussion about male power and privilege led by a university mentor",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Tuesday morning in Mr. Clemente’s second-period class",
+      "materials": "zipped-up backpacks",
+      "social_setting": "classroom conversation with a male university-team leader, male peers, and female peers",
+      "time_context": "Tuesday morning"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the mentor suggested during his opening talk that Chicana students often feel they must be given permission by male teachers and peers to ‘speak up’",
+      "observable_behavior": "Challenged both her (more vocal) male peer and the project mentor’s plea, pausing to exclaim at an interrupting male student",
+      "internal_state": "Reflected not a lesser investment in the topic by young women, but a greater willingness of male students to speak publicly and quickly; silence allows the freedom of not having to exist constantly in reaction to what is said",
+      "related_quotes": [
+        "We like to listen–",
+        "Shut up, Alex!",
+        "–we’re paying attention, but the guys are just talking back."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "As the lesson proceeded and boys were talking and taking notes",
+        "observable_behavior": "Leaning on zipped-up backpacks, silent",
+        "internal_state": "Conscious engagement with classroom conversations; reflective of a lack of identification with sanctioned discourses and modes of engagement",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

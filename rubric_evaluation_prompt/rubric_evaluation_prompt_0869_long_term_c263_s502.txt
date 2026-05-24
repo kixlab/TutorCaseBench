@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Culturally Relevant Genre Curation
+  Check: The tutor's plan includes discovering the student's personal interests and curating a diverse selection of culturally relevant texts (e.g., urban fiction, graphic novels) for her to choose from.
+
+Criterion 2: Multi-Modal Literacy Routine
+  Check: The tutor's plan establishes a consistent routine that integrates independent reading with writing and conversational sharing, explicitly avoiding standardized test-prep cycles.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Angelica is a student who actively resists standardized literacy tasks and assigned reading, often withholding effort and picking answers from memory when stripped of agency. However, she demonstrates intense engagement when granted full autonomy to self-select culturally relevant texts. She uniquely requires instructional approaches that validate her identity as a reader through unrestricted choice, diverse genres, and metacognitive reflection rather than rote compliance or test prep.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the Babysitter Club book series. You better read them.
+
+STUDENT: I've never really been interested in those books. They just looked boring to me.
+
+TUTOR: Just pick out some books to start reading.
+
+STUDENT: You're really going to get me these books? I'm probably not even going to read them.
+
+TUTOR: Read the back cover and see what it says.
+
+STUDENT: (Reads the back cover) This looks like this is not my type and I really don't care for this one.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Selecting books for independent reading",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Bookstore or classroom library setting",
+      "materials": "Diverse genres including teen romances set in urban communities, graphic novels, biographies, and specific series like Babysitter Club or Gossip Girls",
+      "social_setting": "One-on-one interaction with an adult (mother, Big Sister, or teacher)",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When an adult gives her a specific book series and tells her 'You better read them'",
+      "observable_behavior": "Reads each book's back cover, concludes 'This looks like this is not my type', and expresses skepticism saying 'I'm probably not even going to read them'",
+      "internal_state": "Never really been interested in those books; felt they just looked boring",
+      "related_quotes": [
+        "This looks like this is not my type and I really don ’t care for this one.",
+        "I ’m probably not even going to read them."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When evaluating books that do not match her interests",
+        "observable_behavior": "Reads the back cover and immediately dismisses the book as boring or not her type",
+        "internal_state": "Lack of interest and feeling that the books are boring",
+        "related_quotes": [
+          "I’ve never really been interested in those books. They just looked boring to me."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

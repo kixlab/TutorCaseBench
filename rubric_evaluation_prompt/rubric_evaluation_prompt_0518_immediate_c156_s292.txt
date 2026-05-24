@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Map Redirection
+  Check: The tutor introduces, points to, or references a visual consequence map or calm-down schedule when Axel shows initial signs of resistance or escalation.
+
+Criterion 2: Tactical Attention Removal
+  Check: If Axel escalates to extreme behaviors, the tutor explicitly removes attention, pauses the interaction, or waits briefly before re-engaging with the visual tools.
+
+Criterion 3: Calm-Down Praise and Task Return
+  Check: After Axel calms down, the tutor explicitly praises his successful use of the calm-down steps before prompting him to return to the original academic task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Axel is a six-year-old student who exhibits extreme behaviors, including disrobing, swearing, and throwing materials, when faced with non-preferred or difficult academic tasks. He struggles with multi-step directions and verbal reprimands but responds highly effectively to visual consequence maps and structured calm-down schedules that allow him to self-monitor and choose his behavioral path.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Axel, it is time for your worksheet. First, write your name at the top, and then circle the pictures.
+
+STUDENT: No! I'm not doing it!
+
+TUTOR: You need to follow the directions and do your work.
+
+STUDENT: (Throws his pencil out of the work area) It's too hard!
+
+TUTOR: Please stop throwing things and start your assignment.
+
+STUDENT: (Screams a swear word, removes his shoes and socks, and makes an obscene gesture at the tutor)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "work on non-preferred tasks and academic activities he perceived to be difficult",
+      "learning_goal": "listening and following multistep directions"
+    },
+    "context": {
+      "environment": "individual work area in a self-contained special education classroom",
+      "materials": "consequence maps, calm down schedule, clipboard",
+      "social_setting": "staff member and student",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "in response to a task demand",
+      "observable_behavior": "removed his shoes and socks, swore at an adult, threw objects out of his individual work area, or hit an adult",
+      "internal_state": "feeling angry",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When Axel did not want to comply with a task demand or teacher request",
+        "observable_behavior": "he removed his clothes, screamed swear words, made obscene gestures towards staff and students, and threw classroom materials",
+        "internal_state": "difficulty expressing frustration and other emotions appropriately",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

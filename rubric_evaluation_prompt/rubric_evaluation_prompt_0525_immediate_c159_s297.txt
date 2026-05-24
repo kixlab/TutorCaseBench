@@ -1,0 +1,141 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Conditional Accountability
+  Check: The tutor's response must use a conditional framework (e.g., 'If you do X, then Y' or 'This is your last chance to X before Y') to explicitly link his current behavior to an expected outcome.
+
+Criterion 2: Active Confrontation of Provocations
+  Check: The tutor must explicitly acknowledge and address the student's disruptive action or insult in the moment, rather than ignoring it or passively continuing the lesson.
+
+Criterion 3: Rejection of Pathological Framing
+  Check: The tutor's response must treat the student's behavior as a deliberate choice and completely avoid using language that excuses or labels the behavior as an innate deficit, impulse control issue, or medical condition.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Robin is a younger student who disrupts structured social-emotional exercises by contesting teacher authority, using severe gendered insults, and attempting to leave the area. The evidence reveals he uniquely needs to be held directly accountable for his actions through conditional expectations, rather than having his behavior ignored or excused as a biomedical impulse control issue.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our Fortune-tellers with Emotions game. We will pass this folded paper around the circle.
+
+STUDENT: I want to start. I wa::nt... you fucking hag.>
+
+TUTOR: We are going to go in order.
+
+STUDENT: It's just crap.
+
+TUTOR: Robin, it is your turn now.
+
+STUDENT: ↑BITCH. Okay give it to me, then. SHUT UP you fucking slut. (leaves his chair, picks up the bag, collects his things) °Shut up°.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "working with an exercise oriented towards developing the children's understandings of their emotions. The exercise is in the form of a guessing game called Fortune-tellers with Emotions (Sw. Loppor med känslor)",
+      "learning_goal": "developing the children's understandings of their emotions"
+    },
+    "context": {
+      "environment": "seated in chairs in a circle",
+      "materials": "a tool in the form of a folded piece of paper commonly used in children's games",
+      "social_setting": "group of younger students and the two teachers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Responding to being nominated for a turn in the SEL exercise by teacher Gunnel.",
+      "observable_behavior": "ignores the teacher and starts to insult her",
+      "internal_state": "",
+      "related_quotes": [
+        "↑BITCH ((to GUNNEL))",
+        "Okay give it to me, then",
+        "SHUT UP [you fucking slut]"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Interrupting the teacher's (Mari) turn-allocation during the 'Fortune-tellers with Emotions' circle activity.",
+        "observable_behavior": "makes several attempts to contest the features of the identities ascribed to him in the turn-taking organization",
+        "internal_state": "",
+        "related_quotes": [
+          "I want to start",
+          "I wa::nt",
+          "you fucking hag.>"
+        ]
+      },
+      {
+        "condition": "Critiquing the paper 'fortune-teller' tool during the SEL exercise.",
+        "observable_behavior": "upgrades his oppositional stance towards the teachers' authority and the exercise at hand, now questioning the value of the educational tool used",
+        "internal_state": "distancing himself from some of the belittling elements of the exercise",
+        "related_quotes": [
+          "it's just crap"
+        ]
+      },
+      {
+        "condition": "Attempting to leave the classroom and collecting personal belongings while the lesson is still in progress.",
+        "observable_behavior": "leaves his chair, picks up the bag, collects his things",
+        "internal_state": "",
+        "related_quotes": [
+          "°Shut up°."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

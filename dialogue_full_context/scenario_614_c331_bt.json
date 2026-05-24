@@ -1,0 +1,72 @@
+{
+  "category_id": "331",
+  "category_title": "Students with mild intellectual disabilities exhibiting academic engagement, off-task, or disruptive problem behaviors",
+  "scenario_id": "614",
+  "scenario_title": "Disruptive problem behaviors during general instruction",
+  "minimal_context": "The student is expected to listen to the teacher and answer questions during a general classroom lesson while seated near peers.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are going to go over the lesson now. Please sit at your desk, listen carefully, and be ready to answer questions."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks outside through the window and starts playing with a pencil instead of listening.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please pay attention to the lesson."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Turns around to the peer sitting at the desk behind them) Look at what I can do with my pencil."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Stop talking to your friends. You need to sit quietly and listen to me right now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Stands up without permission, walks over to the friend's desk, and grabs their eraser while talking aloud) I am taking this!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are going to go over the lesson now. Please sit at your desk, listen carefully, and be ready to answer questions.\n\nSTUDENT: (Looks outside through the window and starts playing with a pencil instead of listening.)\n\nTUTOR: Please pay attention to the lesson.\n\nSTUDENT: (Turns around to the peer sitting at the desk behind them) Look at what I can do with my pencil.\n\nTUTOR: Stop talking to your friends. You need to sit quietly and listen to me right now.\n\nSTUDENT: (Stands up without permission, walks over to the friend's desk, and grabs their eraser while talking aloud) I am taking this!",
+  "immediate_dialogue_prompt": 1066,
+  "long_term_dialogue_prompt": 1067,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Listening to teacher or peer, asking questions, answering questions",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Inclusive classrooms",
+        "materials": "Friends’ possessions",
+        "social_setting": "General classroom environment with peers/friends nearby",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Placement in the classroom (not sitting in the front desks)",
+        "observable_behavior": "Talking to friends irrelevant to the lesson, talking aloud, disturbing friends, hitting friends, taking her/his friends’ possessions without permission, walking in the class, standing up without permission, or acting against the teachers’ instructions",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When teachers manifest disapproval of students' behaviors or provide low rates of approval",
+          "observable_behavior": "Behaviors that interrupt the lesson, disturbing or distracting the teacher or other students",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Interest-Based Peer Engagement
+  Check: The long-term plan includes strategies to showcase Edward's personal interests (e.g., reading excerpts from his books from home) to naturally draw peers to him in a positive context.
+
+Criterion 2: Facilitated and Monitored Group Inclusion
+  Check: The long-term plan involves actively persuading peers to include Edward in collaborative work while explicitly planning to monitor the group's social dynamics.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Edward is an energetic and boisterous student who uses disruptive behaviors—such as loud interruptions, silly noises, and task avoidance—to gain attention and escape challenging work like independent writing. His oppositional behavior often alienates peers, but he uniquely requires intense 1:1 academic support to stay on task, explicit validation of his ideas to prevent oppositional spirals, and structured opportunities to be viewed as a classroom expert rather than a nuisance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Edward, it is time for morning menu. Please work on the computer project with Trey.
+
+STUDENT: (Standing behind Trey) The Astronomy Picture of the Day. Saturn’s moon has (inaudible) on it. Whoops! Comet over California. Whoosh!
+
+TUTOR: Remember to share the computer.
+
+STUDENT: Alien monster gods. Go back there, Trey. I found something that’s like radar, and it’s so cool . . .
+
+TUTOR: You need to compromise with your partner.
+
+STUDENT: (Loudly) No! I'm not compromising! Trey is doing it wrong! Move!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working on projects with other students and using the computer",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during morning menu",
+      "materials": "Computer",
+      "social_setting": "Collaborating with peers; standing behind another student working on the computer",
+      "time_context": "Morning menu"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to collaborate on projects or share materials with peers",
+      "observable_behavior": "Exhibits overbearing behavior, argues, shows unwillingness to compromise, and relentlessly teases other students (especially girls), sometimes bringing them to tears.",
+      "internal_state": "",
+      "related_quotes": [
+        "The Astronomy Picture of the Day. Saturn’s moon has (inaudible) on it. Whoops! Comet over California. Whoosh! ... Alien monster gods. Go back there, Trey. I found something that’s like radar, and it’s so cool . . ."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When working in groups",
+        "observable_behavior": "Attempts dissolve into arguments over his oppositional behavior and unwillingness to compromise; other students refuse to work with him.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,128 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Targeted Component Isolation
+  Check: The tutor asks a specific, direct question about an isolated component of the expression (e.g., the meaning of a specific variable or operator) rather than asking for a general explanation of the whole expression at once.
+
+Criterion 2: Holistic Expression Purpose
+  Check: The tutor prompts the student to identify what the entire expression calculates or represents as a whole, shifting focus away from individual numbers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Meral and Adile are low-achieving students who rely on superficial compensation strategies, such as ordering numbers based on text appearance rather than mathematical logic. When asked broad questions about their reasoning, they easily stagnate, freeze, and defer to peers. They uniquely require highly specific prompts isolating individual variables, alongside explicit think-aloud modeling and gradual fading of scaffolds to build genuine mathematical comprehension.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the Open air bath problem. What algebraic expression did you write for the pump operation time?
+
+STUDENT: Ehm, I have 7 times 12 minus x?
+
+TUTOR: Can you tell me more about why you wrote that?
+
+STUDENT: Because, there we have. Ehm, for good weather, it is open 7 days, and for rainy days it stays closed. That is why I have 7 times ehm. … No …. Yes. 7 times 12 and then minus x.
+
+TUTOR: Please explain the meaning of the numbers and variables in your expression.
+
+STUDENT: Ehm, because here, we have… Ehm… That is, no. If –no. For good weather it is open seven days a week. Ehm (takes a 5 second break) well how shall I explain that? (takes a 16 second break) [to Adile] You continue, I will read again.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working on the 'Open air bath problem' which asks for an algebraic expression for pump operation time given rainy days (x).",
+      "learning_goal": "Building a complete situation or problem model to find an algebraic expression."
+    },
+    "context": {
+      "environment": "Design experiment session",
+      "materials": "Cards with numbers and variables on a table, Word Problem Cracker (WPC) scaffolding tool",
+      "social_setting": "Working with a peer (Adile) and interacting with a tutor",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to explain her mathematical expression for the 'Open air bath problem' to the tutor.",
+      "observable_behavior": "Explanation stagnates after reciting the first sentence about 7 days from the text. Takes a 5 sec break, asks 'well how shall I explain that?', takes a 16 sec break, and tells peer 'You continue, I will read again.'",
+      "internal_state": "Trying hard, but implicitly applies compensation strategy without building a complete situation or problem model.",
+      "related_quotes": [
+        "Ehm, because here, we have… Ehm… That is, no. If –no. For good [weather] it is open seven days a week. Ehm [5 sec break] well how shall I explain that? [16 sec break] [to Adile] You continue, I will read again."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When writing or modifying algebraic expressions.",
+        "observable_behavior": "Orders numbers according to the order of numbers in the text (e.g., writes 7 · (x − 12), corrects to 7 · (12 − x), then modifies to 7 · x − 12) without referring to the meaning of the quantitative operation and relations.",
+        "internal_state": "Cannot overcome the obstacle of superficial modeling.",
+        "related_quotes": [
+          "Ehm, I have 7 times 12 minus x?",
+          "Because, there we have. Ehm, for good weather, it is open 7 days, and for rainy days it stays closed. That is why I have 7 times ehm. … No …. Yes. 7 times 12 and then minus x."
+        ]
+      },
+      {
+        "condition": "When asked to explain the meaning of the numbers and variables in the expression.",
+        "observable_behavior": "Attributes a meaning to 7 and 12, but does not refer to the meaning of x nor to the question of the task that includes the rainy days. Expresses uncertainty about why numbers were included.",
+        "internal_state": "Has built a partial situation model without proceeding to the problem model; neither focuses on the meaning of the underlying quantity nor on their relation.",
+        "related_quotes": [
+          "Ehm. Well, for good weather, seven days a week are open. Then I have written 7 here. And ehm… ehm, well the pump for the water runs on open days for 12 hours. Hence 7 times 12.",
+          "Thus, it runs 12 hours long. I don’t know, I have it anyway."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

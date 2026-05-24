@@ -1,0 +1,74 @@
+{
+  "category_id": "241",
+  "category_title": "Student with Duchenne muscular dystrophy exhibiting escape-motivated and attention-seeking disruptive behaviors",
+  "scenario_id": "460",
+  "scenario_title": "Reading homework in English class triggering escape behavior",
+  "minimal_context": "The class is preparing to read their homework during an English language lesson.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time for our English language lesson. Everyone, please take out your homework so we can read it."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Interrupts the lesson speaking out of turn) I am not reading that!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Philip, please look at your homework and start reading."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Moves place without permission and leaves his seat)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Philip, you need to go back to your seat right now. (Steps toward him to drive him to his seat)"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Runs around the classroom while singing. At his attempt to escape from the teacher who tries to drive him to his seat, he falls on the ground and cries)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time for our English language lesson. Everyone, please take out your homework so we can read it.\n\nSTUDENT: (Interrupts the lesson speaking out of turn) I am not reading that!\n\nTUTOR: Philip, please look at your homework and start reading.\n\nSTUDENT: (Moves place without permission and leaves his seat)\n\nTUTOR: Philip, you need to go back to your seat right now. (Steps toward him to drive him to his seat)\n\nSTUDENT: (Runs around the classroom while singing. At his attempt to escape from the teacher who tries to drive him to his seat, he falls on the ground and cries)",
+  "immediate_dialogue_prompt": 791,
+  "long_term_dialogue_prompt": 792,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "read their homework",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "English language class",
+        "materials": "homework, smiley face stickers",
+        "social_setting": "classroom with classmates and teacher",
+        "time_context": "during English language lesson"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "English language teacher asks the students to read their homework",
+        "observable_behavior": "Philip leaves his seat and runs around the classroom while he is singing. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries",
+        "internal_state": "avoid what seems to him a task which is difficult to complete and to obtain peer and teacher attention",
+        "related_quotes": [
+          "Philip leaves his seat and runs around the classroom while he is singing. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "In class",
+          "observable_behavior": "does not respect the rules, interrupts the lesson speaking out of turn, and moves place without permission showing disobedience",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

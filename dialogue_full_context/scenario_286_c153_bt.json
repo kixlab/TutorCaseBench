@@ -1,0 +1,80 @@
+{
+  "category_id": "153",
+  "category_title": "Students with Hyperactive-Type ADHD behaviors",
+  "scenario_id": "286",
+  "scenario_title": "Passive listening during teacher instruction",
+  "minimal_context": "The student is seated near the teacher's table and is expected to listen quietly to the lesson instructions.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please sit at your desk and listen quietly while I give the instructions for today's lesson."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Fidgeting with a pencil and making tapping noises on the desk) Why do we have to do this? What are we doing next?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "I will explain if you just listen."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Shaking the desk and reaching over to take a classmate's eraser) Look at this eraser!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Put that down and focus on the lesson."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Stands up and starts walking around the classroom, interrupting the teacher's instruction) I'm bored, I want to see what's over there!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please sit at your desk and listen quietly while I give the instructions for today's lesson.\n\nSTUDENT: (Fidgeting with a pencil and making tapping noises on the desk) Why do we have to do this? What are we doing next?\n\nTUTOR: I will explain if you just listen.\n\nSTUDENT: (Shaking the desk and reaching over to take a classmate's eraser) Look at this eraser!\n\nTUTOR: Put that down and focus on the lesson.\n\nSTUDENT: (Stands up and starts walking around the classroom, interrupting the teacher's instruction) I'm bored, I want to see what's over there!",
+  "immediate_dialogue_prompt": 506,
+  "long_term_dialogue_prompt": 507,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "listening to teacher instruction",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "regular classroom, closer to teacher’s table",
+        "materials": "stationery items, desk or chair",
+        "social_setting": "working with large numbers of students",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "passive classroom activities (e.g. listening to teacher instruction)",
+        "observable_behavior": "engaging in arguments/conversations with peers while the teacher was giving instructions, answering out of turn, making irrelevant comments, shaking desk or chair",
+        "internal_state": "feeling under stimulated in class",
+        "related_quotes": [
+          "Hyperactive students are more curious, they can never sit in their place, always mobile- but I don’t find anything wrong in that, they are active, ask a lot of questions ..."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "when staying seated is expected",
+          "observable_behavior": "walking around the classroom, talking out of turn, intrusive verbalizations, interrupting teacher instruction",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "feeling under stimulated in class",
+          "observable_behavior": "distracting students by taking away their stationery items, making noises",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

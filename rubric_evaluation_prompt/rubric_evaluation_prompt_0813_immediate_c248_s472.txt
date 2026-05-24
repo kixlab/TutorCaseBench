@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Device-Mediated Multi-Sensory Engagement
+  Check: The tutor directs the student to interact physically with a tablet or visual interface (e.g., tracing, sliding, touching symbols) rather than relying solely on verbal instruction or face-to-face interaction.
+
+Criterion 2: Instant App-Based Rewards
+  Check: The tutor utilizes or explicitly prompts the use of instant, device-generated rewards (e.g., app sounds, textual praise) to reinforce the student's actions.
+
+Criterion 3: Picture-Based Communication Prompting
+  Check: The tutor prompts the student to use visual symbols or a picture-based communication app (e.g., Proloquo2Go) to express choices, answer questions, or communicate.
+
+Criterion 4: Redirection to Visual Interface
+  Check: The tutor actively redirects the student's gaze and attention away from the tutor's face and back to the device's screen or the visual task at hand.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is a non-verbal student with classic autism who struggles with face-to-face instruction because his tendency to seek eye contact and socialize directly interferes with his visual learning style. He does not use traditional AAC devices functionally but is highly responsive to tablet-based interventions (like iPads) that offer multi-sensory input, visual symbols, and instant auditory or textual rewards. He requires a learning environment that bypasses interpersonal social barriers by mediating instruction and communication through engaging, picture-based technology.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's use the iPad. Point to the letter on the screen to match it.
+
+STUDENT: (Looks away from the iPad screen and stares directly at the tutor's face instead of the letters.)
+
+TUTOR: Look at the letters on the screen.
+
+STUDENT: (Continues to stare at the tutor, attempting to socialize by smiling at the tutor's face rather than looking at the visual app.)
+
+TUTOR: Try to find the letter.
+
+STUDENT: (Maintains intense eye contact with the tutor, completely ignoring the iPad app and its audio/text rewards, demonstrating the problematic socializing behavior that interferes with the visual learning task.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "identifying and matching letters",
+      "learning_goal": "learn 2-5 letters per month and asked to identify the letter at the end of the month to see what they have learned"
+    },
+    "context": {
+      "environment": "face-to-face with people",
+      "materials": "iPad, apps that provided instant reward gratification with audio and text, pictorial schedules",
+      "social_setting": "face-to-face with people",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "face-to-face with people",
+      "observable_behavior": "problematic behavior of making eye contact and socializing which directly interferes with the ability to optimize a visual learning style",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "face-to-face with people",
+        "observable_behavior": "problematic behavior of making eye contact and socializing",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

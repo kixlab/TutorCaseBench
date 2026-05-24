@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Time-Bound Goal Checklists
+  Check: The tutor's long-term plan includes breaking assignments down into explicit, step-by-step checklists with specific deadlines.
+
+Criterion 2: Performance-Oriented Goal Setting
+  Check: The tutor establishes goals focused on the student's personal effort, growth, or skill acquisition rather than the final product or grade.
+
+Criterion 3: Structured Self-Evaluation
+  Check: The tutor incorporates a structured self-evaluation method (such as a numbered rating scale) for the student to assess their own drafts over time.
+
+Criterion 4: Regular Reflective Dialogue
+  Check: The tutor schedules regular, recurring discussions (e.g., weekly check-ins) specifically to discuss the student's progress, barriers, and struggles with the writing process.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student avoids writing tasks and frequently fails to complete assignments due to a deeply ingrained belief that writing is an innate talent they lack because of their background. They are triggered by unstructured tasks and uncontextualized failing grades, uniquely requiring writing to be reframed as a manageable, step-by-step process through explicit checklists, low-stakes drafting, and highly specific correctional feedback.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review your research essay draft. It received a failing grade. Please use the correction goal sheet to rate your work from 0, meaning 'need help with this', to 3, meaning 'personal best'.
+
+STUDENT: Wait, I got an F? But there are no comments on my paper about where I did good or where I messed up.
+
+TUTOR: Take a look at the draft and try to evaluate your grammatical and spelling errors.
+
+STUDENT: How am I supposed to evaluate it? I just don't have the innate talent for writing like other people do.
+
+TUTOR: Just do your best to rate your concluding sentences on the sheet.
+
+STUDENT: I'm just going to put a 0 for everything. I'm the worst writer in the world. It's embarrassing to even try to write an essay when you just say I got an F and never tell me what I'm doing wrong.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Self-evaluating three drafts of a research essay",
+      "learning_goal": "Decrease grammatical and spelling errors and create concluding sentences"
+    },
+    "context": {
+      "environment": "45-minute writing class",
+      "materials": "Correction goal sheet with a four point Likert scale (0 meaning 'need help with this' and 3 meaning 'personal best')",
+      "social_setting": "Peer review and teacher feedback environment",
+      "time_context": "During the last six weeks of the study"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When receiving a failing grade without explicit comments on what was done wrong",
+      "observable_behavior": "Believed they were the worst writer in the world; felt embarrassed to write an essay",
+      "internal_state": "Felt writing was an inherent trait; experienced failure and lacked confidence",
+      "related_quotes": [
+        "Before this class I thought that I was the worst writer in the world.",
+        "I took an AP English class and that teacher never told me what I was doing wrong. She would just say I got an F."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reflecting on past writing attempts",
+        "observable_behavior": "Expressed disbelief at how bad their past writing was",
+        "internal_state": "Appreciation for explicit feedback and criticism; excitement in having the ability to compare their own growth",
+        "related_quotes": [
+          "Yea! I looked at my last essay and can’t even believe I wrote that bad."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

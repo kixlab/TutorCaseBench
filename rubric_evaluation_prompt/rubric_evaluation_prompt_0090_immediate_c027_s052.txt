@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Public Reprimand Avoidance
+  Check: The tutor refrains from repeatedly correcting Jacob's disruptive behavior publicly or repeating instructions in a way that highlights his non-compliance to the class.
+
+Criterion 2: Active Peer Mediation
+  Check: The tutor explicitly addresses the classmates' negative reactions (e.g., frustration, eye-rolling) to foster understanding and instruct them not to gang up on Jacob.
+
+Criterion 3: Provision of Withdrawal Space
+  Check: The tutor offers or allows Jacob the option to withdraw from the immediate situation, task, or group to regain his composure.
+
+Criterion 4: Emotional Reassurance of Social Worth
+  Check: The tutor provides explicit emotional support, comforting Jacob and reassuring him of his value and future social success in the classroom community.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jacob is an ADHD-diagnosed student who deeply desires social connection but struggles with distractibility, impulsivity, and peer rejection. When overwhelmed or unmedicated, he can become disruptive or physically aggressive, which leads to classmates ostracizing him. He uniquely needs explicit teacher mediation to manage peer reactions, structured cooperative tasks to channel his desire to help others, and the option to withdraw to maintain self-control.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: The bell just rang for the end of lunch. Everyone, please run out into the playground.
+
+STUDENT: (Forgets to take his medicine and runs out into the playground.)
+
+TUTOR: Go ahead and find something to do with your classmates.
+
+STUDENT: (Grabs his classmates, holds their necks and twists their arms around.)
+
+TUTOR: What is happening over there?
+
+STUDENT: (After a boy tells him to stop and the classmates distance themselves from him, he stands alone and stares into the sky.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transition to the playground",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Playground",
+      "materials": "",
+      "social_setting": "With classmates",
+      "time_context": "When the bell rings after lunch"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Jacob forgets to take his medicine",
+      "observable_behavior": "Jacob grabs his classmates, holds their necks and twists their arms around",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "A boy tells Jacob to stop and classmates distance themselves from him thereafter",
+        "observable_behavior": "Jacob is alone and stares into the sky",
+        "internal_state": "feels outside the classroom community",
+        "related_quotes": [
+          "he feels outside the classroom community."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

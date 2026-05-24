@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Family-Collaborative Goal Setting
+  Check: The long-term plan must include a process for collaborating with Jose's family to establish targeted social-emotional goals.
+
+Criterion 2: Explicit Behavioral Definitions
+  Check: The long-term plan must explicitly define what observable actions constitute both a successful (desirable) and unsuccessful (undesirable) transition.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jose is a happy, easygoing student who engages deeply in activities but struggles significantly with transitions, often taking over 8 minutes to switch tasks. Direct verbal reminders trigger power struggles and increase his latency. He uniquely requires visual choices for movement and peer-mediated prompts to successfully navigate transitions without resistance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jose, it is time to stop your current activity and move toward the next activity.
+
+STUDENT: (Jose remains calm and deeply engages in his current activity.)
+
+TUTOR: Please stop what you are doing and come over here.
+
+STUDENT: (Jose does not stop his current activity and move toward the next activity.)
+
+TUTOR: Jose, we need to go to the next activity now.
+
+STUDENT: (Jose continues to take a long time to stop doing his activity, taking more than seven minutes to begin the transition.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Stop his current activity and move toward his next activity",
+      "learning_goal": "After Jose is given a prompt to transition to a familiar activity, Jose stops his current activity and moves (e.g., walks, crawls, hops) toward the next activity"
+    },
+    "context": {
+      "environment": "Classroom where Jose is calm and deeply engages in activities",
+      "materials": "Two picture cards with a movement action (e.g., walks, hops)",
+      "social_setting": "Classroom setting with teachers and peers available",
+      "time_context": "Taking more than seven minutes (average of 8 min 6 s at baseline) to begin transitions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After Jose is given prompt to transition to a planned activity",
+      "observable_behavior": "Jose does not stop his current activity and move (e.g., walks, crawls, hops) toward the next activity; takes a long time to stop doing an activity",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When we give him a verbal reminder",
+        "observable_behavior": "The transition seems to take longer",
+        "internal_state": "He gets upset",
+        "related_quotes": []
+      },
+      {
+        "condition": "During morning routines at home",
+        "observable_behavior": "He moves so slowly getting dressed, eating breakfast, and getting in the car",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

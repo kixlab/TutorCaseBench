@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Active Dialogue Prompting
+  Check: The tutor explicitly asks the student to share their thoughts, interpret a concept, or participate in a two-way discussion rather than just delivering information or asking them to copy/read.
+
+Criterion 2: Amusing or Visual Delivery
+  Check: The tutor incorporates an engaging hook, a visual description, a relatable scenario, or a playful element into the immediate content delivery.
+
+Criterion 3: Inclusive Validation
+  Check: The tutor explicitly validates the student's current contribution, effort, or presence, demonstrating that their specific input is valued regardless of their past academic performance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly susceptible to boredom and sleepiness in passive learning environments, often resorting to disruptive behaviors like talking to friends or cutting paper when subjected to continuous lecturing or dictation. They uniquely require amusing, student-centered, and constructivist approaches where they are given the right to speak, visual stimuli, and inclusive attention that does not exclusively favor 'successful' students.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's continue the lecture. I am going to pay attention to those who are successful and hardworking to answer this next part.
+
+STUDENT: Some teachers discriminates the students as lazy or hardworking, thus I hate almost all the teachers.
+
+TUTOR: Please just listen to the lecture.
+
+STUDENT: I do not pay enough attention to the class.
+
+TUTOR: We need to finish covering this material.
+
+STUDENT: I don’t find the class interesting. (Turns to friends and talks to each other, takes a paper and starts cutting it because of boredom)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Listening to a lecture where the teacher focuses primarily on successful students",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General classroom setting",
+      "materials": "paper",
+      "social_setting": "some of the teachers only pay attention to those who are successful",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "some of the teachers only pay attention to those who are successful",
+      "observable_behavior": "they turn their friends and talk to each other, start to engage in different things, for example, they take a paper and start cutting it",
+      "internal_state": "bored because they don’t find the class interesting",
+      "related_quotes": [
+        "other students get bored because they don’t find the class interesting, they turn their friends and talk to each other, start to engage in different things, for example, they take a paper and start cutting it because of boredom"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Some teachers discriminates the students as lazy or hardworking",
+        "observable_behavior": "I do not pay enough attention to the class",
+        "internal_state": "I hate almost all the teachers",
+        "related_quotes": [
+          "Some teachers discriminates the students as lazy or hardworking, thus I hate almost all the teachers, I do not pay enough attention to the class"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

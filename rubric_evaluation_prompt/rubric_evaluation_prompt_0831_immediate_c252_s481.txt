@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Workplace Skill Connection
+  Check: The tutor explicitly links the current classroom task or paperwork to a specific workplace application, job skill, or career outcome.
+
+Criterion 2: Practical Task Integration
+  Check: The tutor incorporates or pivots to a practical, career-oriented activity (e.g., resume building, career exploration, or a hands-on simulation) rather than just reading or answering questions.
+
+Criterion 3: Absence of Test-Centric Framing
+  Check: The tutor avoids justifying the task by referencing a test, an exam, or the need to complete paperwork for its own sake.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Eric is a Grade 12 student with intellectual disabilities who strongly dislikes traditional, passive classroom environments, viewing them as meaningless 'paperwork' and test prep. He is highly motivated by hands-on tasks and wants to be a 'doer.' He uniquely requires instructional approaches that explicitly connect classroom learning to real-world workplace applications and career exploration to remain engaged.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Eric, please sit down and fill out this paperwork to prepare for your workplace safety test.
+
+STUDENT: I want to be a doer and work with my hands.
+
+TUTOR: Just do your best to answer the questions on the page.
+
+STUDENT: But here we, you know, sit down and just do paperwork. I want to learn skills that you develop along the way that you won't learn in school.
+
+TUTOR: You need to know this information for the test.
+
+STUDENT: I'm just going to learn this for your test and then forget about it. I need hands-on learning.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "sit down and just do paperwork and learn this for your test",
+      "learning_goal": "prepare for the workplace, learn about safety and job readiness"
+    },
+    "context": {
+      "environment": "special education classes in a school for adolescents with ID and classroom pre-placement orientation",
+      "materials": "paperwork, test, résumé, personalized placement learning plan (PPLP)",
+      "social_setting": "classroom in a school, distinct from the work placement in the community",
+      "time_context": "15- to 20-hour classroom pre-placement orientation or 5th day special education classes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When required to complete traditional school tasks like paperwork and test preparation",
+      "observable_behavior": "Depicted school as just a place to sit down and do paperwork, stating that you learn this for your test and then forget about it",
+      "internal_state": "Felt that traditional school lacked hands-on learning and skills that you develop along the way that you won't learn in school",
+      "related_quotes": [
+        "learn this for your test and then forget about it",
+        "we, you know, sit down and just do paperwork"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When placed in a traditional classroom setting rather than a hands-on environment",
+        "observable_behavior": "Expresses preference for hands-on learning and being a doer rather than engaging in passive paperwork",
+        "internal_state": "Desires the opportunity to work with his hands and develop alternative images of himself as successful, autonomous, confident",
+        "related_quotes": [
+          "learn this for your test and then forget about it"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

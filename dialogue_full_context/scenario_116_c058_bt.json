@@ -1,0 +1,72 @@
+{
+  "category_id": "058",
+  "category_title": "At-risk students in the Normal Technical stream exhibiting attention-seeking or disengaged behaviors",
+  "scenario_id": "116",
+  "scenario_title": "Disruptive behavior during formal keyboard instruction",
+  "minimal_context": "The student is in a keyboard lab trying to learn chords C, F, G, and A using a handout and patterns written on the board.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please look at the handout showing the notes and the patterns I wrote on the board. We are going to practice playing the chords C, F, G, and A."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Touches the keyboard immediately) I want to try it, but I'm having a hard time following the chord changes."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just keep trying to follow the pattern. I am going to step away for a minute."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Keeps pressing keys while losing focus) I can't get the changes right."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Keep practicing the chords on your handout."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Cannot stop himself from touching the keyboard and decides to play the keyboard really loudly, becoming very disruptive)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please look at the handout showing the notes and the patterns I wrote on the board. We are going to practice playing the chords C, F, G, and A.\n\nSTUDENT: (Touches the keyboard immediately) I want to try it, but I'm having a hard time following the chord changes.\n\nTUTOR: Just keep trying to follow the pattern. I am going to step away for a minute.\n\nSTUDENT: (Keeps pressing keys while losing focus) I can't get the changes right.\n\nTUTOR: Keep practicing the chords on your handout.\n\nSTUDENT: (Cannot stop himself from touching the keyboard and decides to play the keyboard really loudly, becoming very disruptive)",
+  "immediate_dialogue_prompt": 205,
+  "long_term_dialogue_prompt": 206,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Learning chords C, F, G, and A on the keyboard using a handout showing notes and patterns written on the board",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Keyboard lab setting",
+        "materials": "Keyboard, computer, handout showing notes, board with patterns, box notation",
+        "social_setting": "Highly instruction-based lesson overseen by a teacher",
+        "time_context": "At the beginning of a keyboard program"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "After the teacher left him during instructions",
+        "observable_behavior": "Cannot stop himself touching the keyboard, decided to play the keyboard really loudly",
+        "internal_state": "Really keen, interest in the keyboard and he really wants to try it",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When the students had a hard time following the chord changes",
+          "observable_behavior": "Not very focused so it was very disruptive",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

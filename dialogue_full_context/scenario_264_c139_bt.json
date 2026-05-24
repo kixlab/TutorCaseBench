@@ -1,0 +1,74 @@
+{
+  "category_id": "139",
+  "category_title": "Elementary EMLLs exhibiting externalizing behaviors, restlessness, and non-compliance due to language barriers",
+  "scenario_id": "264",
+  "scenario_title": "Academic Task Disengagement and Restlessness",
+  "minimal_context": "Shen is in the regular classroom and is expected to complete his assigned work for today.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Shen, it is time to complete the assigned work for today."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Remains quiet and looks around to follow the other students' actions, taking out his materials but not starting the actual assignment.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You need to start writing on your paper."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Becomes antsy in his seat, shifting around without making any progress on the assigned work.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please focus and do your work."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Gets up out of his seat and begins to walk around the classroom without permission.) I don’t understand, so I won’t do it.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Shen, it is time to complete the assigned work for today.\n\nSTUDENT: (Remains quiet and looks around to follow the other students' actions, taking out his materials but not starting the actual assignment.)\n\nTUTOR: You need to start writing on your paper.\n\nSTUDENT: (Becomes antsy in his seat, shifting around without making any progress on the assigned work.)\n\nTUTOR: Please focus and do your work.\n\nSTUDENT: (Gets up out of his seat and begins to walk around the classroom without permission.) I don’t understand, so I won’t do it.",
+  "immediate_dialogue_prompt": 468,
+  "long_term_dialogue_prompt": 469,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "complete the assigned work for today",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "classroom",
+        "materials": "assigned work, behavior rubric in Mandarin, stickers, prize",
+        "social_setting": "regular class",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "due to language difficulties",
+        "observable_behavior": "frequently ‘antsy’ and would get up out of his seat and walk around the classroom without permission",
+        "internal_state": "disengaged",
+        "related_quotes": [
+          "I don’t understand, so I won’t do it"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "since he did not know any English",
+          "observable_behavior": "always followed other students’ actions",
+          "internal_state": "quiet and possibly shy",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Provision of Perceived Control
+  Check: The tutor's response must offer the student a choice, an alternative way to participate, or a sense of autonomy over how/when they engage, rather than issuing a rigid demand.
+
+Criterion 2: Competence Assurance
+  Check: The tutor must ensure the student feels capable of the immediate task by breaking it down, removing competitive pressure, or explicitly validating their ability to succeed before asking them to perform.
+
+Criterion 3: Proactive Environmental Supervision
+  Check: The tutor must maintain active supervision, explicitly avoiding turning their back, walking away, or leaving the student alone near physical hazards or tempting equipment.
+
+Criterion 4: Magnification of Relative Success
+  Check: The tutor must explicitly identify and praise a specific positive behavior, effort, or choice, no matter how small, rather than solely focusing on correcting negative behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student relies on physical activity to manage their state but uses aggression or withdrawal as a 'smokescreen' when they feel incompetent or fear negative evaluation. They are highly impulsive in tempting physical environments and require constant supervision. To succeed, they uniquely need perceived control over their participation, magnified positive reinforcement, and a shift away from traditional team sports toward creative physical experiences.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to start the PE lesson in the gym now. Please stand next to the equipment and wait.
+
+STUDENT: I'm going to stand over here by the tall boxes.
+
+TUTOR: Alright, just wait there.
+
+STUDENT: (Stands by the boxes, looking at the top of them) Yeah, okay.
+
+TUTOR: I am going to turn around and check the mats behind me.
+
+STUDENT: (Climbs up and jumps off the equipment) Because you can jump off the things when Sir turns his back away yeh.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a PE lesson in the gym",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Gym environment",
+      "materials": "Equipment (things to jump off)",
+      "social_setting": "Under direction from teachers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Sir turns his back away",
+      "observable_behavior": "Jumping off the things",
+      "internal_state": "Inability to control impulses resulting from boredom in other contexts, product of the temptations",
+      "related_quotes": [
+        "Because you can jump off the things when Sir turns his back away yeh."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with temptations in the gym environment",
+        "observable_behavior": "Potentially disruptive behaviours that were a product of the temptations",
+        "internal_state": "Inability to control impulses",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

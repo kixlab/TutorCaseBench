@@ -1,0 +1,74 @@
+{
+  "category_id": "013",
+  "category_title": "Quiet students who experience cognitive overload when processing multi-step algebraic equations",
+  "scenario_id": "027",
+  "scenario_title": "Struggling to process the far term in distributive property",
+  "minimal_context": "Greg is working independently on his classwork to solve the equation 3(x + 5) = 33 during a one-on-one session.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is the next problem on your paper: 3(x + 5) = 33. Go ahead and solve it."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Writes 3x under the equation)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, what is the next step?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Works quietly for about a minute, staring at the equation but not writing anything else.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just keep going. What do you think you should do with the 5?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Um... So, 3 plus…",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is the next problem on your paper: 3(x + 5) = 33. Go ahead and solve it.\n\nSTUDENT: (Writes 3x under the equation)\n\nTUTOR: Okay, what is the next step?\n\nSTUDENT: (Works quietly for about a minute, staring at the equation but not writing anything else.)\n\nTUTOR: Just keep going. What do you think you should do with the 5?\n\nSTUDENT: Um... So, 3 plus…",
+  "immediate_dialogue_prompt": 46,
+  "long_term_dialogue_prompt": 47,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Solve the equation 3(x + 5) = 33",
+        "learning_goal": "Distribute the multiplier to all terms inside the parentheses"
+      },
+      "context": {
+        "environment": "Working independently on his classwork",
+        "materials": "Diagrams and equations displayed on paper",
+        "social_setting": "One-on-one session with Jane",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "After successfully distributing the 3 to the x, needing to process across the equation to the far term, the 5",
+        "observable_behavior": "Worked quietly for about a minute, seemed stuck, and incorrectly identified the operation for the second term",
+        "internal_state": "Trouble processing across the equation to the far term",
+        "related_quotes": [
+          "So, 3 plus…"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When needing to distribute to terms that are not right next to each other (the far term)",
+          "observable_behavior": "Gets stuck for a moment, pauses, works quietly without progressing",
+          "internal_state": "Trouble processing across the equation",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Micro-Tasking and Readiness Verification
+  Check: The tutor breaks the task into a single, small step and either asks Alex to repeat the direction or confirms he has the specific required material ready.
+
+Criterion 2: Accuracy Over Volume
+  Check: The tutor explicitly reduces the amount of work required (e.g., 'Just do the first two sentences') and emphasizes taking time to do that small amount correctly.
+
+Criterion 3: Active Ignoring of Minor Disruptions
+  Check: The tutor does not verbally correct, scold, or engage with Alex's off-task comical or attention-seeking behaviors, instead keeping the focus entirely on the academic prompt.
+
+Criterion 4: Immediate Behavioral Tracking
+  Check: The tutor uses or references a visible tracking system (e.g., checking off a box, awarding a token) immediately upon Alex completing a small target behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Alex is an 8-year-old student who exhibits significant motor hyperactivity, impulsivity, and inattention, frequently rushing through work with careless errors. He masks underlying sadness and a self-label of being a 'bad kid' by acting as the 'class clown' to escape independent tasks and gain peer attention. He uniquely requires tasks to be micro-stepped with reduced volume, immediate visible reinforcement, and active ignoring of his comical disruptions to prevent reinforcing his escape behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alex, please take out your math worksheet and start working on the problems.
+
+STUDENT: (Fidgeting with a toy and cracking his knuckles) My desk is a mess, I can't find my worksheet.
+
+TUTOR: Please look inside your desk to find your materials.
+
+STUDENT: (Standing beside his desk) I know I need to pay attention. I always get in trouble for talking too much.
+
+TUTOR: Just find your worksheet and begin the assignment.
+
+STUDENT: (Staring out the window) I want to look at clouds! The answer to the first question is ten!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "academic subjects",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom, seat was near the back of the room, and he faced away from the area where Ms. S most frequently addressed the class",
+      "materials": "available toys, colorful and varied visual materials",
+      "social_setting": "whole class instruction",
+      "time_context": "before lessons were initiated"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "during academic subjects",
+      "observable_behavior": "engaged in a high level of motor activity (e.g., ﬁdgeting, standing beside his desk), impulsivity (e.g., blurting out answers to questions), and inattention (e.g., staring out the window, disorganization of materials)",
+      "internal_state": "demonstrated some awareness of his difﬁculties",
+      "related_quotes": [
+        "look at clouds",
+        "pay attention",
+        "[got] in trouble for talking too much"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "completing even simple daily tasks",
+        "observable_behavior": "forgetfulness, lack of follow-through, and distractibility",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

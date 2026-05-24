@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Pre-Alerting for Questions
+  Check: The tutor provides advance warning or cues Shaffer about an upcoming question before officially requiring him to answer.
+
+Criterion 2: Protected Wait Time
+  Check: The tutor directly addresses Shaffer and explicitly provides extended wait time, either by holding a deliberate pause or by verbally instructing the class to wait for his response.
+
+Criterion 3: Social Bridging
+  Check: When peer interaction is required, the tutor actively mediates the introduction or prompts the initial exchange rather than instructing Shaffer to initiate the conversation alone.
+
+Criterion 4: Strategic Fading
+  Check: After prompting or initiating a peer interaction, the tutor explicitly withdraws, steps back, or redirects their own attention to allow Shaffer to interact with peers independently.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shaffer is an honor roll student with autism who uses typed communication and exhibits slower physical response times, often sitting quietly, staring straight ahead, and tapping his thumbs. Because he cannot compete with the fast pace of peers shouting out answers or rapidly raising hands, he frequently appears unable to participate. He uniquely requires adults to manage the pacing of academic tasks through pre-alerting and protected wait time, and to act as a temporary social bridge to initiate peer interactions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the next question for our science lecture.
+
+STUDENT: (Sits silently in the front row staring straight ahead, tapping his thumbs together.)
+
+TUTOR: Shaffer, you know this one. Raise your hand.
+
+STUDENT: (Keeps his hand at his side while four other students shoot their hands quickly in the air.)
+
+TUTOR: Alright, I will call on one of the other students with their hand raised.
+
+STUDENT: (Raises his left hand slowly as the other student begins to give her answer.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "teacher asked a question",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "science lecture, front row",
+      "materials": "",
+      "social_setting": "whole-class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "four other students shot their hands quickly in the air",
+      "observable_behavior": "Shaffer’s stayed at his side",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "The teacher called on one of the students with her hand raised and as she began to give her answer",
+        "observable_behavior": "Shaffer raised his left hand slowly",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

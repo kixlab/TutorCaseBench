@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Verbal Communication Channels
+  Check: The tutor explicitly offers a visual or physical tool (e.g., communication book, iPad, pictures) for Rafiq to convey his thoughts.
+
+Criterion 2: Active Non-Verbal Roles
+  Check: The tutor suggests a specific, action-oriented role for Rafiq that contributes to the group without requiring speech (e.g., taking photos of peers, miming a character while others narrate).
+
+Criterion 3: Absence of Direct Verbal Demands
+  Check: The tutor completely avoids asking questions or giving prompts that require Rafiq to speak aloud.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Rafiq is a shy student with limited verbalization who shuts down and refuses to participate when prompted for spoken answers. However, he becomes highly engaged and capable of taking leading roles when provided with alternative communication methods like photography, communication books, and miming. He uniquely needs non-verbal avenues to contribute to group activities without the pressure of speech.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Rafiq, we are starting the drama session in the sensory room. Please stand with your costume and say your character's first line so we can record the dialogue.
+
+STUDENT: (Looks down at the floor and stays quiet, showing a lack of motivation to communicate in the lesson.)
+
+TUTOR: What do you think your character should say?
+
+STUDENT: (Remains shy and does not provide any verbal output for the group activity.)
+
+TUTOR: Try to say your lines for the recording now.
+
+STUDENT: (Refuses to answer, demonstrating a complete inability to say his lines due to his limited or no verbal output abilities.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Acting out a role in a drama session and making up a dialogue, which was rehearsed and recorded",
+      "learning_goal": "To motivate him to take part in group and whole-class drama activities."
+    },
+    "context": {
+      "environment": "Sensory room",
+      "materials": "Costumes and props, an iPad on set, digital camera, Our Story app",
+      "social_setting": "Group story-making activity with other children and staff",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When required to deliver dialogue due to taking one of the leading roles in the drama",
+      "observable_behavior": "Inability to say lines",
+      "internal_state": "",
+      "related_quotes": [
+        "limited or no verbal output abilities",
+        "due to their inability to say lines"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During activities requiring verbal output",
+        "observable_behavior": "Limited or no verbal output abilities",
+        "internal_state": "",
+        "related_quotes": [
+          "limited or no verbal output abilities"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

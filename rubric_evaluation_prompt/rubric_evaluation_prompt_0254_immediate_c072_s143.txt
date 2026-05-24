@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Direct Task Redirection
+  Check: The tutor provides a clear, direct verbal instruction or prompt that focuses the student on the next specific step of the task, avoiding overly broad or open-ended questions.
+
+Criterion 2: Encouragement of Concrete Aids
+  Check: The tutor explicitly validates, encourages, or suggests the use of physical or visual manipulatives (e.g., fingers, number lines, counters) to help the student solve the problem.
+
+Criterion 3: Explicit Validation
+  Check: The tutor directly answers the student's bid for approval by providing clear confirmation, praise, or validation of their current work or effort.
+
+Criterion 4: Absence of Time Pressure
+  Check: The tutor's response is completely free of time constraints, countdowns, or language that rushes the student.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Student C is an approval-seeking learner who persists through difficult tasks but is highly susceptible to environmental distractions and anxiety under timed conditions. He uniquely requires explicit verbal redirection to stay on task, direct validation to satisfy his need for approval, and the use of concrete physical aids (like number lines or fingers) to bridge cognitive gaps in math.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start the x20 game on the Nintendo DS and try the next multiplication problem.
+
+STUDENT: (Uses his fingers to count) I am trying to do the multiplication. Did I do this part right? (Makes eye contact with the teacher)
+
+TUTOR: Just keep working on it.
+
+STUDENT: These large numbers are really difficult, but I will keep trying to figure it out with my number line.
+
+TUTOR: What do you think you should do next?
+
+STUDENT: (Stops looking at the Nintendo DS and turns around to watch the other people in the room, picking up an object from the desk instead of finishing the math problem)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting various math operations (addition, subtraction, multiplication) and large numbers in the x20 game on the Nintendo DS",
+      "learning_goal": "solving single digit addition, subtraction and multiplication problems"
+    },
+    "context": {
+      "environment": "Education Support Centre classroom with people and objects around him",
+      "materials": "Nintendo DS, counters, number lines, and his fingers",
+      "social_setting": "Interacting with the teacher while performing tasks",
+      "time_context": "Middle to final stages of the intervention"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When people and objects around him occasionally distracted him",
+      "observable_behavior": "He was still distracted occasionally and required verbal prompting or redirecting",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When interacting with his teacher",
+        "observable_behavior": "He sought approval and would make eye contact with his teacher",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When he found tasks difficult",
+        "observable_behavior": "he returned to work and persisted with the tasks even when he found them difficult",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

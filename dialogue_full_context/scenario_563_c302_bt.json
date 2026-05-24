@@ -1,0 +1,78 @@
+{
+  "category_id": "302",
+  "category_title": "Students requiring structured time-",
+  "scenario_id": "563",
+  "scenario_title": "Treadmill task and excessive break requests",
+  "minimal_context": "The student is expected to walk on the treadmill for two minutes during a one-on-one APE session.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time to walk on the treadmill for two minutes."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Uses the break timer to request a break from instruction)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We need to do the treadmill first."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Requests another break, taking a 5-minute long break)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Your break is over. Please stand up and walk on the treadmill."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Lays on the floor screaming)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time to walk on the treadmill for two minutes.\n\nSTUDENT: (Uses the break timer to request a break from instruction)\n\nTUTOR: We need to do the treadmill first.\n\nSTUDENT: (Requests another break, taking a 5-minute long break)\n\nTUTOR: Your break is over. Please stand up and walk on the treadmill.\n\nSTUDENT: (Lays on the floor screaming)",
+  "immediate_dialogue_prompt": 976,
+  "long_term_dialogue_prompt": 977,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Walking on treadmill for two minutes",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "APE session",
+        "materials": "Treadmill, break timer",
+        "social_setting": "One-on-one instruction",
+        "time_context": "Thirty minutes"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "During the thirty-minute session when expected to walk on the treadmill",
+        "observable_behavior": "literally laid on the floor screaming for the whole thirty minutes",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When using a break timer to request a break from instruction",
+          "observable_behavior": "use verbal or non-verbal communication to request a break... like eight times in a session and we get nothing done",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "When taking breaks during the session",
+          "observable_behavior": "taking long breaks... each one is 5 minutes long",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

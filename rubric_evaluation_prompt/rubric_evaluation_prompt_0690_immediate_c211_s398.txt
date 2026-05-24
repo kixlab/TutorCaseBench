@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Real-World Contextualization
+  Check: The tutor explicitly connects the academic concept to a tangible, real-world application or prompts the student to relate it to their own personal experience.
+
+Criterion 2: Pre-Validation of Accuracy
+  Check: The tutor reviews and confirms the accuracy of the student's work privately before prompting them to present, share, or expose their answers to others.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits profound learned helplessness and a high sensitivity to public embarrassment, often shutting down and attributing struggles to being 'stupid'. They require abstract concepts to be explicitly tied to real-world applications and need their work to be pre-validated for accuracy to protect them from peer criticism.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please complete the worksheet on calculating wattage and power.
+
+STUDENT: I don't see why we have to do this. It's completely disconnected from my daily life. I'd rather just learn how circuits are wired into a house.
+
+TUTOR: Just focus on the calculation problems in front of you.
+
+STUDENT: (Stares at the paper) The mathematical aspect of calculating this wattage is too challenging.
+
+TUTOR: Try your best to figure it out.
+
+STUDENT: There's no point. I'm just stupid, so I'm always going to fail these tests anyway. I'm not doing it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "calculating wattage and power",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "science class",
+      "materials": "wattage calculation problems, power meter examples",
+      "social_setting": "classroom",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when students found the mathematical aspect of calculating wattage challenging and disconnected from their daily lives",
+      "observable_behavior": "not completing or by failing previous course loads, demonstrating inconsistent attendance, and/or demonstrating inappropriate behaviour at school",
+      "internal_state": "assume that he or she failed the test because he or she was stupid (internal and global) and will always fail (stable)",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Given the lack of success experienced in the school setting",
+        "observable_behavior": "display learned helplessness with regard to their schoolwork",
+        "internal_state": "predisposed to attribute negative outcomes to internal, global, and stable factors",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

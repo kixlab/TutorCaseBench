@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: End-of-Session Review and Reinforcement Routine
+  Check: The tutor's long-term plan must establish a consistent routine for the student to submit or review their completed checklist at the end of the session in exchange for their agreed-upon reinforcer.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is an eighth-grade student with ASD who struggles with task avoidance, verbal refusal, and low engagement in their general education math class. They uniquely require highly structured self-management checklists that explicitly embed both academic steps and behavioral expectations, alongside clearly visible reinforcers, to initiate and complete work.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to complete the practice problems with your peer-supported group.
+
+STUDENT: (Does not follow the directions within 10 seconds and begins doodling on the desk instead.)
+
+TUTOR: Please start working on the math assignment.
+
+STUDENT: No, I am not doing the work.
+
+TUTOR: You need to do the practice problems with your group.
+
+STUDENT: (Puts head down on the desk and pulls out a book to read instead of looking at the math assignment.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing an introductory warm-up activity, taking notes, completing practice problems in peer-supported groups, and beginning homework assignments",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Eighth-grade general education math class",
+      "materials": "Assignments, non-math tasks (e.g., reading a book, doodling materials), checklist, agreed upon reinforcer",
+      "social_setting": "Peer-supported groups",
+      "time_context": "Fourth period each day, during the allotted time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During instruction or group work when expected to complete assignments during the allotted time",
+      "observable_behavior": "Verbally refusing to do work, putting head down, not following directions within 10 s, and engaging in non-math tasks (e.g., reading a book, doodling)",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When given directions",
+        "observable_behavior": "Not following directions within 10 s",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "During instruction or group work",
+        "observable_behavior": "Verbally refusing to do work, putting head down, and engaging in non-math tasks (e.g., reading a book, doodling)",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

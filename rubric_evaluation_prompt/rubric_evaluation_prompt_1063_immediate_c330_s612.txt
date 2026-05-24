@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Tactical Ignoring of Minor Defiance
+  Check: For minor defiance or cheekiness, the tutor's response must either completely ignore the behavior or seamlessly continue with the task/transition without explicitly disciplining the student.
+
+Criterion 2: Minimalist Warning for Severe Infractions
+  Check: If addressing a major or dangerous infraction, the tutor must issue a simple, direct warning or boundary without adding immediate punitive consequences, extended lectures, or escalating discipline.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student generally has a 'good' reputation but occasionally exhibits severe, uncharacteristic misbehaviors ranging from cheeky defiance to potentially dangerous physical acts. Because they experience strong internal remorse after acting out, they uniquely require a 'light touch' approach—ignoring minor infractions and giving simple warnings for major ones—rather than escalating discipline.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please line up and be quiet for the transition.
+
+STUDENT: (Continues talking instead of being quiet)
+
+TUTOR: I still hear people talking!
+
+STUDENT: (Refuses to line up) We're going on strike!
+
+TUTOR: You need to get in line right now.
+
+STUDENT: (Sings loudly) Oakdale school, is not the best school for you. I hate Oakdale, I hate Oakdale.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transitioning between classrooms; students are instructed to line up and be quiet",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom transition",
+      "materials": "",
+      "social_setting": "Whole class lining up with Ms. Hoffman",
+      "time_context": "Transitioning between classrooms"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When told to line up and be quiet",
+      "observable_behavior": "Refuses to line up. She shouts, 'We're going on strike!' She begins to sing the Oakdale song, but she changes some of the words",
+      "internal_state": "",
+      "related_quotes": [
+        "We're going on strike!",
+        "Oakdale school, is not the best school for you. I hate Oakdale, I hate Oakdale."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When instructed to line up and be quiet during a transition",
+        "observable_behavior": "Refuses to line up, shouts protests, and sings loudly with modified, defiant lyrics",
+        "internal_state": "",
+        "related_quotes": [
+          "We're going on strike!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

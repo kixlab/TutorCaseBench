@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Interest_Led_Curriculum_Adaptation
+  Check: The tutor's long-term plan includes a specific mechanism for using daily observations of Patrick's interests to dictate the following week's activities.
+
+Criterion 2: Extended_Multi_Modal_Exploration
+  Check: The tutor's long-term plan provides multiple, diverse avenues for Patrick to explore a single topic of interest over several weeks.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Patrick is a 5-year-old who frequently expresses frustration—such as kicking furniture and calling school 'dumb'—when faced with prescribed tasks, morning arrivals, or forced group work. He requires high levels of autonomy and responds positively when his specific interests are validated and he is allowed to follow his own lead. The evidence reveals he uniquely needs flexible task parameters, tangible connections between home and school, and curriculum built directly from his daily observed interests.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Patrick, it is time to join the members of the group for our classroom activity.
+
+STUDENT: (Kicks the furniture in frustration) I don't want to. I only want to play with my one regular friend.
+
+TUTOR: He is in another group today. Please sit with these classmates.
+
+STUDENT: No! I don't want to be friends with them!
+
+TUTOR: Just try to work together with them for this activity.
+
+STUDENT: You guys are too slow and you're doing it all wrong! (Vocalizes his frustration and impatience with the members of the group, leaving his classmates confused and startled)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Group activities and social interactions with peers in the classroom",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "",
+      "social_setting": "members of the group",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "interactions with his peers",
+      "observable_behavior": "vocalized his frustration and impatience with the members of the group, leave classmates confused and startled",
+      "internal_state": "frustration and impatience",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "interactions with his peers",
+        "observable_behavior": "had ongoing difficulties making and keeping friends",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

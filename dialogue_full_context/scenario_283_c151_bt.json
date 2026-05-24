@@ -1,0 +1,78 @@
+{
+  "category_id": "151",
+  "category_title": "Eighth-grade students with ASD displaying low academic engagement and task avoidance in math",
+  "scenario_id": "283",
+  "scenario_title": "Low academic engagement during math class activities",
+  "minimal_context": "The student is expected to complete practice problems in a peer-supported group during fourth-period math class.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time to complete the practice problems with your peer-supported group."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Does not follow the directions within 10 seconds and begins doodling on the desk instead.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please start working on the math assignment."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "No, I am not doing the work."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You need to do the practice problems with your group."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Puts head down on the desk and pulls out a book to read instead of looking at the math assignment.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time to complete the practice problems with your peer-supported group.\n\nSTUDENT: (Does not follow the directions within 10 seconds and begins doodling on the desk instead.)\n\nTUTOR: Please start working on the math assignment.\n\nSTUDENT: No, I am not doing the work.\n\nTUTOR: You need to do the practice problems with your group.\n\nSTUDENT: (Puts head down on the desk and pulls out a book to read instead of looking at the math assignment.)",
+  "immediate_dialogue_prompt": 500,
+  "long_term_dialogue_prompt": 501,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Completing an introductory warm-up activity, taking notes, completing practice problems in peer-supported groups, and beginning homework assignments",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Eighth-grade general education math class",
+        "materials": "Assignments, non-math tasks (e.g., reading a book, doodling materials), checklist, agreed upon reinforcer",
+        "social_setting": "Peer-supported groups",
+        "time_context": "Fourth period each day, during the allotted time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "During instruction or group work when expected to complete assignments during the allotted time",
+        "observable_behavior": "Verbally refusing to do work, putting head down, not following directions within 10 s, and engaging in non-math tasks (e.g., reading a book, doodling)",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When given directions",
+          "observable_behavior": "Not following directions within 10 s",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "During instruction or group work",
+          "observable_behavior": "Verbally refusing to do work, putting head down, and engaging in non-math tasks (e.g., reading a book, doodling)",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Self-Identification
+  Check: The tutor explicitly acknowledges, validates, or expresses appreciation for Stephanye's stated identity.
+
+Criterion 2: Acceptance of Ancestral Knowledge
+  Check: The tutor accepts her family's experiences or ways of knowing as valid, avoiding any demands for empirical evidence or questioning of how she knows her family's history.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Stephanye is a student who strongly asserts her racial identity and relies on ancestral knowledge and family history as valid evidence. When peers miscategorize her based on physical appearance, she corrects them using her family's ways of 'just knowing.' She uniquely needs educators to explicitly validate her self-identification and honor her family's knowledge without demanding traditional academic proof.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are reading 'Separate is Never Equal' and talking about skin color. Kristoff just said that you have brown skin, Stephanye. Do you want to respond to that?
+
+STUDENT: I want to say that Kristoff said that I am Brown, and it looks like I am Brown, but I am actually Black.
+
+TUTOR: I see. What else would you like to share with the class?
+
+STUDENT: Um (pauses), my mom and her mom got treated differently because they were Black.
+
+TUTOR: How do you know that happened to them?
+
+STUDENT: They just (pauses). I’m not sure. I just know it. We know that in my family.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a whole-class read-aloud and discussion of the book 'Separate is Never Equal' by Duncan Tonatiuh, which addresses racial segregation.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "The book 'Separate is Never Equal' by Duncan Tonatiuh",
+      "social_setting": "Whole-class discussion about skin color",
+      "time_context": "During a read-aloud"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a peer (Kristoff) categorizes her skin color as Brown based on observation",
+      "observable_behavior": "Explicitly corrects the peer's categorization, asserting her racial identity as Black despite looking Brown, and shares ancestral knowledge about racial discrimination in her family.",
+      "internal_state": "Ways of 'just knowing' about the experiences of being Black",
+      "related_quotes": [
+        "I want to say that Kristoff said that I am Brown, and it looks like I am Brown, but I am actually Black.",
+        "Um ( pauses ), my mom and her mom got treated differently because they were Black."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When explaining how she knows about her family's history of being treated differently",
+        "observable_behavior": "Pauses, states she is not sure, and relies on family knowledge rather than standard academic evidence, causing a rupture in ways of thinking.",
+        "internal_state": "Ways of 'just knowing'",
+        "related_quotes": [
+          "They just ( pauses ). I’m not sure. I just know it. We know that in my family.",
+          "If you want to be mean, be mean. You just–you decide."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

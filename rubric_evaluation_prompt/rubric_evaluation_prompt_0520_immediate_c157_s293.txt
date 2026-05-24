@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-demanding tactile entry into the task
+  Check: The tutor introduces or reintroduces the device/activity through an inviting tactile exploration opportunity, such as hand-under-hand access, and does not rely only on commands to use the device.
+
+Criterion 2: Tactile-auditory meaning for response choices
+  Check: The tutor makes the available choices understandable through tactile and/or auditory access and does not ask Sally to respond primarily through silent gestures or unsupported visual information.
+
+Criterion 3: Agency-preserving support before independent selection
+  Check: The tutor provides any physical support in a non-coercive, access-building way and then gives Sally a clear chance to initiate or select the response herself.
+
+Criterion 4: Persistent prompting without allowing escape
+  Check: The tutor uses a clear progression such as waiting, restating, cueing, or least-to-most prompting to keep the response opportunity active while avoiding punitive or escalating pressure.
+
+Criterion 5: Willingness to communicate protected from error consequences
+  Check: The tutor positively acknowledges or reinforces any genuine communicative attempt and handles incorrect answers through supportive correction, rereading, or another try rather than treating the attempt as a failure.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sally is a blind adolescent student with long-standing selective mutism who understands language well but does not use spoken language or gestures at school. Her resistance appears when communication demands involve unfamiliar devices or inaccessible response modes, leading her to push devices away, block buttons, remain silent, or hesitate. The evidence shows she uniquely needs communication tasks made meaningful through tactile, Braille, auditory, and voice-output access, with predictable routines and reinforcement that protects willingness to communicate.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Sally, I have a second voice-output device for you today. It is the big button communicator.
+
+STUDENT: (Remains silent, pushes the device away from her and refuses to use it.)
+
+TUTOR: Let's try this again. I am putting the device back on the table in front of you.
+
+STUDENT: (Sits silently and continues to refuse to use the device.)
+
+TUTOR: Please use the buttons to communicate a choice.
+
+STUDENT: (Places her arm across all four buttons, rather than use the device appropriately to communicate a choice.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Introduction of a second voice-output device",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "One-on-one instruction time",
+      "materials": "Table, second voice-output device",
+      "social_setting": "One-on-one instruction with the first author",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When she was first presented with a second voice-output device, it was described to her as 'the big button communicator.'",
+      "observable_behavior": "She pushed the device away from her and refused to use it.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "On the second presentation",
+        "observable_behavior": "she placed her arm across all four buttons, rather than use the device appropriately to communicate a choice.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

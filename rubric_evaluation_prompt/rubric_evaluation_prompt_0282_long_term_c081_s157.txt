@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Contextualized Vocabulary Introduction
+  Check: The long-term plan must introduce new vocabulary using a combination of child-friendly definitions, relatable real-world examples, and direct connections to a shared text.
+
+Criterion 2: Peer-Based Expressive Practice
+  Check: The long-term plan must consistently incorporate peer discussion or 'turn-and-talk' routines that allow her to practice using novel words expressively with classmates.
+
+Criterion 3: Fading Vocabulary Scaffolding
+  Check: The long-term plan must explicitly state a strategy for gradually decreasing the amount of scaffolding or prompting provided for target vocabulary words over multiple sessions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Helen is a confident kindergarten student who frequently takes leadership roles in peer discussions but struggles with articulation due to a Spoken Language Disorder. She frequently mispronounces novel vocabulary but remains highly engaged and willing to try. The evidence reveals she uniquely needs accurate, non-discouraging pronunciation modeling in the moment, alongside explicit, highly contextualized vocabulary instruction and peer-talk opportunities over time.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We just finished reading 'Rocket Writes a Story'. Now it is time to turn and talk with your group. Who is someone that inspires you?
+
+STUDENT: I will start the conversation.
+
+TUTOR: Okay, go ahead.
+
+STUDENT: I know my answer.
+
+TUTOR: Tell us.
+
+STUDENT: My sister. She sires [sic] me to get my homework done. My sister sires me [sic].
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Using the explicitly taught vocabulary word 'inspires' during peer talk following an interactive read-aloud of 'Rocket Writes a Story', responding to the prompt 'Who is someone that inspires you?'",
+      "learning_goal": "Consistently and accurately use novel words in context and expand on responses"
+    },
+    "context": {
+      "environment": "Kindergarten classroom during interactive read-aloud (IRA) sessions",
+      "materials": "The book 'Rocket Writes a Story' (Hills 2012)",
+      "social_setting": "Peer conversations with planned opportunities to turn and talk",
+      "time_context": "Following the explicit teaching of the vocabulary word before the read aloud"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to use the novel vocabulary word 'inspires' in conversation during peer talk",
+      "observable_behavior": "Demonstrated difficulty with articulation; was unable to pronounce it correctly, substituting sounds by saying 'sires' instead of 'inspires'",
+      "internal_state": "Comfortable using the word even though she was unable to pronounce it correctly",
+      "related_quotes": [
+        "My sister. She sires [sic] me to get my homework done. My sister sires me [sic]."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When using explicitly taught vocabulary words in conversation",
+        "observable_behavior": "Could not articulate certain sounds in words, but still took a leadership role and was the first to engage in peer talk",
+        "internal_state": "Appeared to be confident in each of the observed conversations",
+        "related_quotes": [
+          "I declared that I couldn’t sleep.",
+          "I saw a bird perch on the end of a tree branch."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

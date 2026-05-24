@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Consistent Small-Group Mindfulness Structure
+  Check: The long-term plan establishes a consistent, small-group format (e.g., twice-weekly sessions with specific peers) for delivering mindfulness interventions.
+
+Criterion 2: Sustained Reflective Journaling
+  Check: The long-term plan incorporates regular homework or journaling assignments designed to help the student reflect on his personal history and practice new techniques.
+
+Criterion 3: Explicit Self-Compassion Integration
+  Check: The long-term plan explicitly includes modules, exercises, or goals dedicated to teaching and practicing self-compassion.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Archie is a student who experiences severe emotional volatility and aggressive outbursts (e.g., throwing chairs) triggered by perceived teacher judgment and trauma from an accident that ended his defining hobbies. He uniquely requires small-group mindfulness interventions, immediate physiological de-escalation, and explicit self-compassion training to regulate his emotions and reconstruct his fragmented sense of identity.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Archie, please take a chair and join Samantha, Victor, and James for the group assignment.
+
+STUDENT: I don't want to do it. I keep, falling into depression.
+
+TUTOR: We need to get started on the work.
+
+STUDENT: You're always looking at me like that. I fe- felt as though the teachers didn’t really like me and I got a bit, worried.
+
+TUTOR: Just sit down in your chair, please.
+
+STUDENT: (Kicks the chair over) I'm raging! I'm going to be throwing chairs about and hurting people!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interacting with teachers and participating in a mainstream secondary school setting",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mainstream secondary school",
+      "materials": "Chairs",
+      "social_setting": "Small group setting with specific peers (Samantha, Victor, and James) and teachers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the student links his judgement of others to his own emotional state and feels as though teachers do not like him",
+      "observable_behavior": "Confronting teachers, acting aggressively, raging, throwing chairs about, hurting people",
+      "internal_state": "Worried, unstable current sense of self",
+      "related_quotes": [
+        "I fe- felt as though the teachers didn’t really like me and I got a bit, worried",
+        "I’d be raging I’d be throwing chairs about I’d be, hurting people"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When interacting in a general school environment prior to intervention",
+        "observable_behavior": "Confronting teachers and acting aggressively",
+        "internal_state": "Unstable current sense of self",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

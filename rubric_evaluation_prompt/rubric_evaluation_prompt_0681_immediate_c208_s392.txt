@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Immediate Academic Validation
+  Check: The tutor provides or offers direct academic assistance, scaffolding, or a path to get help in response to the student's frustration, rather than telling them to work independently or ignoring the difficulty.
+
+Criterion 2: Perspective-Taking Prompting
+  Check: The tutor asks questions or provides prompts that encourage the student to consider the situation from another point of view (e.g., the teacher's perspective, a peer's perspective, or a hypothetical scenario).
+
+Criterion 3: Non-Coercive, Effort-Based Encouragement
+  Check: The tutor avoids using peer comparisons (e.g., 'Look how well X is doing') and intelligence-based praise (e.g., 'You're so smart'), focusing any encouragement strictly on the student's effort or specific strategies.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student acts out and exhibits poor behavior when academic tasks are too difficult and immediate help is unavailable, masking their frustration by 'getting into trouble.' They uniquely need structured reflection to understand multiple perspectives (e.g., teacher vs. student) and require academic support to be addressed directly. They will actively disengage if subjected to coercive comparisons, intelligence-based praise, or if their underlying learning difficulties are ignored.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start working on your test now. You need to complete this independently.
+
+STUDENT: (Looks at the paper) I don't really like the work, it's too hard.
+
+TUTOR: Just keep working on it.
+
+STUDENT: I've gubbed up [made a mess of it] already. Doing a test or something, I probably know I could have done better.
+
+TUTOR: Try to figure it out on your own.
+
+STUDENT: (Pushes the test away) I'll just carry on and then get into trouble. I get frustrated when I don't get help when I need it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Doing a test or something, or work that the student doesn't really like or is too hard",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom environment",
+      "materials": "SG diary",
+      "social_setting": "Independent work where the student does not get help when they need it",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the student doesn't get help when they need it, or if they don't really like the work or it's too hard",
+      "observable_behavior": "I'll just carry on and then get into trouble, exhibiting poor behaviour",
+      "internal_state": "Frustrated, feeling like they have gubbed up [made a mess of it]",
+      "related_quotes": [
+        "If I don't really like the work or its too hard, I'll just carry on and then get into trouble",
+        "I understand now that some of my poor behaviour has been because I get frustrated when I don't get help when I need it",
+        "If I've gubbed up [made a mess of it] - doing a test or something - I probably know I could have done better"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When work is too hard and help is not provided",
+        "observable_behavior": "Carry on and then get into trouble, demonstrating poor behaviour",
+        "internal_state": "Frustrated",
+        "related_quotes": [
+          "I understand now that some of my poor behaviour has been because I get frustrated when I don't get help when I need it"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

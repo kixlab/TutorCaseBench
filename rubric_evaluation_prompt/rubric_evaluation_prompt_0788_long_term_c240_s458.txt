@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Private Processing Channel
+  Check: The tutor's long-term plan must establish or maintain a continuous private reflection mechanism (such as weekly journaling) for the student to process her emotions and group dynamics.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Donna is a white college student who holds a color-blind racial ideology and struggles with group members who emphasize racial diversity, leading her to vent privately rather than address conflict directly. She uniquely needs private, reflective spaces and academic framing (like sociological analysis and targeted readings) to safely deconstruct her privilege and emotional reactions without triggering defensiveness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's discuss your recent journal entry about your group's progress on developing the interview guide and selecting interviewees.
+
+STUDENT: Yes, I wrote about some mean and terrible thoughts I was having about Charles. Like I noted, because this is a journal entry, I feel the freedom to express these thoughts.
+
+TUTOR: Can you elaborate on what happened during the group discussions?
+
+STUDENT: When we were discussing interview questions, Charles contributed that he felt there was no racial diversity on our campus and depending on the age and race of the student we interviewed, they would have different answers.
+
+TUTOR: What are your thoughts on his suggestions for the research?
+
+STUDENT: He got really loud and rambled on in an increasingly dominant voice about how he was Hispanic and older. I don’t understand this — we’re all different and come from different backgrounds. Race shouldn’t matter and we should see past it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Developing an interview guide and in selecting interviewees, designing research methodology and sampling strategy",
+      "learning_goal": "Engage simultaneously in data collection and analysis for qualitative research"
+    },
+    "context": {
+      "environment": "Classroom discussion and on-line discussions with their research team of peers",
+      "materials": "Weekly journal reflections, assigned article on campus racism",
+      "social_setting": "Group work with a diverse peer (Charles) and private instructor-student journal dialogue",
+      "time_context": "Throughout the 15-week honors seminar"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When we were discussing interview questions Charles contributed that he felt there was no racial diversity on our campus and depending on the age and race of the student we interviewed, they would have different answers",
+      "observable_behavior": "Rejected Charles’s insistence that students ensure a diverse sample for the group’s research and to include interview questions that explored racial dimensions; privately characterized Charles as ‘playing the race card’ while some shared their annoyance with his criticism and communication style",
+      "internal_state": "Felt race was no longer a factor in shaping academic experience; experienced annoyance and 'mean and terrible thoughts' about Charles",
+      "related_quotes": [
+        "He got really loud and rambled on in an increasingly dominant voice about how he was Hispanic and older ...On the discussion boards he talks about how he wants team cohesion so we can work better together yet he continually mentions his race and age ...I don’t understand this — we’re all different and come from different backgrounds ...race shouldn’t matter and we should see past it."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a diverse peer insists on attending to race and uses a non-standard communication style",
+        "observable_behavior": "Imposing the standard verbal style they used as more legitimate and scholarly; rejecting the peer's insistence to attend to race",
+        "internal_state": "Rhetoric of color-blindness shaped students’ rejection; posits race should not be (and is not) a factor in any interactions",
+        "related_quotes": [
+          "race shouldn’t matter and we should see past it."
+        ]
+      },
+      {
+        "condition": "When faced with the cognitive work of analysis in qualitative research",
+        "observable_behavior": "Expressing difficulty in processing information, finding patterns, and applying it to the larger picture in private journals",
+        "internal_state": "Significant anxiety",
+        "related_quotes": [
+          "It is much easier to regurgitate information than to process it, try to find patterns, make sense of it, and see it applied in the larger picture"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

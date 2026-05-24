@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Gradual Input Speed Monitoring
+  Check: The long-term plan includes a method for tracking or gently encouraging improvements in writing or input speed (e.g., via an observational IEP checklist) without using strict timers.
+
+Criterion 2: Foundational Symbol Mastery
+  Check: The long-term plan incorporates specific goals or activities focused on matching, recognizing, and understanding foundational math symbols and numbers.
+
+Criterion 3: Untimed Evaluation Methods
+  Check: The long-term plan specifies that assessments and progress monitoring will be conducted without the use of timers or strict time limits.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Student B is a Year 5 student with ASD whose severe perfectionism regarding neatness and accuracy results in slow response rates and a tendency to completely restart tasks upon making a single error. She uniquely requires verbal prompting to initiate tasks, secondary tools (like calculators) to verify answers before committing them, and a completely timer-free environment to prevent anxiety and distraction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start the x20 math game on your Nintendo DS. I am setting the timer for the session.
+
+STUDENT: (Watches the timer on the desk, then slowly picks up the stylus to write the first answer very carefully.)
+
+TUTOR: Try the next math problem.
+
+STUDENT: (Takes a long time writing the number, trying to make it perfectly neat on the touch screen.)
+
+TUTOR: Keep going.
+
+STUDENT: (Looks distracted, writes an incorrect answer, and immediately restarts the entire x20 game.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Answering math sums using a stylus on the DS touch screen in the x20 game, and completing the Westwood One Minute Test of Basic Number Facts",
+      "learning_goal": "Recognising numbers, recognising maths symbols, matching maths symbols, and solving single digit addition, subtraction and multiplication problems"
+    },
+    "context": {
+      "environment": "Education Support Centre classroom",
+      "materials": "Nintendo DS console with Dr Kawashima’s Brain Training game, stylus, calculator, timer, paper and pencil",
+      "social_setting": "Daily 20-minute DS sessions",
+      "time_context": "10-week intervention period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Encountering an error (incorrect answer) while playing the x20 game on the Nintendo DS",
+      "observable_behavior": "Would tend to restart the x20 if she answered an item incorrectly",
+      "internal_state": "Easily distracted",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Writing answers to math problems on the Nintendo DS touch screen using a stylus",
+        "observable_behavior": "Slowed her response rate",
+        "internal_state": "Very preoccupied with writing neatly and correctly",
+        "related_quotes": []
+      },
+      {
+        "condition": "Doing the standardised test while being timed",
+        "observable_behavior": "Played with the timer or watched it during the test",
+        "internal_state": "Very anxious and distracted by the timer",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

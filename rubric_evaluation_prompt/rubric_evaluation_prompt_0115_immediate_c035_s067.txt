@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Disruptive Query Acknowledgment
+  Check: The tutor acknowledges Dang's questions using non-verbal cues (gestures/expressions), peer redirection, or by integrating the answer into the broader group instruction.
+
+Criterion 2: Affectionate Behavioral Direction
+  Check: The tutor uses affectionate language, tone, or expressions when prompting Dang to focus or change her behavior.
+
+Criterion 3: Visual Self-Correction Tools
+  Check: The tutor provides a visual aid (such as a mirror or reflection tool) to help Dang see and correct her own mistakes in the moment.
+
+Criterion 4: Autonomy in Pacing and Breaks
+  Check: The tutor explicitly allows Dang to work at her own pace or offers her the option to take a break when she shows signs of stress or frustration.
+
+Criterion 5: Alternative Task Engagement
+  Check: The tutor offers an alternative, engaging activity (like coloring or art materials) when the primary task or instruction is too complex for her.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Dang is a student with developmental delays who struggles with memory, reasoning, and emotional regulation, often disrupting class with repetitive questions or becoming disorderly when feeling ashamed of academic struggles. She uniquely requires developmentally down-scaffolded tasks, immediate visual and multisensory feedback, and affectionate, non-punitive redirection to maintain engagement and prevent distress.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: You can draw a picture now and then label it with a short sentence.
+
+STUDENT: (Draws and colours a picture) I am done drawing.
+
+TUTOR: Please write a short sentence to label your drawing.
+
+STUDENT: I will write the label.
+
+TUTOR: Keep going.
+
+STUDENT: (Writes the short sentence to label the drawing, but forms the letters the wrong way round) Here is my sentence.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Express herself through drawings and labelling them with short sentences",
+      "learning_goal": "Learn correct letter formation"
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Drawings, mirror, worksheets with dotted letters",
+      "social_setting": "Independent work",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When labelling drawings with short sentences",
+      "observable_behavior": "Often form letters wrong way round",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When writing letters",
+        "observable_behavior": "Form letters wrong way round",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Emotional Vocabulary Expansion
+  Check: The long-term plan includes specific goals, exercises, or milestones for teaching and expanding the student's vocabulary of emotion and appropriate social language.
+
+Criterion 2: Self-Appraisal Calibration
+  Check: The long-term plan incorporates methods for safely comparing the student's self-assessments with external feedback (from peers, teachers, or parents) to build accurate self-awareness.
+
+Criterion 3: Structured Relationship Curriculum
+  Check: The long-term plan outlines a structured, multi-lesson approach (rather than just reactive interventions) dedicated to emotional intelligence and relationship management.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This learner has an inflated perception of their own emotional intelligence but severely lacks the ability to process social-emotional cues, often dominating peers or refusing to cooperate. They uniquely require explicit instruction linking physical cues to emotional labels, delivered through a highly supportive and nurturing approach to bypass their defensiveness and build accurate self-awareness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, for this activity, you need to work in your groups to act out the different emotional scenarios from the lesson.
+
+STUDENT: I'm going to be the director and the main character. I'll tell everyone else where to stand and what to say because I know exactly how to do this.
+
+TUTOR: Try to work together as a team.
+
+STUDENT: I am! Look at John, he's sighing and crossing his arms, which means he's just waiting for me to give him his lines.
+
+TUTOR: What do you think John is really feeling? Keep trying.
+
+STUDENT: He's fine! (Grabs John's arm and pulls him forward) Stand here and do the sad face like I told you! I don't get why you're getting mad and yelling at me to stop, I'm just making you act!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "work in groups in order to act out different emotional scenarios",
+      "learning_goal": "improve social and emotional functioning in an attempt to lessen the symptoms and behaviour of ADD"
+    },
+    "context": {
+      "environment": "classroom setting",
+      "materials": "PATHS curriculum 25-lesson extract addressing feelings and relationships",
+      "social_setting": "work in a team",
+      "time_context": "middle childhood"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "failing to notice when they are annoying or infuriating another person",
+      "observable_behavior": "continue their behaviour with disastrous consequences",
+      "internal_state": "unable to understand the intentions of others or their perspective on a situation",
+      "related_quotes": [
+        "failing to notice when they are annoying or infuriating another person, and they continue their behaviour with disastrous consequences"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "struggle to work in a team",
+        "observable_behavior": "either dominate the team and want to be in control, or refuse to co-operate and contribute to the team, which alienates them from the group",
+        "internal_state": "lack planning strategies and the ability to develop social goals",
+        "related_quotes": [
+          "either dominate the team and want to be in control, or refuse to co-operate and contribute to the team"
+        ]
+      },
+      {
+        "condition": "struggle with social feedback cues",
+        "observable_behavior": "misinterpret body language and facial expressions",
+        "internal_state": "experience difficulties understanding complex emotions, or hidden and mixed emotions",
+        "related_quotes": [
+          "misinterpret body language and facial expressions"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

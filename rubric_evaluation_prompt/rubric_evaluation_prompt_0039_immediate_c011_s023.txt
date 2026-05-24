@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Collaborative Rule-Setting
+  Check: The tutor invites the student to help establish, negotiate, or agree upon the rules and procedures for the session, rather than unilaterally dictating them.
+
+Criterion 2: Explicit Attribution of Contributions
+  Check: The tutor explicitly attributes an idea, question, or contribution to the student by name or explicitly documents their contribution as their own (e.g., 'I am writing your question on the board with your name').
+
+Criterion 3: Agentic Choice Provision
+  Check: The tutor offers the student a meaningful choice regarding the topic, the materials to be used, or how the activity will be handled.
+
+Criterion 4: Dialogic Probing for Justification
+  Check: The tutor asks probing questions that require the student to clarify, justify, or defend their answers or beliefs.
+
+Criterion 5: Absence of Passive Directives
+  Check: The tutor does NOT command the student to 'stay quiet', 'just listen', or unilaterally dictate compliance without offering a channel for their input.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly resistant to traditional, passive learning environments, often reacting with disruptive behavior, verbal arguments, and walking out when told to 'stay quiet and listen.' However, they transition to highly engaged and capable learners when given agency over their learning and when their opinions are explicitly valued. The evidence reveals they uniquely need a dialogic approach where they co-create rules, choose their topics, and have their contributions publicly recognized.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the newspaper clippings on the table. I want you to collaborate with your group and ask questions based on the materials.
+
+STUDENT: Wait, you want us to ask questions and collaborate? We are used to being told to stay quiet and listen to the teachers.
+
+TUTOR: Yes, please work together to write down your questions.
+
+STUDENT: Why did you select our class for this? Can we propose games that we would like to play and activities we would like to do in class instead?
+
+TUTOR: Let's just focus on the reading task right now.
+
+STUDENT: (Stands up from the U-shaped seating arrangement) If we can't suggest our own ideas, I'm not doing this. I'm going to walk out.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "read, observe, watch and analyse the stimulus materials and they are encouraged to ask questions based on the stimulus materials",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "U-shaped seating arrangement, whiteboard, stimulus materials in forms of stories, pictures, poems, newspaper clippings, and videos",
+      "social_setting": "group discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when they were told to ask questions and collaborate to answer questions",
+      "observable_behavior": "surprised when they were told to ask questions and collaborate because they were used to be told to stay quiet and listen to the teachers",
+      "internal_state": "surprised",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "On the second session",
+        "observable_behavior": "asked reasons for selecting their class and asked permission to suggest some ideas. They asked if they can propose games that they would like to play and activities they would like to do in class.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

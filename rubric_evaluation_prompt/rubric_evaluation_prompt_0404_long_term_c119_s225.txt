@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Systematic Schedule Walkthrough
+  Check: The long-term plan includes a systematic review of Michael's daily schedule (e.g., a waking day interview) to identify specific problem settings.
+
+Criterion 2: Third-Party Data Gathering
+  Check: The long-term plan incorporates gathering observational data from other teachers or staff to confirm or clarify Michael's behavioral patterns.
+
+Criterion 3: Daily Modeling and Review
+  Check: The long-term plan includes initial daily reviews and explicit modeling (providing examples and non-examples) of the target behavior and self-monitoring process.
+
+Criterion 4: Weekly Collaborative Data Meetings
+  Check: The long-term plan establishes a weekly meeting to collaboratively review self-monitoring data, provide specific praise, and adjust goals together.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Michael is a young adult with intellectual disability who struggles with self-management and off-task behaviors during transitions. He frequently provides passive agreement ('Sure', 'I don't know') to please teachers or avoid cognitive complexity, making authentic decision-making difficult. He requires a highly facilitated approach using concrete observational data, adequate wait time, guided questioning, and discreet tools to help him accurately self-assess and set realistic goals.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Michael, we would like to develop some goals with you. Your job coach tells me you can do your job well, but that you are not as fast as you could be. Your job coach says you have a tendency to pay more attention to what others are doing and can lose focus on what you need to be doing. Do you think that working on finishing tasks without stopping so much would be a good goal to work on?
+
+STUDENT: Sure.
+
+TUTOR: So that is something that you could work on at both school and home. Do you think it is a problem, Michael?
+
+STUDENT: I don’t know. Maybe.
+
+TUTOR: We need to decide on a goal for your transition plan today. Is it okay if we just go with this one?
+
+STUDENT: Sure.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "develop some goals with you. Your job coach tells me you can do your job well, but that you are not as fast as you could be. Your job coach says you have a tendency to pay more attention to what others are doing and can lose focus on what you need to be doing. Do you think that working on finishing tasks without stopping so much would be a good goal to work on?",
+      "learning_goal": "helping young adults with intellectual disability (ID) make authentic decisions about their own goals and behaviors"
+    },
+    "context": {
+      "environment": "IEP meeting",
+      "materials": "table indicating daily events with columns for notes, interview forms",
+      "social_setting": "IEP meeting with his teacher, job coach, mother, and program supervisor",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When teacher directly suggests a specific goal and asks for agreement",
+      "observable_behavior": "Agrees automatically with little reflection, provides passive agreement ('Sure')",
+      "internal_state": "responds automatically in order to please the teacher or parents, reduce the pressure to respond, or avoid cognitive complexity",
+      "related_quotes": [
+        "Sure"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to self-evaluate a problem behavior",
+        "observable_behavior": "provides non-committal answers, does not see his behavior as concerning",
+        "internal_state": "has a misconception regarding the significance of a behavior",
+        "related_quotes": [
+          "I don’t know. Maybe"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

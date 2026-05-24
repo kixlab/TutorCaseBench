@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Narrowed Focus and Explicit Summary
+  Check: The tutor limits the discussion to 2-3 key strategies at most and explicitly summarizes or visually records the main points.
+
+Criterion 2: Explicit Processing Time
+  Check: The tutor explicitly provides 'think time' (e.g., 'take a moment to think before answering') before prompting the student for a response.
+
+Criterion 3: Scaffolded Persistence Without Rescuing
+  Check: When the student struggles or goes silent, the tutor uses targeted scaffolding questions to help them articulate their thought process rather than providing the final explanation for them.
+
+Criterion 4: Rephrasing for Mathematical Clarity
+  Check: The tutor explicitly rephrases the student's or peers' contributions to clearly state the underlying mathematical rule or logic.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This low-attaining student becomes easily overwhelmed and exhibits overt off-task behaviors (e.g., tearing paper, shutting down, prolonged silence) during fast-paced, multi-strategy discussions. They uniquely require narrowed focus, explicit processing time, and individualized scaffolding that presses them to articulate their own thinking rather than being rescued with explanations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Can you find a match for the 1/4 card?
+
+STUDENT: Nuh. (Looks at the cards, then finds 0.25) That.
+
+TUTOR: Why do they match?
+
+STUDENT: because 25 goes into 100 ten times so it’s a quarter
+
+TUTOR: Can you find a match for 0.75?
+
+STUDENT: (Remains silent for 10 seconds, putting his head down and playing with the cards)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Matching fraction cards (1/4, 3/4) with decimal (0.25, 0.75) and percentage cards",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Post-lesson interview/assessment",
+      "materials": "Fraction cards, decimal cards, percentage cards",
+      "social_setting": "Individual interview following a whole-class discussion",
+      "time_context": "Post-lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to find a match for 0.75",
+      "observable_behavior": "He was silent for 10 seconds. When asked 'not sure?' he said 'yeah'",
+      "internal_state": "Not sure",
+      "related_quotes": [
+        "yeah"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked if he could find a match for 1/4",
+        "observable_behavior": "Initially he said 'Nuh.' Then found 0.25 and said 'That'",
+        "internal_state": "",
+        "related_quotes": [
+          "Nuh.",
+          "That",
+          "because 25 goes into 100 ten times so it’s a quarter"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

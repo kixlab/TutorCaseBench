@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Expert Identity Framing
+  Check: The tutor's long-term plan includes explicitly identifying and referring to Brandon as a 'professional' or 'expert' in the learning environment.
+
+Criterion 2: Advance Leadership Scaffolding
+  Check: The tutor provides materials (like lesson plans) in advance for Brandon to review and briefly checks them with him prior to his performance.
+
+Criterion 3: Creative Ownership
+  Check: The tutor allows Brandon to modify, enhance, or personalize the lesson or activity to reflect his own unique style or approach.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Brandon is a timid, quiet student who feels voiceless and isolated during standard peer interactions. He uniquely requires structured leadership roles, such as co-teaching, where the teacher explicitly transfers authority to him, allowing him to build confidence, develop his voice, and earn peer trust as an expert.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Brandon, please stand in front of the class and deliver the science lesson from the lesson plan.
+
+STUDENT: (Stands in front of the class full of his peers) Okay...
+
+TUTOR: Go ahead and teach them the science content.
+
+STUDENT: (Talking slow) Today... we are... going to...
+
+TUTOR: Keep trying.
+
+STUDENT: (Very timid) I'm really nervous speaking in front of a class full of my peers. I'm talking slow... I usually feel like I have no voice because my partner doesn't like to talk to me.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Standing in front of the 6th-grade science class to deliver a lesson as a co-teacher",
+      "learning_goal": "teach them science content"
+    },
+    "context": {
+      "environment": "6th-grade science classroom",
+      "materials": "lesson plan, student's seat",
+      "social_setting": "in front of a class full of his peers",
+      "time_context": "During class"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When in front his peers teaching science content",
+      "observable_behavior": "very timid",
+      "internal_state": "nervous speaking in front of a class full of his peers",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When teaching in front of the class",
+        "observable_behavior": "talking slow",
+        "internal_state": "nervous",
+        "related_quotes": [
+          "[co- teaching] helps me because when I was teaching in front of [of the class], because I was talking slow, and I got to stand in front of people and talk."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

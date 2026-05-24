@@ -1,0 +1,131 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: High-Frequency Micro-Lesson Scheduling
+  Check: The long-term plan structures instruction into very short (5-10 minute) blocks that occur multiple times a day, rather than single, prolonged sessions.
+
+Criterion 2: Distraction-Free Environmental Control
+  Check: The long-term plan explicitly specifies conducting instruction in a quiet, one-on-one setting with minimal auditory and visual distractions.
+
+Criterion 3: Ultra-Gradual Content Pacing
+  Check: The long-term plan restricts the introduction of new material to an extremely slow pace (e.g., one new sound per week) with heavy repetition of previously taught content.
+
+Criterion 4: Continuous Intervention Schedule
+  Check: The long-term plan mandates a continuous, daily instructional schedule (e.g., 60 days unbroken) to prevent rapid skill regression.
+
+Criterion 5: Structured Point and Praise System
+  Check: The long-term plan includes a formal token or point system where Sam earns points specifically for attention, effort, or accuracy, paired with specific verbal praise.
+
+Criterion 6: Integration of Specialized Behavioral Support
+  Check: The long-term plan incorporates teaming with a qualified behavioral specialist (e.g., ABA therapist) to manage reinforcement ratios and activity levels during instruction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sam is a highly distractible student who actively resists academic instruction, particularly paper/pencil tasks, often responding with severe meltdowns and classroom roaming. He struggles significantly with phonemic retrieval and routine changes, experiencing rapid skill loss if instruction is interrupted. He uniquely requires highly structured, 5-10 minute micro-lessons in distraction-free environments, extremely slow pacing of new material, and constant, novel extrinsic reinforcement (including Premack's Principle) to maintain engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Sam, here is your paper and pencil. Let's practice drawing and coloring.
+
+STUDENT: (Refuses to participate in the lesson and pushes the paper away.) No.
+
+TUTOR: We need to finish this paper and pencil task.
+
+STUDENT: (Gets out of his chair at the desk.)
+
+TUTOR: Please come back to your desk and pick up your pencil.
+
+STUDENT: (Displays rage-like behaviors and begins roaming the classroom.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "drawing and coloring, and paper/pencil tasks",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "general education kindergarten classroom",
+      "materials": "paper/pencil",
+      "social_setting": "one-to-one teacher assistance at his desk",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when asked to do paper/pencil tasks",
+      "observable_behavior": "displayed rage-like behaviors, getting out of his chair and roaming the classroom",
+      "internal_state": "demonstrates significant difficulty controlling his impulses and maintaining the level of attention necessary",
+      "related_quotes": [
+        "often displayed rage-like behaviors when asked to do paper/pencil tasks",
+        "getting out of his chair and roaming the classroom"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Despite having one-to-one teacher assistance at his desk",
+        "observable_behavior": "refused to participate in academic tasks, getting out of his chair and roaming the classroom",
+        "internal_state": "",
+        "related_quotes": [
+          "refused to participate in academic tasks, getting out of his chair and roaming the classroom"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

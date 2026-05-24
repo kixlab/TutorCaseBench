@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Micro-Chunked Task Design
+  Check: The long-term plan must structure coursework into very small, discrete, and highly achievable tasks rather than standard-length assignments.
+
+Criterion 2: Portfolio and Practical Assessment Focus
+  Check: The long-term plan must replace traditional written examinations with practical, portfolio-based assessment methods (e.g., BTEC, ASDAN).
+
+Criterion 3: Relationship-First Pacing
+  Check: The long-term plan must explicitly dedicate an initial period (e.g., the first term) primarily to building trust and rapport before enforcing formal qualification portfolios.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a severely disaffected learner with low-level mental health issues who experiences manual writing and written exams as massive barriers. They are easily disheartened by mistakes and require a foundation of trust, emotional validation, digital alternatives to writing, and practical, micro-chunked tasks to build confidence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your workbook and start writing the answers for the next section of your qualification coursework assignment.
+
+STUDENT: (Arrives looking upset) I don't want to do this today. Writing is always a massive barrier for me.
+
+TUTOR: Just try to get as much written down as you can.
+
+STUDENT: (Writes a few sentences and stops) I've messed it up already. It's full of mistakes and crossed-out words.
+
+TUTOR: Since there are mistakes, you need to copy it again on the next page so it's readable.
+
+STUDENT: I'm not copying it again! I have lots of writing to do and it's already full of mistakes. It's just too disheartening to copy it all over again.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing qualification course work assignments and writing elements of a course",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Small teaching groups",
+      "materials": "Qualification course work materials, laptops, computers, work books, portfolio",
+      "social_setting": "One-to-one support",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When they have lots of writing to do and it is full of mistakes, and they have to copy it again",
+      "observable_behavior": "Reluctant writers",
+      "internal_state": "Very disheartening for them",
+      "related_quotes": [
+        "If they have lots of writing to do and it is full of mistakes, it is very disheartening for them to copy it again."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When arriving at an activity",
+        "observable_behavior": "Arriving upset at an activity",
+        "internal_state": "Low-level mental health issues",
+        "related_quotes": []
+      },
+      {
+        "condition": "When facing end-of-course written examinations",
+        "observable_behavior": "Reluctance to write",
+        "internal_state": "Not confident with written examinations, feeling pressure",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

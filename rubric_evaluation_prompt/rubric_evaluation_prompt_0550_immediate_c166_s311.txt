@@ -1,0 +1,132 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Turn Demarcation
+  Check: The tutor explicitly directs the student to the exact location of their required reading (e.g., quoting the first word, describing where it is on the page) rather than just giving a general prompt to read.
+
+Criterion 2: Maintenance of Reading Responsibility
+  Check: The tutor leaves the target text unread by the adult, maintaining the firm expectation that the student must attempt it.
+
+Criterion 3: Swift Redirection from Debate
+  Check: The tutor bypasses or shuts down the student's argument about whose turn it is without validating the debate, immediately redirecting focus back to the text.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student avoids the risk of reading failure by repeating the adult's text and debating whose turn it is to read. He uniquely requires explicit, escalated cues to demarcate his reading turn and a firm refusal by the adult to take over the reading, alongside long-term strategies that emphasize meaning over pure decoding.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I will read this line: 'The kids were being rude or silly.' Now it is your turn to read.
+
+STUDENT: Was rude or that one.
+
+TUTOR: That's the part I read. Try the next line.
+
+STUDENT: I just said... was rude or silly.
+
+TUTOR: What's the next one say?
+
+STUDENT: You's gonna read the next one. I read this one.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Shared reading of Miss Nelson is missing! (Allard and Marshall, 1977)",
+      "learning_goal": "Shared and reciprocal reading"
+    },
+    "context": {
+      "environment": "Summer Language and Literacy Project",
+      "materials": "Miss Nelson is missing! book",
+      "social_setting": "One-on-one shared reading session with an interventionist",
+      "time_context": "The fifth, sixth and seventh sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the interventionist finishes reading a passage and signals for the student to take a turn via a gaze shift",
+      "observable_behavior": "Declines to read. Instead he repeats exactly what the adult had previously read, debates what line to read, and counters by telling the interventionist to read the next one.",
+      "internal_state": "Recognizing that an interactive turn is required on his part due to the previously established pedagogical expectations... delays having to read or potentially read unsuccessfully",
+      "related_quotes": [
+        "Was rude or that one",
+        "I just said (unintelligible). Was rude or silly.",
+        "You ’s gonna read the next one. I read this one."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Rather than accepting the invitation and attempting the next portion of unread text",
+        "observable_behavior": "Accepted a speaking turn and repeated exactly what the adult had previously read",
+        "internal_state": "",
+        "related_quotes": [
+          "Was rude or that one"
+        ]
+      },
+      {
+        "condition": "When the interventionist clarifies the reading invitation and points to the next line",
+        "observable_behavior": "Debates what line to read, persists in his avoidance, and counters by telling the interventionist to read",
+        "internal_state": "Shifting the intervention ’s attention away from the text",
+        "related_quotes": [
+          "I just said (unintelligible). Was rude or silly.",
+          "You ’s gonna read the next one. I read this one."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

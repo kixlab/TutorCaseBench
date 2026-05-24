@@ -1,0 +1,134 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Collaborative daily target agreement
+  Check: The plan includes regular collaborative target-setting with Brian before lessons, rather than goals being imposed without his involvement.
+
+Criterion 2: Concrete work-to-reward contingency
+  Check: The plan defines observable work or behavior targets and links meeting them to a specific, meaningful reward or activity.
+
+Criterion 3: Explicit mutual contract commitment
+  Check: The plan includes a recurring review of expectations and rewards with Brian plus an explicit mutual commitment, such as signing, confirming, or otherwise agreeing to the contract.
+
+Criterion 4: Brian-controlled reinforcement and goal choice
+  Check: The plan gives Brian meaningful choice over reinforcers and at least some role in shaping his goals.
+
+Criterion 5: Self-monitoring toward independent regulation
+  Check: The plan requires Brian to monitor or record his own progress in a way that supports independent regulation during challenging work.
+
+Criterion 6: Protection against novelty-based reward failure
+  Check: The plan includes a way to keep reinforcers personally valuable over time and does not rely solely on generic or fixed school-based rewards.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Brian is a 12-year-old with ASD whose morning lesson difficulties include leaving his table without permission and, at times, physical aggression toward others. His behavior is attention-seeking and often occurs when academic tasks become difficult, especially when he walks toward the door and checks whether adults are watching. The evidence shows that he needs attention to be redirected away from escape/attention bids in the moment, while long-term success depends on highly personalized, collaborative, self-managed contracts rather than standard school rewards.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Brian, it is time for our morning lessons. We need to work successfully through these five academic programmes.
+
+STUDENT: (Stops working on the difficult task and leaves the table without permission)
+
+TUTOR: Please sit back down and keep trying.
+
+STUDENT: (Walks to the door, looking back to see if the teacher is watching) I made the wrong choice.
+
+TUTOR: We have to finish the programmes.
+
+STUDENT: (Approaches a peer at their table and exhibits physically abusive behaviour against them)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "work successfully through five academic programmes",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school setting at The Jigsaw CABAS® School",
+      "materials": "behaviour contract, computer for preferred activities",
+      "social_setting": "peers present at their tables, working with his teacher",
+      "time_context": "morning lessons (reported as minutes per morning session where total possible time was 160 minutes)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "during difficult tasks",
+      "observable_behavior": "leaving the table without permission, walking to the door, and exhibiting physically abusive behaviour against another person",
+      "internal_state": "attention-seeking",
+      "related_quotes": [
+        "I made the right/wrong choice(s)"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "at any time during his morning lessons",
+        "observable_behavior": "leaving the table without permission",
+        "internal_state": "attention-seeking",
+        "related_quotes": []
+      },
+      {
+        "condition": "once the behaviour contract was implemented",
+        "observable_behavior": "initial increase in assaults to 25 in one session",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

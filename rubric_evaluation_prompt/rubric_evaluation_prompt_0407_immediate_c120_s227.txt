@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Self-Directed Resolution Prompt
+  Check: The tutor prompts the student to identify the next step or solution themselves (e.g., asking 'What do you need to do now?') rather than dictating the resolution or forcing an immediate apology.
+
+Criterion 2: Positive Behavioral Framing
+  Check: The tutor frames behavioral expectations using positive language (e.g., 'Keep your hands to yourself', 'Use gentle touches') and completely avoids negative phrasing (e.g., 'No hitting', 'Don't push').
+
+Criterion 3: De-centering Teacher Authority
+  Check: The tutor focuses the reflection on the peer interaction or the behavior itself, explicitly avoiding statements about the tutor being offended, unhappy, or enforcing rules 'because I said so'.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles to internalize classroom rules, viewing them merely as a way to avoid teacher anger or earn symbolic rewards like stickers. They frequently express rules negatively and resort to physical aggression during peer conflicts. They uniquely require consensus-based rule setting, positive phrasing, and guided peer dialogue to develop intrinsic moral reasoning rather than relying on extrinsic compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for free play in the classroom. Please remember to share the toys with your friends.
+
+STUDENT: No hitting, no pinching off friends. Not throwing toys, not throwing anything.
+
+TUTOR: Why is it important to follow those rules?
+
+STUDENT: Because the teacher sends us to the thinking chair and takes back the stars.
+
+TUTOR: Okay, you can start playing with the toys with your friend now.
+
+STUDENT: (Pushes the friend and pulls their hair) Jerk! I am not sharing!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "sharing toys with our friends",
+      "learning_goal": "not to hurt friends, not to make friends unhappy, not to be unfair to friends and for the good of friends"
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "toys, thinking corner (chair)",
+      "social_setting": "interacting with peers",
+      "time_context": "during daily classroom activities"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "If they have a fight",
+      "observable_behavior": "hitting, pinching, pulling hair, pushing, kicking, behaving badly towards friends, fighting, excluding friends, calling a friend “jerk”, making your friends unhappy, and throwing stones",
+      "internal_state": "",
+      "related_quotes": [
+        "Pushing, hitting and pinching, and running in the classroom…",
+        "…Not kicking, never excluding friends…"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when communicating rules to children",
+        "observable_behavior": "always expressed the class rules using negative sentences",
+        "internal_state": "",
+        "related_quotes": [
+          "No hitting, no pinching off friends. Not throwing toys, not throwing anything"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Pacing via Physical Initiation
+  Check: The tutor's response must explicitly include waiting for a physical initiation from Evie (e.g., a head turn, gaze, or reach) before proceeding with an action or activity.
+
+Criterion 2: Explicit Choice Provision
+  Check: The tutor must offer Evie explicit choices (e.g., multiple options for an activity or item) rather than issuing a single directive.
+
+Criterion 3: Physical Modeling
+  Check: The tutor must offer to physically model or demonstrate an action (e.g., how to hold an item) when asking Evie to perform a task.
+
+Criterion 4: Sensory and Environmental Soothing
+  Check: The tutor must propose a specific sensory or environmental soothing strategy, such as offering a preferred food (e.g., banana), brushing her hair, or taking her for a change of scenery.
+
+Criterion 5: Empathetic Verbal Attunement
+  Check: The tutor must use empathetic verbalizations that directly acknowledge Evie's feelings or distress (e.g., asking what's wrong or validating her unhappiness).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Evie is a non-ambulant adolescent with profound learning difficulties who communicates through non-verbal cues and becomes highly distressed during rigid transitions or 'must do' activities. She uniquely requires communication partners who wait for her physical initiations, offer explicit choices to provide autonomy, and utilize specific sensory or environmental soothing strategies (like hair brushing or a change of scenery) to regulate her prolonged crying.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our hour-long art session. Here are the materials for you to use.
+
+STUDENT: (Looks at the art materials and makes a vocalization, reaching slightly but stopping)
+
+TUTOR: What do you want to do with them?
+
+STUDENT: (Looks away from the materials, becoming disengaged and making a frustrated vocalization)
+
+TUTOR: We need to keep working on the art activity.
+
+STUDENT: (Pushes the materials away, begins to cry, and stops making any further initiations to communicate)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in an hour-long Art session",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "School instructional activity",
+      "materials": "Developmentally appropriate activities, pieces of a banana",
+      "social_setting": "Interacting with adults during an instructional session",
+      "time_context": "Hour-long session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When she became unhappy during the instructional activity",
+      "observable_behavior": "Became unhappy; made many fewer initiations during other instructional or caregiving activities when lacking support.",
+      "internal_state": "Unhappy",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Through a lack of available support and/or through her own difficulties expressing herself",
+        "observable_behavior": "She became disengaged at several points during the activities",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

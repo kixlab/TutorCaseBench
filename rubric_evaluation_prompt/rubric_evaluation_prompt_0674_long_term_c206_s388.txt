@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Weekly Schedule Adaptation
+  Check: The tutor's long-term plan includes a recurring (e.g., weekly) review to examine which elements of the schedule are working and modifies them accordingly.
+
+Criterion 2: Predictable Success-Based Behavioral System
+  Check: The tutor implements a structured behavioral program (using points, levels, or prizes) where expectations and consequences are clearly defined in advance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences radical, unpredictable mood swings that lead to sudden academic refusal and the destruction of their own work. Having a history of feeling like a failure, they are highly sensitive to scolding and require a non-judgmental environment that strictly separates education from psychotherapy. They uniquely need flexible, weekly schedule adjustments and predictable behavioral systems to build a sense of normative success.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We need to continue preparing for your Matriculation Exam today. Let's open the study program and look at the first practice section.
+
+STUDENT: I don't want to look at the practice test. It's too hard to function as a student right now.
+
+TUTOR: Why don't you just try to read the first question?
+
+STUDENT: I can't. I'm just not emotionally available for learning today. Everything feels wrong.
+
+TUTOR: We have put a lot of effort into preparing for this exam. Please keep trying.
+
+STUDENT: I don't care about the effort! I'm in a really bad mood today and I've decided I'm not going to take the Matriculation Exam at all.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "preparing a certain student for a Matriculation Exam",
+      "learning_goal": "maximize students' regular learning"
+    },
+    "context": {
+      "environment": "hospitalized in a psychiatric department with separate psychotherapy meetings",
+      "materials": "custom-made study programs, weekly schedule",
+      "social_setting": "A teacher appointed to every single student, weekly meeting titled levels discussion",
+      "time_context": "any given time, In the beginning of each week"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "student to suddenly arrive in a bad mood",
+      "observable_behavior": "decide not to take it",
+      "internal_state": "frequent and radical mood swings",
+      "related_quotes": [
+        "the student to suddenly arrive in a bad mood and decide not to take it"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a student brings up a psychological issue in class",
+        "observable_behavior": "brings up a psychological issue in class, directly or indirectly, through a story or a drawing for example",
+        "internal_state": "not emotionally available for learning",
+        "related_quotes": [
+          "brings up a psychological issue in class, directly or indirectly, through a story or a drawing for example"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

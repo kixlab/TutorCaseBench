@@ -1,0 +1,115 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Reframing of Capability
+  Check: The tutor's immediate response must explicitly counter the student's expressions of inability (e.g., 'I can't') and directly affirm their capability to do the work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is an ESL student experiencing severe linguistic insecurity and emotional distress, frequently expressing defeat ('I afraid I can't', 'I am so unhappy') when confronted with their vocabulary and grammar limitations. They are highly triggered by early correction and peer comparison, relying heavily on external support like dictionaries and roommates. They uniquely require explicit, direct verbal affirmation to counter their negative self-talk, alongside highly protected, low-stakes environments where effort is valued over immediate accuracy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review the first draft of your English article. I have pointed out the mistakes in your grammar and vocabulary that need to be fixed.
+
+STUDENT: My vocabulary is not enough and English grammar is totally different from Chinese grammar. It is hard for me to write a good English article.
+
+TUTOR: What do you think you should do to correct these mistakes?
+
+STUDENT: I realize that my writing skill learned in China cannot work in my English articles at all. I feel so upset.
+
+TUTOR: Just try your best to rewrite the draft.
+
+STUDENT: I afraid I can't.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing English articles and reviewing the first draft",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Interaction when talked to our teacher",
+      "materials": "First draft of English article",
+      "social_setting": "One-on-one with teacher",
+      "time_context": "When mistakes were pointed out in first draft"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When mistakes were pointed out in my first draft",
+      "observable_behavior": "said ‘I afraid I can’t .’",
+      "internal_state": "felt so upset; realize that my writing skill learned in China cannot work in my English articles at all; vocabulary is not enough and English grammar is totally different",
+      "related_quotes": [
+        "I afraid I can’t ."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When mistakes were pointed out in my first draft",
+        "observable_behavior": "said ‘I afraid I can’t .’",
+        "internal_state": "felt so upset",
+        "related_quotes": [
+          "I afraid I can’t ."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Streak-Based Mastery Goals
+  Check: The tutor's long-term plan sets goals based on achieving a specific streak of correct answers (e.g., 'five-in-a-row') rather than overall accuracy metrics.
+
+Criterion 2: Data-Driven Instructional Adjustment
+  Check: The tutor incorporates a routine (e.g., weekly reviews) to analyze the student's error patterns and adjusts upcoming topics, assignments, or video selections accordingly.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly motivated by gamified mastery (e.g., 'five-in-a-row') but avoids automated hints to protect their streaks, often persisting with incorrect strategies until they seek human help. They also experience cognitive overload from subtitled instructional videos, requiring active human facilitation, peer mentoring, and streak-based goals rather than traditional direct instruction or reliance on automated platform supports.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please continue working individually on your math exercises on the computer.
+
+STUDENT: (Looking at the computer screen) I am trying to get five-in-a-row, but I just got this answer wrong. I'm going to try using the same strategy again for the next problem.
+
+TUTOR: Keep trying your best.
+
+STUDENT: I got it wrong again. I don't want to click the hint button because it will automatically give me an X.
+
+TUTOR: What do you think you should do next?
+
+STUDENT: I'm wary of using the embedded hints because it interrupts my accumulation of check marks and I'll have to rebuild back towards five-in-a-row. Can you just help me with it so I don't lose my points?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "doing math exercises, each with different sets of problems",
+      "learning_goal": "achieving five-in-a-row"
+    },
+    "context": {
+      "environment": "computer labs",
+      "materials": "computer screens",
+      "social_setting": "working individually",
+      "time_context": "30-40 minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "If students get the answer wrong",
+      "observable_behavior": "continued with the same strategy for a problem or two. However, since they continued getting answers wrong, they soon sought help",
+      "internal_state": "wary of using the embedded hints for assistance because it meant they would not earn points for that exercise",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Once a student clicks on the “hint” button, they automatically receive an ✗. This interrupts their accumulation of ✔ marks",
+        "observable_behavior": "preferred turning to peers and teachers. The most common first step we observed was to ask a more math-savvy peer for help",
+        "internal_state": "motivating and gave them a sense that they are mastering different procedures",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

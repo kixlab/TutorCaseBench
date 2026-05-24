@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Verbal Processing Pre-Requisite
+  Check: The tutor encourages the student to talk through their thought process out loud or with a partner before requiring them to write anything down.
+
+Criterion 2: Think-Aloud Modeling
+  Check: The tutor explicitly models how to write down a thought process, either by demonstrating with a non-math example first or by writing their own thoughts out as they solve a problem.
+
+Criterion 3: Confidence-Based Questioning
+  Check: The tutor asks guiding questions that focus on what the student already understands, notices, or feels comfortable with, rather than just demanding written output.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has low self-efficacy regarding writing and strongly compartmentalizes subjects, believing that 'math is numbers not letters.' They experience high anxiety and resistance when asked to write in math class, requiring explicit modeling, verbal processing, and a clear understanding of why writing is necessary. The evidence reveals they uniquely need to bridge the gap between verbalizing (which they find easy) and writing (which they find hard) through structured, gradual scaffolding.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the daily word problem on the board and use your math journal to write down the thought process you used to answer the question.
+
+STUDENT: I like to say what I'm thinkin' out loud in math. The writing is hard but the thinkin' is easy.
+
+TUTOR: Just try your best to write down what you are thinking.
+
+STUDENT: I just like math and all this writing and reading drives me crazy. Math is numbers not letters.
+
+TUTOR: Keep trying. You need to articulate your answer in written form.
+
+STUDENT: I hate to write especially in math. Math and writing don't go together. I can't even get why you would make me write in this class.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Answering a word problem by using a writing framework that requires them to articulate the thought process used to answer the question",
+      "learning_goal": "articulate their answers in written form, use and apply the writing process in math"
+    },
+    "context": {
+      "environment": "Daily routine of solving a word problem written on the board",
+      "materials": "math journal, board, word wall of math terms",
+      "social_setting": "whole-class reviews of daily word problems",
+      "time_context": "prior to the implementation of math journals"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When required to write in math class",
+      "observable_behavior": "Expressing resistance toward writing in the math context, stating that math and writing do not go together",
+      "internal_state": "feelings about writing in math class",
+      "related_quotes": [
+        "I can’t evn (even) get why she would me make me rite (write) in her class.",
+        "Math is numbers not letters.",
+        "I hate to write expesially (especially) in math.",
+        "Math and writing don ’t go 2-gether (together)."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the drafting and metacognition stage",
+        "observable_behavior": "Struggling with the writing process while finding the thinking process easy",
+        "internal_state": "low self-efficacy",
+        "related_quotes": [
+          "I like to say what I ’m thinkin ’out loud in math. The writing is hard but the thinkin ’is easy.",
+          "I just like math and all this writing and reading drives me crazy."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

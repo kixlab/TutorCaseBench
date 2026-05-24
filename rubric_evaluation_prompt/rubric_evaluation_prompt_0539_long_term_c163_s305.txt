@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Self-Selected Reading Autonomy
+  Check: The tutor's plan includes a mechanism for the student to independently select their own reading materials rather than assigning standardized or basal texts.
+
+Criterion 2: Personal Life Connections
+  Check: The tutor incorporates tasks (such as response letters or journals) that explicitly require the student to relate the reading material to their personal life and experiences.
+
+Criterion 3: Peer Recommendation Opportunities
+  Check: The tutor provides a structured opportunity (e.g., recommendation slips, bulletin boards, or peer discussions) for the student to endorse books and justify their choices to peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student initially exhibits strong task resistance toward reading, often claiming to hate it when forced to use standardized basal readers, and tends to read superficially just to finish. They uniquely require autonomy through self-selected texts and open-ended, conversational prompts that connect reading to their personal lives to transition from resistance to deep, genuine engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's have our individual reading conference. What do you notice about this book?
+
+STUDENT: I don't know, I'm just reading it.
+
+TUTOR: Can you tell me about the characters?
+
+STUDENT: There's a boy and a dog. I read the whole first half already.
+
+TUTOR: What are your thoughts about the reading to put on the website?
+
+STUDENT: I don't really have any thoughts about it. I'm just reading it cover to cover so I can finish.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in individual reading conferences and answering questions about book features and characters",
+      "learning_goal": "Make them really think deeply about their book"
+    },
+    "context": {
+      "environment": "Table to the side of the classroom",
+      "materials": "Self-selected books, written response letters, password-protected website",
+      "social_setting": "Individual reading conferences",
+      "time_context": "During independent reading time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When reading books independently without prompts",
+      "observable_behavior": "Simply reading it cover to cover",
+      "internal_state": "Not thinking deeply about their book",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reading independently",
+        "observable_behavior": "Simply reading it cover to cover",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

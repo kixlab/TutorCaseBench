@@ -1,0 +1,75 @@
+{
+  "category_id": "016",
+  "category_title": "Chinese immigrant students with ADHD and English-language dominance",
+  "scenario_id": "033",
+  "scenario_title": "Listening to instructions and vocabulary introduction in non-preferred dialects",
+  "minimal_context": "Eric is sitting at the computer screen for an individual Chinese language lesson to learn new vocabulary.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Look at the computer screen. We are going to learn new Chinese vocabulary today. Please listen to my instructions."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "What did you just say?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "I am explaining the vocabulary. You need to focus so that you can progress at the same pace as your peers."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Can I go play now?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "No, we need to finish this lesson first. Please sit and listen."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Gets out of seat and goes to the play area of the classroom)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Look at the computer screen. We are going to learn new Chinese vocabulary today. Please listen to my instructions.\n\nSTUDENT: What did you just say?\n\nTUTOR: I am explaining the vocabulary. You need to focus so that you can progress at the same pace as your peers.\n\nSTUDENT: Can I go play now?\n\nTUTOR: No, we need to finish this lesson first. Please sit and listen.\n\nSTUDENT: (Gets out of seat and goes to the play area of the classroom)",
+  "immediate_dialogue_prompt": 55,
+  "long_term_dialogue_prompt": 56,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Listening to teacher instructions delivered in Cantonese, English, or Putonghua during Chinese language lessons and introducing key vocabularies to be covered",
+        "learning_goal": "progress at the same pace as his peers"
+      },
+      "context": {
+        "environment": "play area of the classroom",
+        "materials": "computer screen, sticker-system",
+        "social_setting": "individual lessons",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when he could not understand Sara’s instructions, both when she used Cantonese that he had greatest difficulty with or English/Putonghua with which Sara struggled",
+        "observable_behavior": "ask “ what did you just say? ” and “ can I go play now ?”, correct her English when he figured out what she was trying to say",
+        "internal_state": "tremendous difficulty to focus",
+        "related_quotes": [
+          "what did you just say?",
+          "can I go play now ?"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "If the lesson remained difficult to understand",
+          "observable_behavior": "get out of seat and go to the play area of the classroom",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

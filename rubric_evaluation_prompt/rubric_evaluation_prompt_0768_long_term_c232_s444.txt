@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 3: Bridging Home and School Literacy Practices
+  Check: The tutor's long-term plan must include opportunities for the student to bring in, share, or incorporate her personal, home-based literacy materials or creative practices into her learning.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jenna is a highly capable and enthusiastic reader who loves books but struggles to engage with isolated, explicit phonics instruction, which she finds 'really boring.' Instead of attending to direct instruction, she often distracts herself by reading environmental print or texts. She uniquely needs phonics and decoding skills to be explicitly connected to her ultimate goal of independent reading, meaning-making, and her rich out-of-school literacy practices.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, let's look at the magnet board. We are going to pull down letters for the /an/ sound family.
+
+STUDENT: (Sitting at her usual place near the teacher's feet, her eyes are focused on the print before her.)
+
+TUTOR: Let's build the word 'man'. Which letters do we need to pull down?
+
+STUDENT: Phonics is really boring, but it helps you to read.
+
+TUTOR: Please look up here at the magnet board and tell me the letters.
+
+STUDENT: (She does not attend to the teacher, instead turning her attention away to read the posters and charts on the classroom walls.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a whole-class word work activity on the floor around the teacher, specifically pulling down letters for the /an/ sound family on a magnet board.",
+      "learning_goal": "Teaching explicit rules for decoding words (i.e., breaking words apart into component sounds) and coding words (i.e., mark the words with diacritical symbols as an aid to word recognition)."
+    },
+    "context": {
+      "environment": "Classroom that is a rich source of interesting texts, including a space on the floor around the teacher for whole-class word work.",
+      "materials": "Magnet board, letters for the /an/ sound family, print materials, posters and charts on the walls, leveled readers with interesting text, 'The Important Bag' (flannel tote).",
+      "social_setting": "Whole-class activity, sitting at her usual place near Mrs. Parks's feet.",
+      "time_context": "During direct instruction and phonics class."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During direct instruction when the teacher is speaking.",
+      "observable_behavior": "Reading the posters and charts on the walls rather than attending to the teacher. Focused on the texts that were being used than on the teacher.",
+      "internal_state": "Finds phonics instruction 'really boring'.",
+      "related_quotes": [
+        "Phonics is really boring,” said Jenna, “but it helps you to read.",
+        "I’m not too big on reading,” said Jenna, referring to phonics class, “but I love books."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participating in whole-class word work on the floor around the teacher.",
+        "observable_behavior": "Does not need her directive. As always, her eyes are focused on the print before her.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

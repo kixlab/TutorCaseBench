@@ -1,0 +1,74 @@
+{
+  "category_id": "112",
+  "category_title": "Students with cerebral palsy lacking confidence in research skills",
+  "scenario_id": "214",
+  "scenario_title": "Computer-based research for Chinese homework",
+  "minimal_context": "William is using a computer to find information on the Yahoo Knowledge forum for his Chinese homework.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "William, please use the computer to search for information for your Chinese homework."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I am feeling nervous... I need to work hard, typing, rest..."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think you should do next?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I lack confidence to find information with a computer. I didn't have practical learning skills training in my previous class."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just try looking on the Yahoo Knowledge forum."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Copies whole chunks of words from the Yahoo Knowledge forum and pastes them directly into the homework document)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: William, please use the computer to search for information for your Chinese homework.\n\nSTUDENT: I am feeling nervous... I need to work hard, typing, rest...\n\nTUTOR: What do you think you should do next?\n\nSTUDENT: I lack confidence to find information with a computer. I didn't have practical learning skills training in my previous class.\n\nTUTOR: Just try looking on the Yahoo Knowledge forum.\n\nSTUDENT: (Copies whole chunks of words from the Yahoo Knowledge forum and pastes them directly into the homework document)",
+  "immediate_dialogue_prompt": 382,
+  "long_term_dialogue_prompt": 383,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Attempting to find information for homework using a computer and the Yahoo Knowledge forum during Chinese lessons.",
+        "learning_goal": "To choose the right information from the results found and determine what kind of information found on the internet is valid for use in their homework, not just to find any random information."
+      },
+      "context": {
+        "environment": "Form 5 class during Chinese lessons",
+        "materials": "Computer, Yahoo Knowledge forum, Google or Yahoo search engines",
+        "social_setting": "New student in this form 5 class",
+        "time_context": "1st term"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When attempting to find information with a computer without having a very complete practical learning skills training in his previous class",
+        "observable_behavior": "He just copied whole chunks of words from the Yahoo Knowledge forum.",
+        "internal_state": "Lacked confidence to find information with a computer",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When asked by the teacher about any difficulties that might be encountered",
+          "observable_behavior": "Expressed that they need to work hard, typing, rest",
+          "internal_state": "Feeling nervous",
+          "related_quotes": [
+            "need to work hard, typing, rest, feeling nervous ..."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Identity-First Skill Sequencing
+  Check: The tutor's long-term plan must explicitly establish a phase of purely creative, identity-affirming writing before introducing any goals related to syntax, spelling, or organization.
+
+Criterion 2: Multimodal and Performance Integration
+  Check: The tutor's long-term plan must include opportunities for Raquel to express her ideas through multimodal formats, such as spoken word, skits, debates, or digital media.
+
+Criterion 3: Critical and Intersectional Thematic Focus
+  Check: The tutor's long-term plan must incorporate prompts, current events, or discussions that allow Raquel to explore and write about meaningful societal issues and personal identity.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Raquel is a highly creative student who identifies strongly as a writer, designer, and performer, but harbors deep anxiety and resistance regarding her learning disability and IEP labels. She uniquely requires her creative identity and the authentic meaning of her work to be validated first, as premature correction of spelling or grammar triggers defensive resistance and shuts down her engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the first draft of your personal narrative on your Chromebook. We need to revise and edit the spelling and organizational structure.
+
+STUDENT: I already put in bold print for the sounds and used quotation marks for the dialogue. It's an intriguing story.
+
+TUTOR: That is a start, but we need to fix the grammatical structure because it looks a bit messy right now.
+
+STUDENT: I am a creative writer. Why does it always have to be about my deficits in spelling and making it seem like my writing is hard to comprehend?
+
+TUTOR: Let's just keep working on the corrections so we can finish the edits.
+
+STUDENT: I don’t need everybody in my business, and I don’t need people judging me. Everybody else already knows that I get learning support and all that. I want a new reputation, people are gonna act differently, people are gonna be rude.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing a first draft of a personal narrative",
+      "learning_goal": "Tell an intriguing story following a sequential narrative, employ onomatopoeia, use quotation marks, and provide a strong conclusion"
+    },
+    "context": {
+      "environment": "Writing Club or ELA class",
+      "materials": "Chromebooks",
+      "social_setting": "Working together to revise and edit",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When teachers address formal elements of writing such as organization and syntax before she identifies as a writer, or evaluate her based on deficits in spelling and organizational structure",
+      "observable_behavior": "Produces writing that appears to be disorganized, messy, or hard to comprehend, and feels compelled to perform resistance",
+      "internal_state": "Tension about receiving special education; feels her identity as a creator stands in opposition to the ways she is described in special education documents",
+      "related_quotes": [
+        "I don’t need everybody in my business, and I don’t need people judging me."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing having an IEP and receiving learning support in the future",
+        "observable_behavior": "Expresses tension and opposition to ability labels, stating she wants a new reputation",
+        "internal_state": "Fear that people are gonna act differently, people are gonna be rude, and fear of being judged",
+        "related_quotes": [
+          "I don’t want it when I get to high school because I want a new reputation. Like, everybody else [at the Community School] already knows that I get learning support and all that. But when I get to high school, it’s gonna be worse, like people are gonna act differently, people are gonna be rude"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual and Inquiry Scaffolding
+  Check: The tutor's response utilizes visual supports (such as graphic organizers or mnemonics) or inquiry-based prompts (such as formulating questions or designing experiments) rather than relying on traditional text reading.
+
+Criterion 2: Embedded Behavioral Checkpoints
+  Check: The tutor integrates behavioral checkpoints or self-monitoring prompts directly into Sam's academic task checklist.
+
+Criterion 3: Avoidance of Forced Reading
+  Check: The tutor completely avoids asking Sam to read aloud, 'sound out' words, or engage with traditional textbook reading.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sam is a student with a behavioral disorder and reading difficulties who experiences severe emotional distress when asked to read aloud, often leading to outbursts and office referrals. He requires instructional approaches that bypass traditional textbook reading, specifically thriving on inquiry-based learning, visual supports (mnemonics, graphic organizers), structured peer tutoring, and integrated academic-behavioral checklists.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Sam, it is your turn to read the next paragraph from the science textbook aloud to the class.
+
+STUDENT: I don't want to. I have trouble reading this textbook.
+
+TUTOR: Just give it a try and read the first sentence.
+
+STUDENT: No, when I read aloud, the other students make fun of me.
+
+TUTOR: Nobody is making fun of you. Please just read the text.
+
+STUDENT: I said no! You are all making fun of me! Shut up!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "reading the textbook",
+      "learning_goal": "discrete facts"
+    },
+    "context": {
+      "environment": "science class",
+      "materials": "science textbook",
+      "social_setting": "other students",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When they read aloud from the text",
+      "observable_behavior": "outbursts in class, spent his science class time in the resource room",
+      "internal_state": "he always felt like the other students were making fun of him, and he would get very upset",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Because of conflicts with peers",
+        "observable_behavior": "outbursts in class, Sam finds himself spending much of his time in the school office",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

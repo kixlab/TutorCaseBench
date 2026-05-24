@@ -1,0 +1,75 @@
+{
+  "category_id": "042",
+  "category_title": "Non-verbal students with SID using pre-symbolic communication (gestures, sounds, eye contact)",
+  "scenario_id": "084",
+  "scenario_title": "Non-compliance to a Request during Transitions",
+  "minimal_context": "The student is transitioning from using the computer to having lunch in the classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time to finish with the computer and go to lunch."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Makes eye contact, signs 'want', and points to the computer.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "I see you want the computer, but we are not doing that right now."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Changes posture to lean closer to the computer, repeats the 'want' sign, and makes a loud sound.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "No, we have to go to lunch."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Shouts, says 'no', and withdraws by turning completely away.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time to finish with the computer and go to lunch.\n\nSTUDENT: (Makes eye contact, signs 'want', and points to the computer.)\n\nTUTOR: I see you want the computer, but we are not doing that right now.\n\nSTUDENT: (Changes posture to lean closer to the computer, repeats the 'want' sign, and makes a loud sound.)\n\nTUTOR: No, we have to go to lunch.\n\nSTUDENT: (Shouts, says 'no', and withdraws by turning completely away.)",
+  "immediate_dialogue_prompt": 144,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Requesting an activity using few sign language signs ('want') or pointing to few graphic symbols",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom setting",
+        "materials": "Computer, lunch, graphic symbols",
+        "social_setting": "Interacting with a partner who clearly understands the intent of the message",
+        "time_context": "During transitions (e.g., from computer to lunch)"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Occurs when the partner repeats the meaning of the message but declares he is not going to allow the request ('non-compliance')",
+        "observable_behavior": "Uses repair strategies like 'repetition' and 'substitution'",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When the partner clearly understands the intent of the message but refuses to comply",
+          "observable_behavior": "Uses eye contact, facial expressions, gestures, posture changes and sounds (shouting) to communicate, say only the word 'no'",
+          "internal_state": "",
+          "related_quotes": [
+            "‘want’",
+            "‘no’"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

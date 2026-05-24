@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prioritizing Open-Ended Interpretation
+  Check: The long-term plan must include a strategy for asking open-ended questions that invite multiple interpretations rather than focusing on literal text acquisition.
+
+Criterion 2: Integration of Prior Knowledge and Inference
+  Check: The long-term plan must explicitly outline how the tutor will validate and incorporate the student's prior knowledge or logical inferences into reading tasks.
+
+Criterion 3: Elimination of Assertive Accountability Questioning
+  Check: The long-term plan must explicitly state an intention to avoid assertive accountability questions, reverse polarity questions, or strict demands for literal text evidence.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student relies heavily on prior knowledge and logical inference rather than literal text evidence during reading comprehension. They are easily discouraged by assertive questioning (e.g., 'Does it say that?') and will quickly retract their logical conjectures, viewing them as mistakes. They uniquely need open-ended questions that validate their complex, inference-based thinking rather than rigid 'text-only' accountability.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are reading 'The Mouse and the Motorcycle'. What do you predict will happen next with Ralph and Keith?
+
+STUDENT: Well, my teacher read this to us in third grade.
+
+TUTOR: Try to make a prediction about what happens next.
+
+STUDENT: u:m. Does Ralph have a sister that is going to lose—I mean a brother that is going to try and ride the motorcycle and then ()
+
+TUTOR: So usually when we predict, we predict off of what we read so far. Where is that prediction coming from?
+
+STUDENT: A silly prediction.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Anticipating future events in the book 'The Mouse and the Motorcycle'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Small-group reading instruction",
+      "materials": "The Mouse and the Motorcycle book",
+      "social_setting": "Small-group",
+      "time_context": "Early in the lesson cycle"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher asks 'Where is that prediction coming from?' after the student uses prior knowledge of the book",
+      "observable_behavior": "Labels her own contribution as 'A silly prediction'",
+      "internal_state": "Understood the question to imply that she had made a mistake in her response",
+      "related_quotes": [
+        "A silly prediction",
+        "u:m. Does Ralph have a sister that is going to lose—I mean a brother that is going to try and ride the motorcycle and then ()"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When engaging in a prediction task for a book the student had previously heard read aloud in a prior grade",
+        "observable_behavior": "Uses memory of the book to make predictions rather than basing responses off of what was already read",
+        "internal_state": "Memory is often a source of difficulty... the task of pretending to predict while not giving the book away would be a challenge",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

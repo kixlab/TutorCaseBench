@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Cultural and Collaborative Integration
+  Check: The tutor's long-term plan consistently incorporates culturally relevant texts and establishes collaborative, small-group settings as the primary mode for practicing discourse and recall.
+
+Criterion 2: Scaffolded Progression to Written Retelling
+  Check: The tutor's long-term plan includes a structured sequence where read-alouds and oral peer retellings are explicitly used as a bridge to full written retellings, rather than immediate summaries.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Juan is a 5th-grade Chamorro student with ADHD who struggles with reading comprehension and writing mechanics, often rushing through tasks and producing skeletal retellings due to frustration with unfamiliar topics and anxiety over penmanship. He uniquely requires culturally relevant texts (like island legends) and collaborative, small-group retelling environments (inafa'maolek) to engage meaningfully, alongside a strict de-emphasis on spelling and handwriting during initial drafting.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our small group oral retelling of 'The Old Lady in the Vinegar Bottle'.
+
+STUDENT: Okay whose turn?
+
+TUTOR: It is your turn. Please start from the beginning.
+
+STUDENT: Okay. It feels like magic, for example it just like all comes out. The story that I told and heard. A magic tape recorder. (Starts from the beginning) Once there was an old lady...
+
+TUTOR: Keep going.
+
+STUDENT: (Stumbles when he can't recall some words) I can't remember the next part. It’s fun, because everyone’s in a group. We’re all forgetting, but we’re all helping each other. Someone tell me the word.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Small group oral retelling of a favorite tale titled 'The Old Lady in the Vinegar Bottle'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "One-hour retelling sessions two times per week for four months",
+      "materials": "Copies of the legend/tale",
+      "social_setting": "Small group setting with three classmates, also Chamorro Pacific Islanders",
+      "time_context": "One-hour sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When it is his turn to start the retelling from the beginning",
+      "observable_behavior": "Starts from the beginning but stumbles when he can't recall some words",
+      "internal_state": "Views the group process as a shared memory exercise where everyone helps each other",
+      "related_quotes": [
+        "It’s fun, because everyone’s in a group. We’re all forgetting, but we’re all helping each other."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participating in collaborative oral retelling sessions",
+        "observable_behavior": "Stays on task, does not disrupt the group, maintains a productive role even without supervision, and works cooperatively",
+        "internal_state": "Feels like the story is recorded in his head like a magic tape recorder",
+        "related_quotes": [
+          "It feels like magic, for example it just like all comes out.",
+          "Like for example, those are my imaginary friends. Like all recorded in my head.",
+          "The story that I told and heard. A magic tape recorder."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

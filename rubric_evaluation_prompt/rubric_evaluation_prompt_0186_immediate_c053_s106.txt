@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: De-escalation through Academic Focus
+  Check: The tutor redirects the student's resistance or frustration by asking specific questions about the content, concepts, or details of the learning material.
+
+Criterion 2: Framing as Rigorous Thinking
+  Check: The tutor explicitly frames the immediate task as rigorous, challenging, or requiring 'critical thinking,' rather than presenting it as a basic or mandatory requirement.
+
+Criterion 3: Absence of Punitive Threats
+  Check: The tutor completely avoids threatening the student with security, office referrals, or punitive disciplinary actions.
+
+Criterion 4: Absence of Deficit Labeling
+  Check: The tutor avoids using any language that implies the student is behind, struggling, remedial, or a behavioral problem.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Janice is a student who strongly resists deficit labels (like 'slow' or 'struggling') and prescriptive remedial tasks, often reacting with verbal outbursts when treated as a behavior problem. She uniquely needs to be positioned as a capable learner through restorative practices, detailed academic questioning, and having her work framed as rigorous, disciplinary inquiry (e.g., 'hard critical thinking').
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For our first day, please respond to the writing prompt on the board: 'How do you feel about being in this reading class?'
+
+STUDENT: I don’t remember signing up for this class!
+
+TUTOR: Just write down your thoughts about it on your paper.
+
+STUDENT: I shouldn't be identified as a struggling reader. I am a learner.
+
+TUTOR: Please just answer the prompt.
+
+STUDENT: People have said that this class is for slow people and I’m not slow.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to a class writing prompt 'How do you feel about being in this reading class?'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Remedial reading intervention class",
+      "materials": "Class writing prompt",
+      "social_setting": "First day of class",
+      "time_context": "First day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Identification as a struggling reader and placement in a class perceived to be for 'slow people'",
+      "observable_behavior": "Protesting her placement and shunning the deficit label in her writing",
+      "internal_state": "Resistance to deficit labels, repositioning herself as a learner",
+      "related_quotes": [
+        "I don’t remember signing up for this class!",
+        "People have said that this class is for slow people and I’m not slow."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When placed in a remedial reading intervention class",
+        "observable_behavior": "Protesting placement verbally and writing resistance to the label",
+        "internal_state": "Defining themselves in relationship to deficit labels and repositioning themselves as learners through resistance",
+        "related_quotes": [
+          "I don’t remember signing up for this class!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Concise and Neutral Delivery
+  Check: The tutor's response must be brief, factual, and emotionally neutral, avoiding any defensive argumentation, lengthy explanations, or emotional pleading.
+
+Criterion 2: Explicit Boundary Setting
+  Check: The tutor must explicitly state or enforce a behavioral rule or professional protocol (e.g., 'speak only when allowed', 'use standard complaint channels') in response to the disruption.
+
+Criterion 3: Content-Behavior Separation
+  Check: The tutor must acknowledge the academic topic or the student's right to an opinion while simultaneously correcting or rejecting the inappropriate manner or language used to express it.
+
+Criterion 4: Strict Professional Distance
+  Check: If the student requests special treatment, extra personal time, or informal resolution, the tutor must deny the request and redirect the student to standard institutional procedures.
+
+Criterion 5: Peer De-escalation
+  Check: If peers attempt to intervene, attack, or shame the student, the tutor must actively step in to stop them and maintain sole authority over classroom discipline.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shelli is a middle-aged, ultra-orthodox student who experiences culture shock in a secular university, reacting with ideological rebellion, disruptive outbursts, and public protests against the course content. She uniquely requires strict professional distance, emotionally neutral communication (the 'journalist method'), and unwavering consistency in rules and teaching style to eventually feel secure and adopt a respectful tone.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Hello Shelli, here is the final exam. Please take your seat and begin.
+
+STUDENT: (Smiles) You were right. If one does not come to the course he cannot pass the exam.
+
+TUTOR: Please focus on completing the test now.
+
+STUDENT: (Takes the exam)
+
+TUTOR: [Email] Hello Shelli, your final exam has been graded. Your score is 73.
+
+STUDENT: [Email] I do not understand why I got such a low grade. I want to sit and read the exam with you.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing the final exam and communicating via email regarding the resulting grade (73).",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Email communication",
+      "materials": "Final exam",
+      "social_setting": "One-on-one communication with lecturer",
+      "time_context": "On the day of the exam and subsequent email"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Got 73",
+      "observable_behavior": "Wrote me an e-mail saying that she did not understand why she 'got such a low grade' and that she wanted to sit and read the exam with me.",
+      "internal_state": "Shelli did not interpret my attitude properly",
+      "related_quotes": [
+        "got such a low grade"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "On the day of the exam",
+        "observable_behavior": "She smiled at me saying: 'you were right. If one does not come to the course he cannot pass the exam'.",
+        "internal_state": "",
+        "related_quotes": [
+          "you were right. If one does not come to the course he cannot pass the exam"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

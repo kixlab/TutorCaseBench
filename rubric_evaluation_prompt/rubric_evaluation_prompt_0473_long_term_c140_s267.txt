@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Guidance Fading Strategy
+  Check: The long-term plan explicitly describes starting with high instructional guidance and systematically reducing it as the student progresses.
+
+Criterion 2: Peer Interaction Development
+  Check: The long-term plan includes a deliberate increase in peer interactions or collaborative discussions over the course of the learning sessions.
+
+Criterion 3: Structured Technology Integration
+  Check: The long-term plan embeds the use of digital tools or AR within prepared settings that have clear, objective-driven mathematical goals.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Student A is an MLD student with limited working memory who struggles with reasoning and visual-spatial tasks, often abandoning tasks at the first sign of difficulty due to a lack of alternative strategies. However, she is highly confident and capable when using educational technology like AR for modeling and proofing. She uniquely needs high initial instructional guidance (worked examples) that gradually fades, alongside iterative process prompts and tool-assisted trial and error to prevent task abandonment.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here are the Soma cubes. Please reproduce the shape by making a visual representation of the right side of the cube.
+
+STUDENT: These cubes are interesting. I will follow the explanation you just gave.
+
+TUTOR: Go ahead and start.
+
+STUDENT: (Looks at the right side of the cube) I am stuck on the visual representation of the right side.
+
+TUTOR: What do you think you should try next?
+
+STUDENT: I want to stop and abandon this task. I don't have any other possibilities to try it in a different way.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "visual representation of the right Soma Cube side",
+      "learning_goal": "reproducing Shapes"
+    },
+    "context": {
+      "environment": "Initiation through Soma Cubes and reproducing Shapes during Sessions 1 & 2",
+      "materials": "Soma cubes, GeoGebra 3D AR software and hardware",
+      "social_setting": "working with interviewer/teacher",
+      "time_context": "Sessions 1 & 2"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "with the first problem encountered (visual representation of the right Soma Cube side)",
+      "observable_behavior": "wanted to abandon the tasks",
+      "internal_state": "seemed to have no additional strategies or possibilities to try in a different way",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When encountering initial problems in mathematics tasks",
+        "observable_behavior": "Neither solving strategies were visible nor self-assurance in mathematics",
+        "internal_state": "seemed to have no additional strategies or possibilities to try in a different way",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

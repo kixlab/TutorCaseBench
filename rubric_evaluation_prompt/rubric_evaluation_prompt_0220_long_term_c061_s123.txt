@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Gradual Workload Progression
+  Check: The tutor's long-term plan includes starting with a very small, manageable amount of independent work and explicitly outlines a strategy to gradually increase the workload as the student's endurance improves.
+
+Criterion 2: Interest and Level-Matched Text Selection
+  Check: The tutor's long-term plan incorporates a method for discovering the student's interests and assessing his reading level to consistently select texts that are both engaging and accessible.
+
+Criterion 3: Relational Trust Building
+  Check: The tutor's long-term plan includes specific, proactive efforts to get to know the student personally and build a caring relationship to foster his ongoing engagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jesus is a conscientious ELL student who struggles with academic endurance and becomes easily frustrated by large workloads, long reading periods, and difficult or uninteresting texts. He uniquely requires 'simplicity rules' to avoid language overwhelm, instruction in short time segments, and a gradual scaling of homework to build a sense of accomplishment.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jesus, please read this text silently for the next forty-five minutes.
+
+STUDENT: Okay, but reading is a boring activity when I have to do it for long periods of time.
+
+TUTOR: Keep trying to read.
+
+STUDENT: This topic is of little interest to me, and the words are hard to understand.
+
+TUTOR: Just focus on your book.
+
+STUDENT: (Looking over at certain students in the class) I can't. I'm getting easily distracted by them, and that makes reading unappealing.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading for long periods of time",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "English class during reading time",
+      "materials": "Reading books/texts",
+      "social_setting": "When certain students were in class with him",
+      "time_context": "Long periods of time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When he encountered a topic of little interest to him or when 'the words [were] hard to understand'",
+      "observable_behavior": "Could be easily distracted, and that made reading unappealing; spoke of reading as a 'boring' activity",
+      "internal_state": "Found reading boring and unappealing",
+      "related_quotes": [
+        "the words [were] hard to understand"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When certain students were in class with him during reading time",
+        "observable_behavior": "Could be easily distracted",
+        "internal_state": "Made reading unappealing",
+        "related_quotes": []
+      },
+      {
+        "condition": "When he had to read for long periods of time",
+        "observable_behavior": "Spoke of reading as a 'boring' activity",
+        "internal_state": "Boredom",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

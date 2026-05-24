@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Processing Time Provision
+  Check: The tutor explicitly pauses, waits, or offers David extended time to process the instruction or formulate a response without immediately repeating the demand.
+
+Criterion 2: Choice-Based Autonomy
+  Check: The tutor offers David a clear choice (e.g., which task to do first, what reward to work toward, or break length) rather than forcing a single directive.
+
+Criterion 3: Functional Task Initiation
+  Check: The tutor initiates the interaction or day with a functional, engaging activity rather than immediately demanding compliance with routine table work.
+
+Criterion 4: Withholding Escape-Based Consequences
+  Check: The tutor avoids using time-outs, sending David away, or simply removing the task as a consequence for his challenging behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+David is an older adolescent with CHARGE syndrome, profound hearing loss, and severe visual deficits who engages in aggressive behaviors (kicking, scratching) to escape difficult or unstructured tasks. He uniquely requires high-contrast visual supports, concrete predictability, and functional communication alternatives, as traditional negative consequences inadvertently reinforce his escape behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: David, it is time to start the day. Please sit at the table and begin sorting these objects.
+
+STUDENT: (David does not sit at the table. He begins jumping and grinding his teeth.)
+
+TUTOR: Let's get to work. Look at the objects on the table.
+
+STUDENT: (David engages in visual self-stimulatory behavior, ignoring the sorting task.)
+
+TUTOR: You need to do your table work now. Sit down.
+
+STUDENT: (David exhibits problematic behaviors to escape the task, scratching at the tutor's hands and kicking the table.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "routine table work",
+      "learning_goal": "increase positive functional behaviors (communication)"
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "communication shelf; concrete analogue of a picture schedule; object or picture schedule; visual supports",
+      "social_setting": "",
+      "time_context": "started the day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when structure is insuﬃcient",
+      "observable_behavior": "exhibit problematic behaviors... kicking, biting, scratching",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "without consistency",
+        "observable_behavior": "his behavior was more challenging... jumping, teeth grinding, visual self-stimulatory behavior",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

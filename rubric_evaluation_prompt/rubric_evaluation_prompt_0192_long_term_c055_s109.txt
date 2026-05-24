@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Collective Responsibility Framing
+  Check: The tutor's long-term plan explicitly frames assessments, data analysis, and improvements as a collective, community-driven responsibility rather than individual achievements.
+
+Criterion 5: Structured Metacognitive Scaffolding
+  Check: The tutor incorporates the consistent use of structured prompt sheets, reflection tasks, or explicit knowledge-building principles to guide the student's ongoing self- and peer-assessment.
+
+Criterion 6: Offline-to-Online Transitioning
+  Check: The tutor plans for offline or synchronous collaborative culture-building activities (e.g., a physical 'knowledge wall' or whole-class discussion) prior to or alongside online forum work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with a poor self-image, low academic achievement, and a fear that their ideas are inadequate, which initially manifests as disengagement or a hyper-focus on competitive, quantitative metrics. They uniquely require tangible, visual collaborative tasks to lower the barrier to participation, explicit translation of data into qualitative learning opportunities, and a sustained framing of learning as a collective, community responsibility rather than an individual competition.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at your KCA data and the task sheet to analyze the question 'Are we a community that collaborates?'
+
+STUDENT: I can see my deficiencies. For example, reading others' notes, I have read many notes, the percentage is 99% which is pretty high.
+
+TUTOR: What do the other percentages show?
+
+STUDENT: When I look at built-on to others' notes, the percentage is only about 20%, which is pretty low. My notes have been read a lot, but built on less.
+
+TUTOR: What do you think you should do next?
+
+STUDENT: I need to communicate more with peers, but my notes lack thought-provoking questions. I am not happy with the quality of my notes, and I am afraid that my point or idea is not good enough.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Analyzing KCA data regarding the question 'Are we a community that collaborates?' and planning improvements",
+      "learning_goal": "generate useful knowledge building goals including synthesizing ideas and improving ideas collectively"
+    },
+    "context": {
+      "environment": "Knowledge Forum database",
+      "materials": "Knowledge Connection Analyzer (KCA) data, KCA task sheet, reflection journal",
+      "social_setting": "online discourse in Knowledge Forum",
+      "time_context": "After working on the Knowledge Forum database for approximately 3 weeks"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Analyzing KCA data to evaluate the impact and quality of their individual notes",
+      "observable_behavior": "identified the gaps ( 'have read many notes;' 'the percentage of my response to others is only about 20%, which is pretty low;...built-on... the percentage is only about 20%, which is pretty low;' 'the interaction between the other students and me is not sufficient' )",
+      "internal_state": "afraid that my point or idea is not good enough",
+      "related_quotes": [
+        "I have read many notes, the percentage is 99% which is pretty high . However, when I look at built-on to others ’ notes, the percentage is only about 20%, which is pretty low",
+        "I even write notes at home , because I am afraid that my point or idea is not good enough ..."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "reflecting on the quality of their own notes",
+        "observable_behavior": "identified the problems that were ( 'my notes have been read a lot, but built on less;' 'no notes are referred;' 'lack thought-provoking questions' )",
+        "internal_state": "not happy with the quality of my notes",
+        "related_quotes": [
+          "My notes lack thought-provoking questions . I am not happy with the quality of my notes; it has much room to be improved."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

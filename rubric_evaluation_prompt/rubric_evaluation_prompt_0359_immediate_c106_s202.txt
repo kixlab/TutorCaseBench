@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Mastery Feedback and Modeling
+  Check: The tutor provides clear feedback on the correctness of the student's work and offers a model answer or explicit demonstration of the target concept.
+
+Criterion 2: Pre-Assessment Anxiety Expression
+  Check: The tutor prompts the student to express, journal, or discuss their anxieties and feelings regarding an upcoming assessment or challenging task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student puts in high effort but experiences a 'spinning wheels' effect, failing to master concepts due to a lack of inherent strategic awareness and planfulness. They uniquely require explicit training in self-regulated learning (SRL), modeled study plans, and interventions to reduce assessment anxiety, as they cannot independently translate time invested into academic success.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review your recent exam grade and your progress in the ALEKS system.
+
+STUDENT: I don't understand my grade. I engaged consistently with ALEKS throughout the semester, I have over 15.55 hours logged, yet I performed no better on the exam or my homework.
+
+TUTOR: What is your process when you are working on the assignments?
+
+STUDENT: I access the guided notes early to supplement the ALEKS topics. I feel like I am showing a great commitment of effort across the platforms.
+
+TUTOR: Have you been using the study guides to prepare for the assessments?
+
+STUDENT: I only accessed them sporadically about 9 days before the test, I didn't access the full set. I come to class all the time, but I'm not improving much and I don't really have a strategic plan for my learning process.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging with ALEKS adaptive learning platform for course assignments that build problem solving skills and math knowledge",
+      "learning_goal": "Master concepts and improve performance on homework, exams, and course grades"
+    },
+    "context": {
+      "environment": "University mathematics course",
+      "materials": "Artificially intelligent assessment and learning system (ALEKS), learning management systems (LMS), guided notes, study guides, textbook",
+      "social_setting": "Independent study using digital platforms",
+      "time_context": "Throughout the 7-week revisited course semester"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Despite engaging consistently with ALEKS throughout the semester (15.55 hours)",
+      "observable_behavior": "Performed no better on homework, exam or course grades and did not access the full set of study guides",
+      "internal_state": "",
+      "related_quotes": [
+        "engaged consistently with ALEKS throughout the semester (15.55 hours), yet performed no better on homework, exam or course grades"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attending the prior course",
+        "observable_behavior": "Came to class all the time; however, she did not improve much",
+        "internal_state": "Lacked awareness of their learning process",
+        "related_quotes": [
+          "she came to class all the time; however, she did not improve much.",
+          "no student acted in a fashion that teachers described as planful, strategic, or particularly aware of their learning process."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Breakdown Notification
+  Check: The tutor explicitly communicates that they did not understand the student's utterance (e.g., asking for clarification, stating 'I don't understand', or prompting the student to repeat).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly verbal but unintelligible due to severe phonological impairments, yet they suffer from a confident misconception that their speech is perfectly clear. Because they are unaware of their communication breakdowns, they uniquely require explicit notification of being misunderstood to trigger their use of compensatory gestures, alongside long-term exposure to and training in sign-supported communication.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here are the toys we can play with today. What should we do with the blocks and cars?
+
+STUDENT: Dah wuh bee gah. (Speaks a 4-word unintelligible utterance confidently, without using any gestures)
+
+TUTOR: What did you say?
+
+STUDENT: Dah wuh bee gah. (Repeats the exact same verbal message, believing the words are coming out just as intended)
+
+TUTOR: I still don't understand what you mean.
+
+STUDENT: Dah wuh bee gah! (Repeats the verbal message again, but this time emphasizes the content words by pointing directly at the car and showing where it should go)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "The subject of conversation was not controlled. In most cases, the toys present in the therapy room served as topics of conversation. Sometimes a conversation emerged spontaneously, independent of the toys.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "therapy room",
+      "materials": "toys present in the therapy room",
+      "social_setting": "Two speech therapists (one being one of the researchers/authors) worked with four children each.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when their conversational partner misunderstood them",
+      "observable_behavior": "repeating their verbal message, they emphasized content words by supporting them with deictic and iconic gestures... added deictic gestures to their speech – like pointing and showing – to support key words",
+      "internal_state": "unaware of their speech problems. These children believe that the message ‘in their heads’ actually comes out just as they had intended.",
+      "related_quotes": [
+        "believe that the message ‘in their heads’ actually comes out just as they had intended"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During baseline communication before explicit intervention",
+        "observable_behavior": "used more than 40 verbal utterances out of the total 50 utterances... Their speech consisted of 3- to 5-word utterances. However, these children hardly used the ‘gesture/sign’ mode to communicate.",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When experiencing a communicative breakdown",
+        "observable_behavior": "only looked for an alternative when they were misunderstood and needed a complementary mode of communication to support their verbal message.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

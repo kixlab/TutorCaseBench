@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Elimination of Directives and Test Questions
+  Check: The tutor's response must completely avoid giving commands, behavioral directives, or asking test questions (e.g., 'What is this?', 'Say X').
+
+Criterion 2: Strategic Control of Motivating Materials
+  Check: The tutor must indicate that they are managing, holding, or restricting access to the physical materials rather than giving the student free access to them.
+
+Criterion 3: Unrushed Pacing and Wait Time
+  Check: The tutor must explicitly provide wait time, pause, or allow silence to give the student space to process and respond without pressure.
+
+Criterion 4: Following the Student's Attentional Focus
+  Check: The tutor must align their response with the student's current interest by commenting on what the student is doing, engaging in parallel play, or acting animated, rather than redirecting them to a new task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This verbal student possesses a wide vocabulary but strongly prefers working on their own agenda, showing little interest in adult-led social interactions. They are highly triggered by directive communication, demands, test questions, and rushing, which reliably result in ignoring or protesting. To successfully engage them, adults must abandon traditional prompting in favor of facilitative strategies like waiting, following the student's lead, and strategically controlling access to highly motivating items.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here are the bubbles for our lesson. What is inside this bottle?
+
+STUDENT: Bubbles.
+
+TUTOR: Yes. Now, tell me what I should do with the wand.
+
+STUDENT: (Reaches for the bottle) Want.
+
+TUTOR: You need to use a full sentence first. Say 'blow the bubbles'.
+
+STUDENT: (Turns away from the adult and ignores the instruction) No.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a 'bubble' lesson during a 1:1 interaction session",
+      "learning_goal": "To get so much more language from him"
+    },
+    "context": {
+      "environment": "1:1 interaction sessions",
+      "materials": "Bubbles, highly motivating items",
+      "social_setting": "1:1 interaction with classroom adult",
+      "time_context": "10-minute session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the adult was rushing him, forcing him, or using directive communication",
+      "observable_behavior": "Ignoring or protesting at what the adults did or said, and working away on his own agenda",
+      "internal_state": "Did not like demands and expectations placed on them",
+      "related_quotes": [
+        "I was forcing him to, yeah, I know I can see it now . . . So, I have to wait, but he can talk I think because he can talk I can see now I am rushing him."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When adults rely mainly on 'test questions', 'verbal prompts' and 'yes/no' type questions",
+        "observable_behavior": "Heard in one-word responses mainly; shows no interest in interacting with adults",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

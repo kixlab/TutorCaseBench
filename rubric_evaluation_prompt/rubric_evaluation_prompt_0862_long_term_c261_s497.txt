@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Delayed Intervention Threshold
+  Check: The long-term plan explicitly states that the tutor will allow unruly play to develop and only intervene when it reaches extreme raucousness, destruction, or disputes.
+
+Criterion 2: Covert Monitoring
+  Check: The long-term plan includes a strategy for the tutor to observe and listen to the play from a distance without actively joining or directing the game.
+
+Criterion 3: Tolerance for Cyclical Disruption
+  Check: The long-term plan demonstrates acceptance of the daily build-and-destroy cycle, avoiding the implementation of inflexible, preventative disciplinary rules against the play itself.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These preschoolers are highly imaginative but prone to escalating their collaborative play into loud, chaotic, and destructive 'trashing' within self-constructed hidden spaces. They require a delicate balance of 'leaky' classroom management that allows their complex play to develop, paired with firm, specific boundaries when the play becomes indiscriminately messy or disruptive.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It looks like you are gathering materials for your tent in the dramatic play area.
+
+STUDENT: Let's make a tent! (Fills a pushcart with the entire contents of the dramatic play kitchen and dumps it all into the tent, on top of some members of the Sleeping Family.)
+
+TUTOR: You brought all the dishes and plastic food inside.
+
+STUDENT: Now we have food! (Crawls back into the tent and noisily pretends to eat.)
+
+TUTOR: How is your food?
+
+STUDENT: You are our kitty and puppy! (Engages in ravenous and animalistic eating with loud gnashings and growlings, throws the plastic food hither and yon, removes items of clothing, and begins growling, meowing and barking whilst rolling about on the floor.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Initiating the 'Sleeping Family Game' during morning free play, assigning fluid familial roles, and gathering materials to furnish a makeshift tent.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Center of the classroom in the dramatic play area, using an upended wooden storefront structure.",
+      "materials": "Sheets, blankets, pillows, seat cushions, long scarves, dress-up clothes, pushcart, plastic food, dishes, play money, dress-up shoes, beaded necklaces, hats, and plastic baby dolls.",
+      "social_setting": "Group of preschoolers (Isaac, Martina, Bonnie, Tucker, Josefa) playing together during morning free play.",
+      "time_context": "Just before 9 am during the two-hour morning free play period."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the children crawl back into the tent to noisily pretend to eat the gathered food.",
+      "observable_behavior": "Engaged in ravenous and animalistic eating with loud gnashings and growlings. Threw plastic food hither and yon, gathered large amounts of small plastic toys in their arms and threw them in the air inside the tent. Removed items of their clothing and their shoes, squealed and howled with delight, and began growling, meowing and barking whilst rolling about on the floor.",
+      "internal_state": "Joyous, revelling in their transitory resistant experience of relationships, sensation and unruly love.",
+      "related_quotes": [
+        "Now we have food",
+        "You are our kitty and puppy"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When gathering materials to furnish the tent.",
+        "observable_behavior": "Filled a pushcart with the entire contents of the dramatic play kitchen and home area, and dumped it all into the tent, often on top of some members of the Sleeping Family.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,78 @@
+{
+  "category_id": "280",
+  "category_title": "Low-attaining students who rely on repeated addition for multiplication until prompted for more efficient strategies",
+  "scenario_id": "530",
+  "scenario_title": "Multi-digit multiplication using repeated addition",
+  "minimal_context": "Sophie is working on a multi-digit multiplication problem, specifically 9 times 87, in her Year 5 classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are working on multi-digit multiplication today. How can you tell me what 9 times 87 is? What can we keep doing here?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Keep adding on 87."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Until you've added it?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Until we’ve got 9."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Okay, keep adding on for that please."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Attempts to write out the addition) I got confused trying to find the answer to 9 times 87. If I kept adding 87 to my answer it would’ve taken a long time.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are working on multi-digit multiplication today. How can you tell me what 9 times 87 is? What can we keep doing here?\n\nSTUDENT: Keep adding on 87.\n\nTUTOR: Until you've added it?\n\nSTUDENT: Until we’ve got 9.\n\nTUTOR: Okay, keep adding on for that please.\n\nSTUDENT: (Attempts to write out the addition) I got confused trying to find the answer to 9 times 87. If I kept adding 87 to my answer it would’ve taken a long time.",
+  "immediate_dialogue_prompt": 921,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Working on multi-digit multiplication, specifically multiplying 9 times 87",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Year 5 classroom",
+        "materials": "",
+        "social_setting": "Teacher walking around the classroom talking to students individually or in pairs while they worked on the tasks",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When asked how to tell what 9 times 87 is and what to keep doing",
+        "observable_behavior": "Suggests an inefficient repeated addition strategy, stating to keep adding on 87 until they have 9",
+        "internal_state": "I got confused trying to find the answer to 9 times 87",
+        "related_quotes": [
+          "Keep adding on 87.",
+          "Until we’ve got 9.",
+          "I got confused trying to find the answer to 9 times 87."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When faced with a multi-digit multiplication problem",
+          "observable_behavior": "Demonstrates an awareness that multiplication can be thought of as repeated addition but relies on this inefficient strategy, which would take a long time",
+          "internal_state": "",
+          "related_quotes": [
+            "If I kept adding 87 to my answer it would’ve taken a long time."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

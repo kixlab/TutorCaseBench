@@ -1,0 +1,74 @@
+{
+  "category_id": "038",
+  "category_title": "High school student with AD/HD showing inattention and hyperactivity in traditional settings but improved engagement with ICT",
+  "scenario_id": "073",
+  "scenario_title": "Passive viewing of documentary on interactive whiteboard",
+  "minimal_context": "The student is watching a historical documentary projected on an interactive board with the whole class.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please look at the interactive board. We are going to watch this historical documentary video."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks at the board, not very enthusiastic) Okay."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Keep watching the video."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Seems to daydream, showing not much involvement) Yeah."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What did you think about the documentary?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "We watched the video . . . that she showed us . . . the documentary . . . but . . . OK there was not great participation . . .",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please look at the interactive board. We are going to watch this historical documentary video.\n\nSTUDENT: (Looks at the board, not very enthusiastic) Okay.\n\nTUTOR: Keep watching the video.\n\nSTUDENT: (Seems to daydream, showing not much involvement) Yeah.\n\nTUTOR: What did you think about the documentary?\n\nSTUDENT: We watched the video . . . that she showed us . . . the documentary . . . but . . . OK there was not great participation . . .",
+  "immediate_dialogue_prompt": 127,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Watched the video . . . the documentary",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "History classroom",
+        "materials": "Interactive board, historical documentary video",
+        "social_setting": "Whole class viewing",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the interactive board was only used to project a historical documentary",
+        "observable_behavior": "Not much involved, lack of participation",
+        "internal_state": "Not very enthusiastic",
+        "related_quotes": [
+          ". . . We watched the video . . . that she showed us . . . the documentary . . . but . . . OK there was not great participation . . ."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When ICT is used passively without active interaction",
+          "observable_behavior": "Not great involvement by the children",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

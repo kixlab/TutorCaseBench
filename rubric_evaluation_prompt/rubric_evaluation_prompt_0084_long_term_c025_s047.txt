@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Restorative Peer Mediation
+  Check: The long-term plan includes facilitated restorative meetings where the perpetrator is made aware of the student's feelings and opportunities for reparation are provided.
+
+Criterion 2: Social Cue and Emotional Decoding Training
+  Check: The long-term plan incorporates teaching the student how to decode social cues, recognize their internal feelings, and utilize personal strengths to make non-aggressive choices.
+
+Criterion 3: Counteracting Bias through Modeled Care
+  Check: The long-term plan explicitly includes strategies for the teacher to model caring, sensitivity, and unconditional positive regard, especially when redirecting the student's negative behaviors.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe reactive physical aggression ('payback') triggered by peer provocation and a deep-seated belief that teachers are biased against them. They uniquely require visibly fair, structured reporting systems, equal accountability for both bullies and victims, and immediate validation of their grievances to prevent escalation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: You asked to speak with me about what happened with the other students.
+
+STUDENT: I get angry when people are annoying me. They were calling me names and hurting me, because they know they can get to me.
+
+TUTOR: Okay, well, we will touch on this later.
+
+STUDENT: If someone hurt me, like kicked me or something, you wouldn't do anything about it. I would overreact and start going off to them and trying to kick them.
+
+TUTOR: You need to calm down right now.
+
+STUDENT: I know that the teachers think that I'm bad, so they'll just go for their side. I don't bother to say anything.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reporting a peer conflict or bullying incident to a teacher",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mainstream school setting or residential school office",
+      "materials": "Concern cards",
+      "social_setting": "One-on-one interaction with a teacher or staff member after a peer conflict",
+      "time_context": "Immediately following a peer conflict"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the student attempts to report being called names or hurt, and the teacher dismisses the concern ('Oh yeah, we'll touch on this later') or instantly takes the other kids' side",
+      "observable_behavior": "Stops bothering to say anything to teachers, withdraws from reporting, or overreacts and starts going off to the teachers",
+      "internal_state": "Believes teachers think they are bad, feels teachers don't actually care and will forget, feels unfairly treated",
+      "related_quotes": [
+        "I know that the teachers think that I ’m bad, so they ’ll just go for their side, so I don ’t bother to say anything.",
+        "If someone hurt me, like kicked me or something, they (the teachers) wouldn ’t do anything about it. I would overreact and start going off to them"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When teachers fail to address the initial provocation from peers and instead use physical restraint on the student",
+        "observable_behavior": "Overreacts, tries to kick the peers who initiated the hurt, struggles against restraint",
+        "internal_state": "Feels victimized by both peers and staff, perceives intervention as unfair",
+        "related_quotes": [
+          "I would overreact and start going off to them and trying to kick them. So they (the teachers) forced me to the ground, not the kids that kicked me."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

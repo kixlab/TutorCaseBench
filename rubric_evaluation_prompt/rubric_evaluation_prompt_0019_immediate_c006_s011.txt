@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Spatial Distancing
+  Check: The tutor's response must include a specific adjustment to Sammy's physical environment or seating arrangement to ensure distance from peers.
+
+Criterion 2: Purposeful Task Modification
+  Check: The tutor must modify or reframe the academic task so that it results in a clear, purposeful product intended for an audience (e.g., creating a puzzle or game for a classmate).
+
+Criterion 3: Cued Self-Monitoring
+  Check: The tutor must implement a structured self-monitoring system that uses a frequent cue (e.g., a timer, bell, or signal) prompting Sammy to record his own behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sammy is a 10-year-old student whose off-task and 'silly' behaviors are directly triggered by close physical proximity to peers and rote, repetitive academic tasks. The evidence reveals he uniquely needs proactive environmental adjustments (like physical distancing), tasks reframed to have a clear purpose or audience, and structured self-monitoring systems to maintain engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our teacher-directed group activity for music class. Everyone take your seats in the front row; Sammy, sit right here next to your classmates.
+
+STUDENT: (Sits in the front row where there is unavoidable physical contact with the peer next to him) Get away from me!
+
+TUTOR: Let's just focus on the music activity.
+
+STUDENT: (Starts making loud noises instead of participating) Beep beep beep!
+
+TUTOR: Please try to follow along with the group.
+
+STUDENT: (Continues making noises, displays "silly" behavior, and makes inappropriate gestures toward the peers sitting closely next to him)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaged in teacher-directed group activities",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Music class in which students were engaged in teacher-directed group activities while seated in rows",
+      "materials": "Seats arranged in rows",
+      "social_setting": "Sat in the front row very close to other students so that there was unavoidable physical contact",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the close proximity condition, Sammy sat in the front row very close to other students so that there was unavoidable physical contact",
+      "observable_behavior": "Making noises, inappropriate gestures, and “silly” behavior in the classroom; no response or negative response or initiation to peers",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During academic activities with unavoidable physical contact",
+        "observable_behavior": "Off-task behavior during academic activities; noise making or inappropriate talking",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

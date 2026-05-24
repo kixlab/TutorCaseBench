@@ -1,0 +1,135 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Iterative, Completion-Based Drafting
+  Check: The long-term plan must include multiple revision stages where early drafts are evaluated solely on completion or effort, reserving accuracy-based grading for the final draft.
+
+Criterion 2: Thematic Continuity Across Assignments
+  Check: The long-term plan must structure assignments as a sequenced project where the student writes repeatedly about the same subject or theme over time.
+
+Criterion 3: Protected Audience Visibility
+  Check: The long-term plan must explicitly restrict the visibility of the student's work to a confined, safe audience (e.g., only the teacher and specific classmates, no public viewing).
+
+Criterion 4: Mixed-Proficiency Peer Grouping
+  Check: The long-term plan must place the student in structured peer groups that intentionally mix different language proficiency levels (e.g., high, medium, low).
+
+Criterion 5: Observation-Driven Material Adaptation
+  Check: The long-term plan must include a mechanism for the tutor to review the student's informal writing and use those observations to modify future instructional materials or classroom activities.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is an ESL student experiencing severe linguistic insecurity and emotional distress, frequently expressing defeat ('I afraid I can't', 'I am so unhappy') when confronted with their vocabulary and grammar limitations. They are highly triggered by early correction and peer comparison, relying heavily on external support like dictionaries and roommates. They uniquely require explicit, direct verbal affirmation to counter their negative self-talk, alongside highly protected, low-stakes environments where effort is valued over immediate accuracy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to write your 300-word blog reflection on the Personal Narrative assignment.
+
+STUDENT: When I write my essay, I meet many problems. I cannot remember many words and I do not know how to write so much words.
+
+TUTOR: Just try to write what you can.
+
+STUDENT: This is my first year come to United States, so my English is not very good. I look up the words in the dictionary, ask my roommate about my grammar.
+
+TUTOR: Let's look at what you have on the page right now.
+
+STUDENT: I felt not good, I tried my best to write it but it was so bad. I am so unhappy. I will just come back home to rewrite my essay.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing a 300+ word blog reflection on the Personal Narrative assignment",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "in class",
+      "materials": "dictionary",
+      "social_setting": "working independently but asking roommate for help",
+      "time_context": "separate day, typically the day after their final submission"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When I write my essay, I meet many problems",
+      "observable_behavior": "look up the words in the dictionary, ask my roommate about my grammar; came back home to rewrite my essay",
+      "internal_state": "grammar is not very good, I cannot remember many words and I do not know how to write so much words; felt not good, tried my best to write it but it was so bad; was so unhappy",
+      "related_quotes": [
+        "When I write my essay, I meet many problems. Such as my grammar is not very good, I cannot remember many words and I do not know how to write so much words."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When I write my essay, I meet many problems",
+        "observable_behavior": "look up the words in the dictionary, ask my roommate about my grammar",
+        "internal_state": "grammar is not very good, I cannot remember many words",
+        "related_quotes": [
+          "I look up the words in the dictionary, ask my roommate about my grammar. I try my best to write the essay better."
+        ]
+      },
+      {
+        "condition": "When feeling the essay was so bad",
+        "observable_behavior": "came back home to rewrite my essay",
+        "internal_state": "felt not good; was so unhappy",
+        "related_quotes": [
+          "I felt not good, I tried my best to write it but it was so bad. Although I was so unhappy, I knew it was my problem."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}
