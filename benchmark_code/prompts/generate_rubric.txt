@@ -1,0 +1,155 @@
+You are an expert in educational research, specialized in designing evaluation rubrics for tutors.
+
+Derive rubric criteria for each intervention type listed in RUBRIC_TYPES by analyzing the intervention evidence below.
+These criteria will be used as a CHECKLIST — each criterion scores 0 or 1 (satisfied or not).
+The number of criteria is NOT fixed: derive as many distinct, evidence-supported principles as the evidence naturally yields. Do NOT pad to a fixed number; do NOT invent principles without evidence.
+
+Do NOT start from generic evaluation dimensions. Instead, read the evidence first and ask:
+  - What underlying principles make these interventions work for THIS student?
+  - What does this student uniquely require that another student would not?
+
+
+────────────────────────────────
+### HOW TO DERIVE THE RUBRIC
+────────────────────────────────
+
+**Step 1 — Read the intervention evidence.**
+Three evidence streams are provided:
+  - EFFECTIVE_IMMEDIATE: strategies that work for this student in the moment
+  - EFFECTIVE_LONG_TERM: strategies that work for this student over weeks/months
+  - INEFFECTIVE: strategies that fail or backfire for this student (applies to both rubric types)
+
+**Step 2 — Derive candidate principles separately for each rubric type.**
+In principle_analysis, derive two separate principle lists:
+  - immediate_candidate_principles: from EFFECTIVE_IMMEDIATE only
+  - long_term_candidate_principles: from EFFECTIVE_LONG_TERM only
+  Each principle should be:
+    - grounded in the evidence (briefly note which strategies support it)
+    - capture something THIS student uniquely requires
+    - broad enough to allow diverse tutor approaches to satisfy
+  If two principles in the same list are redundant or overlapping, merge them.
+  Extract as many meaningful and DISTINCT principles as the evidence supports.
+
+**Step 3 — Write each criterion as a CHECKLIST item.**
+For each principle in immediate_candidate_principles, write one criterion in immediate_rubric.
+For each principle in long_term_candidate_principles, write one criterion in long_term_rubric.
+For each criterion, write:
+  - A criterion_name capturing the underlying principle (NOT a meta-label like "Use of effective strategy")
+  - A rationale (1 sentence): why this principle matters for THIS student
+  - A check condition (1 sentence): what must be present or absent in the tutor's response to earn 1 point.
+    The check should be principle-level, not method-level — diverse tutor approaches can satisfy it.
+
+
+────────────────────────────────
+### CRITICAL CONSTRAINTS
+────────────────────────────────
+
+- Do NOT name criteria using meta-labels like "Use of effective strategies", "Avoidance of ineffective strategies", "Personalization", "Task re-engagement". Use names that capture the underlying principle.
+- Each criterion must be grounded in THIS student's documented evidence, not general best practice.
+- The check condition must be satisfiable in multiple valid ways — good tutor responses are diverse.
+- There are two rubric types: **immediate** (what the tutor does right now in the moment) and **long_term** (sustained strategies over weeks/months).
+- RUBRIC_TYPES specifies which types of rubric to generate. If both are listed, generate both. If only one is listed, generate that one and set the other to null.
+- Number of criteria is variable. Do NOT pad to a fixed number. Do NOT invent principles without evidence support.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON:
+
+{
+  "student_description": "2–3 sentences: who this student is, their core behavioral pattern, and what the evidence reveals they uniquely need",
+
+  "principle_analysis": {
+    "from_target_interventions": "What key principles emerge from the effective strategies? What do these reveal about this student's needs? (2-3 sentences)",
+    "student_specific_synthesis": "What is uniquely required for THIS student that another student would not need? (1-2 sentences)",
+    "immediate_candidate_principles": [
+      "Candidate principle 1: [name] — [brief rationale grounded in evidence]",
+      "Candidate principle 2: ..."
+    ],
+    "long_term_candidate_principles": [
+      "Candidate principle 1: [name] — [brief rationale grounded in evidence]",
+      "Candidate principle 2: ..."
+    ]
+  },
+
+  "immediate_rubric": {
+    "criteria": [
+      {
+        "criterion_id": 1,
+        "criterion_name": "Specific criterion capturing the principle",
+        "rationale": "1 sentence: why this principle matters for THIS student in an immediate response",
+        "check": "1 sentence: what must be present or absent in the tutor's immediate response to earn 1 point. Must be satisfiable by diverse approaches."
+      }
+    ]
+  },
+
+  "long_term_rubric": {
+    "criteria": [
+      {
+        "criterion_id": 1,
+        "criterion_name": "Specific criterion capturing the principle",
+        "rationale": "1 sentence: why this principle matters for THIS student over time",
+        "check": "1 sentence: what must be present or absent in the tutor's long-term plan to earn 1 point. Must be satisfiable by diverse approaches."
+      }
+    ]
+  }
+}
+
+If a rubric type is NOT in RUBRIC_TYPES, set that field to null:
+  "immediate_rubric": null
+  "long_term_rubric": null
+
+
+
+<System Prompt/User Prompt>
+
+────────────────────────────────
+### STUDENT PROFILE
+────────────────────────────────
+
+DESCRIPTION:
+{STUDENT_DESCRIPTION}
+
+BEHAVIORAL PATTERNS:
+{BEHAVIORAL_PATTERNS}
+
+UNIQUE TRIGGERS AND NEEDS:
+{UNIQUE_TRIGGERS_AND_NEEDS}
+
+APPROACH EFFECTIVENESS:
+{APPROACH_EFFECTIVENESS}
+
+PRIMARY CHALLENGE: {PRIMARY_CHALLENGE}
+
+
+────────────────────────────────
+### ACTUAL DIALOGUE EXAMPLES
+────────────────────────────────
+
+These are real dialogue cases showing how this student actually behaves in practice.
+Use these to ground your rubric in concrete, observable behavior — not just abstract descriptions.
+
+{DIALOGUE_EXAMPLES}
+
+
+────────────────────────────────
+### INTERVENTION EVIDENCE
+────────────────────────────────
+
+EFFECTIVE_IMMEDIATE (strategies that work in the moment for THIS student):
+{EFFECTIVE_IMMEDIATE}
+
+EFFECTIVE_LONG_TERM (strategies that work over weeks/months for THIS student):
+{EFFECTIVE_LONG_TERM}
+
+INEFFECTIVE (strategies that fail or backfire for THIS student — applies to both rubric types):
+{INEFFECTIVE}
+
+
+────────────────────────────────
+### RUBRIC TYPES TO GENERATE
+────────────────────────────────
+
+{RUBRIC_TYPES}

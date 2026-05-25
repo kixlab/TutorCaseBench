@@ -1,0 +1,95 @@
+You are aligning the four answer options of a multiple-choice tutoring question so they read uniformly — same surface vocabulary, similar length, similar tone — without changing what each option substantively does.
+
+You are given: the TARGET dialogue / context / persona, ONE correct option (effective for THIS student), and THREE distractors (real interventions from OTHER scenarios, wrong for THIS student). Options come from different sources, so they may use different vocabulary, lengths, and tones. Make them parallel so test-takers cannot identify the correct option by surface features alone.
+
+────────────────────────────────
+RULES
+────────────────────────────────
+
+PRESERVE
+  - The MECHANISM of each option (e.g., "scaffold by chunking", "visual + verbal cue", "behavior-specific praise", "offer a binary choice"). Do not switch mechanisms.
+  - The correct option's appropriateness for THIS student.
+  - Each distractor's wrongness for THIS student. Do not soften.
+
+CHANGE — surface only
+  - Subject/activity names, materials/tools, group structures, named curricula, source-scenario student or staff names → swap to the target dialogue's vocabulary.
+  - If an option's surface already fits the target context, leave it verbatim.
+
+LENGTH & TONE PARITY
+  - Priority when rules conflict (higher wins):
+      1. Each option's MECHANISM unchanged; the correct option stays right for THIS
+         student; each distractor stays wrong for THIS student. NEVER violate this.
+      2. The four options roughly similar in length and tone.
+  - Equalize length by TRIMMING the longer options first.
+  - If trimming alone cannot close the gap, you MAY add a small amount of NEUTRAL
+    filler to a short option — generic time/place/connective phrasing only
+    (e.g. "...during the activity", "...in this session"). The added words
+    MUST NOT introduce a new method, step, or technique; MUST NOT claim any
+    effect, benefit, or empirical/evidence support (no "...which improves
+    performance", "...with strong research backing"); and MUST NOT make a
+    distractor any more appropriate (or the correct any less) for THIS student.
+    If you cannot pad without touching the mechanism or its fit, leave it short —
+    an uneven length is acceptable; changing substance is not.
+  - All four in third-person tutor-action voice (never direct speech, never "you").
+  - Match register across all four: professional, concise, action-focused.
+
+MINIMUM EDIT
+  - Swap only the surface terms the target context requires. No swap needed →
+    output verbatim.
+  - Never introduce a new method/technique/step, never flip or soften substance.
+    Neutral length-matching filler (per LENGTH & TONE PARITY) is the ONLY permitted
+    addition.
+
+EDIT LEVELS (one label for the whole pass)
+  - none    : all four output verbatim.
+  - surface : ≤ 3 surface words swapped per option.
+  - light   : at least one option needed a short phrase rewrite (no direct target analogue for a surface element).
+  - fuller  : AVOID. Only if a setting structure had no target equivalent and had to be re-described. Re-check that all mechanisms are intact and no wrongness was softened.
+  If any option received neutral length-matching filler, say so explicitly in
+  edit_notes (e.g. "padded distractor 2 with neutral filler for length parity").
+
+────────────────────────────────
+INPUT
+────────────────────────────────
+
+TARGET DIALOGUE:
+{DIALOGUE}
+
+TARGET SCENARIO CONTEXT (task, environment, materials, social setting):
+{TARGET_CONTEXT}
+
+TARGET STUDENT PERSONA:
+{STUDENT_PERSONA}
+
+RESPONSE TYPE: {RESPONSE_TYPE}
+
+Each option below is given as its ACTION only. Adapt that action — do not add any
+rationale, justification, expected effect, or outcome (none is provided, and none
+should be inferred or written into the option).
+
+CORRECT (effective for THIS student):
+  ACTION: {CORRECT_INSTRUCTION}
+
+DISTRACTOR 1 (wrong for THIS student):
+  ACTION: {DISTRACTOR_1_INSTRUCTION}
+
+DISTRACTOR 2 (wrong for THIS student):
+  ACTION: {DISTRACTOR_2_INSTRUCTION}
+
+DISTRACTOR 3 (wrong for THIS student):
+  ACTION: {DISTRACTOR_3_INSTRUCTION}
+
+────────────────────────────────
+OUTPUT
+────────────────────────────────
+
+Output ONLY valid JSON.
+
+{
+  "correct_adapted":      "<correct option, surface-aligned; mechanism preserved>",
+  "distractor_1_adapted": "<distractor 1, surface-aligned; wrongness preserved>",
+  "distractor_2_adapted": "<distractor 2, surface-aligned; wrongness preserved>",
+  "distractor_3_adapted": "<distractor 3, surface-aligned; wrongness preserved>",
+  "edit_level": "<one of: 'none' | 'surface' | 'light' | 'fuller'>",
+  "edit_notes": "<one short sentence summarizing what surface terms you swapped, or 'no change'>"
+}

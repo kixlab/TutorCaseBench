@@ -298,3 +298,42 @@ Each student category is assigned one of five challenge types, representing the 
 | Rubrics — immediate | 321 |
 | Rubrics — long-term | 322 |
 | MCQs | 1,727 |
+
+---
+
+## 🛠️ Pipeline Code
+
+The data construction pipeline used to build this benchmark is located in the `benchmark_code/` folder.
+
+### Key Files
+
+| File | Description |
+|------|-------------|
+| `main.py` | Runs Pipelines 1–5 sequentially on a single PDF — screen, analyze, extract, build scenario, synthesize dialogue, and collect model responses |
+| `evaluation_pipeline.py` | Generates per-category rubrics and evaluates collected model responses using a 0/1 checklist rubric |
+| `quaternary_pipeline.py` | Builds 4-option MCQ questions via embedding-based distractor selection, runs models, and summarizes accuracy |
+| `run_evaluation.py` | Batch runner that auto-discovers all response files and runs evaluation_pipeline.py across all categories |
+| `run_study_group.py` | Top-level orchestrator: runs the full pipeline on a PDF directory, then proceeds to rubric generation and evaluation |
+
+### Directory Structure
+
+```
+benchmark_code/
+├── main.py
+├── evaluation_pipeline.py
+├── quaternary_pipeline.py
+├── run_evaluation.py
+├── run_study_group.py
+│
+├── config/
+│   ├── config_default_model.json    # Default LLM per pipeline stage
+│   ├── config_filter.json           # Eligibility thresholds and scenario count
+│   ├── config_dialogue_turn.json    # Dialogue turn count range
+│   ├── config_response.json         # Models for response collection
+│   └── config_evaluation.json       # Models for rubric generation and evaluation
+│
+├── prompts/                         # {KEY}-style prompt templates for each pipeline stage
+└── utils/                           # PDF extraction, LLM calls, prompt building, file I/O
+```
+
+For full usage instructions, see `benchmark_code/README.md`.

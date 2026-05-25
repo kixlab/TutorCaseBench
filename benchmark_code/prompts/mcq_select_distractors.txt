@@ -1,0 +1,76 @@
+You are picking 3 distractors for a multiple-choice tutoring question.
+
+The CORRECT option is one effective intervention for THIS student in THIS dialogue.
+The OTHER EFFECTIVE interventions listed below are also correct answers for the same
+student per the source paper.
+
+You get up to 10 candidates, each a real effective intervention from a different
+scenario. They were already embedding-filtered to be context-similar but
+behavior/intervention-different, so almost all are usable as-is.
+
+────────────────────────────────
+BE LENIENT
+────────────────────────────────
+
+A distractor only needs to be a plausible-sounding tutor action that is WRONG for
+THIS student. That is a low bar — most candidates clear it.
+
+Pick the 3 best. ALWAYS return exactly 3.
+
+Reject a candidate ONLY if one of these is true (rare, since embedding already
+filtered):
+
+  1. STRUCTURALLY IMPOSSIBLE ACTION — the action's core mechanism depends on a setting
+     structure that does not exist in this scenario and cannot be created by a wording
+     swap (e.g. target is a 1-on-1 session but the action IS "rotate the student
+     across several small groups"; target is a single immediate moment but the action
+     IS "run a multi-week sequenced project"). A merely different subject, textbook,
+     tool, or material is NOT a reason — those are freely rewritten downstream by the
+     adapter (math textbook → English textbook, worksheet → whiteboard, etc.). Reject
+     only when keeping the mechanism would be incoherent in this setting.
+
+  2. TOO CLOSE TO CORRECT — its action is essentially the same (just reworded) as the
+     CORRECT option or any OTHER EFFECTIVE intervention.
+
+Anything else is a fine distractor — including ones that address a different student
+problem, use a quite different approach, or are only a so-so fit. Do NOT reject those.
+
+If rejecting leaves fewer than 3 clean candidates, still return 3 — fill the remaining
+slots with the least-bad rejected ones and list those slots in `forced_idxs`. Leave it
+empty if all 3 are clean.
+
+────────────────────────────────
+INPUT
+────────────────────────────────
+
+TARGET DIALOGUE:
+{DIALOGUE}
+
+TARGET STUDENT PERSONA:
+{STUDENT_PERSONA}
+
+TARGET SCENARIO CONTEXT (task, environment, materials, social setting):
+{TARGET_CONTEXT}
+
+RESPONSE TYPE: {RESPONSE_TYPE}
+
+CORRECT INTERVENTION (the labeled correct answer — do not select):
+{CORRECT_INTERVENTION}
+
+OTHER EFFECTIVE INTERVENTIONS (also correct for this student per the source paper):
+{SIBLING_INTERVENTIONS}
+
+CANDIDATE DISTRACTORS (0-indexed, each from a different scenario):
+{CANDIDATE_DISTRACTORS}
+
+────────────────────────────────
+OUTPUT
+────────────────────────────────
+
+Output ONLY valid JSON.
+
+{
+  "kept_idxs": [<int>, <int>, <int>],   // EXACTLY 3
+  "forced_idxs": [<int>, ...],          // subset of kept_idxs rejected by rule 1 or 2 but kept to reach 3; [] if all clean
+  "reason": "<one short sentence>"
+}

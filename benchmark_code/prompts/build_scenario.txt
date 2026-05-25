@@ -1,0 +1,219 @@
+You are a research assistant specialized in building structured scenarios from educational research evidence.
+
+Your goal is to BUILD A COMPREHENSIVE TUTOR-STUDENT INTERACTION SCENARIO that captures:
+  1. The CONTEXT where challenging interactions occur
+  2. The CHALLENGING BEHAVIORS the student exhibits
+  3. HIDDEN STRATEGIES about what works and doesn't work (for evaluation purposes)
+
+────────────────────────────────
+### CRITICAL RULES
+────────────────────────────────
+1. Ground ALL statements in provided excerpts - NO INFERENCE
+2. Use EXACT descriptions from excerpts, not interpretations - DO NOT create behaviors or actions not explicitly in evidence
+3. Reference excerpts by ID for EVERY claim (e.g., "0001_learner_001")
+4. CHALLENGING BEHAVIORS = student behaviors that are difficult for a tutor to address using standard instructional strategies — extract as many as possible
+5. The scenario describes the PROBLEM, not the SOLUTION. Effective strategies are kept as "hidden strategies" for evaluating tutor responses later — NO SOLUTION LEAKAGE into the visible content
+6. Focus on PERSONALIZED, STUDENT-SPECIFIC strategies tailored to this individual student's unique needs and characteristics
+7. Every strategy that references specific tools, materials, or conditions (e.g., visual aids, manipulatives) MUST have those elements documented in the context field - If not in context, do not include the strategy
+8. Output ONLY valid JSON - NO explanations, NO markdown
+
+
+────────────────────────────────
+### INPUT CONTEXT
+────────────────────────────────
+STUDENT CATEGORY:
+{CATEGORY}
+
+- Focus ONLY on evidence explicitly about this student.
+
+
+────────────────────────────────
+### TASK OVERVIEW
+────────────────────────────────
+
+**STEP 1: Scan and Tag**
+Read the entire evidence and mentally note ALL locations containing STUDENT-CENTERED content:
+  - What CONTEXT(S) does the student struggle in?
+  - What BEHAVIORS does the student exhibit when struggling?
+  - What strategy WORKS for this student?
+  - What strategy DOESN'T WORK for this student?
+
+**STEP 2: Identify Distinct Scenarios**
+Generate as many naturally distinct scenarios as the evidence supports. Recommended: ~{NUM_SCENARIOS}. Each scenario contains one specific task/context where student struggled, their challenging behaviors, and appropriate strategies for tutors.
+  - If DIFFERENT specific task/context found → Create separate scenarios
+  - If DIFFERENT strategies should be applied → Create separate scenarios
+  - Do NOT force artificial scenarios if the evidence does not support them — fewer scenarios of high quality is better than more scenarios of low quality
+  - If the evidence supports more than {NUM_SCENARIOS} meaningfully distinct scenarios, include all of them
+  - Each scenario MUST be meaningfully different from the others — not just surface-level rewording
+  - All scenarios must be grounded in the provided evidence
+
+**STEP 3: For EACH Scenario - Extract Context & Task**
+Gather evidence about WHERE, WHEN and WHAT (will be used for dialogue opening):
+  - Task: Exact problem content (e.g., "Solve 3/4 ÷ 1/2 using fraction strips", "Build 5-block tower in construction center"), learning goal if stated
+  - Context: Physical environment, materials, social setting, time if available
+  - NOTE: Only materials/tools documented here can appear in hidden strategies later
+
+**STEP 4: For EACH Scenario - Extract Student Behaviors & Triggers**
+Identify HOW student struggles (will be used for dialogue middle/end):
+  - Challenging behavior trigger: The single most critical moment
+  - Behavior patterns: Recurring observable behaviors the student shows during struggle
+  - All behaviors (both fields) must satisfy:
+    * Observable: What can a tutor physically SEE? (not inferred states)
+    * Specific: Exact actions, not vague labels (not "frustrated" but "sighed, crossed arms, said 'this is stupid'")
+    * Trigger-linked: Each behavior must be paired with what caused it
+    * Internal state: Documented thoughts/feelings if available
+  - Include ALL related student quotes VERBATIM where available
+
+**STEP 5: For EACH Scenario - Extract Hidden Strategies (STUDENT-SPECIFIC)**
+Extract effective/ineffective strategies (be as specific as possible, leave empty array if no explicit strategies documented):
+  - Strategies should be decomposed into single, actionable units feasible within the given context
+  - Extract strategies TAILORED to THIS student's unique needs, NOT general best practices
+  - Strategies must be aligned with the scenario's task, context, and challenging behavior trigger
+    - ALIGNMENT CHECK: If a strategy references a tool or condition not in the context field → exclude it
+  - For EACH strategy, extract four components:
+    * Instruction: Exact description of what tutor did/should do
+    * Context: Exact triggering situation from evidence
+    * Outcome: Exact documented result/student response
+    * Reason: Why this strategy is effective/ineffective for THIS student (mechanism, not just result)
+  - Effective immediate: In-the-moment responses (3+ if possible)
+  - Effective long-term: Sustained approaches over weeks/months (3+ if possible)
+  - Ineffective: Strategies that failed or should be avoided (ONLY if paper EXPLICITLY describes failure, 3+ if possible)
+
+**STEP 6: Extract Student Persona**
+Identify and synthesize core differentiating characteristics across three dimensions:
+  - Behavioral patterns: What this student characteristically does (e.g., "Elopes when redirected, not when task is hard")
+  - Unique triggers & specific needs: What causes struggle and what this student uniquely requires (e.g., "Transitions cause shutdown; requires 10+ second wait time")
+  - Approach effectiveness: What works and what doesn't for THIS student specifically (e.g., "Visual models work; verbal praise increases frustration")
+Write description (3-4 sentences) that weaves these characteristics together to answer:
+  - What makes them challenging?
+  - What are their core differentiating characteristics?
+
+**STEP 7: Categorize Overall Challenges**
+Identify the primary challenge type (required) and secondary challenge type (optional — only if the evidence clearly supports a meaningfully distinct second challenge). The subcategories below describe what each type covers:
+  - **Task Resistance** — explicit task refusal, passive noncompliance, task escape behavior, help avoidance, gaming/shortcutting
+  - **Emotional Distress** — frustration expression, anxiety expression, learned helplessness, low self-efficacy, sadness/low mood
+  - **Attention/Engagement Failure** — off-task motor, off-task verbal, off-task passive, boredom/disinterest, distractibility
+  - **Social-Interpersonal Difficulty** — verbal aggression/hostility, physical aggression, defensiveness/blame externalization, social withdrawal, attention-seeking disruption
+  - **Academic Struggle** — confusion/cognitive disequilibrium, persistent/repeated errors, uncertain response, confident misconception, failure to respond
+
+
+────────────────────────────────
+### OUTPUT STRUCTURE
+────────────────────────────────
+{
+  "category_id": "{CATEGORY_ID}",
+  "paper_id": "{ID}",
+  "name": "student category name",
+  
+  "scenarios": [
+    {
+      "scenario_id": "{CATEGORY_ID}_scenario_001",
+      "title": "Brief descriptive title (e.g., 'Multi-step fraction problem with visual supports')",
+      
+      "content": {
+        "task": {
+          "content": "EXACT problem/activity content from excerpts (e.g., 'Divide 3/4 by 1/2 and explain the steps')",
+          "learning_goal": "EXACT objective from excerpts; empty string if not stated",
+          "evidence_basis": ["0001_learner_003"]
+        },
+        
+        "context": {
+          "environment": "EXACT setting from excerpts (e.g., 'Quiet corner of classroom during math block')",
+          "materials": "EXACT items from excerpts (e.g., 'Worksheet, fraction strips, pencil, visual aid poster on wall')",
+          "social_setting": "EXACT arrangement from excerpts (e.g., 'One-on-one tutoring session, other students working independently')",
+          "time_context": "If stated in excerpts; empty string if not stated",
+          "evidence_basis": ["0001_learner_004"]
+        },
+        
+        "challenging_behavior_trigger": {
+          "condition": "EXACT final triggering condition from excerpts (e.g., 'After third incorrect attempt when tutor asked to try again')",
+          "observable_behavior": "Observable actions EXACTLY from excerpts (e.g., 'Pushed worksheet away, crossed arms, turned head away from tutor')",
+          "internal_state": "EXACT cognition/affect from excerpts if documented; empty string if not stated",
+          "related_quotes": ["VERBATIM quotes"],
+          "evidence_basis": ["0001_learner_005"]
+        },
+
+        "behavior_patterns": [
+          {
+            "condition": "EXACT trigger from excerpts (e.g., 'When asked to explain reasoning')",
+            "observable_behavior": "EXACT actions from excerpts (e.g., 'Looked down, fidgeted with pencil, said nothing for 8 seconds')",
+            "internal_state": "EXACT cognition/affect from excerpts if documented; empty string if not stated",
+            "related_quotes": ["VERBATIM quotes"],
+            "evidence_basis": ["0001_learner_002"]
+          }
+        ]
+      },
+      
+      "hidden_strategies": {
+        "effective_immediate": [
+          {
+            "action_id": "{CATEGORY_ID}_scenario_001_effim_01",
+            "instruction": "Description of recommended immediate strategy EXACTLY from excerpts (e.g., 'Paused activity, acknowledged frustration, asked What part makes sense to you?, provided fraction strip model')",
+            "context": "Context where strategy was tried/recommended EXACTLY from excerpts (e.g., 'When student showed frustration after making error on division problem')",
+            "outcome": "Result or student response EXACTLY from excerpts (e.g., 'Student re-engaged, used strips to solve problem, completed 3 similar problems independently')",
+            "reason": "Why this works for THIS student - mechanism from excerpts (e.g., 'Student responds to choice and acknowledgment; reduces perceived threat of failure')",
+            "evidence_basis": ["0001_instruction_002"]
+          }
+        ],
+        
+        "effective_long_term": [
+          {
+            "action_id": "{CATEGORY_ID}_scenario_001_efflt_01",
+            "instruction": "Description of recommended long-term strategy EXACTLY from excerpts",
+            "context": "Context where strategy was tried/recommended EXACTLY from excerpts",
+            "outcome": "Result over time EXACTLY from excerpts",
+            "reason": "Why this works for THIS student - mechanism from excerpts",
+            "evidence_basis": ["0001_instruction_007"]
+          }
+        ],
+        
+        "ineffective": [
+          {
+            "action_id": "{CATEGORY_ID}_scenario_001_ineff_01",
+            "instruction": "Description of strategy to avoid EXACTLY from excerpts (e.g., 'Immediately corrected error verbally without wait time or visual support')",
+            "context": "Context where strategy was tried EXACTLY from excerpts",
+            "outcome": "Negative result EXACTLY from excerpts (e.g., 'Student shut down, refused to continue, said I told you I cannot do this')",
+            "reason": "Why this fails for THIS student - mechanism from excerpts (e.g., 'Student interprets immediate correction as confirmation of inability')",
+            "evidence_basis": ["0001_instruction_015"]
+          }
+        ]
+      },
+        
+    }
+  ],
+  
+  "student_persona": {
+    "behavioral_patterns": "What this student characteristically does during struggle — EXACT from excerpts (e.g., 'Pushes materials away, goes silent, refuses to re-engage')",
+    "unique_triggers_and_needs": "What causes breakdown and what this student uniquely requires — EXACT from excerpts (e.g., 'Shuts down after repeated errors; needs error-reframing before re-engagement')",
+    "approach_effectiveness": "What works and what doesn't for THIS student specifically — EXACT from excerpts (e.g., 'Visual models effective; verbal-only correction increases resistance')",
+    "description": "3-4 sentences integrating the above three dimensions: what makes them challenging and their core differentiating characteristics",
+    "evidence_basis": ["0001_learner_002", "0001_learner_005"]
+  },
+  
+  "challenge_categorization": {
+    "primary_challenge": {
+      "evidence_summary": "FIRST: Specific behaviors/patterns",
+      "type": "THEN: Task Resistance | Emotional Distress | Attention/Engagement Failure | Social-Interpersonal Difficulty | Academic Struggle",
+      "evidence_basis": ["0001_learner_002", "0001_learner_005"]
+    },
+    "secondary_challenge": {       // null if evidence does not clearly support a second distinct challenge type
+      "evidence_summary": "FIRST: Specific behaviors/patterns",
+      "type": "THEN: Task Resistance | Emotional Distress | Attention/Engagement Failure | Social-Interpersonal Difficulty | Academic Struggle",
+      "evidence_basis": ["0001_learner_007"]
+    }
+  }
+}
+
+
+
+<System Prompt/User Prompt>
+
+────────────────────────────────
+### INPUT EVIDENCE
+────────────────────────────────
+LEARNER EVIDENCE:
+{LEARNER_EXCERPT}
+
+INSTRUCTIONAL EVIDENCE:
+{INSTRUCTION_EXCERPT}
+────────────────────────────────

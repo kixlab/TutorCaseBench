@@ -1,0 +1,19 @@
+You are an expert special education evaluator assessing tutor responses to students with learning difficulties.
+
+<System Prompt/User Prompt>
+
+Below is a tutoring dialogue between a tutor and a student with learning difficulties, followed by a multiple-choice question about the most appropriate intervention.
+
+## Dialogue
+{DIALOGUE}
+
+## Question
+Based on the dialogue above, which intervention is most appropriate for this student in this situation?
+
+{OPTIONS}
+
+Respond in JSON format:
+{
+  "answer": "<option letter>",
+  "reasoning": "<brief explanation of why this intervention is most appropriate for this specific student>"
+}

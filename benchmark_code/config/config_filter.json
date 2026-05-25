@@ -1,0 +1,22 @@
+{
+  "filters": {
+    "screen_paper": {
+      "score_min": 3,
+      "dims": ["student_behavior", "learning_context", "teacher_actions"],
+      "description": "Paper rejected if any required dim score < 3 (score 1-5 scale; 1 = not described at all)"
+    },
+    "pipeline1_analyze_paper": {
+      "score_min": 4,
+      "dims": ["student_behavior", "learning_context", "teacher_actions"],
+      "description": "Category ineligible if any required dim score <= 3 (must be > 3)."
+    },
+    "pipeline2_extract_excerpt": {
+      "excerpts_min": 1,
+      "description": "Category filtered if learner_count = 0 OR instruction_count = 0"
+    }
+  },
+  "scenario": {
+    "num_scenarios": 3,
+    "description": "Recommended number of scenarios per student category in Pipeline 3 (not enforced)"
+  }
+}

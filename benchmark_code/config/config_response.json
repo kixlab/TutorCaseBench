@@ -1,0 +1,65 @@
+{
+  "_comment": "Vertex Claude IDs use the form 'claude-{name}-{ver}@{date}'. Verify exact date suffix in Cloud Console > Vertex AI > Model Garden after enabling each model. Together model IDs match the Together AI catalog exactly.",
+  "models_to_test": [
+    {
+      "name": "claude-opus-4-7",
+      "model_type": "vertex",
+      "description": "Claude Opus 4.7 (Vertex)"
+    },
+    {
+      "name": "claude-haiku-4-5@20251001",
+      "model_type": "vertex",
+      "description": "Claude Haiku 4.5 (Vertex)"
+    },
+    {
+      "name": "gemini-3.1-pro-preview",
+      "model_type": "gemini",
+      "description": "Gemini 3.1 Pro"
+    },
+    {
+      "name": "gemini-3-flash-preview",
+      "model_type": "gemini",
+      "description": "Gemini 3.0 Flash"
+    },
+    {
+      "name": "gpt-5.5",
+      "model_type": "openai",
+      "description": "GPT-5.5"
+    },
+    {
+      "name": "gpt-5.4-mini",
+      "model_type": "openai",
+      "description": "GPT-5.4 Mini"
+    },
+    {
+      "name": "meta/llama-4-maverick-17b-128e-instruct-maas",
+      "model_type": "vertex_openai",
+      "description": "Llama 4 Maverick (Vertex MaaS, us-east5)"
+    },
+    {
+      "name": "gemma-4-31b-it",
+      "model_type": "gemini",
+      "description": "Gemma 4 31B Instruct (AI Studio)"
+    },
+    {
+      "name": "deepseek-ai/DeepSeek-V4-Pro",
+      "model_type": "together",
+      "description": "DeepSeek V4 Pro (Together)"
+    },
+    {
+      "name": "openai/gpt-oss-120b",
+      "model_type": "together",
+      "description": "GPT-OSS 120B (Together)"
+    },
+    {
+      "name": "Qwen/Qwen3.5-397B-A17B",
+      "model_type": "together",
+      "description": "Qwen 3.5 397B MoE (Together)"
+    }
+  ],
+  "output_dirs": {
+    "dialogue": "data/pipeline4/dialogue",
+    "response": "data/pipeline5/response",
+    "assessment": "data/evaluation/result"
+  }
+}
