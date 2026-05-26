@@ -601,7 +601,7 @@ pip install google-auth google-auth-httplib2  # for Vertex OpenAI (partner MaaS)
 
 ```bash
 # 1. Set up environment
-cp env.local .env.local    # fill in API keys
+vi .env.local    # fill in API keys
 
 # 2. Place PDFs
 mkdir -p data/docs
