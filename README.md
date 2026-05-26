@@ -301,6 +301,14 @@ Each student category is assigned one of five challenge types, representing the 
 
 ---
 
+## 📜 Source Documents
+
+Source documents were identified through ERIC (Education Resources Information Center), a U.S. Department of Education database for education research. We used only publicly accessible full-text materials reachable via ERIC or linked DOI/publisher pages. Copyright remains with the original authors and publishers; materials were used solely for non-commercial academic research. The released benchmark consists entirely of LLM-synthesized dialogues, rubrics, and MCQ items — no source texts or intermediate extraction artifacts are redistributed.
+
+The full paper list is in `document_list.csv`. The `in_dataset` column marks with `"O"` the papers whose cases were included in the benchmark.
+
+---
+
 ## 🛠️ Pipeline Code
 
 The data construction pipeline used to build this benchmark is located in the `benchmark_code/` folder.
