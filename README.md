@@ -288,7 +288,7 @@ Each student category is assigned one of five challenge types, representing the 
 
 | Unit | Count |
 |---|---|
-| Source papers | 410 |
+| Source papers | 414 |
 | Papers used in dataset (filtered for dialogue synthesis) | 209 |
 | Student categories | 335 |
 | Scenarios | 621 |
