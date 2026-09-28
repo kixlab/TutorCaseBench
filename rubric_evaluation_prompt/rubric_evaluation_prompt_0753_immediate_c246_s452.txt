@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Specific Socratic Questioning
+  Check: The tutor asks specific, targeted questions about individual lines, components, or steps rather than broad, general questions like 'what does this do?'.
+
+Criterion 2: Predict-Confront-Resolve Cycle
+  Check: When the student is experimenting or facing an error, the tutor prompts them to predict an outcome, observe the result, and explain the discrepancy.
+
+Criterion 3: Code-Centric Initiation
+  Check: The tutor allows or encourages the student to begin tasks directly in code or by modifying examples, without demanding a written plan or abstract pseudocode first.
+
+Criterion 4: Explicit Processing Time
+  Check: The tutor asks only one question at a time and avoids rapid-fire prompting, explicitly providing space or encouragement for the student to take their time.
+
+Criterion 5: Targeted Direct Instruction of Syntax
+  Check: The tutor explicitly isolates and explains the core structural components of the code when the student shows confusion, rather than relying solely on discovery.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This learner with ADHD prefers hands-on 'hacking' and trial-and-error over formal planning, often struggling to start tasks despite understanding the end goal. They are easily overwhelmed by complex code demonstrations, which leads to rote copying and attention drift, and they respond to vague questions with vague answers. They uniquely require highly structured, chunked instruction, specific step-by-step Socratic questioning, and guided experimentation directly in code.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For this application phase, your task is to write a program that calculates an average. Please write down on paper what you have to do first.
+
+STUDENT: I get the idea of what an average is, but I don't want to write it down. I prefer to hack it with your code as an example.
+
+TUTOR: Okay, go ahead and try it on the computer.
+
+STUDENT: I'm putting in three numbers and trying division by zero. I like experimenting and seeing what happens.
+
+TUTOR: What is happening with your code now?
+
+STUDENT: It's just giving errors. I know what is expected for the average, but I really do not know where to start to actually build it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Calculating an average",
+      "learning_goal": "Practicing the newly-learnt skill"
+    },
+    "context": {
+      "environment": "Application phase",
+      "materials": "Paper, code as an example",
+      "social_setting": "Individual learners practicing",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When starting a new programming task",
+      "observable_behavior": "Preferred to hack it with my code as an example",
+      "internal_state": "Got the idea of what is expected and what an average is, but did not know where to start",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experimenting with code",
+        "observable_behavior": "Started experimenting with three numbers and division by zero",
+        "internal_state": "Liked experimenting and seeing what happens",
+        "related_quotes": [
+          "experimenting and seeing what happens"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

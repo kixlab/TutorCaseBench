@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Alternative Study Methods
+  Check: The tutor explicitly allows, encourages, or facilitates the student's requested alternative study methods (e.g., reading aloud, using summaries, flow charts) instead of forcing traditional textbook reading.
+
+Criterion 2: Normalization of Disability
+  Check: The tutor's language treats the student's need for accommodations as natural and acceptable, completely avoiding comparisons to other students or expectations of uniform performance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly determined and unapologetic about their disability, relying heavily on compensatory work-arounds like summaries, flow charts, and audio rather than traditional reading. They view accommodations as a fundamental right and are deeply triggered by expectations to perform uniformly without support. They uniquely require tutors to treat their disability naturally, validate their alternative study methods, and strictly adhere to diagnostic recommendations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's get started on preparing for the matriculation exam. Please open the textbook to page 45 and read the chapter on the industrial revolution.
+
+STUDENT: I prefer not to read the textbook at all. I brought the summaries my friend wrote and some flow charts we can use instead.
+
+TUTOR: The textbook has the full information you need to know. Go ahead and read the first few paragraphs.
+
+STUDENT: I can prepare for this without opening a book. I usually just speak aloud to myself to memorize the summaries, or you can read the text aloud to me.
+
+TUTOR: Everyone else just reads the textbook directly to study. You need to do the same to get through the material.
+
+STUDENT: I'm not going to say sorry for needing to be read aloud to. It is a thing that I deserve, and I will really insist on my rights to use these accommodations.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Studying from textbooks and course materials for high school subjects, including memorization and reading tasks",
+      "learning_goal": "Preparing for the matriculation examination"
+    },
+    "context": {
+      "environment": "High school environment during the final year (12th grade)",
+      "materials": "Textbooks, summaries written by friends or teachers, flow charts, tape-recorder",
+      "social_setting": "Independent or peer-assisted study sessions",
+      "time_context": "Final year (12th grade) while preparing for matriculation exams"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to perform like everyone else and read textbooks directly",
+      "observable_behavior": "Preferred not to read textbooks at all, insisted on rights (accommodations) like being read to aloud, and would speak aloud to themselves to memorize",
+      "internal_state": "Regarded themselves not as handicapped, but as having a certain degree of handicap which entitled them to special rights; not apologetic about their disability",
+      "related_quotes": [
+        "I really insisted. I knew that this was what I deserved and needed, and slowly I began to use things like extra time.",
+        "The student does not always have to run … bring the tape-recorder and say sorry for needing to be read aloud to. No! It is a thing that he deserves."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When preparing for the matriculation examination",
+        "observable_behavior": "Finds ways of preparing 'without opening a book', using summaries written by friends or teachers, and flow charts",
+        "internal_state": "High expectations of themselves and their performance, and work hard to achieve this",
+        "related_quotes": []
+      },
+      {
+        "condition": "When memorizing and checking knowledge",
+        "observable_behavior": "Would speak aloud to themselves to memorize and benefit from studying with a friend to check 'what I know and what I don't'",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

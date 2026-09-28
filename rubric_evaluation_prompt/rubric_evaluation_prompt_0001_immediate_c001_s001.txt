@@ -22,17 +22,14 @@ A tutor response does not need to satisfy every criterion to be considered accep
 ### RUBRIC (variable-length checklist)
 ────────────────────────────────
 
-Criterion 1: Conditional Task Continuation
-  Check: The tutor allows the student to retain or finish incomplete work by establishing a specific condition or boundary (e.g., 'you can keep it if...').
+Criterion 1: Task Completion Allowance
+  Check: The tutor's response must offer SD a specific alternative time or method to completely finish his current task (e.g., during a break, at lunch) rather than forcing him to submit it incomplete.
 
-Criterion 2: Preferred-Activity Transition Bridging
-  Check: The tutor motivates a transition by explicitly promising a highly preferred activity or person immediately following the completion of the current task.
+Criterion 2: Future-Anchored Transitions
+  Check: The tutor's response must frame the requested transition by explicitly stating a preferred future activity or clear routine that will happen immediately after he complies.
 
 Criterion 3: Environmental De-escalation
-  Check: The tutor directs or escorts the student to a separate, quiet environment away from the trigger to calm down during an active outburst.
-
-Criterion 4: Explicit Sequential Clarity
-  Check: The tutor provides a clear, unambiguous sequence of immediate actions without vague language to guide the student through a transition.
+  Check: If SD is actively having a fit or meltdown, the tutor must suggest or initiate moving him to a different, quieter room or space to calm down.
 
 
 ────────────────────────────────
@@ -62,63 +59,53 @@ Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one ent
 ### STUDENT CONTEXT
 ────────────────────────────────
 
-This student experiences intense emotional distress, physical tantrums, and sudden anger triggered by transitions, perceived loss of time, and unmet expectations. His profound perfectionism makes it nearly impossible for him to submit incomplete work without a breakdown. He uniquely requires conditional autonomy to finish tasks, highly structured routines, and transitions bridged by preferred activities to maintain emotional regulation.
+SD is a gifted student with extreme perfectionism, depression, and impulse control disorder who experiences severe emotional distress and anger fits when interrupted before completing a task. He uniquely requires allowances to finish his work completely, highly predictable routines anchored by preferred activities, and environmental changes to de-escalate during meltdowns.
 
 
 ────────────────────────────────
 ### DIALOGUE (situation the tutor is responding to)
 ────────────────────────────────
 
-TUTOR: Here is the working paper consisting of mind-games. Please start working on the questions.
+TUTOR: The application time is over. Please pass your mind-games working papers to the front so we can get ready for lunch.
 
-STUDENT: (Erases and re-writes over and over again, working on the details) I am not finished yet.
+STUDENT: (Holding onto the paper) I am not returning it. I have to answer all of the questions.
 
-TUTOR: Keep working on it. We will be breaking off for lunch soon.
+TUTOR: Just hand in what you have finished so far.
 
-STUDENT: (In a high voice) I cannot do it but I will!
+STUDENT: No! I will solve all the questions. I am not ending the activity without completing all of them.
 
-TUTOR: The application is over now. Please return your paper so we can go to lunch.
+TUTOR: It is time for lunch now, you need to give me the paper.
 
-STUDENT: (Starts crying) I will not return my paper unless I solve all the questions! I cannot do it but I will!
+STUDENT: (Starts crying loudly) I will not return my paper unless I solve all the questions! I cannot do it but I will!
 
 FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
 Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
 {
   "content": {
     "task": {
-      "content": "Completing a working paper consisting of mind-games",
+      "content": "Working paper consisting of mind-games prepared under three groups with varying levels of difficulty",
       "learning_goal": ""
     },
     "context": {
-      "environment": "Development and Science Program",
-      "materials": "Working paper",
-      "social_setting": "Working with researchers, friends nearby",
-      "time_context": "Right before breaking off for lunch"
+      "environment": "Classroom during the Development and Science Program",
+      "materials": "Working paper consisting of mind-games",
+      "social_setting": "Group setting with other students",
+      "time_context": "When the application was over, right before lunch"
     },
     "challenging_behavior_trigger": {
       "condition": "When the application was over and he was asked to return his paper",
-      "observable_behavior": "SD did not want to return his paper and started crying that he would not return his paper unless he solved all the questions. Saying in a high voice 'I cannot do it but I will!'",
-      "internal_state": "Perfectionism and distress over incomplete work",
+      "observable_behavior": "Did not want to return his paper and started crying that he would not return his paper unless he solved all the questions. In a high voice, saying 'I cannot do it but I will!'",
+      "internal_state": "Perfectionism",
       "related_quotes": [
         "I cannot do it but I will!"
       ]
     },
     "behavior_patterns": [
       {
-        "condition": "When drawing and feeling his work isn't good enough",
-        "observable_behavior": "He erased and re-drawn over and over again, working on the details, and said: 'I am not finished yet.'",
-        "internal_state": "",
-        "related_quotes": [
-          "I am not finished yet."
-        ]
-      },
-      {
-        "condition": "Before starting a drawing/painting task",
-        "observable_behavior": "Told us that he was not able to draw/paint",
-        "internal_state": "Excited but anxious about performance",
-        "related_quotes": [
-          "My drawing/picture may be not-so-good and maybe you do not like it."
-        ]
+        "condition": "When he has not ended the activity without completing all of the questions",
+        "observable_behavior": "Cried until he answered all of the questions",
+        "internal_state": "Perfectionism",
+        "related_quotes": []
       }
     ]
   }

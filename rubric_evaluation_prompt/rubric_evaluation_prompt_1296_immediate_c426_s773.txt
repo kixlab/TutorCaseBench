@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Movement Choices
+  Check: The tutor's response must include presenting visual choices (e.g., picture cards) for a specific movement action (e.g., hopping, walking) to initiate the transition.
+
+Criterion 2: Peer-Mediated Delivery
+  Check: The tutor's response must involve a peer in delivering the transition prompt or choices, rather than an adult directly enforcing it.
+
+Criterion 3: Avoidance of Verbal-Only Directives
+  Check: The tutor must NOT rely solely on verbal commands or reminders to initiate the transition.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jose is a happy, deeply engaged preschooler who struggles significantly with transitions, often taking over 8 minutes to switch activities. He becomes upset and resistant when given standard verbal reminders, uniquely requiring visual choice cards for movement actions (often delivered by peers) to transition smoothly without power struggles.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jose, it is time to stop your current activity and move to the next activity.
+
+STUDENT: (Remains calm and deeply engaged in his activity, not stopping to move toward the next activity.)
+
+TUTOR: Please stop what you are doing and walk over here.
+
+STUDENT: (Continues his activity without stopping, taking a long time to begin the transition.)
+
+TUTOR: Jose, this is a verbal reminder that you need to move to the next activity now.
+
+STUDENT: (Gets upset at the verbal reminder and does not stop his current activity, making the transition take even longer.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Stop current activity and move (e.g., walks, crawls, hops) toward the next planned or familiar activity",
+      "learning_goal": "Decrease the time between a visual prompt and the time it takes Jose to stop and move toward an activity (e.g., less than a 5-min average)"
+    },
+    "context": {
+      "environment": "Preschool classroom",
+      "materials": "Two picture cards with a movement action (e.g., walks, hops), visual supports, transition cues, choice board, first/then board",
+      "social_setting": "Interacting with a teacher or a peer during classroom routines",
+      "time_context": "During transitions between activities"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When given a verbal reminder to transition",
+      "observable_behavior": "Gets upset and the transition seems to take longer",
+      "internal_state": "Upset",
+      "related_quotes": [
+        "When we give him a verbal reminder, he gets upset and the transition seems to take longer."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When prompted to transition to a planned activity",
+        "observable_behavior": "Does not stop his current activity and move (e.g., walks, crawls, hops) toward the next activity, taking an average of 8 min 6 s to begin transitions",
+        "internal_state": "Calm and deeply engages in activities",
+        "related_quotes": [
+          "Jose is calm and deeply engages in activities but sometimes it takes Jose a long time to stop doing an activity and move toward the next activity."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Trauma-Informed Root Cause Focus
+  Check: The tutor's long-term plan includes strategies to help Archie process unresolved feelings or trauma rather than solely focusing on surface-level behavior modification.
+
+Criterion 2: Small-Group Setting Prioritization
+  Check: The tutor's plan explicitly places Archie in small-group or one-on-one settings and avoids whole-class intervention approaches.
+
+Criterion 3: Self-Compassion Cultivation
+  Check: The tutor's plan incorporates explicit exercises, reflections, or goals designed to build Archie's self-compassion and reframe his self-identity positively.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Archie is a Year 8 student whose aggressive behaviors, such as throwing chairs and confronting teachers, stem from unresolved trauma and a loss of identity following a past accident. He struggles with fragmented narratives and polarized emotional expressions, often feeling judged by teachers. He uniquely requires interventions that build self-compassion and allow him to lead discussions in small-group or one-on-one settings, as he is not yet capable of non-judgmental awareness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's reflect on our mindfulness exercises today. How have things been going for you since we started these sessions with Samantha, Victor, and James?
+
+STUDENT: I’ve been more calmer, like, before Mindfulness started, well on this thing with (Ch) I’d be raging I’d be throwing chairs about I’d be, hurting people.
+
+TUTOR: Keep going.
+
+STUDENT: But everyone else would be in there like, Samantha, Victor, and James and you, and it’s just really helped, like loads.
+
+TUTOR: How do you view the actions of the other people at school now?
+
+STUDENT: They are just entirely bad and always doing things to mess me up. I'm doing the right things now, but their actions are completely against me.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Teaching of Mindfulness principles, Mindfulness exercises, and poems aimed at promoting reflection and reinforcement of Mindfulness concepts.",
+      "learning_goal": "Promoting reflection and reinforcement of Mindfulness concepts."
+    },
+    "context": {
+      "environment": "Secondary school setting",
+      "materials": "Poems, journal for homework",
+      "social_setting": "Small group intervention with specific peers (Samantha, Victor, and James)",
+      "time_context": "12 hour long sessions, which were generally delivered twice-weekly"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Following the Mindfulness intervention when evaluating personal intentions and the actions of others",
+      "observable_behavior": "Continued to used polarised language to describe his feelings and continued to judge others' actions as being detrimental towards him.",
+      "internal_state": "Had not yet developed the ability to pay non-judgemental awareness.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When considering a whole-class approach to intervention",
+        "observable_behavior": "Felt they would not have benefitted from a whole-class approach to intervention.",
+        "internal_state": "Feels more comfortable and perceives the intervention as more beneficial to their specific needs in small groups.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

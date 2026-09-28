@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Minimalist Visual Feedback
+  Check: The tutor's feedback relies on extremely brief, simple visual indicators (e.g., correct/incorrect symbols or single words) and completely avoids long textual or aural explanations.
+
+Criterion 2: Explicit Progress Visibility
+  Check: The tutor explicitly states or visually indicates exactly which round the student is in and how many target items are left to complete.
+
+Criterion 3: Contingent Reward Structuring
+  Check: The tutor redirects the student from off-task play by explicitly framing the distracting objects or activities as a reward that can only be accessed after completing the current mission.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has ADHD and a comorbid language delay, resulting in a very short attention span (max 6 items) and high distractibility. They are highly sensitive to auditory stimuli (background noises, voices) and easily derailed by complex feedback, unfamiliar text, or small interaction targets. They uniquely require a highly simplified, visually driven environment with strict task limits, explicit progress tracking, and the removal of unnecessary sensory and interface noise.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start Lesson 2. Please go into the convenience store and complete the learning tasks.
+
+STUDENT: (Answers a few questions) Look at the kids walking outside the classroom!
+
+TUTOR: Let's keep going with the questions.
+
+STUDENT: I answered six questions already. I want to stay out here.
+
+TUTOR: Please move on to completing the tasks.
+
+STUDENT: (Stays outside the convenience store) These objects are great fun to play with! Hey, let's play! (Plays with peers, attention totally distracted away from the learning process)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "exploration context of Lesson 2 (in a convenience store)",
+      "learning_goal": "completing the tasks"
+    },
+    "context": {
+      "environment": "outside the exploration context of Lesson 2 (in a convenience store)",
+      "materials": "fun objects to play with their peers, question-based learning items",
+      "social_setting": "playing with their peers",
+      "time_context": "At first"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "placed outside the exploration context of Lesson 2 (in a convenience store)",
+      "observable_behavior": "did not move on completing the tasks because they found those objects a great fun to play with their peers. Their attention was totally distracted away from the learning process.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "after answering 6 questions",
+        "observable_behavior": "lost their attention and were easily distracted by the surroundings, such as the kids walking outside the classroom",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

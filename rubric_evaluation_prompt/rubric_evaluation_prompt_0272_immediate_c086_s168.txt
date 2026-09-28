@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Step-by-Step Instruction with Concrete Examples
+  Check: The tutor breaks the immediate task or concept into sequential steps and provides at least one concrete example to illustrate the expectation.
+
+Criterion 2: Integration of Post-Task Decompression
+  Check: The tutor explicitly establishes that completing the current task or steps will be followed by a designated period of free time to relax or play.
+
+Criterion 3: Scaffolding Social Interactions
+  Check: The tutor provides a specific, structured entry point or role for peer interaction, explicitly avoiding instructing the student to simply 'join' or mingle with the group organically.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with the transition to secondary education and experiences anxiety and friction during unplanned social interactions with peers from ordinary classes. They uniquely require highly structured environments, specifically step-by-step instructions with concrete examples followed by scheduled decompression time, as well as meticulously planned peer support rather than organic socialization.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are going to practice using the gardening materials. You will be doing this in a cooperative learning group with students from the ordinary class.
+
+STUDENT: I’m learning a lot, to use materials. Gardening, carpentry... I like all.
+
+TUTOR: That is good. Please go over to their table and start working together.
+
+STUDENT: In primary education I was happy with my teachers and classmates. In secondary education, it was hard at the beginning, you need to adapt.
+
+TUTOR: Just go join them and see what they are doing.
+
+STUDENT: I did not get along well with some people in the ordinary class.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Learning to use materials (gardening, carpentry) and reviewing subjects from earlier years",
+      "learning_goal": "Develop their autonomy and skills for adult life as fundamental purposes of their individual educational programme"
+    },
+    "context": {
+      "environment": "Task Learning Class (SAT) and ordinary class environments",
+      "materials": "Materials for gardening, carpentry, sewing, and the canteen",
+      "social_setting": "Cooperative learning and peer support settings",
+      "time_context": "Secondary education"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the transition to secondary education when adapting to new environments and ordinary classes",
+      "observable_behavior": "Did not get along well with some people in the ordinary class",
+      "internal_state": "Finding it hard at the beginning, feeling the need to adapt",
+      "related_quotes": [
+        "In primary education I was happy with my teachers, classmates, games, studies and excursions. In secondary education, it was hard at the beginning, you need to adapt. Now I’m very happy with the teachers, and also with the classmates. Despite, I did not get along well with some people in the ordinary class."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When peer support appears to happen naturally, not planned",
+        "observable_behavior": "Did not get along well with some people in the ordinary class",
+        "internal_state": "",
+        "related_quotes": [
+          "Despite, I did not get along well with some people in the ordinary class."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

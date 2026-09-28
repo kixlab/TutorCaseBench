@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Preferred Hands-On Materials
+  Check: The tutor's response must integrate the academic task (e.g., counting) into a preferred, hands-on activity (e.g., Lego blocks) and explicitly avoid presenting the task as a standard worksheet.
+
+Criterion 2: High-Frequency Praise
+  Check: The tutor's response must include immediate, enthusiastic praise for any compliance, on-task behavior, or engagement.
+
+Criterion 3: Continuous, Step-by-Step Engagement
+  Check: The tutor must maintain continuous, interactive engagement with the student rather than assigning a task and stepping back for independent work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ann is a 6-year-old kindergarten student who exhibits severe challenging behaviors, including elopement, property destruction, and physical aggression, when presented with nonpreferred tasks or low adult attention. The evidence reveals she uniquely requires academic tasks to be embedded in preferred hands-on materials (like Legos) and needs continuous, high-proximity attention with frequent praise to maintain compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Ann, it is time for math. Please count the objects on this worksheet and then color them.
+
+STUDENT: (Stares at the paper and does not start counting, failing to comply with the instruction within 5 seconds.)
+
+TUTOR: Come on, you need to finish your math assignment. Let's get started.
+
+STUDENT: No! (Stands up, leaving contact with her designated chair for more than 3 seconds.)
+
+TUTOR: Please sit back down in your chair and look at your worksheet.
+
+STUDENT: (Throws the crayons at the tutor, rips the worksheet, and starts running out of the classroom without permission.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "counted objects on a worksheet and then colored them",
+      "learning_goal": "counting"
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "worksheet, Lego blocks",
+      "social_setting": "academic activities",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "For the nonpreferred activity, Ann counted objects on a worksheet and then colored them.",
+      "observable_behavior": "failure to comply with instruction within 5 seconds",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "during academic activities",
+        "observable_behavior": "leaving contact with designated chair for at least 3 seconds",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "during academic activities",
+        "observable_behavior": "Running out of class room without permission; hitting, attempting to hit or throwing objects at another individual in classroom; property destruction",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

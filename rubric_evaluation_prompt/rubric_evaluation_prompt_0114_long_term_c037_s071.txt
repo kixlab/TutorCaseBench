@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Firm Boundaries for Off-Task Behavior
+  Check: The long-term plan includes establishing clear rules and expected consequences for off-task behavior.
+
+Criterion 2: Frequent Break Scheduling
+  Check: The long-term plan explicitly incorporates small, frequent breaks into the student's learning routine.
+
+Criterion 3: Sustained Positive Reinforcement
+  Check: The long-term plan includes a strategy for providing consistent positive reinforcement during lessons.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Zeb is a 15-year-old student who struggles with self-control and concentration, often reacting spontaneously and refusing to work if he feels ignored, bored, or unsupported. He uniquely requires highly flexible, patient instruction where teachers slow down, allow work resubmission, answer off-topic questions, and use humor to maintain his engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I am going to explain this Mathematics B concept now. Please watch the board and copy the steps exactly as I write them.
+
+STUDENT: You're going too fast. Can you go slow and repeat that concept? I'm having difficulties concentrating.
+
+TUTOR: We need to move on. Just copy what is on the board.
+
+STUDENT: This is boring. If I hand in a piece of work that is not good, will you give me another chance to redo it and hand it in again?
+
+TUTOR: No, you need to finish it correctly now. Keep working.
+
+STUDENT: (Reacts spontaneously without considering the consequences) You won't help me and you can't teach! I'm doing no work!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Mathematics B concept",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom situation",
+      "materials": "",
+      "social_setting": "Direct or explicit teaching",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During direct or explicit teaching when experiencing difficulties concentrating",
+      "observable_behavior": "React spontaneously and did not consider the possible consequences of their actions",
+      "internal_state": "Inability to sustain self-control in class",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "For teachers whom they described as boring or perceived could not teach",
+        "observable_behavior": "Complete minimal or no work in a classroom situation",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

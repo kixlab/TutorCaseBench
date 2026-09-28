@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Indirect Behavioral Correction
+  Check: The tutor addresses the off-task behavior using an indirect verbal cue (e.g., a general reminder to the whole class) or a non-verbal signal, rather than repeatedly calling her name directly.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Lisa is a student who overtly ignores direct calls to participate by talking to peers, a behavior driven by boredom with repetitive classroom routines and predictable games. She uniquely requires indirect behavioral corrections to save face in the moment, and structural variations like randomized selection and peer collaboration to maintain long-term engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our daily homework check game. Lisa, you are up for this round. Please read out loud which paragraph number on the right matches the main idea on the left for Item (b), 'Our five senses'.
+
+STUDENT: (Turns to Brent, the male student sitting in front of me, and starts overtly talking to him)
+
+TUTOR: Lisa, it is your turn for the game. Do you have the answer?
+
+STUDENT: (Sam taps my hand and points to Item b in his book. I look down at my own book, but I do not look at Sam's pointing)
+
+TUTOR: Lisa, we are waiting for you to read the paragraph number.
+
+STUDENT: (Continues speaking with Brent, completely ignoring the fact that my name has been called for the game)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read out loud which paragraph number on the right matches a main idea on the left, specifically Item (b) 'Our five senses'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting during a checking homework activity",
+      "materials": "Book",
+      "social_setting": "A competitive game that the students played every day in class with familiar rules and team members",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After the teacher called her name for the game",
+      "observable_behavior": "Speaking with Brent (a male student sitting in front of her), ignoring the fact that her name had been called for the game",
+      "internal_state": "Not interested in the activity; did not care much which team would win or who would be singled out",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When another student (Sam) tapped her hand and pointed to the item in his book",
+        "observable_behavior": "Looking at her book, but not at Sam's pointing",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

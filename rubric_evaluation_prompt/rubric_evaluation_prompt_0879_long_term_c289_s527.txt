@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 5: Sustained Environmental and Social Structuring
+  Check: The long-term plan includes specific strategies for structuring the environment or activities to necessitate and support social interaction and shared attention.
+
+Criterion 6: Prioritization of Joint Attention and Play Goals
+  Check: The long-term plan explicitly prioritizes the development of symbolic play and joint attention skills over strict adherence to academic or task-completion goals.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student frequently slips into passive unengagement and exhibits rigid, stereotyped manipulation of objects rather than purposeful play. They do not naturally seek out social interaction, often using pointing to regulate others (e.g., pushing hands away) rather than to share interest. They require heavy adult facilitation and environmental structuring to build joint attention, as strict academic demands or physical prompting cause them to withdraw further.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our structured activity. Let's finish completing your animal puzzle.
+
+STUDENT: (Picks up the animal puzzle pieces and starts moving them across the table as if they were walking, making corresponding animal sounds.)
+
+TUTOR: We need to finish the puzzle. Put the pieces in the board.
+
+STUDENT: (Stops moving the animals, drops the pieces, and stares blankly at the table, slipping from an object-engaged state to a state of unengagement.)
+
+TUTOR: Look at the puzzle. Keep trying to finish it.
+
+STUDENT: (Remains completely unengaged and passive, not looking at the teacher or the puzzle, demonstrating a lack of joint attention and no engagement with others.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "completing her puzzle",
+      "learning_goal": "completing the objectives of the activity"
+    },
+    "context": {
+      "environment": "structured activities",
+      "materials": "animal puzzle pieces",
+      "social_setting": "classroom",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "started moving the animal puzzle pieces as if they were walking and making corresponding animal sounds",
+      "observable_behavior": "objectfocused with less frequent engagement of others into their play activities",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During structured activities",
+        "observable_behavior": "slip from object-engaged states to states of unengagement",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

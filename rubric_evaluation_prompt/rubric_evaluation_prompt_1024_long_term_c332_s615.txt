@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Power-Sharing and Task Negotiation
+  Check: The long-term plan must include methods for negotiating with Harry or sharing decision-making power regarding his activities and routines.
+
+Criterion 2: Proactive Physical Accommodation
+  Check: The long-term plan must incorporate strategies to actively monitor, listen to, and accommodate Harry's physical fatigue or positioning needs.
+
+Criterion 3: Elimination of Coercive Tactics
+  Check: The long-term plan must explicitly avoid relying on threats, ultimatums, or forced compliance to manage task refusal.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Harry is a student with cerebral palsy who experiences significant physical fatigue during fine motor tasks and non-preferred physical positioning. When fatigued, he exhibits task refusal and crying, which are exacerbated by adult threats or imposed control. He uniquely requires adults to share power, negotiate, and proactively accommodate his physical limitations rather than forcing compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Harry, it is work time. Please begin the coloring and writing task.
+
+STUDENT: I am too fatigued to do any more coloring right now.
+
+TUTOR: You just need to keep working on it until it is finished.
+
+STUDENT: I am not going to do the task.
+
+TUTOR: If you refuse, you lose our support and help.
+
+STUDENT: (Starts crying) I am going to do it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "colouring, writing and other ﬁne motor activities",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "",
+      "materials": "",
+      "social_setting": "",
+      "time_context": "During work time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When he is required to perform colouring, writing and other ﬁne motor activities he gets fatigued",
+      "observable_behavior": "said he was not going to do the task",
+      "internal_state": "fatigued",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Responding to the threat of losing support during work time.",
+        "observable_behavior": "started crying and said he was going to do it",
+        "internal_state": "fear of losing support",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Extended Discussion and Processing Time
+  Check: The tutor's long-term plan must explicitly allocate extended time (e.g., doubling the lesson duration) specifically to accommodate open discussion and slower task completion.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly engaged but easily emotionally flooded when discussing bullying, often suggesting aggressive retaliation or becoming too overwhelmed to complete independent tasks. They uniquely require psychological distance through animal proxies, explicit review of concepts before working, and dedicated time to verbally process their intense personal experiences.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the worksheets with the partly-made cartoons. Please read the talking bubbles and draw your own original cartoon.
+
+STUDENT: (Waves hand high) Oh! Oh! I want to talk more about when that kid was mean to me! I was so mad!
+
+TUTOR: Please focus on your worksheet right now.
+
+STUDENT: I don't understand what this phrase in the bubble means. I'm just going to use the half-completed example cartoon instead of making a new one.
+
+TUTOR: Just try your best to think of a new idea.
+
+STUDENT: I don't have any ideas! I would rather discuss the issues than make cartoons. It's too hard to control my emotions when I think about bullying by myself!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading cartoon captions/talking bubbles and attempting to create original cartoons on worksheets",
+      "learning_goal": "demonstrated learning at the close of the lesson"
+    },
+    "context": {
+      "environment": "small group lesson (3-8 students)",
+      "materials": "worksheets of partly-made cartoons",
+      "social_setting": "small groups, each containing at least one student with special needs",
+      "time_context": "15-minute"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "transitioning to the cartoon-drawing activity",
+      "observable_behavior": "Students would rather discuss issues than make cartoons.",
+      "internal_state": "Difficult for many to control emotions when discussing bullying.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When encountering vocabulary/ idioms/ phrases with multiple meanings",
+        "observable_behavior": "using the example cartoons and half-completed cartoons in their work rather than creating new original cartoons",
+        "internal_state": "difficult for our students with cognitive difficulties",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

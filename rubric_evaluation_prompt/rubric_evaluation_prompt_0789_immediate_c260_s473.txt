@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Repetition for Information Recall
+  Check: The tutor offers to repeat, re-read, or re-present information when Henry struggles to remember it, rather than just telling him to try harder.
+
+Criterion 2: Probing with Simple 'Why' Questions
+  Check: The tutor asks simple 'why' questions to explore Henry's reasoning for or against a choice, allowing him space to justify his thoughts.
+
+Criterion 3: Non-Punitive Redirection
+  Check: The tutor responds to resistance or hesitation with supportive, pressure-free language rather than demanding compliance, citing rules, or threatening negative consequences.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Henry is a third-grade student whose behavior is highly dependent on his social environment, acting aggressively in punitive settings but cooperatively in nurturing, one-on-one contexts. He struggles with a rigid punishment-obedience moral orientation that causes confusion when rules conflict with preventing harm. He uniquely needs repetition for memory recall, simple 'why' questions to navigate moral reasoning, and a strictly non-punitive, positive behavioral approach to prevent oppositional triggers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I just finished reading the first story to you. Can you tell me the names of the characters we just heard about?
+
+STUDENT: I liked the story and I want to answer, but I forgot what they were called.
+
+TUTOR: Just try your best to think about it.
+
+STUDENT: Yes, ma'am. I know one boy broke a lot of cups, but I don't know his name.
+
+TUTOR: Keep trying to remember.
+
+STUDENT: I'm sorry, I just can't remember their names at all from hearing it that one time.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Recalling the characters’ names in three of the Piagetian dilemmas (1932/1965)",
+      "learning_goal": "Check comprehension of the characters, setting, and plot"
+    },
+    "context": {
+      "environment": "30-minute individual interview sessions",
+      "materials": "Hypothetical moral dilemmas read aloud",
+      "social_setting": "One-on-one interview with researcher",
+      "time_context": "Immediately after first hearing the story"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After first hearing the story",
+      "observable_behavior": "Had difficulty recalling the characters’ names in three of the Piagetian dilemmas",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to recall story details immediately after the first reading",
+        "observable_behavior": "Demonstrated difficulty recalling the characters' names",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Pre-Task Concept Review
+  Check: The tutor must explicitly review, brainstorm, or define specific concepts or strategies about bullying before prompting the student to create or complete their cartoon.
+
+Criterion 2: Psychological Distance via Animal Proxies
+  Check: The tutor must direct or frame the discussion of bullying behaviors and solutions through the lens of animal characters or distant scenarios rather than focusing directly on the student's personal conflicts.
+
+Criterion 3: Validation and Normalization of Experiences
+  Check: The tutor must validate the student's shared experiences or emotions regarding bullying (e.g., by acknowledging how common it is or defining the shared nature of bullying) rather than simply telling them to focus on the worksheet.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly engaged but easily emotionally flooded when discussing bullying, often suggesting aggressive retaliation or becoming too overwhelmed to complete independent tasks. They uniquely require psychological distance through animal proxies, explicit review of concepts before working, and dedicated time to verbally process their intense personal experiences.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at this cartoon panel with the Eagle and the Turtle. What is a way we can stop the bullying happening here?
+
+STUDENT: (Waving hands high) Oh! Oh! I know! I saw someone being mean like that once and it made me really upset.
+
+TUTOR: Okay, what do you think we should do to stop it?
+
+STUDENT: It just makes me so mad when people do that! I don't want to draw the cartoon right now, I just want to talk about what to do to them.
+
+TUTOR: Please tell us your idea for stopping the bullying.
+
+STUDENT: Well, if I saw somebody getting bullied, I would punch the one who started it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing how to intervene in a bullying situation during the third lesson focused on stopping bullying.",
+      "learning_goal": "brought to light ways to prevent or stop bullying"
+    },
+    "context": {
+      "environment": "small group lesson",
+      "materials": "cartoon panels (e.g., Eagle, Cat, Turtle, Friends cartoons)",
+      "social_setting": "small groups",
+      "time_context": "third lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Discussing how to intervene in a bullying situation",
+      "observable_behavior": "One of the boys said that if he saw somebody getting bullied, he would punch the one who started it.",
+      "internal_state": "He didn't see the connection that punching may also be bullying.",
+      "related_quotes": [
+        "if he saw somebody getting bullied, he would punch the one who started it."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "discussing bullying",
+        "observable_behavior": "Shared feelings and experiences concerning bullying often without prompting. Commented and discussed eagerly.",
+        "internal_state": "Difficult for many to control emotions when discussing bullying.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

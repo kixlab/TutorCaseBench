@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual-Spatial Connection of Terms
+  Check: The tutor's response must include or describe a visual-spatial cue (such as drawing an arch, using arrows, highlighting, or explicitly describing a pointing motion) to connect the outside multiplier to the terms inside the parentheses.
+
+Criterion 2: Spatial Anchoring for Next Steps
+  Check: The tutor's response must visually indicate or explicitly guide where Greg should write or place the next part of the equation (e.g., 'write it right next to the 3x' or pointing to the blank space).
+
+Criterion 3: Grounding in Completed Sub-steps
+  Check: The tutor's response must acknowledge, validate, or point to the specific part of the problem Greg has already completed successfully before prompting him for the next step.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Greg is a quiet, proficient student who works steadily but experiences cognitive overload when faced with multi-step symbolic processes, particularly the distributive property. He struggles to process spatial relationships across equations, such as connecting an outside multiplier to a far term inside parentheses, causing him to go silent or get stuck. He uniquely requires visual-spatial scaffolding, like pointing and arching gestures, paired with brief verbal cues to bridge these connections and resume his independent work.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the next problem on your classwork: 2(2x + 9) = 50. What is your first step?
+
+STUDENT: (Stops his steady rhythm of working and looks at the equation) Um. The parentheses…?
+
+TUTOR: What do you think you should do with the parentheses?
+
+STUDENT: Times?
+
+TUTOR: Times what? How will you get that across these?
+
+STUDENT: (silence)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "2(2x + 9) = 50",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "tutoring session",
+      "materials": "classwork",
+      "social_setting": "working independently",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "encountering the multi-step nature of the problem and the abundance of mathematical symbols to process",
+      "observable_behavior": "(silence)",
+      "internal_state": "cognitive overload and misconception that he needed to solve what was inside the parentheses first",
+      "related_quotes": [
+        "Um. The parentheses…?",
+        "Times?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When prompted to explain how to apply the distributive property",
+        "observable_behavior": "(silence)",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Front-loading and Rehearsal of Interactions
+  Check: The tutor's plan includes coaching or rehearsing specific questions, answers, or social interactions with James prior to his participation in cooperative group work.
+
+Criterion 2: Explicit Instruction of Pragmatic Mechanics
+  Check: The tutor incorporates direct, explicit teaching of specific conversational rules (e.g., defining exactly when to listen and when to talk) within the naturalistic setting.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+James is a student with a learning disability who struggles with pragmatic language during cooperative group work, often impulsively interrupting when he knows an answer and physically withdrawing (e.g., rolling on his back, crossing arms) when corrected. He uniquely requires explicit validation of his academic knowledge before receiving social correction, as well as direct modeling and proactive rehearsal of social rules to prevent the confusion he experiences from ambiguous feedback.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's play our matching card game on the carpet. We will take turns finding word cards that go together, like 'side' and 'walk'.
+
+STUDENT: (Jumps onto his knees and grabs two cards that go together) I found a match!
+
+TUTOR: Yes, they go together, but it is not your turn. You have to return the cards to the floor.
+
+STUDENT: (Returns the cards to the floor and crosses his arms)
+
+TUTOR: We need to keep playing. Please sit up and look at the cards.
+
+STUDENT: (Rolls onto his back, keeping his arms crossed, and completely ignores the other students and the game)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Playing a matching card game involving words like side and walk",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Sitting on the carpet",
+      "materials": "Word cards",
+      "social_setting": "With three other second-graders",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "A peer informs James that yes, they go together but it is not his turn and James has to return the cards to the floor.",
+      "observable_behavior": "James complies, but rolls onto his back, crossing his arms, and ignores the other students.",
+      "internal_state": "Ambiguity in the environmental feedback contributes to his confusion and inhibits his continued participation in the group.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "As he scans the words and finds a match",
+        "observable_behavior": "He jumps onto his knees and grabs two cards that go together. Oblivious to the turn-taking sequence the group has constructed, he announces, 'I found a match!'",
+        "internal_state": "",
+        "related_quotes": [
+          "I found a match!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

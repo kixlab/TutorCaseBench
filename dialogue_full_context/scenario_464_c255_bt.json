@@ -1,0 +1,76 @@
+{
+  "category_id": "255",
+  "category_title": "Struggling readers who directly refuse to read",
+  "scenario_id": "464",
+  "scenario_title": "Direct refusal during shared reading after negative feedback",
+  "minimal_context": "The student and interventionist are participating in a one-on-one shared reading session using the book 'Miss Nelson is missing!'.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's continue our shared reading of 'Miss Nelson is missing!'."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Makes a reading attempt)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "That did not make sense."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Slumps back in chair with frown)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You wanta start this page?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(whispered) No.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's continue our shared reading of 'Miss Nelson is missing!'.\n\nSTUDENT: (Makes a reading attempt)\n\nTUTOR: That did not make sense.\n\nSTUDENT: (Slumps back in chair with frown)\n\nTUTOR: You wanta start this page?\n\nSTUDENT: (whispered) No.",
+  "immediate_dialogue_prompt": 773,
+  "long_term_dialogue_prompt": 774,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Shared reading of 'Miss Nelson is missing!'",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Shared reading sessions",
+        "materials": "Book ('Miss Nelson is missing!')",
+        "social_setting": "One-on-one with an interventionist",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Following feedback from the interventionist that the child's last reading attempt did not make sense",
+        "observable_behavior": "Slumped back in chair with frown, verbally refuses to read by whispering 'No', opts out of the next reading invitation",
+        "internal_state": "Negative affect and disengagement",
+        "related_quotes": [
+          "No"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When asked 'You wanta start this page?' after experiencing a loss of fluency or meaning",
+          "observable_behavior": "Slumped back in chair with frown, whispered 'No'",
+          "internal_state": "",
+          "related_quotes": [
+            "No"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

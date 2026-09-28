@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Role Model Invocation
+  Check: The tutor's response references advice, stories, or the example of role models (e.g., NRL players) to encourage resilience or compliance.
+
+Criterion 2: Unwavering Accountability
+  Check: The tutor enforces the stated rule or expectation directly, explicitly refusing to accept excuses, workarounds, or blame-shifting.
+
+Criterion 3: Interest Integration
+  Check: The tutor integrates the student's knowledge of or interest in rugby league into the academic task or behavioral conversation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits externalizing behaviors such as tantrums, work refusal, and disruption when facing academic challenges, losing games, or failing administrative tasks. They uniquely require explicit visibility of behavioral expectations (regulative discourse), strict accountability without excuses, and the integration of high-interest topics (rugby league) and role models to maintain engagement and build a positive learner identity.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our weekly check. Please bring your diary to my desk so I can check for your parent's signature.
+
+STUDENT: Yes, but I haven’t had it signed.
+
+TUTOR: Please hand me the diary anyway so I can look at it.
+
+STUDENT: (Hands over the diary, pointing to a note written by his parent) Look, she wrote: 'J handed me this book to sign. I didn’t sign it. He had the initiative and intent.'
+
+TUTOR: I see the note, but without the actual signature, you do not meet the requirement for the weekly reward.
+
+STUDENT: (Throws a temper tantrum, pushing the diary off the desk) That's not fair! I'm not doing any of my work today if I don't get the reward!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Returning the weekly diary signed by a parent to remain eligible for the weekly reward system",
+      "learning_goal": "Social skilling imperative of self-regulation"
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Student diary",
+      "social_setting": "Interactions between student, teacher, and parent communication",
+      "time_context": "Weekly"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked by the teacher if he had his diary after failing to get it signed by a parent",
+      "observable_behavior": "Returning the diary without a signature",
+      "internal_state": "",
+      "related_quotes": [
+        "yes, but I haven’t had it signed"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a parent attempts to 'take the blame' for her son's failure to return the diary signed",
+        "observable_behavior": "Failing to meet administrative or behavioral expectations",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Preparation for Emotionally Charged Historical Dialogues
+  Check: The long-term plan must include specific frameworks, preparation, or culturally responsive strategies for facilitating difficult, racially or historically sensitive conversations without dismissing the student's critical questions.
+
+Criterion 2: Proactive Microaggression Mitigation
+  Check: The long-term plan must explicitly incorporate strategies for the instructor to reflect on their own biases, prevent microaggressions, and establish a clear protocol for addressing them if they occur.
+
+Criterion 3: Sustained Validation and Sarcasm Avoidance
+  Check: The long-term plan must explicitly commit to maintaining a respectful, validating communication style that strictly avoids sarcasm, dismissive humor, or expressions of frustration.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student actively and critically questions sensitive historical narratives but is highly vulnerable to stereotype threat and cognitive distraction when met with dismissiveness. They uniquely require culturally responsive teaching, proactive prevention of microaggressions, and instructors who are well-prepared to facilitate emotionally charged dialogues without resorting to sarcasm.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's continue our discussion about Thomas Jefferson and his relationship with his slave Sally Hemings.
+
+STUDENT: He raped her?
+
+TUTOR: Actually, he had three or four children with her.
+
+STUDENT: Oh, so he had a relationship with her?
+
+TUTOR: He was an honorable guy. He bought her a sandwich.
+
+STUDENT: (Looks around uncomfortably) Did that really just happen? ... Whatever, I'm done talking.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a whole-class discussion about Thomas Jefferson and Sally Hemings",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Remedial English class",
+      "materials": "",
+      "social_setting": "Whole-class discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The White instructor started to speak about Thomas Jefferson and his relationship with his slave Sally Hemings.",
+      "observable_behavior": "A Black male student asked, “He raped her?”",
+      "internal_state": "Cognitive distraction and disruption of attention (“Did that really just happen?”) and activation of a stereotype threat (“Do I have to prove myself as a member of my group yet again?”)",
+      "related_quotes": [
+        "He raped her?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "The instructor disagreed, saying, “He had three or four children with her.”",
+        "observable_behavior": "The student then asked, “Oh, so he had a relationship with her?”",
+        "internal_state": "Feels distinctly uncomfortable afterwards, feeling disempowered",
+        "related_quotes": [
+          "Oh, so he had a relationship with her?"
+        ]
+      },
+      {
+        "condition": "Following a microaggressive event in the classroom",
+        "observable_behavior": "Eruptions followed by silencing of students; disengagement initiated as an act of protest",
+        "internal_state": "Anxiety, depression, and anger",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

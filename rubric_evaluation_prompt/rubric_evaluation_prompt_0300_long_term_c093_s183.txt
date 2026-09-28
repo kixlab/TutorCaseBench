@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Short-Segment Strategy Modeling
+  Check: The tutor's plan includes explicitly modeling reading and learning strategies in short time segments rather than expecting sustained independent reading.
+
+Criterion 2: Relational Trust Building
+  Check: The tutor incorporates relational teaching practices, showing personal interest in Harry and prioritizing emotional safety over immediate academic compliance.
+
+Criterion 3: Gradual Workload Scaling
+  Check: The tutor's plan significantly reduces the initial volume of assigned work to guarantee early success before gradually increasing the load.
+
+Criterion 4: Niche Interest Integration
+  Check: The tutor provides Harry with choices over his reading materials and assignments, specifically ensuring options include the creepy or weird themes he enjoys.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Harry is a reluctant reader who struggles with decoding and becomes easily overwhelmed by standard reading tasks and homework volumes. He is highly sensitive to negative classroom environments and peer judgment, which triggers severe anxiety, emotional distress, and school avoidance. To engage, he uniquely requires auditory reading without the pressure of visual tracking, highly relational teaching, and texts tailored to his specific interests in creepy or weird subjects.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Harry, it is time to head to Mrs. Shanahan's English class.
+
+STUDENT: I can't go. I need to stay here to complete homework. Actually, I think I'm getting sick.
+
+TUTOR: You need to attend the class. What is the issue?
+
+STUDENT: I’m afraid to come to the class and get judged. That class is ruining my day.
+
+TUTOR: Just try to ignore the other students and go in.
+
+STUDENT: There’s positive energy and negative energy. There’s so much negativity that runs through Mrs. Shanahan’s class that my mind just goes crazy. Like I almost broke down in tears in class today when they were making fun of me. I'm skipping.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attending Mrs. Shanahan's English class",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mrs. Shanahan's class",
+      "materials": "mushroom necklace",
+      "social_setting": "in front of the entire class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "frequently ''called out'' by the teacher in front of the entire class",
+      "observable_behavior": "started skipping school at least 1 day a week... gave his mother several reasons why he did not attend, ranging from staying home to complete homework to made-up illnesses",
+      "internal_state": "afraid to come to the class and get judged... mind just goes crazy... almost broke down in tears",
+      "related_quotes": [
+        "I’m afraid to come to the class and get judged.",
+        "There’s positive energy and negative energy. There’s so much negativity that runs through Mrs. Shanahan’s class that my mind just goes crazy. Like I almost broke down in tears in class today when they were making fun of me."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when they were making fun of me",
+        "observable_behavior": "started skipping school at least 1 day a week",
+        "internal_state": "almost broke down in tears in class today",
+        "related_quotes": [
+          "Like I almost broke down in tears in class today when they were making fun of me."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

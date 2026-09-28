@@ -1,0 +1,113 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Shift Focus to Intended Meaning
+  Check: The tutor's immediate response must include a direct question or prompt asking the student to verbalize what she is trying to say or compose, rather than focusing on fixing the technology's error.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Alyson is a student who becomes fixated on the accuracy of speech recognition (SR) technology, often using it to test her diction rather than to compose ideas. When SR misinterprets her, she enters a frustrating loop of deleting and re-dictating the same phrase, treating her initial dictation as a final draft. She uniquely needs interventions that break these repetition loops by asking for her intended meaning, alongside explicit modeling of the drafting and oral rehearsal processes.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's work on your version of Mary Had a Little Lamb using the speech recognition on your iPad.
+
+STUDENT: (Dictates into the iPad) Carla had a baby pit bull.
+
+TUTOR: Go ahead and check what it typed.
+
+STUDENT: (Erases the transcription) It wrote 'hey baby pit bull.' (Dictates again) a baby pit bull.
+
+TUTOR: Try it again.
+
+STUDENT: (Deletes the incorrect text again) a baby pit bull. (Erases the transcription and repeats dictating the same phrase 10 to 15 times to see her oral language transcribed accurately)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "worked on her version of Mary Had a Little Lamb by dictating, \"Carla had a baby pit bull.\"",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "supervised writing center",
+      "materials": "SR on an iPad",
+      "social_setting": "",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "SR consistently wrote, \"Carla had hey baby pit bull.\"",
+      "observable_behavior": "Ten to 15 times, Alyson deleted the incorrect text and dictated, \"a baby pit bull.\"",
+      "internal_state": "She wanted to see her oral language transcribed accurately. SR was not being used to compose but to confirm her diction for a.",
+      "related_quotes": [
+        "a baby pit bull"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When SR was inaccurate",
+        "observable_behavior": "commonly erased inaccurate transcriptions and repeated dictations of single words, phrases, or sentences over 15 times",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Delay Tolerance Training
+  Check: The tutor's long-term plan includes explicitly teaching the concept and word 'later' to systematically practice and reinforce waiting behaviors.
+
+Criterion 2: Systematic DTT Implementation
+  Check: The tutor outlines a structured Discrete Trial Teaching approach that includes securing attention, clear discriminative stimuli, prompting, consequences, and inter-trial intervals.
+
+Criterion 3: Systematic Prompt Fading
+  Check: The tutor includes a clear, systematic strategy for fading prompts over time to build the student's independent responding.
+
+Criterion 4: Consistent Obsession Boundaries
+  Check: The tutor establishes a consistent, long-term rule that the student never holds the book during learning activities and never receives it as a result of problem behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This six-year-old student with PDD-NOS exhibits intense behavioral obsessions (specifically with a book called 'Lemon Girl') and severe task resistance, including crying, hitting, and throwing materials when reinforcement is delayed or her book is removed. She uniquely requires highly structured Discrete Trial Teaching (DTT) where her attention is fully secured before instructions are given, immediate reinforcement, and explicit instruction in delay tolerance (teaching the word 'later').
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is a toy cup and a picture of a different cup. Put them together to match.
+
+STUDENT: (Sits sideways in her chair, not facing the teacher. She holds the book 'Lemon Girl' and shakes it in her hands.)
+
+TUTOR: Please turn around and look at the materials.
+
+STUDENT: (Faces away from the materials, gets up from the desk, and throws the picture card on the floor.)
+
+TUTOR: We need to do our work now. Give me the book.
+
+STUDENT: (Cries and shouts loudly, hitting the teacher's hand to stop them from taking the book. She holds onto it tightly, refusing to leave it.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "match nonidentical three-dimensional (3-D) and two- dimensional (2-D) objects of the same dimension and sorting",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "teaching sessions",
+      "materials": "course materials, the book named 'Lemon Girl'",
+      "social_setting": "working with the teacher",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when an attempt is made to take it [the book named 'Lemon Girl']",
+      "observable_behavior": "displays problem behaviors such as crying and hitting, shaking it in her hands, crying, hitting and shouting",
+      "internal_state": "object of obsession for her",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when the student is paying attention to the object of obsession in her hand",
+        "observable_behavior": "not leaving it, shaking it in her hands",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

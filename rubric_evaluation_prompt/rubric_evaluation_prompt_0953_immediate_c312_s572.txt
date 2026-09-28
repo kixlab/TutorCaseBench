@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Workload De-escalation
+  Check: The tutor must explicitly reduce the visible workload, chunk the assignment into smaller pieces, or remove the pressure of completing a large batch of problems at once.
+
+Criterion 2: Effort Validation
+  Check: The tutor must explicitly acknowledge Zachary's effort or validate his feelings of overwhelm, strictly avoiding any language that implies laziness or lack of trying.
+
+Criterion 3: Calm and Clear Pacing
+  Check: The tutor must use a supportive, even tone and take time to clearly explain the immediate task rather than simply directing him to start working.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Zachary is a student who becomes easily overwhelmed and emotionally distressed (crying) when faced with high volumes of rote work or when accused of not trying. He requires a highly empathetic approach that validates his effort, breaks down overwhelming tasks, and incorporates hands-on learning tailored to his unique cognitive and cultural background.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's open your math book for tonight. You need to complete this page of thirty problems.
+
+STUDENT: That's thirty problems on one page. I can't do a whole page a day.
+
+TUTOR: Just start with the first one and keep going.
+
+STUDENT: It's too many. My brain functions differently than a lot of other children.
+
+TUTOR: You are not really trying to do your math right now. You just need to finish the page.
+
+STUDENT: (Starts to cry) I am just so overwhelmed with that!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "A math book at the beginning of the year, and on every page there were like thirty problems. And they were supposed to do a page a day, thirty problems in the first grade.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Every night for homework",
+      "materials": "A math book with thirty problems on every page",
+      "social_setting": "First grade",
+      "time_context": "At the beginning of the year, every night"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Being assigned thirty problems on a page a day and when his first-grade teacher accused him of not trying. Not really trying to do his math.",
+      "observable_behavior": "He would just cry",
+      "internal_state": "He was just so overwhelmed with that",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When given a math book where on every page there were like thirty problems",
+        "observable_behavior": "He would just cry",
+        "internal_state": "He was just so overwhelmed with that",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

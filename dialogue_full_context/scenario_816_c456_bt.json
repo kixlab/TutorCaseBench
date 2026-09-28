@@ -1,0 +1,77 @@
+{
+  "category_id": "456",
+  "category_title": "Highly anxious students with ASD characterized by pervasive sensory rituals and wariness",
+  "scenario_id": "816",
+  "scenario_title": "Sensory rituals and wariness during dog introduction",
+  "minimal_context": "The student and tutor are in the school dinner hall for a 20-minute session with a dog.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are going to spend the next 20 minutes in the dinner hall with the dog."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(The student walks away, becoming very preoccupied with touching surfaces in the room and following markings on the floor in a repetitive manner.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please come back over here and look at the dog."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(The student continues performing mannerisms, showing an over-riding interest in the camera equipment rather than the dog.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "I am going to bring the dog closer to you now so you can see him."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(The student shows immediate wariness, watching the dog in order to move away as it gets too close, resulting in an anxious withdrawal.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are going to spend the next 20 minutes in the dinner hall with the dog.\n\nSTUDENT: (The student walks away, becoming very preoccupied with touching surfaces in the room and following markings on the floor in a repetitive manner.)\n\nTUTOR: Please come back over here and look at the dog.\n\nSTUDENT: (The student continues performing mannerisms, showing an over-riding interest in the camera equipment rather than the dog.)\n\nTUTOR: I am going to bring the dog closer to you now so you can see him.\n\nSTUDENT: (The student shows immediate wariness, watching the dog in order to move away as it gets too close, resulting in an anxious withdrawal.)",
+  "immediate_dialogue_prompt": 1373,
+  "long_term_dialogue_prompt": 1374,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "20-minute semi-standardized sessions",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "school dinner hall",
+        "materials": "dog aids, camera equipment, markings on the floor, surfaces in the room",
+        "social_setting": "teacher and dog present",
+        "time_context": "20-minute sessions"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "if it [the dog] got too close",
+        "observable_behavior": "watching the dog in order to move away",
+        "internal_state": "wariness",
+        "related_quotes": [
+          "awareness and visual interest in the dog was accompanied by wariness, watching the dog in order to move away if it got too close"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "throughout the sessions",
+          "observable_behavior": "very preoccupied with touching surfaces in the room, or following markings on the floor in a repetitive manner... performing mannerisms",
+          "internal_state": "over-riding interest in and motivation for things in the environment other than the dog",
+          "related_quotes": [
+            "the student was very preoccupied with touching surfaces in the room, or following markings on the floor in a repetitive manner",
+            "characterised by an over-riding interest in and motivation for things in the environment other than the dog – for instance, sensory qualities of the room or dog aids, camera equipment or performing mannerisms"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

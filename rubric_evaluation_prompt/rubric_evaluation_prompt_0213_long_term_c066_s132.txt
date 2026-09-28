@@ -1,0 +1,113 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Ongoing Motivation Monitoring and Adaptation
+  Check: The long-term plan includes a systematic method for assessing the student's motivation levels over time and explicitly outlines how instruction will be modified based on those findings.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a highly motivated, 'at-risk' reader who thrives in quiet, structured intervention settings. They are positively engaged when they receive immediate teacher support and tangible rewards, contrasting with the delays and noise of a regular classroom. Their primary need is for prompt assistance and scaffolded reading introductions to build foundational skills without frustration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our 30-minute session. Please start reading the new LLI book.
+
+STUDENT: Okay. It's really quiet in the intervention room. I like sitting in these comfy blue chairs.
+
+TUTOR: Go ahead and read the first page.
+
+STUDENT: (Raises hand) I don't know this word. I need getting help from the teacher.
+
+TUTOR: Just try your best to figure it out on your own.
+
+STUDENT: (Keeps hand raised) But I can't do it by myself. I like it here because I don't have to wait a long time for help. Please just tell me the word so I can complete the task.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "reread one or more LLI-leveled texts, (2) do various Wilson Fundations drills, (3) be introduced to and begin reading a new LLI book, and (4) discuss and/or write about what was read",
+      "learning_goal": "build foundational reading skills"
+    },
+    "context": {
+      "environment": "intervention room that is quieter with comfy blue chairs",
+      "materials": "LLI-leveled texts, Wilson Fundations drills, stickers",
+      "social_setting": "getting help from the teacher, (making and) being with friends",
+      "time_context": "30-min intervention session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When needing help from the teacher",
+      "observable_behavior": "raises hand to answer, asks or answers questions",
+      "internal_state": "need for relatedness",
+      "related_quotes": [
+        "It's really quiet [in the intervention room]"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During intervention activities",
+        "observable_behavior": "follows directions, completes task",
+        "internal_state": "positively engaged in the intervention",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

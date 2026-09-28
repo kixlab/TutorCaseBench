@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Representation of Belonging
+  Check: The long-term plan includes displaying the student's goals, work samples, or photographs in the physical or digital learning environment.
+
+Criterion 2: Metacognitive Reflection on Emotions
+  Check: The long-term plan includes regular opportunities for the student to reflect on why they felt a certain way and how they might change their actions in future similar situations.
+
+Criterion 3: Explicit Context Transfer
+  Check: The long-term plan explicitly requires linking newly learned concepts or skills to situations outside of the immediate classroom.
+
+Criterion 4: Reframing as Privilege
+  Check: The long-term plan includes messaging or framing that promotes the student's participation in the program or activity as a special privilege or positive selection.
+
+Criterion 5: Home-School Communication Loop
+  Check: The long-term plan includes a mechanism for regular communication with the student's home regarding activities and personal achievements.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with school refusal, performance anxiety, and rejection of teacher authority, often manifesting as extreme shyness, tardy compliance, or temper tantrums during competitive games. They have a poor estimation of their self-efficacy and believe they lack innate ability. They uniquely require explicit physical decoding of behavioral expectations, corrections grounded in shared community rules, and sustained metacognitive dialogue to build emotional regulation and a sense of belonging.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright, it is time for our physical education game. Remember, if you get tagged by the ball, you are out and need to sit on the bench.
+
+STUDENT: I don't even care about this game. I'm just going to get out anyway because I'm not good at it.
+
+TUTOR: Just go ahead and join the group to play.
+
+STUDENT: (Gets tagged during the game) No way, I dodged that! I am not out!
+
+TUTOR: You were tagged. You need to step out now.
+
+STUDENT: (Throws a temper tantrum, yelling and kicking the wall) It's not fair! I'm not out! I'm never playing with any of you again!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Playing competitive games",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Health and Physical Education component",
+      "materials": "Games",
+      "social_setting": "Playing games with other students",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When he was given 'out' when playing games",
+      "observable_behavior": "Prone to temper tantrums",
+      "internal_state": "Anxiety about performance",
+      "related_quotes": [
+        "if I don’t throw a temper tantrum when I get out, the other kids let me keep playing and want to be my friend!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When exhibiting temper tantrums",
+        "observable_behavior": "Being ostracised by other students and having difficulty making and keeping friends",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

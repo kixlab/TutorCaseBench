@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Task Modeling
+  Check: The tutor explicitly demonstrates or models the specific task or action before asking the student to attempt it.
+
+Criterion 2: Direct Reassurance of Capability
+  Check: The tutor provides direct, explicit verbal reassurance that the student is capable of completing the task (e.g., 'Yes, you can do this').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with a fragile self-concept and high anxiety, frequently avoiding participation and giving up quickly to avoid losing face in front of peers. They often reject generic praise due to low self-esteem and a deep fear of public failure. They uniquely require a highly routinized environment with constant, explicit modeling, joint goal-setting, and demands strictly matched to their capabilities to build security.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We have a new board game today for the group. We are going to take turns moving around the alphabet based on animal names. Come join the circle.
+
+STUDENT: (Hesitates and stays away from the group) I don't want to play.
+
+TUTOR: Come on, just sit down with everyone and give it a try.
+
+STUDENT: No, I can't do it. It's a new game and I don't know how.
+
+TUTOR: You just have to think of an animal name and move your piece. It's easy.
+
+STUDENT: I'm not doing it! I'll get it wrong and everyone in the class will look at me.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Playing a board game involving moving around the alphabet based on animal names",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Nurture group sessions",
+      "materials": "Board game",
+      "social_setting": "Group game",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When faced with a new activity",
+      "observable_behavior": "Initially unwilling to participate in a group game, despite considerable encouragement from Beehive staff",
+      "internal_state": "Anxiety produced when faced with a new activity as well as anxiety about losing face in front of classmates if expectations were not met",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When they do need help",
+        "observable_behavior": "Reluctant to attempt new activities, hesitates a bit",
+        "internal_state": "Fragile self-concepts, less resilient when faced with new or demanding situations",
+        "related_quotes": [
+          "miss I can't spread"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

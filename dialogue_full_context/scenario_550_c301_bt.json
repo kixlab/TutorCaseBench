@@ -1,0 +1,74 @@
+{
+  "category_id": "301",
+  "category_title": "Defiant and disengaged boys who resist standard classroom requirements",
+  "scenario_id": "550",
+  "scenario_title": "Required written work and missing materials",
+  "minimal_context": "The student is in class and is expected to complete written work in his reader's notebook.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please take out your reader's notebooks and begin your written work for today."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Continues reading the book Monster) I'm just reading."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "The reader's notebook is a key part of our class. You need to do the writing."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Reading Monster is the only work I'm doing."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "I need to ask you about your reader's notebook. Where is it?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I forgot to bring it.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please take out your reader's notebooks and begin your written work for today.\n\nSTUDENT: (Continues reading the book Monster) I'm just reading.\n\nTUTOR: The reader's notebook is a key part of our class. You need to do the writing.\n\nSTUDENT: Reading Monster is the only work I'm doing.\n\nTUTOR: I need to ask you about your reader's notebook. Where is it?\n\nSTUDENT: I forgot to bring it.",
+  "immediate_dialogue_prompt": 913,
+  "long_term_dialogue_prompt": 914,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Reader's notebooks were a key part of our class",
+        "learning_goal": "written work"
+      },
+      "context": {
+        "environment": "class",
+        "materials": "reader's notebook",
+        "social_setting": "",
+        "time_context": "for several days"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When I asked Jayson about his reader's notebook",
+        "observable_behavior": "he said he forgot to bring it",
+        "internal_state": "",
+        "related_quotes": [
+          "he forgot to bring it"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "for several days",
+          "observable_behavior": "reading Monster was the only work he did",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Contingent Reading Access
+  Check: The tutor's immediate response must require, confirm, or establish that required coursework is completed before granting the student access to the e-reader or reading time.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a reluctant reader who uses digital reading (e-readers) primarily as an escape from traditional English coursework. They experience task resistance when faced with regular assignments but can achieve reading flow if given dedicated, uninterrupted reading time. They uniquely require reading to be positioned as a post-work reward and need accountability measures to be extremely low-stakes to avoid triggering their aversion to 'English work.'
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We have about ten minutes left in our Friday Nook reading time. Please go ahead and fill out the half-page reflective homework assignment on your desk.
+
+STUDENT: Do we have to? I most enjoyed about Nook reading day is that we are able to have an easy day with doing no homework and just read.
+
+TUTOR: Just answer the questions on the response sheet.
+
+STUDENT: I'd rather read than do English work. Being able to read from a Nook and no homework is why I like this.
+
+TUTOR: You've been using the Nooks for a while now. How do you feel about them compared to when we first started?
+
+STUDENT: (Shrugs) She brought the Nooks in, and I was excited. Awesome…. After a while it's okay, Nook time, but I'm like okay as long as I don't have to do any English work.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing a half-page reflective homework assignment (Likert scale and open-ended questions)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "English class",
+      "materials": "Nooks, reflective homework pieces, Likert scale, response sheet",
+      "social_setting": "classmate",
+      "time_context": "each Friday for an entire class period (50 minutes)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Discussing the transition from initial excitement to routine use of the Nooks",
+      "observable_behavior": "shrugged off his weakening interest",
+      "internal_state": "weakening interest",
+      "related_quotes": [
+        "After a while it ’ s okay, Nook time, but I ’ m like okay as long as I don ’ t have to do any English work."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When completing reflective homework pieces or response sheets",
+        "observable_behavior": "consistently expressed that the main appeal was avoiding homework, stating 'I ’ d rather read than do English work.'",
+        "internal_state": "desire to have an easy day with doing no homework",
+        "related_quotes": [
+          "I most enjoyed about Nook reading day is that we are able to have an easy day with doing no homework and just read [sic].",
+          "Being able to read from a Nook and no homework.",
+          "I like a day of just reading, you don ’ t have any homework and you can get lost in a good book."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

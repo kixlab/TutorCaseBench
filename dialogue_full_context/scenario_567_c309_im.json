@@ -1,0 +1,76 @@
+{
+  "category_id": "309",
+  "category_title": "Adolescents who disengage due to perceived teacher indifference and lack of individual support",
+  "scenario_id": "567",
+  "scenario_title": "Repetitive tasks and boredom",
+  "minimal_context": "The student is given a worksheet with repeated problems to complete in a classroom setting.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is your next worksheet. It has the same type of problems we did yesterday."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "School just became boring. I don’t learn normal, like normal people."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just keep working on it."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Since I have like learning disabilities, abilities, whatever you wanna call it, I can’t do repeated work."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please try your best to finish the paper."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I'm just gonna sit here. I just kinda stopped doing it.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is your next worksheet. It has the same type of problems we did yesterday.\n\nSTUDENT: School just became boring. I don’t learn normal, like normal people.\n\nTUTOR: Just keep working on it.\n\nSTUDENT: Since I have like learning disabilities, abilities, whatever you wanna call it, I can’t do repeated work.\n\nTUTOR: Please try your best to finish the paper.\n\nSTUDENT: I'm just gonna sit here. I just kinda stopped doing it.",
+  "immediate_dialogue_prompt": 944,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "repeated work",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "classroom setting",
+        "materials": "paper with the same stuff on it",
+        "social_setting": "",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "he'd gimme another paper with the same stuff on it",
+        "observable_behavior": "I'd just sit there and then like after a while I'd ask him like 'Why do I have to keep doing the same stuff?' and just kinda stopped doing it",
+        "internal_state": "school just became boring",
+        "related_quotes": [
+          "I don’t learn normal, like normal people. I can’t do repeated work."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "since I have like learning disabilities, abilities, whatever you wanna call it",
+          "observable_behavior": "I can't do repeated work",
+          "internal_state": "I don't learn normal, like normal people",
+          "related_quotes": [
+            "I don’t learn normal, like normal people. I can’t do repeated work."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

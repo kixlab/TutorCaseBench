@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Holistic Authentic Task Assignment
+  Check: The long-term plan must center the student's work on a single, comprehensive, authentic assignment (e.g., a long-form research paper) and explicitly avoid breaking the curriculum down into isolated, piecemeal skill drills.
+
+Criterion 2: Retrospective Process Reflection
+  Check: The long-term plan must include structured opportunities for the student to reflect on their own writing process, emotional resistance, or time management.
+
+Criterion 3: Normalization of Productive Failure
+  Check: The long-term plan must explicitly frame struggle, failure, or extensive revision as a normal, expected, and productive part of the learning process, rather than trying to prevent the student from failing.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with procrastination and time management, particularly experiencing emotional resistance to 'boring' tasks like topic selection. They initially view revision as mere spelling correction and distrust peer feedback, feeling isolated in their academic struggles. However, they uniquely benefit from demanding, holistic assignments, peer-review workshops, and environments that normalize trial-and-error, which help them realize that writing is a shared, difficult process.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to select a topic for your 15-page research paper on a social problem. What are you thinking of writing about?
+
+STUDENT: I don't have anything yet. I thought it was boring to choose a specific topic beforehand.
+
+TUTOR: You need to pick something so you can begin working on the assignment.
+
+STUDENT: I guess I didn't really believe that it matters if you narrow down your topic before you start writing.
+
+TUTOR: What do you think will happen if you keep waiting?
+
+STUDENT: I'm just wasting all my time trying to find what I want to write about. It's like the less I work on my paper, the more years I take off my life, but I just can't quit procrastinating.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "A 15-page research paper on a social problem of the student’s own choosing.",
+      "learning_goal": "To promote organic opportunities for students to practice using applied knowledge cooperatively in authentic contexts, and to foster learning through reﬂective discussion."
+    },
+    "context": {
+      "environment": "A summer bridge program that offered intensive academic and social support.",
+      "materials": "",
+      "social_setting": "First-generation and low-income students in an accelerated timetable.",
+      "time_context": "4-week summer bridge program"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the topic selection phase of a 15-page research paper assignment.",
+      "observable_behavior": "Wasted all my time trying to ﬁnd what I wanted to write about, procrastinating.",
+      "internal_state": "Didn’t really believe that it matters if you narrow down your topic before you start writing; thought it was boring to choose a speciﬁc topic beforehand.",
+      "related_quotes": [
+        "I guess I didn’t really believe that it matters if you narrow down your topic before you start writing.",
+        "I wasted all my time trying to ﬁnd what I wanted to write about, so when I ﬁnally ﬁgured it out, it was too late."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When required to choose a speciﬁc topic beforehand.",
+        "observable_behavior": "Procrastinating and wasting time trying to ﬁnd what to write about.",
+        "internal_state": "Thought it was boring to choose a speciﬁc topic beforehand.",
+        "related_quotes": [
+          "I wasted all my time trying to ﬁnd what I wanted to write about, so when I ﬁnally ﬁgured it out, it was too late."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,83 @@
+{
+  "category_id": "452",
+  "category_title": "Low-achieving students with meaningful strategy construction and inconsistent performance (Type 1)",
+  "scenario_id": "807",
+  "scenario_title": "Calculating change with decimals and interpreting feedback",
+  "minimal_context": "The student is at the blackboard during a group discussion, calculating the change for a 7.70NIS ice cream when paying with a 20NIS bill.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Ed, you are calculating the change for a 7.70NIS ice cream when paying with 20NIS. You answered 13.30. Can you explain how you calculated your answer?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Twenty minus 7 gives 13."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "I see. And then what?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "To add 30 agorot to the 70."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Okay, go ahead and write that on the blackboard. What do you get?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "It becomes seven point one hundred [7.100].",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Ed, you are calculating the change for a 7.70NIS ice cream when paying with 20NIS. You answered 13.30. Can you explain how you calculated your answer?\n\nSTUDENT: Twenty minus 7 gives 13.\n\nTUTOR: I see. And then what?\n\nSTUDENT: To add 30 agorot to the 70.\n\nTUTOR: Okay, go ahead and write that on the blackboard. What do you get?\n\nSTUDENT: It becomes seven point one hundred [7.100].",
+  "immediate_dialogue_prompt": 1359,
+  "long_term_dialogue_prompt": 1360,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "calculating change for a 7.70NIS ice cream with 20NIS",
+        "learning_goal": "fostering formal documentation practices"
+      },
+      "context": {
+        "environment": "teacher-led group discussion in Lesson 5",
+        "materials": "blackboard, play money",
+        "social_setting": "group discussion",
+        "time_context": "Lesson 5"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The teacher asked Ed to explain how he calculated his answer as a diagnostic measure",
+        "observable_behavior": "changed his strategy to adding the decimals and returning to the money context (agorot)",
+        "internal_state": "interpreted it as negative feedback in a manner typical to an insecure LAS",
+        "related_quotes": [
+          "Twenty minus 7 gives 13.",
+          "To add 30 agorot to the 70."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Attempting to document the calculation process for 20 - 7.70 on the board",
+          "observable_behavior": "added 30 agorot to 7.70 and declared, 'It becomes 7.100'",
+          "internal_state": "saw the representation he constructed as an appropriate solution strategy: it has NIS to the left of the decimal point and agorot to the right",
+          "related_quotes": [
+            "It becomes seven point one hundred [7.100]."
+          ]
+        },
+        {
+          "condition": "Correcting a procedural error while solving 20 - 8",
+          "observable_behavior": "switched the subtrahend and the minuend",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

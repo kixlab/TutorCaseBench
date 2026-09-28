@@ -1,0 +1,113 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Metacognitive Purpose of Decoding
+  Check: The tutor's long-term plan must incorporate questions or reflections that ask the student to explain why they are learning phonics or how decoding helps them read new words.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Alyssa is a struggling reader who relies on memorization, guessing, and watching the teacher rather than decoding print. She frequently attempts to share personal narratives to avoid phonics tasks and needs explicit redirection to the text along with specific phonetic scaffolding to build actual decoding skills.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, let's look at the magnet board. We are going to change the first letter to make different words in the /an/ family.
+
+STUDENT: (Attentively watches the teacher during the group instruction but does not focus on the print on the board.)
+
+TUTOR: Let's read this first word together. The word is 'pan'.
+
+STUDENT: (Sits quietly, silently mouthing the word as it is read by others, continuing to watch the teacher instead of looking at the board.)
+
+TUTOR: Now I am changing the first letter. Alyssa, what should we do to figure out how to read this?
+
+STUDENT: To do it over and over again, 'Cause if you do it over and over again, you’ll know how to read.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a whole-class activity where students are changing letters to make different words in the /an/ family on a magnet board",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-group literacy instruction",
+      "materials": "Magnet board",
+      "social_setting": "Whole-class activity",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When words are read by others during group instruction",
+      "observable_behavior": "Sits quietly, silently mouthing words as they are read by others. Attentively watches the teacher but does not look at the board or focus on the print.",
+      "internal_state": "Views reading as a process of remembering and repeating",
+      "related_quotes": [
+        "To do it over and over again, 'Cause if you do it over and over again, you’ll know how to read."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During whole-group literacy instruction",
+        "observable_behavior": "Attentively watches the teacher but rarely focuses on the print",
+        "internal_state": "Consistent with this view of reading as remembering",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

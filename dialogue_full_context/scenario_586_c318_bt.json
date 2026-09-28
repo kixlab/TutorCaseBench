@@ -1,0 +1,74 @@
+{
+  "category_id": "318",
+  "category_title": "Adolescents with Major Depressive Disorder experiencing psychomotor retardation, cognitive disorganization, and emotional volatility",
+  "scenario_id": "586",
+  "scenario_title": "Task Initiation and Material Organization",
+  "minimal_context": "The student and tutor are sitting together to organize the student's binder and backpack before starting their schoolwork.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's start by organizing your binder and backpack so we can begin your schoolwork."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Shuffles papers from side to side) My backpack is a mess. It's just bits of paper in whirlwind in here."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just look through it and decide what you need to keep and what you can throw away."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I don't know what to throw away. I can't make decisions about my work right now, I can't organize this material."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Okay, let's just find some binder paper so we can start writing the first assignment."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Ignores the inch of paper in the open binder right in front of him and stands up) I'm going to my room to get some. The family cat is being fairly annoying anyway.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's start by organizing your binder and backpack so we can begin your schoolwork.\n\nSTUDENT: (Shuffles papers from side to side) My backpack is a mess. It's just bits of paper in whirlwind in here.\n\nTUTOR: Just look through it and decide what you need to keep and what you can throw away.\n\nSTUDENT: I don't know what to throw away. I can't make decisions about my work right now, I can't organize this material.\n\nTUTOR: Okay, let's just find some binder paper so we can start writing the first assignment.\n\nSTUDENT: (Ignores the inch of paper in the open binder right in front of him and stands up) I'm going to my room to get some. The family cat is being fairly annoying anyway.",
+  "immediate_dialogue_prompt": 975,
+  "long_term_dialogue_prompt": 976,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Organize school materials (binders and backpacks) and begin schoolwork",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "HHI session at home",
+        "materials": "Binder and backpack",
+        "social_setting": "One-on-one instructional session",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When we looked for binder paper",
+        "observable_behavior": "Went to his room to get some, while his binder – right in front of him -- had at least and inch of paper, shuffle papers from side to side",
+        "internal_state": "It didn’t occur to him to look there first; they do not know what to throw away, and it really does not occur to them to do that",
+        "related_quotes": [
+          "the bits of paper in whirlwind."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When starting a session or moving between tasks",
+          "observable_behavior": "They cannot make decisions about their work",
+          "internal_state": "Difficulty in making decisions is a symptom of major depression",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

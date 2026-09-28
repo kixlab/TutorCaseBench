@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Factual Foundation Building
+  Check: The tutor's long-term plan must include a strategy to intentionally ask a high proportion of lower-level, factual recall questions about characters, setting, or plot to build reading readiness.
+
+Criterion 2: Conversational Follow-Up Modeling
+  Check: The tutor's long-term plan must incorporate a routine of consistently asking follow-up questions to the student's initial responses in order to increase the student's overall talk time and elaboration habits.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a struggling reader who defaults to brief, literal responses focused on factual recall and physical descriptions, showing minimal independent inferential comprehension. They uniquely require a strong foundation built through a higher volume of lower-level questions, paired with heavy, step-by-step scaffolding that links inferences to specific justifications.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's discuss your book. What happened during the pancake eating contest?
+
+STUDENT: He wanted to eat the most pancakes.
+
+TUTOR: What did he do with the juice?
+
+STUDENT: He didn’t know that they could drink a lot of juice, more than him.
+
+TUTOR: How would you describe the way the character acted when he did that?
+
+STUDENT: They were silly.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Inferring character traits and justifying motivations regarding a pancake eating contest",
+      "learning_goal": "Draw conclusions from the text and/or prior knowledge to explain some aspect of the story"
+    },
+    "context": {
+      "environment": "One-on-one reading conference",
+      "materials": "Self-selected books, SEM-R bookmarks listing sample questions",
+      "social_setting": "One-to-one discussion with teacher",
+      "time_context": "Phase 2 SEM-R"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked an inference question about how a character acted",
+      "observable_behavior": "Provides a brief response without justification",
+      "internal_state": "",
+      "related_quotes": [
+        "They were silly."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When responding to higher-level follow-up questions",
+        "observable_behavior": "Requires heavy scaffolding to support claims or opinions expressed in response to a previous question or to draw conclusions from the text",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Space for Intersectional Contradictions
+  Check: The tutor's long-term plan must include methods for the student to safely explore the dissonance between academic critiques and her personal/familial allegiances without forcing her to conform to a rigid critical discourse.
+
+Criterion 2: Redefining Engagement Metrics
+  Check: The tutor's long-term plan must explicitly shift the expectation of participation away from full-class vocalization, incorporating alternative modes (e.g., writing, small group work, active listening) as valid forms of engagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a thoughtful, active listener whose silence is often misinterpreted as reluctance or inability to engage. She frequently navigates deep contradictions between critical academic discourses and her lived familial and cultural allegiances, which can cause her to trail off or feel like a 'hypocrite.' She requires intimate, low-stakes settings to share her critiques and needs her silence to be respected as a valid form of participation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are having a classroom conversation on male power and privilege. I'd like to hear everyone's thoughts on this topic.
+
+STUDENT: (Leans on her zipped-up backpack and remains silent while the boys start talking.)
+
+TUTOR: I see the boys are talking and taking notes, but the girls are silent. Please share your thoughts.
+
+STUDENT: (Continues to lean on her backpack, remaining silent in thoughtful contemplation rather than speaking out to the full class.)
+
+TUTOR: ¡Mujeres! This is what I’m talking about! You don't need to feel you must be given permission by male teachers and peers to speak up.
+
+STUDENT: We like to listen– Shut up, Alex! –we’re paying attention, but the guys are just talking back.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a classroom conversation on male power and privilege led by a university-team leader",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mr. Clemente’s second-period class, typically subdued Tuesday morning",
+      "materials": "zipped-up backpacks, notes",
+      "social_setting": "classroom conversation",
+      "time_context": "Tuesday morning"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the mentor exclaimed, ‘¡Mujeres! This is what I’m talking about!’, having just suggested that Chicana students often feel they must be given permission by male teachers and peers to ‘speak up.’",
+      "observable_behavior": "Instantly upon hearing the faculty member’s challenge, a young woman retorted, ‘We like to listen–,’ pausing to exclaim, ‘Shut up, Alex!’ as a male student interrupted, before continuing, ‘–we’re paying attention, but the guys are just talking back.’",
+      "internal_state": "Thoughtful contemplation; freedom of not having to exist constantly in reaction to what is said",
+      "related_quotes": [
+        "We like to listen–, ’ pausing to exclaim, ‘Shut up, Alex!’ as a male student interrupted, before continuing, ‘–we’re paying attention, but the guys are just talking back."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During full-class conversation on social justice topics",
+        "observable_behavior": "Leaning on zipped-up backpacks, silent",
+        "internal_state": "Reflective of a lack of identification with sanctioned discourses and modes of engagement",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Reading Load Accommodation
+  Check: The tutor's long-term plan incorporates consistent read-aloud supports or text-reduction strategies for tasks with high reading demands.
+
+Criterion 2: Structured Inquiry Progression
+  Check: The tutor structures inquiry tasks into heavily scaffolded, teacher-guided steps or structured small-group collaborations rather than assigning independent discovery labs.
+
+Criterion 3: Post-Exploration Vocabulary Anchoring
+  Check: The tutor explicitly introduces and reinforces specific scientific vocabulary immediately following exploratory activities to solidify the concepts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is quietly compliant and appears on-task, but masks significant academic struggles—particularly with reading comprehension and independent inquiry—by guessing, searching the internet, or copying peers. They rarely self-advocate or ask for help, meaning their silence often indicates confusion rather than understanding. They uniquely require proactive scaffolding, visual/read-aloud accommodations, and immediate, direct intervention the moment they signal any uncertainty.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please complete the independent work for our ecology unit. Read the text and answer the questions on your worksheet.
+
+STUDENT: (Nods and looks down at the worksheet, quietly taking notes on the inquiry activity.)
+
+TUTOR: Are you making progress on the questions?
+
+STUDENT: (Continues to work independently with minimal interaction, opening a new tab on the Internet to search for the answer rather than raising a hand.)
+
+TUTOR: Keep trying to find the answers on your own.
+
+STUDENT: (Glances over at the student sitting next to him) When I need help, I would just guess or see if I would try and figure it out. Mostly I looked for what other people were doing. That’s how I completed my work.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing independent work during the 9-week ecology unit",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during the 9-week ecology unit",
+      "materials": "Internet, videos, graphs, scientific inquiry labs",
+      "social_setting": "Independent work phase and small groups",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When needing help, getting 'stuck', or working independently",
+      "observable_behavior": "Reported guessing answers, using the Internet for assistance, or looking for what other people were doing rather than raising their hand",
+      "internal_state": "",
+      "related_quotes": [
+        "Mostly I looked for what other people were doing. That’s how I completed my work.",
+        "When I need help, I would just guess or see if I would try and figure it out."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During general classroom engagement in inquiry activities and whole-class instruction",
+        "observable_behavior": "Quietly on-task (e.g., taking notes, displaying teacher check-in signal) but interactions were more minimal and often worked independently even in group settings",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

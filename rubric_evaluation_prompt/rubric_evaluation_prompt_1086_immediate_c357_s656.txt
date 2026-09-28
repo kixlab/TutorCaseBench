@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Direct and Simple Explanations
+  Check: The tutor uses plain, straightforward language to explain concepts, actively avoiding unnecessary academic jargon or overly complex phrasing.
+
+Criterion 2: Responsiveness to Mastery
+  Check: The tutor acknowledges Raheem's current understanding and offers an immediate opportunity to advance, tackle a harder problem, or receive one-on-one extension rather than forcing him to complete basic review.
+
+Criterion 3: Dynamic Delivery
+  Check: The tutor incorporates an engaging element—such as a real-world hook, conversational tone, or interactive challenge—rather than delivering a dry, rote explanation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Raheem is a capable student who quickly disengages and develops an 'I don't care' attitude when faced with unchallenging review, overly complex explanations, or inconsistent discipline. He uniquely needs straightforward, jargon-free instruction, continuous and escalating academic challenges, and fair, consistent boundaries to maintain his respect and engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at this math concept on the board. We need to utilize the inverse operations to isolate the variable by systematically applying the properties of equality.
+
+STUDENT: The way you teach is so boring. It's not interesting. You're playing with words. You don't put any style or pizzazz into it.
+
+TUTOR: Please just follow along. We must transpose the constant term to the adjacent side of the equation.
+
+STUDENT: You put the work in difficult terms when it could be explained plain and simple.
+
+TUTOR: I mean we just subtract the number from both sides.
+
+STUDENT: Why you just didn't say that in the first place instead of going through all this? You really beat around the bush instead of just getting down to the point.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Explaining mathematical concepts on the board",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "8th grade math classroom",
+      "materials": "Board",
+      "social_setting": "Whole-class instruction",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher uses 'big words' and 'beats around the bush' instead of getting down to the point",
+      "observable_behavior": "Questions the teacher's indirect explanation style and expresses frustration at the unnecessary complexity",
+      "internal_state": "Believes the teacher intentionally puts the work in difficult terms when it could be explained simply",
+      "related_quotes": [
+        "Why you just didn't say that in the first place instead of going through all this?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asking the teacher to explain a mathematical topic",
+        "observable_behavior": "Challenges the teacher's communication style",
+        "internal_state": "Feels the teacher is 'playing with words' rather than teaching effectively",
+        "related_quotes": [
+          "She's playing with words."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

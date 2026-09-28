@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Comprehension Probing
+  Check: The tutor explicitly asks direct, specific questions to verify the student's understanding of the material, rather than accepting silence or generic statements (e.g., 'I'm doing my work') as proof of comprehension.
+
+Criterion 2: Explicit Positive Affirmation
+  Check: The tutor provides clear, immediate positive reinforcement (e.g., praising effort, validating correct steps, offering encouraging remarks) to counteract the student's self-doubt.
+
+Criterion 3: Active Task Guidance
+  Check: The tutor actively guides the student through the material (e.g., step-by-step monitoring, introducing interactive elements) rather than directing them to navigate self-paced or independent work alone.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits quiet compliance that masks a lack of understanding and self-doubt, often disengaging (texting, resting head) during self-paced or computer-based tasks. They uniquely require proactive probing to verify comprehension, constant positive affirmations to combat self-doubt, and active, closely monitored guidance rather than independent, self-paced work.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start working on your worksheet to solve the mathematics problems involving triangles and their sides.
+
+STUDENT: (Remains very quiet with little or no contribution to the learning activity.)
+
+TUTOR: So what are you doing now?
+
+STUDENT: I’m doing my work.
+
+TUTOR: Do you have the answers for the triangle problems?
+
+STUDENT: (Remains quiet even though they are working on the worksheet, experiencing self-doubt, making it so one would not know if they understood the lesson or not.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solving mathematics problems involving triangles and their sides on a worksheet, matching vocabulary words with their meanings, or participating in an essay revision session",
+      "learning_goal": "Ensure that every student understood the concept and reinforce understanding"
+    },
+    "context": {
+      "environment": "General classroom instruction and independent work",
+      "materials": "Worksheets, board with list of words",
+      "social_setting": "Teacher-directed lesson",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Working on the worksheets during independent work",
+      "observable_behavior": "Remained quiet even though they were working on the worksheets and one would not know if they understood the lesson or not",
+      "internal_state": "Doubt myself",
+      "related_quotes": [
+        "My teachers always have something good to say; sometimes when I doubt myself they encourage me and tell me positive things."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When teachers were constantly probing the students with questions to check for their understanding",
+        "observable_behavior": "Some students were very quiet with little or no contribution to learning activities",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When a teacher asks 'So what are you doing now?' during an essay revision session",
+        "observable_behavior": "Responded 'I’m doing my work.'",
+        "internal_state": "",
+        "related_quotes": [
+          "I’m doing my work."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

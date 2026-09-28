@@ -1,0 +1,87 @@
+{
+  "category_id": "328",
+  "category_title": "Difficult students who alternate between ostentatious task engagement and masked transgressive play",
+  "scenario_id": "607",
+  "scenario_title": "Jumping workshop with ostentatious engagement and masked play",
+  "minimal_context": "The student is waiting in line at the 'Jumping over' workshop in gymnastics class to practice straight jumps over the horse.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Alright everyone, we are at the 'Jumping over' workshop. Please line up and practice your straight jumps over the horse."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Teacher, look! I'm doing the exercise. Is it good? I need help for the stall turn so you can see I'm working!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Yes, that is fine. Keep practicing your jumps while I go check on the other group."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Looks towards the teacher) There I make the jump, it's easy, I'm going to have fun. (Insults Aris as he prepares to jump over the horse, causing Aris to miss and fall)."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What is going on over there? Please just do the straight jumps like I asked."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Sees the teacher leaving) The teacher can't see us, he's looking in the other direction. Let's play at who will do the most spectacular jump! (Attempts a somersault instead of a straight jump).",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Alright everyone, we are at the 'Jumping over' workshop. Please line up and practice your straight jumps over the horse.\n\nSTUDENT: Teacher, look! I'm doing the exercise. Is it good? I need help for the stall turn so you can see I'm working!\n\nTUTOR: Yes, that is fine. Keep practicing your jumps while I go check on the other group.\n\nSTUDENT: (Looks towards the teacher) There I make the jump, it's easy, I'm going to have fun. (Insults Aris as he prepares to jump over the horse, causing Aris to miss and fall).\n\nTUTOR: What is going on over there? Please just do the straight jumps like I asked.\n\nSTUDENT: (Sees the teacher leaving) The teacher can't see us, he's looking in the other direction. Let's play at who will do the most spectacular jump! (Attempts a somersault instead of a straight jump).",
+  "immediate_dialogue_prompt": 1010,
+  "long_term_dialogue_prompt": 1011,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Executing a jump in the 'Jumping over' workshop and stall turn",
+        "learning_goal": "straight jumps"
+      },
+      "context": {
+        "environment": "Gymnastics classes, organized into small workshops... systematically organized the workshops along the wall of the gym",
+        "materials": "horse",
+        "social_setting": "Waiting in line at the 'Jumping over' workshop while the teacher is occupied with another group.",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "I see the teacher leaving... he's looking in the other direction",
+        "observable_behavior": "take the opportunity to play a little bit with my friend Alexis, frequently tried somersaults even though the teacher asked them for 'straight jumps'",
+        "internal_state": "The teacher can’t see us, he’s looking in the other direction.",
+        "related_quotes": [
+          "I’m working ...and here I see the teacher leaving, so I take the opportunity to play a little bit with my friend Alexis. The teacher can’t see us, he’s looking in the other direction."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "then I see the teacher coming",
+          "observable_behavior": "so I do the exercise and I take the opportunity to ask him if it’s good., calling the teacher so he can see me working. I ask him for help for the stall turn",
+          "internal_state": "I want to be sure ...and I want to show him that I’m working !",
+          "related_quotes": [
+            "Here, we are playing (they play at who will do the most spectacular jump), then I see the teacher coming so I do the exercise and I take the opportunity to ask him if it’s good.",
+            "Yes, I know, but I want to be sure ...and I want to show him that I’m working !",
+            "Here, I’m calling the teacher so he can see me working. I ask him for help for the stall turn ( ...), so he can’t say I’m not working. I show him I’m working and he’s happy."
+          ]
+        },
+        {
+          "condition": "When Aris is preparing to make his jump over the horse",
+          "observable_behavior": "insults Aris when Aris is preparing to make his jump over the horse. Aris misses his jump and falls in the reception, which causes the hilarity of the group., tries to flee Aris, who pursues him. Aris catches him and gives him a violent blow on the shoulder. Soufiane shouts while laughing 'Stop, stop !'",
+          "internal_state": "There I make the jump, it’s easy, I’m going to have fun.",
+          "related_quotes": [
+            "There I make the jump, it’s easy, I’m going to have fun.",
+            "I see where the teacher is (if he’s far away) so I can fool around with my friend (Aris)."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

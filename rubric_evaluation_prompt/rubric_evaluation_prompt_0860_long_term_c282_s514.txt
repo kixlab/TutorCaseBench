@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Public Exhibition Strategy
+  Check: The tutor's long-term plan must include a mechanism for publicly displaying or showcasing the student's created artifacts.
+
+Criterion 2: Art-Based Assessment Replacement
+  Check: The tutor's long-term plan must assess the student's academic progress through the evaluation of their art projects or artifacts rather than traditional testing.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits extreme task resistance, disruptive behavior (including property destruction), and suspicion of authority when faced with traditional reading or testing. However, they have a strong affinity for art; their resistance vanishes and their retention improves significantly when instruction is anchored in visual exploration, drawing, artifact recreation, and the public display of their work.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are starting our unit on the western industrial age. For this assignment, I want you to integrate drawing into your notes about the inventions.
+
+STUDENT: Give me a reason why we have to draw. I'm not doing this work.
+
+TUTOR: It is just the activity for today's class. Please get your pencils out and get started.
+
+STUDENT: Why are you teaching us bad kids? You're probably just making us do this so you can use us for your own personal gain.
+
+TUTOR: I am just trying to teach the lesson. Please look at the board and begin drawing.
+
+STUDENT: I refuse to do this work. I'm not cooperating with you and I'm paying no attention to this instruction.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "integrate drawing into it",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "probationary high school world history class",
+      "materials": "",
+      "social_setting": "class of 19 students",
+      "time_context": "first introduced the western industrial age"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Laura first introduced the western industrial age, and then she began to integrate drawing into it",
+      "observable_behavior": "Some asked for a reason",
+      "internal_state": "a few were suspicious of Laura using them for her own personal gain",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when interacting with the instructor",
+        "observable_behavior": "student resistance to cooperate with the instructor that had been the norm",
+        "internal_state": "",
+        "related_quotes": [
+          "Why are you teaching us bad kids?"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

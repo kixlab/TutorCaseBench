@@ -1,74 +1,72 @@
 {
   "category_id": "076",
-  "category_title": "First-grade struggling readers who demonstrate graphosemantic awareness by identifying and rejecting incorrect speech-to-text transcriptions",
+  "category_title": "Highly anxious or extremely shy students at risk of disengagement",
   "scenario_id": "148",
-  "scenario_title": "Evaluating inaccurate SR transcriptions and skipping the drafting process",
-  "minimal_context": "The student is using an iPad with speech recognition software to dictate the final sentence of her story at the writing center.",
+  "scenario_title": "Structured Q&A session with visiting adults",
+  "minimal_context": "The student is in a classroom group forum preparing to ask a cloze question to visiting NRL players.",
   "dialogue": [
     {
       "turn_id": 1,
       "speaker": "tutor",
-      "message": "Let's use the iPad to write the final sentence for your story, 'Victoria Had a Little Dog'."
+      "message": "It is your turn to ask your cloze question to the visiting NRL players in the group forum."
     },
     {
       "turn_id": 2,
       "speaker": "student",
-      "message": "(Speaks into the iPad) The dog would say, hello."
+      "message": "(Keeps her head down, failing to make eye contact with the players or raise her hand for permission to speak.)"
     },
     {
       "turn_id": 3,
       "speaker": "tutor",
-      "message": "Let's look at what the screen says."
+      "message": "Please introduce yourself by name and school, and ask your question."
     },
     {
       "turn_id": 4,
       "speaker": "student",
-      "message": "That’s not what I said! It wrote 'Follow dog I don’t know that for'."
+      "message": "(Remains completely silent while the other students listen quietly, looking extremely shy.)"
     },
     {
       "turn_id": 5,
       "speaker": "tutor",
-      "message": "What do you think you should do next?"
+      "message": "We are waiting for you to use a confident voice."
     },
     {
       "turn_id": 6,
       "speaker": "student",
-      "message": "(Deletes the entire sentence from the screen) I'm not copying that to my paper. I'm just going to delete the whole thing.",
+      "message": "(Shrinks back in her seat, struggling to even speak to the kids her own age sitting next to her, let alone the visiting adults.)",
       "is_challenging_behavior": true
     }
   ],
-  "dialogue_combined": "TUTOR: Let's use the iPad to write the final sentence for your story, 'Victoria Had a Little Dog'.\n\nSTUDENT: (Speaks into the iPad) The dog would say, hello.\n\nTUTOR: Let's look at what the screen says.\n\nSTUDENT: That’s not what I said! It wrote 'Follow dog I don’t know that for'.\n\nTUTOR: What do you think you should do next?\n\nSTUDENT: (Deletes the entire sentence from the screen) I'm not copying that to my paper. I'm just going to delete the whole thing.",
-  "immediate_dialogue_prompt": 264,
-  "long_term_dialogue_prompt": 265,
+  "dialogue_combined": "TUTOR: It is your turn to ask your cloze question to the visiting NRL players in the group forum.\n\nSTUDENT: (Keeps her head down, failing to make eye contact with the players or raise her hand for permission to speak.)\n\nTUTOR: Please introduce yourself by name and school, and ask your question.\n\nSTUDENT: (Remains completely silent while the other students listen quietly, looking extremely shy.)\n\nTUTOR: We are waiting for you to use a confident voice.\n\nSTUDENT: (Shrinks back in her seat, struggling to even speak to the kids her own age sitting next to her, let alone the visiting adults.)",
+  "immediate_dialogue_prompt": 237,
+  "long_term_dialogue_prompt": 238,
   "full_context": {
     "content": {
       "task": {
-        "content": "Evaluating the accuracy of an SR transcription for the final sentence of her story 'Victoria Had a Little Dog' on an iPad.",
-        "learning_goal": "Navigating the stages of the writing process (brainstorming, drafting, revising) while using SR technology."
+        "content": "Ask their cloze question to visiting NRL players",
+        "learning_goal": "Socialising the students into appropriate communication with adult visitors to the classroom and respectful communication (speaking and listening) with each other"
       },
       "context": {
-        "environment": "Supervised writing center sessions",
-        "materials": "iPad, SR technology (Dragon), chart paper",
-        "social_setting": "Supervised writing center with teacher available for dialogue",
+        "environment": "Group forum in the classroom",
+        "materials": "Cloze question",
+        "social_setting": "Visiting NRL players and other students listened quietly",
         "time_context": ""
       },
       "challenging_behavior_trigger": {
-        "condition": "When SR transcribed, 'Follow dog I don’t know that for' instead of the dictated sentence 'The dog would say, hello'.",
-        "observable_behavior": "Recognized that the transcription was inaccurate, and therefore did not copy it to her paper. Deleted entire sentences and drafts.",
-        "internal_state": "To them, what they dictated was the final composition.",
-        "related_quotes": [
-          "That’s not what I said!"
-        ]
+        "condition": "When expected to engage with the visiting player in this group forum",
+        "observable_behavior": "Struggled to even speak to kids her own age",
+        "internal_state": "Extremely shy",
+        "related_quotes": []
       },
       "behavior_patterns": [
         {
-          "condition": "When navigating the stages of the writing process with SR.",
-          "observable_behavior": "Consistently ignored the writing process. Wanted to skip brainstorming and drafting and go straight to revising. Dictated complete ideas.",
-          "internal_state": "",
+          "condition": "Prior to the intervention, when required to interact socially",
+          "observable_behavior": "Struggled to even speak to kids her own age",
+          "internal_state": "Extremely shy",
           "related_quotes": []
         }
       ]
     }
   },
-  "challenge_type": "Academic Struggle"
+  "challenge_type": "Social-Interpersonal Difficulty"
 }

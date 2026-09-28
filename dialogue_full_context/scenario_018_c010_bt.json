@@ -1,0 +1,74 @@
+{
+  "category_id": "010",
+  "category_title": "Autistic students who partially process problems with discrepancy gestures and echolalia",
+  "scenario_id": "018",
+  "scenario_title": "Identifying geometric shapes with multiple visual distractors",
+  "minimal_context": "Rico is working on a task sheet to identify and mark images of concrete objects shaped like a beam and a ball.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please look at this task sheet. Find the images shaped like a beam and a ball, and put a checkmark next to them."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Focuses on the objects with irregular hand movements. He moves his hand as if about to put a checkmark on the pencil and cap, but hesitates and turns his attention to the tissue box) Tissue... tissue..."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Keep looking at the pictures. Which one is the beam?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(His view slowly turns, observing the variety of objects. He makes a discrepancy gesture, pointing his finger at the image of the cap while looking at the beam)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What about the ball? Can you find the ball?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(He ignores the image of the marbles. His hand movements give a checkmark on the picture of the hat instead. He stares at the canned milk and repeats quickly) Canned milk, canned milk.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please look at this task sheet. Find the images shaped like a beam and a ball, and put a checkmark next to them.\n\nSTUDENT: (Focuses on the objects with irregular hand movements. He moves his hand as if about to put a checkmark on the pencil and cap, but hesitates and turns his attention to the tissue box) Tissue... tissue...\n\nTUTOR: Keep looking at the pictures. Which one is the beam?\n\nSTUDENT: (His view slowly turns, observing the variety of objects. He makes a discrepancy gesture, pointing his finger at the image of the cap while looking at the beam)\n\nTUTOR: What about the ball? Can you find the ball?\n\nSTUDENT: (He ignores the image of the marbles. His hand movements give a checkmark on the picture of the hat instead. He stares at the canned milk and repeats quickly) Canned milk, canned milk.",
+  "immediate_dialogue_prompt": 27,
+  "long_term_dialogue_prompt": 28,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Identifying the shape of a 'beam' and 'ball' on a task sheet using images of concrete objects",
+        "learning_goal": "Identify appropriate concrete objects specified geometry"
+      },
+      "context": {
+        "environment": "Learning process",
+        "materials": "Task sheet with images of concrete objects including a pencil, cap, tissue box, marbles, hat, and canned milk, as well as concrete objects such as dice and cardboard",
+        "social_setting": "Teacher guiding students working on task",
+        "time_context": "When the work task"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When attempting to identify the picture 'beam' or 'ball' among multiple images",
+        "observable_behavior": "Hesitated, turned his attention to observe the image 'Tissue' in the picture 'cap', discrepancy gesture pointing to an image 'cap' on the 'beam', hand movements still give a '√' in the picture 'hat' again, ignored the image 'marbles'",
+        "internal_state": "Distracted on spatial relations, difficulty repeating ideas visually perceived image, distraction on observation to perceive the form",
+        "related_quotes": [
+          "canned milk"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When observing a variety of objects that are interrelated",
+          "observable_behavior": "Facial expressions focus to hold objects observation with irregular hand movements move, view slowly turns observing a variety of objects but difficult to maintain his observations",
+          "internal_state": "Difficulty selecting or process information so that individual processing of sensory information by partially corrects",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

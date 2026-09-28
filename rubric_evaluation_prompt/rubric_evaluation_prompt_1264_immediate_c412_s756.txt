@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Task Translation Prompting
+  Check: The tutor explicitly asks or encourages the student to rephrase the prompt, task, or concept into their own words.
+
+Criterion 2: Validating Deferral of Strong Opinions
+  Check: The tutor acknowledges the student's affective statement and explicitly guarantees a specific opportunity to explore that exact topic later in the lesson or activity.
+
+Criterion 3: Choice Within Mandatory Frameworks
+  Check: The tutor presents the activity as mandatory but offers the student a specific choice of role, perspective, or entry point.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are older, marginalized urban students with histories of truancy who distrust authority and are easily intimidated by complex academic tasks, often trying to do the bare minimum to graduate. They uniquely require an adult-to-adult dynamic, highly predictable routines, debatable topics to spark engagement, and explicit strategies to translate intimidating prompts into their own words.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are starting our court case reenactment today. Please pull your chairs into a semicircle and choose if you want to be the petitioner, respondent, or judge.
+
+STUDENT: I'm just trying to get in and get out of here. I'm only doing what I need to do to graduate.
+
+TUTOR: The moot court format requires all students to participate. Which role would you like?
+
+STUDENT: In my previous social studies classes, they ain't teach me nothing. Like they just hand out the textbook and read up to this chapter or whatever. I don't feel like this is for me.
+
+TUTOR: We are doing the court case today, not reading the textbook. Please join your teammates.
+
+STUDENT: Look Peter, I know it's an assigned kind of thing, but people get so over that too. I'm not participating in this, I just want to sit here.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "court case reenactments / moot courts",
+      "learning_goal": "defend your point of view and speak in public"
+    },
+    "context": {
+      "environment": "students rarely sat in rows; rather, they worked in circles or semicircles",
+      "materials": "primary documents, political cartoons",
+      "social_setting": "cooperative group work, required participation",
+      "time_context": "established 2-week routine"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "being required to participate in all activities",
+      "observable_behavior": "arrived unwilling to participate in class activities, expressed displeasure in being required to participate",
+      "internal_state": "disengaged, trying to 'get in and get out', doing only what they needed to do to graduate",
+      "related_quotes": [
+        "people get so over that too."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "At the beginning of the course or when faced with traditional social studies instruction",
+        "observable_behavior": "unwilling to participate, disengaged, doing only what is needed to graduate",
+        "internal_state": "negative experiences in school, don't feel like school's a place for them",
+        "related_quotes": [
+          "In my previous social studies classes, they ain’t teach me nothing."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

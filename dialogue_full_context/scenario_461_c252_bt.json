@@ -1,0 +1,76 @@
+{
+  "category_id": "252",
+  "category_title": "Struggling readers who use direct repetition of previous text to avoid new reading",
+  "scenario_id": "461",
+  "scenario_title": "Shared reading turn-taking avoidance via repetition",
+  "minimal_context": "The student and interventionist are taking turns reading 'Miss Nelson is missing!' together.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's continue reading 'Miss Nelson is missing!'. I will read this sentence: 'The class was rude.' Now it is your turn."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Was rude or that one."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "I just read that part. Please look at the next line and read it."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Accepts the speaking turn but does not attempt the unread text) Was rude."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Points to the next passage of text) Go ahead and read this next one."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "You 's gonna read the next one. I read this one.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's continue reading 'Miss Nelson is missing!'. I will read this sentence: 'The class was rude.' Now it is your turn.\n\nSTUDENT: Was rude or that one.\n\nTUTOR: I just read that part. Please look at the next line and read it.\n\nSTUDENT: (Accepts the speaking turn but does not attempt the unread text) Was rude.\n\nTUTOR: (Points to the next passage of text) Go ahead and read this next one.\n\nSTUDENT: You 's gonna read the next one. I read this one.",
+  "immediate_dialogue_prompt": 767,
+  "long_term_dialogue_prompt": 768,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Shared reading of the book 'Miss Nelson is missing!'",
+        "learning_goal": "acquiring the skills necessary for reading"
+      },
+      "context": {
+        "environment": "Summer Language and Literacy Project",
+        "materials": "Miss Nelson is missing! (Allard and Marshall, 1977) book selected from several choices",
+        "social_setting": "share reading with an interventionist",
+        "time_context": "5th, 6th, or 7th session of a 30-minute pedagogical interaction"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "after the interventionist finished reading a sentence and shifted gaze to the child",
+        "observable_behavior": "declines to read. Instead he repeats, ‘Was rude or that one (Line 217)’",
+        "internal_state": "recognizing that an interactive turn is required on his part due to the previously established pedagogical expectations",
+        "related_quotes": [
+          "Was rude or that one"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "after the interventionist pointed to the next passage of text",
+          "observable_behavior": "persists in his avoidance, thus delaying any actual reading by countering, ‘You ’s gonna read the next one. I read this one (Line 224)’",
+          "internal_state": "successfully delays having to read or potentially read unsuccessfully... postures the interventionist as unsuccessful at following along rather than risking an unsuccessful reading turn",
+          "related_quotes": [
+            "You ’s gonna read the next one. I read this one."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

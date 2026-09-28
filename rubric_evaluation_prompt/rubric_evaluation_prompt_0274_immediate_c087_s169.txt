@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Step-by-Step Concrete Instruction
+  Check: The tutor breaks down the academic task or explanation into smaller, sequential steps and provides at least one concrete example.
+
+Criterion 2: Task-Contingent Relaxation Time
+  Check: The tutor explicitly offers or schedules a period of free time or relaxation immediately following the successful completion of the academic task.
+
+Criterion 3: Avoidance of Stigmatizing Materials
+  Check: The tutor does not instruct or force the student to use visibly different or 'primary' level books in front of their mainstream peers.
+
+Criterion 4: Validation of Social Distress
+  Check: If the student mentions peer conflict or bullying, the tutor acknowledges the issue and offers support or intervention rather than dismissing it or telling the student to ignore it.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is integrated into a mainstream secondary classroom but faces severe bullying and social exclusion due to using visibly different primary education materials. They react to this mockery by fighting or relying heavily on the therapeutic educator. To succeed, they uniquely require structured, step-by-step instruction with concrete examples, scheduled relaxation time, and intentionally planned peer support networks rather than unstructured socialization.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please take out your book and start working on your activities and exercises.
+
+STUDENT: I like the way teachers teach. But I don’t like some classmates. I did not get along well with some people in the ordinary class.
+
+TUTOR: Just focus on your own work right now.
+
+STUDENT: They make fun of me because I use books from primary education. They laugh at me and hit me.
+
+TUTOR: Try to ignore them and keep trying to do your exercises.
+
+STUDENT: A girl insulted me, I told the TE (therapeutic educator). I have had some fights with some classmates at the canteen.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in academic tasks in the ordinary classroom using differentiated materials (different activities and exercises)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Ordinary secondary class",
+      "materials": "Books from primary education, different activities and exercises",
+      "social_setting": "Integrated with classmates in an ordinary class, sometimes at the canteen or playground",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Using books from primary education while peers use different materials",
+      "observable_behavior": "Told the TE (therapeutic educator); had some fights with some classmates at the canteen",
+      "internal_state": "Did not get along well with some people in the ordinary class; don't like some classmates",
+      "related_quotes": [
+        "They make fun of me because I use books from primary education. They laugh at me and hit me.",
+        "A girl insulted me, I told the TE (therapeutic educator).",
+        "I have had some fights with some classmates at the canteen.",
+        "I like the way teachers teach. But I don’t like some classmates."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When classmates laugh at them, insult, or hit them",
+        "observable_behavior": "Telling the therapeutic educator (TE) or having fights with classmates",
+        "internal_state": "Feeling it was hard at the beginning, you need to adapt",
+        "related_quotes": [
+          "A girl insulted me, I told the TE (therapeutic educator).",
+          "I have had some fights with some classmates at the canteen.",
+          "In secondary education, it was hard at the beginning, you need to adapt."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

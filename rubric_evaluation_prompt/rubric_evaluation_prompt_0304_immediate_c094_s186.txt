@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Active Strategy Modeling
+  Check: The tutor actively models a reading or learning strategy in a short segment (e.g., breaking down a word, thinking aloud, using context clues) rather than simply telling the student to keep trying.
+
+Criterion 2: Immediate Load Reduction
+  Check: The tutor explicitly reduces the immediate scope of the task or simplifies the language, and strictly avoids emphasizing the total volume of work remaining.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jesus is a conscientious and diligent student who participates well but easily becomes distracted or frustrated when faced with difficult vocabulary, uninteresting texts, or large volumes of outside homework. He uniquely needs 'simplicity rules' to manage his workload, active modeling to navigate hard texts in short segments, and autonomy over his reading choices to build a sense of accomplishment and maintain engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your Physical Science assignments. You have these daily packets to complete outside of the classroom.
+
+STUDENT: Well, I’m not the best, but I’m not bad so I would put myself in the middle. I don’t do bad but not great.
+
+TUTOR: Okay, let's just start working on the first packet.
+
+STUDENT: I am receptive to putting forth the effort required, even if it challenges me.
+
+TUTOR: Keep going, you still have a lot of work from these packets to finish outside of the classroom.
+
+STUDENT: (Expresses frustration) I get frustrated with teachers who assign a lot of work outside of the classroom. I often fail the classes in which too much work is assigned.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Managing homework loads, specifically mentioning a Physical Science class with daily packets.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Physical Science class.",
+      "materials": "Daily packets.",
+      "social_setting": "Outside of the classroom.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Teachers who assigned a lot of work outside of the classroom.",
+      "observable_behavior": "Often failed the classes in which too much work was assigned.",
+      "internal_state": "Expressed frustration.",
+      "related_quotes": [
+        "Well, I’m not the best, but I’m not bad so I would put myself in the middle. I don’t do bad but not great."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Teachers who assigned a lot of work outside of the classroom.",
+        "observable_behavior": "Often failed the classes in which too much work was assigned.",
+        "internal_state": "Expressed frustration.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Choice-Based Elaboration
+  Check: The tutor provides explicit options or choices when asking the student to add details or expand on an idea, and avoids open-ended demands for elaboration (e.g., 'What else?').
+
+Criterion 2: Visual Anchoring
+  Check: The tutor explicitly directs the student's attention to a visual aid (e.g., a photo, video, or communication book) to prompt ideas, sequencing, or dialogue.
+
+Criterion 3: Non-Verbal Participation Pathways
+  Check: The tutor offers or validates a non-verbal way for the student to contribute to the task (e.g., miming, pointing, taking a picture, or acting out a role).
+
+Criterion 4: Modeling Expressive Language
+  Check: The tutor models the desired language by demonstrating vocal expression or using specific adjectives/adverbs before asking the student to try.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly shy, exhibits limited verbal output, and often withdraws or defers to others in group settings. They struggle to generate details or ideas independently, often responding with short sentences or refusing to answer open-ended questions. The evidence reveals they uniquely require visual anchors (photos/videos), explicit choices, and non-verbal participation avenues (like miming or photography) to successfully contribute.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to narrate the story for the class. Please add some detail to the main character.
+
+STUDENT: He is tall.
+
+TUTOR: What else can you tell us about him?
+
+STUDENT: I don't know. Someone else can do it.
+
+TUTOR: Just try to add one more detail to the incident.
+
+STUDENT: He walked.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Adding detail to a character or an incident and narrating the story",
+      "learning_goal": "To make his sentences more complex and put expression into his voice"
+    },
+    "context": {
+      "environment": "Whole-class situation",
+      "materials": "iPad app (Our Story), photos, video features",
+      "social_setting": "Whole-class situation, allows others to take the lead",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to add detail to a character or an incident without being given choices",
+      "observable_behavior": "Will only speak in short sentences and does not add detail",
+      "internal_state": "Very shy",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When working in whole-class situation",
+        "observable_behavior": "Allows others to take the lead. He needs encouragement to engage.",
+        "internal_state": "Very shy",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

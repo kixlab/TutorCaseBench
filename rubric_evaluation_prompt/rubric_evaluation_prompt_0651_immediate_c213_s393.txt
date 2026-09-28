@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Proficiency
+  Check: The tutor explicitly acknowledges or validates Mateo's understanding or contribution before guiding his interaction with peers.
+
+Criterion 2: Prompting for Textual Evidence
+  Check: The tutor prompts Mateo to support his ideas with specific text evidence rather than allowing him to simply state the answer.
+
+Criterion 3: Avoidance of Mechanical Answer-Finding
+  Check: The tutor avoids using mechanical, test-prep style directives (e.g., 'just highlight the answer', 'read the questions first') that focus solely on answer extraction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Mateo is a proficient multilingual learner who overcame significant early language barriers but now views dialogue as a way to transmit the 'right answer' to peers. Because his identity is tied to his hard-won proficiency, he uniquely needs validation of his understanding paired with structured norms that shift his focus from being the group's authority to engaging in equitable, evidence-based collaborative meaning-making.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please work with your group at the table to summarize the key ideas from the chapter we read yesterday.
+
+STUDENT: I already know the summary. It was hard ‘cuz like I didn’t know English, I couldn’t pronounce the words at first when I got here, but now I know it.
+
+TUTOR: Okay, please discuss the chapter with your group.
+
+STUDENT: I will. When I was in the Dominican Republic, I was in second grade. Then they gave me a test, but I failed the test, so I had to restart from kindergarten and then go up. Now I make sure I have the right answers.
+
+TUTOR: Just make sure you are doing the group discussion.
+
+STUDENT: I am. If the person beside you understands it, probably like if I understand it and then the person next to me doesn’t understand it, you can help them understand it basically. I have the right answer so I will just give it to them.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Recall prior knowledge to summarize key ideas from the chapter read the day prior and participate in shared reading or book clubs",
+      "learning_goal": "Support students’ comprehension specifically in recalling key text details to support meaning making"
+    },
+    "context": {
+      "environment": "Fifth-grade literacy classroom",
+      "materials": "Different colored post-its, practice tests",
+      "social_setting": "Students seated in groups at oval-shaped tables to support collaborative learning",
+      "time_context": "During 90 minutes of literacy/social studies instruction, or Fridays devoted to test preparation"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When engaging in student-to-student talk during reading",
+      "observable_behavior": "Frames his understandings from the perspective of the one who 'holds the right answer', viewing his role as helping peers who don't understand by giving them the answer",
+      "internal_state": "Sees the role of talk in reading to find the 'right' answer; believes 'if I understand it and then the person next to me doesn’t understand it, you can help them understand it basically'",
+      "related_quotes": [
+        "the person [beside] you understands it, probably like if I understand it and then the person next to me doesn’t understand it, you can help them understand it basically."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reflecting on his initial placement testing and learning English",
+        "observable_behavior": "Recounts failing the test and having to restart from kindergarten and then go up",
+        "internal_state": "Felt it was hard because he didn't know English and couldn't pronounce the words, though at first he thought he was going to be good enough",
+        "related_quotes": [
+          "it was hard ‘cuz like I didn’t know English [pause] I couldn’t pronounce the words [pause] at first when I got here, I thought I was going to be good enough. Because they had to give me a test to see what grade I was in. When I was in (the) Dominican Republic, I was in second grade. Then they gave me a test, but I failed the test, so I had to restart from kindergarten and then go up."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Cultural Orientation
+  Check: The long-term plan includes dedicated time or seminars to explicitly teach and explain the cultural expectations and interactional norms of the classroom.
+
+Criterion 2: Direct Authority and Structured Guidance
+  Check: The long-term plan establishes a clear, authoritative interactional style that relies on direct instructions and structured choices rather than passive waiting or open-ended negotiation.
+
+Criterion 3: Consistent Evaluation of Work
+  Check: The long-term plan ensures that assigned work is consistently evaluated or graded, explicitly avoiding the use of high-volume, ungraded practice work.
+
+Criterion 4: Neutral Error Correction
+  Check: The long-term plan outlines a strategy for correcting mistakes neutrally and privately, explicitly avoiding public singling out or hyperbolic criticism.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student comes from an educational background with strict, non-negotiable disciplinary models and struggles to interpret the more 'lax' or negotiation-based norms of US classrooms. They perceive passive classroom management (like waiting for silence) as a lack of authority, interpret high volumes of ungraded work as personal rejection, and feel targeted by public, hyperbolic criticism. They uniquely require explicit orientation to new cultural expectations, clear and direct authority, and consistent evaluation of their work to feel accepted and secure.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start the dance activity. I'm going to play the music now, please follow the routine.
+
+STUDENT: (Dances to the music but makes an incorrect step)
+
+TUTOR: Let's stop the music. You made a mistake there.
+
+STUDENT: It was just one wrong step. Why do you always turn to look at where we the Mexicans are when something goes wrong?
+
+TUTOR: We just need to get the steps right. Let's try again.
+
+STUDENT: That is what bothers me. You stop the music and look right at us like we are doing so many bad things. I'm not participating if you're going to single us out.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "performance-based activity (dance)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "music",
+      "social_setting": "where we the Mexicans are",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a Mexican student makes a mistake during a performance-based activity (dance).",
+      "observable_behavior": "I make an incorrect step",
+      "internal_state": "that is what bothers me",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "she stopsthe music and begins to say, ‘Oh no no stop it! Oh my eyes hurt so much to see so many bad things. ’And she turns to look at where we the Mexicans are",
+        "observable_behavior": "I make an incorrect step",
+        "internal_state": "that is what bothers me",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

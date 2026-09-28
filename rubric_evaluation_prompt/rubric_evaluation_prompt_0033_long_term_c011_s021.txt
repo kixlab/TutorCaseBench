@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mastery-Based Progression
+  Check: The long-term plan explicitly states that new academic content will only be introduced after the student has fully mastered the current material.
+
+Criterion 2: Musical Social Stories
+  Check: The long-term plan incorporates creating or using social stories set to the student's favorite music to teach routines or address behavioral barriers.
+
+Criterion 3: Auditory Tolerance Building
+  Check: The long-term plan includes systematic auditory interventions (e.g., Tomatis therapy, classical music exposure) designed to gradually increase his tolerance to sounds.
+
+Criterion 4: Music-Integrated Life Skills and Socialization
+  Check: The long-term plan embeds self-care concepts, motor skills, or peer interaction goals within structured musical games or activities.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly sensitive to environmental changes and the emotional states of others, often reacting to routine disruptions with severe distress or self-harm. He struggles with a short attention span and internal hallucinations, but possesses strong capabilities and a deep affinity for music. He uniquely requires continuous attention redirection, active cognitive distraction during outbursts, and the heavy integration of music as both a reward and a foundational teaching tool.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for your snack. We do not have your regular juice today, so please drink this different juice instead.
+
+STUDENT: (Spins a straw in one hand while holding a toy in the other hand) No, I drink the same juice every day.
+
+TUTOR: You need to drink this one today. Go ahead and try it.
+
+STUDENT: (Starts to cry) No! I eat the same food and drink the same juice every day at school!
+
+TUTOR: We don't have it right now. Please stop crying and sit at your desk.
+
+STUDENT: (Cries uncontrollably and starts screaming. He throws himself on the floor and begins punching his head.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "taking food and drinks in the classroom",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school environment",
+      "materials": "toy in one hand, and in the other hand, he holds a straw that he keeps spinning, food and drinks, music of W. A. Mozart",
+      "social_setting": "assistant supports the student",
+      "time_context": "throughout the day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "if any change happens by chance",
+      "observable_behavior": "starts to cry uncontrollably... starts screaming, crying, punching his head, and throwing himself on the floor",
+      "internal_state": "gets upset",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "other children screaming",
+        "observable_behavior": "covers his ears with his hands",
+        "internal_state": "doesn't like",
+        "related_quotes": []
+      },
+      {
+        "condition": "sees one of his friends crying",
+        "observable_behavior": "immediately starts crying too",
+        "internal_state": "very sensitive and reacts to the emotional states of other children",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

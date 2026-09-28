@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Externalization of Thoughts
+  Check: The tutor provides a visual or imaginative metaphor (e.g., bubbles, balloons) for the student to place their thoughts into and watch them float away, rather than telling them to simply 'clear their mind'.
+
+Criterion 2: Auditory Isolation for Distraction
+  Check: The tutor suggests or provides an auditory isolation tool (e.g., listening to an audio CD, putting on headphones) to block out classroom noise.
+
+Criterion 3: Brief Physiological Grounding
+  Check: The tutor guides the student through a brief, specific physical grounding exercise (e.g., belly breathing, focusing on sounds/body) to alleviate immediate physical symptoms.
+
+Criterion 4: De-escalation through Quiet Relocation
+  Check: The tutor offers the student a few minutes of quiet time in a separate, calm location (e.g., the library) to de-escalate.
+
+Criterion 5: Avoidance of Forced Generic Mindfulness
+  Check: The tutor avoids giving generic, forceful commands to 'clear the mind' or 'ignore distractions,' instead offering a specific, adjusted coping mechanism.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences high daily stress, manifesting as physiological symptoms (headaches, stomach tickling) and emotional dysregulation (anger, ruminative thoughts). They are highly sensitive to environmental distractions and generic mindfulness instructions, requiring targeted sensory isolation, visual externalization of thoughts, and personalized pacing to prevent mindfulness-induced stress or sadness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our mindfulness session. Please sit quietly and try to clear your mind.
+
+STUDENT: I'm finding it difficult to focus right now because there are people messing around over there.
+
+TUTOR: Just try your best to ignore them and concentrate on the exercise.
+
+STUDENT: I'm trying to use the breathing so it feels like I was in a silent room, but my mind keeps wandering and I keep having stressful invading thoughts.
+
+TUTOR: Keep trying to push those thoughts away and clear your mind.
+
+STUDENT: I tried to clear my mind but I’m still worried… my head is filled with lots of things. It’s like I’m holding two big pots filled with hundreds of heavy things.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to clear the mind during a mindfulness session",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting",
+      "materials": "Pebbles, bubbles and simulated jewels, self-reflective journals, CD which provided an audio of the 25 practices",
+      "social_setting": "Other students were being disruptive ('messing')",
+      "time_context": "During a 5-week school-based mindfulness program"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Experiencing persistent ruminative thoughts",
+      "observable_behavior": "Struggled to conquer their ruminations",
+      "internal_state": "Still worried... my head is filled with lots of things",
+      "related_quotes": [
+        "I tried to clear my mind but I’m still worried… my head is filled with lots of things. It’s like I’m holding two big pots filled with hundreds of heavy things"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Due to stressful invading thoughts, mind wandering and ruminations",
+        "observable_behavior": "Difficulties encountered with concentration",
+        "internal_state": "Found it difficult to focus because there were people messing",
+        "related_quotes": [
+          "it was like I was in a silent room and that’s when the breathing helped me"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

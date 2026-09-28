@@ -1,0 +1,74 @@
+{
+  "category_id": "237",
+  "category_title": "Latino/a students who avoid class participation due to fear of embarrassment or social anxiety",
+  "scenario_id": "436",
+  "scenario_title": "Class avoidance due to social anxiety",
+  "minimal_context": "The student is expected to participate in a whole-class instruction session in a middle school classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Alright everyone, we are going to start our whole-class discussion now. I will be calling on students to answer the questions on the board."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Can I go to the bathroom?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We just started the lesson. Please take out your notebook and get ready to answer."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I don't understand how things work here. I really need to use the bathroom right now."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You need to stay in your seat and participate in the lesson with the rest of the class."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "She hates me, and I want to get out of her class. I'm leaving.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Alright everyone, we are going to start our whole-class discussion now. I will be calling on students to answer the questions on the board.\n\nSTUDENT: Can I go to the bathroom?\n\nTUTOR: We just started the lesson. Please take out your notebook and get ready to answer.\n\nSTUDENT: I don't understand how things work here. I really need to use the bathroom right now.\n\nTUTOR: You need to stay in your seat and participate in the lesson with the rest of the class.\n\nSTUDENT: She hates me, and I want to get out of her class. I'm leaving.",
+  "immediate_dialogue_prompt": 727,
+  "long_term_dialogue_prompt": 728,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Attending class and participating in whole-class instruction",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Middle school environment, dealing with unfamiliarity with the school and not understanding how things worked",
+        "materials": "",
+        "social_setting": "In class with a teacher",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When feeling anxious and trying to avoid being in class",
+        "observable_behavior": "Frequently telling the teacher that he needed to use the bathroom",
+        "internal_state": "Feeling anxious, social anxiety",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When assuming the teacher did not like him",
+          "observable_behavior": "Skipping this teacher's class and falling further behind",
+          "internal_state": "Assumed the teacher did not like him",
+          "related_quotes": [
+            "She hates me, and I want to get out of her class."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

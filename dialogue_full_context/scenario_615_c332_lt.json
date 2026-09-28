@@ -1,0 +1,72 @@
+{
+  "category_id": "332",
+  "category_title": "Students with physical disabilities experiencing fatigue during fine motor tasks",
+  "scenario_id": "615",
+  "scenario_title": "Fine motor activities during work time",
+  "minimal_context": "Harry is expected to complete a coloring and writing activity during work time.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Harry, it is work time. Please begin the coloring and writing task."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I am too fatigued to do any more coloring right now."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You just need to keep working on it until it is finished."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I am not going to do the task."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "If you refuse, you lose our support and help."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Starts crying) I am going to do it.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Harry, it is work time. Please begin the coloring and writing task.\n\nSTUDENT: I am too fatigued to do any more coloring right now.\n\nTUTOR: You just need to keep working on it until it is finished.\n\nSTUDENT: I am not going to do the task.\n\nTUTOR: If you refuse, you lose our support and help.\n\nSTUDENT: (Starts crying) I am going to do it.",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 1024,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "colouring, writing and other ﬁne motor activities",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "",
+        "materials": "",
+        "social_setting": "",
+        "time_context": "During work time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When he is required to perform colouring, writing and other ﬁne motor activities he gets fatigued",
+        "observable_behavior": "said he was not going to do the task",
+        "internal_state": "fatigued",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Responding to the threat of losing support during work time.",
+          "observable_behavior": "started crying and said he was going to do it",
+          "internal_state": "fear of losing support",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

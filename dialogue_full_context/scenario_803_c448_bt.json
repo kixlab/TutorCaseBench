@@ -1,0 +1,83 @@
+{
+  "category_id": "448",
+  "category_title": "Low-achieving students who are ignored or disengage during group activities",
+  "scenario_id": "803",
+  "scenario_title": "Mixed-ability group work on multiple-choice assessment",
+  "minimal_context": "The student is working in a mixed-ability group on a multiple-choice test to ensure all members understand the lessons.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please work with your group on this multiple-choice test. The goal is to make sure that every member understood the lessons."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "The better students went faster and they did not always clearly explain information to me."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Have you tried asking them for additional explanations?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I won't risk asking for additional explanations. I feel uncomfortable when I express my ideas because they just 'jumped into my mouth' when I get stuck."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You should still try to contribute to the group's answers."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Why do they always have to recheck my work? I feel devalued when other members revise what I’ve done. The group decisions are mostly made by only one or two members, so I'm put into a jobless situation where I have nothing to do but listen passively or fall to sleep.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please work with your group on this multiple-choice test. The goal is to make sure that every member understood the lessons.\n\nSTUDENT: The better students went faster and they did not always clearly explain information to me.\n\nTUTOR: Have you tried asking them for additional explanations?\n\nSTUDENT: I won't risk asking for additional explanations. I feel uncomfortable when I express my ideas because they just 'jumped into my mouth' when I get stuck.\n\nTUTOR: You should still try to contribute to the group's answers.\n\nSTUDENT: Why do they always have to recheck my work? I feel devalued when other members revise what I’ve done. The group decisions are mostly made by only one or two members, so I'm put into a jobless situation where I have nothing to do but listen passively or fall to sleep.",
+  "immediate_dialogue_prompt": 1351,
+  "long_term_dialogue_prompt": 1352,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "working on an assessment as a multiple-choice test",
+        "learning_goal": "make sure that every member understood the lessons"
+      },
+      "context": {
+        "environment": "mixed-ability groups that consisted of a balance of five low- to five high-achievers",
+        "materials": "multiple-choice tests, group project, detailed and comprehensive powerpoint presentation",
+        "social_setting": "cooperative learning groups",
+        "time_context": "90-minute lessons"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "higher-achieving students usually ‘jumped into their mouth ’(i.e., demeaned them) when they got stuck",
+        "observable_behavior": "listen passively to others or ‘fall to sleep ’",
+        "internal_state": "felt uncomfortable when they expressed their ideas to others",
+        "related_quotes": [
+          "jumped into their mouth"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "better students went faster and they did not always clearly explain information to the lower-achieving students",
+          "observable_behavior": "not risk asking for additional explanations",
+          "internal_state": "felt bored and lost confidence",
+          "related_quotes": []
+        },
+        {
+          "condition": "group decisions were mostly made by only one or two members",
+          "observable_behavior": "put into a ‘jobless ’situation where they had nothing to do but listen passively to others or‘fall to sleep ’",
+          "internal_state": "feel devalued when other members revise what I’ve done",
+          "related_quotes": [
+            "Why do they always have to recheck my work?",
+            "I feel devalued when other members revise what I’ve done"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

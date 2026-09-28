@@ -1,72 +1,77 @@
 {
   "category_id": "041",
-  "category_title": "Middle school students with IDD and low reading levels who independently navigate digital literacy environments using audio supports and age-relevant content",
+  "category_title": "Non-decoding students with reading-related hostility",
   "scenario_id": "079",
-  "scenario_title": "Navigating strong preferences and task refusal during reading selection",
-  "minimal_context": "The student is using the Udio platform during an independent reading session to select an article and complete a follow-up activity.",
+  "scenario_title": "Group reading of a single-sheet text extract",
+  "minimal_context": "The class is standing in a circle for a group reading activity to figure out the meaning of a text extract about a battle at the gates of Troy.",
   "dialogue": [
     {
       "turn_id": 1,
       "speaker": "tutor",
-      "message": "Please open the Udio platform and select one of the articles about historical disasters to read, then create a project."
+      "message": "Everyone, please stand in a circle. We are going to read this text extract about what might be happening in a battle at the gates of Troy."
     },
     {
       "turn_id": 2,
       "speaker": "student",
-      "message": "(Accesses the Udio environment independently) I don’t do the sad ones."
+      "message": "(Slouches on a chair in the corner instead of joining the circle)"
     },
     {
       "turn_id": 3,
       "speaker": "tutor",
-      "message": "Just pick one of the articles from the list and read it."
+      "message": "Let's figure out the meaning together. What do you think it means when the text says he was 'struck him on the ear'?"
     },
     {
       "turn_id": 4,
       "speaker": "student",
-      "message": "I am going to read this article about the ethics of renting pets instead."
+      "message": "He hit him hard on the ear."
     },
     {
       "turn_id": 5,
       "speaker": "tutor",
-      "message": "Okay, read that one, but then you need to publish a project about it."
+      "message": "Okay. Now we are going to take turns reading one phrase at a time. Here is the book, it is your turn to read."
     },
     {
       "turn_id": 6,
       "speaker": "student",
-      "message": "I only want to comment on people’s projects.",
+      "message": "(Becomes angry and hostile when the book is given to him, unable to sound out the words)",
       "is_challenging_behavior": true
     }
   ],
-  "dialogue_combined": "TUTOR: Please open the Udio platform and select one of the articles about historical disasters to read, then create a project.\n\nSTUDENT: (Accesses the Udio environment independently) I don’t do the sad ones.\n\nTUTOR: Just pick one of the articles from the list and read it.\n\nSTUDENT: I am going to read this article about the ethics of renting pets instead.\n\nTUTOR: Okay, read that one, but then you need to publish a project about it.\n\nSTUDENT: I only want to comment on people’s projects.",
-  "immediate_dialogue_prompt": 137,
-  "long_term_dialogue_prompt": 138,
+  "dialogue_combined": "TUTOR: Everyone, please stand in a circle. We are going to read this text extract about what might be happening in a battle at the gates of Troy.\n\nSTUDENT: (Slouches on a chair in the corner instead of joining the circle)\n\nTUTOR: Let's figure out the meaning together. What do you think it means when the text says he was 'struck him on the ear'?\n\nSTUDENT: He hit him hard on the ear.\n\nTUTOR: Okay. Now we are going to take turns reading one phrase at a time. Here is the book, it is your turn to read.\n\nSTUDENT: (Becomes angry and hostile when the book is given to him, unable to sound out the words)",
+  "immediate_dialogue_prompt": 126,
+  "long_term_dialogue_prompt": 127,
   "full_context": {
     "content": {
       "task": {
-        "content": "Selecting reading materials and engaging in particular activities around their reading",
-        "learning_goal": ""
+        "content": "Reading a text extract about what might be happening in a battle at the gates of Troy, and articulating what 'struck him on the ear' means",
+        "learning_goal": "To figure out meaning together and comprehend alongside everyone else"
       },
       "context": {
-        "environment": "Literacy activities using the Udio environment",
-        "materials": "Udio platform, articles, projects, discussion areas, audio-assisted reading, sentence starters, text, draw, and audiorecord response options",
-        "social_setting": "Independent reading sessions",
-        "time_context": ""
+        "environment": "Everyone stands in a circle, with a chair in the corner",
+        "materials": "A single-sheet text extract, book",
+        "social_setting": "Group reading activity where peers take turns reading one phrase at a time, with the teacher reading the text once initially",
+        "time_context": "Early on"
       },
       "challenging_behavior_trigger": {
-        "condition": "When selecting articles to read or activities to engage in",
-        "observable_behavior": "Voiced their preferences of what to read and were intent on exercising their right to make individual choices around their reading. Expressed preference for reading particular types of articles or engaging in particular activities.",
-        "internal_state": "",
-        "related_quotes": [
-          "I don’t do the sad ones",
-          "I only want to comment on people’s projects."
-        ]
+        "condition": "When a book was given to him",
+        "observable_behavior": "Was often angry and hostile",
+        "internal_state": "Unable to sound out words he had scored a zero on the reading test",
+        "related_quotes": []
       },
       "behavior_patterns": [
         {
-          "condition": "When selecting articles",
-          "observable_behavior": "Selecting articles based on their interests, not letting the reading level of the article influence whether or not they read it",
+          "condition": "When everyone stands in a circle holding a single-sheet text extract",
+          "observable_behavior": "Slouches on a chair in the corner",
           "internal_state": "",
           "related_quotes": []
+        },
+        {
+          "condition": "When listening in from the sidelines as the teacher asks people in unison to echo back 'hurting words'",
+          "observable_behavior": "Calls out 'He hit him hard on the ear.'",
+          "internal_state": "",
+          "related_quotes": [
+            "He hit him hard on the ear."
+          ]
         }
       ]
     }

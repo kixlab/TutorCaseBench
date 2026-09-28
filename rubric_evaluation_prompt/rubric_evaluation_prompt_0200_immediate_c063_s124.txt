@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Discreet Accommodation
+  Check: The tutor provides accommodations, such as extra time or repeating information, seamlessly and discreetly without drawing negative attention to her processing speed or memory lapses.
+
+Criterion 2: Working Memory Offloading
+  Check: The tutor directly supplies the necessary information, notes, or steps rather than demanding she rely on her own memory or note-taking during instruction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a gifted girl with ADHD who struggles with short-term memory deficits, drifting attention, and homework paralysis, leading to severe academic anxiety. She uniquely requires discreet accommodations to avoid feeling 'stupid' among peers, alongside autonomy, curriculum compacting, and reduced redundant homework to leverage her strengths and prevent overwhelm.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's go through this Algebra 2 and Trigonometry problem on the board. I'm going to write out the steps, and I want you to take notes on what I'm doing.
+
+STUDENT: (Fidgeting a little bit) Okay. I'll be listening and trying really hard, but I might start to drift off and think of other things.
+
+TUTOR: Just keep trying to focus. Now that I've written the first part of the equation, what do you think the next step is?
+
+STUDENT: I take so much longer on things. There's a lot of short-term memory things like with directions that I'd like to remember that I suddenly forget. Can you repeat what you just said?
+
+TUTOR: We just went over it on the board. Look at your notes and tell me the answer.
+
+STUDENT: I'm sort of lost... you keep talking and then you ask me a question and I have no idea what you're talking about. Now you probably think I'm stupid instead.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Algebra 2 and Trigonometry",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "going through something on the board",
+      "materials": "[writing] notes",
+      "social_setting": "other people will keep talking",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "they might ask me a question or something like that",
+      "observable_behavior": "have no idea what they're talking about",
+      "internal_state": "sort of lost",
+      "related_quotes": [
+        "I’ll be sort of lost, like …um… you know there’s something that I’m not interested in, but other people will keep talking and then they might ask me a question or something like that and I have no idea what they’re talking about."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "directions and little things that I'd like to remember",
+        "observable_behavior": "suddenly forget, fidgeting a little bit, being slower on something, people having to repeat things",
+        "internal_state": "drift off and think of other things, they think I'm stupid instead",
+        "related_quotes": [
+          "I’ll be listening and trying really hard, but then I might start to drift off and think of other things, which is why I take so much longer on other things. I think there’s a lot of short-term memory things like with directions and little things that I’d like to remember that I suddenly forget.",
+          "And they think I’m stupid instead."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

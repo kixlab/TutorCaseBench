@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Neutral, Brief Redirection
+  Check: If addressing a disruption, the tutor's correction is concise and delivered in a neutral, non-critical tone, strictly avoiding sarcasm, raised volume, or prolonged lecturing.
+
+Criterion 2: Explicit Action-Oriented Correction
+  Check: When redirecting the student, the tutor explicitly states the specific replacement behavior the student should engage in right now (e.g., 'write the answer on your paper') rather than only telling them what to stop doing.
+
+Criterion 3: Behavior-Specific Praise
+  Check: When praising the student, the tutor explicitly names the specific positive behavior or academic action the student just performed, rather than using generic praise like 'good job'.
+
+Criterion 4: Brisk Academic Pacing
+  Check: The tutor provides immediate, continuous opportunities for the student to answer academic questions or engage with the material, avoiding long pauses or extended periods of passive listening.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student frequently engages in externalizing disruptive behaviors, such as calling out, leaving their seat, and making noises, which interrupt classroom instruction. Their core differentiating characteristic is a high sensitivity to teacher tone; harsh, loud, or prolonged reprimands actively escalate their disruptions. They uniquely require brief, neutrally-toned redirections that explicitly state what to do instead, behavior-specific praise, and a brisk instructional pace to maintain engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the next problem on your math sheet. Who can tell me the answer to number three?
+
+STUDENT: It's forty-two!
+
+TUTOR: You need to raise your hand. Just write it down and move on to number four.
+
+STUDENT: (Gets out of seat and walks over to a peer's desk) Hey, did you get forty-two for that one?
+
+TUTOR: Sit back down right now and stop interrupting the class.
+
+STUDENT: (Loudly crumbles up the math sheet and starts making repetitive clicking noises with their tongue)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in academic instruction, responding to academic questions, and working on a math sheet",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Ongoing classroom activities during academic instruction",
+      "materials": "Math sheet, paper",
+      "social_setting": "Individual student or group of students with teacher and peers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When teachers revert to making harsh or critical comments",
+      "observable_behavior": "Increases disruptive behaviors such as out of seat without permission talking to peer, ripping or crumbling paper in a loud way, and making covert noises",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expectation is to raise hand",
+        "observable_behavior": "Student calls out answers when expectation is to raise hand",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

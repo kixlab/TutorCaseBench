@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Directive Communication
+  Check: The tutor's response must completely avoid direct commands, behavioral corrections, or explicit instructions regarding the student's actions.
+
+Criterion 2: Externalized Empathy Questioning
+  Check: The tutor must ask at least one open-ended question focused on an external topic (e.g., the documentary, animal welfare) to redirect the student's emotional energy.
+
+Criterion 3: Opinion Validation
+  Check: The tutor must acknowledge or validate the student's expressed feelings or observations about the academic topic without judging their reaction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits high levels of reactive physical and verbal aggression, easily triggered by direct instructions or peer comments. They uniquely require indirect, non-confrontational approaches to emotional regulation, specifically building empathy through external subjects like animal welfare and collaborative group work without explicit moralizing.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now that we have finished watching the documentary, please discuss what you saw with your group and share your opinions on how the animals were treated.
+
+STUDENT: I was furious watching that movie. They showed dogs that were thrown to a kind of bin, alive and dead.
+
+TUTOR: Please sit down quietly and write your group's answers on the paper.
+
+STUDENT: (Glares at a peer) Don't tell me what to write! If you say something to me I'm going to hit you hard and get crazy!
+
+TUTOR: You need to stop talking like that, sit back in your chair, and get to work right now.
+
+STUDENT: I am not doing anything! (Gets mad and throws his school bag away) I don't respect you and I'm out of control!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing animal needs, emotions, and welfare after watching a documentary",
+      "learning_goal": "To share opinions and views on what they were learning and to support their views with scientific knowledge"
+    },
+    "context": {
+      "environment": "Science class",
+      "materials": "Documentaries (e.g., 'Earthlings'), videos, school bag",
+      "social_setting": "Small mixed collaborative groups with students presenting diverse social skills",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher told the student something (gave a direction or correction)",
+      "observable_behavior": "Got mad and threw his school bag away; behaved very bad, did not do anything, and did not respect the teacher",
+      "internal_state": "Felt mad, out of control",
+      "related_quotes": [
+        "I now fight less also, but sometimes I still get out of control, like the other day the teacher told me something and I got mad and threw my school bag away."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a peer told him something",
+        "observable_behavior": "Started to hit him hard and got crazy",
+        "internal_state": "",
+        "related_quotes": [
+          "before someone told me something and I started to hit him hard and got crazy."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

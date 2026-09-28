@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Empathetic Validation of Frustration
+  Check: The tutor explicitly acknowledges and validates the student's feelings or frustrations before attempting to redirect them to the task.
+
+Criterion 2: Integration of Movement or Seating Autonomy
+  Check: The tutor offers a physical break, a change in seating (e.g., optional chairs), or a brief active task rather than demanding the student sit still.
+
+Criterion 3: Assurance of Psychological Safety
+  Check: The tutor explicitly reassures the student that mistakes are acceptable and/or guarantees an environment free from peer ridicule.
+
+Criterion 4: Explicit Social Scripting
+  Check: The tutor provides specific, actionable guidance on social manners or expectations (e.g., how to greet someone, how to handle losing) rather than just telling them to join the group.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with sustained attention and social interactions, frequently rushing work or acting out to escape long periods of sitting or tasks they perceive as 'boring'. They are highly sensitive to peer ridicule and fear making mistakes, which triggers task avoidance and anti-social behavior. To succeed, they uniquely require an environment that integrates frequent physical movement, empathetic validation of their frustrations, explicit social scripting, and academic tasks deeply tied to their personal interests.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit at your desk and spend this period writing your story.
+
+STUDENT: I don't want to do writing. It's just boring stuff and there is lots of work.
+
+TUTOR: You need to complete your planned tasks for today.
+
+STUDENT: I hate having to do stuff like this. I'd rather be outside playing tackle games with my friends.
+
+TUTOR: Just do your best and keep working on it.
+
+STUDENT: (Displays complete inattention and lack of focus on tasks) No, I'm done. This is too much work and I'm just going to mess around until it's time to go to the playground.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing 'planned tasks' notably in 'literacy', such as 'writing stories' or 'reading'",
+      "learning_goal": "Strive to have achieved, by year’s end, more than mediocre standards across a wide range of subject areas"
+    },
+    "context": {
+      "environment": "'classroom' environment",
+      "materials": "'books', 'optional chairs', 'water'",
+      "social_setting": "'daily classroom programme'",
+      "time_context": "'long periods of time'"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When faced with 'lots of work' and 'having to do stuff' over 'long periods of time'",
+      "observable_behavior": "'inattention (lack of focus on tasks)' and 'rushing some work in order to get to break time'",
+      "internal_state": "Viewing the work as 'boring stuff'",
+      "related_quotes": [
+        "lots of work",
+        "having to do stuff",
+        "boring stuff"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When required to 'sit around' learning over 'long periods of time'",
+        "observable_behavior": "'inattention (lack of focus on tasks)'",
+        "internal_state": "Lacking 'positive experiences in school'",
+        "related_quotes": []
+      },
+      {
+        "condition": "When wanting to get to 'break time' or 'recreation times'",
+        "observable_behavior": "'rushing some work in order to get to break time'",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

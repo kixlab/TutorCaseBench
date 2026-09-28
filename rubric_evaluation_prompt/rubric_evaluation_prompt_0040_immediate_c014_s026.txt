@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Parallel Self-Disclosure
+  Check: The tutor's response must include a direct self-disclosure of a parallel personal loss or tragedy to connect with the student's shared experience.
+
+Criterion 2: Boundary-Respecting Pivot
+  Check: The tutor must refrain from asking probing questions about the student's deceased father, instead using the moment of connection to pivot the conversation forward.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student shares deeply personal symbols of his family, including a tree planted by his deceased father, but explicitly sets boundaries around discussing his grief. He uniquely requires the tutor to validate his personal history through parallel self-disclosure of personal tragedy, establishing a deep emotional connection without violating his stated boundaries.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's watch the video you recorded on the iPod of your life outside of school. Please narrate what we are seeing.
+
+STUDENT: This is my grandfather’s boat. Symbolizes him because when we go up, we race down stuff with it.
+
+TUTOR: Okay. What else did you record?
+
+STUDENT: Here is my cat, named Rip. I love my mom and my sister. They’re awesome.
+
+TUTOR: Alright. What are we looking at now in the front yard?
+
+STUDENT: And that’s a tree my dad planted. Yeah. Dad’s actually deceased, so that’s not the best topic to talk about.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Narrating a video of his life outside of school, specifically describing a boat as a symbol for his grandfather, showing his cat named Rip, and narrating a video of his front yard.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "front yard",
+      "materials": "iPod video, grandfather's boat, cat named Rip, tree my dad planted",
+      "social_setting": "Sharing a video/image with the teacher",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "narrating a video of his front yard and mentioning his deceased father",
+      "observable_behavior": "states \"that’s not the best topic to talk about\"",
+      "internal_state": "expressing emotions about his family members",
+      "related_quotes": [
+        "And that’s a tree my dad planted. Yeah. Dad’s actually deceased, so that’s not the best topic to talk about."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Narrating a video of his life outside of school, specifically describing a boat as a symbol for his grandfather",
+        "observable_behavior": "described, \"This is my grandfather’s boat. Symbolizes him [sic] because when we go up [to visit], we race down stuff with it.\"",
+        "internal_state": "",
+        "related_quotes": [
+          "This is my grandfather’s boat. Symbolizes him [sic] because when we go up [to visit], we race down stuff with it."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

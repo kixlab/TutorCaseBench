@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Contractual Goal-Setting
+  Check: The long-term plan must include a system for negotiated, shared goal-setting where Patrick is given the autonomy to declare his own targets, co-create his schedule, or form behavioral contracts.
+
+Criterion 2: Empowering Social Reintegration
+  Check: The long-term plan must incorporate structured, non-academic practical or social activities (e.g., cooking, gardening, mentoring, or clubs) designed to build his confidence and positive relationships with peers or teachers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Patrick is an intelligent but severely alienated student who struggles with peer norms, leading to bullying, outsider status, and extreme defensive behaviors like absenteeism and creating a death list. He responds disastrously to rigid punitive control but thrives when given structured autonomy and functionally diffuse relationships with authority figures, which allow him to resymmetrize power dynamics.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Patrick, it is time for our afternoon activity. Please stay at the table where I can see you while you work on the electronic equipment.
+
+STUDENT: I can fix this, and I can give you support with the other electronic equipment too. I could even sell you my sound-card if you want to buy it.
+
+TUTOR: Thank you, but let's just focus on finishing the current assignment right now.
+
+STUDENT: I'm doing the work, but we need to change the rules about me being kept in here all day. I want to negotiate my schedule so I have more control over what I do.
+
+TUTOR: That is not something we can change. You have to remain in the Timeout-class under supervision.
+
+STUDENT: I'm not accepting that. I already spoke to the local school representative and the police about this. I am also asking the researchers for argumentative support so that you and my parents will be convinced to let me shoot at the shooting club.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in daily activities and managing the formally given relation of dependance and control",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Timeout-class with intensive supervision where students are almost never out of sight of the teacher",
+      "materials": "Valuables (mobile, cigarettes, lighter) locked in by teachers; electronic equipment, sound-card, table-tennis, meals, wood",
+      "social_setting": "Two teachers and 6-8 students at maximum; spend their breaks inside the school, cook their meals and have lunch with the teachers",
+      "time_context": "In the morning and during the day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Experiencing massive control and the formally given relation of dependance",
+      "observable_behavior": "Mobilizes all possible social resources to convince teachers and parents to be allowed to shoot at a shooting club; speakes to the local school representative as well as the police and even asks the researchers for argumentative support",
+      "internal_state": "Seeking to resymmetrize the formally given relation of dependance and control",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing unexpected empowerment and opportunities for social participation",
+        "observable_behavior": "Sells several gadgets to the teachers (e.g his sound-card) and gives them support with electronic equipment",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

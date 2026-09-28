@@ -1,0 +1,76 @@
+{
+  "category_id": "426",
+  "category_title": "Preschoolers who experience slow transitions between activities",
+  "scenario_id": "773",
+  "scenario_title": "Transitioning between familiar activities in the preschool classroom",
+  "minimal_context": "Jose is in the preschool classroom and needs to stop his current activity to move toward the next planned activity.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Jose, it is time to stop your current activity and move to the next activity."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Remains calm and deeply engaged in his activity, not stopping to move toward the next activity.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please stop what you are doing and walk over here."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Continues his activity without stopping, taking a long time to begin the transition.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Jose, this is a verbal reminder that you need to move to the next activity now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Gets upset at the verbal reminder and does not stop his current activity, making the transition take even longer.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Jose, it is time to stop your current activity and move to the next activity.\n\nSTUDENT: (Remains calm and deeply engaged in his activity, not stopping to move toward the next activity.)\n\nTUTOR: Please stop what you are doing and walk over here.\n\nSTUDENT: (Continues his activity without stopping, taking a long time to begin the transition.)\n\nTUTOR: Jose, this is a verbal reminder that you need to move to the next activity now.\n\nSTUDENT: (Gets upset at the verbal reminder and does not stop his current activity, making the transition take even longer.)",
+  "immediate_dialogue_prompt": 1296,
+  "long_term_dialogue_prompt": 1297,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Stop current activity and move (e.g., walks, crawls, hops) toward the next planned or familiar activity",
+        "learning_goal": "Decrease the time between a visual prompt and the time it takes Jose to stop and move toward an activity (e.g., less than a 5-min average)"
+      },
+      "context": {
+        "environment": "Preschool classroom",
+        "materials": "Two picture cards with a movement action (e.g., walks, hops), visual supports, transition cues, choice board, first/then board",
+        "social_setting": "Interacting with a teacher or a peer during classroom routines",
+        "time_context": "During transitions between activities"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When given a verbal reminder to transition",
+        "observable_behavior": "Gets upset and the transition seems to take longer",
+        "internal_state": "Upset",
+        "related_quotes": [
+          "When we give him a verbal reminder, he gets upset and the transition seems to take longer."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When prompted to transition to a planned activity",
+          "observable_behavior": "Does not stop his current activity and move (e.g., walks, crawls, hops) toward the next activity, taking an average of 8 min 6 s to begin transitions",
+          "internal_state": "Calm and deeply engages in activities",
+          "related_quotes": [
+            "Jose is calm and deeply engages in activities but sometimes it takes Jose a long time to stop doing an activity and move toward the next activity."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

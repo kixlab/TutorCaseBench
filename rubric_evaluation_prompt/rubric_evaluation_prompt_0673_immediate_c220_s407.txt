@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Joint Visual Attention
+  Check: The tutor's response must explicitly indicate direct visual or bodily orientation toward Helen (e.g., making eye contact, facing her directly) rather than looking at materials or the board.
+
+Criterion 2: Indirect Disruption Management
+  Check: The tutor addresses the disruption using a general class redirection (e.g., 'Let's have quiet') or a non-verbal signal, rather than a direct, public reprimand.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Helen is a student who engages in highly vigilant, concealed disruptive behaviors (like throwing objects or using her phone) while maintaining a superficial facade of participation. She exploits moments when the teacher's visual attention is diverted and becomes bored by predictable routines. To stay engaged, she uniquely requires joint visual attention during interactions, indirect behavioral corrections, and unpredictable, peer-involved activities to prevent boredom.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's go now to Part A. Topics of paragraphs. This is homework, so everybody is ready. In Part A we have six paragraphs. 'A five tastes of food' is in paragraph three. (Looking at the book)
+
+STUDENT: (Employs a quick flick check at the teacher, hops up from her chair and leans over the table, dragging Wes's book closer to her, then gets her cell phone from Wes and smiles.)
+
+TUTOR: How about b... Our five senses? Lisa, Helen. (Walking toward the board while looking back down at the book)
+
+STUDENT: (Glancing at Wes, then to the teacher, then to her book) One. (Her cell phone rings, and she picks it up and laughs)
+
+TUTOR: Very good. Thank you. Yes, paragraph one. Helen, you get the point. (Standing with back facing towards Helen, eyes looking at the book, making a chart on the board)
+
+STUDENT: (Picks up an object from the table and throws it at Wes, still holding her cell phone, looking at it and laughing. Then picks up a bigger object from the table and throws it at Wes.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Checking homework for 'Part A. Topics of paragraphs' where students match paragraph numbers to main ideas (e.g., 'a five tastes of food is in paragraph three', 'How about b... Our five senses')",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting during transition to a daily homework checking activity",
+      "materials": "Textbook, board, cell phone, paper ball, objects on table",
+      "social_setting": "Whole class activity where two students are called out to compete for the answer; Helen is sitting near a male student named Wes",
+      "time_context": "Daily classroom routine"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher confirms her correct answer and praises her while his back is facing towards her and his eyes are looking at the book",
+      "observable_behavior": "Picks up an object from the table and throws it at Wes, holds her cell phone, looks at it and laughs, then picks up a bigger object from the table and throws it at Wes",
+      "internal_state": "Actively preparing for a 'concealed open challenge' and not interested in the competition",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the teacher's verbal and bodily orientation are on the current task and looking at the book",
+        "observable_behavior": "Employs a 'flick check' at the teacher, hops up from her chair and leans over the table, drags Wes' book closer to her, and gets her cell phone",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When called out for the competition to provide the answer",
+        "observable_behavior": "Glancing at Wes, then to the teacher, then to her book, provides the answer, then picking up her cell phone and laughing when it rings",
+        "internal_state": "",
+        "related_quotes": [
+          "One."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

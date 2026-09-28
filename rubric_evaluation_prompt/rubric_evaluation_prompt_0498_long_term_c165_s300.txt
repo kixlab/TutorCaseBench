@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Methodological Scaffolding
+  Check: The tutor's long-term plan incorporates specific field research methods (e.g., interviews, participant observation, media analysis) to help the student structure and analyze their observations.
+
+Criterion 2: Localized Inquiry
+  Check: The tutor anchors the student's long-term projects or investigations in their immediate, lived environment (e.g., school conditions, local community) rather than distant, abstract macro-issues.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is deeply empathetic and action-oriented, frequently translating broad structural inequalities into immediate, small-scale 'micro-mobilizations.' They uniquely need mentors to validate these localized actions as legitimate starting points for systemic change, rather than dismissing them as superficial or pushing for abstract, macro-level critiques.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For our third-period discussion today, let's look at Montañita’s relative lack of resources and upkeep, and formulate some recommendations for action.
+
+STUDENT: The school just seems downgraded. There are bathrooms with no stall doors or soap in the dispensers, and un-remediated graffiti everywhere. It makes us look bad to outsiders.
+
+TUTOR: What other issues are you seeing around the school?
+
+STUDENT: We also have the burden of carrying heavy backpacks around all day because the administration refuses to fix the decades-old lockers. All of this dilapidation really lowers morale.
+
+TUTOR: So what are your recommendations for action to address these problems?
+
+STUDENT: My recommendation for action is that we just put soap back in the bathroom soap dispensers. It doesn’t matter how small the difference you make, as long as you make it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing various aspects of Montañita’s relative lack of resources and upkeep, and formulating 'recommendations for action'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mr. Clemente’s third-period UEJP class",
+      "materials": "",
+      "social_setting": "Class was discussing",
+      "time_context": "Third-period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When observing esthetic and practical degradation in the school, such as bathrooms with no stall doors or soap in the dispensers, un-remediated graffiti, and decades-old lockers",
+      "observable_behavior": "Complained about the burden of carrying heavy backpacks around all day and proposed immediate and small-scale remediations (‘put soap back in the bathroom soap dispensers’)",
+      "internal_state": "Feeling the devaluation of students that is implicit in bathrooms with no stall doors",
+      "related_quotes": [
+        "lowers morale",
+        "downgraded",
+        "look bad"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When proposing remediation of larger social problems",
+        "observable_behavior": "Offered scaled-down ‘recommendations for action’ or micro-mobilizations",
+        "internal_state": "Concluded, after considering the potential of even severely marginalized students to act toward social justice in everyday ways... ‘It doesn’t matter how small the difference you make, as long as you make it.’",
+        "related_quotes": [
+          "It doesn’t matter how small the difference you make, as long as you make it."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

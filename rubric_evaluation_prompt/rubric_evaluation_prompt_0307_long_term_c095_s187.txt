@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Relational Connection via Humor
+  Check: The tutor's long-term plan must include building rapport through relational teaching that explicitly incorporates humor, light sarcasm, or cynical banter.
+
+Criterion 2: Gradual Task Scaling
+  Check: The tutor's long-term strategy must explicitly outline starting with very simple, low-volume assignments and gradually increasing the workload as the student's confidence grows.
+
+Criterion 3: Modeled Literacy Coaching
+  Check: The tutor's long-term plan must include acting as a reading coach by actively modeling reading strategies in short time segments.
+
+Criterion 4: Sustained Curricular Choice
+  Check: The tutor's long-term plan must incorporate giving the student ongoing choices regarding which texts to read, what assignments to do, or how he is assessed.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Derek is a student with a history of school trouble who masks his severe decoding and memory struggles with defensive body language, cynicism, and task avoidance (e.g., skipping words). The evidence reveals he uniquely needs a tutor who bypasses rigid compliance, offers direct decoding support (like reading aloud), and builds trust through relational teaching, humor, and highly simplified, autonomous tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Welcome to General English. You are arriving a bit late, but please come in.
+
+STUDENT: (Walks in quietly and unassumingly, speaking quickly in short bursts with a scowl on his face) Is there going to be a seating chart in the class?
+
+TUTOR: No, there is no seating chart.
+
+STUDENT: Good. (Promptly sits in a seat, slouching down and crossing his arms across his chest)
+
+TUTOR: Let's get started with the lesson. Please take out your materials and look at the board.
+
+STUDENT: (Remains slouched with arms crossed, appearing completely disengaged and detached from the class activity)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Entering General English class on the first day of school.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General English class on the first day of school",
+      "materials": "Seating chart",
+      "social_setting": "Classroom setting",
+      "time_context": "First day of school"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Entering the classroom and anticipating a rigid seating chart.",
+      "observable_behavior": "Arrived late to class, walking in quietly and unassumingly. He spoke quickly, in short bursts and with a scowl on his face, asking whether there was going to be a seating chart in the class... slouching down and crossing his arms across his chest.",
+      "internal_state": "Defensive body language and a history of resistance to authority.",
+      "related_quotes": [
+        "Good"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "General classroom engagement during English instruction.",
+        "observable_behavior": "Often seemed to be disengaged in class... moments of detachment",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

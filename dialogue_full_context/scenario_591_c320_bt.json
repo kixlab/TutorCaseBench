@@ -1,0 +1,72 @@
+{
+  "category_id": "320",
+  "category_title": "Students with visual impairments who use physical aggression to regain teacher attention",
+  "scenario_id": "591",
+  "scenario_title": "Reward activity interrupted by conversation with teacher",
+  "minimal_context": "The student is in the music room selecting between drums and a tambourine for a reward activity while the music teacher sits nearby at his desk.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are in the music room now. Do you want to play on the drums or the tambourine as a reward?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Chooses the tambourine and begins playing with it.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, go ahead. (Turns toward the music teacher sitting at his desk) Do you have a moment for a quick word?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Pauses playing the tambourine, realizing that the instructor is no longer providing their full attention.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Continues conversation with the music teacher) Yes, we just finished up our last activity."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Moves nearby and strikes the instructor to immediately get the attention she is seeking.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are in the music room now. Do you want to play on the drums or the tambourine as a reward?\n\nSTUDENT: (Chooses the tambourine and begins playing with it.)\n\nTUTOR: Okay, go ahead. (Turns toward the music teacher sitting at his desk) Do you have a moment for a quick word?\n\nSTUDENT: (Pauses playing the tambourine, realizing that the instructor is no longer providing their full attention.)\n\nTUTOR: (Continues conversation with the music teacher) Yes, we just finished up our last activity.\n\nSTUDENT: (Moves nearby and strikes the instructor to immediately get the attention she is seeking.)",
+  "immediate_dialogue_prompt": 982,
+  "long_term_dialogue_prompt": 983,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Selecting a reward activity and playing with a tambourine",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Music room",
+        "materials": "Drums, tambourine",
+        "social_setting": "Music teacher who is sitting at his desk is nearby",
+        "time_context": "Once they are in the music room"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "As she is playing with it, the instructor has a word with the music teacher who is sitting at his desk.",
+        "observable_behavior": "The student, who is nearby, once again strikes the instructor.",
+        "internal_state": "The student realizes that the instructor is not providing his or her full attention.",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When the instructor tells the music teacher that she had better stop talking after being struck",
+          "observable_behavior": "The student immediately received the attention that she sought and discovered that violent behavior was an effective way to get the result that she wanted.",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

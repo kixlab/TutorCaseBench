@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Native-Language Behavioral Rubric
+  Check: The long-term plan must include explicitly translating behavioral or classroom expectations (e.g., safety, responsibility, respect) into Mandarin for Shen.
+
+Criterion 2: Structured Visual Reward System
+  Check: The long-term plan must implement a concrete reward system, such as earning stickers for meeting specific behavioral standards, which eventually leads to a tangible prize.
+
+Criterion 3: Cozy and Expressive Relational Environment
+  Check: The long-term plan must intentionally design a nurturing, low-pressure setting (e.g., pairing him with caring, bilingual mentors or creating a 'cozy' space) where Shen is encouraged to share his true personality and emotions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shen is an English language learner who masks his lack of comprehension by imitating peers, but quickly becomes antsy, resistant, and physically disruptive when overwhelmed by monolingual academic tasks. He uniquely requires explicit behavioral expectations translated into Mandarin, a structured visual reward system, and consistent opportunities to use his home language to express his emotions and demonstrate his knowledge.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Shen, please begin your PowerPoint presentation about your vacation to Massachusetts, New York, and Pennsylvania.
+
+STUDENT: (Stands by the screen with his pictures, looking a little bit shy and nervous.)
+
+TUTOR: Go ahead and read the labels on your slides for the class.
+
+STUDENT: (Uses a little English) Road trip... horse-riding... (Stops and looks surprised that the teacher is not helping him in his native language.)
+
+TUTOR: What else happened on the trip? Keep trying.
+
+STUDENT: (Becomes very shy and nervous. He looks surprised by the situation since no one is communicating with him in his native language, and he completely stops presenting the highlights of his trip.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Present a PowerPoint about a vacation he took to Massachusetts, New York, and Pennsylvania",
+      "learning_goal": "Present the highlights of his trip"
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "PowerPoint, pictures from his trip",
+      "social_setting": "Presenting to the class",
+      "time_context": "At the end of the semester"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When first meeting to communicate without native language support",
+      "observable_behavior": "A little bit shy and nervous",
+      "internal_state": "Surprised by this situation since I was the only person/teacher who could communicate with him in his native language",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "After he realized that the teacher was willing to talk and help him",
+        "observable_behavior": "Started becoming talkative and curious about this additional class, shared his horse-riding experiences and road trips in both Chinese and little English",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

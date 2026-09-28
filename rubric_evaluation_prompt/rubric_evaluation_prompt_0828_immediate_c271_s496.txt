@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Framing Behavior as a Choice
+  Check: The tutor explicitly points out a behavioral or focus decision the student is making, or asks the student how they can make a better choice regarding their attention.
+
+Criterion 2: Providing Social Lifelines
+  Check: The tutor offers the student a specific option to seek help from others (e.g., asking a friend, polling the audience) when they are stuck or unsure.
+
+Criterion 3: Interrupting Repetitive Solitary Tasks
+  Check: The tutor avoids forcing the student through prolonged repetitive drills by either shifting the activity or transforming a solitary task into a collaborative or group effort.
+
+Criterion 4: Pacing for Comprehension
+  Check: The tutor prompts the student to slow down their reading pace or pauses them specifically to check for meaning, rather than allowing them to speed-read unchecked.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is eager to learn but highly distractible, physically active, and intensely social, often losing focus to environmental triggers or disorganized materials. They tend to speed-read without comprehension and will disengage or act out (e.g., rolling on the floor) during overly repetitive, solitary tasks. They uniquely require structured movement to build stamina, safe social lifelines to maintain participation when unsure, and explicit framing of their focus as a personal choice.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read this text out loud for me.
+
+STUDENT: (Eager to learn, reads the text out loud at a very high speed) I finished it!
+
+TUTOR: Okay. What did the text mean?
+
+STUDENT: (Makes an inappropriate attempt to participate by shouting a random guess) It's about a car! Wait, no. Can I just read the next page?
+
+TUTOR: Let's look at this page again. Tell me what happened in the story.
+
+STUDENT: (Starts reading the text again at high speed) I can read it really fast, but I do not really understand the meanings.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "decoding tasks at high speeds (80-90 words per minute)",
+      "learning_goal": "understand the meanings"
+    },
+    "context": {
+      "environment": "reading curriculum activities",
+      "materials": "texts",
+      "social_setting": "",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "despite their speed in decoding",
+      "observable_behavior": "did not really understand the meanings",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "en route to full literacy engagement",
+        "observable_behavior": "made a range of attempts to participate—sometimes appropriately and sometimes inappropriately",
+        "internal_state": "not willfully disengaged",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

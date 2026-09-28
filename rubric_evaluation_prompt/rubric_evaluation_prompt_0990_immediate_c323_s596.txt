@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Space for Independent Execution
+  Check: The tutor's response must provide the initial prompt, task, or boundary and then explicitly offer Amir space to work independently without immediate follow-up steps or hovering.
+
+Criterion 2: Absence of Unsolicited Micro-Corrections
+  Check: The tutor must refrain from offering unsolicited advice, step-by-step instructions, or immediate corrections unless Amir explicitly requests help.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Amir is a highly independent learner who thrives on autonomy and explicit real-world relevance but quickly abandons tasks if he feels micromanaged. The evidence reveals he uniquely needs instructors to provide upfront boundaries and materials, get him started, and then step back entirely, offering help only when explicitly requested rather than guiding him step-by-step.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's open your binder and start on today's core academic assignment. You need to complete all these problems because everything you learn in here you're going to need at some point in your life.
+
+STUDENT: I don't see the point of this. They focus a lot more on what you're going to use stuff for in electives than they do in core classes.
+
+TUTOR: Just focus on question number one. I am going to stand right here to make sure you do the work.
+
+STUDENT: I could do this if I just had the opportunity to decide where I was heading within certain academic boundaries, and was given the time and space to reach these goals on my own.
+
+TUTOR: Let's just go step-by-step. Write down the first part of the answer right now while I watch.
+
+STUDENT: I'm not doing this anymore. I can't learn anything with you breathing down my neck.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working on core academic classes where everything you learn in there you’re going to need at some point in your life",
+      "learning_goal": "decide where they were heading within certain academic boundaries"
+    },
+    "context": {
+      "environment": "traditionally structured classroom",
+      "materials": "materials for the entire year in a binder",
+      "social_setting": "teacher standing over them to make sure they do the work",
+      "time_context": "throughout each class period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher is breathing down their necks and stands over them to make sure they do the work",
+      "observable_behavior": "Reports liking the required classes less than elective classes",
+      "internal_state": "felt as if their learning experience was less successful",
+      "related_quotes": [
+        "breathing down their necks"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When told no matter what in your life you’re going to need this without specific application",
+        "observable_behavior": "Dislikes the class, prefers electives",
+        "internal_state": "Does not see the point of the content",
+        "related_quotes": [
+          "They focus a lot more on what you’re going to use stuff for in electives than they do in core classes."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

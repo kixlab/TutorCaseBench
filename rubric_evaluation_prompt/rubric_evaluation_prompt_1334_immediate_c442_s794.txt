@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prop-Assisted Projective Role-Play
+  Check: The tutor's response must incorporate or reference a physical prop or specific role-play persona to mediate the discussion of feelings or advice.
+
+Criterion 2: Strictly Verbal and Emotional Focus
+  Check: The tutor's response must explicitly guide the scenario toward emotional or verbal exploration and avoid any physical simulation or physical confrontation of bullying.
+
+Criterion 3: Character-Directed Inquiry
+  Check: The tutor must address or ask questions about the role-play character (e.g., 'What is the victim feeling?') rather than asking the student about his own direct experiences.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a history of being bullied and strongly identifies with the victim role, believing victims are entirely isolated and must suppress their anger. He tends to parrot parental advice rather than generate his own coping strategies. He uniquely requires emotionally safe, prop-based role-play to express himself indirectly, alongside long-term support to build consequential thinking and trust in external support systems.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For this part of our role-play, I am going to put on this scarf and pretend to be the victim. How do you think the victim is feeling right now?
+
+STUDENT: His feelings are fear, loneliness, pain, sadness, hatred towards the bully and humiliation. He has no support from other children, so he cannot talk to anyone since nobody could really understand how he is feeling.
+
+TUTOR: What about the bully? What could the bully do to solve the problem he created?
+
+STUDENT: Apology would be the right thing to do in order to find a way out of his problem but at the same time it would be a mistake since by apologising he would show weakness and nobody would hold him in high esteem anymore.
+
+TUTOR: Let's go back to the victim. What advice would you give to the victim to handle this situation?
+
+STUDENT: He needs help. I would certainly become his friend. I would tell him to believe and trust himself. I would tell him to do whatever he likes and not to be afraid of other people... he has to believe that he can make it. Suppression of anger is the only way to deal with the problem, even though that is difficult without help from someone outside.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Comparing the feelings of the victim and the bully and offering advice to the victim character during the role-play.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Individual meeting",
+      "materials": "A scarf used by the researcher to pretend to be the bully or victim",
+      "social_setting": "One-on-one role-play activity with the researcher",
+      "time_context": "20-minute role-play activity"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Proposing ways for the victim to handle the bullying situation during the final stage of the role-play activity.",
+      "observable_behavior": "Appeared to be transferring what he had been listening to from his parents, stating he would become his friend and telling him to believe and trust himself, while seeing suppression of anger as the only way to deal with the problem.",
+      "internal_state": "Identifying himself with the victim, realising how difficult this would be for the victim without any help from someone outside the interpersonal relationship.",
+      "related_quotes": [
+        "He needs help. I would certainly become his friend. I would tell him to believe and trust himself. I would tell him to do whatever he likes and not to be afraid of other people …he has to believe that he can make it."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Identifying the victim's feelings during the second part of the role-play where the researcher took the role of the victim.",
+        "observable_behavior": "Reported that the victim's feelings were fear, loneliness, pain, sadness, hatred towards the bully and humiliation.",
+        "internal_state": "Believed that the victim had no support from other children, so he could not talk to anyone since nobody could really understand how he was feeling.",
+        "related_quotes": []
+      },
+      {
+        "condition": "Discussing potential solutions for the bully character during the role-play debrief.",
+        "observable_behavior": "Reported that they saw apology as the only way for the bully to solve the problem he created.",
+        "internal_state": "Admitted that apology was not easy for bullies as it threatened their ideal self-image.",
+        "related_quotes": [
+          "Apology would be the right thing to do in order to ﬁnd a way out of his problem but at the same time it would be a mistake since by apologising he would show weakness and nobody would hold him in high esteem anymore."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

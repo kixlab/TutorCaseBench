@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 5: Daily Facilitative Play Practice
+  Check: The long-term plan must include dedicated, daily time (e.g., 10 minutes) specifically for the adult to practice child-led play and labelling strategies with Elana.
+
+Criterion 6: Cross-Context Generalization of Non-Directive Approaches
+  Check: The long-term plan must outline how non-directive communication and child-led strategies will be integrated across the entire school day and various routines.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Elana is a 6-year-old student with ASD who is highly resistant to adult direction and determined to have things her own way, showing no baseline interest in interacting with others. She requires a completely non-directive, facilitative approach where adults follow her lead, label her actions, and introduce highly motivating items to prevent immediate protests and foster engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our play session. Let's build a tall tower with these blocks. Put this red block on top.
+
+STUDENT: (Turns her body away from the tutor, ignoring the instruction, and pulls all the blocks towards herself to meet her own needs)
+
+TUTOR: We need to do this together. Please hand me a block so we can build it.
+
+STUDENT: I want the balls. (Quickly grabs the balls to play with them by herself)
+
+TUTOR: You need to listen to my instructions first. Put the balls down and stack the blocks like I asked.
+
+STUDENT: No! My way! (Protests loudly and pushes the blocks off the table, determined to have her own way)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in a playtime session with blocks and balls where she wasn't asked to work",
+      "learning_goal": "Supporting engagement and communication"
+    },
+    "context": {
+      "environment": "1:1 interaction session",
+      "materials": "Blocks, balls, and other motivating items",
+      "social_setting": "One-on-one interaction with an adult",
+      "time_context": "Ten minutes every day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Immediately followed their adults' directive communication (demands and expectations placed on them)",
+      "observable_behavior": "Protest at a rate ranging from 0.42 – 4.6 incidences per minute",
+      "internal_state": "Did not like demands and expectations placed on them; stressed",
+      "related_quotes": [
+        "it's her way or no way",
+        "determined obviously to have her own way all the time"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When she lost interest in the motivating items",
+        "observable_behavior": "Ignoring behaviours and shows no interest in interacting with peers or classroom adults",
+        "internal_state": "Lost interest in them",
+        "related_quotes": []
+      },
+      {
+        "condition": "When stressed or highly motivated",
+        "observable_behavior": "Uses a wide repertoire of vocabulary, makes great efforts to meet her own needs, and asked for them fairly fast, the blocks, the balls",
+        "internal_state": "Highly motivated because she wasn't asked to work",
+        "related_quotes": [
+          "Because she had her blocks and she was getting her way"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

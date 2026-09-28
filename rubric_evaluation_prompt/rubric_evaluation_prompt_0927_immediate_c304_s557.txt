@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Boundary Enforcement via Structured Agreements
+  Check: The tutor references or establishes a clear, structured agreement regarding the student's access to support or expectations for returning to class, rather than allowing open-ended avoidance.
+
+Criterion 2: De-escalation through Time-Out or Trigger Recognition
+  Check: The tutor offers a designated 'time out' or prompts the student to identify their specific triggers, rather than forcing immediate task compliance while the student is dysregulated.
+
+Criterion 3: Flexible Outcome Negotiation
+  Check: The tutor offers choices or negotiates a mutually acceptable next step, explicitly avoiding inflexible, unilateral demands.
+
+Criterion 4: Competence Affirmation
+  Check: The tutor explicitly praises the student's effort, capability, or the quality of their work to build academic confidence.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with social-emotional dysregulation, frequently reacting to peer provocation with anger and classroom disruption. They exhibit authority defiance by ignoring social formalities and abusing unstructured access to support staff to avoid mainstream lessons. They require clear boundaries through structured agreements, de-escalation strategies like time-outs, and flexible negotiation, while responding poorly to rigid demands or being relegated to lower-ability sets.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for you to head back to your mainstream math lesson now.
+
+STUDENT: I'm not going. If I have problems I can go straight to the teachers, so I'm staying here.
+
+TUTOR: You need to attend your scheduled classes.
+
+STUDENT: Look mate, I'm just going to sit here with you. I don't want to go to that lesson.
+
+TUTOR: We cannot just sit here. You have to go.
+
+STUDENT: I said no! You're supposed to let me stay here whenever I want. I'm not going back to that class, so just leave it alone.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "attending lessons",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school setting",
+      "materials": "",
+      "social_setting": "access to a signiﬁcant adult",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "in order to avoid attending lessons",
+      "observable_behavior": "abused such free access to a signiﬁcant adult, become over-reliant on the signiﬁcant adult",
+      "internal_state": "absence of social and emotional competence, a lack of self-control and low self-esteem",
+      "related_quotes": [
+        "[If] I have problems I can go straight to the teachers"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "interactions with adults",
+        "observable_behavior": "talks to everybody in the same way and doesn’t know how to recognise differences in formality",
+        "internal_state": "He is not socialised to have interactions",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

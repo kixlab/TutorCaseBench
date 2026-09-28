@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Consistent Mindfulness and Reflection Routine
+  Check: The long-term plan must incorporate a structured schedule of mindfulness exercises, reflective tools (such as poems), and journaling to build his capacity to pause before reacting.
+
+Criterion 2: Small-Group Delivery Setting
+  Check: The long-term intervention plan must explicitly specify a small-group or one-to-one format, actively avoiding whole-class implementation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+James is a Year 8 student at risk of permanent exclusion due to impulsive, aggressive behavior triggered by deep-seated stress and fear of judgment regarding his sibling's criminal history. The evidence reveals he uniquely needs interventions that separate his identity from his family's actions through self-compassion, open-ended dialogue, and structured small-group mindfulness to build impulse control.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: James, it's time for group work. Please sit with your assigned peers and share the materials for this assignment.
+
+STUDENT: I'm not sitting with them. They keep looking at me like I'm going to nick their stuff. Like, twenty quid doesn't just go randomly missing and you forget about it, that's what they're all thinking about my family.
+
+TUTOR: Nobody is saying that. Just join the group and start the activity.
+
+STUDENT: Yeah, right. It's always about my sister. So I don’t know what’s going on, if she’s had second thoughts about it or if she’s put it anonymous no, questions asked or that... but everyone in here treats me like I'm the one doing it.
+
+TUTOR: We need to get this work done, James. Please just sit down and cooperate with your classmates.
+
+STUDENT: (Pushes the desk aggressively and stands up) I said I'm not doing it! You all think I'm just like her! 'Why can't you just be good?', right? That's what you want to say! I have always thought twice … like not just gone in on the first thought that I’ve had, but I'm sick of everyone judging me!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General classroom participation and peer interaction",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Secondary school classroom",
+      "materials": "",
+      "social_setting": "Classroom environment with peers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When acting on immediate impulses without considering consequences",
+      "observable_behavior": "Aggressive behaviour towards peers and disruptive, confrontational behaviour in the classroom",
+      "internal_state": "Feeling judged based on sibling's actions, struggling to understand the impact of sibling's actions, and feeling his sense of self is intrinsically linked to his sibling",
+      "related_quotes": [
+        "I have always thought twice … like not just gone in on the first thought that I’ve had.",
+        "why can’t you just be good?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing stress and/or confusion at home regarding his sibling",
+        "observable_behavior": "Interlaces stories about his sibling into stories about his own actions, or uses humour and recounts trips away as a sense of escapism",
+        "internal_state": "Unresolved feelings, confusion, and a need to portray that he and his family members are good people",
+        "related_quotes": [
+          "So I don’t know what’s going on, if she’s had second thoughts about it or (2) if she’s put it anonymous no, questions asked or that."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

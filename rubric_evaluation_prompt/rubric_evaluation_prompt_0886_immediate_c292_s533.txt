@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Accessible Physical Prompts
+  Check: The tutor ensures any requested physical actions or attention checks are accessible to the student's physical capabilities, explicitly avoiding impossible prompts like 'hands on head'.
+
+Criterion 2: Physical and Sensory Accommodations
+  Check: The tutor provides or prompts the use of physical accommodations (e.g., a supportive chair) and/or self-regulation tools (e.g., fidgets) before or during passive listening activities.
+
+Criterion 3: Multi-Sensory or Peer-Supported Engagement
+  Check: The tutor incorporates an accessible multi-sensory routine (e.g., vocalizing combined with an accessible movement) or facilitates supportive peer interaction during transitions or listening times.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly motivated and eager to participate in group instruction but has a physical disability that limits their ability to perform certain physical actions. Their core behavioral pattern involves enthusiastic participation when tasks are accessible, but immediate disengagement when given impossible physical prompts or during extended passive listening. The evidence reveals they uniquely need accessible physical routines, specific seating accommodations, sensory tools, and active cooperative learning to maintain engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Okay class, it is time to transition to our next subject. Let's get ready.
+
+STUDENT: (Puts hands up, slaps the desk 2 times and says) Science!
+
+TUTOR: Now, if you can hear me, place your hands on your head.
+
+STUDENT: (Remains still at the desk, unable to lift hands to their head due to physical disability.)
+
+TUTOR: I am waiting for everyone to do it.
+
+STUDENT: (Looks away and becomes completely disengaged from the activity because it is not possible to participate.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to a teacher's whole-group auditory prompt during a classroom activity.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Early elementary classroom",
+      "materials": "Desks",
+      "social_setting": "Whole-group classroom activity",
+      "time_context": "Class transition time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When told 'if you can hear me, place your hands on your head.'",
+      "observable_behavior": "The student was not able to participate in this activity and was not engaged.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When given a verbal command requiring a specific physical response they cannot perform",
+        "observable_behavior": "Not able to participate, resulting in lack of engagement",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

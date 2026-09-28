@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Expectation and Rationale Building
+  Check: The long-term plan includes strategies for explicitly explaining the 'why' behind classroom expectations or proactively orienting the student to institutional norms.
+
+Criterion 2: Relational Style Adaptation
+  Check: The long-term plan proposes adapting the tutor's interactional or communication style to foster mutual respect and affiliation, rather than relying on standard compliance-driven management.
+
+Criterion 3: Elimination of Authoritarian Power Dynamics
+  Check: The long-term plan explicitly avoids, or plans to phase out, punitive, physically assertive, or dismissive ('because I said so') authoritarian management tactics.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits defiance, passive noncompliance, and verbal resistance (e.g., repeatedly asking 'Why?', insulting teachers, leaving the room) when subjected to authoritarian or aggressive classroom management. The evidence reveals they are highly triggered by dismissive authority and physical assertions of power (like snatching items), uniquely requiring explicit, rationale-based orientation to classroom expectations and a culturally adapted, relational interaction style.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Take out a book.
+
+STUDENT: (Joking around) Why?
+
+TUTOR: Take out a pencil.
+
+STUDENT: Why?
+
+TUTOR: Please just follow the instructions.
+
+STUDENT: (Insults the teacher) I'm leaving. (Leaves the classroom without permission)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Take out a book. Take out a pencil.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "ESL class",
+      "materials": "book, pencil",
+      "social_setting": "entering a class",
+      "time_context": "each time we would enter a class"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when the teacher would tell them something",
+      "observable_behavior": "they would ask why?",
+      "internal_state": "",
+      "related_quotes": [
+        "Take out a book. Why? Take out a pencil. Why?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "each time we would enter a class",
+        "observable_behavior": "they would be joking around",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "due to the lack of control teachers exercised over their students",
+        "observable_behavior": "students would leave the classroom without permission and would insult teachers",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

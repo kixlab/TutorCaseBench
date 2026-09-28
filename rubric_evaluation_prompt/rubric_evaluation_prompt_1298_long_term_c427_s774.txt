@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Boundary Setting
+  Check: The long-term plan must include strategies for establishing clear expectations and addressing off-task behavior early before it escalates.
+
+Criterion 2: Structured and Engaging Lesson Design
+  Check: The long-term plan must prioritize highly structured, engaging instructional activities that actively involve the student rather than relying on passive or chaotic environments.
+
+Criterion 3: Emotional Safety and Privacy
+  Check: The long-term plan must demonstrate respect for her emotional boundaries by avoiding forced discussions of sensitive personal topics (e.g., family/mother) and providing a safe, non-intrusive environment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kanita is a student who exhibits explicit task refusal and noncompliance in chaotic, laissez-faire environments but thrives under structured, proactive management. She also emotionally withdraws when pressed on sensitive personal topics, requiring an approach that combines engaging, well-planned instruction with clear boundaries and emotional safety.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, please sit down so we can start our whole-class lesson on synonyms.
+
+STUDENT: (Ignores the instruction and walks away from the group)
+
+TUTOR: Kanita, we are doing synonyms right now. Please come back.
+
+STUDENT: (Sits down at the computer and opens up Math Corner instead of joining the lesson)
+
+TUTOR: Kanita, do not do Math Corner on the computer right now.
+
+STUDENT: I am going to do it anyway.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "A lesson on synonyms",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Loud as she tries to talk over the noise in the class",
+      "materials": "Computer with Math Corner",
+      "social_setting": "Whole class with students at the computer requesting help and other distractions occurring",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Someone tells the teacher that Kanita is doing Math Corner on the computer and the teacher tells her not to",
+      "observable_behavior": "Kanita replies she is going to do it anyway",
+      "internal_state": "",
+      "related_quotes": [
+        "she is going to do it anyway"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During first grade following a transition from kindergarten",
+        "observable_behavior": "Disruptive and noncompliant behavior",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,76 @@
+{
+  "category_id": "144",
+  "category_title": "Students with LD who use logical reasoning or inference instead of literal text evidence",
+  "scenario_id": "265",
+  "scenario_title": "Answering cause/effect questions during summarization",
+  "minimal_context": "The student is answering a cause and effect question about an article on the volcano Kilauea during a small-group summarization lesson.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's answer the cause and effect question about the article. Because Kilauea's so dangerous...?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Um not very many people, um, um use- not - A lot of people like it, but they don’t want to get too close to it."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Is that what the article says?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Well, if it's a dangerous volcano, people wouldn't want to get close to it."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Can you show me where it says that in the text?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "It doesn't.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's answer the cause and effect question about the article. Because Kilauea's so dangerous...?\n\nSTUDENT: Um not very many people, um, um use- not - A lot of people like it, but they don’t want to get too close to it.\n\nTUTOR: Is that what the article says?\n\nSTUDENT: Well, if it's a dangerous volcano, people wouldn't want to get close to it.\n\nTUTOR: Can you show me where it says that in the text?\n\nSTUDENT: It doesn't.",
+  "immediate_dialogue_prompt": 439,
+  "long_term_dialogue_prompt": 440,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Answering a cause/effect question about the volcano Kilauea",
+        "learning_goal": "Summarization skills"
+      },
+      "context": {
+        "environment": "Small-group lesson",
+        "materials": "An article about the volcano Kilauea",
+        "social_setting": "Working with the teacher and two other students",
+        "time_context": "After a discussion about the section’s main ideas and details"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the teacher asked 'Can you show me where it says that in the text?' after the student gave a logical and reasoned conjecture",
+        "observable_behavior": "Responded immediately by saying, 'It doesn't', without spending time searching the text",
+        "internal_state": "Fully aware that her response was not taken from the text; discouraged from using her own knowledge",
+        "related_quotes": [
+          "It doesn't"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When the teacher used a designedly incomplete utterance to structure the response (e.g., 'Because Kilauea’s so dangerous?')",
+          "observable_behavior": "Provided a response that suggested a reasonable effect resulting from Kilauea’s dangers but created a context for error correction",
+          "internal_state": "Engaging in meaning-making processes using her own knowledge",
+          "related_quotes": [
+            "Um not very many people, um, um use- not - A lot of people like it, but they don’t want to get too close to it"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

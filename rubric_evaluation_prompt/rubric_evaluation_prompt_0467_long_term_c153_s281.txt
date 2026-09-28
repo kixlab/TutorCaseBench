@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Alternative Communication Modalities
+  Check: The long-term plan must include consistent opportunities for the student to express their understanding through drawing, acting, or speaking rather than relying solely on traditional written assessments.
+
+Criterion 2: Peer Leadership and Collaboration
+  Check: The long-term plan must incorporate collaborative structures where the student is positioned as a peer expert or team leader, allowing him to assist others using his unique skills.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student possesses specialized, home-based expertise (such as weaving taught by his father) and thrives when positioned as a collaborative peer leader. He has deep conceptual knowledge but struggles with traditional communication formats, requiring alternative mediums like drawing, acting, or speaking to demonstrate his understanding. He uniquely needs his cultural knowledge validated and integrated into peer-assisted learning structures to feel competent and valued.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today in art class, we are studying weaving. Please begin working on the weaving assignment with your group.
+
+STUDENT: My father taught me to weave purses!
+
+TUTOR: That is nice. Let's just focus on the assignment.
+
+STUDENT: I am the master weaver. I can be the team leader and assist the others in my group.
+
+TUTOR: Please just do your own weaving right now.
+
+STUDENT: But I am proud to tell you what my father taught me. I want to collaborate and assist the others with their weaving instead of just sitting here.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "studied weaving in art",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "art",
+      "materials": "",
+      "social_setting": "collaborated and had team leaders who assisted others",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When students studied weaving in art",
+      "observable_behavior": "was proud to tell me that his father taught him to weave purses, etc.",
+      "internal_state": "proud",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When acting as a team leader",
+        "observable_behavior": "assisted others",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

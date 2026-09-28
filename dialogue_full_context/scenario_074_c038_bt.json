@@ -1,0 +1,72 @@
+{
+  "category_id": "038",
+  "category_title": "Student with ASD and intellectual disabilities who relies on visual modeling and struggles with multiplicative vocabulary",
+  "scenario_id": "074",
+  "scenario_title": "Multiplicative Comparison Problem with Additive Misinterpretation",
+  "minimal_context": "Peter is working individually on a worksheet to solve a math problem about Konstan having 3 cars and Carlos having 5 times more cars using a conceptual model diagram.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is the next problem on the worksheet: 'Konstan has 3 cars and Carlos has 5 times more cars.' Please fill out the conceptual model diagram."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Moves his pencil over his fingers while looking at the numbers on the worksheet.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think you should do next?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Looks at the words '5 times more' and starts adding the given quantity.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Write your answer in the 'how many times' box on the diagram."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Adds 5 + 5 and writes 10 in the 'how many times' box of the diagram.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is the next problem on the worksheet: 'Konstan has 3 cars and Carlos has 5 times more cars.' Please fill out the conceptual model diagram.\n\nSTUDENT: (Moves his pencil over his fingers while looking at the numbers on the worksheet.)\n\nTUTOR: What do you think you should do next?\n\nSTUDENT: (Looks at the words '5 times more' and starts adding the given quantity.)\n\nTUTOR: Write your answer in the 'how many times' box on the diagram.\n\nSTUDENT: (Adds 5 + 5 and writes 10 in the 'how many times' box of the diagram.)",
+  "immediate_dialogue_prompt": 118,
+  "long_term_dialogue_prompt": 119,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Solve the Multiplicative Comparison problem: 'Konstan has 3 cars and Carlos has 5 times more cars'",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Instructional sessions were conducted individually in a distraction-free environment",
+        "materials": "Worksheets to cover the four steps proposed in the DOTS list, conceptual model diagram",
+        "social_setting": "Individual session with an instructor",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Encountering comparative vocabulary such as '5 times more'",
+        "observable_behavior": "Interpreted '5 times more' as adding 5 + 5, resulting in writing 10 in the 'how many times' box of the diagram",
+        "internal_state": "Misinterpretation of the comparison factor using an additive strategy; lack of conceptual understanding",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When making calculation errors during problem solving",
+          "observable_behavior": "Followed a counting approach, as we observed him moving the pencil over his fingers",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

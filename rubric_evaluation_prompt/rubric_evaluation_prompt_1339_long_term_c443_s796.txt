@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Embedded Literacy Scaffolding
+  Check: The long-term plan must explicitly teach structural literacy skills (e.g., paragraph writing, text organization, peer review) as necessary steps to complete the student's chosen multimedia project.
+
+Criterion 2: Community and Narrative Integration
+  Check: The long-term plan must include the use of storytelling, fables, or community support (e.g., inviting elders or outside speakers) to explore complex themes.
+
+Criterion 3: Collaborative Learning Structures
+  Check: The long-term plan must structure learning primarily around group work, peer collaboration, and observational learning rather than independent study modules.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student strongly resists traditional, independent transmission pedagogy, often walking out or shutting down when given worksheets or assigned reading. They are deeply motivated by digital multiliteracies (internet research, video creation) and need their gritty, real-world lived experiences (including 'taboo' topics like gangs and drugs) validated. To succeed, they require extreme flexibility, collaborative project-based learning, and literacy skills embedded within topics they initiate.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the newspaper article about Aboriginal gangs again so we can finish talking about the author's tone and the language they used.
+
+STUDENT: Fair? How can it be fair? They watch us like hawks, like criminals, and not the other kids at break. How come white guys are allowed to walk inside the shop? They can do anything. Nobody is following, and we have the stupid man near us all the time.
+
+TUTOR: Let's try to focus on the text. Please read the next section on your own so we can look at the audience.
+
+STUDENT: Boring...boring...boring. It’s all stupid. I didn’t come to school to learn this.
+
+TUTOR: We just need to finish what we started yesterday with the article.
+
+STUDENT: (Pushes the newspaper article away) I'm not reading it again. You want to know about gangs? Let's talk about gang clothing, weapons, and initiation rites. That's how gang protection and hierarchies actually work.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read recent newspaper articles focused on Aboriginal gangs, scaffold the concepts of writing for an audience, tone, and voice, and draw attention to the type of language the author used",
+      "learning_goal": "Raise the students' consciousness about identity construction, discrimination, and racism"
+    },
+    "context": {
+      "environment": "Grade 7-8 alternative education classroom",
+      "materials": "Recent newspaper articles that focused on the prevalence of Aboriginal gangs in the province",
+      "social_setting": "Teacher-led discussions of identity construction, stereotypes, and racism",
+      "time_context": "Over the first several lessons"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher attempted to finish what she had started and scaffold the concepts of writing for an audience, tone, and voice",
+      "observable_behavior": "Resisted reading the newspaper article again, and on their own initiative, began to discuss gangs, gang clothing, weapons, gang initiation rites, gang hierarchies, prostitution, and gang protection",
+      "internal_state": "",
+      "related_quotes": [
+        "It’s all stupid. I didn’t come to school to learn this.",
+        "Boring...boring...boring."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to engage the students in discussions of identity construction, stereotypes, and racism",
+        "observable_behavior": "Not able to extend the students' thinking beyond personal instances of racism",
+        "internal_state": "",
+        "related_quotes": [
+          "Fair? How can it be fair? They watch us like hawks, like criminals, and not the other kids at break."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

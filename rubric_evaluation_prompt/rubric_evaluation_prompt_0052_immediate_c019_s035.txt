@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prompting Physical Spatial Blocking
+  Check: The tutor prompts the student to use their hands/arms to physically block out the 3D shape in the air, or vividly describes a physical, real-world spatial action to represent the volume of the 3D object.
+
+Criterion 2: Tactile Path Tracing for Internal Dimensions
+  Check: The tutor directs the student to physically point to, touch, or trace the path between specific, explicitly named corners/vertices of the object to identify the correct dimensions.
+
+Criterion 3: Dynamic Representation of Extensions
+  Check: The tutor describes or asks the student to perform a dynamic physical motion (e.g., sliding a finger outward, pulling an object out) to represent an extension beyond the main 3D shape.
+
+Criterion 4: Avoidance of Purely 2D/Verbal Explanations
+  Check: The tutor does NOT rely exclusively on referencing 2D diagram labels or mathematical formulas; the response must incorporate a physical, spatial, or gestural visualization strategy.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Lisa is an independent learner who successfully uses self-created visuals for 2D geometry but experiences cognitive disequilibrium with 3D spatial visualization. When given 2D diagrams of 3D problems, she guesses dimensions and forces 2D solutions, uniquely requiring dynamic, physical gestures (like blocking out space with arms or sliding fingers) to bridge the gap between the diagram and 3D reality.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the juice carton problem on the paper. We need to find where the straw would sit in the carton and account for a 1.5cm extension.
+
+STUDENT: Oh… Ok, we have to use 4 and, oh, yes. (Solves for the hypotenuse of a right triangle on the diagram)
+
+TUTOR: What do you think we should do next?
+
+STUDENT: I set up the problem and solved for the unknown hypotenuse. I found the answer to the problem.
+
+TUTOR: What about the straw extending further than the box?
+
+STUDENT: Is it times 1.5?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "3D juice carton straw problem, solving for where the straw would need to sit in the carton and accounting for a 1.5cm extension",
+      "learning_goal": "Solve for the unknown hypotenuse and account for a physical extension"
+    },
+    "context": {
+      "environment": "Teaching session",
+      "materials": "Diagram on paper",
+      "social_setting": "One-on-one tutoring session with Sophia",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After Lisa solved for an irrelevant piece of the diagram (i.e., the hypotenuse of a right triangle that was not needed for finding the answer)",
+      "observable_behavior": "Lisa thought she had found the answer to the problem, not realizing the straw extended further than the box. Guessed the mathematical operation for the extension.",
+      "internal_state": "Failing to account for the 1.5cm extension of the straw",
+      "related_quotes": [
+        "Oh… Ok, we have to use 4 and, oh, yes.",
+        "Is it times 1.5?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When calculating the internal diagonal of the juice carton",
+        "observable_behavior": "Lisa thought she had found the answer to the problem, not realizing the straw extended further than the box.",
+        "internal_state": "",
+        "related_quotes": [
+          "Is it times 1.5?"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

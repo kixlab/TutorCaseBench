@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Private Support Channeling
+  Check: The tutor explicitly offers or utilizes a private, one-on-one communication method (e.g., direct message, email, private chat) for the student to ask questions or receive help.
+
+Criterion 2: Mastery-Oriented Revision
+  Check: The tutor explicitly offers the opportunity to revise, retake, or review the specific assignment until the student understands the material and passes.
+
+Criterion 3: Exclusion of Peer Collaboration
+  Check: The tutor's response strictly maintains an independent work structure and does not suggest or require peer communication, group work, or collaborative assignments.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with self-discipline, procrastination, and social distractions, often avoiding work or missing class. They are easily overwhelmed by heavy reading and fear looking 'dumb' in front of peers. They uniquely require private one-on-one support, self-paced mastery learning with revision opportunities, and multimedia alternatives to text-heavy instruction, while strictly avoiding peer collaboration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please log into the NovaNET online courseware and begin the reading assignment for today's summer session.
+
+STUDENT: I'm logged in, but I'm already having difficulties with the amount of reading demanded of us here. It's just walls of text.
+
+TUTOR: Just do your best to read through the material.
+
+STUDENT: I can't focus on all this. Before this summer, I didn’t pay much attention and had messed up priorities, so I'm not used to reading this much on my own.
+
+TUTOR: If you get stuck on a section, you can just ask me a question about it.
+
+STUDENT: I'm not going to keep asking questions about every single page. I'm just going to skip the reading and guess. Usually I'd just avoid this by being distracted, by my friends, or sleeping in class.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing reading-dominant online courseware (NovaNET or Apex Learning)",
+      "learning_goal": "Minimum 8th grade reading level needed for success"
+    },
+    "context": {
+      "environment": "Online credit recovery course",
+      "materials": "Pronto, email, notes, videos, Gizmos, SAS activities",
+      "social_setting": "Fewer distractions from peers when working online",
+      "time_context": "Summer session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Amount of reading demanded of them",
+      "observable_behavior": "Embarrassed to constantly ask questions and look “dumb”",
+      "internal_state": "Embarrassed",
+      "related_quotes": [
+        "I didn’t pay much attention and had messed up priorities.",
+        "Being distracted, by my friends."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Prior to taking a CR course",
+        "observable_behavior": "Not paying attention in class or sleeping, and “playing around” in class or being distracted by friends",
+        "internal_state": "",
+        "related_quotes": [
+          "I didn’t pay much attention and had messed up priorities.",
+          "Being distracted, by my friends."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Physical Flexibility
+  Check: The long-term plan explicitly incorporates spaces or routines that allow the student to move around, change positions, or approach the text physically.
+
+Criterion 2: Oral Drafting Precedence
+  Check: The long-term plan systematically uses verbal processing, storytelling, or dictation as a primary step before requiring written products.
+
+Criterion 3: Interactive Technology Scaffolding
+  Check: The long-term plan includes the use of interactive reading software or digital tools that allow the student to independently access audio support and self-pace.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an active, verbal processor who is often mischaracterized as resistant or off-task due to non-normative behaviors like shouting out, moving around, and sighing. They struggle under rigid behavioral expectations (e.g., sitting still, staying quiet) and traditional written tasks. The evidence reveals they uniquely need their physical movement and spontaneous talk validated as legitimate learning tools, thriving with oral drafting, peer collaboration, and interactive digital reading supports.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our independent writing activity. Please sit at the table and start writing your story about what your name means to you.
+
+STUDENT: I dunno what to write. I’m not a good writer, you know?
+
+TUTOR: You just need to concentrate and focus on your work right now.
+
+STUDENT: (Pretending to be a teacher, using a woman's voice) Don’t make me do the same thing that Ms. Jones did. “Make your story! Make your story!” ((turns the pages)). These are the rules. Don’t tell me you can’t write all the way to the end. Good writers write all the way to the end.
+
+TUTOR: Please stop talking and write your sentences down on the paper.
+
+STUDENT: (Looks blankly for several seconds, then runs around the table reaching out to his peers and almost touching them) Got you! You’re it! You can’t get me!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent writing activity titled 'What my name means to me' following a read-aloud",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Writing workshop at a table",
+      "materials": "Paper and writing materials",
+      "social_setting": "Working alongside peers at a table",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Struggling to start a writing task and expected to produce a written product",
+      "observable_behavior": "Kept talking to each other, did not write down much, ran around the table recalling his game of tag (reaching out to his peers and almost touching them)",
+      "internal_state": "Self-doubt",
+      "related_quotes": [
+        "I dunno what to write. I’m not a good writer, you know?",
+        "I have a lot of names. People call me Rafael, Rafa, Rafi, Rafito, Muniz … These are all my names."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with rigid behavioral and product-oriented rules of regular classroom writing instruction",
+        "observable_behavior": "Role-playing a teacher to critique the rigid behavioral and product-oriented rules",
+        "internal_state": "Desire to also move beyond school sanctioned writing norms",
+        "related_quotes": [
+          "Don’t make me do the same thing that Ms. Jones [a teacher] did. “Make your story! Make your story!” ((turns the pages)). These are the rules. Don’t tell me you can’t write all the way to the end. Good writers write all the way to the end."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

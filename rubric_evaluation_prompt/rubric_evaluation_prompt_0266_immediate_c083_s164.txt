@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Qualitative Data Translation
+  Check: The tutor's response must explicitly explain, or prompt the student to explore, the qualitative meaning or learning implications behind the raw data.
+
+Criterion 2: Community Collaboration Focus
+  Check: The tutor's response must direct the student's attention toward how the data reflects on the group's collaboration, synthesis, or collective responsibility.
+
+Criterion 3: Inquiry Gap Identification
+  Check: The tutor's response must prompt the student to use the data to identify specific gaps in the current knowledge base or to formulate new questions for inquiry.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+S.18 is a student who demonstrates a strong capacity for community-level monitoring but gets stuck on surface-level quantitative data (e.g., note counts) when using analytics tools. She uniquely requires explicit scaffolding to translate raw numbers into qualitative cognitive opportunities and to focus on collective knowledge-building rather than isolated metrics.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open the Knowledge Connections Analyzer tool and review the data to reflect on our community's synthesis and collaboration.
+
+STUDENT: Okay, I'm looking at the numbers. The number of reference notes is 34 and the number of notes that are being used as references is 56. We have written more than 150 notes.
+
+TUTOR: What does that tell you?
+
+STUDENT: I am wondering whether we have really read the notes carefully and applied them to date.
+
+TUTOR: What else do you see in the tool?
+
+STUDENT: Just these numbers. These data tell us that the extent of synthesis and collaboration is not higher than our expectation. I don't see what else to look at besides the counts it generated.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Using the Knowledge Connections Analyzer (KCA) tool to reflect on community synthesis and collaboration.",
+      "learning_goal": "To recognize the cognitive opportunities afforded by the qualitative information provided and assess community synthesis."
+    },
+    "context": {
+      "environment": "Classroom setting during the reflective assessment phase",
+      "materials": "Knowledge Connections Analyzer (KCA) tool, KCA prompt sheets, reflective journal, Knowledge Forum platform",
+      "social_setting": "Individual reflection and small group work",
+      "time_context": "Immediately after the introduction of the KCA tool"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Initial use of the KCA tool immediately after its introduction",
+      "observable_behavior": "Noticed only the quantitative data generated by the KCA; they did not recognize the cognitive opportunities afforded by the qualitative information provided.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When analyzing the Knowledge Forum database for synthesis",
+        "observable_behavior": "Identifies specific counts of reference notes (34) and notes being used as references (56) out of total notes written (more than 150) to evaluate if the extent of synthesis and collaboration meets expectations.",
+        "internal_state": "Wondering whether we have really read the notes carefully and applied them to date",
+        "related_quotes": [
+          "I am wondering whether we have really read the notes carefully and applied them to date.",
+          "These data tell us that the extent of synthesis and collaboration is not higher than our expectation ..."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

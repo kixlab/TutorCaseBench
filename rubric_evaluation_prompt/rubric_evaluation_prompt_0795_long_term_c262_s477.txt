@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Reciprocal Peer Tutoring Routine
+  Check: The tutor's long-term plan includes regular, structured peer tutoring sessions (such as CWPT) where the student alternates between being the tutor and the tutee.
+
+Criterion 2: Integrated Behavioral Checkpoints
+  Check: The tutor incorporates explicit behavioral self-monitoring steps or checkpoints directly into the student's daily or weekly academic task checklists.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sam is an 11-year-old who loves science but struggles with reading and core academic skills, leading to severe anxiety and outbursts when asked to read aloud or tackle unstructured tasks. He uniquely requires highly structured, reciprocal peer interactions and explicit visual/mnemonic scaffolds to bypass his reading insecurities and maintain behavioral regulation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, for this hands-on inquiry science lesson, we are going to spend our time formulating our own questions and designing our own experiments.
+
+STUDENT: I cannot wait to get started!
+
+TUTOR: Before you begin, listen closely to the directions for how to set up a complex scientific question.
+
+STUDENT: (Turns away from the teacher) I don't even know anything about this unit yet. Hey, what are you going to do?
+
+TUTOR: Sam, please pay attention to the instructions so you know how to do the task.
+
+STUDENT: (Talking to a peer instead of listening to directions) This is too hard. I'm not doing this, let's just mess around with the stuff on the table.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Listening to directions during hands-on inquiry science instruction and formulating their own questions and designing their own experiments",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Hands-on, inquiry-based format that tends to be less structured",
+      "materials": "Academic task checklist, self-monitoring tools, points/rewards system",
+      "social_setting": "Working in groups or peer learning",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When faced with complex and challenging academic tasks",
+      "observable_behavior": "Off-task behavior (e.g., talking to a peer instead of listening to directions)",
+      "internal_state": "Begins science units with less background knowledge than their peers",
+      "related_quotes": [
+        "Sam cannot wait to get started!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During hands-on inquiry science instruction as these lessons tend to be less structured",
+        "observable_behavior": "Talking to a peer instead of listening to directions",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

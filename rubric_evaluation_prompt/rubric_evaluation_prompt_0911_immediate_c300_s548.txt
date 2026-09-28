@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Flexible Integration of Spontaneous Contributions
+  Check: The tutor explicitly accepts and incorporates Dominic's spontaneous props, ideas, or actions into the current activity instead of redirecting him to a rigid behavioral expectation.
+
+Criterion 2: Animal-Centric Engagement and Redirection
+  Check: The tutor uses specific references to animals, animal sounds, or animal-related materials to engage Dominic or redirect his behavior, rather than relying on generic behavioral commands (e.g., 'stop hitting' or 'clean up').
+
+Criterion 3: Support for Caring Creative Initiatives
+  Check: The tutor grants, facilitates, or offers access to special materials or unique tools when Dominic initiates a creative project, particularly one directed at caring for or celebrating animals.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Dominic is a 5-year-old boy who struggles with transitions, routines, and peer interactions, frequently exhibiting aggressive and unpredictable behaviors like hitting or throwing objects. His core differentiating characteristic is a profound emotional connection to and vast knowledge of animals, which elicits a level of caring he struggles to show peers. He uniquely requires tutors to flexibly integrate his spontaneous contributions into activities and use his affinity for animals as the primary bridge for engagement, as generic impulse-control interventions are ineffective for him.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Dominic, it is time for independent project work. You can observe the chicks.
+
+STUDENT: I want to paint for them. Can I use some special metallic paints from the storage cabinet?
+
+TUTOR: Here are the metallic paints. What are you going to do with your painting?
+
+STUDENT: (Turns the painting over and places it picture-side-down on the cage) I am putting it like this so that the chicks can enjoy it.
+
+TUTOR: Your classmate is coming over to look at the chicks with you.
+
+STUDENT: No! Get away! (Hits the classmate) You can't look at them!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "observing the chicks each day",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "special metallic paints from her storage cabinet, chick’s cage",
+      "social_setting": "independent project work",
+      "time_context": "When the chicken eggs hatched during the final weeks of the project"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "social interactions",
+      "observable_behavior": "struggled with social interactions",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "interacting with some of his classmates",
+        "observable_behavior": "seemed unable to show his classmates",
+        "internal_state": "unable to show caring",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

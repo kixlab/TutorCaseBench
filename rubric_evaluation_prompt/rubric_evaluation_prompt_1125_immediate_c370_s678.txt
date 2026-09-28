@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Dynamic Visual Presentation
+  Check: The tutor utilizes or references dynamic visual displays (e.g., projecting slides, using multimedia) or frees their hands for full body language, explicitly avoiding the use of a physical book.
+
+Criterion 2: Active Visual Text Tracking
+  Check: The tutor employs active visual tracking methods, such as using a digital doodling tool, color markers, or explicit on-screen pointers to guide the student's eyes across the text.
+
+Criterion 3: Pre-Recording Scaffolding and Modeling
+  Check: The tutor provides opportunities for the student to listen to recorded models repeatedly and practice the sentences in a low-pressure way before initiating the actual recording task.
+
+Criterion 4: Competitive Team-Based Gamification
+  Check: The tutor frames the learning activity as a competitive game and/or places the student on a team to encourage peer-supported problem-solving.
+
+Criterion 5: Multimodal Meaning-Making
+  Check: The tutor explains story elements or vocabulary using a combination of drawing, translation, or expansive body language and gestures.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits strong task resistance, often running around, fighting, or ignoring tutors when presented with traditional English tasks or physical books. However, they are highly responsive to technology-enhanced interventions, requiring dynamic multimedia presentations, active visual text tracking, and competitive team games to engage and overcome their fear of reading and recording.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to review the summary sentences on the VoiceThread page and record your own reading.
+
+STUDENT: I don't want to do it. I am afraid of my regular English class.
+
+TUTOR: Let's just look at the sentences on the screen together.
+
+STUDENT: (Looks away from the screen) I have no interest in this storytelling.
+
+TUTOR: Please click the button so we can start the recording practice.
+
+STUDENT: No! I will not come if I have to do recording.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reviewing the sentences and recording his own reading",
+      "learning_goal": "Reading the summary sentences out loud"
+    },
+    "context": {
+      "environment": "VoiceThread page",
+      "materials": "VoiceThread online recording system, storylines, pictures, color marker doodling function",
+      "social_setting": "Working with storytellers' help",
+      "time_context": "Week 3 of the story cycle"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When informed they had to participate in recording practices",
+      "observable_behavior": "Some pupils said they would not come if they had to do recording.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When initially faced with English tasks",
+        "observable_behavior": "Showed no interest in storytelling",
+        "internal_state": "Afraid of their regular English class",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

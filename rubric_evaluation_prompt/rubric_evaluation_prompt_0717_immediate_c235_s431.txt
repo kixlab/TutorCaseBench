@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Oral_Retelling_Pre_Writing
+  Check: The tutor prompts Juan to listen to a text and orally retell it before asking him to answer comprehension questions or begin a writing task.
+
+Criterion 2: Comprehensive_Recall_Prompting
+  Check: The tutor explicitly asks Juan to write down everything he can remember from beginning to end, actively directing his focus away from summarizing or mechanical perfection.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Juan is a 5th-grade Chamorro student who struggles with reading comprehension and writing, often rushing through tasks and fixating on penmanship rather than content. He becomes easily frustrated by unfamiliar texts and relies on guessing words from initial letters. However, he thrives when allowed to use oral retelling as a cognitive bridge and engages deeply with culturally familiar texts in collaborative, small-group settings.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read this 4th-grade passage about the history of the printing press out loud, and then we will answer some questions about it.
+
+STUDENT: (Reads loudly and rushes through the text) The p-p-prince... press was invented... (Guesses 'prince' for 'printing' based on the initial letters).
+
+TUTOR: Okay, what was that paragraph about?
+
+STUDENT: It was just about some machine. I'm done reading it.
+
+TUTOR: Let's look at the first question. Why did the inventor need to use metal letters?
+
+STUDENT: I don't know! I know how to pronounce every word, so I am a good reader. This is too hard.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Performing the Qualitative Reading Inventory, specifically word lists and 4th-grade level passages, and answering literal and inferential questions",
+      "learning_goal": "Comprehending text and answering literal and inferential questions"
+    },
+    "context": {
+      "environment": "General classroom reading tasks and assessment settings",
+      "materials": "Word lists, 4th-grade level passages, topics for which he has little-to-no background knowledge, favorite island legends, individual copies of the legend",
+      "social_setting": "Interacting with others, small group setting",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When reading material that is too difficult for him to read and understand, and on topics for which he has little-to-no background knowledge",
+      "observable_behavior": "Gets frustrated with word recognition and comprehension, relies on the initial letters to guess at the word, has a difficult time answering both literal and inferential questions",
+      "internal_state": "Thinks of reading as correct pronunciation; describes a good reader as someone who 'knows how to pronounce every word'",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When interacting with others and reading text",
+        "observable_behavior": "Impulsive, easily distracted and loud; is able to retell the broad sense of text but lacks continuity and detail",
+        "internal_state": "Shows little interest in reading",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

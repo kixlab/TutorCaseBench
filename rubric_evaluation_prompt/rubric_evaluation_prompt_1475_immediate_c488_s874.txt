@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physical Motor Scaffolding
+  Check: The tutor's immediate response must include providing direct physical support for Matthew's hand or arm to help him execute or maintain interaction with the device.
+
+Criterion 2: Accessible Interface Substitution
+  Check: The tutor's immediate response must bypass inaccessible standard equipment by offering a touch-screen alternative or connecting his accessible personal device to the main display.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Matthew is an 11-year-old student with limited mobility who faces significant physical barriers to using standard classroom technology, such as an inability to support his hand weight, apply precise keyboard pressure, or reach interactive whiteboards. He has no cognitive deficits but requires specific physical scaffolding and hardware adaptations to participate. When provided with hand support, wheelchair-mounted touch screens, and accessible interfaces, he can interact independently, demonstrate his creative capabilities, and build a positive identity among his peers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Matthew, it is your turn to select the answer on the Interactive Whiteboard for our whole class activity.
+
+STUDENT: (Approaches the front of the room but sits quietly, looking up at the Interactive Whiteboard.)
+
+TUTOR: If you can't reach the board, you can use the computer keyboard on the desk right there.
+
+STUDENT: (Places his hand over the computer keyboard but struggles to apply the precise touch and pressure required on each key.)
+
+TUTOR: Just try to press the keys carefully, one at a time.
+
+STUDENT: (His hand slips off the computer keyboard due to his motor difficulties, and he remains unable to access the Interactive Whiteboard because of its inaccessible height.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "access the IWBs",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "special setting",
+      "materials": "Interactive Whiteboards (IWBs), iPads, computer keyboards, touch screens",
+      "social_setting": "whole class and small group activities",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to access the IWBs",
+      "observable_behavior": "Faces the issue of their inaccessible height",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When required to use computer keyboards",
+        "observable_behavior": "Faces difficulty because they require precise touch and pressure on each key",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -22,14 +22,11 @@ A tutor response does not need to satisfy every criterion to be considered accep
 ### RUBRIC (variable-length checklist)
 ────────────────────────────────
 
-Criterion 1: Predictable Routine Integration
-  Check: The tutor's long-term plan includes establishing fixed, predictable routines and explicitly communicating the student's specific role within that daily cycle.
+Criterion 1: Predictable Cycle Integration
+  Check: The long-term plan must include establishing and reinforcing strict, predictable daily routines where SD clearly understands the sequence of events and his place in them.
 
-Criterion 2: Stability-Focused Instruction
-  Check: The tutor plans to maximize academic instruction and behavioral reflection exclusively during periods when the student is emotionally stable and calm.
-
-Criterion 3: Modeling Patience for Peer Culture
-  Check: The tutor's plan includes explicitly modeling calm, patient responses to the student's outbursts to teach peers how to support and tolerate him.
+Criterion 2: Collaborative Medical and Family Support
+  Check: The long-term plan must involve coordinating with SD's family and/or medical providers to ensure consistent behavioral support and medication management.
 
 
 ────────────────────────────────
@@ -59,57 +56,49 @@ Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one ent
 ### STUDENT CONTEXT
 ────────────────────────────────
 
-This student experiences intense emotional distress, physical tantrums, and sudden anger triggered by transitions, perceived loss of time, and unmet expectations. His profound perfectionism makes it nearly impossible for him to submit incomplete work without a breakdown. He uniquely requires conditional autonomy to finish tasks, highly structured routines, and transitions bridged by preferred activities to maintain emotional regulation.
+SD is a gifted student with extreme perfectionism, depression, and impulse control disorder who experiences severe emotional distress and anger fits when interrupted before completing a task. He uniquely requires allowances to finish his work completely, highly predictable routines anchored by preferred activities, and environmental changes to de-escalate during meltdowns.
 
 
 ────────────────────────────────
 ### DIALOGUE (situation the tutor is responding to)
 ────────────────────────────────
 
-TUTOR: SD, it is time to transition from group play to our individual work. Please come into the deputy principal's room.
+TUTOR: It is time for us to work individually in the office now.
 
-STUDENT: (Walks in) I am not working with you. I want to join my friends to play the games.
+STUDENT: I don't want to. I want to join my friends to play the games.
 
-TUTOR: We need to do our work now. Please sit on the white leather chair.
+TUTOR: We need to do our work first. Please come inside.
 
-STUDENT: But I am not going to sit on the chair, I am going to sit on the floor.
+STUDENT: (Stands outside the door, looking reluctant to work) But they are playing games right now.
 
-TUTOR: Please sit on the chair so we can get prepared to work.
+TUTOR: We can't wait. You need to come inside the room.
 
-STUDENT: (Refuses to get prepared to work) No! I am turning you down!
+STUDENT: (Turns away, refusing to enter and standing outside the door) No! I am not coming in, I want to play with my friends!
 
 FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
 Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
 {
   "content": {
     "task": {
-      "content": "Transitioning from group play to individual work with researchers",
+      "content": "Transitioning from group play to work individually with researchers",
       "learning_goal": ""
     },
     "context": {
-      "environment": "Deputy principal's room",
-      "materials": "Two white leather chairs, Scratch program",
-      "social_setting": "Researchers waiting inside, IT teacher available nearby",
+      "environment": "Standing outside the door of the room",
+      "materials": "",
+      "social_setting": "Transitioning away from friends playing games to an individual session",
       "time_context": ""
     },
     "challenging_behavior_trigger": {
-      "condition": "When we wanted to work with him individually",
-      "observable_behavior": "SD turned us down telling us that he wanted to join his friends to play the games. He rejected working with us as soon as he walked in.",
+      "condition": "When asked to work with researchers individually instead of joining his friends to play games",
+      "observable_behavior": "Turned us down telling us that he wanted to join his friends to play the games. Turned reluctant to work with us, standing outside the door.",
       "internal_state": "Having difficulties being convinced and during transition",
       "related_quotes": []
     },
     "behavior_patterns": [
       {
-        "condition": "When asked to sit on a chair to prepare for work",
-        "observable_behavior": "Refused to sit on the chair, stating he would sit on the floor",
-        "internal_state": "",
-        "related_quotes": [
-          "But I am not going to sit on the chair, I am going to si t on the floor."
-        ]
-      },
-      {
-        "condition": "When expected to prepare to work in the corridor after lunch",
-        "observable_behavior": "Pushing girls around, towards the toilet. Acting with violence against them. He picked up the warning sign on the corridor (Caution! Wet Floor) and threw it on the ground.",
+        "condition": "When there is anything lacking clarity",
+        "observable_behavior": "This sways him",
         "internal_state": "",
         "related_quotes": []
       }

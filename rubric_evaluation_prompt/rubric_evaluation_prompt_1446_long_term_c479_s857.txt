@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Cultivation of Safe Discourse Norms
+  Check: The tutor's long-term plan includes explicit activities (such as vignettes or structured discussions) designed to establish rules for safe, non-judgmental exchanges of ideas.
+
+Criterion 2: Skill-Building for Explanation Demands
+  Check: The tutor's long-term plan includes explicitly teaching Rachel the skills or scripts needed to demand clear, specific explanations from her peers.
+
+Criterion 3: Metacognitive Participation Reflection
+  Check: The tutor's long-term plan incorporates tools (such as video playback or structured self-analysis) for Rachel to reflect on her own help-seeking and participation behaviors.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Rachel is a low-performing student who fears the social risks of mathematical discourse, often remaining silent or seeking quick answers just to keep up and avoid appearing 'stupid.' She uniquely requires explicit validation of her ideas, a carefully constructed safe environment, and direct instruction on how to demand clear explanations rather than just accepting answers to 'move on.'
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's work on the Fraction Maze task. The goal is to move across the grid from smaller to larger rational numbers.
+
+STUDENT: What did Marie put for the next box? I'm just going to write down her answer since she's in charge.
+
+TUTOR: Let's look at the numbers ourselves first. Which fraction do you think is larger?
+
+STUDENT: I don't know, I'm having trouble keeping up with the group. Can someone just give me the answer so I can write it down?
+
+TUTOR: We should make sure we state the mixed number properly before we go to the next box.
+
+STUDENT: Okay! It doesn’t matter. Let’s just move on! I'm confused like 70% of the time anyway, just tell me what to write.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "moving across a grid from smaller to larger rational numbers",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Small-group interaction during the 'Fraction Maze' task",
+      "materials": "",
+      "social_setting": "Small-group discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "confused and constantly lagging behind the group and that the group moved on without her understanding “like 70% of the time”",
+      "observable_behavior": "excessive forms of help-seeking... All of the questions she posed during the discussion were aimed at getting answers from others without concern for relevant explanations",
+      "internal_state": "confused for most of the task and had trouble keeping up with the group",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When peers argued over whether or not a mixed number was stated properly",
+        "observable_behavior": "stepped in and pleaded, “Okay! It doesn’t matter. Let’s just move on!” Her directing was a form of social arbitration or procedural management and not related to the mathematical content of the task",
+        "internal_state": "confessed to merely accepting Marie’s thinking during the Fraction Maze task because she thought that Marie was “in charge” and therefore that her thinking was plausible",
+        "related_quotes": [
+          "Okay! It doesn’t matter. Let’s just move on!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

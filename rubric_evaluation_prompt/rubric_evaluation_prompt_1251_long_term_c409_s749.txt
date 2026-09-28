@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Direct Instruction Format
+  Check: The tutor's long-term plan outlines a consistent direct instruction sequence (e.g., learning objective, prior knowledge activation, modeling, guided practice, independent practice).
+
+Criterion 2: Routine Self-Monitoring and Generalization
+  Check: The tutor's long-term plan includes a daily routine for the student to self-monitor their goals and share evidence of using these skills outside the intervention setting.
+
+Criterion 3: Systematic Behavioral Reinforcement
+  Check: The tutor's long-term plan integrates a consistent, structured reinforcement system (e.g., daily goal cards, school-wide PBIS tickets) tied to behavioral expectations.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is academically capable but struggles with off-task behavior, poor work completion, and task resistance driven by a 'positive illusory bias' (overestimating their own mastery). They are highly triggered by being pulled out of valued classroom time (like homework blocks) and require embedded choices, concrete behavioral goal-setting, and highly structured direct instruction to overcome their resentment and engage.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the daily schedule on the board. First, we need to complete the Skills for Success Checklist and select a behavioral goal for today, like respect, responsibility, cooperation, or best effort.
+
+STUDENT: I'm just going to mark that I already have mastery of the vast majority of these skills. I'm giving myself a 90 percent because I have very little room for improvement.
+
+TUTOR: Just try your best to fill it out and pick one goal to focus on for our time together.
+
+STUDENT: I don't even want to be in this small group. The other kids in my homeroom are using this time to work on their homework and classwork, and I'm mad that I missed intervention in the classroom.
+
+TUTOR: We need to finish this activity before the block ends at 2:10. What would you change about this group to make it better?
+
+STUDENT: Nothing except leaving.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Selecting a behavioral goal for the day that aligned with school-wide behavioral expectations (e.g., respect, responsibility, cooperation, or best effort) and completing the Skills for Success Checklist.",
+      "learning_goal": "Improving self-regulation skills (e.g., goal setting, self-management, decision making), engagement, and motivation."
+    },
+    "context": {
+      "environment": "Fourth grade intervention block from 1:40 – 2:10 (30 min sessions)",
+      "materials": "Daily schedule displayed on the board as a visual prompt, school-wide reinforcement ticket system",
+      "social_setting": "Small group",
+      "time_context": "1:40 – 2:10"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When other students in their homeroom classes were using the time to work on homework and classwork during the intervention block",
+      "observable_behavior": "Made informal comments to the instructor indicating they were dissatisfied, commented that they did not like that they missed intervention in the classroom, and said 'Nothing except leaving' when asked what they would change.",
+      "internal_state": "Dissatisfied",
+      "related_quotes": [
+        "missed intervention",
+        "Nothing except leaving."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When completing pre-intervention scores on the Skills for Success Checklist",
+        "observable_behavior": "Reported they had mastery of the vast majority of the skills to be taught, with scores close to 90%",
+        "internal_state": "Positive illusory bias meaning they tend to see themselves as more competent than do their teachers; perceived little room for improvement",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

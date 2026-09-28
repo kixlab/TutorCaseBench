@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Advance Transition Warnings
+  Check: The tutor provides a clear warning, countdown, or heads-up before a transition or new activity begins.
+
+Criterion 2: Emotional and Expectation Triage
+  Check: The tutor asks a question to gauge the student's emotional state or explicitly reminds them of a specific behavioral expectation before or during a task.
+
+Criterion 3: Supported Follow-Through
+  Check: The tutor offers direct assistance, guided help, or a collaborative approach to complete the requested task when the student resists.
+
+Criterion 4: Planned Ignoring of Tantrums
+  Check: The tutor deliberately ignores tantrum behaviors (e.g., yelling, throwing) by redirecting their own focus, stepping back, or withholding verbal attention from the negative behavior.
+
+Criterion 5: Concrete 'If-Then' or Visual Referencing
+  Check: The tutor explicitly references a visual support (e.g., schedule, picture, cue card) or uses a clear 'If [action], then [result]' statement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an academically advanced but highly active learner who exhibits chronic noncompliance, physical aggression, and defiance, particularly during transitions or when asked to complete tasks. They are a profound visual learner who becomes completely lost and dysregulated without pictorial supports and predictable routines. Crucially, they require continuous, permanent visual and structural scaffolding, as prematurely withdrawing these supports leads to immediate and significant behavioral regression.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, it is time for our small group reading activity. Let's all sit at the table.
+
+STUDENT: (Runs around the classroom in a circle) I don't want to! I can't sit still!
+
+TUTOR: You need to come over here and stay in the small group so we can start.
+
+STUDENT: No! What are we doing? I don't see the pictures! I don't know what's next!
+
+TUTOR: We are just going to read the story together. Please sit down in your chair.
+
+STUDENT: (Takes off his shoes and throws them at the table) No! (Head-butts the chair and refuses to join the group)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in structured kindergarten activities",
+      "learning_goal": "stay in small group"
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "visual schedule, pictures, classroom schedule, classroom or home rules, If . . . then strips, social stories, cue cards for problem solving",
+      "social_setting": "small group",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "refusal to participate in kindergarten activities",
+      "observable_behavior": "aggressive (e.g., hitting a peer, head-butting a peer, throwing shoes) and impulsive behaviors",
+      "internal_state": "without it [visual schedule], he would be lost",
+      "related_quotes": [
+        "Parents described aggressive (e.g., hitting a peer, head-butting a peer, throwing shoes) and impulsive behaviors, difficulty focusing, and refusal to participate in kindergarten activities."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "within school and community settings",
+        "observable_behavior": "noncompliance, defiance, disruptions... limited attention span, and physical aggression",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

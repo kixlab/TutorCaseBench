@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Systematic ABC Data Tracking
+  Check: The long-term plan includes implementing a structured chart or log to record the date, time, antecedent, behavior, consequence, and function of each incident.
+
+Criterion 5: Antecedent Evaluation and Modification
+  Check: The long-term plan includes a process for reviewing the events immediately preceding the behavior in order to modify or remove those specific triggers in future lessons.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe task avoidance during transitions and independent walking by dropping to the floor, becoming dead weight, and screaming. They are highly motivated by music, but this preference easily reinforces avoidance if used to coax them. The evidence reveals they uniquely need strict differential reinforcement where preferred singing is provided only during compliance and immediately withdrawn during avoidance, alongside opportunities to make choices to express their needs.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to travel down the hallway. Hold your long cane and let's walk.
+
+STUDENT: (Crying and becoming dead weight)
+
+TUTOR: (Partially holding the student and physically prompting him to walk) Come on, let's walk down the hall.
+
+STUDENT: (Agrees to walk independently after walking halfway down the hall)
+
+TUTOR: Keep walking.
+
+STUDENT: (Soon drops to the ground again, refusing to move, becoming dead weight and crying)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Traveling down a hallway with the long cane and attempting independent walking",
+      "learning_goal": "Walk independently"
+    },
+    "context": {
+      "environment": "Hallway",
+      "materials": "Long cane",
+      "social_setting": "One-on-one with O&M instructor",
+      "time_context": "During hallway travel"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After walking halfway down the hall while partially holding the child and physically prompting him to walk, the child agrees to walk independently",
+      "observable_behavior": "Soon drops to the ground again, refusing to move. The child is still dead weight and is crying.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to walk independently in the hallway",
+        "observable_behavior": "Drops to the ground, refusing to move, dead weight, crying",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

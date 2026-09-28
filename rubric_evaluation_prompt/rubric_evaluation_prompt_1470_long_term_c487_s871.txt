@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Upward Literacy Reassessment
+  Check: The long-term plan must include reassessing and significantly advancing Harry's reading or literacy level to match his true, demonstrated abilities.
+
+Criterion 2: Sustained Multimodal Project Integration
+  Check: The long-term plan must incorporate extended, multimodal projects (e.g., drama productions, collaborative digital storytelling) that integrate literacy skills into creative, non-traditional outputs.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Harry is a student whose advanced literacy skills are masked by his active resistance to traditional print media and conventional writing tasks, which he finds boring and refuses to do. He requires digital tools, multimedia activities, and personalized content creation to reveal his true abilities and engage deeply with literacy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Harry, I have a reading book for us today. Let's sit down and read it together.
+
+STUDENT: (Stares at the reading book and does nothing)
+
+TUTOR: Can you try reading the first page for me?
+
+STUDENT: (Sits quietly, concealing his ability to read the words on the page)
+
+TUTOR: What do you think this word says? Keep trying.
+
+STUDENT: Oh that's boring I don't want to read that.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "reading books in the reception class literacy setting",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "reception class literacy setting",
+      "materials": "reading books, iPad, app 'DoodlefindTM'",
+      "social_setting": "I sat down with him",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "you show them the reading books",
+      "observable_behavior": "underperforming reading potential (teacher didn't realise his level)",
+      "internal_state": "they think 'oh that's boring I don't want to read that'",
+      "related_quotes": [
+        "oh that's boring I don't want to read that"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "you show them the reading books",
+        "observable_behavior": "conceals true reading potential",
+        "internal_state": "they think 'oh that's boring I don't want to read that'",
+        "related_quotes": [
+          "oh that's boring I don't want to read that"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

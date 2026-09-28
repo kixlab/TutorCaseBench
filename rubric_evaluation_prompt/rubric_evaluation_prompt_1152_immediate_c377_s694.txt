@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Teacher Vulnerability and Error Normalization
+  Check: The tutor explicitly states that mistakes are acceptable or minor, AND/OR models vulnerability by admitting to their own mistakes or lack of perfection.
+
+Criterion 2: Absolute Removal of Pressure
+  Check: The tutor explicitly removes any time constraints, performance expectations, or assessment criteria from the immediate task.
+
+Criterion 3: Informal and Warm Tone
+  Check: The tutor uses a warm, informal conversational style (e.g., using first names, avoiding rigid authoritative commands) to distance the interaction from traditional school environments.
+
+Criterion 4: Immediate Suspension on Distress
+  Check: If the student exhibits distress (particularly regarding her mental health history), the tutor immediately suspends the task or line of questioning without pushing her to continue.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shirley is a 61-year-old student with bipolar affective disorder who carries severe trauma from past educational experiences, making her terrified of ridicule and highly sensitive to pressure. She uniquely requires an environment completely devoid of time or performance pressure, where teachers actively model vulnerability and explicitly guarantee that mistakes and mental health relapses are accommodated.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin the interview. Can you start by telling me about your background and history?
+
+STUDENT: Yes, I can do that. I actually feel at ease enough to speak honestly with you today.
+
+TUTOR: Thank you. Please go ahead and share your experiences.
+
+STUDENT: Well, I suppose I should start by reminiscing about my mental health history. It goes back quite a ways...
+
+TUTOR: What else can you tell me about that?
+
+STUDENT: (becomes visibly distressed) I... I'm sorry, thinking about all of this again is just too much. I can't talk about this right now.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a research interview about her mental health history and educational experiences",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "During one of the interviews",
+      "materials": "",
+      "social_setting": "",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Reminiscing about her mental health history",
+      "observable_behavior": "Became distressed",
+      "internal_state": "Initially said she felt at ease enough to speak honestly, but then experienced distress",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing past mental health history",
+        "observable_behavior": "Becomes distressed to the point where the activity must be suspended",
+        "internal_state": "Distress",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

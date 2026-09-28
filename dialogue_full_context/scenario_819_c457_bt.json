@@ -1,0 +1,72 @@
+{
+  "category_id": "457",
+  "category_title": "Adolescent with emotional/behavioral disorder and academic frustration",
+  "scenario_id": "819",
+  "scenario_title": "Organizing and tracking academic assignments",
+  "minimal_context": "Isaac is participating in a morning check-in with his teacher to review his planner and turn in his homework.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Good morning, Isaac. It is time for our morning check-in. Please take out your planner and hand in last night's homework."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I don't have it. I didn't even know what assignment was due."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You need to keep track of your assignments. Look in your backpack and see what materials you brought for class today."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Digs through his bag) I don't have my materials. I think I actually completed the assignment, but I can't find it anywhere in here."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "If you cannot find your work, you will have to sit down and redo the assignment right now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "No! I'm not doing it again! (Pushes his desk away and refuses to open his book)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Good morning, Isaac. It is time for our morning check-in. Please take out your planner and hand in last night's homework.\n\nSTUDENT: I don't have it. I didn't even know what assignment was due.\n\nTUTOR: You need to keep track of your assignments. Look in your backpack and see what materials you brought for class today.\n\nSTUDENT: (Digs through his bag) I don't have my materials. I think I actually completed the assignment, but I can't find it anywhere in here.\n\nTUTOR: If you cannot find your work, you will have to sit down and redo the assignment right now.\n\nSTUDENT: No! I'm not doing it again! (Pushes his desk away and refuses to open his book)",
+  "immediate_dialogue_prompt": 1379,
+  "long_term_dialogue_prompt": 1380,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Organizing and tracking academic assignments and materials for class, and completing homework assignments",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom",
+        "materials": "Sectioned binder, planner, binder checklist",
+        "social_setting": "Morning check-in with teacher",
+        "time_context": "Each morning"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Arriving at class when assignments are due",
+        "observable_behavior": "Frequently showed up to class without any materials, completed only classwork that he found easy, and frequently failed to turn in homework assignments",
+        "internal_state": "Sometimes did not know what assignment was due and other times had completed the assignment, but could not find it",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When given directions to participate",
+          "observable_behavior": "Refusal to participate or follow directions, leading to disruptive or disrespectful behavior in the classroom",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Simplified Communication Modality
+  Check: The tutor avoids complex verbal instructions, relying instead on minimal words, gestures, or physical modeling.
+
+Criterion 2: Pre-Symbolic Signal Adaptation
+  Check: The tutor explicitly acknowledges or adapts their approach based on John's immediate physical actions (e.g., crouching, grabbing, hand movements) rather than ignoring them to push a task.
+
+Criterion 3: Student-Led Play Initiation
+  Check: The tutor offers an opportunity for John to initiate or lead a mutually acceptable interaction or game, rather than forcing a predetermined, top-down task.
+
+Criterion 4: Non-Restrictive Physical Management
+  Check: The tutor manages John's grabbing or physical approaches without using physical restraint or forcefully holding his hands.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+John is a young adult with profound intellectual disability who communicates via non-verbal vocalizations and physical actions. He exhibits task resistance (dropping his head, looking blank) when given complex verbal commands and defensive restraint when physically blocked. He uniquely requires simplified communication, predictable routines, and interactions where his pre-symbolic signals are respected and he is allowed to take the lead.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: John, crawl through the plastic triangle that is in front of you.
+
+STUDENT: (John is crouching on the mat and watches the tutor approach.)
+
+TUTOR: (Crawls away) Come over here.
+
+STUDENT: (John tries to grab her.)
+
+TUTOR: Move that bum.
+
+STUDENT: (John continues to sit cross-legged on the mat; he drops his head, puts his hands in his lap and looks blank.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Crawl through the plastic triangle that is in front of him",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Sitting on a gym mat",
+      "materials": "Plastic triangle",
+      "social_setting": "Interaction with staff member (Al)",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Al is trying to induce him to crawl... She says 'move that bum'",
+      "observable_behavior": "Continues to sit cross-legged on the mat; he drops his head, puts his hands in his lap and looks blank",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Al does not try to move him then she crawls away",
+        "observable_behavior": "John is crouching on the mat... John tries to grab her",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

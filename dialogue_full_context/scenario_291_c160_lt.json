@@ -1,0 +1,74 @@
+{
+  "category_id": "160",
+  "category_title": "Students who sleep during the course and challenge teacher directives when woken",
+  "scenario_id": "291",
+  "scenario_title": "Mid-lesson waking and challenging teacher directives",
+  "minimal_context": "The student is participating in a vocational high school course in a classroom setting.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are in the middle of the course. Please look at the board and continue taking notes on the vocational training material."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Lifts head from the desk after sleeping) Teacher, they want to wash their face. I mean, I want to wash my face."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "No, I do not give permission for you to leave the room right now."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Why not? I was just sleeping and I need to wake up. Just let me go out for a minute."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You need to stay in your seat and focus on the lesson."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "This is ridiculous! I'm just asking to wash my face and you're making a huge deal out of it in front of the whole classroom. Why are you always causing problems over nothing?",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are in the middle of the course. Please look at the board and continue taking notes on the vocational training material.\n\nSTUDENT: (Lifts head from the desk after sleeping) Teacher, they want to wash their face. I mean, I want to wash my face.\n\nTUTOR: No, I do not give permission for you to leave the room right now.\n\nSTUDENT: Why not? I was just sleeping and I need to wake up. Just let me go out for a minute.\n\nTUTOR: You need to stay in your seat and focus on the lesson.\n\nSTUDENT: This is ridiculous! I'm just asking to wash my face and you're making a huge deal out of it in front of the whole classroom. Why are you always causing problems over nothing?",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 484,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Participating in a vocational high school course",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom setting",
+        "materials": "",
+        "social_setting": "Middle of the course, incident extends into the classroom",
+        "time_context": "Middle of the course"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the teacher does not give permission to leave the room to wash their face",
+        "observable_behavior": "Starts discussing with the teacher, extending the incident into the classroom",
+        "internal_state": "",
+        "related_quotes": [
+          "they want to wash their face"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "During the course",
+          "observable_behavior": "Always sleeping during the course, awaking in the middle of the course",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

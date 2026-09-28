@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Concrete-to-Abstract Mapping
+  Check: The tutor's response must explicitly connect a physical object, visual, or action to a specific part of the abstract mathematical sentence (e.g., explaining exactly which box a number goes into based on the objects).
+
+Criterion 2: Simplified Visual Representation
+  Check: When suggesting a drawing or visual aid, the tutor must recommend using simple, low-effort marks (like lines, segments, or slashes) rather than complex illustrations.
+
+Criterion 3: Collaborative Role Assignment
+  Check: The tutor must propose a shared task where the student is assigned a specific, distinct physical or visual role (e.g., bundling tens, slashing lines) while the tutor or a peer handles another part.
+
+Criterion 4: Grounding in Familiar Examples
+  Check: When prompting the student to explain or compare abstract concepts, the tutor must anchor the question in a specific, previously solved example or a familiar story.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Rex is a student who exhibits school avoidance and finds mathematics boring, often shutting down or looking puzzled when faced with abstract mathematical sentences or rote procedures. He uniquely requires a calm, unpressured environment, culturally relevant contexts (like hunting or fishing), and explicit, simplified visual or collaborative hands-on tasks that directly map to abstract concepts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is a piece of paper with two leaves drawn on it. Please solve 14 plus 18.
+
+STUDENT: I will write the math sentence. For the ones, 4 plus 8 is 12. I will carry the 2 to the tens and put the 1 at the ones.
+
+TUTOR: Take a look and check your answer.
+
+STUDENT: I checked my answer. I don't see any errors.
+
+TUTOR: Try drawing the insects on the leaves to find the total.
+
+STUDENT: (Looks puzzled) It is very hard to draw so many insects. I don't want to do this.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solving arithmetic problems which involve regrouping using drawings of segments and lines to represent ones and tens",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Individual practice session",
+      "materials": "A piece of paper with two leaves drawn on it",
+      "social_setting": "Individual work",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When encouraged to draw insects on the paper",
+      "observable_behavior": "Found it very hard to draw so many insects",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In case of addition with regrouping",
+        "observable_behavior": "Made mistakes after computing the numerals in the ones and writing the sum wrongly. They 'carried' the wrong numeral to the tens and put the other numeral at the ones. They failed to identify the error when they checked their answers",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

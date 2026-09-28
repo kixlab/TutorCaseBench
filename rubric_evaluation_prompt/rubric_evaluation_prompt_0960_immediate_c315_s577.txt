@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Chunking for Abstract Tasks
+  Check: When transitioning to or working with abstract symbols, the tutor provides or prompts the use of a visual structure (such as a graphic organizer or the Box Method) that mimics the physical layout of her manipulatives.
+
+Criterion 2: Tool-Based Self-Correction
+  Check: When Marcia makes an error or expresses confusion in abstract notation, the tutor prompts her to model, explain, or check the problem using concrete manipulatives.
+
+Criterion 3: Redirection of Validation
+  Check: When Marcia asks if an answer is right or claims her work is wrong, the tutor redirects her to verify her solution using her manipulatives or visual tools rather than simply confirming or denying her accuracy.
+
+Criterion 4: Avoidance of Direct Mimicry
+  Check: The tutor avoids simply showing Marcia how to move the blocks and having her copy the steps, instead requiring her to drive the interaction and reasoning with the tools.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Marcia struggles with blending multi-step algebraic procedures and becomes overwhelmed by purely abstract numbers, leading to faulty negative self-evaluations and constant seeking of teacher validation. She uniquely requires tasks to be visually 'broken up' and needs fluid, non-linear access to concrete manipulatives to self-correct and verify her own work independently.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: You did well multiplying the last expression with the Algebra Lab Gear. For this next problem, let's move away from the blocks and try to solve it using only abstract symbols on your paper.
+
+STUDENT: But I like using these. I’m writing out my problem over here. I have an equation and I am breaking it up and multiplying because this is a multiplying bar and this is x and so I have x plus 3 so x plus 3 times, and this is timesing it, x plus 2 and that’s going to equal x squared.
+
+TUTOR: That is exactly what you did. Now, let's put the corner piece and the blocks aside and just write the numbers for the next one.
+
+STUDENT: I think if it was broken down I would be able to do it. The problem is that there are a lot of steps and once I understand what to do with one part I forget the other – I guess I’m not good at blending the steps.
+
+TUTOR: Let's just try to write it out with the numbers and see what happens.
+
+STUDENT: It’s so much more hard because it’s not broken up then. Like what I do is I see this (pointing to x-bar) and this (pointing to constant blocks) and I read it and I write it then I move it. And then it’s all broken up and I see the whole problem happening. But when it’s all numbers then I forgot where to break it up and what’s what.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Multiplying linear expressions and transitioning from concrete manipulatives to abstract notation",
+      "learning_goal": "Moving away from the blocks to use only abstract symbols"
+    },
+    "context": {
+      "environment": "Instructional session",
+      "materials": "Algebra Lab Gear (ALG) manipulatives, constant blocks, x-bars, abstract symbols, graphic organizer (Box Method)",
+      "social_setting": "One-on-one with teacher-researcher",
+      "time_context": "During the instructional unit"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When told that we were moving away from the blocks to use only abstract symbols",
+      "observable_behavior": "Resisted giving up the manipulatives and complained that she forgot where to break the problem up",
+      "internal_state": "Felt the task was 'so much more hard' because it was not broken up visually",
+      "related_quotes": [
+        "It’s so much more hard because it’s not broken up then. Like what I do is I see this (pointing to x -bar) and this (pointing constant blocks) and I read it and I write it then I move it. And then it’s all broken up and I see the whole problem happening. But when it’s all numbers then I forgot where to break it up and what’s what."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When presented with a word problem and table of data with a lot of words and steps",
+        "observable_behavior": "Unable to develop a plan to engage in the tasks, scoring extremely low (0% - 4%) on pretests",
+        "internal_state": "Felt unable to blend the steps together once she understood one part",
+        "related_quotes": [
+          "I think if it was broken down I would be able to do it. The problem is that there are a lot of words and a lot of steps and once I understand what to do with one part I forget the other – I guess I’m not good at blending the steps."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

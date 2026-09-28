@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Respecting Physical Boundaries
+  Check: The tutor explicitly maintains physical distance, uses gradual or quiet proximity, and avoids forcing immediate interaction or physical contact.
+
+Criterion 2: Prioritizing Connection Over Compliance
+  Check: The tutor validates and encourages Lydia's spontaneous initiations or ideas, explicitly prioritizing her engagement over strict adherence to classroom rules or procedures (such as waiting her turn).
+
+Criterion 3: Bridging Speech to Text
+  Check: The tutor explicitly connects Lydia's spoken words or ideas to a writing task, framing her verbal contribution as the foundation or starting point for her story.
+
+Criterion 4: Author Identity Validation
+  Check: The tutor explicitly labels Lydia as an author or enlists social/peer validation (e.g., thumbs up, group praise) to celebrate her contributions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Lydia is a highly reserved and anxious student who exhibits significant writing avoidance and social withdrawal, often shrinking or moaning when approached directly. She requires adults to maintain physical distance and use gradual proximity to feel safe. To overcome her reluctance to write, she uniquely needs her spontaneous verbal contributions validated, strict rules bent to prioritize connection, and explicit social identification as an author.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to have a read-aloud discussion about mythical characters in Eric Carle’s poetry collection, Dragons, Dragons. Everyone please gather for the group.
+
+STUDENT: (Sits in the back of the group, fiddling with books on the shelf, and rarely looking up.)
+
+TUTOR: Please pay attention to the reading.
+
+STUDENT: (Faces away during the discussion, keeping her head down on her desk and squirming.)
+
+TUTOR: Do you have anything you want to add about the characters?
+
+STUDENT: (Continues facing away and staring into space, not speaking a word to the group.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a read-aloud discussion of mythical characters in Eric Carle’s poetry collection, Dragons, Dragons",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-class read aloud sessions on the rug",
+      "materials": "books on the shelf, writer's notebook",
+      "social_setting": "Whole-class group",
+      "time_context": "first 6 weeks of school until early November"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the entire discussion",
+      "observable_behavior": "facing away from Mae during the entire discussion, head down on her desk, squirming or staring into space",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "during our observations of read aloud",
+        "observable_behavior": "stayed in her seat or she sat in the back of the group, fiddling with books on the shelf, and rarely looking at Mae",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

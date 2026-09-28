@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Safe Exchange Norm-Setting
+  Check: The long-term plan must include establishing or reviewing explicit class norms for safe, non-aggressive communication and peer interaction.
+
+Criterion 2: Explanation Crafting Instruction
+  Check: The long-term plan must include explicitly teaching Patty the skills to construct clear, precise mathematical explanations for others.
+
+Criterion 3: Objective Self-Reflection on Help-Giving
+  Check: The long-term plan must incorporate objective self-reflection tools (such as video playback or specific behavioral vignettes) focused on her help-giving and group participation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Patty is a highly competitive, high-achieving student who prioritizes her own certainty over group collaboration and actively avoids helping struggling peers. She tends to make unilateral decisions, aggressively debunks peers' claims, and refuses to explain her reasoning unless explicitly forced to do so. The evidence reveals she uniquely needs to be positioned as a 'claim justifier' through repeated prompting, explicit instruction on how to craft explanations, and concrete reflection on her social behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For this part of the Fraction Maze, you and Marie need to compare 4 1/3 and 4 1/2.
+
+STUDENT: 4 1/2 is greater. When I’ve worked a problem out over and over, time and time again, and I absolutely know it, I'm not going to change my answer.
+
+TUTOR: Marie wrote down that 4 1/3 is greater. What should we do next?
+
+STUDENT: That's annoying. I'm not going to blindly believe her thinking. My opinion just kicks in. Instinct, I guess.
+
+TUTOR: Try to talk it over with her and see what happens.
+
+STUDENT: (Slaps the table and emphatically reaches for the fraction circle pieces) I guess it’s just my nature, I’m really competitive! I'm going to use these to debunk her claim right now.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Debating fraction comparisons (4 1/3 vs 4 1/2) during the 'Fraction Maze' task",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Small group setting during the 'Fraction Maze' task",
+      "materials": "Fraction circle pieces, mini-vignettes",
+      "social_setting": "Group work with peers (Marie)",
+      "time_context": "Second day of school for norm-setting"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Disagreement with Marie over whether 4 1/3 is greater or less than 4 1/2",
+      "observable_behavior": "Slapped the table and emphatically reached for the fraction circle pieces to debunk Marie’s claim",
+      "internal_state": "Deeply rooted sense of competitiveness, instinct to argue",
+      "related_quotes": [
+        "I guess it’s just my nature, I guess. My opinion just kicks in. Instinct, I guess . . . I’m really competitive."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When evaluating someone else's solutions",
+        "observable_behavior": "Rarely accepted someone else’s solutions at face value, characterized blindly believing as 'annoying'",
+        "internal_state": "Importance of certainty and confidence in her thinking",
+        "related_quotes": [
+          "When I’ve worked a problem out over and over, time and time again, and I absolutely know it, or um, just the instinct kicks in and I get competitive"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

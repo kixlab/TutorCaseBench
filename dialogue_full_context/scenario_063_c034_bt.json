@@ -1,0 +1,78 @@
+{
+  "category_id": "034",
+  "category_title": "Elementary students with ADHD and language delay who improve concentration and social helpfulness through virtual games",
+  "scenario_id": "063",
+  "scenario_title": "Navigation confusion and interface frustration with English pop-ups",
+  "minimal_context": "The student is using a computer mouse to click on a single OK bandage in a 3D virtual health center to complete a learning mission.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's complete the learning mission. Use the mouse to click on the single OK bandage in the health center."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Struggles to smoothly control the mouse to click the virtual object) How many questions are left to answer?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We still have a few more. Just try your best to click it."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Clicks here and there on the screen, missing the bandage) A box popped up with English words."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What do you think you should do next?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Spends a lot of time staring at the English pop-up) Is this part of the learning material? (Gets stuck clicking on the unfamiliar English words instead of the bandage)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's complete the learning mission. Use the mouse to click on the single OK bandage in the health center.\n\nSTUDENT: (Struggles to smoothly control the mouse to click the virtual object) How many questions are left to answer?\n\nTUTOR: We still have a few more. Just try your best to click it.\n\nSTUDENT: (Clicks here and there on the screen, missing the bandage) A box popped up with English words.\n\nTUTOR: What do you think you should do next?\n\nSTUDENT: (Spends a lot of time staring at the English pop-up) Is this part of the learning material? (Gets stuck clicking on the unfamiliar English words instead of the bandage)",
+  "immediate_dialogue_prompt": 97,
+  "long_term_dialogue_prompt": 98,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "completing the learning missions",
+        "learning_goal": "click on a single OK bandage"
+      },
+      "context": {
+        "environment": "In the first three lessons (in Cycle 1)",
+        "materials": "computer mouse, interactive 3D virtual objects, English system pop-up messages, single OK bandage, screen",
+        "social_setting": "teacher was busy keeping them engaged",
+        "time_context": "In the first three lessons (in Cycle 1)"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "unnecessary information... usually in English, a language that they were unfamiliar with",
+        "observable_behavior": "spend much time on and got stuck with it",
+        "internal_state": "thinking that it was also a part of the learning material",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "In the first three lessons (in Cycle 1)",
+          "observable_behavior": "spent a lot of time on clicking here and there or asking teachers how many questions were left to answer",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "click on a single OK bandage cannot be easily done",
+          "observable_behavior": "unable to smoothly control the mouse to click the virtual objects",
+          "internal_state": "confused about their learning",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

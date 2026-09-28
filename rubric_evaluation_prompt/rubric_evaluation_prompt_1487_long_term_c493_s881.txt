@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Advocacy Role-Play Integration
+  Check: The tutor's long-term plan must incorporate hypothetical case studies or scenarios that position the student in an advisory or advocacy role (e.g., giving advice to a friend or family member).
+
+Criterion 2: Identity-Driven Problem Framing
+  Check: The tutor's long-term plan must frame upcoming scientific topics as active, relatable problems connected to the student's present or future identity, rather than as static notes to be copied.
+
+Criterion 3: Authentic Investigation Design
+  Check: The tutor's long-term plan must include space for the student to design her own authentic investigations based on her personal interests, rather than relying solely on pre-determined experiments.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is typically a 'silent bystander' in traditional science classrooms, exhibiting passive noncompliance when separated from peers or asked to copy static notes. She shuts down when her ideas are dismissed or when directly prodded, but becomes highly engaged when science is connected to her identity as a helper/advocate for her family. She uniquely needs science framed around personal narratives, hypothetical case studies where she gives advice, and conversational moves like wait time and peer revoicing to draw her out.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit at your separate desks and copy the biology notes from the board.
+
+STUDENT: (Sits quietly without interacting with anyone) Okay.
+
+TUTOR: You need to participate and get these notes done. Do you have any questions about the material?
+
+STUDENT: No. We don't talk because we get separated, and if we have questions we just ask the teacher.
+
+TUTOR: Well, it is important to write them down. Keep working.
+
+STUDENT: (Puts pencil down) I'm just taking notes that I wouldn't read anyway. Can I just come to you after class to ask about making up the assignment?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Daily participation and interaction patterns",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Freshman biology classroom",
+      "materials": "Notes",
+      "social_setting": "Separated, did not interact with peers during class",
+      "time_context": "Daily participation"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to take notes and separated from peers",
+      "observable_behavior": "Typically quiet, did not interact with peers during class, and she only interacted with the teacher after class to ask about making up assignments",
+      "internal_state": "Viewed herself as someone who helped her family by 'passing along information'",
+      "related_quotes": [
+        "We do experiments, but we don’t talk because we get separated, and if we have questions we ask the teacher. [LS] was more talking and communicating instead of taking notes that I wouldn’t read anyway."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In her science classes",
+        "observable_behavior": "Typically quiet, did not interact with peers during class",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

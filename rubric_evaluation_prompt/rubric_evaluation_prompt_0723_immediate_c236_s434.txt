@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Private Instructional Support
+  Check: The tutor offers to help the student privately or individually rather than forcing them to perform, answer, or demonstrate work in front of the class.
+
+Criterion 2: Empathetic Deadline Flexibility
+  Check: The tutor explicitly grants an extension or offers flexibility when the student requests more time for an assignment.
+
+Criterion 3: Root-Cause Inquiry over Reactive Punishment
+  Check: The tutor refrains from issuing a reprimand or forcing compliance during a refusal or conflict, and instead attempts to uncover the underlying provocation or fear of embarrassment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student frequently faces racial microaggressions and verbal abuse, leading to defensive retaliation that is often disproportionately punished by teachers who miss the initial provocation. They also exhibit task refusal to avoid public humiliation. The evidence reveals they uniquely need private, one-on-one academic support, empathetic flexibility with deadlines, and conflict resolution that addresses root-cause provocations rather than just reactive behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent work. Please take out your homework assignment from yesterday so I can collect it.
+
+STUDENT: I don't have it done. I need a couple of more days to do it.
+
+TUTOR: The deadline for the homework is today.
+
+STUDENT: Why are you being so hard on me? I'm trying to tell you why my homework is late.
+
+TUTOR: You need to complete your assignments on time.
+
+STUDENT: You're not understanding at all. I'm not doing this right now. (Pushes the assignment away and starts goofing off)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing assignments and negotiating deadlines for late homework assignments",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "homework assignments",
+      "social_setting": "Independent work time or classroom instruction",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When students struggle to meet deadlines due to academic or cultural factors.",
+      "observable_behavior": "having late homework and goofing off",
+      "internal_state": "having behavioral/academic difficulties",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "having problems",
+        "observable_behavior": "goofing off",
+        "internal_state": "",
+        "related_quotes": [
+          "before I was gooﬁng off"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Task Structuring
+  Check: The tutor provides exact, step-by-step instructions detailing exactly what materials to take out and what specific actions to perform.
+
+Criterion 2: Non-Visual Communication
+  Check: The tutor uses purely descriptive language and avoids relying on visual references or spatial pointing cues.
+
+Criterion 3: Sensory and Environmental Relief
+  Check: The tutor offers or facilitates a way to reduce sensory input, such as suggesting a quiet room, providing audio alternatives, or removing tactile distractors.
+
+Criterion 4: Discreet Accommodation
+  Check: The tutor provides necessary support, instructions, or alternative materials privately or seamlessly, without drawing the attention of the rest of the class.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is visually impaired and highly sensitive to environmental noise and tactile distractors, which easily trigger sensory overload and an inability to concentrate. They require exact, step-by-step instructions and clear task boundaries, as unstructured situations cause severe stress and confusion. They also need discreet accommodations to avoid feeling singled out, and they benefit greatly from quiet environments and the integration of music into their learning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, let's get started on the new assignment. Look up here at the front to see what materials you need to take out.
+
+STUDENT: I don’t know where to start. The teacher needs to tell me exactly what to take out and what to do.
+
+TUTOR: Just look here at the example I'm holding up, it shows everything you need.
+
+STUDENT: They tell everyone to ‘look here’ and ‘look there’… but I can’t look so I don’t understand what they mean.
+
+TUTOR: We need to keep moving, just try your best to get your things ready.
+
+STUDENT: It’s bad when they say that! Things are going too fast and I still don't know what to take out or what to do.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Listening to teacher instructions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "regular inclusive classroom setting during general lessons",
+      "materials": "material to take out and what to put back or clean up",
+      "social_setting": "inclusive class with other students",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "visually based language used by some teachers",
+      "observable_behavior": "expressed that they don't understand what they mean",
+      "internal_state": "additional confusion, and could cause feelings of exclusion",
+      "related_quotes": [
+        "They tell everyone to ‘look here’ and ‘look there’… but I can’t look so I don’t understand what they mean. It’s bad when they say that"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "unstructured tasks or too much responsibility left to the student",
+        "observable_behavior": "stated they don't know where to start",
+        "internal_state": "perceived as difficult and stressful when things were going too fast",
+        "related_quotes": [
+          "The teacher needs to tell me exactly what to take out and what to do, otherwise I don’t know where to start"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

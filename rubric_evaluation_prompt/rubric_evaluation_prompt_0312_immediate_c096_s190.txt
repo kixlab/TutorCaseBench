@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Autonomy and Consent
+  Check: The tutor's response must invite the student's participation by asking for their willingness to try or offering them a choice in how to proceed, rather than issuing a direct command.
+
+Criterion 2: Facilitator Positioning
+  Check: The tutor must frame their role as a supporter or resource (e.g., offering help if needed) and explicitly avoid using traditional pressure phrases like 'you could do it if you tried' or 'just try'.
+
+Criterion 3: Pre-Performance Rehearsal
+  Check: The tutor must explicitly allow, encourage, or provide time for the student to review their self-modeling tools (e.g., e-books or videos) prior to attempting the task.
+
+Criterion 4: Student-Determined Readiness
+  Check: The tutor must state or imply that the student can decide when they are ready to perform the skill, rather than imposing an immediate deadline.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student possesses necessary academic and social skills but exhibits performance deficits and task resistance in general education settings due to a strong aversion to traditional, teacher-directed pressure. They uniquely require high levels of autonomy, ownership over their learning, and the opportunity to use self-directed tools (like Video Self-Modeling) to rehearse skills until they feel confident enough to perform them.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your textbook and begin working on today's classroom assignment.
+
+STUDENT: (Leaves the book closed and looks around the room) I'm not doing that right now.
+
+TUTOR: You know how to do this. You could do the work if you just tried.
+
+STUDENT: I'm tired of listening to someone in my face all the time about how I could do the work if I just tried. It's boring.
+
+TUTOR: You need to focus on your own assignment and stop talking.
+
+STUDENT: (Turns away from the desk to talk to a peer) I'm not doing something just because someone told me to do it. Hey, look at what I have on my iPad.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General education classroom activities and assignment completion",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General education classroom",
+      "materials": "General classroom assignments, iPads with VSM e-books available",
+      "social_setting": "General education setting with peers and adults",
+      "time_context": "During class-room activities"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When teachers made efforts to increase their enthusiasm for schoolwork (e.g., listening to someone in my face all the time about how I could do the work if I just tried)",
+      "observable_behavior": "Did not attend to their schoolwork, disturbed other students, and failed to respond to their teacher's efforts",
+      "internal_state": "Felt the approach was boring and lacked autonomy",
+      "related_quotes": [
+        "This was my work, not something that someone told me to do. I had fun at school instead of listening to someone in my face all the time about how I could do the work if I just tried. Not boring at all."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During general classroom activities and assignment completion",
+        "observable_behavior": "Often did not attend to their schoolwork and disturbed other students, despite their ability to do the work required of them and get along with peers and adults",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

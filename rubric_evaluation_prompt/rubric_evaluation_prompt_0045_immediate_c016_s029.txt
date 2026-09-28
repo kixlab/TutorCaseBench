@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Active Content Generation
+  Check: The tutor prompts the student to actively generate, read, or organize content (e.g., formulating questions, categorizing, choosing groups) rather than instructing them to sit quietly and listen.
+
+Criterion 2: Public Attribution of Ideas
+  Check: The tutor explicitly acknowledges the student's specific contribution by attaching their name to it or proposing to record it publicly (e.g., writing it on a shared board).
+
+Criterion 3: Relatable Hypothetical Anchoring
+  Check: The tutor introduces a concrete, relatable hypothetical scenario to help the student work through an abstract concept or problem.
+
+Criterion 4: Probing for Justification
+  Check: The tutor asks probing follow-up questions that require the student to clarify, justify, or defend their initial answer or belief.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits high absenteeism and highly disruptive behaviors (walking out, arguing) when subjected to traditional passive learning ('stay quiet and listen'). However, they show remarkable behavioral and cognitive engagement when given autonomy, active collaborative roles, and when their contributions are explicitly valued. They uniquely require a shift from passive compliance to active ownership, where their ideas are publicly validated and their argumentative nature is channeled into defending academic reasoning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, look at the 22 words on the whiteboard. I need you to stay in your assigned seats, classify these words into groups, and write down a name for each class.
+
+STUDENT: (Stands up from desk) I don't want to sit here. I'm going over to that group to talk to my friends.
+
+TUTOR: Please sit back down and focus on the words on the board.
+
+STUDENT: Why can't we pick our own groups or play a game instead? We should be able to suggest activities we actually want to do.
+
+TUTOR: We are not playing a game today. You need to stay quiet and do the classification task.
+
+STUDENT: (Argues loudly) I'm not just going to sit here and be quiet! This is stupid, I'm leaving. (Walks out of the classroom door)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Say a word out loud one by one, classify 22 words written on the whiteboard, and name each class",
+      "learning_goal": "To clarify meanings, give examples, make conclusions and classify"
+    },
+    "context": {
+      "environment": "Philosophical inquiry sessions",
+      "materials": "Whiteboard",
+      "social_setting": "Group discussion with self-selected group members",
+      "time_context": "During the third session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When lacking input or autonomy in teaching and learning sessions",
+      "observable_behavior": "Walked in and out of classes as they pleased",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to participate in traditional activities without autonomy",
+        "observable_behavior": "Would not sit at their places, would come in and get out of class anytime they felt to do so",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

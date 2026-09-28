@@ -1,0 +1,74 @@
+{
+  "category_id": "352",
+  "category_title": "Elementary student with Duchenne muscular dystrophy exhibiting task-avoidant and attention-seeking disruptive behaviors",
+  "scenario_id": "649",
+  "scenario_title": "English class reading homework",
+  "minimal_context": "Philip is in his English language classroom and is asked to read his homework.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Alright class, it is time for our English language lesson. Please take out your notebooks so we can read your homework."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Interrupts the lesson speaking out of turn) I am not reading that!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Philip, it is time to read. Please look at your assignment."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Leaves his seat without permission and moves to another place in the classroom) No!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Steps forward to drive him to his seat) Philip, you need to come back and sit in your chair right now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Runs around the classroom while singing) La la la! (Falls on the ground and cries as he attempts to escape from the teacher)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Alright class, it is time for our English language lesson. Please take out your notebooks so we can read your homework.\n\nSTUDENT: (Interrupts the lesson speaking out of turn) I am not reading that!\n\nTUTOR: Philip, it is time to read. Please look at your assignment.\n\nSTUDENT: (Leaves his seat without permission and moves to another place in the classroom) No!\n\nTUTOR: (Steps forward to drive him to his seat) Philip, you need to come back and sit in your chair right now.\n\nSTUDENT: (Runs around the classroom while singing) La la la! (Falls on the ground and cries as he attempts to escape from the teacher)",
+  "immediate_dialogue_prompt": 1072,
+  "long_term_dialogue_prompt": 1073,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "read their homework",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "classroom during English language lessons",
+        "materials": "homework",
+        "social_setting": "in class",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The English language teacher asks the students to read their homework",
+        "observable_behavior": "leaves his seat and runs around the classroom while he is singing. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries",
+        "internal_state": "avoid what seems to him a task which is difficult to complete and to obtain peer and teacher attention",
+        "related_quotes": [
+          "Philip leaves his seat and runs around the classroom while he is singing. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "In class",
+          "observable_behavior": "does not respect the rules, interrupts the lesson speaking out of turn, and moves place without permission showing disobedience",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

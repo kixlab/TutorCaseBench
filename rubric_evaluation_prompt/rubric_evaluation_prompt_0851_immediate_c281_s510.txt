@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Active Attention Anchoring
+  Check: The tutor's response includes a direct, non-punitive 'wake-up' signal, prompt, or check-in question designed to actively pull the student's focus back to the immediate moment.
+
+Criterion 2: Content-Focused Redirection
+  Check: The tutor responds to off-task or disruptive behavior by immediately engaging the student with an interesting aspect of the academic content, explicitly avoiding behavioral reprimands or disciplinary language.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with severe attention failures, task resistance, and organization, often 'floating away,' acting out, or withdrawing because they find traditional reading boring and anxiety-inducing. However, they are highly responsive to drama-integrated instruction, transforming into focused and engaged learners when allowed to visualize texts as movies or utilize their unique creative talents in specific roles.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to read the next story from the required curriculum. Please get your supplies out and begin reading.
+
+STUDENT: (Keeps eyes downcast curtained by hair) I don't have any supplies for the first day of school.
+
+TUTOR: You can borrow this pencil. Please look at the story.
+
+STUDENT: (Looks confused) It's boring. I'm worried that I won't be able to focus on reading a book.
+
+TUTOR: Just try to pay attention and keep reading.
+
+STUDENT: (Puts head on the desk, then leaves their seat for the fourth time in 10 minutes to sharpen the pencil they borrowed, 'accidentally' hitting someone on the way)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "taking a story from the required curriculum",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "sixth-grade class",
+      "materials": "story from the required curriculum, pencil they borrowed",
+      "social_setting": "class",
+      "time_context": "first few weeks of school"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "first day of school and during regular classroom instruction",
+      "observable_behavior": "head on the desk, falling out of their seat, no supplies for the first day of school, ‘accidentally’ hitting someone as they leave their seat for the fourth time in 10 minutes to sharpen the pencil they borrowed",
+      "internal_state": "found it boring, worried that she would not be able to focus on reading a book",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "most of the time during instruction",
+        "observable_behavior": "looked confused most of the time, tendency to ‘float’ away",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "as the weeks progressed",
+        "observable_behavior": "frequent absences, forgotten homework, eyes downcast curtained by hair that was combed straight down",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

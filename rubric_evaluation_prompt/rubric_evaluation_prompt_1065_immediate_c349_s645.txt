@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Emotional Normalization
+  Check: The tutor explicitly acknowledges and normalizes the student's feelings of frustration, fear, or inadequacy regarding the research process.
+
+Criterion 2: Layered Skill Practice
+  Check: The tutor breaks the target research task down into a smaller, low-stakes practice activity or micro-step rather than demanding immediate execution of the full task.
+
+Criterion 3: Collaborative Strategy Adjustment
+  Check: The tutor proposes or co-creates alternative strategies, such as new writing approaches or adjusting the distribution of labor, to help the student move forward.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are high-achieving honors students who experience severe anxiety, self-doubt, and feelings of inadequacy when transitioning from theoretical learning to the messy, non-linear reality of qualitative research. Because their academic identities are threatened by this disequilibrium, they uniquely require explicit emotional normalization, layered low-stakes practice, and private channels to process their struggles without feeling evaluated.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review your analytical memo draft. For this next step, you need to clarify your ideas and support your claims by referencing the qualitative data.
+
+STUDENT: Okay. I felt really confident with my writing early on in the semester, since I usually get good grades in my other classes even when I just submit a first draft. But I'm struggling to do that here.
+
+TUTOR: Just look at your transcripts and add the quotes in. What do you have so far?
+
+STUDENT: When I was transcribing my interview, I discovered I had not asked adequate follow-up questions. It's really making me question my competency as an interviewer to even have good data to use.
+
+TUTOR: Well, just do your best to support your claims with the data you do have.
+
+STUDENT: I don't think I can. I'm surprised by my own feelings of frustration and inadequacy right now, given the relative ease I experience in my other courses. Being asked to clarify these ideas with actual data is completely diminishing my confidence.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing analytical memos and a formal academic paper, specifically clarifying ideas and supporting claims through referencing data.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Qualitative methods seminar.",
+      "materials": "Analytical memos, formal academic paper, multiple drafts, documentation.",
+      "social_setting": "Research teams, individual meetings with instructor.",
+      "time_context": "During the writing process, after data collection."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to clarify ideas and to support claims through referencing data, experiencing a lack of immediate writing success.",
+      "observable_behavior": "Disclosed negative emotions about the writing experience.",
+      "internal_state": "Their confidence diminished; surprised at their feelings of frustration and inadequacy given the relatively ease they experienced in other courses.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When transcribing an interview and discovering they had not asked adequate follow-up questions.",
+        "observable_behavior": "Questioned her competency as an interviewer.",
+        "internal_state": "Confidence buoyed though was easily rocked by comments and evaluations from teammates or by their own critical self-reflection.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

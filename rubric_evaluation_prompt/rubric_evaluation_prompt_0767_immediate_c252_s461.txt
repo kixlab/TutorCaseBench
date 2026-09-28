@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Turn Clarification
+  Check: The tutor explicitly clarifies the reading expectation by delineating what was already read and clearly indicating the specific text the student is expected to read next.
+
+Criterion 2: Momentum Maintenance via Modeled Reading
+  Check: The tutor responds to persistent avoidance by taking over the reading or providing modeled reading rather than forcing the student to decode the text or delivering formal instruction.
+
+Criterion 3: Non-Oppositional Framing
+  Check: The tutor's response remains neutral or supportive, avoiding any language that scolds, reprimands, or treats the student's delay tactics as behavioral defiance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student uses indirect avoidance strategies, such as repeating the adult's text or negotiating turns, to manage interactional demands and avoid reading failure. They require an interventionist who recognizes these behaviors as compensatory rather than oppositional. To succeed, the student needs clear contextualization of reading turns, modeled reading to bypass standoffs, and a focus on meaning and choice to reduce the threat of failure.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's continue reading 'Miss Nelson is missing!'. I will read this sentence: 'The class was rude.' Now it is your turn.
+
+STUDENT: Was rude or that one.
+
+TUTOR: I just read that part. Please look at the next line and read it.
+
+STUDENT: (Accepts the speaking turn but does not attempt the unread text) Was rude.
+
+TUTOR: (Points to the next passage of text) Go ahead and read this next one.
+
+STUDENT: You 's gonna read the next one. I read this one.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Shared reading of the book 'Miss Nelson is missing!'",
+      "learning_goal": "acquiring the skills necessary for reading"
+    },
+    "context": {
+      "environment": "Summer Language and Literacy Project",
+      "materials": "Miss Nelson is missing! (Allard and Marshall, 1977) book selected from several choices",
+      "social_setting": "share reading with an interventionist",
+      "time_context": "5th, 6th, or 7th session of a 30-minute pedagogical interaction"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "after the interventionist finished reading a sentence and shifted gaze to the child",
+      "observable_behavior": "declines to read. Instead he repeats, ‘Was rude or that one (Line 217)’",
+      "internal_state": "recognizing that an interactive turn is required on his part due to the previously established pedagogical expectations",
+      "related_quotes": [
+        "Was rude or that one"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "after the interventionist pointed to the next passage of text",
+        "observable_behavior": "persists in his avoidance, thus delaying any actual reading by countering, ‘You ’s gonna read the next one. I read this one (Line 224)’",
+        "internal_state": "successfully delays having to read or potentially read unsuccessfully... postures the interventionist as unsuccessful at following along rather than risking an unsuccessful reading turn",
+        "related_quotes": [
+          "You ’s gonna read the next one. I read this one."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

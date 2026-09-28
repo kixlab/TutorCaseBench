@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Cumulative Self-Monitoring
+  Check: The long-term plan includes a routine where Gregory actively reviews or counts his accumulated visual feedback (e.g., thumbs up/down) at the end of the day.
+
+Criterion 2: Choice-Based Activity Reinforcement
+  Check: The long-term plan incorporates a system where Gregory earns the opportunity to select a preferred activity from a choice board based on his overall daily behavior.
+
+Criterion 3: Family Reinforcement Loop
+  Check: The long-term plan includes a mechanism for sending Gregory's daily behavioral feedback home for his family to review and sign.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Gregory is a preschooler who frequently engages in inappropriate social behaviors, such as yelling and taking toys, particularly during transitions and daily routines. Reactive rule rehearsals after misbehavior are ineffective and overly time-consuming for him. He uniquely requires proactive, brief visual check-ins right before routine changes, end-of-day self-monitoring, and choice-based reinforcement to successfully navigate his environment.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for free play in the classroom. Please find a toy to play with.
+
+STUDENT: (Takes a toy from another child) I want this one!
+
+TUTOR: Let's do a brief rehearsal of our classroom rules.
+
+STUDENT: (Hides the toy behind his back) No!
+
+TUTOR: We need to practice listening to others and being a team player.
+
+STUDENT: (Yells at the other child and starts crying) Go away!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General classroom interaction and daily classroom routines",
+      "learning_goal": "Listening to others, being a team player, and engaging in more rule-following behaviors"
+    },
+    "context": {
+      "environment": "Preschool classroom at Edgewood Pines Early Childhood Center and the director's office",
+      "materials": "Toys, visual schedules, rules posters, teaching matrix, timer, Thumbs Up sheet, choice board",
+      "social_setting": "Interacting with other children, preschool teachers Mr. Hughes and Ms. Valencia, and center director Ms. W",
+      "time_context": "Throughout the school day, including morning check-in, transitions between routines, and end-of-day check-out"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During daily classroom routines, even with the universal supports in place",
+      "observable_behavior": "Engages in inappropriate social behaviors, such as yelling at other children, taking their toys, hiding toys and other children's belongings, and crying",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Following each instance of misbehavior when teachers try to do brief rehearsals of the classroom rules",
+        "observable_behavior": "Continues to have an average of 23 instances of misbehavior per day",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

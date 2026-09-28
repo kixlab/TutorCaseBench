@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual/Cinematic Anchoring for Inference
+  Check: The tutor explicitly references, introduces, or asks the student to recall a visual element (e.g., a film scene, an image, or a cinematic comparison) to help her analyze, infer, or predict.
+
+Criterion 2: Emotional and Sensory Prompting
+  Check: The tutor asks the student to describe her feelings, emotional reactions, or sensory observations regarding a scene or character, rather than asking for purely factual or abstract literary definitions.
+
+Criterion 3: Structured Visual-to-Literary Mapping
+  Check: The tutor provides or suggests a structured tool (such as a graphic organizer, chart, or guided note-taking format) to help the student connect visual or cinematic elements to literary themes.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jasmine is an English language learner who is highly reluctant and shy when asked to analyze print-only text, often providing vague or confused answers. However, she demonstrates strong analytical and predictive skills when literary and historical concepts are anchored in visual media (like films) and when she is allowed to express her understanding through creative, multimodal projects.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jasmine, let's look at your homework for the chapter you read in 'Night'. What did you write down for the question about the role of a kapo?
+
+STUDENT: (Looks down at her notebook, hesitating to speak) Um... I just wrote a little bit.
+
+TUTOR: Go ahead and read what you have.
+
+STUDENT: I wrote... he is a person in the story.
+
+TUTOR: Can you explain a bit more about what a kapo does in the camp?
+
+STUDENT: (Looks confused and shrinks back in her chair) I don't know. The reading is confusing. I can't explain what his role is.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading chapters of the novel 'Night' independently and completing associated homework assignments and quizzes",
+      "learning_goal": "teach students to recognize literary elements... the parts of a short story... and basic poetic elements"
+    },
+    "context": {
+      "environment": "General classroom",
+      "materials": "novel 'Night', homework assignments, quizzes, film, notebooks, sheet of paper, materials for creative projects and illustrations",
+      "social_setting": "independent reading",
+      "time_context": "Throughout the first half of the school year"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Assigned to read subsequent chapters and answer questions about the role of a kapo",
+      "observable_behavior": "homework answers and quizzes based on the novel contained answers that were incorrect and vague, could not offer a clear explanation about the role of a kapo",
+      "internal_state": "appeared confused",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Throughout the first half of the school year",
+        "observable_behavior": "very shy, reluctant to participate and ask questions, and had difficulties articulating their ideas both orally and in writing",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

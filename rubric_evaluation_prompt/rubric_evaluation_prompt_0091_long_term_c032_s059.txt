@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Dyadic Partnership Structure
+  Check: The long-term plan structures peer collaboration exclusively as pairing (dyads) rather than larger groups.
+
+Criterion 2: Structured Scarcity for Negotiation
+  Check: The long-term plan includes specific constraints (such as item limits) that naturally force K and his partner to share resources and negotiate.
+
+Criterion 3: Provision of Individualized Space
+  Check: The long-term plan explicitly incorporates a balance between collaborative tasks and designated private spaces or individualization opportunities for K.
+
+Criterion 4: Differentiated Adult Support Roles
+  Check: The long-term plan utilizes distinct adult roles (e.g., one acting as a design critic and another as a technical/task facilitator) to support K's engagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+K is a technically patient student who struggles significantly with social complexity, contextual shifts, and imaginative play. He becomes overwhelmed and passive when facing simultaneous interactions or group demands. To thrive, he uniquely requires carefully scaffolded imaginative prompts, 1-on-1 peer pairing rather than groups, and a structured balance between forced collaboration (via resource limits) and private, individualized spaces.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: K, for this fifth session, you need to collaboratively design the architecture with both C and A. Let's start adjusting the position and size of the items together.
+
+STUDENT: (Types in text chat) I am putting a swimming pool on the balcony.
+
+TUTOR: C and A are asking to change the shape of the balcony and add their items next to yours. What should we tell them?
+
+STUDENT: (Types in text chat) Tell them to leave and wait downstairs for 5 minutes. I want private time with the pool.
+
+TUTOR: They are both trying to place their items in that area right now. You have to design with them.
+
+STUDENT: (Stops typing in the text chat and becomes completely passive, appearing overwhelmed by C and A's simultaneous actions and failing to address their perspectives on the design.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Collaboratively designing an architecture in Session 5 with two partners (C and A) simultaneously.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "OpenSim-based virtual environment",
+      "materials": "architectural item (e.g. its position, size, and shape)",
+      "social_setting": "collaboratively design an architecture with both C and A",
+      "time_context": "The ﬁfth session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "simultaneously interacting with different partners while performing design actions",
+      "observable_behavior": "failing to address varied perspectives of peers (FS3)",
+      "internal_state": "appeared overwhelmed",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when he got to design a beach house that became his private relaxation space",
+        "observable_behavior": "begged all others to leave and wait downstairs for 5 minutes so he could put on a bath suit and enjoyed his private time with the pool",
+        "internal_state": "strong desire to create his own private space",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

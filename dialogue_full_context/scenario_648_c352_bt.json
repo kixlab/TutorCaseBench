@@ -1,0 +1,74 @@
+{
+  "category_id": "352",
+  "category_title": "Elementary student with Duchenne muscular dystrophy exhibiting task-avoidant and attention-seeking disruptive behaviors",
+  "scenario_id": "648",
+  "scenario_title": "Language class writing exercise",
+  "minimal_context": "Philip is in his classroom during a language lesson and is asked to complete a written exercise.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Class, it is time for our language lesson. Please look at the board and write the language exercise in your notebooks."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Leaves his seat without permission and wanders over to another student's desk) I'm not doing that."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Philip, you need to go back to your place and do your work."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Interrupts the lesson speaking out of turn and annoys his classmates) No! I don't have to listen to you!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Walks over and tries to drive him to his seat) Come on, let's go back to your seat and sit down."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Falls on the ground, cries, and refuses to stand up. Grabs a nearby object and tries to throw it, insulting the teacher) Get away from me, you idiot! I hate this!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Class, it is time for our language lesson. Please look at the board and write the language exercise in your notebooks.\n\nSTUDENT: (Leaves his seat without permission and wanders over to another student's desk) I'm not doing that.\n\nTUTOR: Philip, you need to go back to your place and do your work.\n\nSTUDENT: (Interrupts the lesson speaking out of turn and annoys his classmates) No! I don't have to listen to you!\n\nTUTOR: (Walks over and tries to drive him to his seat) Come on, let's go back to your seat and sit down.\n\nSTUDENT: (Falls on the ground, cries, and refuses to stand up. Grabs a nearby object and tries to throw it, insulting the teacher) Get away from me, you idiot! I hate this!",
+  "immediate_dialogue_prompt": 1070,
+  "long_term_dialogue_prompt": 1071,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "write a language exercise",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "classroom during language lessons",
+        "materials": "computer",
+        "social_setting": "in class",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Philip’s teacher asks from the students to write a language exercise",
+        "observable_behavior": "leaves his seat and wanders around the classroom annoying his classmates. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries",
+        "internal_state": "avoid what seems to him a task which is difficult to complete",
+        "related_quotes": [
+          "Philip leaves his seat and wanders around the classroom annoying his classmates. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "teacher’s attempt to seat him again",
+          "observable_behavior": "falling, crying, and refusing to stand up. While on the ground, Philip exhibits physical and verbal aggression. In particular, he often tries to throw objects to hurt anyone who is nearby and insults his classmates and the teacher",
+          "internal_state": "always seems angry",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

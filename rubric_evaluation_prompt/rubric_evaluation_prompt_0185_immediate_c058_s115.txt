@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual and Concrete Anchoring
+  Check: The tutor's response must direct Marios to look at, use, or reference a visual aid, simulation, or concrete demonstration rather than relying solely on verbal explanation.
+
+Criterion 2: Direct Material Interaction
+  Check: The tutor must prompt Marios to take a direct, active role with the learning tools (e.g., manipulating a simulation, writing on the board, recording specific observations himself).
+
+Criterion 3: Prioritized Independent Questioning
+  Check: In group contexts or when asking a question, the tutor must explicitly direct the question to Marios first or ask for his independent thought before allowing peer input.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Marios is a 17-year-old student with AD/HD who struggles with inattention, daydreaming, and task avoidance during traditional, theory-heavy instruction. He is shy and tends to let peers speak for him, requiring priority questioning to voice his own thoughts. He uniquely needs high-stimulus, interactive visual tools (like ICT) to 'see theories happen' and requires explicit scaffolding to bridge his initial technological engagement into actual academic task completion.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Marios, now that we've used the PhET Natural Selection software on the interactive whiteboard, please work with your group to complete the worksheet.
+
+STUDENT: It was clear how it changed according to the conditions, how they grew . . . the population was decreasing . . . etc. . . . the class with the use of the interactive whiteboard is more pleasant.
+
+TUTOR: I'm glad you found it pleasant. Now, please write down your observations on the worksheet.
+
+STUDENT: No, nothing in specific impressed me. It was because it was done in a different way . . . it was more interesting. But . . .we will see examples on the interactive whiteboard . . . but we could also follow the traditional way of teaching.
+
+TUTOR: That's an interesting thought. For now, please finish answering the questions on your paper.
+
+STUDENT: I helped the group with the first part, but I'm leaving the rest of these questions unanswered. I don't want to complete the rest of the worksheet.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reconstruction of students’ ideas through the use of the software ‘PhET: Natural Selection’... Each of the activities was followed by its worksheet",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "ICT biology lesson on Darwin's theory",
+      "materials": "PowerPoint file, interactive whiteboard, software ‘PhET: Natural Selection’, worksheets",
+      "social_setting": "Collaborating with the rest of the members of the group",
+      "time_context": "2-hour biology lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "complete in-class activities",
+      "observable_behavior": "still there were many questions left unanswered or incomplete",
+      "internal_state": "Satisfaction and enthusiasm as a result of the class they had just attended were obvious",
+      "related_quotes": [
+        "It was clear how it changed according to the conditions, how they grew . . . the population was decreasing . . . etc.",
+        "No, nothing in specific impressed me. It was because it was done in a different way . . . it was more interesting",
+        ". . . the class with the use of the interactive whiteboard is more pleasant"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "if it became something regular",
+        "observable_behavior": "opinions were not stable",
+        "internal_state": "it would tire us... I believe that if it became something regular it would not be interesting any more",
+        "related_quotes": [
+          ". . .we will see examples on the interactive whiteboard . . . but we could also follow the traditional way of teaching"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

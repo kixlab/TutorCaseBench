@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Extended Pacing for Practice
+  Check: The long-term plan includes extended timeframes (e.g., longer sessions or extended deadlines) specifically dedicated to allowing Ben ample time for practice and evaluation.
+
+Criterion 2: Gradual Self-Regulation Phasing
+  Check: The long-term plan outlines a phased approach to teaching self-regulated learning strategies, moving from heavily scaffolded goal-setting to independent monitoring over weeks or months.
+
+Criterion 3: Contextualized Technical Skill Building
+  Check: The long-term plan integrates technical or research skills (like typing or using Google Drive) directly into core subject assignments rather than treating them as separate, isolated computer lessons.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ben is a student with mild intellectual disability who possesses strong logical thinking skills but struggles with initial motivation, self-evaluation, and task demands like typing. He easily becomes frustrated and nervous, often resorting to minimal keyword responses and ignoring digital feedback. He uniquely requires direct conversational feedback, explicit encouragement, and capability-based role assignments to build confidence before tackling his weaknesses.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Ben, it is time for self-evaluation. Please open your homework on Google Drive so we can set new goals and find out what you have to improve.
+
+STUDENT: I don't want to look at the Drive. I don't want to do this right now.
+
+TUTOR: What do you think you should pay more attention to for the next steps of your learning tasks?
+
+STUDENT: Study. Good.
+
+TUTOR: Can you write down a full sentence about your suggestions for your new goals?
+
+STUDENT: (Sighs, looking frustrated) No. Just... read. Better.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Self-evaluation, setting new goals, finding out what they have to improve and paying more attention to the next steps of their learning tasks",
+      "learning_goal": "To master self-regulated learning (SRL) strategies and evaluate performance"
+    },
+    "context": {
+      "environment": "Classroom with one and a half hours for each lesson",
+      "materials": "Google Drive, homework and test papers",
+      "social_setting": "Face-to-face evaluation with teachers",
+      "time_context": "Initial phase of implementing SRL strategies"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to express suggestions for self-evaluation and review digital feedback",
+      "observable_behavior": "Could only 'come up' with some individual, common, key words to express their suggestions; does not look at the feedback on Google Drive",
+      "internal_state": "Feeling slightly frustrated; motivation of students' self-regulated learning remains at a very low level",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When setting new goals and finding out what they have to improve",
+        "observable_behavior": "Could only 'come up' with some individual, common, key words to express their suggestions",
+        "internal_state": "Feeling slightly frustrated",
+        "related_quotes": []
+      },
+      {
+        "condition": "When feedback is provided digitally on Google Drive",
+        "observable_behavior": "Not many students look at the feedback",
+        "internal_state": "Motivation remains at a very low level",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

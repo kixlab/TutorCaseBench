@@ -1,0 +1,76 @@
+{
+  "category_id": "512",
+  "category_title": "Students who openly challenge teacher misidentification or disrespect",
+  "scenario_id": "912",
+  "scenario_title": "Math problem solving and intentional misidentification",
+  "minimal_context": "The student is working with the class to solve a math problem written on the board in the learning center.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's work on solving the math problem written on the board as a class."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks up)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Eduardo, what do you think the first step is?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Who's Eduardo?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Laughs) Edgar. Go sit in another desk, Eduardo."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Moves to another seat in the room, speaking in an agitated tone) It's not funny!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's work on solving the math problem written on the board as a class.\n\nSTUDENT: (Looks up)\n\nTUTOR: Eduardo, what do you think the first step is?\n\nSTUDENT: Who's Eduardo?\n\nTUTOR: (Laughs) Edgar. Go sit in another desk, Eduardo.\n\nSTUDENT: (Moves to another seat in the room, speaking in an agitated tone) It's not funny!",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 1541,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Solving a math problem written on the board as a class",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Learning center",
+        "materials": "Math problem written on the board",
+        "social_setting": "Working as a class",
+        "time_context": "Later on in the class period"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Ms Barnes told him, 'Go sit in another desk, Eduardo.' She laughed as she purposefully referred to him as Eduardo again.",
+        "observable_behavior": "He moved to another seat in the room and told her in an agitated tone, 'It's not funny!'",
+        "internal_state": "agitated tone",
+        "related_quotes": [
+          "It's not funny!"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When the teacher referred to a student named Edgar by the wrong name as she called him Eduardo",
+          "observable_behavior": "He looked up and said intently, 'Who's Eduardo?'",
+          "internal_state": "intently",
+          "related_quotes": [
+            "Who's Eduardo?"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

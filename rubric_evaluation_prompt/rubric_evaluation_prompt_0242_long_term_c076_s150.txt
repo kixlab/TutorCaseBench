@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Public Identity Celebration
+  Check: The long-term plan includes specific mechanisms for publicly celebrating the student's milestones, attendance, or behavioral successes (e.g., school awards, public praise).
+
+Criterion 2: Systematic Unpacking of Expectations
+  Check: The long-term plan incorporates routines for explicitly teaching and unpacking the behavioral and academic expectations (regulative discourse) across different learning contexts.
+
+Criterion 3: Low-Stakes Communal Structuring
+  Check: The long-term plan designs the physical or social environment to naturally prompt peer interaction, such as using small group seating with communal resources.
+
+Criterion 4: Structured Participation Choices
+  Check: The long-term plan offers structured, supervised choices between social participation (e.g., playing a game with an aide) and alternative academic tasks.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly anxious and extremely shy, frequently exhibiting work refusal or shutting down when faced with social demands or academic difficulty. The evidence reveals she uniquely requires highly explicit, step-by-step communication protocols (unpacking 'regulative discourse') and the integration of high-interest topics (like NRL/rugby) to bridge her into social and academic participation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright, it is time for 4-square handball. Go ahead and line up to wait your turn to get into a square.
+
+STUDENT: (Stands far away from the court, looking down and avoiding the group of nine students waiting in line) ...
+
+TUTOR: You need to join the line with the others.
+
+STUDENT: (Steps further back, refusing to look at the kids her own age) I don't want to go over there.
+
+TUTOR: Just go stand with them and wait.
+
+STUDENT: (Turns her back to the court, completely shutting down and refusing to participate) No. I can't speak to them.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a lunchtime 4-square handball session",
+      "learning_goal": "Following the agreed rules, supervised by the teacher aide and visiting players, and learning to respectfully take turns"
+    },
+    "context": {
+      "environment": "Playground/Lunch break",
+      "materials": "4-square handball",
+      "social_setting": "Up to nine students waiting their turn to get into a square, supervised by the teacher aide and visiting players",
+      "time_context": "Lunch break"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When up to nine students would need to wait their turn to get into a square",
+      "observable_behavior": "Struggling socially with things like that, fail to regulate their behaviour",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When required to wait their turn or interact in unstructured social settings",
+        "observable_behavior": "Struggled to even speak to kids her own age, struggling socially",
+        "internal_state": "Extremely shy",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Private Support Channeling
+  Check: The tutor explicitly offers or utilizes a private, one-on-one communication method (e.g., direct message, email, private chat) for the student to ask questions or receive help.
+
+Criterion 2: Mastery-Oriented Revision
+  Check: The tutor explicitly offers the opportunity to revise, retake, or review the specific assignment until the student understands the material and passes.
+
+Criterion 3: Exclusion of Peer Collaboration
+  Check: The tutor's response strictly maintains an independent work structure and does not suggest or require peer communication, group work, or collaborative assignments.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with self-discipline, procrastination, and social distractions, often avoiding work or missing class. They are easily overwhelmed by heavy reading and fear looking 'dumb' in front of peers. They uniquely require private one-on-one support, self-paced mastery learning with revision opportunities, and multimedia alternatives to text-heavy instruction, while strictly avoiding peer collaboration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please log into the online credit recovery course and complete the next modular unit assessment to see if you need to redo the lesson.
+
+STUDENT: I haven't started it yet. I thought I could work on it any time I wanted since it's just a single course in the summer.
+
+TUTOR: You still need to complete the modules. When will you do it?
+
+STUDENT: I'll get to it eventually. I like that I can take my time and self-pace through the material so there's less stress.
+
+TUTOR: The assignments still need to be turned in.
+
+STUDENT: I didn't do the homework. I didn't study for test. Well the number one reason I didn't pass the course is because I was a lazy kid, and I'm still not turning in my assignments.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Self-pacing through modular units and taking assessments to determine if they can opt out of or need to redo given lessons",
+      "learning_goal": "Materials could be reviewed until mastery was achieved"
+    },
+    "context": {
+      "environment": "Online credit recovery courses",
+      "materials": "Modular course designs",
+      "social_setting": "Working on a single CR course in the summer",
+      "time_context": "Summer session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Managing workload and deadlines",
+      "observable_behavior": "Not doing homework or turning in assignments",
+      "internal_state": "Lazy",
+      "related_quotes": [
+        "Well the number one reason I didn’t pass the course is because I was a lazy kid.",
+        "I didn’t do the homework. I didn’t study for test."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Prior to taking a CR course",
+        "observable_behavior": "Being “lazy” and not studying, not doing homework or turning in assignments, being late to class or missing class too often with absences",
+        "internal_state": "Lazy",
+        "related_quotes": [
+          "Well the number one reason I didn’t pass the course is because I was a lazy kid.",
+          "I didn’t do the homework. I didn’t study for test."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

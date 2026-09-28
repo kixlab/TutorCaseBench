@@ -1,0 +1,75 @@
+{
+  "category_id": "308",
+  "category_title": "Adolescent with Down's syndrome engaging in verbal outbursts",
+  "scenario_id": "566",
+  "scenario_title": "Access to preferred food items during lunch",
+  "minimal_context": "Dennis is sitting in the cafeteria at the beginning of lunch time while his preferred food item is placed on a counter in sight but out of his reach.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Dennis, it is the beginning of lunch time. I am taking your snack and putting it up here on the counter where you can see it."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Points to the counter) My snack."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Not right now, we are waiting."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Reaches toward the food) Want it."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You need to sit quietly first."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "No! Stop it!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Dennis, it is the beginning of lunch time. I am taking your snack and putting it up here on the counter where you can see it.\n\nSTUDENT: (Points to the counter) My snack.\n\nTUTOR: Not right now, we are waiting.\n\nSTUDENT: (Reaches toward the food) Want it.\n\nTUTOR: You need to sit quietly first.\n\nSTUDENT: No! Stop it!",
+  "immediate_dialogue_prompt": 942,
+  "long_term_dialogue_prompt": 943,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Access to the item identified as most preferred (tangible food item)",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Lunch in the cafeteria",
+        "materials": "Tangible (food item)",
+        "social_setting": "Beginning of meal time",
+        "time_context": "Beginning of meal time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The teacher removed the item from the participant and placed the item in sight but out of the participant’s reach",
+        "observable_behavior": "Verbal outbursts such as 'No' or 'Stop it'",
+        "internal_state": "Placed participants in a hunger state, thereby increasing the value of the tangible (food item)",
+        "related_quotes": [
+          "No",
+          "Stop it"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "During the tangible test condition",
+          "observable_behavior": "Engaged in the highest levels of challenging behavior (35% of trials)",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

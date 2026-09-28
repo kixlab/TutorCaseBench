@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Withholding Direct Correction
+  Check: The tutor refrains from explicitly stating that the student's initial inference is wrong or immediately providing the correct scientific identification.
+
+Criterion 2: Prompting Multiple Plausible Interpretations
+  Check: The tutor asks questions or provides prompts that encourage the student to generate or consider alternative explanations for their observations.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Raul is an enthusiastic learner who confidently makes incorrect scientific inferences based on surface-level visual features, such as mistaking a rock's striation for a fish fin. He uniquely needs a facilitator who withholds immediate correction to allow independent sense-making, while actively validating his contributions over time to build his identity as a researcher.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please take a look at this handpicked set of fossils and make some observations.
+
+STUDENT: (Enthusiastically sorting through the fossil collection) I think I found a ﬁsh.
+
+TUTOR: Why do you think that?
+
+STUDENT: ’Cause it has the ﬁn right there and it looks like it has the eye.
+
+TUTOR: Show me exactly what you are looking at on the rock.
+
+STUDENT: (Interpreting the entire rock as a fish fossil) See, this striation formed on the rock is the fin, and this indentation in the rock is the eye!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Unguided 'discovery' with fossils... making fossil observations and inferences using a handpicked set of fossils",
+      "learning_goal": "practice identification before the actual research samples arrived"
+    },
+    "context": {
+      "environment": "small-group activity",
+      "materials": "fossil collection, handpicked set of fossils, rock with striation and an indentation",
+      "social_setting": "small-group activity with the teacher and researcher",
+      "time_context": "second day of making fossil observations"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When observing a rock with striation and an indentation during unguided discovery",
+      "observable_behavior": "interpreted the entire rock as a ﬁsh fossil... provided rationale for his thinking by pointing to striation formed on the rock, which he thought was a ﬁn",
+      "internal_state": "demonstrated little subject-matter knowledge about the fossils he was observing",
+      "related_quotes": [
+        "I think I found a ﬁsh.",
+        "’Cause it has the ﬁn right there and it looks like it has the eye."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When sorting through the fossil collection",
+        "observable_behavior": "enthusiastically began sorting through the fossil collection, making inferences about what he was seeing",
+        "internal_state": "demonstrated little subject-matter knowledge",
+        "related_quotes": []
+      },
+      {
+        "condition": "When asked to provide rationale for his thinking",
+        "observable_behavior": "pointing to striation formed on the rock, which he thought was a ﬁn. Moreover, what he thought was an eye was actually an indentation in the rock",
+        "internal_state": "clearly making a mistake",
+        "related_quotes": [
+          "’Cause it has the ﬁn right there and it looks like it has the eye."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

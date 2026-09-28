@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Behavioral Prompting and Fading
+  Check: The long-term plan must incorporate specific, research-based instructional procedures such as time delay, differential reinforcement, or stimulus prompting and fading.
+
+Criterion 2: Dedicated AAC Device Allocation
+  Check: The long-term plan must establish a system that separates communication from other functions, such as providing a dedicated, separate device solely for AAC use.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is predominantly nonverbal with ASD and engages in repetitive, stereotypical movements (rapid swiping, tapping) when using an iPad independently. They uniquely require direct, active physical or visual guidance (like hand-over-hand prompting or modeling) and a dedicated communication partner to ensure technology is used for its intended educational or communicative purpose rather than self-stimulation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is snack time. Please use your AAC app to request a snack.
+
+STUDENT: (Taps the iPad screen but does not direct eye gaze or body orientation toward the adult.)
+
+TUTOR: What would you like?
+
+STUDENT: (Presses the screen again without looking at the adult or hesitating to await a response.)
+
+TUTOR: Try telling me again.
+
+STUDENT: (Continues to use the AAC app independently without directing any motoric act toward the adult or awaiting a response, violating the requirement for intentional communication.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "requiring the participant to request using an AAC app",
+      "learning_goal": "intentional communicative act: child directed a motoric and/or vocal act toward the adult as evidenced by eye gaze, body orientation, or physical contact, and awaited a response from the adult"
+    },
+    "context": {
+      "environment": "special day school for individuals with significant impairments",
+      "materials": "iPad, AAC apps",
+      "social_setting": "interacting with an adult partner",
+      "time_context": "during snack-time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when the participant used the iPad® independently",
+      "observable_behavior": "AAC apps use that did not meet this requirement of intentional communicative act was coded as violated",
+      "internal_state": "",
+      "related_quotes": [
+        "AAC apps use that did not meet this requirement of intentional communicative act was coded as violated"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when the participants were independent",
+        "observable_behavior": "AAC apps in particular were violated twice as much as academic and game apps",
+        "internal_state": "",
+        "related_quotes": [
+          "AAC apps in particular were violated twice as much as academic and game apps when the participant used the iPad® independently"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

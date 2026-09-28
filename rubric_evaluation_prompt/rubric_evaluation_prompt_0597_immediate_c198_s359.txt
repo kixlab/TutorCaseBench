@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Active Language Scaffolding
+  Check: The tutor provides specific linguistic scaffolding, targeted prompts, or direct feedback to help the student construct their response, rather than relying on generic requests for more detail.
+
+Criterion 2: Actionable Participation Support
+  Check: The tutor responds to the student's lack of participation with concrete, structured steps or course adjustments to facilitate re-engagement, rather than simply telling them to 'try harder' or 'catch up'.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student lacks the discipline, academic skills, and motivation required for online learning, frequently falling below minimum participation and continuity thresholds. They struggle to engage with asynchronous materials and provide only bare-minimum responses during synchronous communicative practice. To succeed, they require early identification via learning analytics, strict boundaries between online and face-to-face expectations, and heavy scaffolding during live interactions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's practice our speaking. Please tell me about your plans for the weekend in the target language, and then we can have a discussion about it.
+
+STUDENT: I will go to the park. I will watch a movie.
+
+TUTOR: Can you tell me more about that?
+
+STUDENT: The movie is good. I like movies.
+
+TUTOR: Try to ask me a question or add more details so we can have a conversation.
+
+STUDENT: I don't know how to say more. I just share the same plans as my partner. That is all.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Communicative practice",
+      "learning_goal": "Facilitating language acquisition as opposed to conveying information"
+    },
+    "context": {
+      "environment": "During the F2F components of the blended course",
+      "materials": "",
+      "social_setting": "Language classroom",
+      "time_context": "Classroom time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Because they were lower-level language students with limited linguistic resources",
+      "observable_behavior": "Use of the target language for display purposes rather than to generate rich discussions",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During face-to-face sessions of a blended course",
+        "observable_behavior": "Use of the target language for display purposes",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

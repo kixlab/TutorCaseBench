@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Bridging Contexts via Past Successes
+  Check: The tutor's long-term plan includes explicitly reminding Ed of his previous successful strategies and the specific tools he used when facing new or different contexts.
+
+Criterion 2: Sustained Indirect Facilitation
+  Check: The tutor's long-term strategy relies entirely on continuous adaptation through hints and questions, explicitly avoiding a transition to direct instruction or modeling.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ed is an insecure, low-achieving student who constructs meaningful informal math strategies but struggles with fragile memory, context changes, and procedural errors like switching the subtrahend and minuend. He interprets direct correction, modeling, and standard diagnostic questioning as negative feedback. He requires tutors to 'go along' with his informal reasoning, use concrete tools like play money when he is stuck, and explicitly remind him of past successes to prevent regression.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at this verbal subtraction problem on your final written assignment worksheet: 100 minus 38.50.
+
+STUDENT: (Stares at the paper) I don't know how to start. I can't remember how to use either of the strategies I developed before.
+
+TUTOR: What do you think you should try first?
+
+STUDENT: I don't know. I'm just failing to solve most of the tasks on this page.
+
+TUTOR: Keep trying to work it out on the paper.
+
+STUDENT: I can't do it. The questions are in a different context than before, so I'm failing these even though I could do this same difficulty level successfully last week.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing the final written assignment involving verbal subtraction problems (e.g., 100 - 38.50)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "final written assignment",
+      "materials": "worksheets",
+      "social_setting": "working with peers and on worksheets",
+      "time_context": "conducted a week after Lesson 9"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "questions were in a different context than before",
+      "observable_behavior": "failed in tasks that were at a difficulty level he had dealt with successfully in Lesson 5",
+      "internal_state": "fragile memory",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In the next two lessons (lessons 6 and 7)",
+        "observable_behavior": "did not use either of the strategies he developed, and failed to solve most of the tasks",
+        "internal_state": "a regression occurred",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

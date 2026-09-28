@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Metaphoric Reflection
+  Check: The tutor's long-term plan includes facilitated post-activity discussions designed to connect the student's emotional experiences during physical risks to real-world social roles (e.g., bully, victim, bystander).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences intense fear and hesitation when faced with physical risks, specifically heights and falling. They uniquely require explicit reassurance of trust in their peers and equipment, and they overcome their physical freeze response when tutors use metaphoric reflections that link the physical challenge to social behaviors (like bullying or peer support).
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright, it is time to start the high ropes course. Please step up to the first element while your classmates get ready to belay you.
+
+STUDENT: (Looks up at the ropes) I don't know about this. I am sort of afraid of heights.
+
+TUTOR: It's time for your turn. What do you think about trying it?
+
+STUDENT: I am really scared of falling. You have to rely on your friends to belay you, and I don't know if I can trust them to not let me fall.
+
+TUTOR: Just go ahead and step up to the start.
+
+STUDENT: (Steps back from the course) No, I’m not gonna do that.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in high ropes course elements",
+      "learning_goal": "Challenge themselves to reach a new personal goal; could be physical, mental, something they were afraid of, emotional"
+    },
+    "context": {
+      "environment": "Challenge ropes course",
+      "materials": "High ropes course elements, belay system, equipment",
+      "social_setting": "Peers acting as belayers, facilitators monitoring",
+      "time_context": "Initial arrival at the ropes course"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Looking at the ropes course elements",
+      "observable_behavior": "Verbal refusal, stating they would not participate",
+      "internal_state": "Really scared of falling",
+      "related_quotes": [
+        "I’m not gonna do that",
+        "I learned that I am really scared of falling."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Engaging in challenge course activities designed to induce 'disequilibria' through physical and emotional risk",
+        "observable_behavior": "Initial refusal followed by eventual participation in the zip line and high ropes course by the end of the day",
+        "internal_state": "Sort of afraid of heights",
+        "related_quotes": [
+          "I liked the zip line because it was really fun and I am sort of afraid of heights and kinda like conquered that fear."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

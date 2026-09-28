@@ -1,0 +1,115 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 3: Reflection on Reading Purpose
+  Check: The tutor's long-term plan must include asking Mark reflective questions about why the learned strategies are important or how they help him become a better reader.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Mark is a successful, over-eager reader who views literacy as a competitive 'riddle' or game, often resulting in him blurting out answers or whispering loudly while classmates are working. He uniquely needs his enthusiasm channeled into structured, quiz-like formats and active strategy chanting rather than simple behavioral redirection.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now it is Sarah's turn to go to the magnet board. She is going to put the letter 'm' in place to make a word in the /an/ family.
+
+STUDENT: (Watching the board closely) It's a riddle.
+
+TUTOR: Let's just watch quietly while she works.
+
+STUDENT: I am figuring out what works.
+
+TUTOR: She is putting the letter on the board now.
+
+STUDENT: (Shoots his hand into the air, wiggling his hand and speaking just above a whisper) I can read it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Observing a classmate put the letter 'm' in place to make a word in the /an/ family on the magnet board and coding a word at the board",
+      "learning_goal": "Figuring out the “riddle” of text"
+    },
+    "context": {
+      "environment": "Whole-class instruction at the board",
+      "materials": "Magnet board, letters",
+      "social_setting": "Whole-class discussions with classmates taking turns at the board",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "No question has been asked, but a classmate is coding a word at the board",
+      "observable_behavior": "Mark’s hand shoots into the air, wiggling his hand, and he says just above a whisper, 'I can read it!'",
+      "internal_state": "Never seemed to lose sight of his goal of figuring out the “riddle” of text",
+      "related_quotes": [
+        "I can read it!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Participating in whole-class discussions and word coding activities at the board",
+        "observable_behavior": "Hand shooting into the air as a classmate coded a word at the board",
+        "internal_state": "Views reading as a goal of figuring out what works",
+        "related_quotes": [
+          "I can read it!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Hand-Under-Hand Tactile Guidance
+  Check: The tutor's response includes offering or utilizing hand-under-hand assistance to help the student tactually explore the device or Braille, allowing her hand to return to a neutral position for independent selection.
+
+Criterion 2: Reinforcing Communication Attempts
+  Check: The tutor validates, rewards, or gently redirects the student's attempt to communicate (including incorrect answers or expressing 'no' to a preferred item) without punishing or demanding immediate accuracy.
+
+Criterion 3: Low-Pressure Task Introduction
+  Check: The tutor introduces new objects or tasks using inviting, generalized language (e.g., 'something interesting') and explicitly avoids using formal, intimidating names (e.g., 'the big button communicator').
+
+Criterion 4: Absence of Visual and Gestural Demands
+  Check: The tutor relies entirely on tactile or auditory prompts and explicitly avoids asking the student to use or interpret silent visual gestures (e.g., waving, nodding).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sally is a blind student with selective mutism and excellent receptive language skills who exhibits task resistance (e.g., pushing devices away, covering buttons) when faced with new communication demands. She uniquely requires a highly predictable environment, hand-under-hand tactile exploration, and reinforcement for the mere willingness to communicate, as visual gestures and high-pressure demands trigger withdrawal.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Hello Sally! Let's practice our greetings today. Can you wave hello to me?
+
+STUDENT: (Sally does not initially respond.)
+
+TUTOR: What do we say when someone says hello?
+
+STUDENT: (Sally does not verbalize or speak, as she has not spoken at school since beginning preschool.)
+
+TUTOR: Okay, let's try using our gestures instead. Can you nod your head yes or shake your head no?
+
+STUDENT: (Sally demonstrates very limited and inconsistent responses to this intervention, neither nodding her head yes nor shaking her head no.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to a social greeting ('Hello!') and expressing preferences",
+      "learning_goal": "Address the academic, social, and behavioral needs of the child"
+    },
+    "context": {
+      "environment": "School setting and restaurant",
+      "materials": "Voice-output device",
+      "social_setting": "Interacting with the TSVI and classroom teacher",
+      "time_context": "In the course of the school year"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The gestures taught were nodding the head yes, shaking the head no, and waving hello and goodbye.",
+      "observable_behavior": "Sally demonstrated very limited and inconsistent responses to this intervention.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When she did not initially respond",
+        "observable_behavior": "Did not initially respond",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When asked a question about a preferred activity or food choice",
+        "observable_behavior": "Sally independently pushed the 'no' button. This was an unexpected response",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

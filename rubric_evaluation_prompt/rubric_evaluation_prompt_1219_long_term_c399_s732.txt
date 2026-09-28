@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Significant Curriculum Modification
+  Check: The long-term plan includes modifying the academic content to a significantly lower grade level (e.g., Grade 3) rather than just accommodating grade-level work.
+
+Criterion 2: Technology Integration
+  Check: The long-term plan incorporates the use of technology (e.g., a computer) as a standard, accessible tool for his classroom activities.
+
+Criterion 3: External Counseling Support
+  Check: The long-term plan involves coordinating with external professionals, such as a Child and Youth Worker, for ongoing behavioral counseling.
+
+Criterion 4: Independence Scaffolding
+  Check: The long-term plan includes structured steps to gradually decrease the student's reliance on constant adult supervision during independent work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Dwayne is a Grade 6 student who struggles with independent work, emotional regulation, and peer interactions, often presenting as loud, controlling, or easily frustrated. His history of segregation has led to a learned helplessness where he relies heavily on constant adult presence. He uniquely requires explicit workload reductions, strengths-based feedback on poor grades, and non-punitive behavioral mirroring to build self-awareness and confidence without triggering defiance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Dwayne, it is time to work on your own. Please sit down at the computer and do those paragraphs.
+
+STUDENT: Okay, I'll do it.
+
+TUTOR: What do you think you should type first?
+
+STUDENT: (Stands up from the computer and starts walking around the classroom) I can't work on my own.
+
+TUTOR: Dwayne, sit down, try to do this.
+
+STUDENT: (Suddenly loses his temper and becomes threatening) No! I'm not doing it! (Starts pacing all over the place and refuses to work)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "do those paragraphs",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "regular class",
+      "materials": "computer in her class",
+      "social_setting": "work on his own",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "If I say, 'Dwayne sit down, try to do this'",
+      "observable_behavior": "he'll be all over the place. He cannot work.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "getting angry",
+        "observable_behavior": "thrown desks and been quite threatening",
+        "internal_state": "he will be sweet one minute and then the next minute he loses it",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

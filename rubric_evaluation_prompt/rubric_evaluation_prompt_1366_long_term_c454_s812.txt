@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Progressive Scaffolding of Student Autonomy
+  Check: The tutor's long-term plan demonstrates a clear transition from initially structuring the introduction of stimuli to allowing the student to dictate how the sessions are structured and used.
+
+Criterion 2: Sustained Non-Interrogative Environment
+  Check: The tutor's overarching strategy explicitly commits to a communication style based entirely on suggesting and commenting, systematically eliminating instructions and questions over time.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Student A engages with novel stimuli through intense, multi-sensory physical exploration, sometimes fixating on parts of living beings rather than the whole. He is prone to sudden disengagement ('having had enough') and retreats to sensory behaviors when overwhelmed or pressured. He uniquely requires a gentle, facilitative approach that maximizes his control and strictly avoids direct questions or instructions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: The dog is here in the hall now. You can go ahead and interact with him.
+
+STUDENT: (Stops his previous sensory behaviors and shifts his full attention to the dog, looking highly excited by the multi-sensory experience.)
+
+TUTOR: What would you like to do with the dog?
+
+STUDENT: (Approaches the dog and begins focused physical exploration of the animal.)
+
+TUTOR: Okay, keep exploring.
+
+STUDENT: (Intensely focuses his physical exploration on the dog's mouth and tongue, interacting with them as if the dog is a 'part-object' rather than a whole, living being.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "physical exploration of the dog",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school dinner hall",
+      "materials": "dog resources (rope, balls, brushes, blankets, toys, biscuits, leads, harness)",
+      "social_setting": "first 2 minutes were with the teacher alone, followed by 18 minutes with the dog present",
+      "time_context": "20-minute semi-standardized session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "beginning with mouth and tongue",
+      "observable_behavior": "physical exploration of the dog, beginning with mouth and tongue",
+      "internal_state": "conceptualised initially as a ‘part-object’ rather than a whole, living being",
+      "related_quotes": [
+        "conceptualised initially as a ‘part-object’ rather than a whole, living being"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when the dog entered the room",
+        "observable_behavior": "sensory interests to full attention on the dog",
+        "internal_state": "highly exciting, multi-sensory experience",
+        "related_quotes": [
+          "highly exciting, multi-sensory experience"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

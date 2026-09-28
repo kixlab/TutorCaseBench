@@ -1,0 +1,113 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Consistent Parental Engagement
+  Check: The tutor's long-term plan must include a strategy for regularly communicating with the student's parents about their progress and integrating this connection into the student's routine.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student works ahead independently at a fast pace but frequently disrupts group lessons with procedural questions or inappropriate behaviors like making phone calls. They react poorly to authoritarian, positional discipline, requiring private, 1-on-1 conversations for behavioral correction and consistent parental involvement for long-term accountability.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: You can continue working ahead independently in your unit workbook while I record the joint working on the board for the rest of the group.
+
+STUDENT: Excuse me Miss . . . do I need to copy the problems down or just write the answers?
+
+TUTOR: Just do what you think is right.
+
+STUDENT: Excuse me Miss . . . I'm on the next page now, what am I supposed to do for this section?
+
+TUTOR: Please keep trying to work through it.
+
+STUDENT: Excuse me Miss . . . I'm working ahead at a faster pace and I need you to tell me the procedure for the next unit.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "unit workbooks around a narrative theme from which various numeracy problems stemmed",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Prevocational mathematics class",
+      "materials": "self-contained resource, unit workbooks",
+      "social_setting": "rest of the students worked as one group under the teacher's directions, participating in class discussions of the problems, attempting the problems independently, then contributing to a joint working which the teacher recorded on the board",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "working ahead independently at a faster pace",
+      "observable_behavior": "frequently disrupted the teacher's lesson with procedural questions",
+      "internal_state": "",
+      "related_quotes": [
+        "Excuse me Miss . . ."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "within the constraints of the classroom setting",
+        "observable_behavior": "make phone calls in my class",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

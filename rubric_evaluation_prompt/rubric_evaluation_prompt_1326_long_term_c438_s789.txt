@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Peer-Mediated Social Consequences
+  Check: The tutor's long-term plan includes strategies to empower peers to set their own boundaries, speak up, or exclude the student if she is being hurtful.
+
+Criterion 2: Uncensored Observation
+  Check: The tutor's long-term plan explicitly commits to observing or monitoring the play theme over time without banning or censoring it.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student uses a 'sassy girl' persona to explore power dynamics, relational aggression, and meanness. Direct adult reprimands or censorship cause her to push the behavior underground or engage in mock aggression. She uniquely needs adults to observe rather than censor her imaginative play, while empowering her peers to enforce natural social boundaries.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, let's sit down at the table and eat our lunch.
+
+STUDENT: (Standing by the table with hands on her hips, looking at the boys) We're sassy girls. We're sassy girls.
+
+TUTOR: Please sit down and focus on your food.
+
+STUDENT: (Teasing the boys across the table) Don't mess with me.
+
+TUTOR: No, no, we're not doing that, guys. Sorry.
+
+STUDENT: (Whispering to her friend) Okay, well we're just going to be sassy, but they won't know.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General classroom interactions and lunch time.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during lunch time",
+      "materials": "",
+      "social_setting": "Sitting with peers and teachers during lunch",
+      "time_context": "Lunch time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher used direct verbal disapproval and shutdown of the play theme ('No, no, we're not doing that, guys. Sorry').",
+      "observable_behavior": "Whispered to each other to continue the play theme without teacher knowledge.",
+      "internal_state": "",
+      "related_quotes": [
+        "Okay, well we’re just going to be sassy, but they won’t know."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When approaching boys during free play.",
+        "observable_behavior": "Approached boys with their hands on their hips and teased and taunted them.",
+        "internal_state": "Embodied a tough, feminine 'don't mess with me' attitude.",
+        "related_quotes": [
+          "We’re sassy girls. We’re sassy girls."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

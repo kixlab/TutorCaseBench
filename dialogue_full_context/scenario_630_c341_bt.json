@@ -1,0 +1,89 @@
+{
+  "category_id": "341",
+  "category_title": "Students who systematically decompose multi-step problems using strategic scaffolding",
+  "scenario_id": "630",
+  "scenario_title": "Decomposing a complex four-step word problem using the WPC tool",
+  "minimal_context": "The students are using the Word Problem Cracker tool to develop sub-expressions for a complex four-step word problem about pizza and bowling costs.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's start working on this four-step word problem about the pizza and bowling costs using the Word Problem Cracker tool."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Six euros (writes) times the number of persons, but this is x, isn’t it?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Six euros times persons, ok. What do I get then? .... the costs of the pizza."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Keep going with the rest of the problem."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "This would be 6 times … well, this here and this here (hints to costs for meals and drinks and bowling). There we must first … mmhm … now we have to fill yellow and blue before writing the expression.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's start working on this four-step word problem about the pizza and bowling costs using the Word Problem Cracker tool.\n\nSTUDENT: Six euros (writes) times the number of persons, but this is x, isn’t it?\n\nTUTOR: What do you think?\n\nSTUDENT: Six euros times persons, ok. What do I get then? .... the costs of the pizza.\n\nTUTOR: Keep going with the rest of the problem.\n\nSTUDENT: This would be 6 times … well, this here and this here (hints to costs for meals and drinks and bowling). There we must first … mmhm … now we have to fill yellow and blue before writing the expression.",
+  "immediate_dialogue_prompt": 1044,
+  "long_term_dialogue_prompt": 1045,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Starting a four-step word problem with high textual complexity (pizza/costs problem)",
+        "learning_goal": "Developing sub-expressions for a multi-step word problem"
+      },
+      "context": {
+        "environment": "",
+        "materials": "final version of the Word Problem Cracker (WPC) tool, which includes boxes, yellow and blue columns (left and middle column), and a trial and error space",
+        "social_setting": "boys working together",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When planning the next steps in the WPC tool to write an expression for multiple costs",
+        "observable_behavior": "Hints to costs for meals and drinks and bowling, pauses with 'mmhm', and states they must fill the yellow and blue columns before writing the expression",
+        "internal_state": "mental construction of quantities as well as the final questions as part of working forward and backward",
+        "related_quotes": [
+          "This would be 6 times … well, this here and this here [hints to costs for meals and drinks and bowling]. There we must first … mmhm … now we have to fill yellow and blue [i.e. the left and middle column] before writing the expression."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When analyzing intermediate results while solving a multi-step word problem",
+          "observable_behavior": "often ask, 'What do we get? What does it mean?' with a consequent focus on quantities",
+          "internal_state": "focus on meanings and relations of quantities",
+          "related_quotes": [
+            "Six euros times persons, ok. What do I get then? .... the costs of the pizza",
+            "Six euros [writes] times the number of persons, but this is x, isn’t it?"
+          ]
+        },
+        {
+          "condition": "When filling out the WPC columns for a complex word problem",
+          "observable_behavior": "switch between the order of columns quite flexibly, always starting with the easiest aspect, for example... switches from the right column to the left to the middle column",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "When working through the WPC for a multi-step problem",
+          "observable_behavior": "Untypically, they do not use the trial and error space",
+          "internal_state": "strong control by strategy S3",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

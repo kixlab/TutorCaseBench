@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Noncontingent Protective Measures
+  Check: The tutor's immediate response ensures the noncontingent application or continuous presence of protective equipment (e.g., a helmet) regardless of the student's behavior.
+
+Criterion 2: Elimination of Demands and Programmed Consequences
+  Check: The tutor provides periodic attention (e.g., every 30 seconds) but strictly avoids issuing instructions, demands, or contingent reactions to the student's SIB or self-restraint.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student engages in severe, automatically maintained SIB and high levels of self-restraint to avoid the aversive consequences of her own SIB. Because her behavior is heavily allocated to SIB rather than item engagement, standard reinforcement alone fails, requiring noncontingent protective measures, competing stimuli, and active response disruption.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your preferred item. You can play with it while we sit in the room.
+
+STUDENT: (Ignores the item and crosses her hands tightly across her chest.)
+
+TUTOR: You can use your hands to play if you want to.
+
+STUDENT: (Uncrosses her hands and begins scratching and pinching her arms, then quickly places her hands behind her back.)
+
+TUTOR: Let's just sit quietly then.
+
+STUDENT: (Begins hitting herself in the head and banging her helmet against the padded wall, then immediately sits on her hands and holds them under her clothing to restrain them.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in the control condition with continuous access to at least one preferred item",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Padded treatment rooms with a one-way observation window",
+      "materials": "Preferred item, helmet",
+      "social_setting": "Therapist remained in the room with the participant",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the no-interaction condition and the control condition",
+      "observable_behavior": "Engaged in self-restraint including sitting on hands, crossing hands across the chest, placing hands behind the back, and holding them within or under clothing (e.g., shirt or pants)",
+      "internal_state": "Self-restraint may occur to avoid aversive consequences produced by SIB",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In the initial functional analysis where no protective procedures were applied",
+        "observable_behavior": "Engaged in low but consistent levels of responding across all conditions; SIB may have been suppressed because she engaged in self-restraint",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "In the functional analysis with added protections where a helmet was added",
+        "observable_behavior": "Engaged in moderate levels of SIB and self-restraint, including head-directed SIB (hitting oneself in the head or banging head against a surface), body-directed SIB, and skin-directed SIB",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

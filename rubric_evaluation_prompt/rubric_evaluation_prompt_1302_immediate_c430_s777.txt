@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Cognitive Offloading of Intermediate Steps
+  Check: The tutor prompts the student to physically write down the intermediate mathematical operation, such as the factor of reduction or the multiplication step, rather than holding it in her head.
+
+Criterion 2: Visual Scaffolding of Multiples
+  Check: The tutor directs or encourages the student to write her sequence of multiples on paper to visually anchor her recitation.
+
+Criterion 3: Metacognitive Process Inquiry
+  Check: The tutor asks the student to explicitly describe her internal mental process or tracking method for the current calculation (e.g., asking if she is doing it in her head or how she is counting).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Emily is an 18-year-old student with persistent low math achievement who relies on an atypical strategy of reciting multiples lists and finger-counting. She frequently makes errors or inadvertently switches lists (e.g., from 6s to 9s) because multi-step problems, like fraction reduction, overload her working memory. She uniquely needs interventions that cognitively offload intermediate steps and visually scaffold her lists, allowing her to use her existing strategies successfully rather than forcing her to learn standard algorithms.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's work on finding a common multiple for 6 and 12. Can you start by listing the multiples of 6 on your paper?
+
+STUDENT: 6, 12, 18, 24, 36, 45, 54, 63, 72, 81.
+
+TUTOR: Take another look at what you just recited.
+
+STUDENT: I just memorize them, and I don’t even know if it’s right. 6, 12, 18, 24, 36, 45, 54, 63, 72, 81. Is that right or is that wrong?
+
+TUTOR: What do you think?
+
+STUDENT: 9, 18, 27, 36, 45, 54, 63, 72, 81—no that’s nines. 6, 12, 18, 24, 36, 45, 54, 63, 72, I’m confused, they are both nines.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to find a common multiple for 6 and 12 by listing multiples of 6",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "weekly tutoring sessions",
+      "materials": "paper",
+      "social_setting": "negotiated between the student and tutor",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "As she recites her sixes she inadvertently switches from the sixes to the nines list",
+      "observable_behavior": "Repeats this incorrect sequence four times during this brief episode",
+      "internal_state": "Clearly unable to determine whether she was reciting her nines or her sixes",
+      "related_quotes": [
+        "6, 12, 18, 24, 36, 45, 54, 63, 72, 81.",
+        "I just memorize them, and I don’t even know if it’s right. 6, 12, 18, 24, 36, 45, 54, 63, 72, 81. Is that right or is that wrong?",
+        "9, 18, 27, 36, 45, 54, 63, 72, 81—no that’s nines.",
+        "6, 12, 18, 24, 36, 45, 54, 63, 72, I’m confused, they are both nines."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Attempting to solve the problem 'what times 2 is 16?'",
+        "observable_behavior": "Opted to access the second number on her fives, sixes, sevens, and eights lists rather than iterating through her twos list",
+        "internal_state": "Although it may appear more cognitively cumbersome to list the second element of many lists, Emily preferred this option to that of iterating through her twos list",
+        "related_quotes": [
+          "You can’t do it… cause 2 doesn’t go into 16, evenly.",
+          "Yeah. 5, 10. 6, 12. 7, 14. Oh! 8. Duh!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

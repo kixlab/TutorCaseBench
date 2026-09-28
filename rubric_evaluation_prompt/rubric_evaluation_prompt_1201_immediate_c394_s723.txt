@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Higher-Order Inquiry
+  Check: The tutor's response must include at least one question that prompts the student to make an inference, justify a claim, or express an opinion.
+
+Criterion 2: Chained Elaboration Prompting
+  Check: The tutor must prompt the student to expand on a previous statement, explain a story element they just mentioned, or build on a prior response within the ongoing exchange.
+
+Criterion 3: Avoidance of Solely Factual Questioning
+  Check: The tutor must NOT limit their inquiry to closed-ended questions about characters, setting, or plot that only require basic factual recall.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a high-level reader who easily grasps basic plot points and factual information. They thrive when pushed to provide complex, multi-sentence responses involving character analysis and thematic interpretation. They uniquely require a high density of advanced cognitive challenges—specifically inference, justification, and opinion questions—rather than standard comprehension checks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our Phase 2 reading conference to talk about your book. Do you think he's a bad kid? Why not?
+
+STUDENT: Because it really doesn't seem like he's a bad kid.
+
+TUTOR: What else do you think?
+
+STUDENT: It seems like he's a shy and gentle kid and he just wants to get in to a lot of trouble to tell everybody that he's in the different school.
+
+TUTOR: Go on.
+
+STUDENT: ...because he's really not mean to anybody in his family, he's only mean to people in like school and the teachers.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Analyzing character behavior and personality in a book about an alternative school",
+      "learning_goal": "Determine if students are reading appropriately challenging books and to assess students’ reading readiness"
+    },
+    "context": {
+      "environment": "Phase 2 of the SEM-R involves individualized conferences",
+      "materials": "Self-selected books, SEM-R bookmarks with sample higher-level and follow-up questions",
+      "social_setting": "One-on-one reading conference with Mrs. McCarthy",
+      "time_context": "Phase 2 of the SEM-R"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "In the book, the main character, Martin, had to go to an alternative school",
+      "observable_behavior": "Glorimar participated in a one-on-one reading conference to talk about her self-selected book.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked inference and justify follow-up questions within the same exchange: 'Do you think he’s a bad kid? Why not?'",
+        "observable_behavior": "Glorimar supported claims and opinions expressed in response to a previous question, drawing conclusions from the text.",
+        "internal_state": "",
+        "related_quotes": [
+          "Because it really doesn’t seem like he’s a bad kid. It seems like he’s a shy and gentle kid and he just wants to get in to a lot of trouble to tell everybody that he’s in the different school, because he’s really not mean to [anybody] in his family, he’s only mean to people in like school and the teachers."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

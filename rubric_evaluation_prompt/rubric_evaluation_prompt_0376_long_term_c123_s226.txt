@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Task Boundary and Routine Establishment
+  Check: The tutor's long-term plan includes establishing predictable routines with clear beginnings, ends, and comprehensive checklists for all lesson elements.
+
+Criterion 2: Musical Integration
+  Check: The tutor's long-term plan incorporates music into theoretical learning, break times, rewards, or social activities.
+
+Criterion 3: Sensory Channel Optimization
+  Check: The tutor's long-term plan includes ongoing assessment and utilization of the student's optimal sensory channels (e.g., prioritizing audio over paper Braille) to deliver information.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is visually impaired and highly sensitive to environmental noise and tactile distractors, which easily trigger sensory overload and an inability to concentrate. They require exact, step-by-step instructions and clear task boundaries, as unstructured situations cause severe stress and confusion. They also need discreet accommodations to avoid feeling singled out, and they benefit greatly from quiet environments and the integration of music into their learning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here are your separate materials for the assignment. The rest of the class is starting their group discussions now, so you can begin working on this.
+
+STUDENT: Please don't make a big deal out of giving me separate materials in front of everyone else.
+
+TUTOR: Alright, just try to focus on your work while the other groups talk.
+
+STUDENT: There are too many things going on in here right now and the other students are disturbing me.
+
+TUTOR: Keep trying to concentrate on the task in front of you.
+
+STUDENT: I can't sort out all this noise. If it’s not calm, sensible and quiet, I just cannot think!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "trying to focus on a task",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "large, noisy regular classroom",
+      "materials": "separate materials, music",
+      "social_setting": "regular inclusive classes with peers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "distracting noise, when many things were going on or when other students disturbed them",
+      "observable_behavior": "expressed that they just cannot think",
+      "internal_state": "difficulties in sorting out stimuli, making it hard to concentrate",
+      "related_quotes": [
+        "If it’s not calm, sensible and quiet, I just cannot think!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "teachers pointed them out, for example by making a big deal out of giving them separate materials or special treatment in front of the peers",
+        "observable_behavior": "resisted when teachers pointed them out",
+        "internal_state": "felt a relief to be with others who also needed extra support",
+        "related_quotes": [
+          "I like to be with other students who also need extra help, we understand each-other better. It feels good that I am not the only one."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

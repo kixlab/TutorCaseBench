@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Egalitarian Communication
+  Check: The tutor must use collaborative, peer-like language (e.g., using 'we', validating their perspective, showing warmth) and completely avoid issuing unilateral commands or demanding compliance with authority.
+
+Criterion 2: Task Utility and Attainability
+  Check: The tutor must explicitly frame the task as achievable at the student's current level and/or directly connect it to a practical, real-world value or personal interest.
+
+Criterion 3: Autonomy and Flexibility
+  Check: The tutor must offer the student flexibility in how, when, or where the task is executed (e.g., allowing them to talk, move, take a break, or organize the work themselves) rather than enforcing rigid behavioral constraints.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a history of school failure, resulting in deep mistrust, defensiveness, and rebellion against traditional authority and rigid classroom rules. They uniquely require an egalitarian, highly flexible approach where educators build mutual trust first and provide practical, interest-based tasks at their current skill level.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit down quietly and copy the academic exercises I am writing on the blackboard.
+
+STUDENT: I was forced to go to class. I'm not doing this academic stuff.
+
+TUTOR: This is the assignment for today. Please get started.
+
+STUDENT: I always missed classes anyway. The teachers were against me, and you're no different.
+
+TUTOR: You need to follow the rules and pay attention to the board.
+
+STUDENT: I'm not sitting in this closed space for six hours without speaking or moving! You're just distant and trying to make my misery evident.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "academic tasks",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "closed space, without speaking or moving, sitting down, in front of a teacher whose only tools are a blackboard and chalk",
+      "materials": "blackboard and chalk",
+      "social_setting": "in front of a teacher",
+      "time_context": "six hours a day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When one meets these students and they see teachers as people who are distant and who over many years may have made their 'misery' evident",
+      "observable_behavior": "perceives mistrust, scorn, a certain aggressiveness and a defensive attitude towards the teacher, Rebellious against rules and authority",
+      "internal_state": "mistrustful, reluctant to accept the academic environment",
+      "related_quotes": [
+        "The teachers were against me.",
+        "I was forced to go to class."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When engaged in academic tasks rather than manipulative tasks",
+        "observable_behavior": "They have been truant, spontaneous, impulsive and not given to reflection",
+        "internal_state": "Low expectations of success, Low self-esteem",
+        "related_quotes": [
+          "I always missed classes."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

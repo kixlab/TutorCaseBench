@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Break Prompting
+  Check: The tutor prompts the student to use a break card or explicitly offers a structured, time-limited break option (e.g., resting, doodling, coloring) when work avoidance behaviors occur.
+
+Criterion 2: Instructional Redirection
+  Check: The tutor provides explicit, instructional feedback on what the student should do (e.g., how to request a break or how to engage with the task) rather than solely issuing a reprimand or telling him what not to do.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Martin is a capable second-grade student who frequently engages in off-task and disruptive behaviors, such as leaving his seat and talking to peers, primarily to avoid instructional tasks. Because his behavior is maintained by work avoidance rather than a need for attention or academic remediation, he uniquely requires structured, appropriate ways to take breaks and frequent, point-based feedback tied to tangible incentives to make academic engagement more rewarding.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent reading. Please sit at your desk and read your book quietly.
+
+STUDENT: (Turns his body away from the assigned materials and stares at the back of the classroom.)
+
+TUTOR: Martin, you need to look at your book.
+
+STUDENT: (Leans over to the next desk) Hey, what page are you on? Look at this.
+
+TUTOR: Please stop talking and focus on your own reading.
+
+STUDENT: (Gets out of his seat and walks away from his desk, leaving his book behind to avoid the reading task.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "independent reading",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "second-grade classroom during independent reading",
+      "materials": "assigned materials, a break card kept on the desk, daily progress reports",
+      "social_setting": "independent",
+      "time_context": "20-minute observation periods"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "during instructional activities",
+      "observable_behavior": "off-task behavior, defined as out of seat and or eyes/body directed away from assigned materials",
+      "internal_state": "maintained by work avoidance and not teacher attention",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "during baseline",
+        "observable_behavior": "off-task behavior was scored in approximately 54% of intervals, disruption in 30% of intervals, and out of seat in 16% of intervals",
+        "internal_state": "maintained by work avoidance",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

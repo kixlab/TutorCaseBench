@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Clarification of Choices
+  Check: The tutor uses visual supports (e.g., presenting, arranging, or holding up pictures) to help Adam make a choice or understand an expectation.
+
+Criterion 2: Reciprocation of Non-Verbal Initiations
+  Check: The tutor acknowledges and responds to Adam's non-verbal cues (e.g., by copying his movements, smiling, nodding, or verbally interpreting his gesture) rather than ignoring them or demanding verbalization.
+
+Criterion 3: De-escalation Through Physical Space
+  Check: If Adam is protesting or dysregulated, the tutor explicitly provides time and physical distance rather than moving closer or verbally enforcing the transition.
+
+Criterion 4: Low-Demand Re-engagement
+  Check: The tutor uses non-verbal prompts (e.g., tapping a surface, gesturing, or positioning a chair) to guide Adam's movement or re-engagement.
+
+Criterion 5: Sensory Regulation with Communication Checks
+  Check: The tutor offers or provides sensory input (e.g., a hand massage) and explicitly pauses the activity to ask if Adam wants 'more' or is 'finished.'
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Adam is an 8-year-old with autism who communicates primarily through pictures, gestures, and proximity, and has strong preferences regarding his activities. When forced into non-preferred transitions, he exhibits intense protests such as sitting on the floor and spitting. He uniquely requires adults to respect his need for physical space during dysregulation, followed by non-verbal cues, visual choices, and sensory regulation to successfully re-engage.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is breakfast time. Here are the pictures of food and drinks on the table.
+
+STUDENT: (Picks up a picture of cranberry juice and gives it to the teacher.)
+
+TUTOR: Here is your juice. What do you want to eat?
+
+STUDENT: (Taps the picture for toast and Nutella. While waiting, he moves his head closer to the teacher and looks directly into his eyes.)
+
+TUTOR: You finished your toast. Now you need to choose just one item from your book.
+
+STUDENT: (Reaches for his book, turns the page, and chooses both cereal and toast. He pushes both pictures forward, showing his strong views about what he wants, and begins to protest intensely when he cannot have both.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Selecting breakfast items using a personalized photo menu",
+      "learning_goal": "Communicate choices and understand expectations to choose just one item"
+    },
+    "context": {
+      "environment": "At a table",
+      "materials": "Individually designed breakfast menu with photographs of a range of food and drinks, book",
+      "social_setting": "One-on-one with a teacher",
+      "time_context": "Breakfast time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher responded that he needed to choose just one item after he had already eaten",
+      "observable_behavior": "Reached for his book, turned the page and chose cereal and toast",
+      "internal_state": "Clear and often strong views about how he wanted to spend his time",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While waiting for the breakfast",
+        "observable_behavior": "Looked at his teacher, moving his head closer to the teacher and looking directly into his eyes",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When requesting specific food items",
+        "observable_behavior": "Tapped the picture and gave it to his teacher",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Action-First Engagement
+  Check: The tutor's response allows the student to immediately begin playing or trying the activity before engaging in extended discussion or reflection.
+
+Criterion 2: In-Game Technical Guidance
+  Check: The tutor provides technical instruction or feedback within the context of continuous gameplay, completely avoiding the use of isolated individual or paired drills.
+
+Criterion 3: Novelty for Skill Acquisition
+  Check: If introducing a specific rule or principle to learn, the tutor applies it to an unfamiliar sport or activity rather than modifying the rules of a sport the student already knows well.
+
+Criterion 4: Protection from Peer Critique
+  Check: The tutor's response does not ask the student to evaluate, assess, or identify the weaknesses of their peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly resistant to traditional pedagogical methods, including isolated technical drills, modified rules in familiar sports, and peer assessment, often reacting with off-task wandering, refusal, or aggression. They require an action-first approach where technical skills are taught either through unfamiliar sports (to force focus) or embedded within unmodified, competitive gameplay that allows them to release stress and exercise autonomy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are playing soccer, but to practice the principles of defending, like pressure on the ball and denial of the ball, we are going to play a modified version with restricted zones.
+
+STUDENT: We all play football as our main sport. We're already familiar with the concepts and don't need to learn too much.
+
+TUTOR: Let's just try it this way for a bit and see how it goes.
+
+STUDENT: (Discusses the rules briefly with the group, but upon returning to the field, completely ignores the zones and applies minimal defensive principles)
+
+TUTOR: Remember to keep trying to use the defensive principles we talked about in your groups.
+
+STUDENT: This is stupid! I'm not doing this modified stuff anymore. We just want to play the 'real' game!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "principles of defending in games such as pressure on the ball, denial of the ball and helping away from the ball",
+      "learning_goal": "learn the above principles"
+    },
+    "context": {
+      "environment": "Year 9 Physical Education learning environment",
+      "materials": "Soccer game, equipment for unfamiliar sports",
+      "social_setting": "Class of Year 9 boys with SEBD, group discussions",
+      "time_context": "lesson by lesson basis"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when Amy changed aspects of the soccer game played to emphasise the principle of defending being taught",
+      "observable_behavior": "met by pupil dissention, wanted to play the ‘real’ game rather than one that was modiﬁed by the teacher",
+      "internal_state": "they are familiar with the concepts and think they don’t need to learn too much",
+      "related_quotes": [
+        "wanted to play the ‘real’ game"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "engaging the class in discussion around a particular defensive principle",
+        "observable_behavior": "pupils would discuss in groups the questions set but, in returning to play the game, application of the principle was minimal",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

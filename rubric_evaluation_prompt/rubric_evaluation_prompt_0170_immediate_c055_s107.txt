@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Decoding of Physical Readiness
+  Check: The tutor explicitly describes the physical actions required for readiness (e.g., where to look, how to sit, what to do with hands) rather than just telling the student to get ready or transition.
+
+Criterion 2: Invocation of Shared Community Rules
+  Check: The tutor addresses troubling behavior by referencing a shared community rule, standard, or collective identity (e.g., 'how we treat each other here', 'our classroom rules') rather than relying solely on personal authority or demanding compliance.
+
+Criterion 3: Scaffolded Verbalization
+  Check: When the student struggles to respond or justify a choice, the tutor probes, rephrases the question, or invites peers/the class to contribute, rather than forcing the student to answer independently.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with school refusal, performance anxiety, and rejection of teacher authority, often manifesting as extreme shyness, tardy compliance, or temper tantrums during competitive games. They have a poor estimation of their self-efficacy and believe they lack innate ability. They uniquely require explicit physical decoding of behavioral expectations, corrections grounded in shared community rules, and sustained metacognitive dialogue to build emotional regulation and a sense of belonging.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright class, it is time to transition to our next activity. Please put your current work away and listen for the next instruction.
+
+STUDENT: (Continues talking to the student next to them, completely ignoring the instruction to transition.)
+
+TUTOR: I need everyone to stop talking and get ready for the next task.
+
+STUDENT: Why do we even have to learn this? I'm not doing the next task.
+
+TUTOR: Please just follow the instructions so we can move on with the lesson.
+
+STUDENT: (Turns completely away from the teacher, resisting control and continuing to talk loudly instead of complying with the redirection.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transitioning between activities when the teacher is providing verbal instructions to the whole class",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "None specified",
+      "social_setting": "Whole class",
+      "time_context": "Early weeks of the programmes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Before every instruction",
+      "observable_behavior": "Lack of attention, talking, ignoring, or tardy compliance",
+      "internal_state": "Do not feel valued and do not have a sense of belonging to the school environment",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When students do not feel connected to school",
+        "observable_behavior": "Resist teacher control",
+        "internal_state": "Question their own ability as well as the concept of knowledge and learning",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

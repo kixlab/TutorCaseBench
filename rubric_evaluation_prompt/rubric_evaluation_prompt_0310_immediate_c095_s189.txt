@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Flexible Task Autonomy
+  Check: The tutor's response must offer the student a choice or demonstrate flexibility regarding how, when, or where a task is completed, rather than enforcing a rigid rule.
+
+Criterion 2: Direct Audio/Reading Support
+  Check: The tutor must offer to read the text aloud to the student or provide an immediate auditory alternative to independent reading.
+
+Criterion 3: Immediate Task Simplification
+  Check: The tutor must present a significantly reduced, bite-sized task or explicitly remove the pressure of completing a large volume of work at once.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Derek is a student with a history of school trouble who masks his severe decoding and memory struggles with defensive body language, cynicism, and task avoidance (e.g., skipping words). The evidence reveals he uniquely needs a tutor who bypasses rigid compliance, offers direct decoding support (like reading aloud), and builds trust through relational teaching, humor, and highly simplified, autonomous tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Derek, please take out the materials from yesterday's lesson and start working on the classwork assignment.
+
+STUDENT: (Slouching down and crossing his arms across his chest) I’m a different type of student, I think because I have changed over the years and I do my work but at the same time I don’t do anything in class.
+
+TUTOR: You just need to try to remember what we covered yesterday and answer the questions on the page.
+
+STUDENT: I’m really difficult, um, there are a number of things that aren’t easy. Um for some reason I can remember like how to make everything at work but I can’t remember how to do a math problem to save my life, let alone remember this lesson.
+
+TUTOR: Just look at the assignment and do the best you can to get it done.
+
+STUDENT: (Looking completely detached) I'm not investing any time into this. It doesn't matter anyway, it's just like when I got in trouble and kicked out of my last school.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing classwork and homework assignments.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General English class",
+      "materials": "Assignments and homework",
+      "social_setting": "General classroom engagement",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Being unable to remember lessons",
+      "observable_behavior": "Simply did not invest any time into school and recounted stories of troubling events with what appeared to be little remorse or emotion, as if he were disconnected from the issues of his past.",
+      "internal_state": "Tensions and discomfort increased by being unable to remember lessons.",
+      "related_quotes": [
+        "I’m a different type of student, I think because I have changed over the years and I do my work but at the same time I don’t do anything in class.",
+        "I’m really difficult, um, there are a number of things that aren’t easy. Um for some reason I can remember like how to make everything at work but I can’t remember how to do a math problem to save my life."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When students feel overwhelmed by the volume of work and perceive failure as inevitable.",
+        "observable_behavior": "Often seemed to be disengaged in class... moments of detachment",
+        "internal_state": "School had never been easy for him",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

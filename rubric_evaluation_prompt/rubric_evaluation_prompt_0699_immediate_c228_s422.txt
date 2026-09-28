@@ -1,0 +1,140 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Embracing Silence and Unstructured Dialogue
+  Check: The tutor leaves space for the student to lead by using pauses, accepting overlapping dialogue, or explicitly inviting the student to steer the conversation without redirecting them to a rigid structure.
+
+Criterion 2: Co-Learner Questioning
+  Check: The tutor avoids asking obvious, closed-ended questions, instead utilizing complex, open-ended questions that position the tutor as a co-learner (e.g., validating uncertainty or asking for philosophical conclusions).
+
+Criterion 3: Validation of Sociopolitical Critique
+  Check: The tutor explicitly acknowledges and validates the student's sociopolitical commentary, identity claims, or critiques of injustice without attempting to soften, dismiss, or correct their observations.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These students are highly critical and observant, frequently challenging historical injustices and traditional classroom hierarchies. They uniquely require educators who relinquish control, avoid simplistic questioning, and allow their sociopolitical critiques to genuinely transform the learning environment.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are reading 'Separate is Never Equal'. Let's look at this illustration showing the sign that says 'No dogs or Mexicans allowed'.
+
+STUDENT: (Lifts hands in the air and raises voice) But they are so mean! The white people. I think the white people should go on the other side of the earth!
+
+TUTOR: What do you think about that idea?
+
+STUDENT: That means my brother and me and my mom would be on one side of the earth but my dad would be on the other side. Sad, because then my family would be torn apart like that.
+
+TUTOR: Do you ever notice that people are treated differently because of their skin color?
+
+STUDENT: Well, isn't the book showing us that people do get treated differently because of their skin color? Yeah. I mean, I think that book already answers the question.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing school segregation and access during a whole-class read-aloud of 'Separate is Never Equal'.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-class read-aloud on the carpet.",
+      "materials": "The book 'Separate is Never Equal'",
+      "social_setting": "Whole-class discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to facilitate a discussion on racial treatment using a simplistic question ('Do you ever notice that people are treated differently because of their skin color?')",
+      "observable_behavior": "Challenging the researcher's question directly, stating the book already answers it.",
+      "internal_state": "",
+      "related_quotes": [
+        "Yeah. I mean, I think that book already answers the question."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Reacting to an illustration of a sign saying 'No dogs or Mexicans allowed' during a whole-class read-aloud.",
+        "observable_behavior": "Lifted his hands in the air and called out, raising his voice, proposing that white people should go on the other side of the earth.",
+        "internal_state": "",
+        "related_quotes": [
+          "…But they are so mean!",
+          "The white people. I think, think… the white people were saying they were Mexicans but they were not.",
+          "I think the white people should go on the other side of the earth!"
+        ]
+      },
+      {
+        "condition": "Critiquing a peer's proposal to separate races by applying it to her own multiracial family",
+        "observable_behavior": "Explaining why separating people by race would be upsetting for her multiracial family",
+        "internal_state": "Sad",
+        "related_quotes": [
+          "That means my brother and me and my mom would be on one side of the earth but my dad would be on the other side.",
+          "Sad, because then my family would be torn apart like that."
+        ]
+      },
+      {
+        "condition": "Investigating racial categories and skin tones",
+        "observable_behavior": "Physically comparing arms and hands, discussing colors like brown, tan, beige, black and so on, with multiple students talking at the same time and sometimes over each other",
+        "internal_state": "",
+        "related_quotes": [
+          "Well how do we know who is white or Black and who is not?"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

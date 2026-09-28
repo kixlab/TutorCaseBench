@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Concrete Visualization
+  Check: The tutor's response must incorporate physical manipulatives, visual whiteboard modeling, or concrete representations rather than relying solely on abstract formulas.
+
+Criterion 2: Step-by-Step Guided Execution
+  Check: The tutor must guide Greg through the problem one step at a time, explicitly avoiding instructions that ask him to complete the problem or multiple steps independently.
+
+Criterion 3: Integration with Class Notes
+  Check: The tutor must explicitly reference, or prompt Greg to use, his class notes to help solve the current problem.
+
+Criterion 4: In-Session Task Completion
+  Check: The tutor must structure the session to complete the homework together in the moment, explicitly avoiding any suggestion that Greg finish the work at home.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Greg is a struggling math student who has significant difficulty with abstract formulas and independent work, often failing to return homework if he takes it home. He is reluctant to stay after school but highly responsive to intensive, one-on-one support that uses concrete visual aids and connects directly to his class notes.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's get started on your math homework. We have a full hour to work on these formula problems.
+
+STUDENT: I don’t like staying but I know I can get good help—Ms. Haley really does class differently after school.
+
+TUTOR: Go ahead and try the first formula problem on your own.
+
+STUDENT: I really struggle with these. If I have to take this homework home to finish, it usually won't come back the next day.
+
+TUTOR: Just look at the formula on the page and see what you can do.
+
+STUDENT: I can't do it just looking at the formula. I need you to go over the problems step-by-step, or show me the manipulatives so I can see how they relate to my notes.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Math homework problems involving formulas",
+      "learning_goal": "To progress through the work and see how manipulatives relate to the formulas or his notes"
+    },
+    "context": {
+      "environment": "After school math tutoring",
+      "materials": "Homework, class notes, physical manipulatives, whiteboard",
+      "social_setting": "One-on-one",
+      "time_context": "Full hour"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When dealing with math homework and abstract formulas without support",
+      "observable_behavior": "Really struggles; expresses dislike for staying after school",
+      "internal_state": "Reluctance to stay but acknowledges the need for help",
+      "related_quotes": [
+        "I don’t like staying but I know I can get good help—Ms. Haley really does class differently after school."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "If he had to take his homework home",
+        "observable_behavior": "It usually did not come back the next day",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

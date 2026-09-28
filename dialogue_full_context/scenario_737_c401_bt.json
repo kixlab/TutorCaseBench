@@ -1,0 +1,82 @@
+{
+  "category_id": "401",
+  "category_title": "Students with low academic knowledge who confuse personal identity with academic concepts",
+  "scenario_id": "737",
+  "scenario_title": "Distinguishing personal identity from academic concepts during a social studies lesson",
+  "minimal_context": "The student is participating in a whole-class lesson about the Bill of Rights and answering questions about religious affiliation.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are discussing the Bill of Rights and religious freedom. The Lord's prayer is from what religion? Who says the Lord's prayer?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Church people."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "From what religion? Have you ever said the Lord's prayer?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Shrugs) Yeah."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What's your religion?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Black?",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are discussing the Bill of Rights and religious freedom. The Lord's prayer is from what religion? Who says the Lord's prayer?\n\nSTUDENT: Church people.\n\nTUTOR: From what religion? Have you ever said the Lord's prayer?\n\nSTUDENT: (Shrugs) Yeah.\n\nTUTOR: What's your religion?\n\nSTUDENT: Black?",
+  "immediate_dialogue_prompt": 1228,
+  "long_term_dialogue_prompt": 1229,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Participating in a whole-class lesson about the Bill of Rights led by Mr. Strong; the teacher is asking questions about the Lord's Prayer and religious affiliation to explain the concept of religious freedom.",
+        "learning_goal": "discerning the difference between his ethnicity and his religion"
+      },
+      "context": {
+        "environment": "Community Day School classroom",
+        "materials": "",
+        "social_setting": "whole-class lesson",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Answering direct questions from the teacher about personal background and religious concepts during a classroom discussion about the Bill of Rights.",
+        "observable_behavior": "Confuses racial identity with religious identity, answering 'Black?' when asked 'What's your religion?'",
+        "internal_state": "not discerning the difference between his ethnicity and his religion",
+        "related_quotes": [
+          "Black?"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Responding to teacher's initial questions about religious practices in a classroom setting",
+          "observable_behavior": "uses a shrug to indicate lack of knowledge",
+          "internal_state": "did not know something",
+          "related_quotes": []
+        },
+        {
+          "condition": "When asked who says the Lord's prayer",
+          "observable_behavior": "provides a vague answer",
+          "internal_state": "",
+          "related_quotes": [
+            "Church people."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

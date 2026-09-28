@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Meaning-Preserving Miscues
+  Check: The tutor explicitly permits, validates, or encourages Sofia to substitute or mispronounce a difficult word (like a name) as long as the substitution makes sense in the story.
+
+Criterion 2: Activation of Known Decoding Strengths
+  Check: The tutor prompts Sofia to apply a specific, familiar decoding strategy (such as 'stretching it out' or using picture clues) rather than simply supplying the unknown word.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sofia is a seven-year-old bilingual student who lacks reading confidence and struggles with a disconnect between decoding and comprehension. She reads aloud fluently using graphophonic cues but fails to monitor for meaning, often making meaning-changing miscues on word endings and contractions or getting bogged down on proper nouns. She uniquely needs interventions that shift her focus away from perfect phonetic accuracy toward active meaning-making, text connection, and maintaining narrative flow.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start reading this book, Amelia Bedelia and the Baby.
+
+STUDENT: Okay. I want to read it, but I don't think I know enough words.
+
+TUTOR: Just try your best. Go ahead and read the sentence on this page.
+
+STUDENT: Babies should have...
+
+TUTOR: What is the last word in that sentence?
+
+STUDENT: (Looks at the picture) ...bowls. Babies should have bowls.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading the book Amelia Bedelia and the Baby for the first time and discussing specific miscues during a Retrospective Miscue Analysis (RMA) session",
+      "learning_goal": "Ensure they are reading for meaning and facilitates student thinking"
+    },
+    "context": {
+      "environment": "One-on-one tutoring session",
+      "materials": "The book Amelia Bedelia and the Baby, audio record of the reader's oral reading",
+      "social_setting": "One-on-one session",
+      "time_context": "During the first visit and subsequent RMA sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When conferring with Sofia about her miscues and encountering words where she relied on picture clues",
+      "observable_behavior": "She read 'Babies should have bowls' for Babies shouldn't have bottles. She miscued 'bowls' for bottles. She predicted the meaning of bottles from the picture, though she sounded it out as 'bowls.'",
+      "internal_state": "Believed that she did not know enough words",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When encountering words with specific endings or contractions",
+        "observable_behavior": "Left out some word endings (e.g., read flowered as 'flower') and miscued many times on couldn't and shouldn't (e.g., read 'should' instead of shouldn't), which changed the meaning of the text",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

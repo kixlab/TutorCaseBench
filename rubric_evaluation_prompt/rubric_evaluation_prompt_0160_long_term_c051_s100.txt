@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Pervasive Bid Responsiveness
+  Check: The tutor's long-term plan includes a commitment to consistently monitoring, acknowledging, and responding to all of Evie's non-verbal and vocal communicative bids across different daily activities.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Evie is a sociable adolescent with complex medical needs who communicates primarily through non-verbal behaviors, physical actions, and vocalizations. She easily becomes distressed during transitions or when denied autonomy, escalating from small noises to prolonged crying. She uniquely requires highly responsive adults who immediately recognize her subtle physical cues, avoid verbal persuasion, offer concrete choices with wait time, and utilize specific sensory soothing techniques like vocal imitation or preferred items.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our hour-long art session. Here are the materials for the activity.
+
+STUDENT: (Evie uses eye gaze to look at the materials, then makes a reaching motion toward the adult while making a differentiated vocalization.)
+
+TUTOR: What do you think we should do next?
+
+STUDENT: (Evie shakes her head, pushes the art materials away, and makes a sharp, small noise.)
+
+TUTOR: We need to keep going with the art activity. Here is a piece of banana.
+
+STUDENT: (Evie becomes completely disengaged from the activity, turning her head away and escalating to crying, showing she is unhappy and having difficulty expressing herself.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in an hour-long Art session",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Art session",
+      "materials": "developmentally appropriate activities, pieces of a banana",
+      "social_setting": "adults had offered",
+      "time_context": "hour-long"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "through a lack of available support and/or through her own difficulties expressing herself",
+      "observable_behavior": "She became disengaged at several points during the activities",
+      "internal_state": "became unhappy",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "during an hour-long Art session",
+        "observable_behavior": "made 56 bids for communication (almost 1 per minute)... including eye gaze, facial expression, simple motor actions, crying, reaching, pushing away, showing, headshakes, nods and differentiated vocalizations",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

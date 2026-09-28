@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Step-by-Step Task Breakdown
+  Check: The tutor breaks the assignment down into smaller, step-by-step instructions rather than giving a single, broad directive.
+
+Criterion 2: Direct Redirection of Solitary Behavior
+  Check: The tutor explicitly addresses and redirects any solitary off-task behavior (e.g., singing, looking away) back to the specific academic task.
+
+Criterion 3: Enforced Individual Accountability
+  Check: The tutor assigns Kylie a specific, distinct role or requires her to explicitly explain her reasoning, preventing her from simply copying a peer's answer.
+
+Criterion 4: Direct Questioning
+  Check: The tutor poses a direct, targeted question specifically to Kylie to pull her into the dialogue.
+
+Criterion 5: Precision Correction with Validation
+  Check: The tutor acknowledges a correct aspect of Kylie's work while explicitly pointing out a specific detail or notation that needs precise correction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kylie is a student who lacks academic stamina and frequently retreats into solitary, off-task behaviors like singing or playing alone when faced with independent or group work. She views the teacher as the sole source of knowledge and tends to passively copy peers to avoid individual accountability. To engage, she uniquely requires step-by-step guidance, direct redirection, assigned specific roles in group work, and consistent 1-on-1 dialogue to build her capacity for academic discourse.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please work with your partner to look for relationships between the areas and record your statements using uppercase letters.
+
+STUDENT: (Sits next to her partner but works independently without discussion) I wrote my equation. It says t+e+L=r.
+
+TUTOR: Examine your work. Remember we need to use uppercase letters.
+
+STUDENT: (Erases the first letter) I rewrote my equation as T+e+L=r.
+
+TUTOR: Work together with your partner to finish correcting the rest of the letters.
+
+STUDENT: (Passively watches as her partner points to the paper without explaining) He just told me to write T+E+L=R, so I'm just going to copy that.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Look for relationships between areas and record statements about findings using uppercase letters to represent the areas",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Grade 1 mathematics class",
+      "materials": "",
+      "social_setting": "Paired work setting",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When working in pairs to correct an equation representing area quantities",
+      "observable_behavior": "Sat together but worked independently without discussion. Relied on partner and avoided individual accountability for learning.",
+      "internal_state": "Passive and reluctant to work with other students",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When writing equations to represent area relationships",
+        "observable_behavior": "Wrote the equation using a mix of lower- and uppercase letters, and when correcting, rewrote her equation as T+e+L=r",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

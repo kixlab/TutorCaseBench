@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Direct Procedural Intervention
+  Check: The tutor provides direct, active guidance (e.g., stepping in to explain the procedure, using a whiteboard, or pairing the student with a peer) rather than directing the student to watch a video or figure it out alone.
+
+Criterion 2: Real-Time Data Accountability
+  Check: The tutor explicitly references real-time progress metrics (e.g., number of problems attempted, time elapsed, or peer comparisons) to redirect the student's avoidance behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with self-paced learning environments, often repeating incorrect strategies or attempting to slide through by doing minimal work. They uniquely require real-time data accountability to stay on task, direct human facilitation over passive video lessons, and a mastery-based practice model that rewards consecutive successes rather than penalizing early mistakes.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are 20 minutes into the computer lab session. Please keep working on your assigned skills to reach the goal of getting five-in-a-row.
+
+STUDENT: I'm working on it. I'm just looking at the screen right now.
+
+TUTOR: Let's check your progress on the tracker.
+
+STUDENT: I did some already. I'm just trying to get through the period.
+
+TUTOR: The data shows you have only attempted two problems so far.
+
+STUDENT: Yeah, I'm struggling the most with this, so I just guessed on two problems and stopped. I was hoping to just slide through the system today without doing the rest.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "assigning anywhere from one to five skills in a single class",
+      "learning_goal": "goal of reaching the practice level (i.e., getting five-in-a-row) by a certain date"
+    },
+    "context": {
+      "environment": "computer lab session",
+      "materials": "real time data function",
+      "social_setting": "class",
+      "time_context": "20 minutes into the class"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Even though, Khan Academy is self-paced, some students still needed a little oversight",
+      "observable_behavior": "had only attempted two problems",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "students who struggle the most",
+        "observable_behavior": "slide through the system",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

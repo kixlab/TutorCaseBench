@@ -1,0 +1,72 @@
+{
+  "category_id": "151",
+  "category_title": "Focused female students with low frequency of participation",
+  "scenario_id": "278",
+  "scenario_title": "Navigating peer disagreement and low participation in structured dialogue",
+  "minimal_context": "The student is participating in a structured argumentative dialogue circle where they must state if they agree or disagree with previous speakers.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's continue our discussion. Remember to use the format 'I agree or disagree with [person's name] because...'. What do you think about what David just said?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I disagree with David because... it's not fair to take things without asking."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Alright. Now Sarah just said she disagrees with you, because sometimes people have no choice. What is your response to Sarah?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Frowns) Why is she criticizing me? I guess my viewpoint is just wrong then."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What do you think about her point? Go ahead and answer."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Looks down at the floor and stays completely silent, refusing to contribute any further to the dialogue)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's continue our discussion. Remember to use the format 'I agree or disagree with [person's name] because...'. What do you think about what David just said?\n\nSTUDENT: I disagree with David because... it's not fair to take things without asking.\n\nTUTOR: Alright. Now Sarah just said she disagrees with you, because sometimes people have no choice. What is your response to Sarah?\n\nSTUDENT: (Frowns) Why is she criticizing me? I guess my viewpoint is just wrong then.\n\nTUTOR: What do you think about her point? Go ahead and answer.\n\nSTUDENT: (Looks down at the floor and stays completely silent, refusing to contribute any further to the dialogue)",
+  "immediate_dialogue_prompt": 462,
+  "long_term_dialogue_prompt": 463,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Engage in structured argumentative dialogue where participants must agree/disagree with at least one previous speaker and give reasons using the format: 'I agree with [person’s name] because. . . '",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Locked classroom",
+        "materials": "",
+        "social_setting": "Participants sit in a circle in order to see one another, with the facilitator outside the circle",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When another participant disagreed with them",
+        "observable_behavior": "Contributed much less frequently to the dialogue and were speaking on fewer occasions",
+        "internal_state": "Interpreted as their viewpoint being seen as wrong or subject to unfair criticism",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When there were interruptions or disruptions by others",
+          "observable_behavior": "Rarely got involved in disruptive behaviours, made fewer interruptions, either on or off-task, and remained more focused during the sessions",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

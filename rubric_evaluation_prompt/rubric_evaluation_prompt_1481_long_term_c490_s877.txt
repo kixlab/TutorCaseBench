@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Mitigation of Microaggressions
+  Check: The long-term plan must include strategies for the tutor to reflect on their own biases, utilize culturally responsive teaching practices, and actively prevent microaggressions in the learning environment.
+
+Criterion 2: Sustained Communication of High Expectations
+  Check: The long-term plan must explicitly outline methods for consistently communicating high academic expectations and treating the student as intellectually capable, strictly avoiding any condescending or infantilizing language.
+
+Criterion 3: Frustration Regulation and Sarcasm Avoidance
+  Check: The long-term plan must include mechanisms for the tutor to regulate their own frustration and strictly avoid using sarcasm or public shaming in their interactions with the student.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Javier is a student who reacts to public shaming, sarcasm, and intelligence-related microaggressions by becoming expressionless and withdrawing. He is highly susceptible to stereotype threat and cognitive distraction when subjected to infantilizing language or low expectations. He uniquely requires a culturally responsive, non-hostile learning environment where instructors actively manage their frustration and consistently communicate high academic expectations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now you got to show your work. Javier, come to the board to solve a problem.
+
+STUDENT: (Walks to the board in front of the class to solve the problem.)
+
+TUTOR: Go ahead and write out your solution.
+
+STUDENT: (Attempts the problem on the board, writing out the steps, but gets the wrong answer.)
+
+TUTOR: You need to do it like you are in kindergarten, that way you make no mistakes, right? Write this 17 times. (Writes "17 times" on the board) Right, Javier?
+
+STUDENT: (Looks at the board expressionless, completely withdrawing and silencing himself as an act of protest and disengagement.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Come to the board to solve a problem and \"show your work\"",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General education math course classroom",
+      "materials": "Board, quizzes",
+      "social_setting": "In front of the class, directed to a specific student by the instructor",
+      "time_context": "After collecting quizzes from students"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After the student attempts the problem but gets the wrong answer, and the professor uses infantilizing language and public shaming",
+      "observable_behavior": "Looks at the board expressionless, withdrawal, silencing, disengagement",
+      "internal_state": "Anxiety, depression, anger, feeling disempowered, cognitive distraction (\"Did that really just happen?\"), activation of stereotype threat (\"Do I have to prove myself as a member of my group yet again?\")",
+      "related_quotes": [
+        "You need to do it like you are in kindergarten, that way you make no mistakes, right? Write this 17 times [he writes, “17 times” on the board]—Right, Javier?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Following a microaggressive event or when instructors use sarcasm and express obvious frustration",
+        "observable_behavior": "Disengagement initiated as an act of protest, withdrawal, silencing of students",
+        "internal_state": "Feeling distinctly uncomfortable, questioning of social belongingness, undermined academic self-concept",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

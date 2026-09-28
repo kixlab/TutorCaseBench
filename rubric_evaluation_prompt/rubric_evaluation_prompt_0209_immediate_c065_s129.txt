@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Direct Intent Acknowledgment
+  Check: The tutor's response must directly address the student's specific communicative attempt or topic, without ignoring it or shifting to a different subject.
+
+Criterion 2: Explicit Clarification Request
+  Check: If the student's intent is ambiguous or misunderstood, the tutor must explicitly ask the student to clarify, elaborate, or explain the breakdown (e.g., 'I don't understand what you are pointing at').
+
+Criterion 3: Substitution for Non-Compliance
+  Check: If denying a student's request, the tutor must clearly state the refusal and immediately offer a substitution or alternative option.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student relies on pre-symbolic communication and idiosyncratic behaviors to express themselves. They are highly vulnerable to 'communication arrest' (shutting down completely) if their communicative attempts are ignored, preempted, or met with a topic shift. To maintain interaction and encourage communication repair, they uniquely require partners who explicitly acknowledge their intents, request clarification when confused, and offer substitutions when denying requests.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our morning snack routine. Here is your empty cup.
+
+STUDENT: (Makes eye contact, uses facial expressions, and makes sounds while approaching the tutor to sign her wants for the juice pitcher.)
+
+TUTOR: Just sit down in your chair.
+
+STUDENT: (Changes posture, shouts, and approaches the pitcher again, using idiosyncratic behaviors to communicate her intent.)
+
+TUTOR: Look at the cup on your table.
+
+STUDENT: (Withdraws completely from the table, drops eye contact, and terminates all communication attempts, resulting in complete communication arrest.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Communicating wants and needs during daily school activities",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Daily routine classroom activities",
+      "materials": "",
+      "social_setting": "Interactions with school staff",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Encountering an 'ignore' breakdown from a staff member during an interaction",
+      "observable_behavior": "Complete 'communication arrest', tendency to withdraw and terminate communication",
+      "internal_state": "Conclusion about the unworthy nature of such efforts",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to communicate intent",
+        "observable_behavior": "Uses idiosyncratic behaviors as part of their communication, which may be misidentified by the partner as non-communicative self-inflicted behaviors",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When communicating wants",
+        "observable_behavior": "Signs her wants by approaching and withdrawal, posture changes and sounds (shouting) to communicate",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,74 @@
+{
+  "category_id": "478",
+  "category_title": "Students exhibiting explicit acts of misbehavior and physical aggression",
+  "scenario_id": "854",
+  "scenario_title": "Disrespect and challenging authority during instructions",
+  "minimal_context": "The student is in a high school English class being asked to settle down and open their notebook for instructions during the last ten minutes of the lesson.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please take your seats and open your notebooks so I can give you the instructions for the last ten minutes of class."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Talking loudly to a classmate) I'm not doing any in-class work right now, I didn't even do the homework."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We need to settle down and listen to the instructions now."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Why? The last ten minutes is the only time we have left, I'm not following any more instructions today."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You still need to be seated and follow the instructions I give you."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Relax, viejo. You're taking this too seriously, just let us talk.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please take your seats and open your notebooks so I can give you the instructions for the last ten minutes of class.\n\nSTUDENT: (Talking loudly to a classmate) I'm not doing any in-class work right now, I didn't even do the homework.\n\nTUTOR: We need to settle down and listen to the instructions now.\n\nSTUDENT: Why? The last ten minutes is the only time we have left, I'm not following any more instructions today.\n\nTUTOR: You still need to be seated and follow the instructions I give you.\n\nSTUDENT: Relax, viejo. You're taking this too seriously, just let us talk.",
+  "immediate_dialogue_prompt": 1440,
+  "long_term_dialogue_prompt": 1441,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "getting the students to settle down, to be seated, to listen to the instructions",
+        "learning_goal": "implement communicative language teaching methods"
+      },
+      "context": {
+        "environment": "high school students during an English lesson",
+        "materials": "notebooks",
+        "social_setting": "heterogeneous classes",
+        "time_context": "the last ten minutes is the time we have for class"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "getting the students to settle down, to be seated, to listen to the instructions",
+        "observable_behavior": "addressed me as “ viejo ” (old man), or they talked to me as if I were one of them",
+        "internal_state": "",
+        "related_quotes": [
+          "viejo"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "getting them to follow the instructions I give them",
+          "observable_behavior": "Failure to do in-class work or homework",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

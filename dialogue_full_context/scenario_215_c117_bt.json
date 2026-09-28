@@ -1,0 +1,74 @@
+{
+  "category_id": "117",
+  "category_title": "Struggling readers who identify and reject inaccurate speech-to-text transcriptions",
+  "scenario_id": "215",
+  "scenario_title": "Evaluating and rejecting inaccurate speech recognition transcriptions during story drafting",
+  "minimal_context": "Maggie is using an iPad with speech recognition software at the writing center to dictate and transcribe the final sentence of her story.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time to write the final sentence for your story, 'Victoria Had a Little Dog'. Go ahead and use the iPad to dictate your idea."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Skips brainstorming and speaks directly into the iPad) The dog would say, hello."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, the iPad transcribed your words. It says: 'Follow dog I don't know that for'."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "That’s not what I said!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Why don't you just copy those words onto your paper so we can move on to the next activity?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Refuses to copy the text onto her paper and deletes the entire sentence from the screen instead)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time to write the final sentence for your story, 'Victoria Had a Little Dog'. Go ahead and use the iPad to dictate your idea.\n\nSTUDENT: (Skips brainstorming and speaks directly into the iPad) The dog would say, hello.\n\nTUTOR: Okay, the iPad transcribed your words. It says: 'Follow dog I don't know that for'.\n\nSTUDENT: That’s not what I said!\n\nTUTOR: Why don't you just copy those words onto your paper so we can move on to the next activity?\n\nSTUDENT: (Refuses to copy the text onto her paper and deletes the entire sentence from the screen instead)",
+  "immediate_dialogue_prompt": 357,
+  "long_term_dialogue_prompt": 358,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Drafting a story titled 'Victoria Had a Little Dog' using SR on an iPad and transcribing the results onto paper, specifically dictating the final sentence: 'The dog would say, hello'",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Supervised writing center",
+        "materials": "iPad with Speech Recognition (SR) software, paper, chart paper",
+        "social_setting": "Independent or small-group writing time with teacher available for assistance",
+        "time_context": "Mid-April"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the SR software inaccurately transcribes her dictated sentence (e.g., transcribing 'Follow dog I don't know that for' instead of 'The dog would say, hello')",
+        "observable_behavior": "Recognizes the transcription is inaccurate, exclaims 'That's not what I said!', and does not copy the inaccurate text to her paper",
+        "internal_state": "Readily recognizes when SR transcriptions are inaccurate despite struggling to read at the first-grade level",
+        "related_quotes": [
+          "That’s not what I said!"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When using SR technology for compositions",
+          "observable_behavior": "Consistently ignores the writing process, skips brainstorming and drafting to go straight to revising, dictates complete ideas, and deletes entire sentences and drafts when SR is inaccurate",
+          "internal_state": "Considers what they dictated to be the final composition",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

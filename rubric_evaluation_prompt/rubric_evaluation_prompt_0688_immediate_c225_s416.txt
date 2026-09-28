@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual and Hands-On Expression
+  Check: The tutor incorporates or encourages the use of visual aids, drawings, or hands-on materials rather than relying solely on verbal questioning.
+
+Criterion 2: Scribing and Verbal Scaffolding
+  Check: The tutor helps capture the student's ideas by offering to scribe keywords, using active listening, or providing targeted probing rather than forcing extended verbal responses.
+
+Criterion 3: Peer Conflict Mitigation
+  Check: The tutor actively protects the student from peer conflict by validating their safety concerns, redirecting them to a safe space, or intervening in negative peer dynamics.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a young learner with social, emotional, and behavioral difficulties who struggles with short attention spans and limited verbal expression. They become restless during verbally mediated tasks and are highly distressed by unstructured environments or peer conflict. The evidence reveals they uniquely need visual/hands-on communication alternatives, adult assistance in capturing their thoughts, and highly predictable, nurturing routines to feel safe.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is playtime in the big classroom, so go ahead and play with the toys with the other children.
+
+STUDENT: I don’t like it when we don’t play.
+
+TUTOR: Go find a group to play with.
+
+STUDENT: The classroom has more toys and more colours, but I want more well-behaved peers.
+
+TUTOR: Why do you say that?
+
+STUDENT: I don’t like it when they hurt me and we argue.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interacting with peers and practising the Golden Rules for behaviour",
+      "learning_goal": "Understand and manage their feelings and build better relationships with their peers"
+    },
+    "context": {
+      "environment": "Bigger mainstream classroom or during break time",
+      "materials": "Toys",
+      "social_setting": "With peers",
+      "time_context": "Break time or playtime"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Exposure to peer behaviour problems which may be more likely to occur in bigger mainstream classroom or during break time",
+      "observable_behavior": "Suggested more well-behaved peers when asked what aspects they would change",
+      "internal_state": "I don't like it",
+      "related_quotes": [
+        "I don’t like it when they hurt me and we argue."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When they hurt me and we argue",
+        "observable_behavior": "Suggested more well-behaved peers",
+        "internal_state": "I don't like it",
+        "related_quotes": [
+          "I don’t like it when they hurt me and we argue."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

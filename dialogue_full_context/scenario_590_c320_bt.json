@@ -1,0 +1,72 @@
+{
+  "category_id": "320",
+  "category_title": "Students with visual impairments who use physical aggression to regain teacher attention",
+  "scenario_id": "590",
+  "scenario_title": "Hallway travel interrupted by staff conversation",
+  "minimal_context": "The student is traveling a familiar route down the hallway to the music room using wall trailing techniques.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's head down the hallway to the music room. Go ahead and trail the wall."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Trails the wall with her hand, walking forward down the hallway.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Stop for a moment, please. Oh, hello. Yes, what do you need?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Stops walking, realizing the instructor's full attention has been taken away by another person.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "I can look at that paperwork with you after this period."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Reaches out and hits the instructor in the chest while they are talking.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's head down the hallway to the music room. Go ahead and trail the wall.\n\nSTUDENT: (Trails the wall with her hand, walking forward down the hallway.)\n\nTUTOR: Stop for a moment, please. Oh, hello. Yes, what do you need?\n\nSTUDENT: (Stops walking, realizing the instructor's full attention has been taken away by another person.)\n\nTUTOR: I can look at that paperwork with you after this period.\n\nSTUDENT: (Reaches out and hits the instructor in the chest while they are talking.)",
+  "immediate_dialogue_prompt": 980,
+  "long_term_dialogue_prompt": 981,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Traveling a familiar route from the classroom to the music room using wall trailing techniques",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Hallway",
+        "materials": "Wall for trailing, long cane",
+        "social_setting": "The instructor follows behind the student by a few feet; another service provider interrupts the lesson",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Another service provider interrupts the lesson to ask the instructor a question. The instructor asks the student to stop for a moment.",
+        "observable_behavior": "While the instructors are talking, the student hits the O&M instructor in the chest.",
+        "internal_state": "The student realizes that the instructor is not providing his or her full attention.",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "General use of a long cane during orientation and mobility instruction",
+          "observable_behavior": "She will swing the cane and hit other people and will hold the cane tip in the air, tripping others",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

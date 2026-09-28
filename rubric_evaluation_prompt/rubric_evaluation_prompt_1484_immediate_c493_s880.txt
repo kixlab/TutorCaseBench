@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Facilitating Elaboration and Peer Revoicing
+  Check: The tutor must prompt the student to elaborate (e.g., 'say more'), use wait time, or invite peers to respond to her ideas, and must NOT directly prod her for a factual answer or unilaterally declare her the expert.
+
+Criterion 2: Validating Lived Experiences
+  Check: The tutor must explicitly invite or validate connections between the student's current scientific ideas and her personal stories, family role, or lived experiences.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is typically a 'silent bystander' in traditional science classrooms, exhibiting passive noncompliance when separated from peers or asked to copy static notes. She shuts down when her ideas are dismissed or when directly prodded, but becomes highly engaged when science is connected to her identity as a helper/advocate for her family. She uniquely needs science framed around personal narratives, hypothetical case studies where she gives advice, and conversational moves like wait time and peer revoicing to draw her out.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review your group's plan for testing environmental impacts on the plants.
+
+STUDENT: I tried to give suggestions for a more authentic study design. In middle school science classes, we did real hands-on experiments, but here they just want to pour Windex on the plants.
+
+TUTOR: What did your group members say when you shared your idea?
+
+STUDENT: My suggestions were dismissed by my classmates.
+
+TUTOR: Well, try to keep participating and working with your group.
+
+STUDENT: (Becomes a silent bystander, limiting her interactions and just watching as the group members talk about pouring the Windex.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a group investigation to test environmental impacts on plants",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Freshman biology classroom",
+      "materials": "Plants, WindexTM",
+      "social_setting": "Group investigation",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When her suggestions for a more authentic study design were dismissed by classmates",
+      "observable_behavior": "Watched as group members talked about pouring WindexTM on plants, was a silent bystander, classroom interactions with others were limited and constraining",
+      "internal_state": "Experiences were difficult for her to reconcile with her experiences in middle school science classes, in which she had forged an identity of herself as a scientist",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During a group investigation",
+        "observable_behavior": "Silent bystander, classroom interactions with others were limited and constraining",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,72 @@
+{
+  "category_id": "030",
+  "category_title": "Year 4 pupil with ADHD symptoms (hyperactivity, impulsivity, and learning difficulties)",
+  "scenario_id": "055",
+  "scenario_title": "Remaining seated during 90-minute Literacy block",
+  "minimal_context": "Yiannis is expected to remain seated at his desk and work on his reading assignment during the 90-minute Literacy block.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are starting our 90-minute Literacy block now. Please sit at your desk and begin your reading assignment."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks highly distracted and moves back and forth in his chair in a nervous manner.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please look at your book and keep trying to read."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Shows great difficulty sitting on his chair, constantly moving back and forth without looking at the assignment.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Yiannis, you need to stay in your seat and do your work."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Leaves his seat completely and begins moving around in the classroom.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are starting our 90-minute Literacy block now. Please sit at your desk and begin your reading assignment.\n\nSTUDENT: (Looks highly distracted and moves back and forth in his chair in a nervous manner.)\n\nTUTOR: Please look at your book and keep trying to read.\n\nSTUDENT: (Shows great difficulty sitting on his chair, constantly moving back and forth without looking at the assignment.)\n\nTUTOR: Yiannis, you need to stay in your seat and do your work.\n\nSTUDENT: (Leaves his seat completely and begins moving around in the classroom.)",
+  "immediate_dialogue_prompt": 85,
+  "long_term_dialogue_prompt": 86,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Remain seated for Literacy hour",
+        "learning_goal": "Remain seated for Literacy hour"
+      },
+      "context": {
+        "environment": "Sat very close to the teacher's desk, book corner",
+        "materials": "Class rules were pinned on a board close to Yiannis' seat... reader friendly, with different colours, pictures and bold letters, reward chart with sticker from his favourite football club",
+        "social_setting": "Classroom",
+        "time_context": "Literacy hour... ninety minutes"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Yiannis seemed to be distracted the most during Literacy",
+        "observable_behavior": "Left his seat and moved around in the classroom",
+        "internal_state": "Distracted",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Sitting on his chair",
+          "observable_behavior": "Great difficulty sitting on his chair and constantly moved back and forth in a nervous manner",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

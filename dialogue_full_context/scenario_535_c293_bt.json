@@ -1,0 +1,72 @@
+{
+  "category_id": "293",
+  "category_title": "Students with severe disabilities receiving one-on-one paraeducator instruction",
+  "scenario_id": "535",
+  "scenario_title": "Passive disengagement during independent silent reading",
+  "minimal_context": "The student is sitting at their desk in the general education classroom with an adapted book for a silent reading activity.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time for our silent reading activity. Your adapted book is right here on your desk."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks around the classroom while many other students are talking quietly.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please go ahead and start reading."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Stares straight ahead, leaving the adapted book closed on the desk.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You need to open your book."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(The book remains closed while the student continues to stare straight ahead and look around the classroom.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time for our silent reading activity. Your adapted book is right here on your desk.\n\nSTUDENT: (Looks around the classroom while many other students are talking quietly.)\n\nTUTOR: Please go ahead and start reading.\n\nSTUDENT: (Stares straight ahead, leaving the adapted book closed on the desk.)\n\nTUTOR: You need to open your book.\n\nSTUDENT: (The book remains closed while the student continues to stare straight ahead and look around the classroom.)",
+  "immediate_dialogue_prompt": 889,
+  "long_term_dialogue_prompt": 890,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "silent reading activity",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "upper elementary/middle school classroom, at the student's desk",
+        "materials": "adapted book, primer level phonics book, auditory version of a novel, magnifying device, worksheets, pencil, iPad",
+        "social_setting": "general education classroom where many students were talking quietly, and two other adults were working with students; one-on-one paraeducator instruction available",
+        "time_context": "morning work time / silent reading activity"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "in a silent reading activity with an adapted book to read available on the student's desk",
+        "observable_behavior": "the book remained closed while the student stared straight ahead or looked around the classroom",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "in a silent reading activity",
+          "observable_behavior": "the book remained closed while the student stared straight ahead or looked around the classroom",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

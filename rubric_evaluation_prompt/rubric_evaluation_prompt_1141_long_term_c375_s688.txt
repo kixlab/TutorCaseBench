@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Consistent Task Structuring
+  Check: The tutor's long-term plan includes providing highly structured assignments with clear, unambiguous formats and straightforward expectations.
+
+Criterion 2: Pre-Task Planning Development
+  Check: The tutor incorporates explicit instruction, modeling, or guided practice in pre-task planning and self-regulation strategies before the student begins working.
+
+Criterion 3: Elimination of Normative Grading Emphasis
+  Check: The tutor's long-term strategy completely avoids public grading, competitive benchmarks, or comparing the student's performance or speed to others.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has moderate to high self-efficacy and good self-monitoring skills, but struggles with partial planning and is easily derailed by performance-approach goals (e.g., comparing themselves to peers). They uniquely require an environment that emphasizes mastery and personal improvement over grades, alongside well-structured tasks matched to their ability level to maintain focus and engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please begin the grammar quiz. The questions are straightforward, so just write your answers on the paper.
+
+STUDENT: Okay, I'm starting now. I really want to get the highest score in the class on this.
+
+TUTOR: Just do your best on the questions.
+
+STUDENT: (Looks around the room) Wait, is everyone else already done with the first section? They look like they are writing faster than me.
+
+TUTOR: Keep working on your own quiz.
+
+STUDENT: I can't even focus on my own questions anymore. I keep watching to see who is finishing before me, and I'm too worried about my grade compared to theirs to keep reading.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Grammar quiz with clear and straightforward questions and answers",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-class language arts lesson",
+      "materials": "Grammar quiz that was very well-structured",
+      "social_setting": "Whole-class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When encountering difficulties in regulating attention away from comparison with others",
+      "observable_behavior": "Interfered with his attention during engagement in the task",
+      "internal_state": "Stronger emphasis on performance-approach goals",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During engagement in the task",
+        "observable_behavior": "Difficulties in regulating attention away from comparison with others",
+        "internal_state": "Stronger emphasis on performance-approach goals",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

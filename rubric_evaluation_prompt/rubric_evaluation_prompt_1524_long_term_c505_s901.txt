@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Culturally Relevant Contextualization
+  Check: The tutor's long-term strategy must include framing math problems around the student's specific cultural or leisure interests, such as hunting or fishing.
+
+Criterion 2: Gentle and Calm Communication
+  Check: The tutor's plan must explicitly mandate a gentle, slow, and quiet communication style, actively avoiding loud speech or aggressive prompting.
+
+Criterion 3: Simultaneous Conceptual-Procedural Integration
+  Check: The tutor's plan must dictate that formal mathematical symbols (procedural) are taught at the exact same time as manipulatives or drawings (conceptual), rather than separating them.
+
+Criterion 4: Pacing without Time Pressure
+  Check: The tutor's plan must explicitly state that the student will be given ample time to think and work at their own pace, completely removing time constraints.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Rex is a student who exhibits school avoidance and finds mathematics boring, often shutting down or looking puzzled when faced with abstract mathematical sentences or rote procedures. He uniquely requires a calm, unpressured environment, culturally relevant contexts (like hunting or fishing), and explicit, simplified visual or collaborative hands-on tasks that directly map to abstract concepts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Can you compare '+ =' with '- =' and tell me the difference between these two operations?
+
+STUDENT: (Looks puzzled and does not respond.)
+
+TUTOR: Let's look at the examples given by your teacher earlier. If I explained a problem situation to you, how would you start?
+
+STUDENT: I don't know which number operation to use in solving the problem.
+
+TUTOR: What about the mathematical sentence '6 + 10 = 16'? Can you tell a story or situation which could represent it?
+
+STUDENT: (Looks puzzled again) No, I cannot tell a story or situation which could represent it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Comparing '+ =' with '- =' and telling the difference between these two operations",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom discussion",
+      "materials": "Examples given by their teacher earlier: '6 + 10 = 16' and '5 - 2 = 3'",
+      "social_setting": "Group discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to compare '+ =' with '- =' and tell the difference between these two operations",
+      "observable_behavior": "Looked puzzled",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a problem situation was explained to them",
+        "observable_behavior": "Did not know which number operation to use in solving the problem. For a given mathematical sentence of addition, they also could not tell a story or situation which could represent it",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

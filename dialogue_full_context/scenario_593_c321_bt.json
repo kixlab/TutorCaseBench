@@ -1,0 +1,72 @@
+{
+  "category_id": "321",
+  "category_title": "Students with visual impairments who use floor-sitting and screaming as task avoidance",
+  "scenario_id": "593",
+  "scenario_title": "Hallway travel and independent walking",
+  "minimal_context": "The student is traveling down a hallway with a long cane to practice independent walking.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time to travel down the hallway. Hold your long cane and let's walk."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Crying and becoming dead weight)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "(Partially holding the student and physically prompting him to walk) Come on, let's walk down the hall."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Agrees to walk independently after walking halfway down the hall)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Keep walking."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Soon drops to the ground again, refusing to move, becoming dead weight and crying)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time to travel down the hallway. Hold your long cane and let's walk.\n\nSTUDENT: (Crying and becoming dead weight)\n\nTUTOR: (Partially holding the student and physically prompting him to walk) Come on, let's walk down the hall.\n\nSTUDENT: (Agrees to walk independently after walking halfway down the hall)\n\nTUTOR: Keep walking.\n\nSTUDENT: (Soon drops to the ground again, refusing to move, becoming dead weight and crying)",
+  "immediate_dialogue_prompt": 986,
+  "long_term_dialogue_prompt": 987,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Traveling down a hallway with the long cane and attempting independent walking",
+        "learning_goal": "Walk independently"
+      },
+      "context": {
+        "environment": "Hallway",
+        "materials": "Long cane",
+        "social_setting": "One-on-one with O&M instructor",
+        "time_context": "During hallway travel"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "After walking halfway down the hall while partially holding the child and physically prompting him to walk, the child agrees to walk independently",
+        "observable_behavior": "Soon drops to the ground again, refusing to move. The child is still dead weight and is crying.",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When expected to walk independently in the hallway",
+          "observable_behavior": "Drops to the ground, refusing to move, dead weight, crying",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

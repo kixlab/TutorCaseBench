@@ -1,0 +1,76 @@
+{
+  "category_id": "186",
+  "category_title": "Preschoolers non-compliant with classroom maintenance routines like toy cleanup and garbage disposal",
+  "scenario_id": "335",
+  "scenario_title": "Toy cleanup non-compliance during play time",
+  "minimal_context": "The student is playing with Lego and other toys in the classroom during play time and is asked to put the toys away.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Play time is over. It is time to start putting the toys away."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Ignores the instruction) Look, I am making a tunnel with Lego!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You need to stop playing and clean up."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Grabs other objects without permission) I want to play with these! (Messes the girls' houses up)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please come back here and put the toys in the bin."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Starts running around the classroom, making a lot of noise and whining) No! I don't want to!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Play time is over. It is time to start putting the toys away.\n\nSTUDENT: (Ignores the instruction) Look, I am making a tunnel with Lego!\n\nTUTOR: You need to stop playing and clean up.\n\nSTUDENT: (Grabs other objects without permission) I want to play with these! (Messes the girls' houses up)\n\nTUTOR: Please come back here and put the toys in the bin.\n\nSTUDENT: (Starts running around the classroom, making a lot of noise and whining) No! I don't want to!",
+  "immediate_dialogue_prompt": 560,
+  "long_term_dialogue_prompt": 561,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Putting the toys away",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom",
+        "materials": "Toys, Lego",
+        "social_setting": "Play time with friends",
+        "time_context": "Play time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when a child does not put their toys away",
+        "observable_behavior": "Messing up toys, playing with objects without permission, making a tunnel with Lego",
+        "internal_state": "",
+        "related_quotes": [
+          "In this picture, K. and A. mess the girls’ houses up."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When rules are not followed",
+          "observable_behavior": "Making a lot of noise, running around, crying, whining",
+          "internal_state": "",
+          "related_quotes": [
+            "If we do not share the toys, our teacher tells us not to bring toys. We should not fight with our friends."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

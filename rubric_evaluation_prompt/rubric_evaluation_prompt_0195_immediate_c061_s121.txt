@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Respect for Content and Modality Choice
+  Check: The tutor's response must validate and permit the student's choice of reading material or response format, rather than redirecting them to 'easier' content or a mandated modality.
+
+Criterion 2: Targeted Mechanical Assistance
+  Check: When the student struggles with writing, the tutor must directly provide the requested spelling or mechanical help without rewriting their sentence or taking over the creative aspect of the task.
+
+Criterion 3: Compensatory Social Praise
+  Check: The tutor must provide explicit, positive praise or social validation regarding the student's contributions, ideas, or efforts, particularly when the student is discouraged.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are middle school students with IDD who are highly motivated by autonomy, social interaction, and age-appropriate content. They can independently navigate digital platforms and use embedded supports (like audio) to access complex texts, but they struggle with spelling/mechanics and become easily discouraged by a lack of peer social feedback. They uniquely need targeted, non-intrusive writing support, compensatory teacher praise, and absolute respect for their content choices.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent reading. Please log into Udio and find an article to read.
+
+STUDENT: Oh, yeah, I can get an article. I know where to find one.
+
+TUTOR: Okay, go ahead and pick something.
+
+STUDENT: I don’t do the sad ones. I am picking this one about renting pets because I love animals.
+
+TUTOR: That article has a lot of big words and looks too hard for you. You need to pick an easier one.
+
+STUDENT: No, I want to read this one! I get to choose what I read. I'm just going to use the audio button to listen to it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independently seeking and accessing age-relevant text in Udio based on content topics",
+      "learning_goal": "Read age-relevant content"
+    },
+    "context": {
+      "environment": "Udio environment",
+      "materials": "Articles, audio-assisted reading",
+      "social_setting": "Independent reading time",
+      "time_context": "Over the course of 4.5 months"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Text being beyond their current reading ability",
+      "observable_behavior": "Voiced their preferences of what to read and were intent on exercising their right to make individual choices",
+      "internal_state": "Excitement about being able to choose for themselves what, when, and how to read",
+      "related_quotes": [
+        "I don’t do the sad ones",
+        "Oh, yeah, I can get an article. I know where to find one."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When selecting articles",
+        "observable_behavior": "Selecting articles based on their interests",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

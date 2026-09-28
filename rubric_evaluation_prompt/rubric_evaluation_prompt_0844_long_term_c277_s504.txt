@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Experiential Visual Anchoring
+  Check: The tutor's long-term plan includes organizing shared physical experiences (e.g., field trips, hands-on activities) and capturing them visually (e.g., taking photos) to serve as a reference point for future lessons.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+John is a student who communicates in short phrases and struggles significantly with social regulation, often monopolizing group discussions and ignoring peers. The evidence reveals he uniquely requires highly structured physical environments (visual aids, props) to scaffold turn-taking, and he engages much better with peers when humor is utilized as a social bridge.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to discuss ideas for our classroom story. Let's take turns suggesting what happens in the plot.
+
+STUDENT: A giant dog comes in!
+
+TUTOR: Okay, now it is your classmate's turn to suggest an idea.
+
+STUDENT: The dog eats all the homework!
+
+TUTOR: Your classmate just said she wants the story to be about a spaceship. What do you think about her idea?
+
+STUDENT: No spaceships! The dog barks really loud! Woof!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing story ideas, suggesting dialogue and ideas about the plot for a classroom story.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting during a collaborative story-making session.",
+      "materials": "Printed photos, notes, props, costumes, smartboard, and iPad2.",
+      "social_setting": "Group collaborative planning session with peers and teacher.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During baseline assessment of social and story-telling abilities when expected to participate in group discussion.",
+      "observable_behavior": "He is unable to wait until asked to respond by teacher; does not listen to peers; does not respond appropriately to what peers say.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When peers are speaking or making suggestions during the collaborative session.",
+        "observable_behavior": "Does not listen to peers; does not respond appropriately to what peers say.",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When waiting for a turn to speak during teacher-led activities.",
+        "observable_behavior": "He is unable to wait until asked to respond by teacher.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

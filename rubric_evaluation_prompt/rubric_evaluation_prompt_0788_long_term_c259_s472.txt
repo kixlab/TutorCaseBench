@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Flexible Play-Based Expectations
+  Check: The tutor's long-term plan incorporates informal, play-based activities where expectations for participation are flexible and adjust based on Katie's daily responsiveness.
+
+Criterion 2: Systematic Use of Modeling
+  Check: The tutor's long-term strategy includes the systematic use of modeling by peers or paraprofessionals to demonstrate expected behaviors.
+
+Criterion 3: Proactive Curriculum Adaptation
+  Check: The tutor's long-term plan explicitly adapts the curriculum to align with Katie's physical and cognitive readiness, rather than strictly mirroring the general education requirements.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Katie is a student who thrives in self-contained settings where she can take on leadership roles, but exhibits task avoidance (shutting down, bathroom trips) in inclusive settings when tasks exceed her physical or cognitive readiness. The evidence reveals she uniquely needs informal, flexible instruction, peer/adult modeling, and validation of her current output rather than rigid adherence to standard curriculum.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, let's sing the song 'Look who's here'. Katie, try to match the pitch with your voice as we sing.
+
+STUDENT: (Drones the words in a speaking-voice monotone, not matching pitch with her voice) Look who is here.
+
+TUTOR: Listen to the music and try again.
+
+STUDENT: (Continues to drone the words in a speaking-voice monotone without matching pitch)
+
+TUTOR: Sing it out loud with the rest of the fourth-grade class.
+
+STUDENT: (Shows a lack of vocal effort and stops singing entirely, appearing aware that the sounds she produces are not the same as the other students around her)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Singing activities such as singing the song 'Look who's here'",
+      "learning_goal": "Match pitch with their voices"
+    },
+    "context": {
+      "environment": "Fourth-grade inclusive music class and self-contained CI class",
+      "materials": "Musical content and props",
+      "social_setting": "Inclusive setting with peers and self-contained setting with paraprofessionals",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the activity is musically beyond her readiness",
+      "observable_behavior": "Not singing as much with this class as she does with the CI class, lack of vocal effort",
+      "internal_state": "Definitely aware that the sounds she produces are not the same as those around her",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to sing or match pitch",
+        "observable_behavior": "Drones the words in a speaking-voice monotone, neither of them matched pitch with their voices",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Social Reciprocity
+  Check: The tutor's long-term plan includes teaching or reinforcing explicit, structured rules for social give-and-take (e.g., improvisation rules like 'Yes, and...').
+
+Criterion 2: Metaphorical Vulnerability Processing
+  Check: The tutor's long-term plan incorporates the use of literary characters, stories, or metaphors to discuss weaknesses, disabilities, or vulnerabilities.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Karl is a student on the autism spectrum who struggles with social reciprocity and uses his diagnosis as a defensive shield during peer conflicts. He uniquely requires explicit physical modeling of boundaries, structured rules for social give-and-take, and metaphorical discussions to safely address his vulnerabilities without triggering his lawyer-like defensiveness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: James and Karl, let's show what 'Achilles struck Moulios on the head with his sword' might have looked like to the observing Greek and Trojan warriors. We're just going to pretend to fight to the death. But no actually touching. OK?
+
+STUDENT: (Agrees, pretends to wield an imaginary sword, and turns toward James) OK.
+
+TUTOR: Go ahead and start the scene.
+
+STUDENT: (Eyes James carefully, looking for a sneaky way to push his buttons before the strike) You're going down.
+
+TUTOR: Let's just focus on acting out the scene.
+
+STUDENT: (As James lurches forward and cries out, 'I cut your head off!') No way! You can't just do that, I wasn't even ready and you stepped too fast, so technically that doesn't count at all!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Show what 'Achilles struck Moulios on the head with his sword' might have looked like to the observing Greek and Trojan warriors",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Standing in the middle of the circle",
+      "materials": "Imaginary sword",
+      "social_setting": "With teacher Brian and peer James",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When peer James lurches forward and cries out, 'I cut your head off!'",
+      "observable_behavior": "Yells 'No way,' refusing to accept the peer's pretend action",
+      "internal_state": "",
+      "related_quotes": [
+        "No way,"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During general social interaction with peer James in the EBD unit",
+        "observable_behavior": "Push each other's buttons; Karl acts sneakier but has it in for James",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

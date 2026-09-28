@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Phased Project Structuring
+  Check: The tutor's long-term plan breaks assignments or studying into smaller, distinct phases, each requiring its own deadline and evidence of completion.
+
+Criterion 2: Routine External Monitoring
+  Check: The tutor establishes a recurring, explicit system for checking the student's notebooks, agendas, or homework completion on a regular basis.
+
+Criterion 3: Collaborative Environment Tailoring
+  Check: The tutor includes a mechanism for regularly asking the student about their learning preferences or focus needs in order to adjust their ongoing study environment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with chronic procrastination, disorganization, and sustained mental effort, frequently becoming overwhelmed by large tasks and attributing their difficulties to 'laziness.' They lack internal self-regulation and agency, leading to lost assignments, crumpled papers, and last-minute emotional distress. To succeed, they uniquely require high levels of external monitoring, explicit instruction on how to organize, and large projects broken down into accountable, bite-sized phases.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start by checking your agenda and notebook to see what homework assignments we need to work on today.
+
+STUDENT: I don't have my agenda. Agendas—I just find this is one more thing to lose.
+
+TUTOR: Alright, let's just look through your notebook to find your notes and assignments.
+
+STUDENT: Like … I write everything down, I just don’t keep it organized. … Like, it’s not in order of date, in order of anything.
+
+TUTOR: Just look in your backpack and pull out whatever homework sheets you have so we can do them.
+
+STUDENT: Like, there’s sheets ripped out, crumpled up in the bottom of my backpack. I have something against it! It’s just … that’s one thing I hate. … You go to school for six hours and they give you homework that lasts another six. … I hate homework so much. … It’s the most meaningless thing in the world. I just … don’t do it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Maintaining and organizing notebooks and binders for school subjects, and completing homework assignments",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "clinical interview or tutoring session where students brought their materials",
+      "materials": "notebooks, agendas, backpack, homework assignments",
+      "social_setting": "One-on-one review of school materials",
+      "time_context": "outside of school hours"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "what teachers would look for when checking notebooks (e.g., completeness, dated pages, neatness, titles, underlining) and agenda use",
+      "observable_behavior": "notebooks were disorganized, sheets ripped out, crumpled up in the bottom of backpack, lost their agendas",
+      "internal_state": "Agendas—I just find this is one more thing to lose",
+      "related_quotes": [
+        "Like … I write everything down, I just don’t keep it organized. … Like, it’s not in order of date, in order of anything. … Like, there’s sheets ripped out, crumpled up in the bottom of my backpack. … I’m disorganized."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Completing homework assignments outside of school hours",
+        "observable_behavior": "completing parts of their homework, then tiring and stopping, or making a deliberate choice not to do homework",
+        "internal_state": "I hate homework so much. … It’s the most meaningless thing in the world.",
+        "related_quotes": [
+          "I have something against it! It’s just … that’s one thing I hate. … You go to school for six hours and they give you homework that lasts another six. … I hate homework so much. … It’s the most meaningless thing in the world. I just … don’t do it!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

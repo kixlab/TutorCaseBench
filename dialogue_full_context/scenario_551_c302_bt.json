@@ -1,0 +1,75 @@
+{
+  "category_id": "302",
+  "category_title": "Friendly, talkative boys who struggle to focus during independent reading",
+  "scenario_id": "551",
+  "scenario_title": "Lack of focus and sleepiness during independent reading",
+  "minimal_context": "The student is participating in a one-on-one reading conference during the 15 to 20 minutes of independent reading time with a self-selected text.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We have 15 to 20 minutes for independent reading now. Please take out your self-selected text and begin reading."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Hey! How's it going? I was just talking to my friends about what we're doing after school."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Let's focus on the book right now. Go ahead and start reading."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I don't really want to read right now. Doing this is just a chore."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just try your best to read the next few pages."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "This is boring. I can't focus on this, reading makes me sleepy.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We have 15 to 20 minutes for independent reading now. Please take out your self-selected text and begin reading.\n\nSTUDENT: Hey! How's it going? I was just talking to my friends about what we're doing after school.\n\nTUTOR: Let's focus on the book right now. Go ahead and start reading.\n\nSTUDENT: I don't really want to read right now. Doing this is just a chore.\n\nTUTOR: Just try your best to read the next few pages.\n\nSTUDENT: This is boring. I can't focus on this, reading makes me sleepy.",
+  "immediate_dialogue_prompt": 915,
+  "long_term_dialogue_prompt": 916,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "the 15 to 20 minutes of class time when students read a self-selected text",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom during independent reading",
+        "materials": "self-selected text, chart/roster",
+        "social_setting": "independent reading, one-on-one reading conferences",
+        "time_context": "15 to 20 minutes of class time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "during independent reading",
+        "observable_behavior": "friendly, talkative, and had a hard time focusing",
+        "internal_state": "claim that reading makes them sleepy",
+        "related_quotes": [
+          "reading makes them sleepy",
+          "This is boring"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When expected to read silently",
+          "observable_behavior": "resisted teacher direction",
+          "internal_state": "pressures and problems that often made reading not only a chore but—for some boys—also an impossibility",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

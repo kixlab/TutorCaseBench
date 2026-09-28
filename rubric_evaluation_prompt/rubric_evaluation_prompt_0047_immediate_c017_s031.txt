@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Gestural Communication
+  Check: The tutor's response must acknowledge, accept, or incorporate Luke's physical gestures as a valid expression of mathematical understanding, rather than correcting him or demanding formal terminology.
+
+Criterion 2: Visual/Spatial Focusing
+  Check: The tutor's response must use visual cues, such as pointing, highlighting, or explicitly isolating a specific mathematical symbol or term, to guide his attention.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Luke is a math student who experiences high academic anxiety and self-consciousness, particularly around peers. When he lacks formal mathematical vocabulary, he relies on physical gestures (like hand-twisting) to communicate his emerging understanding. He uniquely needs tutors to validate these gestures as legitimate communication and use visual focusing techniques to help him process abstract concepts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at this negative exponent problem. Try to get rid of the negative exponent in the denominator.
+
+STUDENT: I worked on this one by myself, but I can't figure out how to solve it.
+
+TUTOR: If you want to get rid of the negative exponent in the denominator and make it one number, you have to multiply by the reciprocal. Do you remember what that is?
+
+STUDENT: When you switch right?
+
+TUTOR: Can you explain what you mean by that?
+
+STUDENT: Uh…The same thing, but twist, right? (He responds in an unsure, questioning way, twisting his hand back and forth in a circular motion with his palm facing toward the tutor, looking self-conscious about answering in front of his peer.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solving negative exponent problems, specifically how to get rid of a negative exponent in the denominator and make it one number by multiplying by the reciprocal",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Tutoring session",
+      "materials": "Math problems involving negative exponents",
+      "social_setting": "Working with a tutor (Matt) and a peer (Henry) who was also school-identified as a student with LD in math and reading",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After working independently on a problem but not being able to figure out how to solve it, and being asked by the tutor 'Do you remember what that is?' regarding a reciprocal",
+      "observable_behavior": "Responded in an unsure, questioning way while TWISTING his hand back and forth in a circular motion with his palm facing toward the tutor",
+      "internal_state": "Struggled with academic anxiety and was especially self-conscious about appearing incompetent in front of his peers",
+      "related_quotes": [
+        "When you switch right?",
+        "Uh…The same thing, but twist, right?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When lacking the formal mathematical terminology to explain a concept",
+        "observable_behavior": "Uses physical gestures, such as TWISTING his hand back and forth in a circular motion, to communicate his emerging conceptual understanding",
+        "internal_state": "Self-conscious about appearing incompetent",
+        "related_quotes": [
+          "It is when you flip the numbers"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

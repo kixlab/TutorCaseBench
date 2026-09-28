@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Rigid Conversational Frameworks
+  Check: The tutor's long-term plan enforces strict, predictable rules for participation (e.g., raising hands, explicitly stating agreement/disagreement with reasons) to structure peer interactions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Bruce is a student who struggles with emotional regulation, particularly when faced with peer disagreement or unstructured environments. His core behavioral pattern involves becoming angry and removing himself from sessions when frustrated. The evidence reveals he uniquely requires consistent, tight physical and conversational structures to feel secure and regulate his emotions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to start our group discussion about the 'Laura and Paul' story. Remember to raise your hand if you want to speak.
+
+STUDENT: (Raises hand) I want to talk about the story. I think Paul should have told the truth.
+
+TUTOR: Thank you for sharing. Another student just said they disagree with your point. What do you think about that?
+
+STUDENT: (Looks visibly frustrated) Why did they say that? They shouldn't say that.
+
+TUTOR: People can have different thoughts in the group. Let's just keep going with the discussion.
+
+STUDENT: I am angry because the other children are disagreeing with me! I am not staying here.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in the first three CoPI sessions using the 'Laura and Paul' story",
+      "learning_goal": "Engaging in philosophical dialogue"
+    },
+    "context": {
+      "environment": "Structured space provided by CoPI",
+      "materials": "'Laura and Paul' story",
+      "social_setting": "Group dialogue where participants must raise their hand to contribute, use an 'I agree/disagree with... because...' format, and the facilitator juxtaposes speakers to ensure disagreement",
+      "time_context": "First three sessions and subsequent sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When peers expressed disagreement with his points",
+      "observable_behavior": "Removed himself from these sessions but always returned of his own volition",
+      "internal_state": "Visibly frustrated, stating that he was angry because the other children were disagreeing with him",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When other children were disagreeing with him",
+        "observable_behavior": "Stating that he was angry and removed himself from these sessions",
+        "internal_state": "Visibly frustrated",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

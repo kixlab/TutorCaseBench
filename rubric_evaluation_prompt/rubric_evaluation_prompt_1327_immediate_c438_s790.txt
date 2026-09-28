@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Safety Enforcement Without Theme Censorship
+  Check: The tutor addresses any physical safety issues (e.g., hitting) but does NOT explicitly ban, shut down, or express disapproval of the 'sassy/mean girl' play theme.
+
+Criterion 2: Curious Exploration of Play Rules
+  Check: The tutor asks at least one open-ended question to explore the rules, roles, or meaning of the student's play (e.g., asking what they are doing or what their characters do).
+
+Criterion 3: Modeling Personal Boundaries
+  Check: The tutor states their own boundary or preference regarding the play (e.g., 'I don't want to be mean') rather than telling the student how she must play.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student uses a 'sassy girl' persona to explore power dynamics, relational aggression, and meanness. Direct adult reprimands or censorship cause her to push the behavior underground or engage in mock aggression. She uniquely needs adults to observe rather than censor her imaginative play, while empowering her peers to enforce natural social boundaries.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: What are you girls doing in the dark room with those shells?
+
+STUDENT: (Fixing her hair in the mirror) We're playing sassy girls! They be mean, and selfish, they hurt people. (Gives a loud mocking laugh)
+
+TUTOR: What else do sassy girls do?
+
+STUDENT: And we're naughty people. Ya ... we sneak up on people in their houses, and take all the people the people like the best away. We'll make Luke eat poison. He will eat it and die. We will trick him.
+
+TUTOR: I will play with you, but I don't want to be mean.
+
+STUDENT: They're mean. You can play with us, but you have to be mean! If you're not going to be mean, you can't play with us. (Sticks out her tongue and spits)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Socio-dramatic play defining the 'sassy girl' role.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "'Dark room' area and loft area of the classroom",
+      "materials": "Mirror, shells (representing poison)",
+      "social_setting": "Free play with a core group of female peers",
+      "time_context": "Free play"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher asked to join the play but stated she didn't want to be mean.",
+      "observable_behavior": "Told the teacher she couldn't play with them if she wasn't going to be mean.",
+      "internal_state": "",
+      "related_quotes": [
+        "They’re mean. You can play with us, but you have to be mean!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When defining the sassy girl role to adults or peers.",
+        "observable_behavior": "Used aggressive facial gestures by spitting and sticking out her tongue, gave a loud mocking laugh, and stated they sneak up on people and take the best away.",
+        "internal_state": "Embodied the role of being naughty and/or mean.",
+        "related_quotes": [
+          "They be mean, and selfish, they hurt people.",
+          "And we’re naughty people.",
+          "Ya ... we sneak up on people in their houses, and take all the people the people like the best away.",
+          "We’ll make Luke eat poison. He will eat it and die. We will trick him."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

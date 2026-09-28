@@ -1,0 +1,77 @@
+{
+  "category_id": "124",
+  "category_title": "Students with blindness and autism exhibiting executive functioning deficits and low task independence",
+  "scenario_id": "228",
+  "scenario_title": "Reading Comprehension and Sensory Overload",
+  "minimal_context": "The student is attempting a reading comprehension task using a Braille book in a bustling school environment.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please open your Braille book and read the first page so we can answer the comprehension questions."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Runs hands over the edge of the book) The spiral binding on this book is distracting. And the paper makes too much sound when I turn it. I prefer audio books, because it is faster and easier to understand when you do not have to engage in tactile reading."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We need to use the paper book today. Go ahead and start reading."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "It's too noisy in the hallway. Nobody should shout, but speak in a low tone of voice and be quiet if the teacher says so. I don’t understand why students don’t do as the teacher says."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just try to ignore the noise and focus on understanding the story."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I can't concentrate on understanding what I am reading. The feel of certain letters is distracting, and with all this noise... If it’s not calm, sensible and quiet, I just cannot think!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please open your Braille book and read the first page so we can answer the comprehension questions.\n\nSTUDENT: (Runs hands over the edge of the book) The spiral binding on this book is distracting. And the paper makes too much sound when I turn it. I prefer audio books, because it is faster and easier to understand when you do not have to engage in tactile reading.\n\nTUTOR: We need to use the paper book today. Go ahead and start reading.\n\nSTUDENT: It's too noisy in the hallway. Nobody should shout, but speak in a low tone of voice and be quiet if the teacher says so. I don’t understand why students don’t do as the teacher says.\n\nTUTOR: Just try to ignore the noise and focus on understanding the story.\n\nSTUDENT: I can't concentrate on understanding what I am reading. The feel of certain letters is distracting, and with all this noise... If it’s not calm, sensible and quiet, I just cannot think!",
+  "immediate_dialogue_prompt": 379,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Reading tasks using Braille on paper",
+        "learning_goal": "Reading comprehension"
+      },
+      "context": {
+        "environment": "School evaluations in an environment with noise and bustle",
+        "materials": "Braille book with spiral binding, paper, audio books",
+        "social_setting": "",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When reading Braille on paper with distractors like the spiral binding, the feel of certain letters, and the sound of turning the paper",
+        "observable_behavior": "Difficult to concentrate on understanding what they were reading",
+        "internal_state": "Cannot think",
+        "related_quotes": [
+          "If it’s not calm, sensible and quiet, I just cannot think!",
+          "Nobody should shout, but speak in a low tone of voice and be quiet if the teacher says so. I don’t understand why students don’t do as the teacher says—it’s so much easier if everyone just listens to the teacher. In my new class they do."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When it is not calm, sensible and quiet",
+          "observable_behavior": "Unable to concentrate",
+          "internal_state": "Cannot think",
+          "related_quotes": [
+            "If it’s not calm, sensible and quiet, I just cannot think!"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

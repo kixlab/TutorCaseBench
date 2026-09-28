@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Verbal Proximity and Cues
+  Check: The tutor uses physical proximity, standing nearby, or subtle non-verbal cues to redirect Gail back to the task, rather than relying solely on verbal reprimands.
+
+Criterion 2: Environmental Redirection
+  Check: The tutor suggests or facilitates moving Gail to a quieter, less distracting environment (e.g., the library or a quiet corner) to complete her work.
+
+Criterion 3: Collaborative Physical Organization
+  Check: The tutor actively participates in physically organizing Gail's materials, desk, or workspace with her, rather than just telling her to get organized.
+
+Criterion 4: Actionable Redirection
+  Check: The tutor provides a specific, actionable step for Gail to take immediately, avoiding statements that merely observe or criticize her lack of organization.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Gail is a highly intelligent student with inattentive ADHD whose primary challenges are severe time management and executive functioning deficits. Rather than being disruptive, she goes off-task by hyper-focusing on minor activities (e.g., rearranging keys, washing hands) and frequently misses instructions during transitions. She uniquely requires subtle non-verbal redirection, environmental shifts, and highly concrete, repetitive organizational systems rather than mere verbal reminders or goal-setting.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please put your poster board away with the other projects, and then we will begin today's science experiment. I've also explained when the extra credit is due.
+
+STUDENT: (Takes an inordinate amount of time to put her poster board with the other projects along the wall closest to her desk)
+
+TUTOR: Gail, please finish putting that away and start working on the assignment.
+
+STUDENT: (Takes quite a long time to hand it in and misses part of the instructions regarding the test)
+
+TUTOR: You need to start the experiment now. Do you know what to do?
+
+STUDENT: The hardest thing in school today was science. I wasn’t sure what steps to do in our experiment and I’m not sure when the extra credit is due, either.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "science experiment and tracking when extra credit is due",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during a science lesson",
+      "materials": "Science experiment materials, extra credit assignments",
+      "social_setting": "Whole class instruction",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "While the teacher is giving instructions and the student is putting away a project",
+      "observable_behavior": "misses part of the instructions regarding the test since she is taking an inordinate amount of time to put her poster board with the other projects along the wall closest to her desk",
+      "internal_state": "felt unsure of what steps to take in that day’s assignment",
+      "related_quotes": [
+        "The hardest thing in school today was science. I wasn’t sure what steps to do in our experiment and I’m not sure when the extra credit is due, either."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When losing attention during interactions",
+        "observable_behavior": "misses part of each interaction",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

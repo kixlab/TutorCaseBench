@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Cooperative Learning Design
+  Check: The long-term plan must incorporate structured cooperative learning frameworks rather than relying on chaotic, self-organized group work.
+
+Criterion 2: Proactive Mapping of Difficult Periods
+  Check: The long-term plan must include a mechanism for Adam and the pedagogue or teacher to collaboratively identify and plan for specific times or lessons he finds difficult to manage.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Adam is a student with ADHD who experiences severe sensory overwhelm in noisy, unstructured environments, leading him to withdraw (e.g., hiding under tables, reading by windowsills) to prevent angry outbursts. He uniquely requires adults to accept his temporary withdrawal as a valid self-regulation strategy, alongside targeted pedagogue support to manage environmental noise and proactively plan for known difficult lessons.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Adam, the classroom lesson is starting. Please sit at the table and work with the others.
+
+STUDENT: It's too loud. I feel this lesson is the hardest to manage right now.
+
+TUTOR: Everyone is just talking about the assignment. Try to focus.
+
+STUDENT: I can't cope with the situation by myself. I feel like I'm going to become angry and lose the ability to control my anger.
+
+TUTOR: We need to get through this lesson. Please stay at the table.
+
+STUDENT: (Covers his ears and sits underneath a table) The noise level is too high!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Classroom lesson",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "a table",
+      "social_setting": "classroom community",
+      "time_context": "specific times when he felt the lesson was hardest to manage"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the noise level was too high",
+      "observable_behavior": "covered his ears and sat underneath a table",
+      "internal_state": "felt the lesson was hardest to manage",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "in his previous reactions to these situations",
+        "observable_behavior": "become angry, lose the ability to control his anger or hit others",
+        "internal_state": "could not cope with the situation by himself",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

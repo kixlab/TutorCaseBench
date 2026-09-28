@@ -1,0 +1,72 @@
+{
+  "category_id": "160",
+  "category_title": "Students who sleep during the course and challenge teacher directives when woken",
+  "scenario_id": "293",
+  "scenario_title": "Aimless disengagement and sleeping during active instruction",
+  "minimal_context": "The student is expected to follow along with the teaching material on the board during active instructional time in the classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please look at the board and follow along with the teaching material for today's lesson."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks directly at your face without any goals, showing interest in everything except the teaching material.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Are you going to look at the material?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Takes out a mobile phone and starts listening to music instead of following the lesson.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please put that away and focus on the lesson."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Continues to ignore the teaching material, puts his head down on the table, and goes to sleep in the classroom.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please look at the board and follow along with the teaching material for today's lesson.\n\nSTUDENT: (Looks directly at your face without any goals, showing interest in everything except the teaching material.)\n\nTUTOR: Are you going to look at the material?\n\nSTUDENT: (Takes out a mobile phone and starts listening to music instead of following the lesson.)\n\nTUTOR: Please put that away and focus on the lesson.\n\nSTUDENT: (Continues to ignore the teaching material, puts his head down on the table, and goes to sleep in the classroom.)",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 486,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Following the teaching material during the lesson",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom",
+        "materials": "Mobile phones, teaching material, board, table",
+        "social_setting": "During active instructional time",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "As they follow the lesson without an aim",
+        "observable_behavior": "They look at my face without any goals, play with their phones, listen to music or prefer sleeping",
+        "internal_state": "Uninterested in the course",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When the teacher is teaching the material",
+          "observable_behavior": "Interested in everything except the teaching material, playing with mobile phones and sleeping in the classroom happen the most",
+          "internal_state": "Uninterested",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

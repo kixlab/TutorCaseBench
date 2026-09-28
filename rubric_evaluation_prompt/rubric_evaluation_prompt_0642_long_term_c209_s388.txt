@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Native-Language Behavioral Rubric
+  Check: The long-term plan must include explicitly translating behavioral or classroom expectations (e.g., safety, responsibility, respect) into Mandarin for Shen.
+
+Criterion 2: Structured Visual Reward System
+  Check: The long-term plan must implement a concrete reward system, such as earning stickers for meeting specific behavioral standards, which eventually leads to a tangible prize.
+
+Criterion 3: Cozy and Expressive Relational Environment
+  Check: The long-term plan must intentionally design a nurturing, low-pressure setting (e.g., pairing him with caring, bilingual mentors or creating a 'cozy' space) where Shen is encouraged to share his true personality and emotions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shen is an English language learner who masks his lack of comprehension by imitating peers, but quickly becomes antsy, resistant, and physically disruptive when overwhelmed by monolingual academic tasks. He uniquely requires explicit behavioral expectations translated into Mandarin, a structured visual reward system, and consistent opportunities to use his home language to express his emotions and demonstrate his knowledge.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to start our lesson. Please sit in your seat.
+
+STUDENT: (Gets up out of his seat and walks around the classroom without permission, appearing antsy.)
+
+TUTOR: You need to go back to your seat.
+
+STUDENT: (Continues to walk around the classroom without permission and picks up a bag.)
+
+TUTOR: What are you doing with that bag?
+
+STUDENT: (Swings the bag around in a circle and hits the substitute teacher with it.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interaction with a substitute teacher in the classroom",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "A bag",
+      "social_setting": "With a substitute teacher",
+      "time_context": "One day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "While interacting with a substitute teacher",
+      "observable_behavior": "Hit a substitute teacher with a bag that he was swinging around in a circle",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During general classroom instructional time",
+        "observable_behavior": "Frequently 'antsy' and would get up out of his seat and walk around the classroom without permission",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

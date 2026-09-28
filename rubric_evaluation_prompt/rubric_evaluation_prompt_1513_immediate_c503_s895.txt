@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Simultaneous Concrete-Abstract Linking
+  Check: The tutor explicitly connects a mathematical symbol, operation, or procedural step to a concrete visual or physical representation (e.g., manipulatives, simple drawings) rather than just providing abstract rules.
+
+Criterion 2: Step-by-Step Validation
+  Check: The tutor directly answers Esther's request for validation on her current step or provides clear, 1:1 guidance on the immediate next action, rather than telling her to work independently or 'try her best'.
+
+Criterion 3: Simplified Visual Representation
+  Check: When utilizing visual aids or drawings, the tutor directs the student to use simple marks (e.g., lines, slashes, boxes) rather than detailed illustrations.
+
+Criterion 4: Contextual Grounding
+  Check: The tutor frames the mathematical problem within a familiar, real-world context or story rather than presenting it as a purely abstract equation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Esther is a student with limited schooling experience who lacks confidence in her mathematical abilities and relies heavily on constant teacher validation. She uniquely requires a gentle, low-pressure environment and explicit 1:1 guidance that simultaneously connects simple concrete representations to abstract mathematical notation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I have explained the problem and arranged the two groups of straws on the table. Esther, please look at the blackboard where I wrote ' + = ' and fill in the addends and the total.
+
+STUDENT: I don't know which number operation to use to solve the problem.
+
+TUTOR: What do you think you should do with the straws?
+
+STUDENT: I cannot tell a story or situation that represents this sentence.
+
+TUTOR: Just try your best to write the numbers in the blanks.
+
+STUDENT: (Stands silently at the blackboard and does not respond.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Filling in addends and totals in a blank mathematical sentence on the blackboard",
+      "learning_goal": "Apply addition and subtraction to problem situations"
+    },
+    "context": {
+      "environment": "Classroom setting",
+      "materials": "Blackboard, two groups of straws arranged on the table",
+      "social_setting": "Whole-class instruction",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After a problem was explained, Miss Bong instructed two students to arrange two groups of straws on the table and wrote ' + = ' on the blackboard.",
+      "observable_behavior": "Did not response.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a problem situation was explained to them",
+        "observable_behavior": "Did not know which number operation to use in solving the problem. For a given mathematical sentence of addition, they also could not tell a story or situation which could represent it.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Implementation of Physical Boundaries
+  Check: The tutor's long-term plan must include the use of physical barriers, such as desk carrels or partitions, to create a dedicated personal workspace for the student.
+
+Criterion 2: Localized Material Storage
+  Check: The tutor's long-term plan must provide localized storage solutions (e.g., chair bags, desk compartments) so the student can access all necessary materials without leaving their seat.
+
+Criterion 3: Pathway and Workstation Optimization
+  Check: The tutor's long-term plan must restructure the classroom layout to clear high-traffic pathways (e.g., moving shared supplies to open areas) and orient workstations away from the general student body.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits high-frequency disruptive behaviors, including physical contact and profanities, which are heavily driven by environmental triggers like peer proximity, congested pathways, and inaccessible supplies. They uniquely require strict physical boundaries, localized material storage, and immediate, non-graded independent tasks to prevent wandering and peer conflict.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent work. Please walk to my desk to get your supplies and reading books, or go to the computer area.
+
+STUDENT: (Leaves seat and walks through the undefined pathway, pushing another student) Move out of my way!
+
+TUTOR: Please walk quietly and get your materials.
+
+STUDENT: (Stops at the computers facing the classroom, ignoring the teacher's direction) Hey, look at what is on this screen!
+
+TUTOR: You need to get your supplies from my desk and go to your seat.
+
+STUDENT: (Walks to the congested teacher's desk, hits another student reaching for the same supplies, and throws a marker across the room) Back off, I was here first! I'm not doing this!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Accessing supplies, independent reading books, and using the computer area",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom environment where pathways were not clearly defined",
+      "materials": "Supplies on the teacher's desk, computers facing the students, independent reading books",
+      "social_setting": "General student body in an inclusive classroom",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When needing to access supplies kept on the teacher's desk or navigating undefined pathways",
+      "observable_behavior": "Leaving seats, coming into physical contact with each other, throwing objects, and causing congestion",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When using the computer area with computers facing the students",
+        "observable_behavior": "Increased distractibility and complete disregard for teacher direction",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

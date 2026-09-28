@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: High-Stimulus ICT Integration
+  Check: The tutor's long-term plan must explicitly incorporate interactive technology (ICT, interactive whiteboards, simulations) as a core, recurring component of the curriculum.
+
+Criterion 2: Methodological Variety
+  Check: The tutor's long-term strategy must outline the use of multiple, shifting instructional methods rather than a single repetitive routine.
+
+Criterion 3: Bridging Engagement to Execution
+  Check: The tutor's long-term plan must include specific scaffolding strategies (e.g., guided notes, structured check-ins) designed to translate his technology-driven engagement into completed academic tasks.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Marios is a 17-year-old student with AD/HD who struggles with inattention, daydreaming, and task avoidance during traditional, theory-heavy instruction. He is shy and tends to let peers speak for him, requiring priority questioning to voice his own thoughts. He uniquely needs high-stimulus, interactive visual tools (like ICT) to 'see theories happen' and requires explicit scaffolding to bridge his initial technological engagement into actual academic task completion.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Marios, please look at the explanatory presentation on the board and use it to fill out your worksheet on Lamarck's theory.
+
+STUDENT: I am not very interested... but OK... it is a relatively nice course.
+
+TUTOR: Try to answer the first question on the worksheet based on the presentation.
+
+STUDENT: I believe that biology is a course that a part of it should be carried out in the laboratory. No matter how good is the teacher’s intention and no matter how well he is informed a student cannot accept all these theories without seeing them happen.
+
+TUTOR: We need to finish this worksheet right now. Keep trying to write down the answers.
+
+STUDENT: (Daydreaming and looking toward the hallway) I missed the points necessary to complete the activity. I can't focus my attention on the details, it demands too much mental effort.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reconstruction of students’ ideas through an explanatory presentation of the basic points of Lamarck’s theory with the use of appropriate worksheets.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Traditional 2-hour biology lesson on Lamarck's theory",
+      "materials": "Explanatory presentation and appropriate worksheets",
+      "social_setting": "Classroom setting without the use of ICT",
+      "time_context": "2-hour biology lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "in-class activities that demanded mental efforts",
+      "observable_behavior": "could not focus his attention to details, he made a lot of mistakes due to failure to concentrate, he was finding difficulties to maintain his attention to his duties, and he was also finding difficulties to complete his duties and tasks. He also seemed to daydream during the class.",
+      "internal_state": "not satisfied by the way biology is being taught in school... considered the biology course being very demanding and needing a lot of analysis",
+      "related_quotes": [
+        ". . . I am not very interested . . . but OK . . . it is a relatively nice course",
+        ". . . I believe that biology is a course that a part of it should be carried out in the laboratory. No matter how good is the teacher’s intention and no matter how well he is informed a student cannot accept all these theories without seeing them happen."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "distraction caused by external stimuli",
+        "observable_behavior": "showed difficulties in fully following teacher’s directions... lose points that may be necessary to complete an activity",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

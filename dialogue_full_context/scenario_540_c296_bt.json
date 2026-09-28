@@ -1,0 +1,85 @@
+{
+  "category_id": "296",
+  "category_title": "Students who use defensive social put-downs when challenged",
+  "scenario_id": "540",
+  "scenario_title": "Salinity investigation and explaining mass differences",
+  "minimal_context": "The student is participating in a small-group discussion to predict which cup of water will make an egg float and explain the mass differences between the cups.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We have two cups of water and an egg. Which cup do you predict will make the egg float?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I think that this one because of the salt water, it will hold the egg up."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Let's look at the cups on the scale. What do you observe?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "This has two things: salt and water. And that one has just one thing."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Notice that both cups have equal volume, but different weights. Why do you think that is?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "That’s because it has an extra thing. It makes it heavier.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We have two cups of water and an egg. Which cup do you predict will make the egg float?\n\nSTUDENT: I think that this one because of the salt water, it will hold the egg up.\n\nTUTOR: Let's look at the cups on the scale. What do you observe?\n\nSTUDENT: This has two things: salt and water. And that one has just one thing.\n\nTUTOR: Notice that both cups have equal volume, but different weights. Why do you think that is?\n\nSTUDENT: That’s because it has an extra thing. It makes it heavier.",
+  "immediate_dialogue_prompt": 897,
+  "long_term_dialogue_prompt": 898,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Salinity investigation using two cups of water and an egg; students are making predictions about which cup will make the egg float.",
+        "learning_goal": "explaining why the cup with salt water weighs more than the cup with fresh water"
+      },
+      "context": {
+        "environment": "Small-group discussion",
+        "materials": "two cups of water and an egg, scale",
+        "social_setting": "Small-group discussion",
+        "time_context": "Having weighed the two cups"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "explaining why the cup with salt water weighs more than the cup with fresh water after weighing them on a scale.",
+        "observable_behavior": "uses vague claims",
+        "internal_state": "",
+        "related_quotes": [
+          "That’s because it has an extra thing."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "making predictions about which cup will make the egg float.",
+          "observable_behavior": "language in the beginning of the discussion was decidedly 'everyday'",
+          "internal_state": "",
+          "related_quotes": [
+            "I think that this one because of the salt water, it will hold the egg up"
+          ]
+        },
+        {
+          "condition": "defending his explanation of mass differences.",
+          "observable_behavior": "clarifying what the 'extra thing' is",
+          "internal_state": "",
+          "related_quotes": [
+            "It has extra salt and water.",
+            "It makes it heavier."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

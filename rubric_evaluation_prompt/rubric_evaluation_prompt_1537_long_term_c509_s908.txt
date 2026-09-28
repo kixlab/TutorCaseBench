@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Ongoing Curricular Modification
+  Check: The long-term plan includes specific adaptations or modifications to the curriculum format, moving away from passive independent work toward more interactive or tailored formats.
+
+Criterion 2: Proactive Praise System
+  Check: The long-term plan incorporates a deliberate, ongoing strategy for catching and praising the student's positive behaviors or moments of active participation.
+
+Criterion 3: Sustained Individualized Focus
+  Check: The long-term plan establishes a routine or mechanism to ensure the student receives a dedicated, consistent amount of direct instructional focus and feedback, preventing them from fading into the background.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits passive non-responsiveness, often spending significant time doing nothing, looking around, or self-stimulating during passive tasks like paper-pen worksheets or unstructured downtime. Because they are not actively disruptive, they easily fade into the background and go unnoticed. They uniquely require proactive inclusion through active discussion, specific curricular modifications, and high rates of direct feedback and praise to maintain engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, I have handed out the math worksheet. Please take out your pencils and start working on the problems.
+
+STUDENT: (Looks around the classroom without taking out a pencil or looking at the worksheet.)
+
+TUTOR: You need to get started on your assignment now.
+
+STUDENT: (Continues to sit quietly, engaging in self-stimulation by repeatedly tapping his fingers on the edge of the desk, without raising his hand or participating in the task.)
+
+TUTOR: Are you going to write down the answers?
+
+STUDENT: (Displays no academic response and no task management, spending the time doing nothing and staring blankly during the paper-pen activity.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General classroom instruction across various content areas including math problems, paper-pen activities, and teacher lecture",
+      "learning_goal": "accessing the curriculum"
+    },
+    "context": {
+      "environment": "general education classrooms",
+      "materials": "paper-pen",
+      "social_setting": "Whole group instruction, teacher lecture, and discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During teacher lecture and conditions such as no instruction, no task, no activity, and paper-pen activities",
+      "observable_behavior": "spend almost one fourth of the instruction time by doing nothing, displaying no academic response, no task management, and no competing response",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In no instruction, no activity and no task conditions",
+        "observable_behavior": "looking around which was coded in 20.10% of the intervals and self stimulation which was observed in 10.49 % of the observation time",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "During general classroom participation",
+        "observable_behavior": "displayed very few academic behaviors such as silent reading and academic talking in conjunction with task management behaviors, such as raising their hand and task participation",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Content Neutrality
+  Check: The tutor's response must strictly avoid introducing new facts, external texts, or personal opinions, acting only to facilitate the process.
+
+Criterion 2: Student-Generated Inquiry
+  Check: The tutor prompts the student to formulate their own question or topic of interest to drive the discussion.
+
+Criterion 3: Clarification-Based Extension
+  Check: The tutor explicitly asks the student to clarify a previous statement or provide an example of what they mean.
+
+Criterion 4: Structural Enforcement
+  Check: The tutor explicitly states, reminds the student of, or enforces a specific rule or format for the dialogue.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly focused and non-disruptive but participates infrequently due to a fear of being 'wrong' and self-consciousness about general knowledge gaps. They interpret peer disagreement as unfair criticism and uniquely require a highly structured environment where they can generate their own inquiry topics and the facilitator remains strictly content-neutral.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Welcome to our first session. Please look at the short text in front of you. I will read it out loud to the circle so we can discuss it.
+
+STUDENT: (Sits quietly and looks down) I don't have anything to say.
+
+TUTOR: Can you try to explain what you know about this topic before we start?
+
+STUDENT: I don't know anything about it. I've never heard of any of this stuff.
+
+TUTOR: That's okay, just follow along with the text while I read it.
+
+STUDENT: (Pushes the text away) I'm not going to read it, and I don't want to listen to it either. I'm just not going to talk.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read a short text or listen to the facilitator read it, then engage in structured argumentative dialogue",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Locked classroom",
+      "materials": "Short text",
+      "social_setting": "Participants sit in a circle in order to see one another, with the facilitator outside the circle",
+      "time_context": "In the first session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to read a short text or even listen to the facilitator read it",
+      "observable_behavior": "Were not sufficiently motivated to read a short text or even listen to the facilitator read it",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participants needed to provide clarification through an extended contribution or an example",
+        "observable_behavior": "Explanations by the children often highlighted very noticeable gaps in their general knowledge on a range of subjects",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

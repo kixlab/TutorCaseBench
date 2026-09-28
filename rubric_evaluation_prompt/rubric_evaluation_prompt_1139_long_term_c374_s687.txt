@@ -1,0 +1,115 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mastery Goal Orientation
+  Check: The tutor's long-term plan includes consistent messaging or activities that explicitly frame learning around deep understanding and skill improvement rather than task completion, grades, or avoiding failure.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is motivated to complete tasks accurately but struggles with self-regulation when confused, prompting them to actively seek help. They are extremely sensitive to dismissive teacher responses; if brushed off, they will abandon the goal of understanding and revert to mere task completion. They uniquely require explicit instruction in self-regulation strategies and a strong emphasis on mastery goals to maintain their engagement with deep learning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start the reading comprehension task. Please read the passage and answer the questions at the end.
+
+STUDENT: Okay. I'm trying to use the reading strategies we talked about. I asked myself, do I understand what the information is saying? But I'm not really sure if I'm doing it right.
+
+TUTOR: Keep trying to read through it.
+
+STUDENT: Can you help me? I want to make sure my answers are accurate so I can get a good grade and avoid failing, but I don't know how to find the right information.
+
+TUTOR: Just do what you can.
+
+STUDENT: Fine, I'll just write down whatever to finish the task. I'm not going to try to understand it anymore because everything …confusing.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "reading comprehension tasks",
+      "learning_goal": "understanding"
+    },
+    "context": {
+      "environment": "individualized support sessions",
+      "materials": "",
+      "social_setting": "teacher and student",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a student with learning disabilities asks for help during a challenging task.",
+      "observable_behavior": "asked the teacher for help",
+      "internal_state": "indicated only low to moderate efficacy for using these strategies",
+      "related_quotes": [
+        "everything …confusing"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "during their engagement",
+        "observable_behavior": "asked their teacher questions several times",
+        "internal_state": "expressed effort as well as external and uncontrollable attributions to success and failure",
+        "related_quotes": [
+          "I asked myself, do I understand what the information is saying?"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

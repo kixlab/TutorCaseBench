@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Formalized Permission for Expressive Reading
+  Check: The long-term plan includes a formal mechanism, routine, or artifact (e.g., a 'poetic license' or specific expressive reading time) that explicitly grants students permission to break traditional quiet reading rules.
+
+Criterion 2: Integration of Communal and Choral Reading
+  Check: The long-term plan incorporates regular opportunities for choral, communal, or shared out-loud reading into the broader class structure.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Bill and Kwame are highly engaged students who express their literacy learning through loud, rhythmic, and physical performances like singing and tapping. Their core behavioral pattern involves disrupting traditional 'quiet reading' norms with embodied, musical energy. The evidence reveals they uniquely need teachers to legitimize these behaviors as valid academic strategies (e.g., 'noticing rhythm') and to match their playful energy rather than enforcing silence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for readers' workshop. Please pair up and read your poems to each other to build your reading stamina.
+
+STUDENT: (Taking turns reading in singing voices) This is the way! Hey! We start the day! Hey!
+
+TUTOR: Let's just read the text on the page, please.
+
+STUDENT: (Continuing in singing voices) We get the knowledge! Hey! To go to college! Hey!
+
+TUTOR: Keep going, but remember the rule for readers' workshop is that it should be quiet.
+
+STUDENT: (Tapping their pencils on the desks and moving their bodies from side to side) We won't stop there! Hey! Go anywhere! Hey! (They start singing louder and invite the peers next to them to join their rhythm)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Partner reading of poetry texts",
+      "learning_goal": "Read just-right books to build their stamina"
+    },
+    "context": {
+      "environment": "Readers' workshop where one of the central rules was that it should be quiet",
+      "materials": "Poems, pencils, desks, just-right books, poetic licenses, shared text",
+      "social_setting": "Pair up to read poems to one another",
+      "time_context": "During the poetry unit"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During partner readings of poetry",
+      "observable_behavior": "Invite their peers to read poems together, join their voices as they read the same text, and keep the rhythm of poems by tapping pencils on desks and moving their bodies from side to side",
+      "internal_state": "Interest in poetry",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reading the poem together",
+        "observable_behavior": "Take turns to read the poem in singing voices",
+        "internal_state": "",
+        "related_quotes": [
+          "Hey!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

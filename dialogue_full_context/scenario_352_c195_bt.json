@@ -1,0 +1,72 @@
+{
+  "category_id": "195",
+  "category_title": "Students with Autism Spectrum Disorder (ASD) showing variable engagement",
+  "scenario_id": "352",
+  "scenario_title": "Whole-class instruction in core subjects without individual support",
+  "minimal_context": "The student is expected to copy and solve math problems from the board during whole-class instruction.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Class, please look at the board and copy down the math problems for today's lesson."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Sits at the desk looking away from the board, keeping the notebook closed and exhibiting no interaction behaviour.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Everyone should be writing the problems down now."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Remains seated and does not participate in the instruction, showing signs of being inattentive.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Let's keep going, we only have a few minutes left to finish this."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Exhibits inattentive and misbehaving actions, completely failing to participate in the whole-class activity and showing no interaction behaviour with peers or the teacher.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Class, please look at the board and copy down the math problems for today's lesson.\n\nSTUDENT: (Sits at the desk looking away from the board, keeping the notebook closed and exhibiting no interaction behaviour.)\n\nTUTOR: Everyone should be writing the problems down now.\n\nSTUDENT: (Remains seated and does not participate in the instruction, showing signs of being inattentive.)\n\nTUTOR: Let's keep going, we only have a few minutes left to finish this.\n\nSTUDENT: (Exhibits inattentive and misbehaving actions, completely failing to participate in the whole-class activity and showing no interaction behaviour with peers or the teacher.)",
+  "immediate_dialogue_prompt": 585,
+  "long_term_dialogue_prompt": 586,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Engaged in core subjects (literacy or maths)",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Mainstream classroom",
+        "materials": "",
+        "social_setting": "Participation within the entire class in non-co-taught classes",
+        "time_context": "5-minute observation period divided into 10-second intervals"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When teachers teach a group of students or the entire class without providing individual teaching",
+        "observable_behavior": "Student is inattentive/misbehave, does not participate, and exhibits no interaction behaviour",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "During participation within the entire class in non-co-taught settings",
+          "observable_behavior": "Does not participate and exhibits no interaction behaviour",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

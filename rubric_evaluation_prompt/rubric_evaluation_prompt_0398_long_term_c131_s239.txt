@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Maximization of Active Music-Making
+  Check: The tutor's long-term plan must prioritize continuous, active music-making activities and explicitly minimize passive listening or transition times.
+
+Criterion 2: Intentional Peer Interaction Design
+  Check: The tutor's long-term strategy must include purposefully planned opportunities for formal and informal peer collaboration during tasks.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with passive waiting and noninstructional transitions, frequently going off-task when expected to wait their turn or work strictly independently. The evidence reveals they uniquely need continuous, active engagement (specifically music-making) and explicitly structured opportunities to collaborate with peers rather than being forced into solo work or passive waiting.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to complete your music worksheet individually.
+
+STUDENT: (Leans over to the next desk) Hey, do you know the answer to this first one?
+
+TUTOR: Try your best on your own.
+
+STUDENT: (Continues talking to the classmate) I think it's a quarter note, right?
+
+TUTOR: Please keep working.
+
+STUDENT: (Ignores the worksheet completely and continues the unassigned peer interaction) Anyway, what are you doing after school today?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "complete a worksheet individually",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Session 1 of a third-grade music class",
+      "materials": "worksheet",
+      "social_setting": "individually",
+      "time_context": "Session 1"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "assigned to complete a worksheet individually",
+      "observable_behavior": "engaged in peer interactions that were unassigned",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "assigned to complete a worksheet individually",
+        "observable_behavior": "talked with another classmate",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

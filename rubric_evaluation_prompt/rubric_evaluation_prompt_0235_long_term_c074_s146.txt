@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Normalization of Negative and Unruly Affect
+  Check: The long-term plan must include strategies for consistently addressing and normalizing negative or unruly emotions mutually with the student over time.
+
+Criterion 5: Channeling Intensity into Symbolization
+  Check: The long-term plan must outline methods for helping the student translate her intense physical and emotional expressions into symbolic, creative, or imaginative work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jasmine is a highly expressive student who uses intense, sometimes aggressive physical movements to communicate her ideas and emotions. She is triggered when adults attempt to sanitize, idealize, or restrict her physical expressions, which causes her to escalate her behavior to prove her point. She uniquely needs her 'unruly' affect to be mutually acknowledged and discussed openly rather than repressed or redirected into artificially positive interpretations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We need to choose a gesture for our morning greeting. Theodore suggested touching knees. What do you think?
+
+STUDENT: (Puts her hand in the air and begins waving it around desperately, jumps up, and bounces on one foot) Neck touches are giraffe kisses.
+
+TUTOR: That sounds like a gentle moment between a mother giraffe and her child.
+
+STUDENT: (Punches a fist into the air) No. That’s not how it goes, it’s not like that.
+
+TUTOR: Can you show us what you mean?
+
+STUDENT: (Raises both arms up, standing again and aggressively knocking her forearms into each other, then punches her fists together, grunting softly and cracking her knuckles) The giraffes are kissing and it’s like this, and they also do this too.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in the morning meeting greeting selection and sharing a personal story about 'giraffe kisses'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Morning meeting circle",
+      "materials": "",
+      "social_setting": "Whole class gathering where the day's line leader chooses what language the classmates greet each other in and choosing a gesture they should use as they go around the circle",
+      "time_context": "Morning meeting"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher interprets the student's story through an idealized, romanticized lens (e.g., 'mother and her child') and holds a 'dreamy expression' on her face",
+      "observable_behavior": "Punches a fist into the air, raises both arms up, standing again and aggressively knocking her forearms into each other, punches her fists together, grunting softly and cracking her knuckles",
+      "internal_state": "",
+      "related_quotes": [
+        "No. That’s not how it goes, it’s not like that. The giraffes are kissing and it’s like this, and they also do this too."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the teacher expresses hesitation about touching necks and suggests alternative, less intimate body parts like elbows or knees or toes",
+        "observable_behavior": "Puts her hand in the air and begins waving it around desperately, jumps up, and bounces on one foot",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

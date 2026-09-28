@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physical and Academic Task Modification
+  Check: The tutor's long-term plan includes modifying academic tasks to accommodate his physical limitations, such as allowing oral responses, using a computer, or adjusting the difficulty level.
+
+Criterion 2: Replacement Behavior Instruction
+  Check: The tutor's plan includes explicitly teaching and reinforcing Philip to ask for help when he encounters difficulty.
+
+Criterion 3: Adapted Peer Inclusion
+  Check: The tutor's plan establishes specific, tailor-made roles for Philip during peer activities (e.g., a modified role in a sports game) to ensure his active inclusion.
+
+Criterion 4: Proactive Attention and Structured Reinforcement
+  Check: The tutor's plan incorporates noncontingent attention throughout the day and a structured reward system (e.g., stickers) for desirable behaviors like completing work or playing appropriately.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Philip is a student with Duchenne muscular dystrophy who exhibits task-avoidant and attention-seeking behaviors, such as falling to the ground, crying, and aggression, when faced with physically demanding writing tasks or peer exclusion. The evidence reveals he uniquely needs academic modifications for his physical weakness, tailor-made roles for social inclusion, and attention extinction during outbursts rather than physical coercion.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, it is time for our language lesson. Please look at the board and write the language exercise in your notebooks.
+
+STUDENT: (Leaves his seat without permission and wanders over to another student's desk) I'm not doing that.
+
+TUTOR: Philip, you need to go back to your place and do your work.
+
+STUDENT: (Interrupts the lesson speaking out of turn and annoys his classmates) No! I don't have to listen to you!
+
+TUTOR: (Walks over and tries to drive him to his seat) Come on, let's go back to your seat and sit down.
+
+STUDENT: (Falls on the ground, cries, and refuses to stand up. Grabs a nearby object and tries to throw it, insulting the teacher) Get away from me, you idiot! I hate this!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "write a language exercise",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom during language lessons",
+      "materials": "computer",
+      "social_setting": "in class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Philip’s teacher asks from the students to write a language exercise",
+      "observable_behavior": "leaves his seat and wanders around the classroom annoying his classmates. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries",
+      "internal_state": "avoid what seems to him a task which is difficult to complete",
+      "related_quotes": [
+        "Philip leaves his seat and wanders around the classroom annoying his classmates. He finally falls on the ground at his attempt to escape from the teacher who tries to drive him to his seat and cries"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "teacher’s attempt to seat him again",
+        "observable_behavior": "falling, crying, and refusing to stand up. While on the ground, Philip exhibits physical and verbal aggression. In particular, he often tries to throw objects to hurt anyone who is nearby and insults his classmates and the teacher",
+        "internal_state": "always seems angry",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

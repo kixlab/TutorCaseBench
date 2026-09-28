@@ -1,0 +1,131 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Interest-Based Academic Integration
+  Check: The tutor's long-term plan incorporates the student's personal interests (e.g., specific book topics, cars) into core academic subjects to sustain engagement.
+
+Criterion 2: Hands-On Pedagogical Shift
+  Check: The tutor plans for regular 'hands-on' activities and projects rather than relying primarily on traditional desk-based worksheets or lectures.
+
+Criterion 3: Structured Social Skills Curriculum
+  Check: The tutor includes a sustained, explicit social skills program (e.g., teaching specific rules for manners, hygiene, and sportsmanship) over time.
+
+Criterion 4: Sanctioned High-Energy Play Outlets
+  Check: The tutor's plan ensures regular, structured opportunities for vigorous physical activities or games during recreation times.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with sustained attention and social interactions, frequently rushing work or acting out to escape long periods of sitting or tasks they perceive as 'boring'. They are highly sensitive to peer ridicule and fear making mistakes, which triggers task avoidance and anti-social behavior. To succeed, they uniquely require an environment that integrates frequent physical movement, empathetic validation of their frustrations, explicit social scripting, and academic tasks deeply tied to their personal interests.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to work with your classmates in groups for our outdoor game.
+
+STUDENT: Do I have to be in a group with him? He is one of those kids that get on your nerves.
+
+TUTOR: You need to stay with your group and participate in the planned task.
+
+STUDENT: I don't want to play. I only like it when you can make mistakes and have no one laugh at you.
+
+TUTOR: Just go over there and take your turn in the game.
+
+STUDENT: (Kicks the game equipment away from the group) I'm not playing with them!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "'work with classmates and in groups' on 'planned tasks' or playing 'games'",
+      "learning_goal": "Development of 'social skills' and 'incorporation of manners in social interactions'"
+    },
+    "context": {
+      "environment": "'classroom' and 'playground'",
+      "materials": "'games'",
+      "social_setting": "'work with classmates and in groups'",
+      "time_context": "'recreation times'"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When interacting with 'kids that get on your nerves' or making mistakes in front of others",
+      "observable_behavior": "'anti-social behaviour (particularly in the playground)'",
+      "internal_state": "Fear of having someone 'laugh at you'",
+      "related_quotes": [
+        "kids that get on your nerves",
+        "no one laugh at you"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When interacting with peers or playing games in the playground",
+        "observable_behavior": "'anti-social behaviour (particularly in the playground)'",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When making mistakes during 'planned tasks'",
+        "observable_behavior": "Reluctance to participate (implied by the relief of 'no one laugh at you')",
+        "internal_state": "Fear of peer ridicule ('no one laugh at you')",
+        "related_quotes": [
+          "no one laugh at you"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

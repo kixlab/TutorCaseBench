@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Group Reinforcement System
+  Check: The long-term plan must establish a system where Mike's appropriate behavior or task completion earns a specific reward or positive reinforcement for the entire class or peer group.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Mike is an 8-year-old second grader who frequently engages in disruptive and hyperactive behaviors (e.g., tapping, wandering, calling out) to avoid independent writing tasks. He does not respond to standard verbal redirects or adult assistance; instead, he uniquely requires structured task escape, visual self-monitoring tools, choice-making, and group-based reinforcement to successfully engage and complete his work.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent writing. Please begin working on your assignment, making sure to include your starter sentence, detail sentences, and a conclusion statement.
+
+STUDENT: (Mike picks up his pencil and begins loudly tapping it on his desk, looking around the room instead of at his paper.)
+
+TUTOR: Mike, please stop tapping and get to work on your writing.
+
+STUDENT: (Mike gets out of his seat without permission and walks across the room to the pencil sharpener.) I need to sharpen my pencil again.
+
+TUTOR: You just sharpened it. Please sit back down and write your starter sentence.
+
+STUDENT: (Mike walks back to his group but does not sit down. He leans over, tapping the student next to him on the shoulder while they are working, and calls out across the room) Hey, what are you writing? I don't want to do this!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent writing exercises including specified writing components (i.e., starter sentence, detail sentences, conclusion statement)",
+      "learning_goal": "Completing the assigned activity within the time provided"
+    },
+    "context": {
+      "environment": "Second grade general education classroom",
+      "materials": "Task materials, pencil, objects on his desk, environmental support to visually cue expectations",
+      "social_setting": "Independent work times with other students present and working",
+      "time_context": "Writing time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Mike is presented with demands to start academic tasks that are less preferred, especially tasks during independent and large group work times",
+      "observable_behavior": "Tapping objects on his desk, calling out without permission, tapping other students on the shoulders when they were working, getting out of his seat without permission, and sharpening his pencil more than once",
+      "internal_state": "Will engage in disruptive behavior to delay or avoid the nonpreferred academic activity",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During assigned activities and independent work tasks, specifically writing",
+        "observable_behavior": "Tapping objects on his desk, calling out without permission, tapping other students on the shoulders when they were working, getting out of his seat without permission, and sharpening his pencil more than once",
+        "internal_state": "Desires to delay or avoid the nonpreferred academic activity",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

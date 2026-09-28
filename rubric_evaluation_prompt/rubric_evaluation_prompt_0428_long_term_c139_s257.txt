@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Whole-Student Mentorship
+  Check: The long-term plan includes strategies for building a non-threatening, mentoring relationship that discusses topics beyond subject content.
+
+Criterion 2: Social Coping Strategy Instruction
+  Check: The long-term plan incorporates direct instruction or shared discourse on coping strategies, such as code-switching or managing peer dynamics.
+
+Criterion 3: Reframing Underachievement as a Protective Struggle
+  Check: The long-term plan explicitly frames Jimmy's underachievement as a protective response to a specific social struggle rather than a behavioral choice or deficit.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jimmy is a highly gifted student who masks his abilities and withdraws in class (e.g., sleeping, refusing to submit work) to avoid social ridicule from peers who view being smart as 'uncool.' He secretly produces high-quality work but views his intellect as a curse. He uniquely requires covert methods to submit work and affective mentoring that validates his social struggle rather than traditional intellectual praise.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I am looking at the composition notebook you handed me. Let's review the writing and drawings you have on these first fifty pages.
+
+STUDENT: (Shrugs) It's just some stuff I write on my own. Mostly just poems and things like that.
+
+TUTOR: I see that it is highly structured and uses a lot of vocabulary.
+
+STUDENT: Yeah, well, I can't exactly do that in class. I learned pretty quick that it's uncool to be smart, so I just keep it in the notebook to stay good with my peers.
+
+TUTOR: The quality and depth of this work is very good.
+
+STUDENT: (Scoffs) Whatever. Having this ability is just a curse anyway. I know I'm underachieving in my classes, but it doesn't bother me. I don't need high achievements to validate who I am at the core.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reviewing independent writing and drawing in a personal composition notebook that is highly structured and written with impeccable vocabulary and candor.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Interview/one-on-one conversation",
+      "materials": "Composition notebook brimming with writing and drawings on nearly the first fifty pages",
+      "social_setting": "One-on-one conversation regarding academic performance and social identity",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Receiving positive comments regarding the quality or depth of his work",
+      "observable_behavior": "Jimmy scoffed at positive comments regarding the quality or depth of his work.",
+      "internal_state": "Knew he was underachieving, but that it didn’t bother him because he didn’t need high achievements to validate who he was at the core; afraid of the risk required to get there.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During a discussion about the potential benefits of high ability",
+        "observable_behavior": "Describes his giftedness negatively.",
+        "internal_state": "Views his high intellectual ability as a social liability.",
+        "related_quotes": [
+          "curse"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

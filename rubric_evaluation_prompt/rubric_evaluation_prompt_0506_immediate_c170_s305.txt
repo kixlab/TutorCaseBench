@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Comprehension Restatement Check
+  Check: The tutor prompts the student to restate, summarize, or explain the concept or lesson they just encountered.
+
+Criterion 2: Explicit Feedback and Model Answers
+  Check: The tutor provides clear feedback on the student's understanding and offers a model answer or concrete example of mastery.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student initially exhibits disengagement and relies heavily on basic retention strategies like self-testing, often skipping through course materials. However, she is highly responsive to structured self-regulated learning training that includes explicit comprehension checks, model answers, and prompts to map course resources to specific learning objectives.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please respond to the open-ended prompt in the training module regarding your future study plans and strategy selection for the introductory algebra course.
+
+STUDENT: If I were studying for an exam I would only use Self-testing and I would use practice quizzes to also help me with that.
+
+TUTOR: Are there any other materials in the LMS you plan to use?
+
+STUDENT: Maybe the study guides, but I'll probably just look at them right before the test. I'm not really focused on this initial attempt.
+
+TUTOR: Please go ahead and complete the rest of the current algebra module.
+
+STUDENT: (Clicks rapidly through the module without reading) I'm just skipping the rest of this. I already told you my plan is just basic practice quizzes for retention, so I'm not going to engage with these other lessons right now.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Introductory algebra course and responding to an open-ended prompt within the SRL training module regarding future study plans and strategy selection",
+      "learning_goal": "basic retention of knowledge"
+    },
+    "context": {
+      "environment": "online LMS",
+      "materials": "adaptive learning technologies, study guides",
+      "social_setting": "",
+      "time_context": "in the initial attempt"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "in the initial attempt",
+      "observable_behavior": "showed multiple indicators of disengagement",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "in an open response prompt",
+        "observable_behavior": "planned only techniques that would be effective, but only for basic retention of knowledge",
+        "internal_state": "",
+        "related_quotes": [
+          "If I were studying for an exam I would only use Self-testing and I would use practice quizzes to also help me with that"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

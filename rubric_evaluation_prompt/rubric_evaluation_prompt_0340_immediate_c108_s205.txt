@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Accommodation of Verification Process
+  Check: The tutor's immediate response must allow, encourage, or actively support Louis in his process of rewriting and verifying the math problem, rather than forcing an abrupt transition.
+
+Criterion 2: Intensive One-on-One Feedback
+  Check: The tutor must provide direct, step-by-step guidance or immediate feedback on the specific math problem Louis is working on.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Louis is a proactive student working to catch up on math content who relies heavily on strong interpersonal relationships with his teachers and mentors. He has a distinct need to physically rewrite problems on a whiteboard to verify his understanding before transitioning or ending a session, and he is highly motivated by personal connections and pop-culture references.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the next math problem for our after-school tutoring session.
+
+STUDENT: Mr. Lopez keeps me on track, making sure I get to my math teacher whenever there is free time to help me catch up—he looks out [for me].
+
+TUTOR: Go ahead and try to solve it.
+
+STUDENT: (Writing the math problem on the whiteboards) I need to make sure I understand the content.
+
+TUTOR: Our time is up for today, you need to pack up.
+
+STUDENT: (Rewriting the math problem on the whiteboards) I can't go yet, I am rewriting the math problem on the whiteboards, making sure I understood the content before I left.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "math problem",
+      "learning_goal": "making sure he understood the content before he left"
+    },
+    "context": {
+      "environment": "After school",
+      "materials": "whiteboards",
+      "social_setting": "small groups or work one-on-one with a student",
+      "time_context": "30-40 minute math tutoring session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "before he left",
+      "observable_behavior": "writing or rewriting the math problem on the whiteboards",
+      "internal_state": "making sure he understood the content",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "whenever there is free time to help me catch up",
+        "observable_behavior": "writing or rewriting the math problem on the whiteboards",
+        "internal_state": "making sure he understood the content",
+        "related_quotes": [
+          "Mr. Lopez keeps me on track, making sure I get to my math teacher whenever there is free time to help me catch up—he looks out [for me]."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

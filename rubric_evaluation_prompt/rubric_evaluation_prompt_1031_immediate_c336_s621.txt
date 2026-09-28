@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Presentation Adaptation
+  Check: The tutor ensures that any visual materials, prompts, or objects are presented with high contrast, without visual clutter, and explicitly within David's intact visual field.
+
+Criterion 2: Extended Processing Time
+  Check: The tutor explicitly provides extra wait time after giving an instruction or presenting a task before expecting a response or intervening again.
+
+Criterion 3: Prompting Alternative Communication
+  Check: When David struggles or shows signs of task resistance, the tutor prompts him to use visual supports or signs to request 'help', 'wait', or a 'break'.
+
+Criterion 4: Withholding Escape-Based Consequences
+  Check: The tutor does not suggest, threaten, or implement time-outs, removal from the area, or sending David away in response to disruptive behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+David is an older adolescent with profound sensory-neural hearing loss and moderate-to-severe visual acuity deficits. He frequently engages in severe escape behaviors (kicking, biting, scratching, throwing food) when task demands are unclear, tasks are too difficult, or structure is insufficient. He uniquely requires highly adapted visual inputs, extended processing time, functional communication alternatives to escape, and meaningful daily living activities, while traditional exclusionary discipline must be strictly avoided as it reinforces his behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: David, it is time for your table-top activities. Here are the objects for sorting.
+
+STUDENT: (David sits at the table but does not sort the objects, engaging in visual self-stimulatory behavior and teeth grinding instead.)
+
+TUTOR: Look at the objects on the table. Put them in the right places.
+
+STUDENT: (David pushes the sorting objects away, continuing to grind his teeth, and begins jumping up from his chair.)
+
+TUTOR: Sit back down. You need to finish sorting these objects.
+
+STUDENT: (David begins kicking and scratching to escape the activity.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "completing table-top activities such as puzzles, sorting objects, and tracing",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "puzzles, sorting objects, and tracing materials, single leers or shapes, visual supports, picture symbols",
+      "social_setting": "direct and systematic instruction",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When David does not comprehend task demands, or when structure is insuﬃcient",
+      "observable_behavior": "kicking, biting, scratching, jumping, teeth grinding, visual self-stimulatory behavior",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When David has diﬃculty with a task or activity",
+        "observable_behavior": "exhibit problematic behaviors to escape/avoid them",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

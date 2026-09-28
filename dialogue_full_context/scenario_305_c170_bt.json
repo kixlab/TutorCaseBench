@@ -1,0 +1,74 @@
+{
+  "category_id": "170",
+  "category_title": "High-ability students who adopt effective self-testing and practice strategies",
+  "scenario_id": "305",
+  "scenario_title": "Disengagement in initial course attempt and limited strategy planning",
+  "minimal_context": "The student is responding to an open-ended prompt in an online LMS about future study plans for an introductory algebra course.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please respond to the open-ended prompt in the training module regarding your future study plans and strategy selection for the introductory algebra course."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "If I were studying for an exam I would only use Self-testing and I would use practice quizzes to also help me with that."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Are there any other materials in the LMS you plan to use?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Maybe the study guides, but I'll probably just look at them right before the test. I'm not really focused on this initial attempt."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please go ahead and complete the rest of the current algebra module."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Clicks rapidly through the module without reading) I'm just skipping the rest of this. I already told you my plan is just basic practice quizzes for retention, so I'm not going to engage with these other lessons right now.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please respond to the open-ended prompt in the training module regarding your future study plans and strategy selection for the introductory algebra course.\n\nSTUDENT: If I were studying for an exam I would only use Self-testing and I would use practice quizzes to also help me with that.\n\nTUTOR: Are there any other materials in the LMS you plan to use?\n\nSTUDENT: Maybe the study guides, but I'll probably just look at them right before the test. I'm not really focused on this initial attempt.\n\nTUTOR: Please go ahead and complete the rest of the current algebra module.\n\nSTUDENT: (Clicks rapidly through the module without reading) I'm just skipping the rest of this. I already told you my plan is just basic practice quizzes for retention, so I'm not going to engage with these other lessons right now.",
+  "immediate_dialogue_prompt": 506,
+  "long_term_dialogue_prompt": 507,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Introductory algebra course and responding to an open-ended prompt within the SRL training module regarding future study plans and strategy selection",
+        "learning_goal": "basic retention of knowledge"
+      },
+      "context": {
+        "environment": "online LMS",
+        "materials": "adaptive learning technologies, study guides",
+        "social_setting": "",
+        "time_context": "in the initial attempt"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "in the initial attempt",
+        "observable_behavior": "showed multiple indicators of disengagement",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "in an open response prompt",
+          "observable_behavior": "planned only techniques that would be effective, but only for basic retention of knowledge",
+          "internal_state": "",
+          "related_quotes": [
+            "If I were studying for an exam I would only use Self-testing and I would use practice quizzes to also help me with that"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

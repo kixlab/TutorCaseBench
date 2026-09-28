@@ -1,0 +1,133 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Visual Direction
+  Check: The tutor's response must explicitly direct the student's attention to specific visual elements or choices (e.g., using simulated pointing, text highlighting, or explicitly naming the exact visual options to look at).
+
+Criterion 2: Concrete Object Prompting
+  Check: The tutor must prompt the student using specific, everyday concrete objects (e.g., 'pencil', 'can of milk', 'dice') when asking them to identify, draw, or classify a shape.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Awal is an autistic student who processes abstract geometric concepts by visually perceiving similarities between concrete, everyday objects. He relies heavily on explicit teacher gestures (like pointing) and tangible visual aids to guide his attention and bridge the gap between concrete items and abstract shapes.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the first shape on the worksheet and find the matching object.
+
+STUDENT: a cube. (Visually perceives the cardboard and selects the picture of the dice that resembles the shape)
+
+TUTOR: Move on to the next shape on the page.
+
+STUDENT: (Focuses on the picture of the rectangular box) Beams. (Uses a matching gesture to indicate the similarity of the shape) a pencil.
+
+TUTOR: Now identify the tube from the images of the piggy bank or the football.
+
+STUDENT: (Points hand gestures to the image of marbles and cans of milk, visually seeing the similarity of a circular shape instead of the requested objects)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "identification form “tube” made in the image concrete objects “piggy bank” or “football”",
+      "learning_goal": "identify or classify objects according to similarities in character"
+    },
+    "context": {
+      "environment": "learning process",
+      "materials": "images, posters, toys (balls, blocks), concrete objects such as dice and cardboard, sheets task",
+      "social_setting": "teacher guiding students working on task",
+      "time_context": "At the beginning of the learning process"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "while identification form “tube” made in the image concrete objects “piggy bank” or “football”",
+      "observable_behavior": "pointing hand gestures image “marbles” or “cans of milk”",
+      "internal_state": "able to use his ideas visually see similarity circular shape",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "responds to call “cardboard” “a cube”",
+        "observable_behavior": "visually perceived forms of” cardboard “together with form “dice” and both resemble the shape of “cube”",
+        "internal_state": "can perception to differentiate and see the similarities with the form of “cube”",
+        "related_quotes": [
+          "a cube"
+        ]
+      },
+      {
+        "condition": "calls the picture “beams” that appointed teachers",
+        "observable_behavior": "Matching gesture indicating Awal can understand the similarity of shape image “pencil” with a picture of “a tissue” that looks like a rectangular box shape “beam”",
+        "internal_state": "",
+        "related_quotes": [
+          "a pencil"
+        ]
+      },
+      {
+        "condition": "in the form of “tubes”",
+        "observable_behavior": "appear matching gesture, expression focus Awal observe and call the picture “tube” designated teacher, then move his hand selecting images “piggy bank” with a clear articulation while giving a “√” in the space",
+        "internal_state": "",
+        "related_quotes": [
+          "tube",
+          "piggy bank"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

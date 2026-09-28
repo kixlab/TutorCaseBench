@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Mechanical Deconstruction
+  Check: The tutor explicitly explains the grammatical or structural reason behind a specific error (e.g., why a sentence is a run-on) rather than merely pointing out the error or providing the corrected version.
+
+Criterion 2: Temporal Separation of Reflection
+  Check: The tutor schedules or introduces reflective tasks only after the active pressure of drafting or submission has concluded, avoiding mixing emotional reflection with active error correction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is an international student with medium English proficiency who struggles with mechanical errors (like run-on sentences) and L1/L2 translation issues, stemming from a native educational background focused on grammar over structure. They easily lose confidence when confronted with widespread errors in their writing. However, they thrive in low-stress, highly structured environments that offer explicit error explanations, multiple ungraded drafts, and safe spaces for empathetic peer reflection.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please take out the second draft of your Personal Narrative assignment so we can work on revising it.
+
+STUDENT: I looked at it, but after the revision of my second draft, I found more errors and they were the same. Like before, those were mostly the run-on and repeated sentences.
+
+TUTOR: Okay, let's just try to correct those sentences now.
+
+STUDENT: It is difficult for me to correct my essay. I understand how hard to organize thoughts and choose the correct words. I'm from Korea, and there they don't teach how to organize thoughts and write an essay.
+
+TUTOR: Just do your best to write what you mean.
+
+STUDENT: Because of the problems with use of English language, I lost confidence in writing. I found it hard because there were errors in almost all my essay. Since I am not a good talker, I had troubles with expressing my thoughts in a proper way.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Revising the first and second drafts of a Personal Narrative assignment",
+      "learning_goal": "improve my essay"
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Personal Narrative assignment, essay drafts",
+      "social_setting": "Individual work on essay revision",
+      "time_context": "After the revision of the second draft"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After the revision of the second draft, when the student found more errors and they were the same (run-on sentences and repeated words)",
+      "observable_behavior": "Expressed having troubles with expressing thoughts in a proper way, and stated it was difficult to correct the essay",
+      "internal_state": "Lost confidence in writing, found it hard because there were errors in almost all the essay",
+      "related_quotes": [
+        "those were mostly the run -on and repeated sentences",
+        "Since I am not a good talker, I had troubles with expressing my thoughts in a proper way."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When dealing with L1/L2 translation errors and organizing thoughts",
+        "observable_behavior": "Struggles to organize thoughts and choose the correct words, attributing it to their Korean education system",
+        "internal_state": "Understands that writing is hard, especially with second language",
+        "related_quotes": [
+          "I understand how hard to organize thoughts and choose the correct words. I ’m from Korea. Korean education system is similar to Chicness in some ways. In Kore a, it is more important to write in correct grammar too. They don't teach how to organize thoughts and write an essay."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

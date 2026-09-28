@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Low-Pressure Home Language Comprehension Checks
+  Check: The tutor uses the student's home language (Korean) to gently ask if she understands the instruction or content, rather than relying on her non-verbal cues or asking in English.
+
+Criterion 2: Dual-Language Content Delivery
+  Check: The tutor presents instructional material by alternating between English and the student's home language, providing home-language explanations for the English text or concepts.
+
+Criterion 3: Explicit Emotional Validation
+  Check: The tutor explicitly validates the student's ideas or efforts using encouraging, low-stakes phrases (e.g., 'any idea will do', 'that is a good idea') to reduce her anxiety.
+
+Criterion 4: Idea-to-Frame Translanguaging
+  Check: The tutor allows the student to express her idea in her home language first, and then provides a specific English sentence frame or grammatical structure to help her translate that exact idea into English.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jessica is a silent, depressed English language learner who experiences extreme school avoidance and frustration due to a total lack of comprehension in English-only settings. She masks her confusion with weak smiles and nods, uniquely requiring home language (Korean) support, translanguaging strategies, and emotional scaffolding to bridge her understanding and alleviate her distress.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are going to read the picture book 'What Do You Do with an Idea?' I want you to try reading this first page in English.
+
+STUDENT: (Shakes her head quietly, appearing reluctant to attempt any reading in English.)
+
+TUTOR: That's alright, I will read the book to you in English. Just listen and follow along.
+
+STUDENT: (She remains completely silent, though her eyes are busy following the book pages and looking at your mouth and eyes while you read.)
+
+TUTOR: I've been reading for a while now. Can you tell me what you think is happening in the story?
+
+STUDENT: (She gives a weak smile) 그냥 이렇게 가만히 앉아있었죠. I have been sitting quietly just like this.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading the picture book 'What Do You Do with an Idea?'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Weekly reading and writing activities in English and Korean",
+      "materials": "The picture book 'What Do You Do with an Idea?'",
+      "social_setting": "One-on-one with a volunteer",
+      "time_context": "30 minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher reads a book for 30 minutes that she doesn't understand.",
+      "observable_behavior": "Sitting quietly just like this.",
+      "internal_state": "",
+      "related_quotes": [
+        "그냥 이렇게 가만히 앉아있었죠. I have been sitting quietly just like this."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to engage with reading or writing in English.",
+        "observable_behavior": "Initially reluctant to attempt any reading or writing in English.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

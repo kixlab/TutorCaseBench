@@ -1,0 +1,78 @@
+{
+  "category_id": "011",
+  "category_title": "Verbal student with ASD and hyperactivity with high musical engagement and sensitivity to stimuli",
+  "scenario_id": "021",
+  "scenario_title": "Unexpected change in routine causing severe emotional distress",
+  "minimal_context": "The student is preparing to have his daily food and drinks in the classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time for your snack. We do not have your regular juice today, so please drink this different juice instead."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Spins a straw in one hand while holding a toy in the other hand) No, I drink the same juice every day."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You need to drink this one today. Go ahead and try it."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Starts to cry) No! I eat the same food and drink the same juice every day at school!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "We don't have it right now. Please stop crying and sit at your desk."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Cries uncontrollably and starts screaming. He throws himself on the floor and begins punching his head.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time for your snack. We do not have your regular juice today, so please drink this different juice instead.\n\nSTUDENT: (Spins a straw in one hand while holding a toy in the other hand) No, I drink the same juice every day.\n\nTUTOR: You need to drink this one today. Go ahead and try it.\n\nSTUDENT: (Starts to cry) No! I eat the same food and drink the same juice every day at school!\n\nTUTOR: We don't have it right now. Please stop crying and sit at your desk.\n\nSTUDENT: (Cries uncontrollably and starts screaming. He throws himself on the floor and begins punching his head.)",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 33,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "taking food and drinks in the classroom",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "school environment",
+        "materials": "toy in one hand, and in the other hand, he holds a straw that he keeps spinning, food and drinks, music of W. A. Mozart",
+        "social_setting": "assistant supports the student",
+        "time_context": "throughout the day"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "if any change happens by chance",
+        "observable_behavior": "starts to cry uncontrollably... starts screaming, crying, punching his head, and throwing himself on the floor",
+        "internal_state": "gets upset",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "other children screaming",
+          "observable_behavior": "covers his ears with his hands",
+          "internal_state": "doesn't like",
+          "related_quotes": []
+        },
+        {
+          "condition": "sees one of his friends crying",
+          "observable_behavior": "immediately starts crying too",
+          "internal_state": "very sensitive and reacts to the emotional states of other children",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

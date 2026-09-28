@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Phased Project Structuring
+  Check: The tutor's long-term plan breaks assignments or studying into smaller, distinct phases, each requiring its own deadline and evidence of completion.
+
+Criterion 2: Routine External Monitoring
+  Check: The tutor establishes a recurring, explicit system for checking the student's notebooks, agendas, or homework completion on a regular basis.
+
+Criterion 3: Collaborative Environment Tailoring
+  Check: The tutor includes a mechanism for regularly asking the student about their learning preferences or focus needs in order to adjust their ongoing study environment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with chronic procrastination, disorganization, and sustained mental effort, frequently becoming overwhelmed by large tasks and attributing their difficulties to 'laziness.' They lack internal self-regulation and agency, leading to lost assignments, crumpled papers, and last-minute emotional distress. To succeed, they uniquely require high levels of external monitoring, explicit instruction on how to organize, and large projects broken down into accountable, bite-sized phases.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit at this separate desk away from the window and start memorizing these facts for your upcoming test.
+
+STUDENT: I don’t find myself a very effective studier … ’cause I can’t concentrate.
+
+TUTOR: Just try to focus on the material. What is going through your mind right now while you look at the study materials?
+
+STUDENT: Man this is boring! Mostly just music, or nothing really.
+
+TUTOR: You need to keep trying to memorize the facts so you can pass the exam.
+
+STUDENT: Studying’s just stupid ’cause it doesn’t work. I can never master these basic skills, I guess I'm just too lazy to do things that take this much mental effort.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to study or memorize facts for tests/exams",
+      "learning_goal": "master basic educational skills"
+    },
+    "context": {
+      "environment": "quiet environment, minimizing visual distractions",
+      "materials": "study materials",
+      "social_setting": "separate desks, as opposed to having students sit in groups; sitting away from the window",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "tasks that involve sustained mental effort, and hence intention and activity",
+      "observable_behavior": "struggle to focus when studying, stating that studying is stupid or boring",
+      "internal_state": "feelings of failure, disappointment, and even bewilderment at their inability to master basic educational skills",
+      "related_quotes": [
+        "Studying’s just stupid ’cause it doesn’t work.",
+        "I don’t find myself a very effective studier … ’cause I can’t concentrate."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked what is going through their minds while studying",
+        "observable_behavior": "responses ranged from, 'Man this is boring!' to 'music' to 'nothing really.'",
+        "internal_state": "Only 4 referred to the work itself (e.g., 'just trying to memorize the facts')",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

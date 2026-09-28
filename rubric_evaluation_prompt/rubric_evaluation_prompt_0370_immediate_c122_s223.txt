@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Time De-pressurization
+  Check: The tutor explicitly removes time pressure, reassuring the student that they can take as much time as they need and should not worry about speed.
+
+Criterion 2: Minimal Incremental Nudging
+  Check: When the student is stuck, the tutor provides only a single, minimal prompt or question, strictly avoiding multi-step instructions or taking over the problem.
+
+Criterion 3: Eliciting Process Articulation
+  Check: The tutor explicitly invites the student to articulate their current thinking process or explain the representation they are currently building.
+
+Criterion 4: Supporting Spontaneous Task Extension
+  Check: The tutor allows the student to determine when a task is complete, supporting them if they choose to spontaneously extend or continue exploring the problem rather than forcing them to move on.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student relies on informal, cumbersome visuospatial representations (like drawing individual tally marks) to make sense of arithmetic. They are highly sensitive to time constraints and peer pressure, which easily disrupts their fragile sense-making and causes them to get 'stuck.' They uniquely require extreme generosity of time, the freedom to use inefficient methods, and minimal, single-step nudges rather than multi-step explanations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's work on this problem: there are 30 biscuits shared between five people. You can use these unit containers to help you.
+
+STUDENT: We were doing something else in math class... Er, angles.
+
+TUTOR: Let's focus on the biscuits for now. What should we do first?
+
+STUDENT: I don’t really get it though …
+
+TUTOR: Try using the unit containers to show the problem.
+
+STUDENT: (Starts slowly counting out the 30 biscuits into the unit containers one by one) I'm stuck.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "30 biscuits shared between five people, 30 people grouped in six-seater taxis, six multiplied by five, etc.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "working on arithmetical tasks",
+      "materials": "using unit containers",
+      "social_setting": "",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Where a student indicates that they are ‘stuck’",
+      "observable_behavior": "indicates that they are ‘stuck’",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "discussing their current work on 'angles' in mathematics class",
+        "observable_behavior": "Says Er, angles. and I don’t really get it though …",
+        "internal_state": "",
+        "related_quotes": [
+          "Er, angles.",
+          "I don’t really get it though …"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

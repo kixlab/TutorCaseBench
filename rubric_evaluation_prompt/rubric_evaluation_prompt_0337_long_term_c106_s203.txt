@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Continuous Personal Investment
+  Check: The long-term plan includes dedicated, consistent efforts to learn about Beaumont's life, background, and interests outside of the curriculum.
+
+Criterion 2: Peer Team-Building Integration
+  Check: The long-term plan incorporates team-building activities or strategies designed to foster mutual respect and positive, collaborative relationships among peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Beaumont is a student who masks his academic insecurities with social off-task behavior, perpetual 'preparation', and peer distraction. He feels misunderstood by strict rule enforcement but is highly responsive to personal connection; taking time to discuss his non-academic interests completely transforms his demeanor into an engaged, proactive learner.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Beaumont, it is time to start. Please take out your math assignment and copy the notes from class today.
+
+STUDENT: I don't have my math notebook with me. Let me just look through my backpack to find a pencil and some paper so I can get ready.
+
+TUTOR: Okay, please find what you need and begin.
+
+STUDENT: I usually don’t know what is happening a lot during class anyway because I am kinda late usually or not paying attention. I learn differently.
+
+TUTOR: Just try to focus on the math work right now.
+
+STUDENT: (Turns to the student at the next desk) Hey, what are you working on? Look at this. I know I just have to stop messing around when I go, but I'm still preparing my stuff. My teacher doesn’t help the ones that are screwing around anyway – I get kicked out a lot [laughing].
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Copying the same notes from the class, asking questions, and completing math work",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "30-45 minute math tutoring session in the after school program",
+      "materials": "Materials needed to participate",
+      "social_setting": "Peers working nearby, teacher available but usually spending her time with students doing actual work",
+      "time_context": "After school"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When arriving at tutoring and needing to begin actual work",
+      "observable_behavior": "Rarely had the materials he needed to participate and usually spent that time 'preparing' to work. He was often off-task, interacting with his friends as they worked, inevitably pulling them off-task as well.",
+      "internal_state": "Considers himself very smart, just misunderstood by his teachers.",
+      "related_quotes": [
+        "I usually don’t know what is happening a lot during class…I am kinda late usually or not paying attention. After school I can copy the same notes from the class and ask questions more.",
+        "I know if I go to tutoring more my grade will get better. I just have to stop messing around when I go. My teacher doesn’t help the ones that are screwing around – I get kicked out a lot [laughing]."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During class or tutoring when expected to work",
+        "observable_behavior": "Late usually or not paying attention, messing around, screwing around, getting kicked out a lot.",
+        "internal_state": "Felt like he had a relationship with her, albeit somewhat professional",
+        "related_quotes": [
+          "I learn differently"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

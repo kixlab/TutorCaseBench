@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Decision-Making Bypass
+  Check: The tutor explicitly directs the student on what specific task, subject, or habitual action to start, rather than asking open-ended questions about what they want to do or how to organize their materials.
+
+Criterion 2: Micro-Chunking
+  Check: The tutor breaks the immediate assignment into a highly restricted, bite-sized chunk (e.g., focusing on just the next step or a very small subset of problems) rather than presenting the whole task at once.
+
+Criterion 3: Parallel Error Modeling
+  Check: When an error occurs, the tutor works through the problem alongside the student or demonstrates the correction process, rather than simply telling the student to find and fix their mistake independently.
+
+Criterion 4: Output Scaffolding
+  Check: The tutor offers to physically scribe (type/write) for the student or drastically simplifies the structural requirements of the task (e.g., reducing an essay to a single sentence or basic transition).
+
+Criterion 5: Emotion Validation without Cheerleading
+  Check: The tutor explicitly acknowledges or validates the student's difficulty or negative emotions without attempting to cheer them up, minimize the distress, or force a positive outlook.
+
+Criterion 6: Analogical Bridging
+  Check: The tutor uses analogies or explicitly connects new academic material to concepts, habits, or experiences the student already knows.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences profound psychomotor retardation, cognitive disorganization, and emotional volatility, often becoming paralyzed by decision-making, minor errors, or the emotional weight of academic content. They require a tutor who acts as an external executive function by dictating tasks, breaking work into micro-chunks, and physically scaffolding output (e.g., scribing). Crucially, the student suffers from anhedonia and guilt, meaning the tutor must validate their distress without attempting to cheer them up.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the next Algebra II problem from the textbook. Please solve it on the whiteboard.
+
+STUDENT: (Holds very still and is slow to reach out for a pencil) I get it. I can work while you’re here.
+
+TUTOR: Okay, go ahead and write out your steps.
+
+STUDENT: (Moves at about half-speed through the algebra work, struggling to translate the book examples to the book problems, and makes a calculation error)
+
+TUTOR: Your answer is incorrect. Look at your calculations and try reworking it.
+
+STUDENT: (Gets bogged down and spends an extended period reworking the calculation error, circling around and around and not seeing an escape) Why bother?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Algebra II problems from a textbook",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "HHI session at home",
+      "materials": "Textbook, whiteboard",
+      "social_setting": "One-on-one instructional session",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the error is in calculation rather than concept",
+      "observable_behavior": "Gets bogged down by problems and will spend extended periods reworking them, circling around and around and not seeing an escape",
+      "internal_state": "Responsibilities stretch in from of him like an endless chain",
+      "related_quotes": [
+        "Why bother?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When he says he 'gets' a math problem",
+        "observable_behavior": "His accuracy is about 50%, holds very still on some days, and is slow to reach out for a pencil",
+        "internal_state": "It seems to be to keep me happy; math is a source of frustration for him from the fluid way instructors use mathematical terms",
+        "related_quotes": [
+          "I can work while you’re here."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

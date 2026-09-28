@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Multimodal Questioning
+  Check: The tutor asks direct, specific questions that explicitly offer or encourage a nonverbal response option (e.g., pointing, using an adapted tool) alongside verbal options.
+
+Criterion 2: Peer-Mediated Interaction
+  Check: The tutor incorporates a peer into the immediate interaction (e.g., asking a peer to demonstrate, share, or assist Jason) rather than forcing direct 1-on-1 compliance with the tutor.
+
+Criterion 3: Elimination of Downtime
+  Check: The tutor provides an immediate, active task or secondary activity, ensuring Jason is not left waiting for his turn or sitting idle.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jason is a middle school student with physical and cognitive disabilities who exhibits self-injurious behaviors, verbal outbursts, and self-stimulation when isolated, waiting, or pressured by unfamiliar adults. He uniquely requires peer-mediated support, age-appropriate materials, and modified shared curriculum to prevent isolation and facilitate meaningful participation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to read this article about the culture of Japan today. Can you look at the page and identify the first letter for me?
+
+STUDENT: (Turns his head away, refusing to talk or interact with the unfamiliar tutor.)
+
+TUTOR: Please look at the article. What letter is this right here?
+
+STUDENT: (Continues refusing to talk and begins engaging in self-stimulation, flapping his hands and rocking his body.)
+
+TUTOR: You need to try to answer. Just point to the letter on the paper.
+
+STUDENT: (Lets out a loud verbal outburst and begins engaging in self-injurious behavior, hitting himself and picking at his skin.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading an article about the culture of Japan and identifying letters by responding to questions",
+      "learning_goal": "Demonstration of general education content acquisition"
+    },
+    "context": {
+      "environment": "General education contexts",
+      "materials": "Age-appropriate and grade-level materials (e.g., an article about the culture of Japan)",
+      "social_setting": "General education classmates and teachers, with one-on-one assistance through a peer support program",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When approached by people who were unfamiliar to him",
+      "observable_behavior": "Refusing to talk or interact with others, loud verbal outbursts, self-injurious behavior (hitting oneself, picking skin), and self-stimulation (hand flapping, body rocking)",
+      "internal_state": "Associated only with people who were in his inner circle",
+      "related_quotes": [
+        "associated only with people who were in his “inner circle,” refusing to talk or interact with others"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When provided with unrelated activities that had been prepared by special educators",
+        "observable_behavior": "Curtailed interaction with classmates and lack of participation in class activities",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

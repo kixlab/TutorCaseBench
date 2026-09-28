@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Vocal Response Modality
+  Check: The tutor prompts MG to respond using a physical action, gesture, or object manipulation rather than demanding a vocalization.
+
+Criterion 2: Concrete Visual Scaffolding
+  Check: The tutor pairs their instruction with a concrete visual or physical support (e.g., exact photos, physical objects, picture cards) rather than relying solely on verbal directions.
+
+Criterion 3: Avoidance of Direct Vocal Imitation
+  Check: The tutor does NOT demand direct vocal imitation (e.g., 'Say [sound/word]') as the primary task or expectation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+MG is a 4-year-old girl with ASD who experiences severe speech and language delays, lacking meaningful vocalizations, joint attention, and symbolic play. Because her language deficits have both biological and behavioral roots, standard vocal imitation fails; she uniquely requires physical prompting for gestures, concrete-to-abstract visual supports, and alternative communication systems to bridge her needs.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is a spoon. Look at these three photos on the table. Match the spoon to the correct photo.
+
+STUDENT: (Does not produce any meaningful vocalizations or words, and engages in primarily exploratory play with the spoon instead of looking at the photos.)
+
+TUTOR: Listen to me. Pick the correct picture for the spoon.
+
+STUDENT: (Continues exploratory play with the object, lacking symbolic play, and does not pick a picture from the array.)
+
+TUTOR: Let's try again. Put the spoon on the matching picture.
+
+STUDENT: (Performs inconsistently in object and picture identification, placing the spoon on the wrong photo without producing any meaningful vocalizations.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "match object to an array of two to three pictures",
+      "learning_goal": "improve on three main areas, namely communication and preverbal skills, language comprehension and, speech and language production"
+    },
+    "context": {
+      "environment": "structured tasks",
+      "materials": "common objects, such as cup, spoon, comb and key, photos of the exact objects, picture cards and line drawings",
+      "social_setting": "one-on-one intervention",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During object and picture identification",
+      "observable_behavior": "perform inconsistently in object and picture identification",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During assessment of object and picture identification",
+        "observable_behavior": "could only identify the common objects and pictures correctly 10% of the time",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

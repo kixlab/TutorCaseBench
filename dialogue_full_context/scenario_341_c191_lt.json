@@ -1,0 +1,77 @@
+{
+  "category_id": "191",
+  "category_title": "Students accustomed to strict, non-negotiable disciplinary models",
+  "scenario_id": "341",
+  "scenario_title": "Whole-class instruction and noise management",
+  "minimal_context": "The teacher is attempting to begin whole-class instruction while the students are in the classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Alright everyone, I need to teach the class now. Let's get started."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Continues speaking loudly to a classmate) So anyway, I was telling him that we should go after school..."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "I will wait for everyone to stop talking before I talk."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Laughs with classmate) Look, it seems that she gets upset. But they do not punish them or do anything. They wait for them to stop talking instead of telling them to be quiet."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "I am still waiting for silence so we can begin."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Just keep talking. They cannot hit us or punish us physically here. Sometimes we do certain things based on our knowledge of what they can and cannot do to us.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Alright everyone, I need to teach the class now. Let's get started.\n\nSTUDENT: (Continues speaking loudly to a classmate) So anyway, I was telling him that we should go after school...\n\nTUTOR: I will wait for everyone to stop talking before I talk.\n\nSTUDENT: (Laughs with classmate) Look, it seems that she gets upset. But they do not punish them or do anything. They wait for them to stop talking instead of telling them to be quiet.\n\nTUTOR: I am still waiting for silence so we can begin.\n\nSTUDENT: Just keep talking. They cannot hit us or punish us physically here. Sometimes we do certain things based on our knowledge of what they can and cannot do to us.",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 569,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "the teacher needs to teach the class",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "in class",
+        "materials": "",
+        "social_setting": "everyone continues speaking",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "the teachers would wait for the students to stop talking before they talk",
+        "observable_behavior": "we do certain things based on our knowledge of what they can and cannot do to us",
+        "internal_state": "aware that they cannot do us anything. They cannot hit us or punish us physically.",
+        "related_quotes": [
+          "because if someone begins to speak it seems that they get upset. But they do not punish them or do anything. They wait for them to stop talking instead of telling them to be quiet.",
+          "They cannot hit us or punish us physically. Sometimes we do certain things based on our knowledge of what they can and cannot do to us."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "when we make noise and the teacher needs to teach the class",
+          "observable_behavior": "everyone continues speaking",
+          "internal_state": "aware that they cannot do us anything",
+          "related_quotes": [
+            "They were very strict with respect to discipline because they did not allow us to make noise in class."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

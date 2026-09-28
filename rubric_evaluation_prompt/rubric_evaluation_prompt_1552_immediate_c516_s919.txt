@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Implicit L2 Recasting
+  Check: The tutor provides the English translation or phrasing for the student's L1 response rather than repeatedly demanding the student produce English words they do not know.
+
+Criterion 2: L2 Concept Reinforcement
+  Check: If L1 is used or accepted during the exchange, the tutor explicitly follows up by reinforcing or summarizing the concept in English.
+
+Criterion 3: Morphological Vocabulary Analysis
+  Check: The tutor breaks down technical vocabulary into its morphological components (e.g., roots, prefixes) or connects it to simpler, known English words.
+
+Criterion 4: Structured Preparation Time
+  Check: The tutor offers the student dedicated time to prepare their response (e.g., suggesting they think for a moment, write it down, or discuss with a peer) before requiring a full L2 answer.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has lower English (L2) proficiency and frequently relies on their native Chinese (L1) to answer content questions in CLIL lessons. While they understand the academic concepts, they lack the English academic vocabulary to express them and become frustrated when forced to produce it on the spot. They uniquely need implicit L2 recasting, morphological breakdown of terms, and structured preparation time to bridge the gap between content knowledge and L2 expression.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's discuss plate tectonics. Look at this diagram. How are these two plates moving?
+
+STUDENT: (Answers in Chinese)
+
+TUTOR: Can you try to say your answer in English?
+
+STUDENT: They are moving... (Pauses and finishes the explanation in Chinese)
+
+TUTOR: Keep trying. What is the English phrase for that movement?
+
+STUDENT: I don't know the English words. (Answers in Chinese again because they cannot express that the plates are moving 'Towards each other')
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing plate tectonics and movement",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Grade 10 Geography lesson in School C",
+      "materials": "",
+      "social_setting": "More interactive as teachers there talked comparatively less and their turns were considerably shorter",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When students provide answers in their L1 (Chinese)",
+      "observable_behavior": "students' answer in Chinese",
+      "internal_state": "unable to express their understanding of content knowledge through English academic language",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked a question about plate movement",
+        "observable_behavior": "students' answer in Chinese",
+        "internal_state": "",
+        "related_quotes": [
+          "Towards each other"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Mastered Tasks
+  Check: The tutor's immediate response includes or pivots to academic tasks the student has already mastered to encourage initial engagement or de-escalate resistance.
+
+Criterion 2: Visual and Interactive Prompting
+  Check: The tutor utilizes visual aids, interactive icons, or visual modeling rather than relying solely on verbal directives to prompt the student.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Evan is a 9-year-old with limited expressive language who exhibits severe avoidance behaviors (eloping, dropping to the floor, physical protests) during transitions, group activities, or unfamiliar tasks. He uniquely requires visual supports, explicit visual schedules tied to reinforcers, and the use of mastered tasks to build momentum and mitigate task resistance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our whole-group calendar activity. Let's look at the SmartBoard to review the date, days of the week, and the weather.
+
+STUDENT: (Stands still and does not follow the direction to join the group activity.)
+
+TUTOR: Evan, you need to come over here and participate with the class.
+
+STUDENT: (Protests the activity by turning and running away from the calendar area.)
+
+TUTOR: Please stop running and come back to the SmartBoard.
+
+STUDENT: (Continues running and elopes into the unoccupied adjacent classroom to avoid the group activity.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "participated in a group calendar time activity where the date, days of the week, and weather were reviewed",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "whole-group activity",
+      "materials": "SmartBoard with interactive icons and words for the days and weather",
+      "social_setting": "Six students participated in this 30-min activity (i.e., the three research participants and their three classmates)",
+      "time_context": "30-min activity"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "attempted to avoid group activities",
+      "observable_behavior": "eloping to an unoccupied adjacent classroom",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "failed to independently follow directions",
+        "observable_behavior": "running away",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

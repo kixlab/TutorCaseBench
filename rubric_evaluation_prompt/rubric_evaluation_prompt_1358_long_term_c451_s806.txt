@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Choice of Reinforcer
+  Check: The long-term plan includes a mechanism for Jose to choose the specific reinforcer he will earn for meeting his behavioral goals.
+
+Criterion 2: Preferred Adult as Reward
+  Check: The long-term plan structures visits with preferred adults (e.g., the principal or assistant principal) strictly as a contingent reward for meeting goals, never as a punishment.
+
+Criterion 3: Explicit Behavior and Reward Mapping
+  Check: The long-term plan explicitly defines the target prosocial behaviors expected during independent work and clearly links them to specific, earnable reinforcements.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jose is a 9-year-old fourth-grade student who struggles with independent work and frequently engages in off-task behaviors (wandering, talking, playing) to seek attention. His core differentiating characteristic is that traditional disciplinary measures, such as verbal warnings or being sent to the principal's office, actually reinforce his misbehavior because he enjoys the social interaction. He uniquely requires a proactive approach that provides attention and preferred activities strictly as contingent rewards for meeting behavioral goals, rather than as consequences for acting out.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jose, it is time for independent work. Please complete this worksheet at your desk.
+
+STUDENT: (Pushes the worksheet aside and starts playing with books and materials on his desk.)
+
+TUTOR: You need to focus on your seatwork right now.
+
+STUDENT: (Leaves his desk and walks across the classroom to sharpen his pencil.)
+
+TUTOR: Please go back to your assigned area and finish the worksheet.
+
+STUDENT: (Instead of returning to his desk, he moves around the classroom, talking to peers and interrupting other students who are working.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "independent work tasks, including worksheets and other seatwork",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "fourth grade general education classroom",
+      "materials": "worksheets, pencil, books and materials, self-management system",
+      "social_setting": "assigned area, peers present in the classroom",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Jose is engaged in an independent task, particularly when required to do worksheets or other seat work",
+      "observable_behavior": "leave his assigned area, interrupt other students, and become disengaged from the task",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During independent work tasks",
+        "observable_behavior": "leaving his desk and moving around the classroom, talking to peers, sharpening his pencil, and playing with books and materials",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Low-Distraction Digital Medium
+  Check: The tutor's long-term plan must transition the student away from paper books and onto a low-distraction digital e-reader for sustained reading sessions.
+
+Criterion 2: Device Ownership and State Preservation
+  Check: The tutor's long-term plan must ensure the student has a dedicated, unshared device where their reading progress and bookmarks are securely preserved.
+
+Criterion 3: Abundant Free Choice Library
+  Check: The tutor's long-term plan must include providing a broad, easily accessible digital library of free-choice reading materials on the student's device.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a reluctant reader who loses focus and feels passive ('just sitting') when reading traditional paper books. They uniquely require low-distraction e-readers with customizable features and the ability to switch between texts to transform reading into an active, flow-inducing experience.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our 50-minute Friday Silent Sustained Reading session. Please open your traditional paper book and begin reading your free choice novel.
+
+STUDENT: I stay more focused when I'm on the Nook.
+
+TUTOR: We are using the paper books right now. Please look at your book and read.
+
+STUDENT: Yeah. I don't know. I just can't focus, can't read.
+
+TUTOR: Just do your best to keep trying for the rest of the period.
+
+STUDENT: I lose focus just randomly. I don't like this because I'm not doing anything but sitting.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading free choice novels",
+      "learning_goal": "Silent, sustained reading"
+    },
+    "context": {
+      "environment": "Classroom during a 50-minute Friday Silent Sustained Reading (SSR) session",
+      "materials": "Traditional paper books, Barnes and Noble Simple Touch Nook e-readers, downloaded books",
+      "social_setting": "Independent reading during an entire class period",
+      "time_context": "50-minute Friday session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When reading a traditional paper book",
+      "observable_behavior": "Loses focus randomly, stops reading, and complains about not doing anything but sitting",
+      "internal_state": "Unable to focus, feels unengaged and inactive",
+      "related_quotes": [
+        "Yeah. I don’t know. I just can’t focus, can’t read."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reading a paper book",
+        "observable_behavior": "Loses focus randomly and is unable to read",
+        "internal_state": "Lacks focus",
+        "related_quotes": [
+          "Yeah. I don’t know. I just can’t focus, can’t read."
+        ]
+      },
+      {
+        "condition": "When required to sit and read print",
+        "observable_behavior": "Expresses dislike for reading because they are not doing anything but sitting",
+        "internal_state": "Feels unengaged and inactive",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

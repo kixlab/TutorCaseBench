@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Task Segmentation and Choice
+  Check: The tutor's response must either break the assignment into smaller, manageable parts or offer David a choice regarding which part of the task to complete first.
+
+Criterion 2: Redirection Without Task Removal
+  Check: The tutor must redirect David back to the task without issuing reprimands, time-outs, or office referrals that would allow him to avoid the work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+David is a 3rd-grade student who uses disruptive behavior and profanity to escape difficult academic tasks, particularly in reading and math. Because traditional punitive measures like time-outs inadvertently reinforce his avoidance by removing the task, he uniquely needs tasks to be segmented, choices provided, and proactive academic previewing to build success.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: David, it is time for ELA. Please read this passage and complete the assignment at your desk.
+
+STUDENT: (Stares at the paper) I'm not reading this. It's too long.
+
+TUTOR: You need to do your work. Just get started.
+
+STUDENT: (Pushes the assignment off the desk) No! I'm not doing it.
+
+TUTOR: David, pick up your paper right now or I will have to send you to the office.
+
+STUDENT: I don't give a s***! Send me to the office, I'm not doing this f***ing reading!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "academic task in math or reading, specifically a difficult reading assignment",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "English Language Arts (ELA) and Science classes during regular classroom instruction",
+      "materials": "reading assignments, contingency contract, self-monitoring form, tickets, classroom treasure box, scatter plot",
+      "social_setting": "classmates and teachers",
+      "time_context": "end of ELA, math, and science periods"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when David a 3rd grade student is presented with an academic task in math or reading",
+      "observable_behavior": "engage in disruptive behavior to avoid completing the assigned task and uses profane language",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when the teacher stopped the lesson to reprimand the student, give him time out, or send him to the office",
+        "observable_behavior": "task avoidance",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Boundary Enforcement via Structured Agreements
+  Check: The tutor references or establishes a clear, structured agreement regarding the student's access to support or expectations for returning to class, rather than allowing open-ended avoidance.
+
+Criterion 2: De-escalation through Time-Out or Trigger Recognition
+  Check: The tutor offers a designated 'time out' or prompts the student to identify their specific triggers, rather than forcing immediate task compliance while the student is dysregulated.
+
+Criterion 3: Flexible Outcome Negotiation
+  Check: The tutor offers choices or negotiates a mutually acceptable next step, explicitly avoiding inflexible, unilateral demands.
+
+Criterion 4: Competence Affirmation
+  Check: The tutor explicitly praises the student's effort, capability, or the quality of their work to build academic confidence.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with social-emotional dysregulation, frequently reacting to peer provocation with anger and classroom disruption. They exhibit authority defiance by ignoring social formalities and abusing unstructured access to support staff to avoid mainstream lessons. They require clear boundaries through structured agreements, de-escalation strategies like time-outs, and flexible negotiation, while responding poorly to rigid demands or being relegated to lower-ability sets.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit at your desk and start catching up on the worksheet you missed yesterday.
+
+STUDENT: I don't even know what to do. I was feeling angry all the time and I can't concentrate on this.
+
+TUTOR: Just try your best to focus on the paper and get it done.
+
+STUDENT: (Turns around to the desk behind) Stop looking at my paper! The only reason I am bad is because people wind me up and I cannot control my behaviour.
+
+TUTOR: Please ignore them and get back to your own work.
+
+STUDENT: (Throws the worksheet off the desk and starts talking loudly to the peers) No! I would rather disrupt than do this. You're all winding me up!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "performing classroom-based tasks as well as homework or catching up on lost work",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "lessons in the mainstream microsystem",
+      "materials": "",
+      "social_setting": "peers present in lessons",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when people wind me up",
+      "observable_behavior": "disturbing their peers, would rather disrupt",
+      "internal_state": "feeling angry all the time, cannot control my behaviour",
+      "related_quotes": [
+        "The only reason I am bad is because people wind me up and I cannot control my behaviour.",
+        "I was feeling angry all the time"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "catching up on lost work and concentrating in lessons",
+        "observable_behavior": "difﬁculy performing classroom-based tasks",
+        "internal_state": "higher levels of academic encumbrance",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Predictive Observation Focus
+  Check: The tutor's response must prompt the student to track a specific pre-stated goal or prediction made by the player, rather than asking them to record general, open-ended data.
+
+Criterion 2: Short-Cycle Feedback Intervals
+  Check: The tutor's response must structure the observation task into short, manageable chunks (e.g., a specific low number of points or a brief time limit) followed immediately by a pause for feedback or review.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a beginner with a history of academic and behavioral struggles who finds standard observation tasks meaningless and overwhelming, leading to frustration and random guessing. They uniquely require shared stakes (where their coaching directly impacts a combined team score) and highly structured, short-cycle observation tasks to maintain focus and accuracy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please watch your teammate's match and record the point locations on your observation worksheet. Remember, the theme is hitting to the front and back zones.
+
+STUDENT: This is stupid. My teammate just keeps sending the shuttlecock right to the central zone of the other court anyway. It's not even hard for the opponent to hit back.
+
+TUTOR: Just keep watching the game and write down what happens on your sheet.
+
+STUDENT: I don't even know where it landed that time. It's moving too fast, so I'm just going to guess and put a mark somewhere.
+
+TUTOR: Try to be as accurate as you can with your data collection.
+
+STUDENT: I've already made a ton of mistakes on this worksheet. I missed the last few shots so I just scribbled random marks all over the paper. I don't see why I have to fill this out.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Recording point locations on a worksheet while acting as a coach for a teammate during a match, and formulating a strategic project before a set",
+      "learning_goal": "Hitting to the front and back zones"
+    },
+    "context": {
+      "environment": "General classroom setting for first-year secondary school students in Marseilles, France, during a six-lesson badminton unit",
+      "materials": "Observation worksheet, badminton court physically marked into three zones (front, central and back), shuttlecock",
+      "social_setting": "Teammate-based dyad where one teammate is functioning as a player and the other is the coach",
+      "time_context": "During the pre-test session and initial lessons"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Initial use of the observation worksheet by students in the collaborative 'coach' class during the pre-test session",
+      "observable_behavior": "High number of observation errors and a high standard deviation, which reflected a difference in the quality of the data collection between students",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the initial lessons of the unit when playing badminton matches",
+        "observable_behavior": "Frequently sent the shuttlecock to the central zone of the opposing court, which was not difficult for the opponent",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

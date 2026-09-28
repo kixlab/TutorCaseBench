@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Interruption of Repetitive Actions
+  Check: The tutor explicitly interrupts an incorrect or repetitive physical action (e.g., verbally stating a clear rule or physically pausing his hand) rather than letting the loop continue.
+
+Criterion 2: Single-Point Visual Redirection
+  Check: The tutor directs Rico's attention to one specific item or image at a time, strictly avoiding rapid or alternating pointing between multiple objects.
+
+Criterion 3: Deliberate Non-Verbal Anchoring
+  Check: The tutor pairs their verbal instruction with a clear, deliberate non-verbal cue (e.g., a specific hand movement or facial expression) to anchor his attention.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Rico is a student who struggles with partial sensory processing, leading to discrepancy gestures where his physical actions, visual focus, and verbalizations do not match. He is easily overwhelmed by spatial relations on a 2D page, which triggers distraction and echolalia. He uniquely requires explicit interruption of repetitive loops, single-point visual redirection, and foundational multi-sensory work with 3D concrete objects before tackling 2D tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the task sheet and find the tube shape.
+
+STUDENT: (Moves his hand very quickly to point at the object) Tube.
+
+TUTOR: (Points to the picture of the tube) Look at this picture.
+
+STUDENT: Tube. Tube. Tube. (Repeats the word repeatedly while looking at the designated image)
+
+TUTOR: (Points to the images of the piggy bank and ball) What about these ones?
+
+STUDENT: Piggy bank! (Makes a hand movement marking a '√' in the empty space above the paper)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Identifying 'tube' shapes on a task sheet using images of concrete objects",
+      "learning_goal": "Identify appropriate concrete objects specified geometry"
+    },
+    "context": {
+      "environment": "Learning process",
+      "materials": "Task sheet with images of concrete objects including a tube, piggy bank, and ball, along with concrete objects that are observed",
+      "social_setting": "Teacher guiding students working on task",
+      "time_context": "When the work task"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Teacher points to picture 'tube'",
+      "observable_behavior": "Appears matching gesture, responded by repeating the words of teachers call 'tube' in the designated image repeatedly, calling 'piggy bank' and then hand movements mark '√' in space",
+      "internal_state": "Distraction on observation so that Rico difficult perceive, analyze and establish the identity of geometric shapes",
+      "related_quotes": [
+        "tube",
+        "piggy bank"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "If suddenly the idea/notion of the object being observed",
+        "observable_behavior": "Immediately respond very quickly move the hand pointing object, calling the identity associated with the observed object, but this movement is accompanied by accentuation echolalia",
+        "internal_state": "Echolalia break the concentration (being the trigger of distraction)",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Concrete Math Fluency Scaffolding
+  Check: The tutor provides or prompts the use of concrete math fluency aids (e.g., number lines, flashcards, corrective feedback) rather than offering generic encouragement to 'try harder' or 'do your best'.
+
+Criterion 2: Itemized Organizational Checklists
+  Check: The tutor uses or prompts a specific, itemized checklist (e.g., a multi-item binder check) to help Isaac locate or organize materials, rather than giving general commands to check his bag or planner.
+
+Criterion 3: Somatic Calming and Feeling Identification
+  Check: The tutor prompts Isaac to identify his internal physical feelings of anger and use concrete calming strategies (e.g., deep breathing, counting) rather than telling him to 'use his words' or 'ignore' peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Isaac is a seventh-grade student who exhibits intense task resistance, material destruction, and emotional outbursts when faced with math frustration or peer conflicts. His behavioral challenges are rooted in specific deficits: a lack of math fact fluency, poor independent organizational skills, and an inability to regulate anger in the moment. He requires highly concrete, individualized tools—such as explicit fluency aids, itemized self-monitoring checklists, and direct role-play—because general expectations and abstract discussions consistently fail to change his behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Isaac, let's talk about how you can respond appropriately to your classmates during lunch today.
+
+STUDENT: Why bother? None of my classmates like me and they are always picking on me.
+
+TUTOR: What do you think you should do when you feel like they are picking on you?
+
+STUDENT: I don't know. I usually just play alone anyway. But I can tell you about what happened yesterday that made me so mad.
+
+TUTOR: Just try to ignore them and use your words if they bother you.
+
+STUDENT: (Screams loudly) Words don't work! If they come near me at lunch I'm just going to shove them and start a fight!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Social interactions with peers and responding appropriately to negative peer comments and interactions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom, lunch, and recess",
+      "materials": "Self-monitoring checklist",
+      "social_setting": "Interacting with classmates",
+      "time_context": "Throughout the school day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Situations with peers that had angered him",
+      "observable_behavior": "Heated arguments and aggression, loud and prolonged screaming at a peer, shoving one another, two fistfights with peers",
+      "internal_state": "Expressed concerns to his teachers that none of his classmates liked him and they were always picking on him",
+      "related_quotes": [
+        "none of his classmates liked him and they were always picking on him"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Even after extensive discussion about how he might respond in those situations",
+        "observable_behavior": "He was unable to respond appropriately, and either withdrew entirely or started a fight",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

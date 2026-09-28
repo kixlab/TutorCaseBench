@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Reinforcement
+  Check: The tutor provides or suggests a visual or tangible reward (such as drawing a star on the student's work) when the student follows directions.
+
+Criterion 2: Deliberate Wait Time
+  Check: The tutor explicitly incorporates a pause or wait time (e.g., waiting 4-5 seconds) after giving an instruction or when the student becomes distracted.
+
+Criterion 3: Non-Verbal Behavior Management
+  Check: The tutor uses non-verbal communication (e.g., sad facial expressions, shaking head, or gentle physical touch) to address negative behavior before or instead of using verbal reprimands.
+
+Criterion 4: Direct Impact Feedback
+  Check: The tutor addresses aggressive behavior by establishing one-on-one contact (e.g., mutual eye contact) and explicitly stating that the behavior hurts peers or makes them uncomfortable.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is frequently unresponsive to verbal instructions and exhibits physical aggression or property destruction when seated near peers. They require a highly structured approach utilizing visual rewards, deliberate wait time, non-verbal behavioral corrections, and proactive peer education to foster a supportive environment.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here are your lettering studies. Please try to replicate these letters on your paper.
+
+STUDENT: (Sits alone at the desk and does not react to the materials.)
+
+TUTOR: What do you think? You can pick up your pencil now.
+
+STUDENT: (Remains unresponsive to the interaction.)
+
+TUTOR: Keep trying, just copy the letters.
+
+STUDENT: (Does not react to the instruction and continues to be completely unresponsive to the interaction with the tutor.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "do lettering studies suitable for him and try to make him replicate these",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "inclusive classroom",
+      "materials": "lettering studies, books",
+      "social_setting": "sits alone in the class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "interactions with me",
+      "observable_behavior": "does not react to many things and is often unresponsive",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "put somebody beside the student",
+        "observable_behavior": "tears and scribbles on others’ books and disturbed them all the time",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Direct Tool Assignment
+  Check: The tutor explicitly names and introduces a specific mathematical tool or representation (e.g., an array) rather than asking the student to choose a method or leaving tool use optional.
+
+Criterion 2: Explicit Representation Modeling
+  Check: The tutor provides a clear explanation, demonstration, or step-by-step instruction on how to construct the chosen representation before expecting the student to do it independently.
+
+Criterion 3: Scaffolded Answer Extraction
+  Check: The tutor provides or sets up explicit guidance on how to use the representation to find the actual answer (e.g., guided counting, grouping strategies) rather than assuming the drawing alone will lead to the correct calculation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Riley is a low-attaining student who enjoys game-based math activities but lacks foundational calculation skills and knowledge of mathematical representations. He will not self-select tools and struggles to calculate correct answers even when using a representation, requiring explicit modeling and guided calculation support.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: You drew a nine and an eight from the playing cards. Please calculate nine multiplied by eight.
+
+STUDENT: This is good because it was something different and we get to use playing cards and do the maths questions. Let me try to figure out nine times eight...
+
+TUTOR: Why don't you use an array to help you calculate it?
+
+STUDENT: I don't know what an array is.
+
+TUTOR: I will show you what it looks like. Now you try drawing an array of nine by eight to find the answer.
+
+STUDENT: (Spends most of the time for the game drawing the array) Okay, I drew an array of nine by eight. The answer is 70.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Calculate nine multiplied by eight during a multiplication game using playing cards to generate random numbers for equations.",
+      "learning_goal": "Understanding of products and factors"
+    },
+    "context": {
+      "environment": "Classroom with MAB [Multi-based Arithmetic Blocks] at the back",
+      "materials": "Playing cards, MAB [Multi-based Arithmetic Blocks]",
+      "social_setting": "Playing a multiplication game",
+      "time_context": "Most of the time for this game"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Trying to calculate nine multiplied by eight",
+      "observable_behavior": "Spent most of the time for this game trying to calculate nine multiplied by eight.",
+      "internal_state": "Seemed to enjoy the use of the cards in this lesson, although his understanding of products and factors did not seem supported by their use.",
+      "related_quotes": [
+        "[The lesson was] good because it was something different and we get to use playing cards and do the maths questions."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When suggested he use an array",
+        "observable_behavior": "Riley didn’t know what an array was.",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "After being shown how to draw an array of nine by eight",
+        "observable_behavior": "He drew an array of nine by eight although his final answer was incorrect.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

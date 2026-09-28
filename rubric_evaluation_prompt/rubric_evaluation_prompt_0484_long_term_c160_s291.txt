@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Concrete Academic Responsibilities
+  Check: The tutor's long-term plan must include assigning specific, concrete academic duties, roles, or goals to the student to actively engage them in the coursework.
+
+Criterion 2: Co-Creation of Mutual Expectations
+  Check: The tutor's long-term plan must incorporate structured opportunities (such as meetings, workshops, or dedicated discussions) for the student and teacher to mutually share expectations and discuss classroom rules.
+
+Criterion 3: Multi-Perspective Impact Explanations
+  Check: The tutor's long-term plan must include explaining disciplinary rules by discussing the specific negative effects of misbehaviors on the individual, others, and the environment, rather than relying on arbitrary enforcement or physical intimidation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits profound passive disengagement, often sleeping or using their phone, driven by an entitled belief that simply remaining 'silent' guarantees a passing grade. When their passive state is interrupted or requests are denied without explanation, they escalate into active disruption and verbal disputes. They uniquely require assigned, concrete academic duties to counter their aimlessness, alongside structured, mutual discussions about expectations and the broader impacts of their behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are in the middle of the course. Please look at the board and continue taking notes on the vocational training material.
+
+STUDENT: (Lifts head from the desk after sleeping) Teacher, they want to wash their face. I mean, I want to wash my face.
+
+TUTOR: No, I do not give permission for you to leave the room right now.
+
+STUDENT: Why not? I was just sleeping and I need to wake up. Just let me go out for a minute.
+
+TUTOR: You need to stay in your seat and focus on the lesson.
+
+STUDENT: This is ridiculous! I'm just asking to wash my face and you're making a huge deal out of it in front of the whole classroom. Why are you always causing problems over nothing?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a vocational high school course",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting",
+      "materials": "",
+      "social_setting": "Middle of the course, incident extends into the classroom",
+      "time_context": "Middle of the course"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher does not give permission to leave the room to wash their face",
+      "observable_behavior": "Starts discussing with the teacher, extending the incident into the classroom",
+      "internal_state": "",
+      "related_quotes": [
+        "they want to wash their face"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the course",
+        "observable_behavior": "Always sleeping during the course, awaking in the middle of the course",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

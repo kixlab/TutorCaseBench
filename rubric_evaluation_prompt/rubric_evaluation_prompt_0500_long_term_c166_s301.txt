@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Facilitation of the Teacher Role
+  Check: The long-term plan includes specific opportunities for the student to adopt a leadership or mentoring role, such as guiding or teaching classmates.
+
+Criterion 2: Dialogic Sense-Making
+  Check: The long-term plan incorporates collaborative, discussion-based reading strategies (e.g., think-alouds, read-alouds, peer text discussions) as a primary vehicle for comprehension.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jenna is a collaborative student who thrives in leadership positions, often adopting a 'teacher role' to support her peers. She exhibits task resistance when forced to complete independent, computer-based typed summaries because she finds typing difficult and time-consuming. She uniquely needs asset-oriented validation of her natural reading strategies (like reading aloud) and opportunities for dialogic, peer-based comprehension rather than isolated digital tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent reading. Please read the article on the Achieve 3000 program and type your response in the summary strategy text box.
+
+STUDENT: I was just helping the new student learn to navigate through the reading program. Can I keep talking her through it instead?
+
+TUTOR: You need to work independently right now. Please start your summary.
+
+STUDENT: But I already understand the story from our discussion earlier. I even showed my partner how to enlarge the text so we could read it better.
+
+TUTOR: That is fine, but you still need to use the summary strategy provided by the program.
+
+STUDENT: I don't want to use the summary strategy. It is just too difficult and time consuming to type my responses into the text box.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to use the built-in 'summary' strategy tool within the Achieve 3000 program",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Independent reading sessions using the computer-assisted program",
+      "materials": "Computer-assisted program (Achieve 3000) on a laptop, text box for typed responses",
+      "social_setting": "Reading independently, with opportunities to interact with teachers, peers, and new students",
+      "time_context": "During the study period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When prompted by the teachers to use the summary strategy",
+      "observable_behavior": "Was not observed using any of the strategies provided by the computer-assisted program",
+      "internal_state": "Found it difficult and time consuming to type her responses into the text box",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When she read independently",
+        "observable_behavior": "Was not observed using any of the strategies provided by the computer-assisted program",
+        "internal_state": "Found it difficult and time consuming to type her responses into the text box",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Relapse Accommodation
+  Check: The tutor's long-term plan must include explicit, repeated reassurances that Colin's place in the course is secure even if he experiences absences or a mental health relapse.
+
+Criterion 2: Cultivation of Peer Acceptance
+  Check: The tutor's long-term strategy must include methods for fostering a non-judgmental classroom culture where peer acceptance is actively encouraged to mitigate social fears.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Colin is a mature student with severe insomnia and depression who is highly sensitive to being 'shown up' or embarrassed, which has previously caused him to abandon education entirely. He uniquely requires a highly informal, low-pressure environment where mistakes are normalized and explicit guarantees are made that his place will be held during mental health relapses.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Colin, please chop the onions and put them in at the right time for the recipe.
+
+STUDENT: I'm not sure when they go in... I have a fear of failure and I'm worried the other students will laugh at me if I make a mistake.
+
+TUTOR: Colin, just follow the instructions on the page.
+
+STUDENT: (Colin looks down at the onions, feeling embarrassment about asking for help. He stares blankly, exhausted from severe insomnia and depression.)
+
+TUTOR: Colin, I am talking to you. Why are you just standing there?
+
+STUDENT: You really showed me up! I didn't realise you were talking to me. That done it for me. I'm leaving and I'm never going back.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "chop the onions or put them in at the right time",
+      "learning_goal": "gathering different recipes and eating more healthily"
+    },
+    "context": {
+      "environment": "specialized cookery course",
+      "materials": "onions, different recipes",
+      "social_setting": "with 'their own people' (i.e. people who also had mental health difficulties)",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher was talking to him and he didn't realize",
+      "observable_behavior": "dropped out of the class and never went back",
+      "internal_state": "felt shown up and embarrassed",
+      "related_quotes": [
+        "Apparently the teacher was talking to me and she really showed me up as I didn ’t realise. That done it for me. I never went back"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When making mistakes during the learning process",
+        "observable_behavior": "embarrassment about asking for help",
+        "internal_state": "fear of failure and fear of being laughed at by other students",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sensory and Safe Space Redirection
+  Check: The tutor directs Joseph to a designated safe space or prompts the use of sensory tools (such as a fidget toy or weighted blanket) when he shows signs of overwhelm.
+
+Criterion 2: Cessation of Verbal and Visual Demands
+  Check: The tutor immediately stops verbal prompting, task demands, and visual schedule references once Joseph displays distress or agitation.
+
+Criterion 3: Non-Forceful De-escalation
+  Check: The tutor uses calm, non-confrontational language and avoids forceful directives, physical demands, or threats of restraint during a crisis.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Joseph is a bright, curious fourth-grader with severe disabilities who experiences intense sensory overload and frustration, often leading to physical aggression and elopement. He uniquely requires a highly structured environment with sensory supports and safe spaces, as poorly timed verbal prompts or forceful interventions during moments of distress rapidly escalate his behavior into severe physical crises.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Joseph, it is time for our transition. Please look at the visual supports to see what we are doing next.
+
+STUDENT: (Displays signs of distress and frustration, pacing away from the visual supports.)
+
+TUTOR: Listen to my verbal prompts, Joseph. You need to calm down and come over here.
+
+STUDENT: (Becomes increasingly agitated as the verbal prompts continue, stepping forward and beginning to scratch Ms. Tracey.)
+
+TUTOR: Stop scratching right now. We need to finish this transition.
+
+STUDENT: (Begins kicking and hitting Mrs. O’Shaughnessy. As she attempts to back away, he grabs a fist-full of her hair and pulls her to the floor.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transition period in the classroom",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Self-contained classroom",
+      "materials": "Visual supports",
+      "social_setting": "Teaching team includes his primary special education teacher, Ms. Tracey, and several instructional aides",
+      "time_context": "January"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During a transition period in the classroom when staff attempted to calm him using visual supports and verbal prompts",
+      "observable_behavior": "Began to scratch Ms. Tracey, began kicking and hitting Mrs. O’Shaughnessy, grabbed a fist-full of her hair and pulled her to the floor",
+      "internal_state": "Increasingly agitated, displaying signs of distress and frustration",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When returning from recess or the cafeteria (transition between school environments)",
+        "observable_behavior": "Physically aggressive toward staff members, attacking everyone around him, shoved Ms. Tracey and she fell backwards onto a cafeteria table",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Academic Calibration
+  Check: The long-term plan includes regular reviews of task difficulty to ensure academic targets are appropriately matched to the student's level and adequately reinforced.
+
+Criterion 2: Tiered Visual Behavioral Tracking
+  Check: The long-term plan implements a visual, tiered tracking system (e.g., green/orange/red criteria) for specific behaviors and explicitly avoids punitive resets (like wiping a chart clean after infractions).
+
+Criterion 3: Cross-Environment Delayed Reinforcement
+  Check: The long-term plan connects the student's daily school behavior contract to delayed, high-value rewards administered at home (e.g., computer access) and/or weekly at school.
+
+Criterion 4: Sequential Behavioral Expansion
+  Check: The long-term plan targets one foundational behavior first (e.g., in-seat behavior) and only adds secondary behaviors (e.g., hair touching) once the first is mastered, concurrently increasing the reward value.
+
+Criterion 5: Exclusion of Peer-Mediated Ignoring
+  Check: The long-term plan explicitly avoids strategies that require mainstream peers to ignore, tolerate, or not react to the student's inappropriate physical contact.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Matthew is an eight-year-old boy with ASD who exhibits severe out-of-seat behavior and inappropriate physical contact, specifically fixating on and pulling peers' sparkly hair grips. He requires clear, tiered visual behavior contracts linked to delayed home rewards, as he does not respond to punitive response-cost systems or peer-mediated ignoring.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Matthew, you have finished accessing your reinforcing activity. Please return to your seat for our teaching time.
+
+STUDENT: (Stands up from the activity area but does not return to his seat, walking to another part of the classroom instead.)
+
+TUTOR: Matthew, it is time to sit at your desk.
+
+STUDENT: (Continues to wander around the room, demonstrating out-of-seat behavior during the scheduled teaching time.)
+
+TUTOR: Please come back to your seat so we can begin.
+
+STUDENT: (Leaves the teaching area completely without permission, continuing his out-of-seat behavior which disrupts the session.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Formal teaching time and transitioning in the school building",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General classroom learning environment during daily teaching sessions",
+      "materials": "Curriculum targets, behavior contract, green, orange, and red stickers",
+      "social_setting": "Classroom setting",
+      "time_context": "Daily teaching sessions, including post-reinforcement periods"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After transitioning in the school building or finishing accessing a reinforcing activity",
+      "observable_behavior": "Leaving his seat without permission, not returning to his seat once he finished accessing a reinforcing activity or not returning to his seat after transitioning",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During teaching time",
+        "observable_behavior": "Out-of-seat behaviour ranging from zero to 36 minutes with a mean of 13 minutes per session",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

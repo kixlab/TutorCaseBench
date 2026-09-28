@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sensory and Energy Accommodation
+  Check: The tutor accommodates the student's sensory distractions or need for physical energy regulation (e.g., allowing a physical break, removing the distractor) rather than simply demanding she focus on the task.
+
+Criterion 2: Concrete Task Structuring
+  Check: The tutor provides clear, specific, and concrete steps for how to proceed with the immediate task rather than giving vague directives to 'keep working'.
+
+Criterion 3: Error Normalization and De-escalation
+  Check: The tutor responds to errors or confusion with neutral, supportive feedback that normalizes the struggle and explicitly avoids shaming or punitive language.
+
+Criterion 4: Safe Engagement and Stress Reduction
+  Check: The tutor allows the student to process new material privately or step away from a stressor, explicitly avoiding forcing her into immediate public performance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a gifted girl with ADHD who struggles with sensory distractibility, high physical energy, and profound boredom during repetitive tasks. She uniquely requires physical activity to regulate her energy, curriculum compacting to avoid redundant work, and autonomy in her learning. She is highly sensitive to negative feedback and public performance of new material, which trigger intense anxiety and self-discouragement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's get started on your homework assignment. You have these worksheets to complete.
+
+STUDENT: I have so much energy right now, I feel like I'm gonna spaz out. I don't know what I would do without running first, because it tires me out but then I get home and I still can, like, function and do my homework.
+
+TUTOR: We need to do the homework now. Please start on the first page.
+
+STUDENT: It's just the same material. We've been doing it years before, and I know it...
+
+TUTOR: Just keep working through the problems until you finish the assignment.
+
+STUDENT: I cannot focus on my homework. I don't... it's not that I don't like it, it's just that after a while I get bored and I don't want to do anymore after a certain point.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing homework on the same material they have been doing years before",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "At home",
+      "materials": "Homework assignments",
+      "social_setting": "Independent work",
+      "time_context": "After a while of working on the same material"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After a while of doing the same material that she already knows",
+      "observable_behavior": "Stops working, says she doesn't want to do anymore after a certain point",
+      "internal_state": "Cannot focus, gets bored",
+      "related_quotes": [
+        "I cannot focus on my homework. I don’t…it’s not that I don’t like it, it’s just that after a while I get bored and I don’t want to do anymore after a certain point. It’s just the same material. We’ve been doing it years before, and I know it …"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When she has excess energy before doing homework",
+        "observable_behavior": "Struggles to function without physical activity",
+        "internal_state": "Feels like she's gonna spaz out",
+        "related_quotes": [
+          "I don’t know what I would do without running because when I have energy, I feel like I’m gonna spaz out."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

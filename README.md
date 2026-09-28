@@ -289,15 +289,17 @@ Each student category is assigned one of five challenge types, representing the 
 | Unit | Count |
 |---|---|
 | Source papers | 414 |
-| Papers used in dataset (filtered for dialogue synthesis) | 209 |
-| Student categories | 335 |
-| Scenarios | 621 |
-| Dialogue prompts — immediate | 567 |
-| Dialogue prompts — long-term | 513 |
-| Dialogue prompts — total | 1,080 |
-| Rubrics — immediate | 321 |
-| Rubrics — long-term | 322 |
-| MCQs | 1,727 |
+| Papers used in dataset (filtered for dialogue synthesis) | 300 |
+| Student categories | 518 |
+| Scenarios | 923 |
+| Dialogue prompts — immediate | 824 |
+| Dialogue prompts — long-term | 736 |
+| Dialogue prompts — total | 1,560 |
+| Rubrics — immediate | 494 |
+| Rubrics — long-term | 491 |
+| MCQs — immediate | 1,428 |
+| MCQs — long-term | 1,109 |
+| MCQs — total | 2,537 |
 
 ---
 

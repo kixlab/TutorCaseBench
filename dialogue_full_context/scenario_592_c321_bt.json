@@ -1,0 +1,72 @@
+{
+  "category_id": "321",
+  "category_title": "Students with visual impairments who use floor-sitting and screaming as task avoidance",
+  "scenario_id": "592",
+  "scenario_title": "Initiating O&M lesson and transitioning from classroom",
+  "minimal_context": "The O&M instructor is picking up the student from the classroom to initiate an O&M lesson.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time for your O&M lesson. Please rise up from your chair."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Begins to scream and cry, and will not stand up)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We need to leave the classroom now. Let's go."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Immediately drops to the floor and starts screaming)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Picks the child up and holds him while physically prompting him to walk) You need to walk."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Screams, cries, drops to the floor, and refuses to stand or walk)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time for your O&M lesson. Please rise up from your chair.\n\nSTUDENT: (Begins to scream and cry, and will not stand up)\n\nTUTOR: We need to leave the classroom now. Let's go.\n\nSTUDENT: (Immediately drops to the floor and starts screaming)\n\nTUTOR: (Picks the child up and holds him while physically prompting him to walk) You need to walk.\n\nSTUDENT: (Screams, cries, drops to the floor, and refuses to stand or walk)",
+  "immediate_dialogue_prompt": 984,
+  "long_term_dialogue_prompt": 985,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Rise up from his chair and leave the classroom for O&M activities",
+        "learning_goal": "Initiating an O&M lesson"
+      },
+      "context": {
+        "environment": "The student's classroom",
+        "materials": "Chair",
+        "social_setting": "One-on-one with O&M instructor",
+        "time_context": "Pick-up of the student from the classroom"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The O&M instructor tells him to rise up from his chair and that it is time for his O&M lesson",
+        "observable_behavior": "The student immediately begins to scream and cry, and will not stand up. The child immediately drops to the floor and starts screaming.",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Responding to the instructor's request to leave the classroom for O&M activities",
+          "observable_behavior": "Screamed, cried, dropped to the floor, and refused to stand or walk",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

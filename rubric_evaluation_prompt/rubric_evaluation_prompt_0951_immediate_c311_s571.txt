@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Verbal Validation of Effort
+  Check: The tutor explicitly praises or validates a specific positive action, effort, or improvement made by the student.
+
+Criterion 2: Non-Punitive Tone
+  Check: The tutor maintains a pleasant, even tone and avoids using threats of punishment, suspension, or exclusionary discipline.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Angelica is an adolescent who uses truancy and acting out to maintain peer connections during a difficult high school transition. Her behaviors stem from a need for social integration rather than academic deficits. She uniquely requires positive peer group integration, individualized teacher validation, and a strict avoidance of exclusionary or punitive discipline, which only exacerbates her trespassing and disengagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please take out your assignment and begin working on the reading questions for today's lesson.
+
+STUDENT: This is boring. I don't see why we have to do this.
+
+TUTOR: Just do your best to get through the questions.
+
+STUDENT: It's pointless. I don't even want to be in this class without my friend.
+
+TUTOR: You need to stay in your seat and finish the work.
+
+STUDENT: No, I'm cutting this class. I'm going to find my friend instead of staying here.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General classroom instruction and curriculum mastery across various subjects",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Transition to a new high school in ninth grade",
+      "materials": "",
+      "social_setting": "Regular school campus and alternative education setting",
+      "time_context": "Early in the year"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Difficulty making new friends in a transition to a new high school",
+      "observable_behavior": "Began to cut classes early in the year, acting out on purpose to be near her only friend, and trespassing on a regular school campus while placed at the alternative school",
+      "internal_state": "Boredom and disconnect with teachers",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing boredom and disconnect with teachers",
+        "observable_behavior": "Student disengagement",
+        "internal_state": "Sense of futility",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

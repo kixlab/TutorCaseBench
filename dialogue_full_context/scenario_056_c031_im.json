@@ -1,0 +1,77 @@
+{
+  "category_id": "031",
+  "category_title": "Verbal students with HFA who struggle with environmental distractions and role ambiguity",
+  "scenario_id": "056",
+  "scenario_title": "Environmental Distraction in Virtual World",
+  "minimal_context": "The student is working in an OpenSim virtual environment to build a Japanese neighborhood.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's start building the virtual Japanese neighborhood in OpenSim. Please place your first architectural item on the island."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I am very excited to start building. I will place the first item and refine its position and size now."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Great, go ahead and tell me what you are doing."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Yes, but I cannot understand you. What ’s that sound?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "That is just the background ocean wind in the virtual environment. Please continue with the task."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I cannot understand you. There is a lot of noise!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's start building the virtual Japanese neighborhood in OpenSim. Please place your first architectural item on the island.\n\nSTUDENT: I am very excited to start building. I will place the first item and refine its position and size now.\n\nTUTOR: Great, go ahead and tell me what you are doing.\n\nSTUDENT: Yes, but I cannot understand you. What ’s that sound?\n\nTUTOR: That is just the background ocean wind in the virtual environment. Please continue with the task.\n\nSTUDENT: I cannot understand you. There is a lot of noise!",
+  "immediate_dialogue_prompt": 87,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Collaborative architectural design task in OpenSim to build a virtual Japanese neighborhood",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "OpenSim-based virtual environment, initial design sessions, virtual island",
+        "materials": "OpenSim software, voice chat, text chat",
+        "social_setting": "Working in partnership with another child and an adult facilitator",
+        "time_context": "Initial design sessions"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "While receiving a facilitator's prompt when environmental sounds (ocean wind) were present in the virtual island",
+        "observable_behavior": "Easily distracted by environmental disruptions and persevere on these nuances",
+        "internal_state": "",
+        "related_quotes": [
+          "Yes, but I cannot understand you. What ’s that sound?",
+          "I cannot understand you. There is a lot of noise!"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When environmental disruptions occur",
+          "observable_behavior": "Persevering on a complaint about background noise despite the facilitator's explanation",
+          "internal_state": "",
+          "related_quotes": [
+            "I cannot understand you. There is a lot of noise!"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Transparent Peer Mediation
+  Check: The tutor explicitly explains the student's current behavior, sensory need, or limitation to the peers present.
+
+Criterion 2: Contextualized Expectations
+  Check: The tutor openly justifies to the class or group why the student is receiving different treatment or accommodations in this specific instance.
+
+Criterion 3: Avoidance of Deficit Framing
+  Check: The tutor addresses the student's needs neutrally or positively, without using language that isolates the student as defective or a burden to the majority.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits atypical movements, fixations, and sensory sensitivities (e.g., needing peace and quiet) that can lead to disruptive behaviors and alienate peers. They uniquely require a transparent environment where the teacher acts as a bridge, explicitly explaining their behaviors and needs to classmates to foster empathy rather than relying on standard discipline. The student thrives when their differences are normalized and supported by a cooperative peer group, rather than being isolated or forced into competitive frameworks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It's time for our group activity. Let's go over to the table and play with the building blocks with your classmates.
+
+STUDENT: (Continues spinning a small plastic wheel on the desk, completely fixated on it and not looking up.)
+
+TUTOR: You can bring the wheel, but we need to go sit with the group now.
+
+STUDENT: (Starts rocking back and forth, getting visibly annoyed) Too loud. Need quiet.
+
+TUTOR: Look, your classmates are trying to get your attention to come play.
+
+STUDENT: (Makes unusual hand movements near their face, staring blankly past the peers who are calling their name, completely ignoring them with a strange expression.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in play and communication with peers",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Inclusive classroom setting",
+      "materials": "Resources for individual and whole-class work, objects or activities the student fixates on",
+      "social_setting": "Interacting with peers without MHD, involving school discipline and supervision",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When peers attempt to get their attention or play with them",
+      "observable_behavior": "Make weird movements and they don't listen to you, they don't speak properly and they've got a strange expression, not taking any notice of peers",
+      "internal_state": "In their world",
+      "related_quotes": [
+        "You can play with them but they don’t listen to you, it’s a bit tiring when you’re playing with someone and they don’t take any notice of you",
+        "With a kid with autism it would be a bit difficult because they make weird movements and they don’t listen to you, we wouldn’t play together the same way because they’re different, they don’t speak properly and they’ve got a strange expression",
+        "It’s more difficult to get their attention because they can’t communicate and express themselves, they can play but with people who’re more patient"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When things affect them or they lack peace and quiet",
+        "observable_behavior": "Getting annoyed more easily, exhibiting hyperactivity and fixation on an object or activity, and disruptive behaviours",
+        "internal_state": "Cannot control some of their behaviours",
+        "related_quotes": [
+          "They’re kids like us, but they have problems like getting annoyed more easily",
+          "it’s just they need peace and quiet to do things properly"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

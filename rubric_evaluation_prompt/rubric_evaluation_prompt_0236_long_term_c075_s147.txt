@@ -1,0 +1,133 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Self-Generated Imaginative Expression
+  Check: The long-term plan must include strategies to accept, explore, or validate Bernie's self-generated imaginative themes (even if aggressive or unruly) rather than redirecting him to sanitized or teacher-preferred topics.
+
+Criterion 2: Autonomy Over Personal Identity and Preferences
+  Check: The long-term plan must explicitly avoid imposing labels about Bernie's identity, feelings, or preferences, instead allowing him space to self-identify and express his own interests.
+
+Criterion 3: Respect for Physical and Expressive Boundaries
+  Check: The long-term plan must establish boundaries that do not force eye contact, physical proximity, or forced positive affect when Bernie exhibits signs of withdrawal or resistance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Bernie is a student who strongly resists having his identity, feelings, or preferences dictated by adults, often withdrawing physically or deflecting with aggressive imaginative play when pressured. He uniquely requires an environment that validates his unruly affect and self-generated imaginative themes rather than forcing compliance, eye contact, or sanitized positive narratives.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's play our guessing game. I am thinking of someone. His family is from Cameroon, he has a twin brother, and he likes math materials. Is it Bernie?
+
+STUDENT: (Grins enormously, nods, and bends and straightens twice in a row.)
+
+TUTOR: Is your family from Cameroon, Bernie? What part of the world is that in?
+
+STUDENT: (Stands rigidly and does not answer; he is no longer smiling. Looks up and then down to his feet.) I have a rocket at home.
+
+TUTOR: Here it is on the globe. But at choice time, you like to play with math materials. You love them. Did you know that about yourself?
+
+STUDENT: (Turns toward the rest of the class.) I’m gonna blast off and go out of my house. I’m going to knock down my house with that rocket ship. No, I love ice cream! Ice cream cones! I went to the store to buy giant watermelons!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in the 'Have you seen my sheep?' guessing game during morning meeting, where the teacher describes a child in three different ways for the class to guess.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Morning meeting with the rest of the class",
+      "materials": "A globe",
+      "social_setting": "Whole class setting with the teacher maintaining physical contact (touching the student)",
+      "time_context": "Morning meeting / choice time discussion"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher persists with questions about his family's country of origin (Cameroon) and tells him what his internal preferences are ('you like to play with math materials. You love them.')",
+      "observable_behavior": "Stands rigidly and does not answer; he is no longer smiling. Looks up at the teacher and then down to his feet, and verbally redirects to unrelated topics like rockets, knocking down his house, and buying giant watermelons.",
+      "internal_state": "",
+      "related_quotes": [
+        "You can’t walk there.",
+        "I’m gonna blast off and go out of my house. I’m going to knock down my house with that rocket ship.",
+        "No, I love ice cream! Ice cream cones!",
+        "I went to the store to buy giant watermelons!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked specific questions about his cultural background ('What part of the world is that in?')",
+        "observable_behavior": "Stands rigidly, stops smiling, looks down at his feet, and attempts to change the subject to aggressive imaginative play ('I have a rocket at home').",
+        "internal_state": "",
+        "related_quotes": [
+          "I have a rocket at home."
+        ]
+      },
+      {
+        "condition": "When the teacher dictates his internal feelings and preferences to the class ('you like to play with math materials. You love them. Did you know that about yourself?')",
+        "observable_behavior": "Turns toward the rest of the class, contradicts the teacher, and offers non-sequiturs about watermelons and ice cream.",
+        "internal_state": "",
+        "related_quotes": [
+          "No, I love ice cream! Ice cream cones!",
+          "I went to the store to buy giant watermelons!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Strategy Instruction
+  Check: The tutor's long-term plan includes dedicated mini-lessons to explicitly teach comprehension or writing strategies prior to independent application.
+
+Criterion 2: Diverse Modalities for Demonstration
+  Check: The tutor's long-term plan incorporates multiple, non-test formats for the student to demonstrate learning, such as class blogs, discussions, or creative projects.
+
+Criterion 3: Relationship Building over Test Prep
+  Check: The tutor's long-term plan explicitly prioritizes relationship-building and engagement over standardized test preparation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This middle school student is significantly behind grade level, exhibits low self-efficacy, and frequently refuses to participate, sneaks naps, or gives brief, unelaborated answers. They view literacy merely as a test-taking skill and experience severe anxiety about reading aloud. They uniquely require independent practice before public performance, explicit strategy instruction, and specific clarifying feedback, while strictly avoiding any focus on standardized tests.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright, it's time for our Reading and Discussion rotation. We are going to take turns reading the assigned pages from 'Stargirl' out loud to the group.
+
+STUDENT: (Whispers to a peer) I'm not reading this.
+
+TUTOR: Jesse, please start us off by reading the first page out loud.
+
+STUDENT: I didn't get to practice it by myself first. I'm not doing it.
+
+TUTOR: Just give it a try. Read the first paragraph for us.
+
+STUDENT: (Puts head down on the desk, refusing to work) No. I'm not reading out loud in front of everyone.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "reading out loud in a group",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Intervention Language Arts class",
+      "materials": "assigned pages from the novel 'Stargirl'",
+      "social_setting": "Reading and Discussion rotation",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "reading out loud in a group",
+      "observable_behavior": "refused to participate in class",
+      "internal_state": "anxiety that many struggling readers feel about reading out loud in a group",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to participate in class",
+        "observable_behavior": "sneaking naps, whispering to each other, or refusing to work",
+        "internal_state": "low levels of self-efficacy",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

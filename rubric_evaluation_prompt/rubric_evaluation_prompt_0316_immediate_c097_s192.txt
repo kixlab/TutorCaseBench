@@ -1,0 +1,131 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Strict Linguistic Framing
+  Check: The tutor prompts or requires the student to use a specific linguistic template (e.g., 'I agree/disagree with... because...') to frame their contribution.
+
+Criterion 2: Verbatim Validation
+  Check: The tutor acknowledges, records, or repeats the student's questions or statements exactly as they were asked, without paraphrasing or interpreting.
+
+Criterion 3: Plain-Language Personal Reasoning
+  Check: The tutor directs the student to explain their thoughts in their own words, explicitly discouraging the use of technical jargon or appeals to outside authority.
+
+Criterion 4: Explicit Opt-Out Option
+  Check: The tutor explicitly offers or affirms the student's right to step away or remove himself from the interaction if he feels unable to cope.
+
+Criterion 5: Decentralized Turn-Taking Management
+  Check: The tutor manages the flow of conversation by requiring hand-raising and juxtaposing peer contributions, rather than acting as the central authority or answering questions directly.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student with ASD struggles with peer distractions and emotional regulation during unstructured interactions, typically requiring a support assistant to stay on task. However, he thrives and participates independently when provided with strict, rule-based dialogue frameworks (e.g., 'I agree/disagree with... because...'). He uniquely needs a non-hierarchical environment, verbatim validation of his thoughts without interpretation, and the explicit option to remove himself if overwhelmed.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to talk about the stimulus passage we just read. Please share your thoughts with the circle.
+
+STUDENT: I think the story is... well, I want to make a point about the main character, but... (looks over at a classmate who is whispering).
+
+TUTOR: What do you want to say about the character?
+
+STUDENT: He was wrong. I mean, I find it easier to get on with people when I use philosophy and just the agreeing and disagreeing in general, but I don't know how to structure what I want to say right now.
+
+TUTOR: Just go ahead and tell us why you think he was wrong.
+
+STUDENT: I can't think when they keep trying to distract me! I don't have my support assistant here to help me stay on task. I can't cope with this right now, I'm removing myself from the session.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in verbal dialogue during CoPI sessions, providing relevant contributions, and waiting to speak",
+      "learning_goal": "Engaged in a shared search for meaning"
+    },
+    "context": {
+      "environment": "Whole class as part of normal classwork",
+      "materials": "Stimulus passage",
+      "social_setting": "Participants sit in a circle, allowing them to see and be seen by one another, with the facilitator remaining outside the circle",
+      "time_context": "For an hour each week over 10 weeks"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When participating in class activities without the support assistant usually required to ensure he stayed 'on task'",
+      "observable_behavior": "Failing to stay 'on task' and needing to remove himself from the session",
+      "internal_state": "Found himself unable to cope emotionally or behaviourally",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When he wanted to justify a point he was trying to make",
+        "observable_behavior": "Struggles to structure the articulation of his thoughts precisely without a specific framework",
+        "internal_state": "",
+        "related_quotes": [
+          "I find it easier to get on with people when I use philosophy and just the agreeing and disagreeing in general"
+        ]
+      },
+      {
+        "condition": "During class activities when other children are present",
+        "observable_behavior": "Susceptible to attempts from other children to distract him",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

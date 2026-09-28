@@ -1,72 +1,75 @@
 {
   "category_id": "010",
-  "category_title": "Student with ASD and hyperactivity exhibiting self-harming behaviors and high musical engagement",
+  "category_title": "Autistic students who partially process problems with discrepancy gestures and echolalia",
   "scenario_id": "019",
-  "scenario_title": "Written exam with short attention span",
-  "minimal_context": "The student is sitting with the teaching assistant to complete a written exam.",
+  "scenario_title": "Identifying shapes triggering echolalia and spatial marking",
+  "minimal_context": "Rico is working on a task sheet to identify tube shapes among images of concrete objects like a piggy bank and a ball.",
   "dialogue": [
     {
       "turn_id": 1,
       "speaker": "tutor",
-      "message": "Here is the next question on your written exam. Please read it and write your answer."
+      "message": "Please look at the task sheet and find the tube shape."
     },
     {
       "turn_id": 2,
       "speaker": "student",
-      "message": "(Avoids social eye contact and looks away from the exam paper.)"
+      "message": "(Moves his hand very quickly to point at the object) Tube."
     },
     {
       "turn_id": 3,
       "speaker": "tutor",
-      "message": "What do you think the answer is? Keep trying."
+      "message": "(Points to the picture of the tube) Look at this picture."
     },
     {
       "turn_id": 4,
       "speaker": "student",
-      "message": "I want that the YouTube channel where I listen to music is always on."
+      "message": "Tube. Tube. Tube. (Repeats the word repeatedly while looking at the designated image)"
     },
     {
       "turn_id": 5,
       "speaker": "tutor",
-      "message": "We need to finish the written exam first."
+      "message": "(Points to the images of the piggy bank and ball) What about these ones?"
     },
     {
       "turn_id": 6,
       "speaker": "student",
-      "message": "(Loses attention completely, stands up due to a need for constant movement, and starts walking toward the door to go out to the school yard without prior notice.)",
+      "message": "Piggy bank! (Makes a hand movement marking a '√' in the empty space above the paper)",
       "is_challenging_behavior": true
     }
   ],
-  "dialogue_combined": "TUTOR: Here is the next question on your written exam. Please read it and write your answer.\n\nSTUDENT: (Avoids social eye contact and looks away from the exam paper.)\n\nTUTOR: What do you think the answer is? Keep trying.\n\nSTUDENT: I want that the YouTube channel where I listen to music is always on.\n\nTUTOR: We need to finish the written exam first.\n\nSTUDENT: (Loses attention completely, stands up due to a need for constant movement, and starts walking toward the door to go out to the school yard without prior notice.)",
-  "immediate_dialogue_prompt": 33,
-  "long_term_dialogue_prompt": 34,
+  "dialogue_combined": "TUTOR: Please look at the task sheet and find the tube shape.\n\nSTUDENT: (Moves his hand very quickly to point at the object) Tube.\n\nTUTOR: (Points to the picture of the tube) Look at this picture.\n\nSTUDENT: Tube. Tube. Tube. (Repeats the word repeatedly while looking at the designated image)\n\nTUTOR: (Points to the images of the piggy bank and ball) What about these ones?\n\nSTUDENT: Piggy bank! (Makes a hand movement marking a '√' in the empty space above the paper)",
+  "immediate_dialogue_prompt": 29,
+  "long_term_dialogue_prompt": 30,
   "full_context": {
     "content": {
       "task": {
-        "content": "written exam",
-        "learning_goal": ""
+        "content": "Identifying 'tube' shapes on a task sheet using images of concrete objects",
+        "learning_goal": "Identify appropriate concrete objects specified geometry"
       },
       "context": {
-        "environment": "school environment",
-        "materials": "written exam, TV or YouTube channel where he listens to music",
-        "social_setting": "with the teaching assistant",
-        "time_context": ""
+        "environment": "Learning process",
+        "materials": "Task sheet with images of concrete objects including a tube, piggy bank, and ball, along with concrete objects that are observed",
+        "social_setting": "Teacher guiding students working on task",
+        "time_context": "When the work task"
       },
       "challenging_behavior_trigger": {
-        "condition": "During the written exam",
-        "observable_behavior": "easy loss of attention",
-        "internal_state": "short attention span creates a problem",
-        "related_quotes": []
+        "condition": "Teacher points to picture 'tube'",
+        "observable_behavior": "Appears matching gesture, responded by repeating the words of teachers call 'tube' in the designated image repeatedly, calling 'piggy bank' and then hand movements mark '√' in space",
+        "internal_state": "Distraction on observation so that Rico difficult perceive, analyze and establish the identity of geometric shapes",
+        "related_quotes": [
+          "tube",
+          "piggy bank"
+        ]
       },
       "behavior_patterns": [
         {
-          "condition": "During longer communication and understanding",
-          "observable_behavior": "lack of social eye contact, attention deficit disorder, easy loss of attention",
-          "internal_state": "",
+          "condition": "If suddenly the idea/notion of the object being observed",
+          "observable_behavior": "Immediately respond very quickly move the hand pointing object, calling the identity associated with the observed object, but this movement is accompanied by accentuation echolalia",
+          "internal_state": "Echolalia break the concentration (being the trigger of distraction)",
           "related_quotes": []
         }
       ]
     }
   },
-  "challenge_type": "Emotional Distress"
+  "challenge_type": "Attention/Engagement Failure"
 }

@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Book Selection Strategy Development
+  Check: The tutor's long-term plan includes explicit lessons, routines, or guided practice for teaching Jennifer how to evaluate and select appropriate books.
+
+Criterion 2: Schema-Building Comprehension Strategies
+  Check: The tutor incorporates ongoing, explicit instruction on making connections (text-to-self, text-to-text, text-to-world) to build her reading comprehension schema.
+
+Criterion 3: Heterogeneous Group Integration
+  Check: The tutor plans for Jennifer to consistently participate in structured, heterogeneous literature discussion groups rather than working solely independently or in homogeneous groups.
+
+Criterion 4: Co-Creation of Group Protocols
+  Check: The tutor includes opportunities for students to generate and agree upon their own behavior and discussion protocols for their reading groups.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jennifer is a struggling reader who frequently disengages from independent reading due to cognitive overload from complex texts and unfamiliar vocabulary. She uniquely requires structured opportunities to verbally process information with peers, using collaborative talk and chunked reading to 'clean her head out' and readjust her schema.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our literature discussion group on the new chapter of 'Jeremy Fink and the Meaning of Life' where the mailman delivers the box. What is happening in this chapter?
+
+STUDENT: I have a lot of stuff in my head that I don't know what it means. Did the mom really want Jeremy to have the box?
+
+TUTOR: That is a question to consider. What do you think about her motives?
+
+STUDENT: Yeah, but Oswald said that, um, that mail dude was following along with it because he... wait, I'm trying to remember what happened in that other chapter.
+
+TUTOR: Keep going. What else do you remember about the mailman?
+
+STUDENT: Oh, and he could be sneaky about him trying to find out what it was. But I'm confused by it, I get to the point that I barely understand it. I need Ray and Donnie to explain it because my head is full of stuff I don't get.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a literature discussion group about a chapter in 'Jeremy Fink and the Meaning of Life' where the mailman delivers a box",
+      "learning_goal": "To clarify character motives and understand what was happening in the chapter"
+    },
+    "context": {
+      "environment": "Classroom literature discussion group",
+      "materials": "The novel 'Jeremy Fink and the Meaning of Life'",
+      "social_setting": "Small literature discussion group with peers (Ray, an honors student, and Donnie)",
+      "time_context": "During a 90-minute class period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Her schema had to readjust and adapt to new information from this chapter",
+      "observable_behavior": "Questioned Jeremy’s mother’s motives to be sure she understood what was happening in the chapter, recalled a previous chapter about Mr. Oswald, and attempted to conjecture and possibly dispute peers' assertions",
+      "internal_state": "Had a lot of stuff in her head that she didn't know what it meant, needing to readjust and adapt schema",
+      "related_quotes": [
+        "Did the mom really want Jeremy to have the box?",
+        "Yeah, but Oswald said that, um, that mail dude was following along with it because he...",
+        "Oh, and he [the mailman] could be sneaky about him [Jeremy] trying to find out what it [the box] was."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When confused by complex texts and needing to clarify understanding",
+        "observable_behavior": "Uses collaborative talk to ask clarifying questions and synthesize information provided by peers",
+        "internal_state": "Feels the need to 'clean my head out' because otherwise she has 'a lot of stuff in my head that I don't know what it means'",
+        "related_quotes": [
+          "b/c [because] it cleans my head out because if we don’t do it [literature discussion] then I have a lot of stuff in my head that I don't know what it means.",
+          "’Cause I find out things I didn’t know"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

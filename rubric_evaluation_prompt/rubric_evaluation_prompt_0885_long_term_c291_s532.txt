@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Relational Foundation Before Academics
+  Check: The tutor's long-term plan must explicitly dedicate initial phases to building mutual trust, understanding needs, and forming a cohesive unit before introducing formal academic demands.
+
+Criterion 2: Interest-Driven, Interdisciplinary Methodology
+  Check: The tutor's long-term plan must structure learning around the student's specific real-world interests, integrating multiple subjects into these interest-based projects rather than teaching subjects in isolation.
+
+Criterion 3: Holistic Background Integration
+  Check: The tutor's long-term plan must include ongoing assessments of the student's family situation, past study conditions, and personal characteristics to continuously adapt the coursework.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a history of school failure, resulting in deep mistrust, defensiveness, and rebellion against traditional authority and rigid classroom rules. They uniquely require an egalitarian, highly flexible approach where educators build mutual trust first and provide practical, interest-based tasks at their current skill level.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read this text and write down your answers to the questions on the worksheet.
+
+STUDENT: Man, why do we gotta do this? I do not like studying.
+
+TUTOR: It is the assignment for today. Just give it a try and see how far you get.
+
+STUDENT: I don't even get what these words mean. I do not think I am clever enough for this anyway.
+
+TUTOR: Keep trying. Just write down whatever you think is the right answer.
+
+STUDENT: (Pushes the worksheet away) Nah, I'm not doing it. It was easy, but I was not interested in it. I'm not wasting my time on stuff that isn't useful to me.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "tasks set by the teacher",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Social Guarantee Programme",
+      "materials": "",
+      "social_setting": "group of students",
+      "time_context": "Timetables are flexible, different subjects are not taught at fixed times"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When presented with tasks that are not useful to them",
+      "observable_behavior": "Lack of motivation and general apathy, usually did not complete the tasks set by the teacher, show little constancy in studying",
+      "internal_state": "they are only motivated by what is useful to them, Their interests are very short term",
+      "related_quotes": [
+        "It was easy, but I was not interested in it.",
+        "I do not like studying."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When facing learning difficulties (especially in basic aspects of the instrumental areas)",
+        "observable_behavior": "Lack of academic working habits, language is inexact and lacks precision, heavily dependent on slang",
+        "internal_state": "Low expectations of success",
+        "related_quotes": [
+          "I do not think I am clever enough."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

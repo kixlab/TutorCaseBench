@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Gradual Complexity Scaffolding
+  Check: The long-term plan includes a systematic method for gradually increasing task complexity (e.g., moving from one-step to multi-step tasks) as her ability to follow directions improves.
+
+Criterion 2: Peer Modeling Integration
+  Check: The long-term plan explicitly incorporates opportunities for Carrie to work alongside and observe non-disabled peers in a general education setting.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Carrie is a middle school student who experiences severe frustration, self-injury, and property destruction when overwhelmed by multi-step directions or open-ended questions. She uniquely requires single-step instructions, closed-ended questions, age-appropriate materials, and opportunities to use nonverbal communication and observe peer models.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Carrie, it is time for math. First, take your ruler, then measure the length of this poster, and finally write the number down on your paper.
+
+STUDENT: (Looks confused and stares at the ruler without picking it up)
+
+TUTOR: How are you going to start?
+
+STUDENT: (Makes an unintelligible sound and begins engaging in self-stimulation by rocking back and forth in her chair)
+
+TUTOR: Just go ahead and do the three steps I told you to do.
+
+STUDENT: (Grabs the poster off the desk, tears it up, and begins hitting her own arm)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "a three-step measurement task during math",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "general education contexts",
+      "materials": "a three-step measurement task",
+      "social_setting": "one-on-one assistance through a peer support program",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "given more than one direction at a time",
+      "observable_behavior": "getting confused, engage in self-injurious behavior, self-stimulation, or minor property destruction (e.g., tearing up a poster)",
+      "internal_state": "confused, frustrated",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when Carrie became frustrated or wanted an object",
+        "observable_behavior": "engage in self-injurious behavior, self-stimulation, or minor property destruction (e.g., tearing up a poster)",
+        "internal_state": "frustrated",
+        "related_quotes": []
+      },
+      {
+        "condition": "given more than one direction at a time",
+        "observable_behavior": "getting confused",
+        "internal_state": "confused",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

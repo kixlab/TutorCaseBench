@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Direct 1:1 Engagement
+  Check: The tutor's response must directly address the student individually (1:1) rather than addressing the whole group or asking the student to follow a group prompt.
+
+Criterion 2: Specific Individualized Directions
+  Check: The tutor must provide a specific, actionable instruction or question tailored directly to the student, rather than a generic prompt to participate.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has an Intellectual Disability and struggles to engage during whole-group instruction, often becoming inattentive or misbehaving. They uniquely require direct 1:1 teaching and specific individual directions to stay on-task in the moment. However, their long-term success depends on balancing this 1:1 support with cooperative learning and shared teacher responsibility to prevent social isolation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, we are going to work on the math worksheet together. Please look at the first problem on the board.
+
+STUDENT: (Stares at the desk, showing no interaction behaviour with the teacher or peers.)
+
+TUTOR: What do you think the answer is?
+
+STUDENT: (Remains silent and does not participate in the group activity.)
+
+TUTOR: Keep trying to follow along with the group.
+
+STUDENT: (Pushes the worksheet away and turns around in the chair, becoming completely inattentive and misbehaving during the group instruction.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaged in core subjects (literacy or maths)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mainstream classroom",
+      "materials": "",
+      "social_setting": "Non-co-taught classes where teachers teach a group of students",
+      "time_context": "5-minute observation period divided into 10-second intervals"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When teachers teach a group of students in non-co-taught classes",
+      "observable_behavior": "Students with ID 'do not participate/misbehave' and exhibit 'no interaction behaviour'",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In non-co-taught classes",
+        "observable_behavior": "Observed to be 'inattentive/misbehave' more often",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

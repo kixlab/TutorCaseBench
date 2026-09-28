@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Collaborative Target Setting
+  Check: The long-term plan includes a mechanism for the student to collaboratively set and monitor their own individual behavioral or academic targets.
+
+Criterion 2: Consensus-Based Norms
+  Check: The long-term plan involves creating and reinforcing working practices or behavioral expectations through consensus (e.g., a shared pledge or agreement).
+
+Criterion 3: Structured Reflective Routine
+  Check: The long-term plan incorporates a recurring reflective activity, such as a guided diary or structured prompts, to help the student analyze past experiences over time.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with academic frustration when tasks are too hard or help is delayed, often acting out as a coping mechanism. They uniquely require collaborative, discussion-based activities that explore multiple perspectives, and they react negatively to intelligence-based praise, which triggers a fear of failure.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please fill out the next page in your SG diary reflecting on how you handled the test today.
+
+STUDENT: I don't really like this work. If I've gubbed up doing a test or something, I probably know I could have done better, but writing this is too hard.
+
+TUTOR: Just read the prompts and do your best to answer them.
+
+STUDENT: I don't know what to write. Sometimes I try to behave then something would happen and I'd not care any more. I need help with this.
+
+TUTOR: I need to check on the other students right now, just keep working on it by yourself.
+
+STUDENT: (Pushes the diary away) I get frustrated when I don't get help when I need it! If I don't really like the work or it's too hard, I'll just carry on and then get into trouble.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "doing a test or something, or work that the student doesn't really like or its too hard",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom environment",
+      "materials": "SG diary",
+      "social_setting": "collaborative, discussion-based activities",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when I don't get help when I need it",
+      "observable_behavior": "poor behaviour",
+      "internal_state": "frustrated",
+      "related_quotes": [
+        "I understand now that some of my poor behaviour has been because I get frustrated when I don’t get help when I need it"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "If I don't really like the work or its too hard",
+        "observable_behavior": "I'll just carry on and then get into trouble",
+        "internal_state": "",
+        "related_quotes": [
+          "If I don’t really like the work or its too hard, I’ll just carry on and then get into trouble"
+        ]
+      },
+      {
+        "condition": "Sometimes I tried to behave then something would happen",
+        "observable_behavior": "having difficulty in coping with the norms of school life",
+        "internal_state": "I'd not care any more",
+        "related_quotes": [
+          "Sometimes I tried to behave then something would happen and I’d not care any more."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

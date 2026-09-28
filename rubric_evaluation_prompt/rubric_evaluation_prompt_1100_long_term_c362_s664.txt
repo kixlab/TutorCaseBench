@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Tactile Screen-Based Learning
+  Check: The tutor's long-term plan includes activities that require the student to physically interact with a tablet screen, such as tracing or sliding, to learn new concepts.
+
+Criterion 2: Micro-Paced Target Acquisition
+  Check: The tutor structures learning goals into very small, manageable monthly increments (e.g., 2-5 items per month) to track comprehension and progress.
+
+Criterion 3: Personalized Picture-Based Communication
+  Check: The tutor's long-term strategy incorporates picture-based apps or personalized stories using recorded photos and audio to build the student's expressive communication.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a 9-11 year old male with classic autism who struggles with natural speech and traditional communication devices like the Springboard Lite. He requires alternative, highly engaging communication methods, specifically responding well to iPad-based interventions that offer tactile tracing, picture-based communication, and instant auditory or text-based rewards.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for a snack. Please tell me what you want to eat using your Springboard Lite device.
+
+STUDENT: (Presses buttons on the screen randomly, not using his device as a functional use of communication to select a snack.)
+
+TUTOR: What do you want to eat?
+
+STUDENT: (Makes a vocal sound but exhibits difficulty using natural speech to answer the question.)
+
+TUTOR: Try to tell me what you need.
+
+STUDENT: (Remains unable to use natural speech to meet his daily communication needs and pushes the device away without communicating a choice.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Meeting daily communication needs, teaching social messages, and exhibiting personal cues",
+      "learning_goal": "Improve functional communication skills and independence"
+    },
+    "context": {
+      "environment": "Classroom setting for students with classic autism",
+      "materials": "iPad tablet, picture-based applications (Proloquo2Go, Grace), Look2Learn, Stories2Learn",
+      "social_setting": "Students with speech and language impairments serviced by a speech pathologist",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to meet daily communication needs",
+      "observable_behavior": "Difficulty using natural speech",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When needing to communicate daily needs",
+        "observable_behavior": "Difficulty using natural speech",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When provided with traditional communication devices like Springboard Lite",
+        "observable_behavior": "Not using his device as a functional use of communication",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

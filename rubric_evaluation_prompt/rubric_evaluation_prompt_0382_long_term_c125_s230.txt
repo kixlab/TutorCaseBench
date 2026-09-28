@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: play_based_desensitization
+  Check: The long-term plan includes structured game or play activities designed to create positive associations with dogs and dog dolls.
+
+Criterion 2: systematic_behavior_tracking
+  Check: The long-term plan incorporates systematic data collection methods, such as ABC charts or scatter plots, to track occurrences of the fear response throughout the day.
+
+Criterion 3: cross_staff_consistency
+  Check: The long-term plan includes steps to coordinate with and train other classroom staff (e.g., teacher assistants) to discontinue inappropriate strategies and maintain a consistent approach.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ben is a student with a specific phobia of dogs and dog dolls in the school environment, which causes him to freeze or refuse to participate in activities. He uniquely requires explicit instruction in replacement behaviors (like standing still and verbalizing), immediate verbal reinforcement, and play-based desensitization to overcome his fear.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our class transition. Please move to the activity table.
+
+STUDENT: (Stops walking) I can't go to the table. The dog doll is sitting right there.
+
+TUTOR: Please just walk over to the table and sit down.
+
+STUDENT: No, I don't want to go near it. I'm scared of the dog doll.
+
+TUTOR: We need to continue our daily classroom activities. Go ahead.
+
+STUDENT: (Refuses to move forward, showing fear) I won't go! I'm too afraid of the dog doll in the classroom!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Daily classroom activities and class transitions",
+      "learning_goal": "Create a positive attitude about dogs and teaching replacement behaviour"
+    },
+    "context": {
+      "environment": "School area and classroom",
+      "materials": "Dog doll, scatter plots, ABC charts",
+      "social_setting": "Whole class with Mrs Ann and a teacher assistant",
+      "time_context": "During the class all day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Seeing a dog doll which was found in the classroom",
+      "observable_behavior": "Fearing dogs which were normally found in the school area as well as a dog doll",
+      "internal_state": "Fearing",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Seeing dogs which were normally found in the school area",
+        "observable_behavior": "Fearing dogs",
+        "internal_state": "Fearing",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

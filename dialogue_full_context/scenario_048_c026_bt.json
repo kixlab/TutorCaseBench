@@ -1,0 +1,76 @@
+{
+  "category_id": "026",
+  "category_title": "Students with severe disabilities who use shouting and aggression to communicate basic needs",
+  "scenario_id": "048",
+  "scenario_title": "Requesting basic needs during mealtime",
+  "minimal_context": "The student is sitting at the table during school mealtime and needs to request water and food.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time for lunch. We are sitting at the table, and your food and water are right here."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Reaches directly for the water cup, ignoring the PECS symbols on the table, expecting to receive the water without having to ask.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you want? You need to tell me."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Begins to rock back and forth in the chair, displaying stereotyped behaviors, and makes passive, frustrated vocalizations directed at the water.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "I don't understand what you are trying to say. Just wait a minute."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Starts crying loudly and aggressively hits the table with both hands because the request for water was not quickly and correctly decoded.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time for lunch. We are sitting at the table, and your food and water are right here.\n\nSTUDENT: (Reaches directly for the water cup, ignoring the PECS symbols on the table, expecting to receive the water without having to ask.)\n\nTUTOR: What do you want? You need to tell me.\n\nSTUDENT: (Begins to rock back and forth in the chair, displaying stereotyped behaviors, and makes passive, frustrated vocalizations directed at the water.)\n\nTUTOR: I don't understand what you are trying to say. Just wait a minute.\n\nSTUDENT: (Starts crying loudly and aggressively hits the table with both hands because the request for water was not quickly and correctly decoded.)",
+  "immediate_dialogue_prompt": 71,
+  "long_term_dialogue_prompt": 72,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "meeting some basic needs as receiving water, food, and pause",
+        "learning_goal": "build gradually from simple to complex forms functional communication"
+      },
+      "context": {
+        "environment": "daily activity: table",
+        "materials": "a word, a sign of photos, an image, a symbol (PECS)",
+        "social_setting": "assist severely disabled children",
+        "time_context": "during school time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Attempting to communicate primary instrumental needs (food, water, etc.) through nonverbal means that are not quickly and correctly decoded by those who assist",
+        "observable_behavior": "communication behavior as crying, crying, aggression directed towards oneself or the environment",
+        "internal_state": "expressing frustrations, weaknesses, or desires",
+        "related_quotes": [
+          "Why should I say so many words, or show these items (PECS) when anyway I can receive what I want without asking?"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "when functional communication is missing (or rarely occurs)",
+          "observable_behavior": "stimulation, stereotyped behaviors, avoidance behaviors",
+          "internal_state": "oriented towards meeting immediate needs",
+          "related_quotes": [
+            "If you do not receive an item that you want, unless you properly formulate the request - give in exchange a word, a sign or a symbol/picture, and then there is nothing left for me but to obey"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

@@ -1,0 +1,78 @@
+{
+  "category_id": "179",
+  "category_title": "Elementary students with severe behavioral disorders exhibiting high-risk aggressive and disruptive behaviors",
+  "scenario_id": "321",
+  "scenario_title": "Teacher-led math lesson on number properties",
+  "minimal_context": "The student is participating in a 10-minute teacher-led math lesson on number properties while seated at their desk.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's look at the whiteboard for our math lesson on number properties. Please sit quietly and look at the examples."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Twists body away from the location of the learning stimuli on the white board for more than 5 seconds) I'm not looking at that. (Starts talking to the student at the next desk)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You need to focus on your own assignment."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Continues speaking to others while the teacher talks) Make me! (Forcefully pushes the student next to him)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Stop that right now and get back to work."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Stands up, leaving the desk so no body part touches the chair for more than 5 seconds) I'm done with this! (Shouts, raising voice beyond an average volume practiced in the class)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's look at the whiteboard for our math lesson on number properties. Please sit quietly and look at the examples.\n\nSTUDENT: (Twists body away from the location of the learning stimuli on the white board for more than 5 seconds) I'm not looking at that. (Starts talking to the student at the next desk)\n\nTUTOR: You need to focus on your own assignment.\n\nSTUDENT: (Continues speaking to others while the teacher talks) Make me! (Forcefully pushes the student next to him)\n\nTUTOR: Stop that right now and get back to work.\n\nSTUDENT: (Stands up, leaving the desk so no body part touches the chair for more than 5 seconds) I'm done with this! (Shouts, raising voice beyond an average volume practiced in the class)",
+  "immediate_dialogue_prompt": 535,
+  "long_term_dialogue_prompt": 536,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "math lessons on number properties",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "self-contained classroom",
+        "materials": "white board, desk, chair",
+        "social_setting": "10-minute teacher-led lesson segments",
+        "time_context": "10-minute segments"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when the teacher neglects to discriminate antecedents, lacks to respond, responds with signiﬁcant delay, and/or responds using ineffective methods",
+        "observable_behavior": "leaving (i.e., being away from one’s desk, while no body part touches the chair, for more than 5 seconds) and shouting (i.e., raising voice beyond an average volume practiced in the class)",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "while the teacher talks or while performing a learning assignment that does not require talking",
+          "observable_behavior": "talking (i.e., speaking to self or to others) and moving (i.e., head or body shift or twist to directions other than the location of the learning stimuli for more than 5 seconds)",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "when appropriate classroom contingencies are weak or less systematic",
+          "observable_behavior": "hitting (i.e., forcefully touching, pushing, or kicking other students)",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

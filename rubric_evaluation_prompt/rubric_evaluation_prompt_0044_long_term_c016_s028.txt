@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Collaborative Norm-Setting
+  Check: The tutor's long-term plan includes a dedicated process for discussing and agreeing upon classroom rules and procedures collaboratively with the student.
+
+Criterion 2: Reinforcement of Task Focus
+  Check: The tutor's long-term plan incorporates explicit praise and positive reinforcement specifically tied to the student demonstrating focus and completing tasks.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits high absenteeism and highly disruptive behaviors (walking out, arguing) when subjected to traditional passive learning ('stay quiet and listen'). However, they show remarkable behavioral and cognitive engagement when given autonomy, active collaborative roles, and when their contributions are explicitly valued. They uniquely require a shift from passive compliance to active ownership, where their ideas are publicly validated and their argumentative nature is channeled into defending academic reasoning.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read the story about the cauldron and write down some questions in your notebooks.
+
+STUDENT: Welcome to the hell. (Turns around and starts talking loudly to a friend instead of looking at the stimulus materials)
+
+TUTOR: You need to stay quiet and listen to the instructions.
+
+STUDENT: (Stands up from the U-shaped seating arrangement) I don't want to just stay quiet and listen to you.
+
+TUTOR: Please sit back down at your place and stop disturbing your friends.
+
+STUDENT: (Starts walking toward the classroom door) I'm not doing this. I can get out of class anytime I feel like it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read stimulus materials in the form of fictional stories, pictures, and non-fictional text, and formulate questions based on the stimulus materials",
+      "learning_goal": "To ask factual, speculative, and philosophical questions"
+    },
+    "context": {
+      "environment": "Philosophical inquiry sessions",
+      "materials": "Stimulus materials (stories, pictures, poems, newspaper clippings, videos), note books, whiteboard",
+      "social_setting": "U-shaped seating arrangement to promote two-way communication",
+      "time_context": "50 minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When told to stay quiet and listen to the teachers",
+      "observable_behavior": "Noisy, distracted, engaged in verbal arguments and rude; would not sit at their places, would come in and get out of class anytime they felt to do so, and would disturb their friends",
+      "internal_state": "Used to be told to stay quiet and listen to the teachers",
+      "related_quotes": [
+        "welcome to the hell"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the first and the second session",
+        "observable_behavior": "Much time was spent on managing students' disruptive behaviours",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

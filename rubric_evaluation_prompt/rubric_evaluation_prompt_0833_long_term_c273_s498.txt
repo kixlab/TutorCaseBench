@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Positive Incremental Target-Setting
+  Check: The tutor's long-term plan includes negotiating and monitoring small, specific behavioral targets that are framed in positive terms (e.g., what to do, rather than what not to do).
+
+Criterion 2: Relational Trust Building
+  Check: The tutor's long-term strategy prioritizes maintaining a positive alliance and demonstrating that they have the student's best interests at heart, avoiding punitive or coercive cycles.
+
+Criterion 3: Sustained Insight Development
+  Check: The tutor incorporates regular, structured reflective activities (such as support group diaries or peer discussions) into the long-term plan to continuously build the student's self-awareness.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with self-regulation, frequently exhibiting disruptive and aggressive behavior, especially when reprimanded publicly or placed under pressure. They lack insight into their own behavioral triggers and tend to blame others, responding explosively to coercive discipline and ultimatums. They uniquely require a non-confrontational approach that uses guided reflection to build self-awareness, alongside positive relationship-building and incremental, positively framed target-setting.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Everyone, please open your textbooks to page 42 and begin reading the chapter silently.
+
+STUDENT: (Kicks the chair of the pupil sitting in front of them) I'm not reading this.
+
+TUTOR: You need to stop distracting others and start your reading.
+
+STUDENT: I wasn't even doing anything! He moved his chair back into my desk. It's his fault, not mine.
+
+TUTOR: The whole class is waiting for you to be quiet. Stop arguing and get to work right now.
+
+STUDENT: (Slams the textbook onto the floor and stands up) Why are you always picking on me in front of everyone?! I can’t control my behaviour when under pressure like this! I'm not doing your stupid work!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General classroom activity and responding to teacher direction",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General classroom environment",
+      "materials": "",
+      "social_setting": "In front of the class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Being told off in front of the class or when under pressure",
+      "observable_behavior": "Defies teachers and/or refuses to obey rules, argues with teachers, loses temper, and becomes rude, resentful, angry, agitated, argumentative, bad-tempered and/or confrontational, resulting in a tantrum",
+      "internal_state": "I can’t control my behaviour when under pressure",
+      "related_quotes": [
+        "Any situation like this results in a tantrum from . . . ",
+        "I can’t control my behaviour when under pressure"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When interacting with peers in the classroom",
+        "observable_behavior": "Deliberately does things to annoy other pupils, is touchy or easily annoyed by others, and is angry, resentful, spiteful or vindictive",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

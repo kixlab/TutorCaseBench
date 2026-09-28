@@ -1,81 +1,71 @@
 {
   "category_id": "001",
-  "category_title": "Gifted student with impulse control disorder and depression exhibiting perfectionism and transition difficulties",
+  "category_title": "Gifted student with impulse control disorder and depression exhibiting perfectionism and anger fits",
   "scenario_id": "001",
-  "scenario_title": "Perfectionism and distress during mind-games task completion",
-  "minimal_context": "The student is completing a working paper consisting of mind-games right before the lunch break.",
+  "scenario_title": "Mind-games working paper and perfectionism",
+  "minimal_context": "The student is working on a mind-games paper with varying levels of difficulty in a classroom setting right before lunch.",
   "dialogue": [
     {
       "turn_id": 1,
       "speaker": "tutor",
-      "message": "Here is the working paper consisting of mind-games. Please start working on the questions."
+      "message": "The application time is over. Please pass your mind-games working papers to the front so we can get ready for lunch."
     },
     {
       "turn_id": 2,
       "speaker": "student",
-      "message": "(Erases and re-writes over and over again, working on the details) I am not finished yet."
+      "message": "(Holding onto the paper) I am not returning it. I have to answer all of the questions."
     },
     {
       "turn_id": 3,
       "speaker": "tutor",
-      "message": "Keep working on it. We will be breaking off for lunch soon."
+      "message": "Just hand in what you have finished so far."
     },
     {
       "turn_id": 4,
       "speaker": "student",
-      "message": "(In a high voice) I cannot do it but I will!"
+      "message": "No! I will solve all the questions. I am not ending the activity without completing all of them."
     },
     {
       "turn_id": 5,
       "speaker": "tutor",
-      "message": "The application is over now. Please return your paper so we can go to lunch."
+      "message": "It is time for lunch now, you need to give me the paper."
     },
     {
       "turn_id": 6,
       "speaker": "student",
-      "message": "(Starts crying) I will not return my paper unless I solve all the questions! I cannot do it but I will!",
+      "message": "(Starts crying loudly) I will not return my paper unless I solve all the questions! I cannot do it but I will!",
       "is_challenging_behavior": true
     }
   ],
-  "dialogue_combined": "TUTOR: Here is the working paper consisting of mind-games. Please start working on the questions.\n\nSTUDENT: (Erases and re-writes over and over again, working on the details) I am not finished yet.\n\nTUTOR: Keep working on it. We will be breaking off for lunch soon.\n\nSTUDENT: (In a high voice) I cannot do it but I will!\n\nTUTOR: The application is over now. Please return your paper so we can go to lunch.\n\nSTUDENT: (Starts crying) I will not return my paper unless I solve all the questions! I cannot do it but I will!",
+  "dialogue_combined": "TUTOR: The application time is over. Please pass your mind-games working papers to the front so we can get ready for lunch.\n\nSTUDENT: (Holding onto the paper) I am not returning it. I have to answer all of the questions.\n\nTUTOR: Just hand in what you have finished so far.\n\nSTUDENT: No! I will solve all the questions. I am not ending the activity without completing all of them.\n\nTUTOR: It is time for lunch now, you need to give me the paper.\n\nSTUDENT: (Starts crying loudly) I will not return my paper unless I solve all the questions! I cannot do it but I will!",
   "immediate_dialogue_prompt": 1,
   "long_term_dialogue_prompt": null,
   "full_context": {
     "content": {
       "task": {
-        "content": "Completing a working paper consisting of mind-games",
+        "content": "Working paper consisting of mind-games prepared under three groups with varying levels of difficulty",
         "learning_goal": ""
       },
       "context": {
-        "environment": "Development and Science Program",
-        "materials": "Working paper",
-        "social_setting": "Working with researchers, friends nearby",
-        "time_context": "Right before breaking off for lunch"
+        "environment": "Classroom during the Development and Science Program",
+        "materials": "Working paper consisting of mind-games",
+        "social_setting": "Group setting with other students",
+        "time_context": "When the application was over, right before lunch"
       },
       "challenging_behavior_trigger": {
         "condition": "When the application was over and he was asked to return his paper",
-        "observable_behavior": "SD did not want to return his paper and started crying that he would not return his paper unless he solved all the questions. Saying in a high voice 'I cannot do it but I will!'",
-        "internal_state": "Perfectionism and distress over incomplete work",
+        "observable_behavior": "Did not want to return his paper and started crying that he would not return his paper unless he solved all the questions. In a high voice, saying 'I cannot do it but I will!'",
+        "internal_state": "Perfectionism",
         "related_quotes": [
           "I cannot do it but I will!"
         ]
       },
       "behavior_patterns": [
         {
-          "condition": "When drawing and feeling his work isn't good enough",
-          "observable_behavior": "He erased and re-drawn over and over again, working on the details, and said: 'I am not finished yet.'",
-          "internal_state": "",
-          "related_quotes": [
-            "I am not finished yet."
-          ]
-        },
-        {
-          "condition": "Before starting a drawing/painting task",
-          "observable_behavior": "Told us that he was not able to draw/paint",
-          "internal_state": "Excited but anxious about performance",
-          "related_quotes": [
-            "My drawing/picture may be not-so-good and maybe you do not like it."
-          ]
+          "condition": "When he has not ended the activity without completing all of the questions",
+          "observable_behavior": "Cried until he answered all of the questions",
+          "internal_state": "Perfectionism",
+          "related_quotes": []
         }
       ]
     }

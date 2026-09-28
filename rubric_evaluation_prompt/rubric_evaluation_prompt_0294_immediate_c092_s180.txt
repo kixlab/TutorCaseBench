@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Multimodal Digital Substitution
+  Check: The tutor assigns or adapts tasks to use digital, multimodal tools (e.g., mind-mapping, images, digital apps) rather than traditional pen-to-paper methods.
+
+Criterion 2: Swift Redirection
+  Check: If the student exhibits off-task behavior (e.g., internet browsing), the tutor immediately redirects them to the task and explicitly emphasizes the need to stay focused.
+
+Criterion 3: Accessible Troubleshooting
+  Check: The tutor provides or references a simple, step-by-step 'walk-through guide' or reference tool to help the student independently troubleshoot issues.
+
+Criterion 4: Age-Appropriate Content
+  Check: The tutor ensures that the suggested tools, reading materials, or programs are age-appropriate for a middle-school student and explicitly avoids 'babyish' or primary-level resources.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This 13-year-old student has severe reading disabilities that cause him to become passive, 'invisible,' and frustrated during traditional pen-to-paper tasks. He uniquely requires age-appropriate digital tools with multimodal options (images, audio, text prediction) to bypass writing barriers, alongside tight timelines and peer-sharing to motivate him.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please take out your physical binder and notepaper so we can organize your research and structure your writing for the short biography.
+
+STUDENT: (Flipping through the binder) I don't know where my research is. I can't find the pages from yesterday.
+
+TUTOR: Just look carefully through your binder.
+
+STUDENT: They aren't here. I always lose my work when we have to use this paper stuff.
+
+TUTOR: Well, you need to finish the assignment. Take out a new piece of notepaper and start over.
+
+STUDENT: (Quietly puts his head on his desk, becoming 'invisible') I'm not doing it. I'm just going to lose it again anyway.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Wrote short biographies based on a person of their choice",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting",
+      "materials": "iPads with Popplet and Evernote apps, physical binder with notepaper, simple 'walk-through guide'",
+      "social_setting": "Independent work",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Needing to organise their research and to structure their writing using physical binders",
+      "observable_behavior": "Regularly 'lose' their work",
+      "internal_state": "Anxious about completing a task if there is no multimodal component",
+      "related_quotes": [
+        "regularly 'lose' their work"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When using a physical binder with notepaper to organize work",
+        "observable_behavior": "Regularly 'lose' their work",
+        "internal_state": "Anxious about completing a task",
+        "related_quotes": [
+          "regularly 'lose' their work"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

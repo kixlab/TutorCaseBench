@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Peer Dialogue Facilitation
+  Check: The tutor explicitly prompts Carles to ask his group members for help or prompts the group to assist Carles with the unfamiliar words, rather than providing the definition directly.
+
+Criterion 2: Process-Oriented Support
+  Check: The tutor explicitly instructs Carles or his peers to explain the steps, meanings, or processes behind the problem, actively discouraging the mere sharing of the final solution.
+
+Criterion 3: In-Situ Integration
+  Check: The tutor addresses Carles's needs entirely within the group context, without suggesting he work alone, step outside, or receive separate isolated materials.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Carles is a 12-year-old student with speech and learning difficulties who struggles with unfamiliar vocabulary and was historically isolated through pull-out special education. He uniquely needs to be fully integrated into heterogeneous groups where adults act as facilitators of peer-to-peer dialogue rather than direct instructors. He thrives when the group is collectively responsible for ensuring everyone understands the process, rather than just sharing final answers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start working on the proportions and percentages activity with your group. You have about 15 to 20 minutes for this task.
+
+STUDENT: I can't do this math problem. There are some words here which are very strange.
+
+TUTOR: Read it again and see what you can figure out.
+
+STUDENT: I don't know how. In primary school I was used to going outside the classroom to receive special attention when I couldn't read the words.
+
+TUTOR: Well, you are in this group now, so just keep trying to get it done.
+
+STUDENT: I still don't understand something because of these strange words. Hey guys, I need help, can someone just give me the solution so we can finish the activity?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "session on mathematics was being conducted and the specific activities focused on calculation, geometry, proportions, and percentages",
+      "learning_goal": "ensure that the whole group completes the task"
+    },
+    "context": {
+      "environment": "12-year-olds’ classroom... 20 students were split into four IGs",
+      "materials": "different curricular activity for each of the small groups",
+      "social_setting": "heterogeneous in terms of ability level, gender, culture, language, and ethnicity... Four adults (the teacher and three volunteers) helped the students",
+      "time_context": "worked on an activity for about 15–20 minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When he doesn’t understand something, because there are some words which are very strange",
+      "observable_behavior": "he asks for them, he asks the whole group for help",
+      "internal_state": "doesn't understand something",
+      "related_quotes": [
+        "When he doesn’t understand something, because there are some words which are very strange, well he asks for them, he asks the whole group for help, and … He learns quite a lot more …"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "especially in their beginning of the implementation of the IGs",
+        "observable_behavior": "some students tend to give the solution to their peers rather than describing the processes followed and helping others understand by themselves",
+        "internal_state": "goal is just to finish the activity by themselves",
+        "related_quotes": []
+      },
+      {
+        "condition": "in primary school",
+        "observable_behavior": "going outside the classroom to receive ‘special attention’ and he was not integrated into his class group at all",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

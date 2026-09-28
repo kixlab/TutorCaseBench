@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Strategy Modeling
+  Check: The long-term plan includes the tutor explicitly modeling the target strategy or scaffolding tool (e.g., thinking aloud) before the student is expected to use it.
+
+Criterion 2: Persistent Guided Practice
+  Check: The plan incorporates a sustained phase of guided practice where the tutor actively supports the student in applying the scaffolding tool before independent use.
+
+Criterion 3: Student-Paced Scaffold Fading
+  Check: The plan explicitly designs the removal of the scaffolding tool to be gradual and dictated by the student's individual pace of mastery.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student relies on superficial compensation strategies, such as ordering numbers exactly as they appear in a word problem, rather than building a conceptual situation model. Their explanations often stagnate after reciting the first sentence, and they struggle to attribute meaning to abstract variables or operations. They uniquely require prompts to continue their explanations to focus on specific numbers, alongside explicit modeling and persistent, gradually faded guidance using structured scaffolding tools.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please solve the 'Open air bath problem' by finding an algebraic expression for the pump operation time given varying rainy days.
+
+STUDENT: (Writes 7 · (12 − x)) Ehm, I have 7 times 12 minus x?
+
+TUTOR: Can you explain how you got that expression?
+
+STUDENT: I don’t know, I have it anyway. The text says 7 days and 12... (stops explaining after reciting the first sentence without referring to the meaning of x or the rainy days)
+
+TUTOR: What do you think about the rest of the expression?
+
+STUDENT: Let's just agree on 7 · x − 12.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solving the 'Open air bath problem' (Fig 1) which requires finding an algebraic expression for pump operation time given varying rainy days.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Design experiment session",
+      "materials": "Cards with numbers and variables on a table, Word Problem Cracker (WPC) scaffolding tool",
+      "social_setting": "Working with a tutor and a peer",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Finalizing a solution for the 'Open air bath problem' after a long discussion with the tutor.",
+      "observable_behavior": "agree on Meral’s expression 7 · x − 12 without referring to the meaning of the quantitative operation and relations given in the text.",
+      "internal_state": "cannot overcome the obstacle of superficial modeling",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Explaining an algebraic expression for the 'Open air bath problem'",
+        "observable_behavior": "ordered according to the order of numbers in the text... explanation stagnates after reciting the first sentence about 7 days from the text.",
+        "internal_state": "implicitly apply this compensation strategy without building a complete situation or problem model.",
+        "related_quotes": [
+          "Ehm, I have 7 times 12 minus x?"
+        ]
+      },
+      {
+        "condition": "Explaining the components of an algebraic expression",
+        "observable_behavior": "makes successfully sense of the meaning of 7 and 12, but does not refer to the meaning of x... nor to the question of the task that includes the rainy days.",
+        "internal_state": "built a partial situation model without proceeding to the problem model.",
+        "related_quotes": [
+          "I don’t know, I have it anyway."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

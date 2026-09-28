@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Academic Language Bridging
+  Check: The tutor's long-term plan must incorporate dedicated, intensive instruction focused specifically on academic L2 proficiency (such as bridging courses or targeted academic language modules) alongside or prior to content instruction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student understands academic content in English but struggles with active L2 production, exhibiting frequent pauses, fillers, and false starts when put on the spot. They uniquely require structured preparation time before speaking and sustained support in academic language to bridge the gap between their content comprehension and L2 expressive abilities.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I have just spent some time explaining the three main stages of the water cycle. Now, I want you to explain the first stage, evaporation, in your own words.
+
+STUDENT: Um... yes. The water... it gets hot.
+
+TUTOR: What else can you tell me about it?
+
+STUDENT: Ah... the sun... the sun makes the water... um... change.
+
+TUTOR: Please continue.
+
+STUDENT: So... um... it... the water is... ah... it becomes... um... gas. And... ah... it... it goes up. That's... um... all.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Listening to academic content delivered in English",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Grade 10 CLIL lessons",
+      "materials": "",
+      "social_setting": "Very teacher-centered lessons where teacher talk occupied over 95% of the interaction time, and the teachers on average held the floor for over 35 seconds before distributing the turn to students",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When students mostly spoke in English during longer student turns",
+      "observable_behavior": "Student turns consisted of quite a lot of fillers, pauses and false starts, and were shorter in actual richness in the content",
+      "internal_state": "Could understand the academic content delivered in English, though some may not be able to respond or participate in interaction actively",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to participate in interaction actively",
+        "observable_behavior": "May not be able to respond or participate in interaction actively",
+        "internal_state": "Understand the academic content delivered in English",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

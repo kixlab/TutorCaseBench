@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Task Chunking and Simplification
+  Check: The tutor breaks the assignment into small, manageable steps and uses simple, direct instructions rather than giving a large, open-ended prompt.
+
+Criterion 2: Subtle Redirection
+  Check: The tutor redirects off-task behavior using subtle, gentle cues or visual prompts, explicitly avoiding repetitive use of his name or direct verbal reprimands.
+
+Criterion 3: Frequent Positive Reinforcement
+  Check: The tutor explicitly praises or encourages Yiannis's specific efforts during the interaction.
+
+Criterion 4: Structured Release
+  Check: The tutor offers a structured, acceptable break or alternative activity (e.g., a brief pause or a shift to a designated low-pressure zone) when he shows signs of physical restlessness.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Yiannis is a Year 4 student with hyperactivity and impulsivity who struggles significantly with long instructional blocks and independent writing. When overwhelmed, he exhibits nervous physical movements, writes run-on sentences, and refuses to work. He uniquely requires tasks to be broken into very small chunks, subtle/non-verbal redirection instead of verbal reprimands, and structured outlets for his physical restlessness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are starting our Literacy hour now. Please take out your notebook and work on your own to write a text about your weekend.
+
+STUDENT: (Stumps his feet under the desk) I don't want to work on my own. Writing is too hard.
+
+TUTOR: Just try your best to start forming your sentences.
+
+STUDENT: (Nervously moves his palms back and forth on his thighs) I went to the park and then I saw a dog and then we played and then we went home and then I ate dinner and then...
+
+TUTOR: Keep going, you need to write more than that.
+
+STUDENT: (Flaps his arms) No! I refuse to do this on my own anymore! I can't form the sentences!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent writing tasks involving sentence formation",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Literacy hour does not last for one hour, but ninety minutes, basically two periods of 45 minutes",
+      "materials": "Lists of activities for the day, class timetable was taped on his desk",
+      "social_setting": "Work on his own",
+      "time_context": "First two periods of the day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When forming sentences and often refused to work on his own",
+      "observable_behavior": "Rarely used punctuation and as a result, most of the texts he created had very long sentences, which made it very hard to comprehend what was written",
+      "internal_state": "Writing was a very daunting task for him",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While sitting",
+        "observable_behavior": "He would flap his arms or stump his feet, or nervously move back and forth his palms on his thighs",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

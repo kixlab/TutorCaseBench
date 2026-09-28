@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Strict Contingent Use of Music
+  Check: The tutor provides or promises singing ONLY when the student is actively complying (standing/walking) and explicitly stops or withholds singing the moment the student drops, cries, or becomes dead weight.
+
+Criterion 2: Withholding Physical Prompting During Dead Weight
+  Check: The tutor refrains from physically lifting, prompting, or coaxing the student while they are exhibiting dead weight or floor-dropping behaviors.
+
+Criterion 3: Integration of Choice-Making
+  Check: The tutor offers the student a clear choice regarding their destination or activity and encourages them to communicate their preference.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe task avoidance during transitions and independent walking by dropping to the floor, becoming dead weight, and screaming. They are highly motivated by music, but this preference easily reinforces avoidance if used to coax them. The evidence reveals they uniquely need strict differential reinforcement where preferred singing is provided only during compliance and immediately withdrawn during avoidance, alongside opportunities to make choices to express their needs.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for your O&M lesson. Please rise up from your chair.
+
+STUDENT: (Begins to scream and cry, and will not stand up)
+
+TUTOR: We need to leave the classroom now. Let's go.
+
+STUDENT: (Immediately drops to the floor and starts screaming)
+
+TUTOR: (Picks the child up and holds him while physically prompting him to walk) You need to walk.
+
+STUDENT: (Screams, cries, drops to the floor, and refuses to stand or walk)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Rise up from his chair and leave the classroom for O&M activities",
+      "learning_goal": "Initiating an O&M lesson"
+    },
+    "context": {
+      "environment": "The student's classroom",
+      "materials": "Chair",
+      "social_setting": "One-on-one with O&M instructor",
+      "time_context": "Pick-up of the student from the classroom"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The O&M instructor tells him to rise up from his chair and that it is time for his O&M lesson",
+      "observable_behavior": "The student immediately begins to scream and cry, and will not stand up. The child immediately drops to the floor and starts screaming.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Responding to the instructor's request to leave the classroom for O&M activities",
+        "observable_behavior": "Screamed, cried, dropped to the floor, and refused to stand or walk",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

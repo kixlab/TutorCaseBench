@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Acknowledgment of Personal Details
+  Check: The tutor's response must explicitly reference or revoice specific details the student shared about his life, family, or recent disappointment.
+
+Criterion 2: Authentic Community Connection
+  Check: The tutor must share a personal connection, observation, or authentic self-disclosure related to the community spaces, landmarks, or experiences the student described.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is deeply connected to his neighborhood and family, frequently sharing detailed stories about his out-of-school life, including vulnerable moments like a recent job rejection. He uniquely needs educators to validate his out-of-school identity by actively acknowledging his experiences and bridging the gap through authentic, shared community connections.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's watch the video you recorded on the iPod about your life outside of school.
+
+STUDENT: (Presses play on the iPod) This is my typical afternoon. I rode the bus to the grocery store for breakfast foods, and then I took a bike ride through my neighborhood to visit my grandmother.
+
+TUTOR: Okay, keep playing the video.
+
+STUDENT: Here is the layout of my house. I just cut the grass today. A little plant, a little tree, flowers. I do this up myself. And inside, I am a big wrestling fan. I really like to watch wrestling. I like to play wrestling video games.
+
+TUTOR: Alright. What is the next part of the video?
+
+STUDENT: This church is where my dad works. He gives—well, he works as the deacon. And we don’t really go to church that much. I play for the basketball team. I tried to get a job there cleaning it up… but they said no, and pay them more.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Creating a video of his life outside of school using an iPod, taken home overnight.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Out and about in his neighborhood, riding the bus to the grocery store, visiting his grandmother, and taking a bike ride through his neighborhood.",
+      "materials": "iPod",
+      "social_setting": "Sharing the video with the teacher",
+      "time_context": "Typical afternoon, taken home overnight"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When narrating his connections to his father's workplace at the church",
+      "observable_behavior": "Shares personal details about his dad's role, his hobbies, yardwork he completed, and a personal rejection when he tried to get a job cleaning the church but was told no.",
+      "internal_state": "",
+      "related_quotes": [
+        "I just cut the grass today. A little plant, a little tree, flowers. I do this up myself.",
+        "This church is where my dad works. He gives—well, he works as the deacon. And we don’t really go to church that much. I play for the basketball team. I tried to get a job there cleaning it up… but they said no, and pay them more.",
+        "I am a big wrestling fan. I really like to watch wrestling. I like to play wrestling video games."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When showing his neighborhood and community landmarks",
+        "observable_behavior": "Narrates his connections to various places as the bus passed by, showing relevant experiences at his church, favorite restaurants, and the layout of his house.",
+        "internal_state": "",
+        "related_quotes": [
+          "This church is where my dad works. He works as the deacon."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

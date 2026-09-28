@@ -1,77 +1,73 @@
 {
   "category_id": "335",
-  "category_title": "Lower-proficiency students who use L1 and gestures to express concepts in content-subject lessons",
+  "category_title": "Students with autism who communicate via typing and require significant wait time for responses",
   "scenario_id": "620",
-  "scenario_title": "Explaining plate tectonics using gestures and L1",
-  "minimal_context": "The student is answering questions about how tectonic plates move during a Geography lesson.",
+  "scenario_title": "Facilitating peer interaction during group work",
+  "minimal_context": "Shaffer is sitting in the front row during a class period to participate in group work with his classmates.",
   "dialogue": [
     {
       "turn_id": 1,
       "speaker": "tutor",
-      "message": "When plates move, why will it shake? How can plates move?"
+      "message": "Shaffer, it is time for group work. Please discuss the assignment with the classmates at your table."
     },
     {
       "turn_id": 2,
       "speaker": "student",
-      "message": "(Remains silent)"
+      "message": "(Sits as a silent young man in the front row staring straight ahead, tapping his thumbs together.)"
     },
     {
       "turn_id": 3,
       "speaker": "tutor",
-      "message": "Can you try to answer the question?"
+      "message": "Go ahead and start talking to them."
     },
     {
       "turn_id": 4,
       "speaker": "student",
-      "message": "Move..."
+      "message": "(Types slowly) I think it’s so difficult to initiate conversation questions if you don’t have a teacher in the introduction."
     },
     {
       "turn_id": 5,
       "speaker": "tutor",
-      "message": "Yes, but how can plates move?"
+      "message": "I am sitting right here next to you. Just tell them your thoughts."
     },
     {
       "turn_id": 6,
       "speaker": "student",
-      "message": "That way, that way, that way. [hands gesturing]",
+      "message": "(Continues staring straight ahead and tapping his thumbs together, unable to connect with the other kids) I look to an adult to really make the bridge... adults must quietly step into the background, camouflaging their help.",
       "is_challenging_behavior": true
     }
   ],
-  "dialogue_combined": "TUTOR: When plates move, why will it shake? How can plates move?\n\nSTUDENT: (Remains silent)\n\nTUTOR: Can you try to answer the question?\n\nSTUDENT: Move...\n\nTUTOR: Yes, but how can plates move?\n\nSTUDENT: That way, that way, that way. [hands gesturing]",
-  "immediate_dialogue_prompt": 1078,
-  "long_term_dialogue_prompt": 1079,
+  "dialogue_combined": "TUTOR: Shaffer, it is time for group work. Please discuss the assignment with the classmates at your table.\n\nSTUDENT: (Sits as a silent young man in the front row staring straight ahead, tapping his thumbs together.)\n\nTUTOR: Go ahead and start talking to them.\n\nSTUDENT: (Types slowly) I think it’s so difficult to initiate conversation questions if you don’t have a teacher in the introduction.\n\nTUTOR: I am sitting right here next to you. Just tell them your thoughts.\n\nSTUDENT: (Continues staring straight ahead and tapping his thumbs together, unable to connect with the other kids) I look to an adult to really make the bridge... adults must quietly step into the background, camouflaging their help.",
+  "immediate_dialogue_prompt": 1029,
+  "long_term_dialogue_prompt": 1030,
   "full_context": {
     "content": {
       "task": {
-        "content": "Answering the questions: 'When plates move, why will it shake? (pause) How can plates move?'",
-        "learning_goal": "Explaining plate movement in a Geography lesson"
+        "content": "Working with classmates during group work or free periods",
+        "learning_goal": ""
       },
       "context": {
-        "environment": "Geography lesson in School C, a Content and Language Integrated Learning (CLIL) classroom",
-        "materials": "",
-        "social_setting": "Teacher-student interaction during a content-subject lesson",
-        "time_context": ""
+        "environment": "General education classes and special education room",
+        "materials": "Short film about his experience of autism, snacks",
+        "social_setting": "Sitting in the front row, peers present but unsure how to approach him, adults nearby",
+        "time_context": "During group work, free periods, or diversity group meetings"
       },
       "challenging_behavior_trigger": {
-        "condition": "When asked an open-ended academic question in L2 ('How can plates move?')",
-        "observable_behavior": "Used L1 (translated as 'That way, that way, that way') and physical gestures ('hands gesturing') instead of L2 academic language",
-        "internal_state": "",
+        "condition": "When adults are constantly by his side without fading back",
+        "observable_behavior": "Sits quietly next to an adult, missing opportunities to interact directly with classmates",
+        "internal_state": "I think it’s so difficult to initiate conversation questions if you don’t have a teacher in the introduction. I look to an adult to really make the bridge.",
         "related_quotes": [
-          "That way, that way, that way. [hands gesturing]"
+          "I am thinking that people only can have the greatest feelings of security where the teachers are having the intelligence to be a bridge that can cross over the distances of inconsolation of the sad feelings … I think it’s so difficult to initiate conversation questions if you don’t have a teacher in the introduction. I look to an adult to really make the bridge."
         ]
       },
       "behavior_patterns": [
         {
-          "condition": "When participating in teacher-student interaction during observed lessons",
-          "observable_behavior": "Provides very short verbal responses, with a mean length of student turns at 1.9 s (SD = 1.6)",
-          "internal_state": "",
-          "related_quotes": []
-        },
-        {
-          "condition": "When teachers ask questions in L2",
-          "observable_behavior": "Provides no responses to questions",
-          "internal_state": "",
-          "related_quotes": []
+          "condition": "When peers are present but unsure how to approach him",
+          "observable_behavior": "Silent young man in the front row staring straight ahead, tapping his thumbs together",
+          "internal_state": "Willing and ready to connect with other kids, but needs adults to smooth the way with friendship and then stand back",
+          "related_quotes": [
+            "We are willing and ready to connect with other kids, and adults must quietly step into the background, camouflaging their help as a tiger who may hide in full view. It’s the needed disguise of the adult who smooths the way with the friendship, then stands back in the shadows, observing the complicated dance of steps taking you to the feeling of confidence."
+          ]
         }
       ]
     }

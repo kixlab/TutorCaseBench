@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mutual Exploration of Constraints
+  Check: The long-term plan includes strategies for discussing classroom limits and shared frustrations collaboratively, rather than relying on strict behavioral enforcement.
+
+Criterion 2: Fostering Symbolic Expression
+  Check: The long-term plan incorporates opportunities for the student to express feelings through imagination, creation, or symbolization rather than relying solely on verbal conflict resolution.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student expresses desires and frustrations physically, such as shoving over space or fidgeting, and becomes overwhelmed or confused by standard SEL conflict resolution scripts. They uniquely require adults to openly acknowledge their wishes, disappointments, and bodily excitement rather than forcing them to verbalize their feelings or intent.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Aiden, I saw you walk up and push Ariel. What is going on?
+
+STUDENT: (Aiden makes eye contact) I want him to move. That’s my spot.
+
+TUTOR: Can you use your words to ask him that, to ask him to move somewhere different?
+
+STUDENT: (Aiden looks to the floor, knotting his fingers and kicking the ground) Can you move to another spot? That’s my spot. (Ariel kicks the ground as well and tucks both hands beneath his waistband.)
+
+TUTOR: Did it bother you, Ariel, that Aiden touched you? Did it bother you when he pushed you instead of using words?
+
+STUDENT: (Ariel stares, expressionless. He continues staring, and eventually whispers) I’m sorry that you bothered me.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transitioning from free play (Legos, drawing) to the morning meeting rug for the start of the school day.",
+      "learning_goal": "Engaging in teacher-directed conflict resolution on the morning meeting rug."
+    },
+    "context": {
+      "environment": "Morning meeting rug",
+      "materials": "",
+      "social_setting": "While other kids take their seats",
+      "time_context": "Start of the school day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Aiden wants Ariel to move from a specific spot on the rug.",
+      "observable_behavior": "Aiden walks up to Ariel and shoves him. Ariel stares, and Aiden shoves him again.",
+      "internal_state": "",
+      "related_quotes": [
+        "I want him to move. That’s my spot."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When prompted by the teacher to 'use your words' to ask to move.",
+        "observable_behavior": "Aiden looks to the floor, knotting his fingers, kicks the ground, and says softly: 'Can you move to another spot? That’s my spot.' Ariel kicks the ground as well and tucks both hands beneath his waistband.",
+        "internal_state": "",
+        "related_quotes": [
+          "Can you move to another spot? That’s my spot."
+        ]
+      },
+      {
+        "condition": "When asked repeatedly if being pushed bothered him.",
+        "observable_behavior": "Ariel stares, expressionless, continues staring, and eventually whispers a confused apology.",
+        "internal_state": "",
+        "related_quotes": [
+          "I’m sorry that you bothered me."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

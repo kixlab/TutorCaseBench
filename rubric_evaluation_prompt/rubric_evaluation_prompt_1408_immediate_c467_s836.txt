@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Demystification of Professional Conventions
+  Check: The tutor explicitly explains the meaning, purpose, or mechanics of a professional convention (e.g., formal phrasing, email etiquette) without making the student feel inadequate for not already knowing it.
+
+Criterion 2: Validation of Tentative Efforts
+  Check: The tutor explicitly validates the student's attempt, mistake, or impulsive action by framing it positively as a step toward progress or a natural part of the learning process.
+
+Criterion 3: Bridging to Lived Experience
+  Check: The tutor uses analogies, idioms, or cultural references to connect the academic or professional task to the student's real-world experiences or understanding.
+
+Criterion 4: Collaborative Scaffolding of Revisions
+  Check: The tutor prompts a discussion about why certain content (e.g., survey questions, email drafts) might need to be adjusted for the target audience, rather than simply dictating the changes.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are overage 8th-graders with histories of repeated academic failure, resulting in damaged learner identities. They are highly engaged in collaborative, inquiry-driven projects but feel deep embarrassment when they do not know professional conventions, often acting impulsively (e.g., hastily sending unreviewed emails) to hide their lack of knowledge. They uniquely need explicit, non-judgmental demystification of professional norms, validation that mistakes are 'steps toward progress,' and a cognitive apprenticeship approach that connects new academic discourses to their lived experiences.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review the survey you are revising on the laptop to print out and distribute to your fellow students.
+
+STUDENT: (Moving desks closer together) I feel a lot of people will answer ‘yes’ to this one. You know why? Cause I have a LOT of friends like that.
+
+TUTOR: How are you planning to handle the completed surveys?
+
+STUDENT: We want to make sure students feel safe returning their surveys. We decided it would be better to put them in a shoe-box, put tape around it, and then decorate it to ensure security.
+
+TUTOR: You need to rewrite some of these items. Questions like the ones about abortion are too probing and should be knocked off the survey.
+
+STUDENT: No, you’re going too fast! You have to slow down, man. Don’t rush it. Sex questions you always leave for the end. You sugar-coat them at first. And then you crack them!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "revising a survey they plan to print out and distribute to their fellow students",
+      "learning_goal": "gather accurate information, and then create and disseminate new knowledge to the public."
+    },
+    "context": {
+      "environment": "New York City high school",
+      "materials": "laptop, large poster paper with marker in hand",
+      "social_setting": "desks closer together... next to and facing each other",
+      "time_context": "after school until 6pm twice a week"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "supervising teacher urged them to rewrite it, since she said it was 'too probing.' (Other questions she said should be 'knocked off' the survey such as whether students had ever had an abortion.)",
+      "observable_behavior": "heated discussion about how to make sure students felt safe in returning their surveys... Some discussion ensued as to whether oral sex was actually sex.",
+      "internal_state": "thinking as researchers as they seek to gather accurate information",
+      "related_quotes": [
+        "No, you’re going too fast! You have to slow down, man. Don’t rush it. Sex questions you always leave for the end. You sugar-coat them at first. And then you crack them!",
+        "I feel a lot of people will answer ‘yes’ to this one. You know why? Cause I have a LOT of friends like that."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When one student suggested they keep the filled-in surveys in a shoe-box",
+        "observable_behavior": "others were against the idea since they said it could be opened. The first student then decided it would be better to put tape around it and then decorate it",
+        "internal_state": "make sure students felt safe in returning their surveys",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

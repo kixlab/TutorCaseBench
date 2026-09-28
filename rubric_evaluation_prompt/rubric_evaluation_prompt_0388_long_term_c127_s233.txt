@@ -1,0 +1,111 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Cross-Context Generalization
+  Check: The long-term plan explicitly incorporates strategies to practice, model, and reinforce manual signing across multiple different daily routines (e.g., meals, crafts, leisure) and/or with various communication partners.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student uses both speech and key word signing but frequently abandons signs during non-communicative activities (like crafts or mealtimes) when their hands are occupied. They are highly dependent on staff modeling and will revert to speech-only communication if the tutor does not use signs. They uniquely require consistent AAC modeling, direct prompts to sign, and reinforcement to maintain functional manual communication across different contexts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start making the greeting cards. Here is the paper and the glue.
+
+STUDENT: (Takes the paper and glue, keeping hands occupied) I will make a blue card.
+
+TUTOR: What shape do you want to cut out for the front?
+
+STUDENT: (Cutting the paper) A star.
+
+TUTOR: Okay, put the star on the card. Where does it go?
+
+STUDENT: (Holding the glue and paper, speaking exclusively verbally without using any spontaneous manual signs) Right here in the middle.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Crafts (e.g. making cards or painting)",
+      "learning_goal": "functional communication"
+    },
+    "context": {
+      "environment": "non-communicative activities",
+      "materials": "cards or painting",
+      "social_setting": "observed with familiar direct support staff, teachers and communication specialists",
+      "time_context": "during daily activities"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When staff communicated without signs",
+      "observable_behavior": "abandon rather than use spontaneous signs",
+      "internal_state": "did not perceive an acute need for manual signs during work activities",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when staff communicated exclusively through speech",
+        "observable_behavior": "inclined to communicate exclusively verbally",
+        "internal_state": "working memory load is less occupied with other tasks and using signs may be easier",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

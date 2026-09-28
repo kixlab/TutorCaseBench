@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Lesson Preview
+  Check: The tutor's response must explicitly outline or preview the specific content, activities, or texts that will be covered in the upcoming lesson.
+
+Criterion 2: Affirmation of Creative Autonomy
+  Check: The tutor's response must explicitly offer Landry a choice in their writing topic or confirm that they are not required to write about personal trauma.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Landry is a proactive self-advocate who engages deeply with sensitive material but is highly vulnerable to being triggered by trauma literature. They uniquely require explicit previews of lesson content, guaranteed choice in writing assignments, and robust, pre-established safety plans to avoid being caught off guard.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Thanks for stopping by between classes. Today we will be writing a poem as a creative response to the novel Speak and the complementary texts.
+
+STUDENT: I began a poem. It starts with, 'The screams in the air are thick / I can feel her pain in my lungs.'
+
+TUTOR: Okay, keep working on that during the lesson.
+
+STUDENT: I am trying to take steps for my comfort and safety to avoid triggering.
+
+TUTOR: Just follow along with the reading when class starts.
+
+STUDENT: That's why I asked for this check-in. I need to discuss the specific details of today's lesson right now so I am not caught off guard.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing a poem as part of a creative writing response to the novel Speak and complementary trauma texts",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "5-week trauma literature unit",
+      "materials": "The novel Speak and complementary trauma texts",
+      "social_setting": "Private meetings between teacher and student between classes",
+      "time_context": "During the first few weeks of the unit; between classes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Anticipating details of the day's lesson involving trauma literature that could catch them off guard",
+      "observable_behavior": "Proactively took steps for their comfort and safety and to avoid triggering by asking for private meetings with Amber for frequent check-ins between classes to discuss details of the day’s lesson",
+      "internal_state": "Fear of being caught off guard by sensitive content",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When writing a creative response to trauma texts",
+        "observable_behavior": "Began a poem with intense imagery about pain and screams",
+        "internal_state": "",
+        "related_quotes": [
+          "The screams in the air are thick / I can feel her pain in my lungs."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

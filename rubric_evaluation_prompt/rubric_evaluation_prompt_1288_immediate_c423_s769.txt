@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Guided Rephrasing of Hurtful Comments
+  Check: The tutor prompts or guides Nia to rephrase her negative statement into a friendly comment, compliment, or polite request.
+
+Criterion 2: Provision of Short, Concrete Scripts
+  Check: The tutor provides at least one specific, short phrase (e.g., 'Way to go,' 'May I help?', 'Excuse me') for Nia to practice saying to her peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Nia is a highly social preschooler who loves organizing play but struggles with impulsivity, often using a rude, bossy tone and making hurtful comments to peers. The evidence reveals she uniquely needs concrete, short scripts to replace her negative comments, immediate guidance to rephrase her words, and proactive priming (like video modeling) before play begins.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our 10-minute free play period. You can go over to the art table and play with your friends.
+
+STUDENT: I'm going to organize the drawing game! Everyone sit down and listen to me.
+
+TUTOR: Go ahead and start your activity.
+
+STUDENT: No, you aren't playing right. Your picture is messy.
+
+TUTOR: Just keep playing together.
+
+STUDENT: Stop! Get out of my way. I can do better than you, let me do that!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Organizing play activities and interacting with friends",
+      "learning_goal": "Increasing her positive comments to friends to above 70% of intervals"
+    },
+    "context": {
+      "environment": "Preschool classroom",
+      "materials": "Brief 2-min video clip",
+      "social_setting": "Free play with friends",
+      "time_context": "10-min free play monitoring period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When interacting with friends during free play",
+      "observable_behavior": "Makes a statement in an unfriendly tone of voice, which includes insults, bragging, demands, and/or disrespect",
+      "internal_state": "",
+      "related_quotes": [
+        "Get out of my way",
+        "I can do better than you",
+        "Let me do that",
+        "Stop"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When she talks to her friends while organizing play activities",
+        "observable_behavior": "She can be impolite or unfriendly, and her tone of voice is often rude and bossy",
+        "internal_state": "Says the first thing she thinks of",
+        "related_quotes": [
+          "You aren't playing right",
+          "Get out of my way",
+          "Your picture is messy"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

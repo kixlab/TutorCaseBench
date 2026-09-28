@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Pre-Proposal Forecasting
+  Check: The tutor precedes a new directive with a pre-proposal question, a forecasting cue (e.g., 'look'), or a description of the upcoming action.
+
+Criterion 2: Interaction Envelope Construction
+  Check: The tutor formats their proposal so that the child's current play activity, or a slight modification of it, fulfills the request.
+
+Criterion 3: Validation of Alternative Responses
+  Check: The tutor accepts the child's non-verbal action, slight adjustment, or alternative play choice as a valid turn, rather than repeating a rejected command.
+
+Criterion 4: Sequence Closing Acknowledgment
+  Check: The tutor provides a closing acknowledgment (e.g., 'there you go', 'okay', or a validating observation) immediately following the child's response to a proposal.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an early language learner who communicates primarily through non-verbal actions, precise timing, and solitary play. They are highly sensitive to abrupt directives for new activities, often responding to direct demands by running away or switching toys. To maintain engagement, they uniquely require tutors to build 'interaction envelopes' around their current play, use pre-proposals to gauge interest, and accept non-verbal counter-proposals as valid conversational turns rather than non-compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's play with the slinky on the table.
+
+STUDENT: (Extends the slinky in and out while gazing at it.)
+
+TUTOR: You got the slinky. (Moves hand toward the slinky)
+
+STUDENT: (Moves the slinky toward you but holds onto it.)
+
+TUTOR: Can I see the slinky? (Holds hand out)
+
+STUDENT: (Steps back, places the slinky on the table instead of handing it directly, and releases it while gazing at it.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Playing with a slinky and participating in a demonstration trick",
+      "learning_goal": "Interactional turn-taking"
+    },
+    "context": {
+      "environment": "15-minute free-play session in a University clinic playroom",
+      "materials": "slinky, table",
+      "social_setting": "Caregiver-child interaction",
+      "time_context": "15-minute session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Mom asks to see the slinky and holds hand out",
+      "observable_behavior": "steps back, places slinky on table, and releases it",
+      "internal_state": "",
+      "related_quotes": [
+        "can i see the slinky?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When prompted to hand over a toy",
+        "observable_behavior": "steps back, places toy on table instead of handing directly, and releases it while gazing at it",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

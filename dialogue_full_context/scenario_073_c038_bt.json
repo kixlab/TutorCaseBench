@@ -1,0 +1,72 @@
+{
+  "category_id": "038",
+  "category_title": "Student with ASD and intellectual disabilities who relies on visual modeling and struggles with multiplicative vocabulary",
+  "scenario_id": "073",
+  "scenario_title": "Equal Groups Division Problem with Large Quantities",
+  "minimal_context": "The student is working individually on a worksheet problem about distributing 24 candies into 4 bags.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's look at the next problem on your worksheet. There are 24 candies to be distributed equally among 4 bags. How many candies are in each bag?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks at the worksheet and draws 4 large bags on the paper.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think you should do next?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Starts drawing 24 individual candies inside the first bag.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Okay, keep going."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Draws 24 candies in each of the remaining three bags, then starts counting all of the drawn candies one by one, losing track of the count due to the large number) One, two, three... twenty-four... twenty-five... wait...",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's look at the next problem on your worksheet. There are 24 candies to be distributed equally among 4 bags. How many candies are in each bag?\n\nSTUDENT: (Looks at the worksheet and draws 4 large bags on the paper.)\n\nTUTOR: What do you think you should do next?\n\nSTUDENT: (Starts drawing 24 individual candies inside the first bag.)\n\nTUTOR: Okay, keep going.\n\nSTUDENT: (Draws 24 candies in each of the remaining three bags, then starts counting all of the drawn candies one by one, losing track of the count due to the large number) One, two, three... twenty-four... twenty-five... wait...",
+  "immediate_dialogue_prompt": 116,
+  "long_term_dialogue_prompt": 117,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Solve a division problem involving 24 candies and 4 bags",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Instructional sessions were conducted individually in a distraction-free environment",
+        "materials": "Worksheets to cover the four steps proposed in the DOTS list, conceptual model diagram",
+        "social_setting": "Individual session with an instructor who had prior experience in teaching mathematics to the participant",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Encountering vocabulary related to equal distribution (e.g., 'distributed equally among')",
+        "observable_behavior": "Used a multiplicative strategy by drawing 24 candies in each of the 4 bags and then counting them, leading to error in the number of candies drawn in one of the bags and in the overall count",
+        "internal_state": "Deficiencies in conceptual understanding regarding division problems, suggesting challenges in comprehending the given situations",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When attempting to solve division problems without explicit operation identification",
+          "observable_behavior": "Employed incorrect modeling strategies in the four division problems, treating them as multiplication or subtraction problems",
+          "internal_state": "Incorrectly rely on his prior knowledge of addition or multiplication due to language comprehension challenges",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

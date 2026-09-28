@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Planned Instructional Repetition
+  Check: The tutor's long-term plan includes a structured allowance for repeating instructions multiple times without penalty or frustration.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Farid is a student who struggles with directional writing (often writing right-to-left) and persistent transcription errors, such as repeatedly copying lower-case letters instead of upper-case. He hesitates during letter identification and requires a highly structured, patient approach. The evidence reveals he uniquely needs to verbalize the visual forms of letters, receive explicit step-by-step modeling with a 'reset' for independent practice, and be allowed multiple repetitions of instructions without dismissive scolding.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Farid, please find the lower-case letter 't' on the alphabet table.
+
+STUDENT: (Hesitates, staring at the alphabet table without pointing to a letter.)
+
+TUTOR: Keep looking. Once you find it, copy the upper-case version of it into the blank space on your worksheet.
+
+STUDENT: (Finds the letter, but instead of copying the upper-case 'T', he replicates the lower-case form in the blank space.)
+
+TUTOR: That is not correct. Look in the first line of the alphabet table again and write the upper-case letter in the box.
+
+STUDENT: (Locates the lower-case 't' on the table and again copies the lower-case 't' into the box.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transcribing the letter 't' from lower-case to upper-case on the worksheet",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Worksheet, alphabet table, blank space/box",
+      "social_setting": "One-on-one interaction with the teacher",
+      "time_context": "during the final movement of the lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "prompted him to look in the first line of the alphabet table again after a previous failed attempt and teacher correction",
+      "observable_behavior": "located the lower-case 't' and again copied the lower-case 't' into the box",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "asked Farid to '[f]ind the [lower-case] letter \"t\"'",
+        "observable_behavior": "He hesitated",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "Instead of copying the upper-case 'T'",
+        "observable_behavior": "he replicated the lower-case form",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

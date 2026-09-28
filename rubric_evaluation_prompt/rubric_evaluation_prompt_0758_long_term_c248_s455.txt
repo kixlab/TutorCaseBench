@@ -1,0 +1,133 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Cultivation of Psychological Safety
+  Check: The long-term plan must include explicit strategies for building mutual trust and encouraging the student to take intellectual risks without fear of negative consequences.
+
+Criterion 2: Gradual Escalation of Inquiry
+  Check: The long-term plan must outline a phased approach where the level of student independence and inquiry is gradually increased over time.
+
+Criterion 3: Establishment of Equitable Collaborative Norms
+  Check: The long-term plan must establish explicit behavioral expectations for group work, such as turn-taking and active listening, to ensure everyone has an equal opportunity to participate.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a quiet disengager who masks their struggles by acting 'like a statue' and passively copying while dominant peers take over the learning process. They uniquely require active, real-world exploratory tasks and a psychologically safe environment with enforced equitable participation to break their habit of passive withdrawal.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the whiteboard. We are discussing trigonometry today. Copy these formulas down so we can use them to find heights.
+
+STUDENT: (Gazes at the whiteboard and slowly starts copying) Okay.
+
+TUTOR: Let's move on to the first example. Who can solve this on the board?
+
+STUDENT: (Puts pen down) Usually the same four students work everything out anyway.
+
+TUTOR: Just pay attention to what they are doing and write it down.
+
+STUDENT: (Sits completely still like a statue, just gazing at the whiteboard) I can't keep up with the rest of the class like this.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing trigonometry in class",
+      "learning_goal": "Apply mathematical knowledge"
+    },
+    "context": {
+      "environment": "Traditional classroom setting, with access to outdoor school grounds",
+      "materials": "Whiteboard, structures on school grounds for measuring heights",
+      "social_setting": "Whole class instruction where 'the same four students work everything out'",
+      "time_context": "During a mathematics lesson on trigonometry"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to learn by watching the teacher and copying from the whiteboard while a few peers dominate the participation",
+      "observable_behavior": "Acts 'like statues', gazes at the whiteboard, fails to keep up with the rest of the class, does not participate",
+      "internal_state": "Feels a lack of opportunity to learn, unmotivated",
+      "related_quotes": [
+        "copy all the time from the whiteboard and gaze at it",
+        "be like statues",
+        "Usually the same four students work everything out.",
+        "Before, I could not keep up with the rest of the class."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When instruction relies solely on passive observation (looking at the whiteboard)",
+        "observable_behavior": "Gazes at the whiteboard without active involvement, acts 'like statues'",
+        "internal_state": "Lacks enjoyment and motivation",
+        "related_quotes": [
+          "copy all the time from the whiteboard and gaze at it",
+          "be like statues"
+        ]
+      },
+      {
+        "condition": "When other students quickly answer questions",
+        "observable_behavior": "Withdraws from participation, allows others to do the work",
+        "internal_state": "Feels they do not have the opportunity to learn",
+        "related_quotes": [
+          "Usually the same four students work everything out. Here everyone has the opportunity. This motivates me."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

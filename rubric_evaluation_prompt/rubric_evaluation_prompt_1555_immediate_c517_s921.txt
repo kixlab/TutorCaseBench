@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Multimodal Symbolic Modeling
+  Check: The tutor pairs their spoken words with a demonstration of a graphic symbol (aided language input) or a manual sign.
+
+Criterion 2: Validation of Nonsymbolic Communication
+  Check: When Cody exhibits a nonsymbolic behavior (e.g., gaze, head turn, movement), the tutor explicitly states what it means and models how to express that meaning using a symbol or sign.
+
+Criterion 3: Avoidance of Direct Demands
+  Check: The tutor avoids giving direct commands to use a device (e.g., 'Hit your switch', 'Tell me') and avoids relying on closed yes/no questions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Cody is a student with severe intellectual disabilities who communicates primarily through nonsymbolic behaviors (movements, facial expressions, gazing) and often becomes a passive observer during instruction. He uniquely requires adults to validate his nonsymbolic communication by ascribing meaning to it and providing multimodal symbolic modeling, as direct demands and lack of AAC modeling lead to immediate disengagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's read 'All You Need for a Snowman'. Look at all this snow! Hit your switch to turn the page.
+
+STUDENT: (Hits the single message voice output device with a fisted hand to respond to the direct request, sitting back in his manual wheelchair.)
+
+TUTOR: Good job. Now look at this big snowman. Is he cold?
+
+STUDENT: (Uses a head nod to answer the yes or no question, but otherwise remains a passive observer.)
+
+TUTOR: Pay attention to the story, Cody. Use your communication board to tell me about the snowman.
+
+STUDENT: (Shows no interest in his personal aided AAC device. He turns his head to the side to refuse, demonstrating disinterest and non-engagement as he struggles with attention.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in shared reading instruction (e.g., reading 'Spookyrumpus' or 'All You Need for a Snowman')",
+      "learning_goal": "Develop joint attention and communication skills, and foster flexible language learning"
+    },
+    "context": {
+      "environment": "Instructional setting during shared reading sessions",
+      "materials": "Books, manual wheelchair, personal aided AAC device with graphic symbols, single message voice output devices",
+      "social_setting": "Interacting with an adult teacher",
+      "time_context": "Beginning of the year / initial sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher reads the book with animation but does not use aided language input, does not provide access to aided AAC, or limits interaction to direct requests and single message voice output devices",
+      "observable_behavior": "Acts as a primarily passive observer, struggles with attention, shows non-engagement, and only responds to direct requests",
+      "internal_state": "Disinterest",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When refusing",
+        "observable_behavior": "Turned his head to the side or shook his head",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When attempting to obtain objects or engage in social interactions",
+        "observable_behavior": "Gazed between people and desired objects, nodded his head, waved to greet people, or raised his hand to get attention",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When provided with a personal aided AAC device without proper modeling",
+        "observable_behavior": "Showed no interest in it, despite having the physical ability to isolate and extend his right index finger",
+        "internal_state": "Disinterest",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

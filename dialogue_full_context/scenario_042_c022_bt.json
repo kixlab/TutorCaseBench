@@ -1,0 +1,81 @@
+{
+  "category_id": "022",
+  "category_title": "English-dominant Chinese immigrant students with ADHD and Chinese language learning difficulties",
+  "scenario_id": "042",
+  "scenario_title": "Vocabulary introduction with language switching",
+  "minimal_context": "The student is participating in an individual lesson, looking at photos of objects on a computer screen to learn key vocabulary.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's start our lesson. Please look at the photos of objects on the computer screen so we can introduce the key vocabularies."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "what did you just say?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "I said we are looking at the computer screen. You need to focus on the lesson."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "can I go play now ?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "No, we have to finish looking at these photos first."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Gets out of his seat and goes to the play area of the classroom.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's start our lesson. Please look at the photos of objects on the computer screen so we can introduce the key vocabularies.\n\nSTUDENT: what did you just say?\n\nTUTOR: I said we are looking at the computer screen. You need to focus on the lesson.\n\nSTUDENT: can I go play now ?\n\nTUTOR: No, we have to finish looking at these photos first.\n\nSTUDENT: (Gets out of his seat and goes to the play area of the classroom.)",
+  "immediate_dialogue_prompt": 60,
+  "long_term_dialogue_prompt": 61,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "presentation of photos of objects on a computer screen to introduce the key vocabularies",
+        "learning_goal": "strengthen Eric’s recognition of the target words"
+      },
+      "context": {
+        "environment": "play area of the classroom",
+        "materials": "computer screen, photos of objects, flash cards with both words and pictures, sticker-system",
+        "social_setting": "individual lessons for Eric",
+        "time_context": "typically began in English"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "If the lesson remained difficult to understand",
+        "observable_behavior": "get out of seat and go to the play area of the classroom",
+        "internal_state": "tremendous difficulty to focus",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When he could not understand Sara’s instructions",
+          "observable_behavior": "ask “ what did you just say? ” and “ can I go play now ?”",
+          "internal_state": "tremendous difficulty to focus",
+          "related_quotes": [
+            "what did you just say?",
+            "can I go play now ?"
+          ]
+        },
+        {
+          "condition": "when he figured out what she was trying to say",
+          "observable_behavior": "correct her English",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

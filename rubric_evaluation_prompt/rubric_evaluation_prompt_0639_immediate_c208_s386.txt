@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Low-Pressure Home Language Comprehension Checks
+  Check: The tutor uses the student's home language (Korean) to gently ask if she understands the instruction or content, rather than relying on her non-verbal cues or asking in English.
+
+Criterion 2: Dual-Language Content Delivery
+  Check: The tutor presents instructional material by alternating between English and the student's home language, providing home-language explanations for the English text or concepts.
+
+Criterion 3: Explicit Emotional Validation
+  Check: The tutor explicitly validates the student's ideas or efforts using encouraging, low-stakes phrases (e.g., 'any idea will do', 'that is a good idea') to reduce her anxiety.
+
+Criterion 4: Idea-to-Frame Translanguaging
+  Check: The tutor allows the student to express her idea in her home language first, and then provides a specific English sentence frame or grammatical structure to help her translate that exact idea into English.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jessica is a silent, depressed English language learner who experiences extreme school avoidance and frustration due to a total lack of comprehension in English-only settings. She masks her confusion with weak smiles and nods, uniquely requiring home language (Korean) support, translanguaging strategies, and emotional scaffolding to bridge her understanding and alleviate her distress.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We need to write an English label for your drawing so we can put it on the classroom bulletin board.
+
+STUDENT: (Looks down at her drawing of a female teacher in front of a board, looking reluctant to attempt writing in English) 음…제가 그리고 싶은 그림은요, 제가 선생님이 되어 있는 모습이요. Umm…The picture I want to draw is, myself who became a teacher and teaching my students.
+
+TUTOR: That is a good idea. Please write that down in English for the label.
+
+STUDENT: (Hesitates, holding her pencil but not writing) 저는…나중에 자라서 선생님이 되고 싶다는. 그런 아이디어가 있어요. I want to be a teacher when I grow up. I have an idea like that.
+
+TUTOR: Okay, go ahead and put those English words on the paper now.
+
+STUDENT: (Stares silently at the paper, unable to come up with the words in English to write her own label. She puts the pencil down, leaving the label completely absent)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Labeling a drawing for the classroom bulletin board in English.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Weekly reading and writing activities in English and Korean",
+      "materials": "Drawing assignment for the classroom bulletin board, picture of a female teacher in front of a board, chalk in hand",
+      "social_setting": "One-on-one with a volunteer",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Unable to come up with the words in English to write her own label.",
+      "observable_behavior": "The absent label was a painfully visual representation of Jessica’s ‘deficit’ in English.",
+      "internal_state": "",
+      "related_quotes": [
+        "저는…나중에 자라서 선생님이 되고 싶다는. 그런 아이디어가 있어요. I want to be a teacher when I grow up. I have an idea like that.",
+        "음…제가 그리고 싶은 그림은요, 제가 선생님이 되어 있는 모습이요. Umm…The picture I want to draw is, myself who became a teacher and teaching my students."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to attempt any reading or writing in English.",
+        "observable_behavior": "Initially reluctant to attempt any reading or writing in English.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

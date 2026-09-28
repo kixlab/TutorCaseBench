@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Comprehension Scaffolding
+  Check: The tutor provides clear structural support before or during reading (e.g., previewing the text, introducing a story map for beginning/middle/end) rather than just telling the student to read or complete a blank worksheet.
+
+Criterion 2: Active Vocabulary Application
+  Check: The tutor explains vocabulary using student-friendly language or prompts the student to use the word in context, explicitly avoiding rote copying of complex dictionary definitions.
+
+Criterion 3: Embedded Redirection
+  Check: The tutor redirects the student by immediately re-engaging them in an instructional task, without halting the lesson to deliver a behavioral reprimand or assigning independent reading/worksheets as a consequence.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student frequently engages in off-task and disruptive behavior during reading instruction, often using independent reading or disruptive acts to escape tasks they find frustrating. The evidence reveals they uniquely need structured comprehension tools (like story maps), accessible vocabulary engagement rather than rote copying, and continuous instructional momentum rather than punitive independent work or halted lessons.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please copy these new vocabulary definitions from the dictionary into your notebook.
+
+STUDENT: I don't get this. The definition has words I don't even know. This is confusing.
+
+TUTOR: Just do your best to read it and write it down.
+
+STUDENT: (Puts pencil down and pushes the notebook away) No, I'm not copying all this.
+
+TUTOR: You need to finish your vocabulary assignment.
+
+STUDENT: (Turns around to the desk behind them and grabs their classmate's paper) Hey, stop working and look at what I'm doing. This is boring anyway.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "work with new words",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "general education classrooms",
+      "materials": "definitions, writing and reading materials",
+      "social_setting": "reading instruction",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "using definitions that are not student friendly (e.g., contains words that are unknown to students; definitions using complex syntax) and copying activities",
+      "observable_behavior": "off task up to 80% of the time",
+      "internal_state": "appears frustrated and confused",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During reading instruction",
+        "observable_behavior": "interferes with others",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

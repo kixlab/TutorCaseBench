@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Removal of Traditional Assessment Threats
+  Check: The tutor explicitly removes or alters a traditional academic requirement (e.g., replacing a written report with an informal chat) to lower the stakes of the task.
+
+Criterion 2: Humanizing through Humor or Personal Connection
+  Check: The tutor uses humor, self-deprecation, or notices a personal detail about the student before or instead of demanding academic compliance.
+
+Criterion 3: Situational Flexibility and Rule-Bending
+  Check: The tutor adjusts the day's expectations or bends a minor rule (e.g., changing the work environment, reducing workload) in response to the student's mood or external stressors.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a history of school failure, deeply distrusts adults, and expects to fail, often resulting in severe task resistance. They require a highly relational, flexible approach that repairs their damaged self-image through informal interactions and a focus on the future. The evidence reveals they uniquely need tutors to abandon strict rule enforcement and traditional assessments in favor of humanizing connection and explicit 'fresh start' framing.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Good morning. Please take your seat and start working on the morning assignment.
+
+STUDENT: I don't want to work. I have not slept well.
+
+TUTOR: You need to try to get some work done today.
+
+STUDENT: I can't. My parents quarrel a lot at home and something happened.
+
+TUTOR: Was it tough at home last night?
+
+STUDENT: Yes. I'm not doing any work today, just leave me alone.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Arriving at school and interacting with the teacher in the morning",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school",
+      "materials": "",
+      "social_setting": "interacting with the teacher in the morning",
+      "time_context": "morning"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "parents are in the process of divorce or quarrel a lot at home",
+      "observable_behavior": "student has not slept well or if something happened",
+      "internal_state": "distress",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "If parents are in the process of divorce or quarrel a lot at home",
+        "observable_behavior": "student has not slept well",
+        "internal_state": "",
+        "related_quotes": [
+          "Yes"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

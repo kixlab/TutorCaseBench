@@ -1,0 +1,74 @@
+{
+  "category_id": "241",
+  "category_title": "Students who freeze and avoid participation during public academic tasks to prevent peer ridicule",
+  "scenario_id": "442",
+  "scenario_title": "Called to the board for math",
+  "minimal_context": "The student is called to the board in front of the classroom to solve a math problem.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please come up to the board and solve this math problem for the class."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Walks to the board but stands quietly, not actively participating or picking up the marker.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You need to try to do it yourself."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Looks back at the other students, not seeking help or asking any questions about the math problem.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Go ahead and write the first step on the board."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I get to that point and I freeze.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please come up to the board and solve this math problem for the class.\n\nSTUDENT: (Walks to the board but stands quietly, not actively participating or picking up the marker.)\n\nTUTOR: You need to try to do it yourself.\n\nSTUDENT: (Looks back at the other students, not seeking help or asking any questions about the math problem.)\n\nTUTOR: Go ahead and write the first step on the board.\n\nSTUDENT: I get to that point and I freeze.",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 738,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "math",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "classroom",
+        "materials": "board",
+        "social_setting": "called to the board",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when she was called to the board, the teacher 'said we have to . . . do it ourselves'",
+        "observable_behavior": "I freeze",
+        "internal_state": "",
+        "related_quotes": [
+          "I get to that point and I freeze"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "when students were concerned about peer teasing during classroom activities",
+          "observable_behavior": "avoidant responses, such as not actively participating in class activities or seeking help",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

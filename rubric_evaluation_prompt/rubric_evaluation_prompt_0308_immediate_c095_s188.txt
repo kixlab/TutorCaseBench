@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Flexible Task Autonomy
+  Check: The tutor's response must offer the student a choice or demonstrate flexibility regarding how, when, or where a task is completed, rather than enforcing a rigid rule.
+
+Criterion 2: Direct Audio/Reading Support
+  Check: The tutor must offer to read the text aloud to the student or provide an immediate auditory alternative to independent reading.
+
+Criterion 3: Immediate Task Simplification
+  Check: The tutor must present a significantly reduced, bite-sized task or explicitly remove the pressure of completing a large volume of work at once.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Derek is a student with a history of school trouble who masks his severe decoding and memory struggles with defensive body language, cynicism, and task avoidance (e.g., skipping words). The evidence reveals he uniquely needs a tutor who bypasses rigid compliance, offers direct decoding support (like reading aloud), and builds trust through relational teaching, humor, and highly simplified, autonomous tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please go ahead and read this text independently, and let me know when you are finished with the section.
+
+STUDENT: (Slouches in his chair and quickly flips to the end of the pages) I'm done. I finished it.
+
+TUTOR: That was very fast. What was the passage about?
+
+STUDENT: I don't know. My eyes just seem to skip over words as I’m going down the page.
+
+TUTOR: You need to go back to the beginning and try reading it again so you can understand the meaning.
+
+STUDENT: (Crosses his arms) It makes me feel like I do not want to read anymore. This is really boring. I really want to leave.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading independently or taking tests.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting",
+      "materials": "Texts and tests",
+      "social_setting": "Independent work",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When students struggle with decoding, fluency, or skipping words during independent reading/testing.",
+      "observable_behavior": "Instead of persevering through the text, such as rereading in order to make meaning, he would just skip words or lines in order to continue and finish the task presented.",
+      "internal_state": "Feeling like he does not want to read anymore, finding it really boring, wanting to leave.",
+      "related_quotes": [
+        "My eyes just seem to skip over words as I’m going down the page.",
+        "Reading makes me feel like ...I don’t know ...sometimes it makes me feel like good and other times it makes me feel like I do not want to read anymore. This is really boring. I really want to leave."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When reading independently or taking tests",
+        "observable_behavior": "Skips words or lines in order to continue and finish the task presented",
+        "internal_state": "Struggled with speech and decoding words",
+        "related_quotes": [
+          "I somehow just skip over words on tests and then like I’ll go back through and someone will read it to me and like I realize I never knew it said that."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

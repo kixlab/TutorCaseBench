@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Simplified Visual Feedback
+  Check: The tutor provides immediate feedback using simple, universally understood visual symbols (such as 'O' or 'X') rather than delivering lengthy verbal or text-based explanations.
+
+Criterion 2: Concrete Motor Scaffolding
+  Check: The tutor provides a concrete physical or visual scaffold (such as placing a sticker on the correct mouse button or physically guiding her hand) to assist with hardware interaction.
+
+Criterion 3: On-Demand Technical Guidance
+  Check: The tutor provides essential rules upfront and then steps back, intervening with technical support only when the student explicitly signals a need for help or gets completely stuck.
+
+Criterion 4: Avoidance of Text Communication
+  Check: The tutor communicates exclusively through oral instructions or visual cues, completely avoiding the use of text chat for instructions or interaction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Child D is a student with mild mental retardation and language delays who struggles with fine motor control, complex reasoning, and short attention spans. She is easily frightened by sudden sounds (like teleportation) and derailed by unfamiliar interface elements, such as small click areas or English pop-ups. She requires a highly simplified, sequential learning environment with strict limits on task volume and concrete visual scaffolding for both feedback and physical interactions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are in Lesson 3, the health center at a school. Please use the mouse to click on the single OK bandage on the screen.
+
+STUDENT: (Moves the mouse around, unable to smoothly control the mouse to click the virtual objects) It won't go.
+
+TUTOR: Keep trying to click it.
+
+STUDENT: (Clicks the wrong area and an English pop-up appears. Stares at it for a long time) Is this the lesson? I don't know these words.
+
+TUTOR: What do you think you should do next?
+
+STUDENT: (Still unable to smoothly control the mouse to click the single OK bandage, looking confused about her learning) I can't click the bandage. I don't know.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "In Lesson 3 'A health center at a school,' a click on a single OK bandage",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Lesson 3 'A health center at a school'",
+      "materials": "computer mouse, interactive 3D virtual objects, single OK bandage",
+      "social_setting": "learned by playing individually",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to click on a small trigger area (a single OK bandage)",
+      "observable_behavior": "unable to smoothly control the mouse to click the virtual objects",
+      "internal_state": "confused about their learning",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Encountering English-language system pop-up messages (e.g., 'You have no privilege to purchase this')",
+        "observable_behavior": "spend much time on and got stuck with it",
+        "internal_state": "thinking that it was also a part of the learning material",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

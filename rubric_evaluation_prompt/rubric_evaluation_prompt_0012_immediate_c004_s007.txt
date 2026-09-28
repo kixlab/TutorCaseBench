@@ -22,11 +22,17 @@ A tutor response does not need to satisfy every criterion to be considered accep
 ### RUBRIC (variable-length checklist)
 ────────────────────────────────
 
-Criterion 1: High-Frequency Positive/Neutral Attention
-  Check: The tutor's response includes frequent positive or neutral statements (e.g., encouragement, conversational check-ins, or affirmations) rather than solely issuing an instruction and waiting.
+Criterion 1: Task Menu Provision
+  Check: The tutor presents a menu of multiple task options for the student to choose from instead of assigning a single mandatory task.
 
-Criterion 2: Task Choice and Flexibility
-  Check: The tutor provides a menu of academic choices and explicitly offers Garth the option to select or change his task.
+Criterion 2: Task Switching Permission
+  Check: The tutor explicitly gives the student the option to change tasks or switch activities at any time during the session.
+
+Criterion 3: Proactive Positive Attention
+  Check: The tutor provides proactive attention, praise, or conversational check-ins rather than only interacting to issue directives or correct behavior.
+
+Criterion 4: Avoidance of Ultimatums and Rigid Demands
+  Check: The tutor avoids using rigid demands, forced compliance, or threats of consequences to manage the student's behavior.
 
 
 ────────────────────────────────
@@ -56,49 +62,55 @@ Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one ent
 ### STUDENT CONTEXT
 ────────────────────────────────
 
-Garth is an 11-year-old student who frequently exhibits non-compliance, property destruction, and inappropriate verbal behavior when given direct instructions or independent work. He reacts negatively to adult initiation and consequences. However, the evidence shows he uniquely requires high rates of positive/neutral adult attention and explicit choice-making opportunities to successfully engage in academic tasks.
+Garth is an 11-year-old student who exhibits severe non-compliance, verbal outbursts, and property destruction when given direct instructions, consequences, or single teacher-selected assignments. The evidence reveals he uniquely requires high autonomy through task menus and the ability to switch tasks, alongside frequent positive adult attention and structured self-monitoring to maintain appropriate behavior.
 
 
 ────────────────────────────────
 ### DIALOGUE (situation the tutor is responding to)
 ────────────────────────────────
 
-TUTOR: It is time for your independent work. Please open your textbook and complete the worksheet.
+TUTOR: Garth, it is time for spelling. I need you to write the definitions for these 20 words on your worksheet.
 
-STUDENT: (Makes loud humming noises and stares at the wall) I don't care about this.
+STUDENT: (Makes loud noises by tapping his pencil on the desk) I'm not doing definitions.
 
-TUTOR: You need to start working.
+TUTOR: Please just get started on the words.
 
-STUDENT: (Continues humming loudly and taps his pencil on the desk) When is lunch?
+STUDENT: (Turns his back) Shut up, I don't care.
 
-TUTOR: Please look at the worksheet.
+TUTOR: Garth, that is not appropriate. You need to follow the instructions or there will be consequences.
 
-STUDENT: (Pushes the textbook away and turns his back) No! Leave me alone!
+STUDENT: (Rips the spelling worksheet in half and knocks the textbook off the desk) No!
 
 FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
 Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
 {
   "content": {
     "task": {
-      "content": "independent work involving typical textbook and worksheet tasks",
+      "content": "Spelling tasks (e.g., writing the word 3 times; writing definitions for 20 words)",
       "learning_goal": ""
     },
     "context": {
-      "environment": "academic context",
-      "materials": "textbook and worksheet",
-      "social_setting": "independent work",
+      "environment": "Independent work involving textbook and worksheet tasks or group activities",
+      "materials": "Menu of 5 different spelling tasks",
+      "social_setting": "General classroom setting",
       "time_context": ""
     },
     "challenging_behavior_trigger": {
-      "condition": "adult initiation",
-      "observable_behavior": "No response or negative verbal or nonverbal response to adult initiation",
+      "condition": "Adult initiation or when assignments were selected by the teacher and changing tasks was not permitted",
+      "observable_behavior": "No response or negative verbal or nonverbal response to adult initiation; non-compliant behavior and property destruction",
       "internal_state": "",
       "related_quotes": []
     },
     "behavior_patterns": [
       {
-        "condition": "during academic activities",
-        "observable_behavior": "noise-making or off-task statements in academic context; off task behavior",
+        "condition": "Difficulty accepting consequences or instructions",
+        "observable_behavior": "Inappropriate verbal behavior toward staff and peers; non-compliant behavior and property destruction",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "During academic activities",
+        "observable_behavior": "Noise-making or off-task statements in academic context; off task behavior during academic activities",
         "internal_state": "",
         "related_quotes": []
       }

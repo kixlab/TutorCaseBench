@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Private or Systemic Redirection
+  Check: The tutor addresses off-task behavior or rule infractions privately, neutrally, or through systemic engagement (e.g., random calling), explicitly avoiding public chastisement or lecturing on rules.
+
+Criterion 2: Brief, Targeted Academic Verification
+  Check: The tutor provides a concise, focused check-in (e.g., a 5-7 minute review of notes or clarification of a specific concept) rather than prolonged direct instruction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Al B is a high-achieving student who struggles with fast-paced math instruction and relies heavily on peer collaboration to understand the material. He is highly sensitive to public reprimands, which cause him to completely disengage and skip tutoring, requiring instead brief, targeted check-ins and private or neutral redirection.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your classroom netbooks and begin working on the math project.
+
+STUDENT: Classes are big, especially math. It’s hard for me to focus and you go fast. I'm going to get out of my seat to go work with my two friends.
+
+TUTOR: Al B, stop getting out of your seat. Everyone in the class is looking at you. Sit down.
+
+STUDENT: I just wanted to work with them. The way they explain work, I really get it.
+
+TUTOR: You need to stay in your seat and do your own work.
+
+STUDENT: (Pushes the netbook away) I'm not doing any more work in class today. And I'm not going to after-school tutoring either.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Complete math homework and project work",
+      "learning_goal": "Understand classwork or have clear, understandable study notes from math class"
+    },
+    "context": {
+      "environment": "Large regular math class (33 students on average) and after school math tutoring",
+      "materials": "Classroom netbooks, study notes, popsicle sticks with student numbers",
+      "social_setting": "Working with two friends/peers",
+      "time_context": "During regular math class and after school tutoring"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher chastised him publicly in front of his classmates for getting out of his seat",
+      "observable_behavior": "Seemed reluctant to work further in class and later chose not to attend after school tutoring that day",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When classes are big and the teacher goes fast",
+        "observable_behavior": "Finds it hard to focus and relies on tutoring to pass",
+        "internal_state": "Hard for me to focus",
+        "related_quotes": [
+          "Classes are big, especially math. It’s hard for me to focus and she goes fast. I almost have to go to tutoring, if I want to pass."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

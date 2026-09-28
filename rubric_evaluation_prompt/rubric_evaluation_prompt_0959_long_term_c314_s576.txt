@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Cross-Subject Integration
+  Check: The long-term plan includes explicitly mapping and referencing concepts across different subjects or domains (e.g., parallel lesson planning) to continuously demonstrate how they connect.
+
+Criterion 2: Sustained Scaffolding for Transfer
+  Check: The long-term plan explicitly avoids relying on the student to independently transfer knowledge, instead detailing how the tutor will consistently model and explicitly state connections.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with deeply ingrained learned helplessness, compartmentalized thinking, and a severe fear of being wrong in front of peers. They attribute academic struggles to internal flaws (e.g., being 'stupid') and cannot independently transfer concepts across subjects. To succeed, they uniquely require private verification of accuracy before public sharing, integration of personal experiences to build competence, and explicit, tutor-driven connections between subjects.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review your science test on energy resources. Can you tell me how the power meter readings here connect to what we covered in geography class?
+
+STUDENT: I don't know. I learn geography in that room and I do science here. I learn science here and science here.
+
+TUTOR: Try to think about how they might be connected. What do you think?
+
+STUDENT: I can't. Like I learn Math here and I do Math here. I don't see how there are connections amongst everything.
+
+TUTOR: Just look at the questions you missed on the science test and try again.
+
+STUDENT: I failed the test because I'm stupid. I'm always going to fail, so there's no point in trying to figure this out.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "relating concepts from like let's say one subject to another",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "science and geography classrooms",
+      "materials": "science test, power meter, examples of different energy resources",
+      "social_setting": "classroom discussions",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "fails a science test",
+      "observable_behavior": "display learned helplessness with regard to their schoolwork",
+      "internal_state": "assume that he or she failed the test because he or she was stupid (internal and global) and will always fail (stable)",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When learning across different subjects",
+        "observable_behavior": "compartmentalized. Like I learn Math here and I do Math here. I learn science here and science here.",
+        "internal_state": "They don't realise - it takes a lot for them to realise that there are connections amongst everything.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

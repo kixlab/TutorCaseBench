@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Intense 1:1 Task Proximity
+  Check: The tutor offers to work directly side-by-side with the student on the task rather than repeatedly directing him to work independently.
+
+Criterion 2: Respectful Redirection via Validation
+  Check: When correcting out-of-turn or disruptive behavior, the tutor explicitly acknowledges the value of the student's ideas or expresses a genuine desire to hear them at the appropriate time.
+
+Criterion 3: Expertise Positioning
+  Check: The tutor explicitly invites the student to share their specific knowledge, ideas, or expertise on the topic being discussed.
+
+Criterion 4: Refusal of Power Struggles
+  Check: The tutor ignores minor provocations (e.g., silly noises, sassy tone, broken pencils) and avoids back-and-forth arguing over compliance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Edward is an overactive, oppositional student who frequently uses disruptive, attention-seeking behaviors and task avoidance (especially in writing) to mask his academic needs. However, he possesses deep background knowledge and a strong underlying desire to be heard and valued. He uniquely requires intense one-to-one proximity to complete tasks, respectful validation of his ideas during corrections, and opportunities to be positioned as an expert, while strictly avoiding power struggles that lead to downward spirals.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our read-aloud of Ereth's Birthday. Before we read the next page, Roger was just saying he didn't think the fisher deserved to get in that trap anyway.
+
+STUDENT: He didn't get killed.
+
+TUTOR: Let's remember to raise our hands. In this next part of the story, Ereth calls someone a 'loudmouth lollie'.
+
+STUDENT: (Fidgeting and facing away) Loudmouth lollie! (Guffaws and looks around at the other students, making a funny face)
+
+TUTOR: Please sit still and listen. Now, what do you call it when an animal acts like a human—has human qualities like talking or playing music?
+
+STUDENT: (In a sassy tone) Um, unnecessary? (Laughs loudly and makes another silly noise, hoping to enlist others in the silliness)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a whole-class read-aloud discussion",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Carpet after lunch",
+      "materials": "Read-aloud book (Ereth's Birthday)",
+      "social_setting": "Whole-class read aloud",
+      "time_context": "After lunch"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Each time Mae pronounced one of Ereth’s phrases",
+      "observable_behavior": "Edward would repeat it, guffaw, and look around, hoping to enlist others in the silliness. interrupted 17 times during a single read aloud to say something silly to another student, laugh loudly, or make a smart-aleck comment.",
+      "internal_state": "hoping to enlist others in the silliness",
+      "related_quotes": [
+        "Um, unnecessary?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When other students misspoke about something or were trying to collect their thoughts during discussions",
+        "observable_behavior": "Edward was quick with a know-it-all correction",
+        "internal_state": "",
+        "related_quotes": [
+          "He didn't get killed."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Minimal Incremental Nudging
+  Check: The tutor's response provides exactly one small, incremental prompt or question to move the student forward, explicitly avoiding multi-step explanations or giving away the process.
+
+Criterion 2: Requirement for Process Justification
+  Check: The tutor asks the student to articulate how they arrived at their answer or to explain their working, rather than simply confirming if the answer is right or wrong.
+
+Criterion 3: Withholding Unjustified Praise
+  Check: The tutor refrains from praising or validating an answer (even if correct) until the student has demonstrated the reasoning or working behind it.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student engages in superficial 'maths-like' behaviors, such as guessing 'lucky numbers' or arranging symbols nonsensically, to mimic mathematical work without understanding. They passively accept failure and wait for the next instruction when corrected. They uniquely require a radical removal of time constraints, the freedom to use their own cumbersome representations, and small incremental nudges that demand justification rather than mere correction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's do some multiplication. What is 6 times 8?
+
+STUDENT: (Answers quickly) 21.
+
+TUTOR: No, that's incorrect. Try again.
+
+STUDENT: (Answers quickly again) 14?
+
+TUTOR: That is also incorrect. How did you get that answer?
+
+STUDENT: I just picked one of my 'lucky numbers'.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Multiplication task",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Individual task-based interviews",
+      "materials": "",
+      "social_setting": "One-on-one with interviewer",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Initial response to the multiplication task",
+      "observable_behavior": "Quick assertion of (often unrelated) numbers for answers, with no attempt to calculate, despite having the means to do so",
+      "internal_state": "Belief in guessing as an appropriate way to respond to arithmetical tasks; engaging efforts in activities which give the superficial appearance of 'doing maths' but do not actually involve mathematical thinking",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked how he had obtained his incorrect answer to a multiplication",
+        "observable_behavior": "Explained he had picked one of his 'lucky numbers'",
+        "internal_state": "Imitative behaviour developed for ritual participation, having seen peers call out facts on demand with no visible calculation",
+        "related_quotes": [
+          "picked one of his ‘lucky numbers’"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

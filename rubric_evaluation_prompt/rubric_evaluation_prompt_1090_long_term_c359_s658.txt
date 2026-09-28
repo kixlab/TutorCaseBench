@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Peer-Mediated Engagement Strategy
+  Check: The long-term plan must include teaching peers specific strategies to engage Jasmine, such as asking her for help or inviting her to work together.
+
+Criterion 2: Social-Communication Reframing
+  Check: The long-term plan must explicitly identify her off-task or script-mimicking behaviors as attempts at social interaction rather than simple noncompliance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jasmine is a highly academic kindergartner with ASD who escapes unchallenging tasks to initiate social interactions using rigid, teacher-mimicking scripts. Because her behavior is often misread as noncompliance, she uniquely needs educators to embed social opportunities, provide explicit peer-interaction scripts, and increase academic challenge rather than enforcing strict task redirection.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to complete your math worksheet. Please color the objects on the page in groups of four.
+
+STUDENT: Let’s do some colors! What color is the apple? What color is the boy? What color is the car?
+
+TUTOR: Jasmine, please look at your own paper. You need to do your math.
+
+STUDENT: (Excitedly shakes her braids and rubs her fingers together quickly in front of the ABC book) O the O says/ o/, octopus. the T says…
+
+TUTOR: (Points to the math worksheet) You cannot read the ABC book right now. We have music next, so you need to do your math.
+
+STUDENT: (Grabs the ABC book again) No! Aaahh!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Complete a math worksheet back at their tables",
+      "learning_goal": "Color the objects on the page in groups of 4"
+    },
+    "context": {
+      "environment": "Kindergarten class, at a round table",
+      "materials": "Math worksheet, ABC book, favorite color crayon (purple)",
+      "social_setting": "Inclusive classroom, sitting with a peer (Jeff) and a paraprofessional",
+      "time_context": "Transitioning from a dice game"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the paraprofessional redirects Jasmine to the math worksheet by pointing, reminds her they have music next, and tells her she cannot read the ABC book right now",
+      "observable_behavior": "Protests by grabbing the ABC book again and loudly saying 'no', protests by yelling 'aaahh', and occasionally protests by saying 'no' in a very high-pitched voice while working",
+      "internal_state": "Appears to want to escape a task that she possibly considered boring, and to subsequently interact with Jeff",
+      "related_quotes": [
+        "no",
+        "aaahh"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to interact with a peer during or after completing her assigned task",
+        "observable_behavior": "Employs familiar classroom scripts mimicking the teacher in form and intonation, excitedly shakes her braids, rubs her fingers together quickly in front of the book, waves her fingers in front of her eyes, and leans over the table waving her arms",
+        "internal_state": "Interest in maintaining her interaction with Jeff is clear",
+        "related_quotes": [
+          "Let’s do some colors!",
+          "What color is the apple? What color is the boy? What color is the car?",
+          "Write your name, Jeff.",
+          "Write your name on the top",
+          "O the O says/ o/, octopus",
+          "the T says…",
+          "booga booga"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

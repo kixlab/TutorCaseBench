@@ -1,84 +1,74 @@
 {
   "category_id": "077",
-  "category_title": "Braille-reading students with blindness and ASD who struggle with task initiation, sensory overload, and visually-based instructions",
+  "category_title": "Students with externalizing behavior problems including work refusal and temper tantrums",
   "scenario_id": "152",
-  "scenario_title": "Making mistakes during fast-paced new activities",
-  "minimal_context": "The student is practicing reading Braille labels on new folders to generalize their skills to real-life situations.",
+  "scenario_title": "Weekly diary signature requirement and administrative compliance",
+  "minimal_context": "The student is presenting his weekly diary to the teacher to check for a parent signature required for the reward system.",
   "dialogue": [
     {
       "turn_id": 1,
       "speaker": "tutor",
-      "message": "Today we are going to try a new activity to practice using your Braille skills in real life. I have some new folders here, and I want you to read the labels and sort them quickly."
+      "message": "It is time for our weekly check. Please bring your diary to my desk so I can check for your parent's signature."
     },
     {
       "turn_id": 2,
       "speaker": "student",
-      "message": "I am happy doing what I am used to do. It’s difficult when you have to think fast and answer fast and do things fast all the time."
+      "message": "Yes, but I haven’t had it signed."
     },
     {
       "turn_id": 3,
       "speaker": "tutor",
-      "message": "It is important to understand how you can use skills you learn in school in other contexts. Just give it a try and read the first label."
+      "message": "Please hand me the diary anyway so I can look at it."
     },
     {
       "turn_id": 4,
       "speaker": "student",
-      "message": "(Touches the Braille label) It says 'Math'. No, wait, I read the dots wrong. I made a mistake."
+      "message": "(Hands over the diary, pointing to a note written by his parent) Look, she wrote: 'J handed me this book to sign. I didn’t sign it. He had the initiative and intent.'"
     },
     {
       "turn_id": 5,
       "speaker": "tutor",
-      "message": "That's fine, don't worry about it. Just leave it and move on to the next folder."
+      "message": "I see the note, but without the actual signature, you do not meet the requirement for the weekly reward."
     },
     {
       "turn_id": 6,
       "speaker": "student",
-      "message": "I am very worried. I want the mistake to be corrected immediately. I can't think about anything else until we fix it.",
+      "message": "(Throws a temper tantrum, pushing the diary off the desk) That's not fair! I'm not doing any of my work today if I don't get the reward!",
       "is_challenging_behavior": true
     }
   ],
-  "dialogue_combined": "TUTOR: Today we are going to try a new activity to practice using your Braille skills in real life. I have some new folders here, and I want you to read the labels and sort them quickly.\n\nSTUDENT: I am happy doing what I am used to do. It’s difficult when you have to think fast and answer fast and do things fast all the time.\n\nTUTOR: It is important to understand how you can use skills you learn in school in other contexts. Just give it a try and read the first label.\n\nSTUDENT: (Touches the Braille label) It says 'Math'. No, wait, I read the dots wrong. I made a mistake.\n\nTUTOR: That's fine, don't worry about it. Just leave it and move on to the next folder.\n\nSTUDENT: I am very worried. I want the mistake to be corrected immediately. I can't think about anything else until we fix it.",
-  "immediate_dialogue_prompt": 271,
-  "long_term_dialogue_prompt": 272,
+  "dialogue_combined": "TUTOR: It is time for our weekly check. Please bring your diary to my desk so I can check for your parent's signature.\n\nSTUDENT: Yes, but I haven’t had it signed.\n\nTUTOR: Please hand me the diary anyway so I can look at it.\n\nSTUDENT: (Hands over the diary, pointing to a note written by his parent) Look, she wrote: 'J handed me this book to sign. I didn’t sign it. He had the initiative and intent.'\n\nTUTOR: I see the note, but without the actual signature, you do not meet the requirement for the weekly reward.\n\nSTUDENT: (Throws a temper tantrum, pushing the diary off the desk) That's not fair! I'm not doing any of my work today if I don't get the reward!",
+  "immediate_dialogue_prompt": 245,
+  "long_term_dialogue_prompt": 246,
   "full_context": {
     "content": {
       "task": {
-        "content": "Trying new things or doing certain activities to generalize skills",
-        "learning_goal": "Understand how to use skills learned in school in other contexts or 'real life'"
+        "content": "Returning the weekly diary signed by a parent to remain eligible for the weekly reward system",
+        "learning_goal": "Social skilling imperative of self-regulation"
       },
       "context": {
-        "environment": "School environment",
-        "materials": "New task materials",
-        "social_setting": "Interacting with teachers who are trying to encourage and motivate them",
-        "time_context": "When things are going too fast"
+        "environment": "Classroom",
+        "materials": "Student diary",
+        "social_setting": "Interactions between student, teacher, and parent communication",
+        "time_context": "Weekly"
       },
       "challenging_behavior_trigger": {
-        "condition": "When making a mistake or when something did not turn out as expected",
-        "observable_behavior": "Dwells on it for a long time, unable to think about anything else",
-        "internal_state": "Gets very worried and experiences considerable distress",
+        "condition": "When asked by the teacher if he had his diary after failing to get it signed by a parent",
+        "observable_behavior": "Returning the diary without a signature",
+        "internal_state": "",
         "related_quotes": [
-          "…[s/he] gets very worried and wants the mistake to be corrected immediately, otherwise [s/he] dwells on in for a long time, unable to think about anything else"
+          "yes, but I haven’t had it signed"
         ]
       },
       "behavior_patterns": [
         {
-          "condition": "When introduced to new things or activities that deviate from established routines",
-          "observable_behavior": "Displays reluctance to try new things, creating 'thresholds' that prevent using and developing skills",
-          "internal_state": "Happy doing what they are used to do",
-          "related_quotes": [
-            "Well, [s/he’s] happy doing what [s/he] is used to do, but that doesn’t lead [her/him] forward…"
-          ]
-        },
-        {
-          "condition": "When having to think fast, answer fast, and do things fast all the time",
-          "observable_behavior": "Exhibits stress and difficulty handling the pace",
-          "internal_state": "Perceives the situation as difficult and stressful",
-          "related_quotes": [
-            "it’s difficult when you have to think fast and answer fast and do things fast all the time"
-          ]
+          "condition": "When a parent attempts to 'take the blame' for her son's failure to return the diary signed",
+          "observable_behavior": "Failing to meet administrative or behavioral expectations",
+          "internal_state": "",
+          "related_quotes": []
         }
       ]
     }
   },
-  "challenge_type": "Attention/Engagement Failure"
+  "challenge_type": "Task Resistance"
 }

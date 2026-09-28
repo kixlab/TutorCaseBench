@@ -1,0 +1,76 @@
+{
+  "category_id": "092",
+  "category_title": "Middle school students with severe reading disabilities who disengage from traditional tasks",
+  "scenario_id": "181",
+  "scenario_title": "Independent iPad work and off-task behavior",
+  "minimal_context": "The student is using an iPad to complete an assigned task that will be shared on a large screen with the class.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We have a tight timeline today. Please use your iPad to complete the assigned task so we can share it on the large screen with the rest of the class."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Looks at the iPad) Yeah, I know we have to share it on the screen."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "How is your progress coming along?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Opens the web browser) I'm just checking something online real quick."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Make sure you keep working on the assignment."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Ignores the assignment and continues searching the Internet for items off-task, scrolling through unrelated websites)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We have a tight timeline today. Please use your iPad to complete the assigned task so we can share it on the large screen with the rest of the class.\n\nSTUDENT: (Looks at the iPad) Yeah, I know we have to share it on the screen.\n\nTUTOR: How is your progress coming along?\n\nSTUDENT: (Opens the web browser) I'm just checking something online real quick.\n\nTUTOR: Make sure you keep working on the assignment.\n\nSTUDENT: (Ignores the assignment and continues searching the Internet for items off-task, scrolling through unrelated websites)",
+  "immediate_dialogue_prompt": 296,
+  "long_term_dialogue_prompt": 297,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Completing assigned tasks",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom setting",
+        "materials": "iPads with internet access, large screen",
+        "social_setting": "Independent work to be shared with the rest of the class",
+        "time_context": "Relatively tight timelines"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Using iPads for classroom tasks where the temptation to search the Internet for items off-task exists",
+        "observable_behavior": "Searching the Internet for items off-task",
+        "internal_state": "",
+        "related_quotes": [
+          "searching the Internet for items off-task"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When temptation to search the Internet for items off-task exists",
+          "observable_behavior": "Searching the Internet for items off-task",
+          "internal_state": "",
+          "related_quotes": [
+            "searching the Internet for items off-task"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Strategic Environmental Proximity
+  Check: The long-term plan includes specific seating or positioning strategies (e.g., near the teacher's desk, next to a focused peer) to proactively manage the student's environment.
+
+Criterion 2: Sustained Supervision and Cueing Routine
+  Check: The long-term plan establishes a structured system for providing frequent, consistent reminders and close supervision during independent or written work.
+
+Criterion 3: Consistent Feedback Follow-Up
+  Check: The long-term plan includes a defined mechanism for consistently following up on feedback with the student and/or their parents over time.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits significant hyperactive-impulsive and motoric behaviors, frequently wandering, fidgeting, and interrupting during passive tasks like silent reading or written work. They become easily frustrated by traditional feedback and uniquely require active, fast-paced engagement and structured physical movement. Traditional punitive measures, warnings, and strict rule-based systems consistently fail to produce lasting behavioral change for this student.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit at your desk and complete the math and spelling worksheet. You have 15 minutes to finish.
+
+STUDENT: (Constantly shifting in his place and fidgeting with his stationery items) I do not like written work.
+
+TUTOR: Just focus on the paper and keep trying.
+
+STUDENT: (Gets up and starts walking in class, making noises) I want to hurry to finish!
+
+TUTOR: You need to sit down. Your work is incomplete and you are not keeping pace with the other students.
+
+STUDENT: (Pouts and starts crying easily) I can't do it! (Leaves the incomplete work on the desk, looking easily irritated and frustrated)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "completing written work in class in writing, spelling and math",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "regular classroom",
+      "materials": "books from all the rows, stationery items",
+      "social_setting": "with the other students",
+      "time_context": "completing timed written work"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "completing written work in class",
+      "observable_behavior": "incomplete work, easily distracted, difficulties concentrating, wastes time, does not like written work, hurry to finish, slow pace of written work-not at class expected level",
+      "internal_state": "easily irritated or frustrated",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when given feedback",
+        "observable_behavior": "pouting when given feedback, crying easily",
+        "internal_state": "easily irritated or frustrated",
+        "related_quotes": []
+      },
+      {
+        "condition": "when being seated was expected",
+        "observable_behavior": "restless, constantly shifting in their places, fidgeting with stationery items, rocking or seen to be walking in class",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

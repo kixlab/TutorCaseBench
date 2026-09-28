@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Affirmation of Personhood
+  Check: The tutor's response explicitly acknowledges Liam's personal feelings, perspective, or worth, rather than focusing solely on academic compliance or rules.
+
+Criterion 2: Granting Authentic Trust
+  Check: The tutor offers Liam a specific, meaningful choice, role, or piece of responsibility in the current situation.
+
+Criterion 3: Absence of Fatalistic Threats
+  Check: The tutor completely avoids using negative predictions about Liam's future (e.g., failing in life, not getting a job) as a motivational tactic.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Liam is an at-risk youth who reacts with severe anger and confrontation when placed in traditional school settings or labeled a 'bad student.' The evidence reveals he uniquely requires environments that erase traditional school dynamics, thriving instead when given authentic responsibility (like a store key), personal mentorship, and work-based learning opportunities.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Liam, please go to the front counter and help that customer process their return.
+
+STUDENT: Fine. But that guy is already giving me an attitude and treating me like I don't know what I'm doing.
+
+TUTOR: Just go over there and see what he needs.
+
+STUDENT: I did, and he's complaining about the store policy. I'm getting really angry because he won't even listen to me.
+
+TUTOR: Try to explain it to him again.
+
+STUDENT: No! I'm not going to just stand here and let him talk to me like that. I'm going to go back out there and tell him exactly where he can shove his return!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interacting with customers and managing interpersonal conflicts",
+      "learning_goal": "Developing people skills and learning about life and society"
+    },
+    "context": {
+      "environment": "Sports retail store",
+      "materials": "Store key",
+      "social_setting": "Work placement interacting with customers, supervisors, and adult mentors",
+      "time_context": "During a co-op placement"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Situations involving interpersonal conflicts with other people, especially customers",
+      "observable_behavior": "Getting in confrontations with other people",
+      "internal_state": "Feeling \"really angry\"",
+      "related_quotes": [
+        "I was really angry … but since co-op I can let that all go … Now I’m able to think before I act. I’m able to walk away from situations and not get in confrontations with other people, especially customers."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When facing situations that provoke anger before learning to regulate his behavior",
+        "observable_behavior": "Acting without thinking and getting into confrontations",
+        "internal_state": "Really angry",
+        "related_quotes": [
+          "I was really angry"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Inquiry into Academic Difficulty
+  Check: The tutor explicitly asks if the student is confused, stuck, or needs help with the material.
+
+Criterion 2: Anxiety-Minimizing Accommodation
+  Check: The tutor offers a low-pressure alternative, private check-in, or specific accommodation that reduces the social or performance anxiety of the immediate task.
+
+Criterion 3: Suspension of Direct Compliance Demands
+  Check: The tutor does NOT issue a flat directive to just complete or submit the work without first addressing potential underlying difficulties.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student masks academic struggles and severe social anxiety through avoidance behaviors like missing homework, requesting bathroom breaks, or skipping class. Their non-compliance is actually a silent signal for help, as they are too embarrassed to self-assert their needs. They uniquely require educators to proactively inquire about their difficulties, provide anxiety-minimizing accommodations, and offer timeline flexibility rather than issuing direct demands for compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, we are going to start our whole-class discussion now. I will be calling on students to answer the questions on the board.
+
+STUDENT: Can I go to the bathroom?
+
+TUTOR: We just started the lesson. Please take out your notebook and get ready to answer.
+
+STUDENT: I don't understand how things work here. I really need to use the bathroom right now.
+
+TUTOR: You need to stay in your seat and participate in the lesson with the rest of the class.
+
+STUDENT: She hates me, and I want to get out of her class. I'm leaving.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attending class and participating in whole-class instruction",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Middle school environment, dealing with unfamiliarity with the school and not understanding how things worked",
+      "materials": "",
+      "social_setting": "In class with a teacher",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When feeling anxious and trying to avoid being in class",
+      "observable_behavior": "Frequently telling the teacher that he needed to use the bathroom",
+      "internal_state": "Feeling anxious, social anxiety",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When assuming the teacher did not like him",
+        "observable_behavior": "Skipping this teacher's class and falling further behind",
+        "internal_state": "Assumed the teacher did not like him",
+        "related_quotes": [
+          "She hates me, and I want to get out of her class."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

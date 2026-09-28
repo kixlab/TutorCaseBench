@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Multimodal Mapping
+  Check: The tutor's plan includes the use of graphic organizers or structured notes to help the student map visual or cinematic elements to textual descriptions.
+
+Criterion 2: Creative, Choice-Based Assessment
+  Check: The tutor incorporates alternative, creative ways for the student to demonstrate their understanding (e.g., multimedia projects, creative writing, choice-based tasks) instead of relying solely on traditional essays or tests.
+
+Criterion 3: Sustained Empathic Framing
+  Check: The tutor's long-term curriculum frames historical or literary events around personal, human experiences and empathy rather than abstract facts, dates, or numbers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These students are shy and struggle to articulate ideas or visualize abstract historical events from print text alone, often resulting in vague or incorrect answers on traditional assessments. Their core behavioral pattern is compliance without engagement when faced with rote tasks, masking their actual capacity for deep comprehension. They uniquely require visual media to anchor abstract concepts and multimodal, choice-based creative assessments to confidently express their understanding and emotional empathy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read the poem 'First They Came for the Jews' and look at the information I jotted down on the blackboard about the Holocaust. Write down your thoughts on the worksheet.
+
+STUDENT: (Looks down at the paper quietly) I felt confused by the poem at first and then we reread it and I understood it a little better.
+
+TUTOR: That's a start. Keep looking at the text and the notes on the board. What do you think about why they were targeted?
+
+STUDENT: (Shrugs slightly) I'm not sure. I know they were hated and segregated in Germany, but it's hard to picture.
+
+TUTOR: Just try to think about the reading and connect to the subject material. What else stands out to you?
+
+STUDENT: I just don't get it. Why didn’t any of the people stick up for themselves?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Introductory lessons – which included reading, discussing and jotting down information about the Holocaust on the blackboard.",
+      "learning_goal": "Have the class personally connect to the subject material."
+    },
+    "context": {
+      "environment": "Classroom during introductory lessons",
+      "materials": "Blackboard, KWL chart, sheet of paper with quotes from Night, film 'Escape from Sobibor'",
+      "social_setting": "Class discussion",
+      "time_context": "Introductory phase of the unit"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to comprehend the curriculum and connect on an emotional level through introductory reading and blackboard notes.",
+      "observable_behavior": "Amy wanted to know: ‘Why didn’t any of the people stick up for themselves?’ She and her peers conveyed that they could not fully grasp just how deep the anti-Semitism was.",
+      "internal_state": "Trouble comprehending the curriculum and connecting on an emotional level.",
+      "related_quotes": [
+        "Why didn’t any of the people stick up for themselves?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Reading and responding to the poem 'First They Came for the Jews'.",
+        "observable_behavior": "Exhibited much confusion about why Jews were targeted, hated and segregated in Germany at the time of the Third Reich.",
+        "internal_state": "Felt confused by the poem at first.",
+        "related_quotes": [
+          "I felt confused by the poem at first and then we reread it and I understood it a little better."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sideline Engagement Allowance
+  Check: The tutor's response must allow Rick to participate from the periphery and explicitly avoid demanding that he read aloud, hold a book, or physically join the reading circle.
+
+Criterion 2: Validation of Verbal Comprehension
+  Check: The tutor must actively validate Rick's verbal contributions (e.g., through enthusiastic agreement, physical enactment of his idea, or highlighting his insight to the group).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Rick is a non-decoding student who becomes hostile and resistant when forced to read from traditional books, yet possesses strong listening comprehension. He uniquely needs to participate from the sidelines without the pressure of decoding, requiring short text extracts and strong validation of his verbal contributions to feel successful.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Everyone, please stand in a circle. We are going to read this text extract about what might be happening in a battle at the gates of Troy.
+
+STUDENT: (Slouches on a chair in the corner instead of joining the circle)
+
+TUTOR: Let's figure out the meaning together. What do you think it means when the text says he was 'struck him on the ear'?
+
+STUDENT: He hit him hard on the ear.
+
+TUTOR: Okay. Now we are going to take turns reading one phrase at a time. Here is the book, it is your turn to read.
+
+STUDENT: (Becomes angry and hostile when the book is given to him, unable to sound out the words)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading a text extract about what might be happening in a battle at the gates of Troy, and articulating what 'struck him on the ear' means",
+      "learning_goal": "To figure out meaning together and comprehend alongside everyone else"
+    },
+    "context": {
+      "environment": "Everyone stands in a circle, with a chair in the corner",
+      "materials": "A single-sheet text extract, book",
+      "social_setting": "Group reading activity where peers take turns reading one phrase at a time, with the teacher reading the text once initially",
+      "time_context": "Early on"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a book was given to him",
+      "observable_behavior": "Was often angry and hostile",
+      "internal_state": "Unable to sound out words he had scored a zero on the reading test",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When everyone stands in a circle holding a single-sheet text extract",
+        "observable_behavior": "Slouches on a chair in the corner",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When listening in from the sidelines as the teacher asks people in unison to echo back 'hurting words'",
+        "observable_behavior": "Calls out 'He hit him hard on the ear.'",
+        "internal_state": "",
+        "related_quotes": [
+          "He hit him hard on the ear."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Establishment of Sociomathematical Norms
+  Check: The long-term plan must include activities that explicitly define, model, or critique the characteristics of a clear mathematical explanation (e.g., using specific verbal labels instead of pronouns).
+
+Criterion 2: Facilitation of Objective Self-Reflection
+  Check: The long-term plan must incorporate methods for Marie to objectively review her own participation (such as video playback or transcript analysis) to reflect on her clarity and interaction style.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Marie is a highly enthusiastic, fast-calculating student who dominates group discourse and struggles with impulsivity. She frequently uses vague referents ('this', 'that') and disconnected think-alouds, assuming others can easily follow her rapid internal logic. She uniquely requires interventions that force her to clarify her reasoning for an audience and explicit redirection to acknowledge her peers' contributions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the Science Fair task and figure out how to partition the auditorium space.
+
+STUDENT: (Writes feverishly) Oh, can I say it now?! . . . I got it! Okay! (raises her hand)
+
+TUTOR: Go ahead and share what you have.
+
+STUDENT: You divide like that into these and you can know that it’s almost half.
+
+TUTOR: Can you say a bit more about your solution?
+
+STUDENT: You can add up these (pointing to her paper) and then do that (pointing to her paper again). Patty gets it, it's effortless to figure out.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Science Fair task (partitioning auditorium space)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Small-group discussion of mathematical tasks",
+      "materials": "Paper",
+      "social_setting": "Group setting with peers (e.g., Heidi, Patty)",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When she shared contributions with others",
+      "observable_behavior": "Truncated the meaning by omitting key referents, like nouns or the specific objects that the numbers represented, pointing to her paper and using vague pronouns",
+      "internal_state": "Believed that the ability to deductively infer the intended meaning of a vague explanation is relatively effortless for some students",
+      "related_quotes": [
+        "You divide like that into these and you can know that it’s almost half",
+        "You can add up these [pointing to her paper] and then do that [pointing to her paper again]."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a peer delivered an elaborate explanation",
+        "observable_behavior": "Immediately began explaining her own solution and completely ignoring the peer's explanation",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "In an attempt to get permission to share her reasoning",
+        "observable_behavior": "Would blurt out phrases uncontrollably and raise her hand",
+        "internal_state": "Struggled to contain her enthusiasm",
+        "related_quotes": [
+          "Oh, can I say it now?! . . . I got it! Okay! [raising her hand]"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

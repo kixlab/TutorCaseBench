@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Punitive Validation of Reports
+  Check: The tutor acknowledges, sympathizes with, or validates the student's report without labeling them a 'tattletale', reproaching them for reporting, or issuing a shared punishment.
+
+Criterion 2: Attention Provision Without Automatic Peer Punishment
+  Check: The tutor provides adult attention or verbal acknowledgment in response to the report, but refrains from punishing or admonishing the peer unless the violation involves property entitlement or physical aggression.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student uses excessive, though overwhelmingly truthful, tattling to manipulate adult attention and assert social dominance over peers. They require validation of their truthful reports without being shamed, but also need strategies that prevent tattling from being reinforced as a weapon for social control. Over time, they need extrinsic motivation to shift their monitoring behavior from reporting negative peer actions to reporting positive ones.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jack, you and Matthew can use the building blocks to make a tower, or use the scissors and paintbrushes at the art table.
+
+STUDENT: Teacher, I want to paint but she’s not ﬁnished yet [with the paintbrush]; she won’t hurry up.
+
+TUTOR: Just see if you can find something else to do while you wait.
+
+STUDENT: (Walks over to the blocks) Give me those blocks, Matthew. If you don't give them to me, I’m telling the teacher!
+
+TUTOR: Try to play nicely and work it out together.
+
+STUDENT: Teacher! Matthew, he’s knocking down the tower! And he won’t let me have the scissors! You need to punish him!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in free play and daily classroom activities",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Preschool classroom during free play",
+      "materials": "Scissors, paintbrushes, and building blocks for a tower",
+      "social_setting": "Interacting with peers during free play",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When another child does not share a resource, damages property, or engages in a perceived aggressive action",
+      "observable_behavior": "Uses the threat of tattling as a strategic sanction against a peer's unwelcome behavior and directly reports the transgression to the teacher",
+      "internal_state": "Highly egocentric, focused on achieving help or punishment for another child's negative behavior toward the tattler",
+      "related_quotes": [
+        "I’m telling the teacher!",
+        "He won’t let me have the scissors",
+        "Matthew, he’s knocking down the tower",
+        "She’s not ﬁnished yet [with the paintbrush]; she won’t hurry up"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing retaliatory impulses against peers' aggression in an environment where physical aggression is punished",
+        "observable_behavior": "Directs impulses into indirect, verbal behavior by reporting the peer's actions to the teacher",
+        "internal_state": "Using tattling as an interpersonal strategy to achieve social dominance and manipulate others' attention",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

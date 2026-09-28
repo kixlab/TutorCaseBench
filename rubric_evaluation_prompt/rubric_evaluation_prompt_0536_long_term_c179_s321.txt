@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Systematic Stimulus Control Routine
+  Check: The long-term plan must establish a consistent routine for applying specific, proactive classroom management skills (such as planned proximity and scheduled positive reinforcement) to maintain ongoing stimulus control.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe behavioral disorders, including high-risk aggressive and disruptive actions like shouting, hitting, and leaving their desk. They are highly sensitive to delayed teacher responses, negative reprimands, and a lack of physical proximity, which rapidly escalate their behaviors. They uniquely require immediate, positive interactions, close physical proximity, and proactive instructional antecedents to maintain stimulus control and prevent escalation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the whiteboard for our math lesson on number properties. Please sit quietly and look at the examples.
+
+STUDENT: (Twists body away from the location of the learning stimuli on the white board for more than 5 seconds) I'm not looking at that. (Starts talking to the student at the next desk)
+
+TUTOR: You need to focus on your own assignment.
+
+STUDENT: (Continues speaking to others while the teacher talks) Make me! (Forcefully pushes the student next to him)
+
+TUTOR: Stop that right now and get back to work.
+
+STUDENT: (Stands up, leaving the desk so no body part touches the chair for more than 5 seconds) I'm done with this! (Shouts, raising voice beyond an average volume practiced in the class)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "math lessons on number properties",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "self-contained classroom",
+      "materials": "white board, desk, chair",
+      "social_setting": "10-minute teacher-led lesson segments",
+      "time_context": "10-minute segments"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when the teacher neglects to discriminate antecedents, lacks to respond, responds with signiﬁcant delay, and/or responds using ineffective methods",
+      "observable_behavior": "leaving (i.e., being away from one’s desk, while no body part touches the chair, for more than 5 seconds) and shouting (i.e., raising voice beyond an average volume practiced in the class)",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "while the teacher talks or while performing a learning assignment that does not require talking",
+        "observable_behavior": "talking (i.e., speaking to self or to others) and moving (i.e., head or body shift or twist to directions other than the location of the learning stimuli for more than 5 seconds)",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "when appropriate classroom contingencies are weak or less systematic",
+        "observable_behavior": "hitting (i.e., forcefully touching, pushing, or kicking other students)",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

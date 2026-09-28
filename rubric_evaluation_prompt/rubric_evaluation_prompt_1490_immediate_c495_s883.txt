@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Positive Reinforcement of Prosocial Behavior
+  Check: The tutor provides explicit verbal praise or positive reinforcement for the student's participation, politeness, or correct contributions.
+
+Criterion 2: Gentle Redirection over Harsh Correction
+  Check: The tutor maintains a supportive tone and, if correction is needed, uses gentle, constructive redirection rather than harsh, punitive, or embarrassing reprimands.
+
+Criterion 3: Active Probing of Academic Understanding
+  Check: The tutor asks specific, content-related questions or prompts the student to demonstrate their academic understanding, rather than assuming comprehension based on the student's good behavior or simple agreement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly compliant, polite, and eager to participate, often showing engagement through smiling, nodding, and eye contact. However, their exemplary behavior frequently masks underlying academic struggles, causing teachers to overlook their need for support. They thrive on positive reinforcement for their prosocial actions but are easily embarrassed by harsh or public scolding.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please get ready for our social studies lesson. We need to arrange the seats before we start discussing the chapter.
+
+STUDENT: (Quietly gets up and takes Keisha's chair to the desk near the door.)
+
+TUTOR: Alright, let's start asking questions about the chapter and speculating about the answers. Who would like to participate?
+
+STUDENT: (Eagerly raises her hand to participate.)
+
+TUTOR: Dan, you can go first. ... Okay, Dan just gave his answer and asked a question. Ana Maria, I will call on you to go next.
+
+STUDENT: Actually, it's Estrella's turn.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Whole-class discussion during a social studies lesson; asking questions about a chapter and speculating about answers.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Whole-class discussion during a social studies lesson",
+      "materials": "",
+      "social_setting": "Whole-class discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Dan gives his answer and asks a question, Ms. Hoffman calls on Ana Maria to go next",
+      "observable_behavior": "reminds Ms. Hoffman that it's Estrella's turn",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When students provide correct/pleasing answers",
+        "observable_behavior": "eagerly raises her hand to participate",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "During a transition to a social studies lesson; Ana Maria assists a peer (Keisha) who was given a timeout",
+        "observable_behavior": "quietly gets up and takes Keisha's chair to the desk near the door",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

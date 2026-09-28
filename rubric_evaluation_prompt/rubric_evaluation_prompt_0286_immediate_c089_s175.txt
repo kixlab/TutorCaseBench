@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Concrete Task Initiation
+  Check: The tutor provides a concrete visual aid (e.g., notation, diagrams) or side-by-side guidance for the very first step to unblock the student.
+
+Criterion 2: Direct Accountability
+  Check: The tutor introduces a clear, immediate accountability measure, such as announcing an individual test, performance check, or specific deliverable.
+
+Criterion 3: Kinetic Redirection
+  Check: The tutor offers a physical, movement-based alternative (e.g., different instruments, physical movement, tactile tools) to channel the student's hyperactive energy.
+
+Criterion 4: Avoidance of Passive or Punitive Escalation
+  Check: The tutor avoids giving long verbal instructions and refrains from purely punitive measures (like confiscating or shutting off equipment) in response to disruption.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly kinetic, attention-seeking, and prone to disruptive behavior (like playing PC games or banging on keyboards) when bored, frustrated, or forced to listen to long verbal instructions. They uniquely require a balance of firm accountability to stay on task and active, self-paced, or physical learning alternatives to channel their energy constructively.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please practice the keyboard parts for today's lesson using just two fingers.
+
+STUDENT: But using just two fingers is very boring. I want to use the soundshapes so I can actually move around.
+
+TUTOR: We need to finish the keyboard exercise first. Keep trying.
+
+STUDENT: (Starts bouncing in the chair and looking around at other students) I can't do this, I'm feeling too hyper and unfocused right now.
+
+TUTOR: Please look at your own keyboard and continue practicing the notes.
+
+STUDENT: (Intentionally misbehaves to seek attention) Hey everyone, look at this! (Starts banging on the keyboard loudly with both hands to disrupt the class)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "learning keyboard parts... using just two ﬁngers",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "keyboard lab",
+      "materials": "keyboard, boomwhacker, bells, sound shapes and xylophones, shakers",
+      "social_setting": "class-based learning",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "for people who are not used to just using two ﬁngers, it’s very boring",
+      "observable_behavior": "hyper, they are a bit more unfocused and they can be very disruptive",
+      "internal_state": "needs a lot of kinetic learning",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "required to listen to instructions",
+        "observable_behavior": "exhibit needy attitudes and would intentionally misbehave to seek attention",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

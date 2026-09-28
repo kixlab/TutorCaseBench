@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Verbal Readiness Tracking
+  Check: The tutor's response includes observing, acknowledging, or making space for the student's non-verbal cues (e.g., body language, eye contact) rather than solely demanding verbal output.
+
+Criterion 2: Low-Stakes Vocalization Scaffold
+  Check: The tutor provides an opportunity for shared, choral, or highly scaffolded speaking (e.g., reading a passage together) rather than putting the student on the spot to generate an independent answer.
+
+Criterion 3: Egalitarian Language Enforcement
+  Check: The tutor explicitly encourages plain language, asks for the student's own words, or actively redirects the group away from using jargon and technical terms.
+
+Criterion 4: Exact Word Validation
+  Check: The tutor commits to recording, writing down, or repeating the student's contribution exactly as stated, explicitly avoiding paraphrasing or interpreting.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences extreme social withdrawal and silence during group work, despite being patient and non-disruptive. The evidence reveals they uniquely need a non-hierarchical, 'no-expert' environment where early, low-stakes vocalization and strict adherence to plain language help them overcome the barrier to speaking.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are starting our group philosophical dialogue session. Please read the first paragraph of the stimulus passage out loud to the circle.
+
+STUDENT: (Sits quietly in the circle, looking at the passage but remaining completely silent.)
+
+TUTOR: Go ahead and start reading whenever you are ready.
+
+STUDENT: (Continues to sit patiently without causing any distractions, but does not speak to her peers.)
+
+TUTOR: Would you like to generate a question about the passage for the group instead?
+
+STUDENT: (Remains silent and non-participative in the group work situation, finding it very difficult to speak with her peers despite showing high levels of patience.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Making verbal contributions during structured philosophical dialogue in CoPI sessions, including reading a stimulus passage and generating questions.",
+      "learning_goal": "Interacting with peers and participating in group work"
+    },
+    "context": {
+      "environment": "Participants sit in a circle, allowing them to see and be seen by one another... seats are equidistant.",
+      "materials": "Stimulus passage",
+      "social_setting": "Whole class for an hour each week... The facilitator remains outside the circle of participants.",
+      "time_context": "10 weeks"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "In group work situations where she would normally have remained silent and non-participative",
+      "observable_behavior": "Remained silent and non-participative, contributing in half or fewer than half of the sessions, while showing high levels of patience and no distraction behaviours.",
+      "internal_state": "Found it very difficult to speak with her peers",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to speak with peers",
+        "observable_behavior": "Remained silent and non-participative",
+        "internal_state": "Found it very difficult to speak with her peers",
+        "related_quotes": []
+      },
+      {
+        "condition": "During sessions",
+        "observable_behavior": "Contributing in half or fewer than half of the sessions, showed high levels of patience and no distraction behaviours",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: prioritize_direct_teacher_instruction
+  Check: The long-term plan must explicitly allocate time for direct, teacher-led instruction (e.g., by reassigning administrative or paraprofessional duties) rather than relying on independent work or generic group activities.
+
+Criterion 2: individualized_systematic_curriculum
+  Check: The long-term plan must outline a shift away from generic worksheets toward individualized, systematic instructional sequences designed specifically for this student's needs.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits profound passive disengagement without disruptive behaviors, often shutting down when given generic tasks or exposed to environmental distractions like adult conversations. They uniquely require highly individualized, systematic instruction with frequent, direct feedback and a distraction-free instructional focus to actively participate.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the pile of papers and the envelopes. Please start stuffing the envelopes.
+
+STUDENT: (Sits quietly at the desk, looking at the envelopes without touching them as a peer across the room begins making loud, repetitive moaning noises.)
+
+TUTOR: Go ahead and put the papers in.
+
+STUDENT: (Picks up one paper but stops, turning their head to passively watch the other activities and instructional routines happening in the classroom.)
+
+TUTOR: Keep working on those. Anyway, as I was saying to the other teacher, the schedule for tomorrow is completely changed...
+
+STUDENT: (Drops the paper back onto the desk and sits completely still, demonstrating no competing behavior but remaining entirely disengaged from the task as the adults continue their off-task conversation.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "engaged in a non-grade aligned task, such as stuffing envelopes or completing a puzzle",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "self-contained high school special education classrooms",
+      "materials": "envelopes or completing a puzzle",
+      "social_setting": "frequently had no observed partner (52%)",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Adults often appeared off-task in their conversations with one another",
+      "observable_behavior": "demonstrated no competing behavior (defined as aggression, disruption, self-stimulatory behaviors, asleep, or non-compliance; 70%)",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "surrounded by environmental distractions such as staff talking to one another (34%) and other peers making loud noises (i.e., repetitive moaning or oral reciting behaviors; 15%)",
+        "observable_behavior": "frequently passive observers of activities and instructional routines",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

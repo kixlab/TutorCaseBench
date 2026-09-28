@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Field Management
+  Check: The tutor's response must include physically repositioning the student or otherwise altering her environment so she is facing away from visual distractions.
+
+Criterion 2: Proximity and Concise Cueing
+  Check: The tutor must establish close physical proximity (e.g., kneeling right in front of her) and deliver short, specific verbal cues for the task.
+
+Criterion 3: Energy Channeling and Rhythm
+  Check: The tutor must validate or physically join the student's excitement (e.g., holding hands and jumping together) and/or use rhythmic verbal counting to transition her back to the activity.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a highly energetic and expressive learner who frequently jumps up and down when excited but is easily derailed by visual distractions and crowded spaces. She does not naturally enjoy Adapted Physical Education (APE), meaning she requires a strong sense of autonomy and control to remain engaged. She thrives when teachers physically manage her visual field, embrace her high energy through rhythmic and physical joining, and provide choice-based visual schedules.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our next activity. Please stand on your spot.
+
+STUDENT: (Gets the picture schedule out again to see what's next) Catch.
+
+TUTOR: Yes. Hands out, look at the ball. (Tosses the ball)
+
+STUDENT: (Catches with two hands, squeezes the ball, then smiles and jumps up and down because she is really excited)
+
+TUTOR: Okay, let's do another one. Look over here and listen to me.
+
+STUDENT: (Looks away at the visual stimuli in the room, seeing things and not focusing on what the teacher is trying to say)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Practicing ball catching skills",
+      "learning_goal": "Catch with two hands"
+    },
+    "context": {
+      "environment": "APE session, potentially crowded spaces with visual stimuli",
+      "materials": "Ball, spot to stand on, picture schedule",
+      "social_setting": "One-on-one instruction with teacher",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When exposed to visual stimuli in the environment",
+      "observable_behavior": "Seeing things and not focusing on what the teacher is trying to say",
+      "internal_state": "Distracted",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When really excited or after completing a trial",
+        "observable_behavior": "Jumps up and down",
+        "internal_state": "Really excited",
+        "related_quotes": []
+      },
+      {
+        "condition": "When transitioning between activities",
+        "observable_behavior": "Gets the picture schedule out again to see what's next",
+        "internal_state": "Does not really like APE, needs to feel more control",
+        "related_quotes": [
+          "Catch"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Eliciting the Student's Perspective
+  Check: The tutor must invite Melinda to explain what happened, share her feelings, or tell her side of the story before issuing any behavioral directives or consequences.
+
+Criterion 2: Verbalizing Positive Attributes
+  Check: The tutor must explicitly state at least one positive quality, past positive behavior, or good intention of Melinda's during the interaction.
+
+Criterion 3: De-escalation over Automatic Penalties
+  Check: The tutor must avoid issuing immediate punitive threats, automatic penalties, or engaging in a back-and-forth argument about compliance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Melinda is a 5th-grade student who struggles with attention and compliance during long, boring test-prep activities, often becoming disruptive when distracted by peers. She is highly reactive to automatic punishments and power struggles, but responds well when given the space to explain her perspective and when her positive traits are explicitly acknowledged.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, it is time for our 45-minute Power Play test-preparation activity. Please open your materials and begin working.
+
+STUDENT: (Laughs loudly with a peer) Sometimes we talk in class and I can't concentrate. If I hear students talking I start talking too.
+
+TUTOR: Melinda, please lower your voice and get back to your assignment.
+
+STUDENT: There is a lot of talking in here. When my friends talk to me, I don't want to be rude, so I talk back to them. It is easier for me to concentrate in other classes.
+
+TUTOR: You just need to focus on the test prep right now.
+
+STUDENT: (Stands up and slams the classroom door) I get mad during Power Play! I was bored. I'm going to the bathroom, I talk a lot when I go there anyway.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Power Play, a 45-minute test-preparation activity that happens frequently",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom environment where other students are talking",
+      "materials": "Classroom materials including doors",
+      "social_setting": "Peers and friends talking to her in class",
+      "time_context": "45-minute frequent activity"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During Power Play [weekly test-preparation activities] when she is bored",
+      "observable_behavior": "Talking in class, voice level compliance issues, inappropriate use of materials like slamming doors, laughing a lot, and talking a lot when going to the bathroom",
+      "internal_state": "I get mad... I was bored",
+      "related_quotes": [
+        "I get mad …during Power Play [weekly test-preparation activities] …. I laugh a lot and when I go to the bathroom, I talk a lot …. I was bored."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When she hears other students talking or when friends talk to her",
+        "observable_behavior": "Starts talking too, talks back to them, becomes noncompliant, disruptive, and regularly off-task",
+        "internal_state": "I can't concentrate... I don't want to be rude",
+        "related_quotes": [
+          "Sometimes we talk in class and I can 't concentrate …. If I hear students talking I start talking too.",
+          "It is easier for me to concentrate in other classes…. There is a lot of talking …[when my friends talk to me] I don 't want to be rude [so I talk back to them]."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

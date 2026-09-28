@@ -22,17 +22,14 @@ A tutor response does not need to satisfy every criterion to be considered accep
 ### RUBRIC (variable-length checklist)
 ────────────────────────────────
 
-Criterion 1: Conditional Task Continuation
-  Check: The tutor allows the student to retain or finish incomplete work by establishing a specific condition or boundary (e.g., 'you can keep it if...').
+Criterion 1: Task Completion Allowance
+  Check: The tutor's response must offer SD a specific alternative time or method to completely finish his current task (e.g., during a break, at lunch) rather than forcing him to submit it incomplete.
 
-Criterion 2: Preferred-Activity Transition Bridging
-  Check: The tutor motivates a transition by explicitly promising a highly preferred activity or person immediately following the completion of the current task.
+Criterion 2: Future-Anchored Transitions
+  Check: The tutor's response must frame the requested transition by explicitly stating a preferred future activity or clear routine that will happen immediately after he complies.
 
 Criterion 3: Environmental De-escalation
-  Check: The tutor directs or escorts the student to a separate, quiet environment away from the trigger to calm down during an active outburst.
-
-Criterion 4: Explicit Sequential Clarity
-  Check: The tutor provides a clear, unambiguous sequence of immediate actions without vague language to guide the student through a transition.
+  Check: If SD is actively having a fit or meltdown, the tutor must suggest or initiate moving him to a different, quieter room or space to calm down.
 
 
 ────────────────────────────────
@@ -62,60 +59,54 @@ Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one ent
 ### STUDENT CONTEXT
 ────────────────────────────────
 
-This student experiences intense emotional distress, physical tantrums, and sudden anger triggered by transitions, perceived loss of time, and unmet expectations. His profound perfectionism makes it nearly impossible for him to submit incomplete work without a breakdown. He uniquely requires conditional autonomy to finish tasks, highly structured routines, and transitions bridged by preferred activities to maintain emotional regulation.
+SD is a gifted student with extreme perfectionism, depression, and impulse control disorder who experiences severe emotional distress and anger fits when interrupted before completing a task. He uniquely requires allowances to finish his work completely, highly predictable routines anchored by preferred activities, and environmental changes to de-escalate during meltdowns.
 
 
 ────────────────────────────────
 ### DIALOGUE (situation the tutor is responding to)
 ────────────────────────────────
 
-TUTOR: Here are your drawing materials and the prize chocolates you won in the mind-game. You can start drawing your picture titled 'Dragon Tower'.
+TUTOR: Here is the paper on the coffee table. You can start drawing the picture of you and your family now.
 
-STUDENT: (Sits at the desk, appearing calm and focused as he begins to draw the picture.)
+STUDENT: But I am not going to sit on the chair, I am going to sit on the floor. (Bends over the coffee table and starts drawing, then begins erasing and redrawing the same spot over and over) The fences of the animal shelters are not good enough.
 
-TUTOR: You have been working for a short while. Keep going.
+TUTOR: It looks fine. We need to finish drawing soon.
 
-STUDENT: (Stops drawing and suddenly raises his head in a burst of anger.)
+STUDENT: (Continues etching out minute details on the paper) I am not finished yet.
 
-TUTOR: Remember, you wanted to draw pictures.
+TUTOR: You have to finish drawing now so we can move on.
 
-STUDENT: My time! My time lost in vain! (Starts shouting inside the classroom and throws the prize chocolates.)
+STUDENT: (Raises head in a burst of anger) My time! My time lost in vain! (Starts shouting inside the classroom, throws his prize chocolates, and then sits on the floor crying, having a fit)
 
 FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
 Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
 {
   "content": {
     "task": {
-      "content": "Drawing a picture titled 'Dragon Tower'",
+      "content": "Drawing a picture where he was together with his family, and drawing the Dragon Tower",
       "learning_goal": ""
     },
     "context": {
-      "environment": "Inside the classroom",
-      "materials": "Prize chocolates won in a mind-game, drawing materials",
-      "social_setting": "Working with researchers",
-      "time_context": ""
+      "environment": "Inside the classroom, sitting on the floor bending over a coffee table",
+      "materials": "Prize chocolates, coffee table",
+      "social_setting": "Individual session",
+      "time_context": "After winning prize chocolates in a mind-game"
     },
     "challenging_behavior_trigger": {
-      "condition": "After a short while of being calm and focused drawing",
-      "observable_behavior": "Rose his head in a burst of anger. And started yelling: 'My time! My time lost in vain!'... started shouting inside the classroom and threw those prize chocolates at us",
-      "internal_state": "Burst of anger, conviction and transition issues",
+      "condition": "When talked to that he had to finish drawing, or after a short while of focused drawing",
+      "observable_behavior": "Rose his head in a burst of anger. Started yelling, shouting inside the classroom and threw those prize chocolates at us. Having a fit, crying and sitting on the floor.",
+      "internal_state": "Frustration and anger, going through a turmoil",
       "related_quotes": [
         "My time! My time lost in vain!"
       ]
     },
     "behavior_patterns": [
       {
-        "condition": "If he does not get an extra piece of food (tangerine)",
-        "observable_behavior": "He starts insisting if he does not get that extra one. He starts having nervous breakdowns.",
-        "internal_state": "Getting that piece of food is vital for him",
-        "related_quotes": []
-      },
-      {
-        "condition": "When playing a game and not getting the cards he wanted",
-        "observable_behavior": "He did not enjoy the game at all and he kept on complaining",
-        "internal_state": "",
+        "condition": "When drawing details like fences of animal shelters",
+        "observable_behavior": "Erased and re-drawn over and over again, working on the details. Continued etching out minute details.",
+        "internal_state": "Perfectionism",
         "related_quotes": [
-          "Why not the knight, why can I not draw the dragon card?"
+          "I am not finished yet."
         ]
       }
     ]

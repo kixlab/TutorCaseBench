@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Redirection Strategy
+  Check: The tutor's response must incorporate or explicitly reference the use of a visual support (e.g., a picture card, visual schedule, or gesture) to guide the student's behavior.
+
+Criterion 2: Absence of Exclusionary Threats
+  Check: The tutor's response must completely avoid threatening the student with removal, exclusion, or physical relocation.
+
+Criterion 3: Non-Shaming Tone
+  Check: The tutor's response must remain neutral and supportive, avoiding any verbal shaming, accusations of defiance, or framing the behavior as intentional provocation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Rick is a student with autism whose intense sensory needs manifest as humming and mouth noises. He becomes highly agitated by verbal reprimands, shaming, and threats of exclusion, which adults often mistakenly use when assuming his behavior is intentional provocation. He uniquely requires visual supports for immediate redirection and a long-term approach based on shared power and negotiation to manage his sensory needs.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, please sit on the floor so we can begin our circle time activity.
+
+STUDENT: (Sits on the floor but begins making humming and mouth noises.)
+
+TUTOR: Rick, please stop making those noises.
+
+STUDENT: (Looks up, smiles, and continues making the mouth noises.)
+
+TUTOR: You need to stop; otherwise you will have to leave.
+
+STUDENT: (Becomes clearly agitated, continues the noises, and pulls away) Noooo!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Circle time activity with the whole class gathered on the floor.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General classroom environment",
+      "materials": "Card with a picture of a boy with the hands over his lips and the word 'quiet' below it",
+      "social_setting": "Whole class gathered on the floor for circle time",
+      "time_context": "Later the same day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Ms Nelson told him he would 'have to leave'",
+      "observable_behavior": "He was clearly agitated",
+      "internal_state": "Intense sensory needs",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to stop making noises with his mouth",
+        "observable_behavior": "He looks at me and smiles. He did not stop and was dragged by the arms outside of the classroom, saying 'Noooo'.",
+        "internal_state": "",
+        "related_quotes": [
+          "Noooo"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

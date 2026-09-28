@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Vocational Anchoring
+  Check: The tutor explicitly connects the academic concept or task to a specific, practical workplace activity or vocational skill.
+
+Criterion 2: Concrete Artifacts and Demonstrations
+  Check: The tutor introduces, references, or utilizes a physical object, tool, or visual demonstration to explain the concept rather than relying solely on text or lecture.
+
+Criterion 3: Eliciting Personal and Emotional Experience
+  Check: The tutor prompts the student to share a personal story, sensory perception, or emotional reaction related to the topic.
+
+Criterion 4: Authentic Professional Scenarios
+  Check: The tutor frames the lesson around a real-world professional scenario, authentic media (e.g., a documentary), or a physical field environment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with traditional, abstract, desk-based learning, often viewing general subjects as irrelevant and reacting with disengagement or chaos. They are highly motivated by practical, visual, and concrete learning activities, thriving when academic concepts are explicitly tied to real-world vocational skills. They uniquely require a safe, non-traditional learning environment that values their personal experiences and utilizes physical artifacts rather than textbooks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are going to learn the facts about human physiology and diabetes to prepare for your tests. Please sit at your desks and read the first chapter on how the body processes sugar.
+
+STUDENT: Do we really have to just sit and read this? I thought we were going to use that box of insulin pens and injection needles you have on the desk.
+
+TUTOR: We need to cover the theory first. Please focus on the text in front of you.
+
+STUDENT: But this just feels like irrelevant information. My grandmother suffers from diabetes, and she just had to change her diet. I don't see why we need to memorize all these biology terms.
+
+TUTOR: You need to know this for when you administer insulin later. Keep trying to read through it.
+
+STUDENT: (Pulls out cell phone) I have a hard time just to sit and take in all this reading when there's no clear explicit connection to the practical work. I'm just going to take photos of these different coloured pens instead.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Learning facts about human physiology",
+      "learning_goal": "Prepare them for their own tests and administering insulin"
+    },
+    "context": {
+      "environment": "Social and health care training college classroom",
+      "materials": "Box of insulin 'pens', injection needles, blood glucose measuring equipment, cell phones",
+      "social_setting": "Classroom with teacher Betinna and students",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to learn facts about human physiology through traditional, cognitive-based teaching",
+      "observable_behavior": "Have a hard time just to sit and take in",
+      "internal_state": "Limited prerequisites for learning by means of traditional, cognitive-based teaching",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When lacking a clear explicit connection between school-based activities and practical work-based activities",
+        "observable_behavior": "Can cause chaos for diverse reasons",
+        "internal_state": "Not all of them motivated for schooling",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

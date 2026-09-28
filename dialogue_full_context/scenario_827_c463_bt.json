@@ -1,0 +1,80 @@
+{
+  "category_id": "463",
+  "category_title": "Struggling students using infinite practice for mastery",
+  "scenario_id": "827",
+  "scenario_title": "Repeated errors during self-paced computer lab practice",
+  "minimal_context": "The student is working on self-paced math exercises in a computer lab to master a procedure.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please continue working on your math exercises on the computer. Remember, you need to get five in a row correct."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I just got that one wrong. I'm going to try the exact same strategy on this next problem and see if it works this time."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, go ahead and try the next one."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "It marked it wrong again. I tried asking my partner for help, but we have unique problems on our screens so we have to work through the procedure together instead of just sharing the solution."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Why don't you try watching the video lesson on the screen?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "The teacher can teach me more than the video. I've just been repeating the same strategy for the last few problems and getting them all wrong, so I need you to come over here and help me.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please continue working on your math exercises on the computer. Remember, you need to get five in a row correct.\n\nSTUDENT: I just got that one wrong. I'm going to try the exact same strategy on this next problem and see if it works this time.\n\nTUTOR: Okay, go ahead and try the next one.\n\nSTUDENT: It marked it wrong again. I tried asking my partner for help, but we have unique problems on our screens so we have to work through the procedure together instead of just sharing the solution.\n\nTUTOR: Why don't you try watching the video lesson on the screen?\n\nSTUDENT: The teacher can teach me more than the video. I've just been repeating the same strategy for the last few problems and getting them all wrong, so I need you to come over here and help me.",
+  "immediate_dialogue_prompt": 1393,
+  "long_term_dialogue_prompt": 1394,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "math exercises",
+        "learning_goal": "master a procedure"
+      },
+      "context": {
+        "environment": "computer lab session",
+        "materials": "video lesson",
+        "social_setting": "in class and continue working outside of class",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "If students get the answer wrong",
+        "observable_behavior": "continued with the same strategy for a problem or two. However, since they continued getting answers wrong, they soon sought help",
+        "internal_state": "",
+        "related_quotes": [
+          "The teacher can teach me more than the video."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Because each student had unique problems",
+          "observable_behavior": "ask a more math-savvy peer for help",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "In the Khan Academy sessions",
+          "observable_behavior": "visibly asking the teacher for help more frequently than in the traditional classes",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

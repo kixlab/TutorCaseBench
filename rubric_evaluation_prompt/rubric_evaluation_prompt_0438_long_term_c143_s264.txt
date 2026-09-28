@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Multi-Interpretive Question Design
+  Check: The tutor's long-term plan includes designing open-ended questions that explicitly allow for multiple valid interpretations rather than converging on one correct text-based answer.
+
+Criterion 2: Privileging the Text-Reader Interaction
+  Check: The tutor's strategy explicitly centers the student's personal meaning-making and interaction with the text in both instruction and assessment.
+
+Criterion 3: Sustained Inclusion of Prior Knowledge
+  Check: The tutor's plan ensures the student is actively included in anticipatory or discussion tasks without limiting her participation to prevent 'giving the book away.'
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Megan is a student who possesses prior knowledge of texts but lacks confidence, quickly abandoning her own reasoning when challenged by authoritative or reverse polarity questions. She tends to label her own thoughts as 'silly' or conforms to the teacher's expected answer when her outside knowledge is treated as a liability. To thrive, she uniquely needs open-ended validation of her text-reader interaction, allowing her prior knowledge to serve as a legitimate source of evidence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the part in 'The Mouse and the Motorcycle' where it says 'Ralph’s heart raced like a motor'. How do you think Ralph is feeling?
+
+STUDENT: I think he feels scared, adventurous, and sad.
+
+TUTOR: Can you explain your thinking?
+
+STUDENT: U:m he wished he had not eaten so much—oh wait. If he had been if he hadn’t been so greedy, the core would have been thicker and he would have been thinner. he feels sad about being greedy?
+
+TUTOR: Does it say that?
+
+STUDENT: no, he either feels sad or: um (.) guilty
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Inferring a character's feelings based on text evidence ('Ralph’s heart raced like a motor')",
+      "learning_goal": "Inferring character emotion and providing evidence from the text"
+    },
+    "context": {
+      "environment": "Small-group discussion",
+      "materials": "The text 'The Mouse and the Motorcycle'",
+      "social_setting": "Small group with teacher (Sharon) and another student (Garrett)",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher challenged her reasoning by asking, 'Does it say that?' as a reverse polarity question",
+      "observable_behavior": "Refined her thinking to say that he was feeling guilty, a response the teacher accepted, removing her original reasoning from the process",
+      "internal_state": "Recognized that Ralph’s attempts at hiding under the apple core were proving ineffective and that Ralph was regretting his actions",
+      "related_quotes": [
+        "no, he either feels sad or: um (.) guilty"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to explain her thinking after suggesting a character's feelings",
+        "observable_behavior": "Reads a sentence from the text to support her inference and explains how the sentence indicates the character's feelings",
+        "internal_state": "",
+        "related_quotes": [
+          "U:m he wished he had not eaten so much—oh wait. If he had been if he hadn’t been so greedy, the core would have been thicker and he would have been thinner.",
+          "he feels sad about being greedy?"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

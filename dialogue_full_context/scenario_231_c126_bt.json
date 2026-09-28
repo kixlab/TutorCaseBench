@@ -1,0 +1,74 @@
+{
+  "category_id": "126",
+  "category_title": "Preschoolers with Autism and communication delays who exhibit physical aggression during activity transitions",
+  "scenario_id": "231",
+  "scenario_title": "Transitioning to a non-preferred activity",
+  "minimal_context": "Chris is in his pre-kindergarten classroom being asked to transition from playtime to a table activity.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Chris, it is time to clean up the toys and go to the table for our next activity."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "No! (Drops to the floor)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We have to follow the schedule. Please get up."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Elopes from the activity area)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Chris, you need to come back and transition to the table right now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Engages in physical aggression by kicking and throwing items in the classroom)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Chris, it is time to clean up the toys and go to the table for our next activity.\n\nSTUDENT: No! (Drops to the floor)\n\nTUTOR: We have to follow the schedule. Please get up.\n\nSTUDENT: (Elopes from the activity area)\n\nTUTOR: Chris, you need to come back and transition to the table right now.\n\nSTUDENT: (Engages in physical aggression by kicking and throwing items in the classroom)",
+  "immediate_dialogue_prompt": 383,
+  "long_term_dialogue_prompt": 384,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "transition to a non-preferred activity",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "public-school pre-kindergarten classroom",
+        "materials": "first/then card, token board, stickers",
+        "social_setting": "adults and peers",
+        "time_context": "daily routines"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when Chris was instructed to transition to a non-preferred activity",
+        "observable_behavior": "engaging in hitting, kicking, and/or throwing items in the classroom with or without targeting another peer or adult in the room",
+        "internal_state": "delays the presentation of the non-preferred activity and obtains attention from adults and peers",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "warning signs",
+          "observable_behavior": "Say \"no\", will drop to the floor, or elope from activity",
+          "internal_state": "",
+          "related_quotes": [
+            "no"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

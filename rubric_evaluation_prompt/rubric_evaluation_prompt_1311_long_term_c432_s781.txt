@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: High-Density Specific Praise Schedule
+  Check: The tutor's long-term plan establishes a highly frequent, fixed-interval schedule for delivering specific praise (e.g., every 2 minutes) during instruction.
+
+Criterion 2: Active Tutor Self-Monitoring
+  Check: The tutor's plan includes a mechanism for the tutor to actively self-monitor their own praise delivery (such as a tracking form or tally) rather than relying on passive external prompts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Buck is a perfectionist who struggles with academic feedback, perceiving it as criticism, which triggers self-harm and vocal outbursts. He has low self-awareness and requires an environment where problem behaviors are not reinforced by attention or breaks. To tolerate instruction, he uniquely needs a highly structured, self-monitored schedule of frequent specific praise to buffer his negative reactions to correction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Buck, it is time for our 20-minute reading and writing instruction. Please read the passage and write your answers on the worksheet.
+
+STUDENT: Reading and writing are harder to do than math. I am good at math.
+
+TUTOR: Please just do your best and write down your answer for the first reading question.
+
+STUDENT: (Grunts and snorts) I finished the writing.
+
+TUTOR: Let me check your work. You made a mistake here, you need to correct this part.
+
+STUDENT: (Hits the table repeatedly and slaps himself in the head) Correct this part. I can’t do it! no one can do it! no one knows the answer!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Academic instruction in reading and writing, which he felt were harder to do than math",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General classroom environment in a self-contained special education setting",
+      "materials": "Table, squeezable therapeutic foam toys (fidgets), self-instruction checklist typed on a large note card, point sheet for M&Ms, Motivador vibrating pager, praise self-monitoring form (sheet of paper with 10 2-min intervals)",
+      "social_setting": "Academic instruction delivered by teacher Mrs. C",
+      "time_context": "During 20-minute academic instruction sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Receiving instructional feedback or behavioral redirection from the teacher",
+      "observable_behavior": "Hitting or slapping himself or furniture repeatedly, vocal outbursts that were not an academic response, repeating phrases, grunting, and snorting",
+      "internal_state": "Frustrated with work and did not like to be corrected or redirected as he viewed that as criticism; perfectionist who did not handle feedback well",
+      "related_quotes": [
+        "no one can do it",
+        "I can’t do it",
+        "no one knows the answer"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When he does not get things right or gets off his schedule",
+        "observable_behavior": "Self-harm when frustrated, yelling, repeating phrases, low self-awareness, grunting, and snorting",
+        "internal_state": "Often did not know he was hitting himself or repeating phrases and noticed these behaviors only when they caused pain",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

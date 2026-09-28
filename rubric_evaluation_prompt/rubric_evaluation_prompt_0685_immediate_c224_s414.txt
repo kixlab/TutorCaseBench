@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mood Prioritization
+  Check: The tutor's response must prioritize validating, accommodating, or improving the student's emotional state rather than correcting their non-compliance or pointing out behavioral faults.
+
+Criterion 2: Inclusive Collaboration
+  Check: The tutor must frame the interaction collaboratively (e.g., offering shared support or partnership) and avoid language or actions that isolate, single out, or segregate the student from peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe emotional and behavioral difficulties, often escalating to physical aggression and rampaging when feeling isolated, unsupported, or 'different'. They uniquely require an environment where core instruction is proactively structured around their specific needs, and immediate interactions must prioritize mood management and inclusive collaboration over behavioral correction or isolated monitoring.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, please open your textbooks to page 42 and complete the reading assignment quietly at your desks.
+
+STUDENT: I don't want to read this. Everyone is staring at me like there is something different about me. I don't feel like I am part of the group.
+
+TUTOR: Just look at the book and try your best to read it.
+
+STUDENT: (Starts acting out and pacing around the classroom) I'm not doing it! I hate this!
+
+TUTOR: Please sit back down and be quiet, I need to help the other students right now.
+
+STUDENT: (Suddenly hits another pupil severely who is sitting nearby) Get away from me!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in regular teaching and work in the classroom",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "regular classrooms",
+      "materials": "",
+      "social_setting": "integration with the whole class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "acute situations when there were not enough resources to manage all pupils",
+      "observable_behavior": "suddenly hits another pupil severely",
+      "internal_state": "feel that there is something different about them",
+      "related_quotes": [
+        "There is a hurry when a pupil suddenly hits another pupil severely",
+        "so they don’t feel that there is something different about them, that [they feel] they are part of the group"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when integrated in the regular classroom without adapted teaching",
+        "observable_behavior": "acting out social disorders rampaging through the school; they fight and do all kinds of things",
+        "internal_state": "suffer in integration",
+        "related_quotes": [
+          "acting out social disorders’ rampaging through the school; they fight and do all kinds of things",
+          "The whole class and the EBD child suffer in integration"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation with Conceptual Probing
+  Check: The tutor acknowledges the student's correct action, guess, or statement and immediately follows up with a question asking them to explain their reasoning.
+
+Criterion 2: Action-to-Concept Translation
+  Check: The tutor asks a specific question about the student's physical use of manipulatives (e.g., counting parts, fitting pieces) to prompt a mathematical connection.
+
+Criterion 3: Answer Withholding
+  Check: The tutor refrains from directly providing the mathematical answer or strategy, instead using a question or prompt to redirect the cognitive work back to the student.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+David is a student who struggles with abstract mathematical reasoning, relying heavily on physical manipulation and guessing to solve problems. He uniquely needs tutors to bridge the gap between his physical actions and mathematical concepts by withholding direct answers, validating his guesses, and persistently probing him to explain his reasoning using concrete manipulatives over distributed, chunked conversations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please use these red and brown Cuisenaire rods to work on your fractions.
+
+STUDENT: (Places the red rods beside the brown rod) What it is. I'm kind of measuring it.
+
+TUTOR: What are you trying to measure?
+
+STUDENT: See if it's a quarter or not. Because I went like this... (moves small red rods along the longer rod).
+
+TUTOR: How would you know if it is a quarter?
+
+STUDENT: An ordinary guess. I was happy because that was pretty easy until I got up to number 6, 'cause I knew it all. Now I need you to tell me the parts.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "A lesson on fractions that used Cuisenaire rods",
+      "learning_goal": "Scaffolding the concept that the number of parts in one whole names the fraction"
+    },
+    "context": {
+      "environment": "Classrooms during mathematics tasks",
+      "materials": "Cuisenaire rods (specifically red rods and brown rods)",
+      "social_setting": "Working individually or in pairs while the teacher walks around",
+      "time_context": "Over the course of a lesson in 'chunks'"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked 'How would you know if it is a quarter?'",
+      "observable_behavior": "Responded that it was 'An ordinary guess'",
+      "internal_state": "Felt happy because it was 'pretty easy' until he got up to number 6, where he needed help",
+      "related_quotes": [
+        "An ordinary guess.",
+        "I was happy because that was pretty easy until I got up to number 6, ‘cause I knew it all. Ms B helped me a little bit. She told me the parts."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked 'What are you checking to see?'",
+        "observable_behavior": "Described physical actions rather than mathematical concepts, stating 'I'm kind of measuring it' and moving small red rods along the longer rod",
+        "internal_state": "",
+        "related_quotes": [
+          "What it is. I’m kind of measuring it."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

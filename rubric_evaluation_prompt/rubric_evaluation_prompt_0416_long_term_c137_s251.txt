@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Phased Spatial Foundation
+  Check: The tutor's long-term plan includes a phased approach that explicitly teaches foundational 3D concepts (e.g., 3D space, vertices, geometry) before advancing to complex modeling.
+
+Criterion 2: Peer Feedback Integration
+  Check: The tutor incorporates structured opportunities for the student to present their work, receive peer feedback, and practice applying constructive criticism to their designs.
+
+Criterion 3: Artistic Autonomy Post-Mastery
+  Check: The tutor plans a transition from structured technical lessons to a flexible phase where the student is encouraged to integrate their own narrative research and artistic interests into the project.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This is an artistically-inclined student with a background in cinematography who excels at storytelling and visual aesthetics but struggles with the technical complexities of 3D modeling and interactive game design. They tend to create visually appealing but 'flat' or non-interactive environments and require direct technical scaffolding alongside narrative-driven prompts to bridge their artistic strengths with gameplay mechanics.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your environment models for your bike delivery game in Cinema 4D. During the peer feedback session, it was mentioned that we need to work on the visual optics.
+
+STUDENT: I got part of the idea for my game since my school is by Fisherman’s Wharf; I go there a lot. I just get to see the environment around there a lot so I know more about how it’s going to be.
+
+TUTOR: That's good. How are you going to set up the models in the software?
+
+STUDENT: I recreated San Francisco landmarks like Fisherman’s Wharf and the Golden Gate Bridge, but I'm having trouble trying to visualize three-dimensional objects in two-dimensional space.
+
+TUTOR: What do you think you should try next to fix that?
+
+STUDENT: I don't know what to do. A classmate made the observation that some of my early renderings were too flat. I know I'm supposed to use Cinema 4D's lighting tools to include shadows from both the bridge and bike to create a 3D effect, and play with depth of field, but the software is too complicated for me to figure out on my own.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Modeling 3D assets and adjusting visual optics (depth of field) for a bike delivery game",
+      "learning_goal": "visualize three-dimensional objects in two-dimensional space"
+    },
+    "context": {
+      "environment": "3D Animation and Gaming track",
+      "materials": "industry-standard software (Unity, Cinema 4D)",
+      "social_setting": "peer feedback session",
+      "time_context": "8-month course"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "in response to a classmate's observation that some of his early renderings were too flat",
+      "observable_behavior": "produced early renderings that were too flat",
+      "internal_state": "daunting",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When introduced to the complexity of game development",
+        "observable_behavior": "require intensive 'handholding' or individualized technical support",
+        "internal_state": "daunting",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

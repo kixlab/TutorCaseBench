@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Direct Academic Contact
+  Check: The tutor's response includes a direct, personalized academic prompt, question, or interaction rather than just issuing a general behavioral command.
+
+Criterion 2: Active Task Pacing
+  Check: The tutor breaks the task into immediate, active steps or provides a specific, continuous action for the student to perform right now to keep them busy.
+
+Criterion 3: Positive Reinforcement of Desired Behavior
+  Check: The tutor explicitly praises, approves, or acknowledges a positive action, effort, or approximation of the desired behavior.
+
+Criterion 4: Absence of Direct Disapproval
+  Check: The tutor avoids scolding, reprimanding, or explicitly criticizing the student's off-task or disruptive behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has mild intellectual disabilities and frequently exhibits off-task or disruptive behaviors (e.g., wandering, talking, playing with objects) when under-engaged during standard lessons. The evidence reveals they uniquely require high levels of direct academic contact, continuous active tasks, strategic physical proximity (front-row seating), and positive reinforcement rather than reprimands to maintain focus.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please copy the sentences written on the board into your notebook.
+
+STUDENT: (Picks up the pencil but starts playing with it instead of writing, looking around the classroom.)
+
+TUTOR: You need to write what is on the board.
+
+STUDENT: (Puts the pencil down and turns to look outside through the window, ignoring the notebook.)
+
+TUTOR: Are you doing your work?
+
+STUDENT: (Continues looking out the window, tapping the pencil on the desk, attending to other things irrelevant to the lesson instead of engaging in the academic task.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in Turkish and Social Studies courses involving writing, listening to teacher or peer, asking questions, answering questions, seeking help by looking at her/his peer’s notebook, showing her/his notebook to teachers, copying in her/his notebook from what is written on the board, and reading aloud or silently",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Primary schools’ second, third, fourth, and fifth-grade inclusive classrooms",
+      "materials": "Pencils, notebook, board",
+      "social_setting": "Inclusive classrooms in which there were students with mild intellectual disabilities",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Teachers not sufficiently engaging these students in classroom activities",
+      "observable_behavior": "Looking around, looking outside through the window, playing with pencils, or attending to other things irrelevant to the lesson",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Not engaging in classroom activities",
+        "observable_behavior": "Behavior that does not disturb others nor interrupts lessons but which also cannot be coded as academic engagement behavior",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

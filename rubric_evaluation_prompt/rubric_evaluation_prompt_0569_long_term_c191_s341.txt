@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Cultural Orientation
+  Check: The long-term plan includes dedicated time or seminars to explicitly teach and explain the cultural expectations and interactional norms of the classroom.
+
+Criterion 2: Direct Authority and Structured Guidance
+  Check: The long-term plan establishes a clear, authoritative interactional style that relies on direct instructions and structured choices rather than passive waiting or open-ended negotiation.
+
+Criterion 3: Consistent Evaluation of Work
+  Check: The long-term plan ensures that assigned work is consistently evaluated or graded, explicitly avoiding the use of high-volume, ungraded practice work.
+
+Criterion 4: Neutral Error Correction
+  Check: The long-term plan outlines a strategy for correcting mistakes neutrally and privately, explicitly avoiding public singling out or hyperbolic criticism.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student comes from an educational background with strict, non-negotiable disciplinary models and struggles to interpret the more 'lax' or negotiation-based norms of US classrooms. They perceive passive classroom management (like waiting for silence) as a lack of authority, interpret high volumes of ungraded work as personal rejection, and feel targeted by public, hyperbolic criticism. They uniquely require explicit orientation to new cultural expectations, clear and direct authority, and consistent evaluation of their work to feel accepted and secure.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, I need to teach the class now. Let's get started.
+
+STUDENT: (Continues speaking loudly to a classmate) So anyway, I was telling him that we should go after school...
+
+TUTOR: I will wait for everyone to stop talking before I talk.
+
+STUDENT: (Laughs with classmate) Look, it seems that she gets upset. But they do not punish them or do anything. They wait for them to stop talking instead of telling them to be quiet.
+
+TUTOR: I am still waiting for silence so we can begin.
+
+STUDENT: Just keep talking. They cannot hit us or punish us physically here. Sometimes we do certain things based on our knowledge of what they can and cannot do to us.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "the teacher needs to teach the class",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "in class",
+      "materials": "",
+      "social_setting": "everyone continues speaking",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "the teachers would wait for the students to stop talking before they talk",
+      "observable_behavior": "we do certain things based on our knowledge of what they can and cannot do to us",
+      "internal_state": "aware that they cannot do us anything. They cannot hit us or punish us physically.",
+      "related_quotes": [
+        "because if someone begins to speak it seems that they get upset. But they do not punish them or do anything. They wait for them to stop talking instead of telling them to be quiet.",
+        "They cannot hit us or punish us physically. Sometimes we do certain things based on our knowledge of what they can and cannot do to us."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when we make noise and the teacher needs to teach the class",
+        "observable_behavior": "everyone continues speaking",
+        "internal_state": "aware that they cannot do us anything",
+        "related_quotes": [
+          "They were very strict with respect to discipline because they did not allow us to make noise in class."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

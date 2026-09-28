@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Archaic Text Demystification
+  Check: The tutor explicitly breaks down, translates, or re-explains specific complex words or lines rather than just telling the student to keep reading or try their best.
+
+Criterion 2: Self-Selected Peer Grouping
+  Check: The tutor allows, prompts, or explicitly gives the student permission to choose their own group members or partners for the activity.
+
+Criterion 3: Facilitative Encouragement
+  Check: The tutor provides encouraging, hands-off facilitation that prompts the student to rely on their peers or their own creative decisions rather than giving direct, prescriptive advice.
+
+Criterion 4: Disruption Contingency Management
+  Check: The tutor establishes clear rules, boundaries, or immediate backup plans to handle missing group members or disrupted group dynamics.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits a stark contrast in behavior: they are highly reluctant and disengaged during standard English tasks due to a fear of peer judgment and confusion over archaic texts, but they become highly enthusiastic and cognitively engaged during creative, drama-focused projects. They uniquely require autonomy, self-selected peer groups to feel safe, and opportunities to take on specific leadership roles to leverage their creative strengths.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at your copy of A Midsummer Night's Dream. We are going to read the text and then perform the scene in front of the class.
+
+STUDENT: I don't know what these words mean. In the Mid summer night’s dream the text at first was quiet confusing.
+
+TUTOR: Just keep reading and try your best. Who would like to volunteer to read the first character's lines?
+
+STUDENT: Sometimes I feel comfortable because of the topic but sometimes I don’t like to raise my hand.
+
+TUTOR: We need to move on to the drama activity now. Please stand up and perform your lines for the group.
+
+STUDENT: I'm not doing it. Some people judge you... I just don’t like performing in front of people.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Understanding archaic Shakespearean language and participating in drama activities",
+      "learning_goal": "Cognitive understanding of the text"
+    },
+    "context": {
+      "environment": "English lessons",
+      "materials": "A Midsummer Night's Dream text",
+      "social_setting": "Whole class and group work",
+      "time_context": "Initial introduction to the text before research lessons"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to perform in front of people or participate in drama",
+      "observable_behavior": "Expressed a dislike of drama, reluctance to engage in lesson activities, and not raising hand",
+      "internal_state": "Feared being judged and found the text confusing",
+      "related_quotes": [
+        "Some people judge you [. . .] I just don’t like performing in front of people.",
+        "Sometimes I feel comfortable because of the topic but sometimes I don’t like to raise my hand",
+        "In the Mid summer night’s dream the text at first was quiet confusing"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During initial reading of the text",
+        "observable_behavior": "Reluctance to engage in lesson activities",
+        "internal_state": "Finding the text confusing",
+        "related_quotes": [
+          "In the Mid summer night’s dream the text at first was quiet confusing"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

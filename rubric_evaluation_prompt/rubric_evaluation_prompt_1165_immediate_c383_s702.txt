@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Metacognitive Emotional Tracking
+  Check: The tutor prompts the student to express her in-the-moment feelings, reactions, or levels of engagement with the text, rather than solely asking for factual comprehension.
+
+Criterion 2: Autonomy in Text Selection
+  Check: The tutor provides the student with meaningful choices among diverse, high-interest genres or topics, rather than assigning a single mandatory text.
+
+Criterion 3: Connecting to Personal Literacy History
+  Check: The tutor invites the student to share or reflect on her personal history, childhood memories, or past experiences related to reading and writing.
+
+Criterion 4: Avoidance of Rote Mechanics
+  Check: The tutor does NOT force the reading of standardized test passages or focus the interaction on rote test-taking mechanics.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Angelica is an adolescent who actively resists rote instruction and institutional labels of being a 'struggling reader' by withholding effort and skimming texts. However, she demonstrates deep engagement and stamina when provided with autonomy, diverse high-interest texts, and opportunities to explore her personal identity as a reader. She uniquely requires interventions that validate her personal reading experiences and non-traditional literacy practices rather than focusing on standardized test mechanics.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We have some time in the bookstore today. Go ahead and pick out some books to read independently for class.
+
+STUDENT: Great, it's another reading class. I saw all these books and I just thought this is going to be really boring.
+
+TUTOR: Why don't you look at the books in this series over here?
+
+STUDENT: (Reads the back cover) This looks like this is not my type and I really don't care for this one. I've never really been interested in those books. They just look boring to me.
+
+TUTOR: Just pick out some books that you would probably like.
+
+STUDENT: You're really going to buy me some books? I'm probably not even going to read them.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Pick out some books to read independently",
+      "learning_goal": "Recognize and claim their already existing identities as readers"
+    },
+    "context": {
+      "environment": "9th grade reading class and bookstore",
+      "materials": "Diverse genres on a range of relevant topics, books typical of different ages, artifacts, sticky notes, poster",
+      "social_setting": "Groups and whole-class discussion",
+      "time_context": "Beginning weeks of the school year"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When her Big Sister took her to a bookstore and said 'Pick out some books.'",
+      "observable_behavior": "I'm just like, 'You're really going to buy me some books? I'm probably not even going to read them.'",
+      "internal_state": "",
+      "related_quotes": [
+        "You're really going to buy me some books? I'm probably not even going to read them."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When her mother bought her the Babysitter Club book series and said 'You better read them.'",
+        "observable_behavior": "Concluded after reading each book's back cover that, 'This looks like this is not my type and I really don't care for this one.'",
+        "internal_state": "Never really been interested in those books. They just looked boring to me.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Simultaneous Conceptual-Procedural Linking
+  Check: The tutor explicitly pairs a physical manipulative action or drawing with the writing or explaining of a mathematical sentence in the same step.
+
+Criterion 2: Simplified Visual Representation
+  Check: The tutor prompts the use of simple, abstract visual aids (like lines or tallies) to represent numbers, rather than detailed or complex illustrations.
+
+Criterion 3: Explicit Bundling Guidance
+  Check: The tutor provides explicit, step-by-step guidance on how to physically group or bundle items into tens and where to place the corresponding digits.
+
+Criterion 4: Conceptual Grounding of Procedures
+  Check: The tutor ensures every procedural step (like setting up a vertical form or carrying a number) is explained through a conceptual model, avoiding rote copying.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These students are shy, sensitive, and prone to panic under pressure, working slowly but carefully. Their core challenge is bridging concrete counting with abstract place value and regrouping, often making persistent errors like treating the '1' in '16' as a single unit. They uniquely require a gentle, unpressured environment where simple manipulatives or drawings are simultaneously linked to formal mathematical sentences and culturally relevant contexts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the number 16 on the board. Please use your straws to show me this number.
+
+STUDENT: (Carefully counts out the straws) Here are sixteen straws.
+
+TUTOR: Thank you. Now, I am pointing to the '6' in '16'. Show me the straws for this number.
+
+STUDENT: (Separates some straws and holds them up) Six.
+
+TUTOR: Alright. Now I am pointing to the '1' in '16'. What does this numeral mean? Show me with the straws.
+
+STUDENT: (Looks puzzled, then holds up a single straw) One.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Explaining the meaning of the numeral in the tens and ones",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mathematics remediation classroom",
+      "materials": "Straws as concrete materials",
+      "social_setting": "Whole-class demonstration",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Pointed to the “1” in “16”",
+      "observable_behavior": "They showed one straw and said it is “one”",
+      "internal_state": "",
+      "related_quotes": [
+        "one"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Asked to explain the meaning of the numeral in the tens and ones",
+        "observable_behavior": "They could not answer or show with the straws",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

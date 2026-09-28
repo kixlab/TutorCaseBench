@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Radical De-pressurization of Time
+  Check: The tutor's long-term strategy explicitly removes time limits, pacing expectations, or speed-based goals, emphasizing that the student can take as much time as they need.
+
+Criterion 2: Cultivation of Personal Representations
+  Check: The tutor's plan consistently encourages the student to invent, use, and rely on their own visual or physical representations rather than forcing standard mathematical notation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student engages in superficial 'maths-like' behaviors, such as guessing 'lucky numbers' or arranging symbols nonsensically, to mimic mathematical work without understanding. They passively accept failure and wait for the next instruction when corrected. They uniquely require a radical removal of time constraints, the freedom to use their own cumbersome representations, and small incremental nudges that demand justification rather than mere correction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please use the paper and pen to solve this problem: There are 192 people travelling in 50-seater coaches. How many coaches are needed?
+
+STUDENT: (Writes on the paper, imitating the general appearance of standard notational forms) Here is my answer. 310 coaches.
+
+TUTOR: That answer is incorrect.
+
+STUDENT: (Accepts the failure and puts her pen down) Okay. What's the next instruction?
+
+TUTOR: Can you explain how you got 310?
+
+STUDENT: (Expresses surprise at the question, pointing to her paper which shows fragments of notation surrounded by nonsensical activity) I just arranged the numbers so it looked like math. I don't get it anyway. Are we moving on?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Passengers task: with 192 people travelling in 50-seater coaches, finding the number of coaches needed",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Individual task-based interviews",
+      "materials": "Paper and pen for written calculations",
+      "social_setting": "One-on-one with interviewer",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The student’s first attempt at the task",
+      "observable_behavior": "Produced the figure of 310 coaches, which she presented as her answer; arranged symbols in a manner that looked 'mathematical' with fragments of notation and algorithm surrounded by nonsensical activity",
+      "internal_state": "Secure in the knowledge that she had arranged some symbols in a manner that looked 'mathematical', with a vague hope that the end product might be pronounced correct, and no expectation of working through a challenge, learning anything new, or becoming more proficient",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "On being told their initial solutions to tasks were incorrect",
+        "observable_behavior": "Accepted the failure and simply waited for the next instruction",
+        "internal_state": "Little interest in either the true solution or why their strategy had not worked; did not independently respond by thinking critically about the strategy used or attempting an alternative",
+        "related_quotes": []
+      },
+      {
+        "condition": "When asked how they had obtained their incorrect answer",
+        "observable_behavior": "Expressed surprise",
+        "internal_state": "Unaware that genuine numerical reasoning is an intended goal; not expecting to understand what they are doing",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Task Bounding
+  Check: The tutor's response must explicitly define the immediate task by outlining what to do, how much is required, how to know it is finished, and what happens next.
+
+Criterion 2: Strict Routine Adherence
+  Check: The tutor's response must maintain the established routine or task order without introducing unexpected changes or new, unannounced activities.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ben is a high-functioning student with Asperger Disorder who struggles with task initiation, often engaging in off-task motor behaviors like sharpening pencils or playing with objects instead of starting work. He requires intense predictability and becomes distressed by minor routine changes. The evidence shows he uniquely needs explicit visual work systems (defining what, how much, when finished, and what's next) and strict adherence to established schedules to successfully transition and engage.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, break time is over. Please sit at your desks and begin your independent handwriting practice.
+
+STUDENT: (Enters the classroom five minutes after the rest of the classmates and sits at his desk without starting the work.)
+
+TUTOR: Ben, you need to start your handwriting task now.
+
+STUDENT: (Gets out of his chair and begins sharpening his pencils instead of looking at the assignment.)
+
+TUTOR: Your pencils are fine. Please sit down and do your work.
+
+STUDENT: (Sits back at his desk but does not engage in the learning activity, choosing to play with a toy instead.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "A handwriting task or literacy task involving practising and reinforcing skills with which Ben was already familiar, rather than introducing completely new learning tasks",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Year 3-4 composite class, transitioning from school breaks back into the classroom",
+      "materials": "Pencil and paper, objects, toys, pencils to sharpen",
+      "social_setting": "Mainstream classroom where students are expected to begin independent work following whole-class instructions",
+      "time_context": "The period immediately following whole-class instructions after a break"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Immediately following whole-class instructions when students are expected to begin independent work, despite receiving the same directions as his peers",
+      "observable_behavior": "Was usually the last student to enter the room after breaks, up to five minutes after his classmates. Did not start work immediately, but played with objects, sharpened pencils, or sat at his desk not engaged in any specific learning activity.",
+      "internal_state": "Reluctant to engage with school work and was slow to start classroom activities, despite being capable of completing the work",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During general independent work periods where the student was expected to remain at his desk and engage with materials",
+        "observable_behavior": "Being out of his chair, playing with toys, sharpening pencils",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

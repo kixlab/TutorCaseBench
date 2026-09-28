@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Granular Task Structuring
+  Check: The tutor breaks the task down into explicit, step-by-step instructions that clearly define exactly what materials to use, how to begin, and what the end of the task looks like, completely avoiding open-ended or unstructured prompts.
+
+Criterion 2: Sensory Optimization and Pacing
+  Check: The tutor adapts the delivery to minimize sensory clutter (e.g., offering audio instead of tactile materials) and introduces the task at a slow, deliberate pace, providing context before expecting execution.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has profound executive functioning deficits, characterized by a slow tempo, lack of inner drive, and an inability to initiate or complete tasks without an external 'start button'. They are highly sensitive to sensory overload (especially tactile and auditory) and become paralyzed by unstructured tasks, unexpected changes, or fast-paced instruction. They uniquely require hyper-structured, step-by-step instructions with clear beginnings and ends, sensory-optimized materials like audiobooks, and the integration of their strong interest in music to engage and succeed.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent study. Please get your materials out and start the lesson.
+
+STUDENT: (Sits at the desk with a very slow tempo, not reaching for any materials or initiating the task.)
+
+TUTOR: Are you going to start working?
+
+STUDENT: I don't know how to begin.
+
+TUTOR: Just try to do it independently.
+
+STUDENT: (Remains completely still, showing no inner drive to take initiative or complete the task without someone pushing the start button.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Initiating and completing independent tasks during classroom lessons",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Regular class or small group",
+      "materials": "Materials to take out and put back or clean up",
+      "social_setting": "Classroom lesson",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When assigned unstructured tasks or when too much responsibility is left to the student",
+      "observable_behavior": "Exhibits a slow tempo, does not know where to start, and neither begins nor completes a task independently",
+      "internal_state": "Perceives the situation as difficult and stressful, lacks inner drive",
+      "related_quotes": [
+        "The teacher needs to tell me exactly what to take out and what to do, otherwise I don’t know where to start",
+        "[S/he] has no inner drive. [S/he] neither knows how to begin, nor complete a task independently—you have to push the “start button” all the time"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When things are going too fast",
+        "observable_behavior": "Unable to handle the task",
+        "internal_state": "Difficult and stressful",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

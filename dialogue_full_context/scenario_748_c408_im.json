@@ -1,0 +1,80 @@
+{
+  "category_id": "408",
+  "category_title": "Low-attaining students lacking knowledge of mathematical representations like arrays",
+  "scenario_id": "748",
+  "scenario_title": "Calculating products in a playing card multiplication game",
+  "minimal_context": "Riley is playing a multiplication game using playing cards to generate random numbers and needs to calculate nine multiplied by eight.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "You drew a nine and an eight from the playing cards. Please calculate nine multiplied by eight."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "This is good because it was something different and we get to use playing cards and do the maths questions. Let me try to figure out nine times eight..."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Why don't you use an array to help you calculate it?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I don't know what an array is."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "I will show you what it looks like. Now you try drawing an array of nine by eight to find the answer."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Spends most of the time for the game drawing the array) Okay, I drew an array of nine by eight. The answer is 70.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: You drew a nine and an eight from the playing cards. Please calculate nine multiplied by eight.\n\nSTUDENT: This is good because it was something different and we get to use playing cards and do the maths questions. Let me try to figure out nine times eight...\n\nTUTOR: Why don't you use an array to help you calculate it?\n\nSTUDENT: I don't know what an array is.\n\nTUTOR: I will show you what it looks like. Now you try drawing an array of nine by eight to find the answer.\n\nSTUDENT: (Spends most of the time for the game drawing the array) Okay, I drew an array of nine by eight. The answer is 70.",
+  "immediate_dialogue_prompt": 1249,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Calculate nine multiplied by eight during a multiplication game using playing cards to generate random numbers for equations.",
+        "learning_goal": "Understanding of products and factors"
+      },
+      "context": {
+        "environment": "Classroom with MAB [Multi-based Arithmetic Blocks] at the back",
+        "materials": "Playing cards, MAB [Multi-based Arithmetic Blocks]",
+        "social_setting": "Playing a multiplication game",
+        "time_context": "Most of the time for this game"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Trying to calculate nine multiplied by eight",
+        "observable_behavior": "Spent most of the time for this game trying to calculate nine multiplied by eight.",
+        "internal_state": "Seemed to enjoy the use of the cards in this lesson, although his understanding of products and factors did not seem supported by their use.",
+        "related_quotes": [
+          "[The lesson was] good because it was something different and we get to use playing cards and do the maths questions."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When suggested he use an array",
+          "observable_behavior": "Riley didn’t know what an array was.",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "After being shown how to draw an array of nine by eight",
+          "observable_behavior": "He drew an array of nine by eight although his final answer was incorrect.",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

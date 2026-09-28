@@ -1,0 +1,80 @@
+{
+  "category_id": "286",
+  "category_title": "Students at risk of educational failure with significant instructional and behavioral disengagement",
+  "scenario_id": "522",
+  "scenario_title": "One-on-one transcription focusing on letter formation and visual details",
+  "minimal_context": "The student is working one-on-one with the teacher to transcribe letters to upper-case on a worksheet using an alphabet table.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's transcribe these letters to upper-case on your worksheet. Start with the letter 'i'."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Writes the upper-case 'I' and adds the top and bottom serifs, as shown in the alphabet table.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay. Now let's do the upper-case 'N'. Write it here."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Makes an incorrect first attempt at the upper-case 'N', then grimaces and looks at the teacher as she erases the letter.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Points to the lower-case 't' and locates it in the alphabet table) This is a 't'. Which letter are you going to write?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Points to the upper-case 'T') I don't know how to write it.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's transcribe these letters to upper-case on your worksheet. Start with the letter 'i'.\n\nSTUDENT: (Writes the upper-case 'I' and adds the top and bottom serifs, as shown in the alphabet table.)\n\nTUTOR: Okay. Now let's do the upper-case 'N'. Write it here.\n\nSTUDENT: (Makes an incorrect first attempt at the upper-case 'N', then grimaces and looks at the teacher as she erases the letter.)\n\nTUTOR: (Points to the lower-case 't' and locates it in the alphabet table) This is a 't'. Which letter are you going to write?\n\nSTUDENT: (Points to the upper-case 'T') I don't know how to write it.",
+  "immediate_dialogue_prompt": 870,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Transcribing letters 't', 'a', 'i', and 'N' to upper-case",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom",
+        "materials": "Worksheet, alphabet table, paper rack",
+        "social_setting": "One-on-one interaction with the teacher",
+        "time_context": "At the end of the time allocated to the lesson"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Pointed to the lower-case 't', said the name of the letter, located it in the alphabet table and then asked him which letter he was going to write",
+        "observable_behavior": "Pointed to the upper-case 'T', but said: 'I don't know how to write it'",
+        "internal_state": "",
+        "related_quotes": [
+          "I don't know how to write it"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When transcribing a lower-case 'i' to an upper-case 'I'",
+          "observable_behavior": "Added the top and bottom serifs, as shown in the alphabet table",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "When his first attempt at the upper-case 'N' was incorrect and the teacher erased the letter",
+          "observable_behavior": "Grimaced and looked at his teacher",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

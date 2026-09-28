@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Temporary Removal of Formal Constraints
+  Check: The tutor's response temporarily sets aside the requirement for formal documentation or written steps, allowing the student to attempt the problem informally or mentally.
+
+Criterion 2: Shift to Concrete Manipulatives
+  Check: The tutor introduces or suggests using concrete objects (e.g., play money, physical coins) to represent the math problem.
+
+Criterion 3: Numerical Simplification
+  Check: The tutor simplifies the current problem by substituting smaller, easier numbers (e.g., changing a complex decimal to a basic integer problem) to help the student formulate the underlying procedure.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Li is a student with fragile memory and impulsivity who frequently resists formal documentation and verification procedures, often replying with a quick 'no' when overwhelmed. She uniquely requires temporary relief from formal constraints, concrete manipulatives (like play money), numerical simplification, and explicit reminders of past successes to overcome her rapid shifts into resistance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: How can we check the change we received from this 20NIS bill?
+
+STUDENT: No! I have no idea.
+
+TUTOR: Let's look at the 20NIS bill and the coins on the table. What should we do next?
+
+STUDENT: This I don’t know.
+
+TUTOR: We can continue the gradual conversion of the coins. Would it help?
+
+STUDENT: No.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to teacher's question about how to check the change (verification procedure) and attempting to convert a 20NIS bill into coins",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Group discussion",
+      "materials": "20NIS bill, coins",
+      "social_setting": "Group discussion with teacher",
+      "time_context": "Lesson 4"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher offered to continue the gradual conversion of coins and provided meta-cognitive support by asking 'Would it help?'",
+      "observable_behavior": "Replied quickly with a 'no', impulsively refusing the teacher's support",
+      "internal_state": "",
+      "related_quotes": [
+        "no",
+        "This I don’t know"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the teacher used a question to diagnose knowledge regarding the verification procedure",
+        "observable_behavior": "Exclaimed 'No!' and stated she had no idea",
+        "internal_state": "",
+        "related_quotes": [
+          "No! I have no idea."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

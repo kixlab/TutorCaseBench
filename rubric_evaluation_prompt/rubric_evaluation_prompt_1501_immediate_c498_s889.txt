@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physical Redirection via Communication Book
+  Check: The tutor prompts Harold to physically hold, open, or turn the pages of his communication book to interrupt or prevent stereotypic behaviors.
+
+Criterion 2: Structured Initiation Scaffolding
+  Check: The tutor provides a concrete, physical way to initiate the interaction (e.g., having the partner hand him the book, or prompting him to hand the book to the partner) rather than just telling him to go talk.
+
+Criterion 3: Pacing and Reciprocity Management
+  Check: The tutor explicitly models, or instructs the conversational partner to provide, wait time for Harold's responses and to ask direct reciprocal questions (e.g., 'What about you?').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Harold is a student who desires peer connection but struggles with social initiation, often standing uncomfortably close to peers or engaging adults in repetitive topics. He frequently exhibits stereotypic behaviors like rubbing his arms or skin picking when unstructured. He uniquely requires a physical communication book with visual symbols, which serves both as a guide for conversational turn-taking and as an incompatible manipulative to occupy his hands and reduce stereotypy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Harold, we are in the hallway for lunch. Go ahead and initiate a conversation with the students over there.
+
+STUDENT: (Rubs his arms and knuckles, engaging in quiet self-talk) Help them when they’re confused and they’ll help me when I’m confused.
+
+TUTOR: Just walk over to them and try talking.
+
+STUDENT: (Walks over and stands near the peers in the hallway, but does not interact with them.)
+
+TUTOR: What do you think you should do next?
+
+STUDENT: (Notices a cartoon character on a student's backpack and steps forward to stand uncomfortably close to the student, who then begins to walk away.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Initiating a conversation with a peer",
+      "learning_goal": "learning to talk to new friends at school"
+    },
+    "context": {
+      "environment": "hallway or at lunch",
+      "materials": "Communication book composed of a typed conversational opener with a corresponding Picture Communication Symbol",
+      "social_setting": "general education classes",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When he noticed an item of interest, such as a cartoon character on a student’s backpack",
+      "observable_behavior": "Harold was observed to stand uncomfortably close to the student, who often walked away.",
+      "internal_state": "",
+      "related_quotes": [
+        "Help them when they’re confused and they’ll help me when I’m confused."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During baseline observations in general education classes",
+        "observable_behavior": "He rarely interacted with peers in his general education classes, but occasionally stood near them in the hallway or at lunch. Harold frequently engaged in stereotypic behavior such as self-talk or rubbing his arms or knuckles.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

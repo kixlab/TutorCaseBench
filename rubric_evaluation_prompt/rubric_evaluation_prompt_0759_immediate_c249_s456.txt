@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Alternative Modalities for Expression
+  Check: The tutor provides a non-independent-writing alternative for the student to express their thoughts, such as allowing them to draw a picture, share their connection orally, or use provided sentence stems.
+
+Criterion 2: Concrete Text Selection Strategies
+  Check: The tutor actively scaffolds the book selection process by prompting the student to examine the cover or first pages, or by offering a personal recommendation of a book the tutor enjoyed.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This first-grade student lacks the prerequisite skills for independent writing and unstructured text selection, often resulting in off-task behavior or grabbing books without intentionality. They are highly social and prefer partner reading and oral discussions over solitary tasks. To succeed, they uniquely require alternative modalities for expressing comprehension (like drawing or oral sharing) and concrete, socially-mediated guidance when selecting books.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit at your workstation and write a connection to your book in your journal.
+
+STUDENT: (Stares at the blank journal page) I don't know how to write it by myself.
+
+TUTOR: Just think about what the book reminds you of and write it down.
+
+STUDENT: (Puts the pencil down and looks around the room) Can I just tell my partner about the book instead?
+
+TUTOR: No, this is independent work time. You need to write your connection.
+
+STUDENT: (Pushes the journal away, completely off-task, and starts playing with a shoelace instead of attempting to share the text-to-text connection.) I can't write it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "write a connection to their book",
+      "learning_goal": "share text-to-text connections"
+    },
+    "context": {
+      "environment": "Workstations",
+      "materials": "journals, book",
+      "social_setting": "independent work time",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "instructed to write a connection to their book",
+      "observable_behavior": "struggle with writing independently",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "working on their spelling words or writing in journals",
+        "observable_behavior": "most likely to be off-task",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

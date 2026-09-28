@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Personal Circumstance Integration
+  Check: The long-term plan includes specific methods for learning about and referencing the student's out-of-school life, interests, or personal circumstances in future sessions.
+
+Criterion 2: Relational Trust Building
+  Check: The long-term plan prioritizes cultivating a personal, non-punitive relationship over enforcing strict academic compliance or institutional rules.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a 'reluctant stayer' who views school merely as a shelter from unemployment and frequently engages in off-task behavior, swearing, and topical diversions because they find the curriculum irrelevant or too hard. They have a deeply negative history with schooling and will actively resist positional authority, requiring instead detailed scaffolding, humor, explicit praise, and deep relational connections to engage.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit at your computer and start drafting your persuasive marketing brochure.
+
+STUDENT: This business proposal is bullshit. It's too hard and completely irrelevant to me. I'm literally only at school so I don't have to be unemployed.
+
+TUTOR: You need to keep working on the assignment.
+
+STUDENT: (Stands up and walks away from the computer) I'm not doing it. I'm going over to the other desks to talk.
+
+TUTOR: Please come back to your desk.
+
+STUDENT: Fuck off, I'm not going back to my desk. I've been in this lab for 70 minutes and I haven't typed a single word of this crap, and I'm not starting now.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "a persuasive marketing brochure, the second a script for a business proposal to be delivered in a speech",
+      "learning_goal": "complete for assessment purposes"
+    },
+    "context": {
+      "environment": "computer laboratory",
+      "materials": "detailed scaffolding templates, models",
+      "social_setting": "individual seatwork with teacher monitoring and individual teacher-student dialogue",
+      "time_context": "70 minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when the teacher repeatedly protested about students' swearing and redirected off task behaviour",
+      "observable_behavior": "swearing, off task behaviour, not at desk (Can you please come back to your desk), doing little work (That's it? All you've done in 70 minutes?)",
+      "internal_state": "find the curriculum irrelevant or too hard",
+      "related_quotes": [
+        "Language!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when expected to work independently on assignments",
+        "observable_behavior": "swearing, talking instead of working, leaving desk",
+        "internal_state": "experience of schooling is negative: they do not get on with teachers",
+        "related_quotes": [
+          "Can you please stop the language. I don't like it!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

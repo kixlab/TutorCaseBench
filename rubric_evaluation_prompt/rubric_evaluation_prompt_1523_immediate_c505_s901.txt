@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Concrete-to-Abstract Mapping
+  Check: The tutor's response must explicitly connect a physical object, visual, or action to a specific part of the abstract mathematical sentence (e.g., explaining exactly which box a number goes into based on the objects).
+
+Criterion 2: Simplified Visual Representation
+  Check: When suggesting a drawing or visual aid, the tutor must recommend using simple, low-effort marks (like lines, segments, or slashes) rather than complex illustrations.
+
+Criterion 3: Collaborative Role Assignment
+  Check: The tutor must propose a shared task where the student is assigned a specific, distinct physical or visual role (e.g., bundling tens, slashing lines) while the tutor or a peer handles another part.
+
+Criterion 4: Grounding in Familiar Examples
+  Check: When prompting the student to explain or compare abstract concepts, the tutor must anchor the question in a specific, previously solved example or a familiar story.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Rex is a student who exhibits school avoidance and finds mathematics boring, often shutting down or looking puzzled when faced with abstract mathematical sentences or rote procedures. He uniquely requires a calm, unpressured environment, culturally relevant contexts (like hunting or fishing), and explicit, simplified visual or collaborative hands-on tasks that directly map to abstract concepts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Can you compare '+ =' with '- =' and tell me the difference between these two operations?
+
+STUDENT: (Looks puzzled and does not respond.)
+
+TUTOR: Let's look at the examples given by your teacher earlier. If I explained a problem situation to you, how would you start?
+
+STUDENT: I don't know which number operation to use in solving the problem.
+
+TUTOR: What about the mathematical sentence '6 + 10 = 16'? Can you tell a story or situation which could represent it?
+
+STUDENT: (Looks puzzled again) No, I cannot tell a story or situation which could represent it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Comparing '+ =' with '- =' and telling the difference between these two operations",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom discussion",
+      "materials": "Examples given by their teacher earlier: '6 + 10 = 16' and '5 - 2 = 3'",
+      "social_setting": "Group discussion",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to compare '+ =' with '- =' and tell the difference between these two operations",
+      "observable_behavior": "Looked puzzled",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a problem situation was explained to them",
+        "observable_behavior": "Did not know which number operation to use in solving the problem. For a given mathematical sentence of addition, they also could not tell a story or situation which could represent it",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

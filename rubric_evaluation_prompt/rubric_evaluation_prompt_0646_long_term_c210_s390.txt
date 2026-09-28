@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Normalization of Academic Struggle
+  Check: The tutor's long-term plan includes strategies to explicitly model, display, or reinforce a growth mindset, framing struggles and challenges as normal steps in learning.
+
+Criterion 2: Dialogic Meaning-Making
+  Check: The tutor's long-term plan incorporates dialogic practices that emphasize co-constructing meaning over time, explicitly moving away from test-prep or 'find the right answer' drills.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Anna is a multilingual learner who struggles with severe self-confidence issues, often displaying disengaged body language or crying when frustrated. She views discussions mechanically as a search for the 'right answer' and rarely volunteers. However, she possesses grit and will actively participate when directly called upon, provided with structured equity tools, and guided to focus on evidence rather than correctness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our small group discussion about George's Secret Key to the Universe. Do you all like reading this together? Who would like to volunteer to share their thoughts first?
+
+STUDENT: (Hesitates and shakes her head no) Kind of... But I like this book. (She holds her head up with her hand and does not volunteer to share).
+
+TUTOR: Anna, what do you think about the chapter we just read?
+
+STUDENT: I think they are going to space... but I don't know if I have the right answer.
+
+TUTOR: Keep discussing it with your group. Talk together about what it might mean.
+
+STUDENT: (Lays her head on the table, her frustrations bringing her to tears) But we are just supposed to talk so the other person can get to know the right answer or if they agree or disagree on each other that they have the right answer or not have the right answer.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Small group discussion about the book George's Secret Key to the Universe",
+      "learning_goal": "To co-construct text meaning with peers rather than just discern right from wrong answers"
+    },
+    "context": {
+      "environment": "Classroom with oval-shaped tables to support collaborative learning, and a leveled library with a rug and red bean bags",
+      "materials": "George's Secret Key to the Universe book, different colored post-its, I have a growth mindset poster",
+      "social_setting": "Small group discussion with peers",
+      "time_context": "During the 90 minutes of literacy/social studies instruction"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During open group discussions when students are expected to volunteer and talk together",
+      "observable_behavior": "Rarely volunteered during discussions and often observed holding her head up or laying her head on the table",
+      "internal_state": "Struggled with her self-confidence as a learner; understands the purpose of dialogue as a vehicle to discern right from wrong answers",
+      "related_quotes": [
+        "so the other person can get to know the right answer or if they agree or disagree on each other that they have the right answer or not have the right answer."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When experiencing frustrations as a learner",
+        "observable_behavior": "Her frustrations brought her to tears",
+        "internal_state": "Struggled with her self-confidence",
+        "related_quotes": []
+      },
+      {
+        "condition": "When asked whether she liked to read",
+        "observable_behavior": "Hesitated and then simply said, 'kind of' as she shook her head no",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

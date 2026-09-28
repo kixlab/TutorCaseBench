@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Playful Social Framing
+  Check: The tutor's response includes humor, playful roleplay, or enthusiastic social validation to acknowledge the student's brave actions or fear.
+
+Criterion 2: Scientific Identity Validation
+  Check: The tutor explicitly validates the student's interest in science or asks follow-up questions that connect the current scary task to their identity or goals as a scientist.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences intense fear and physical avoidance of novel biological specimens (e.g., bugs, worms) but possesses a strong underlying curiosity and a desire to be a scientist. They uniquely require playful social validation, humor, and conversational scaffolding to self-regulate, overcome their anxiety, and transform their fear into pride.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the worm for today's activity. Please begin by touching it before we start the dissection.
+
+STUDENT: (Looking at the worm, appearing scared) Have you opened up a worm before? You’re a scientist.
+
+TUTOR: Yes, I have. What do you think you should do next?
+
+STUDENT: I want to grow up to be a scientist.
+
+TUTOR: Okay, then please go ahead and touch the worm.
+
+STUDENT: Ok, I’m going to touch it. One, two, three. (Touches the worm and then screams)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Touching a worm and performing a worm dissection",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Out-of-school biology workshop session",
+      "materials": "Worms for touching and dissection",
+      "social_setting": "Working alongside peers and an instructor (Keith)",
+      "time_context": "July 12 and July 13"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When initiating physical contact with the worm for the first time",
+      "observable_behavior": "Counts to three, touches the worm, and then screams",
+      "internal_state": "Scared, but motivated to overcome the fear",
+      "related_quotes": [
+        "Ok, I’m going to touch it. One, two, three."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When looking at the worm to begin the dissection",
+        "observable_behavior": "Proceeds with the dissection and looks inside its head despite initial fear, initiating conversation with the instructor",
+        "internal_state": "At first he is scared, but he does the dissection anyway because he is so curious",
+        "related_quotes": [
+          "Have you opened up a worm before?",
+          "You’re a scientist.",
+          "I want to grow up to be a scientist."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

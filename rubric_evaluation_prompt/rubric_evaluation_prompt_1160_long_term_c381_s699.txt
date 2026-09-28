@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Unobtrusive Observation
+  Check: The long-term plan includes periods of covert observation or intentional non-interference, allowing the children's play to escalate and develop naturally before the tutor steps in.
+
+Criterion 2: Collaborative Task Structure
+  Check: The long-term plan ensures that activities and assessments are designed to permit peer collaboration and shared problem-solving rather than requiring isolated, individual performance.
+
+Criterion 3: Single-Step Direction Scaffolding
+  Check: The long-term plan explicitly avoids multi-step sequential instructions, instead structuring routines and transitions using single, immediate steps to prevent overwhelm.
+
+Criterion 4: Accommodation of Sensory-Heavy Play
+  Check: The long-term plan accommodates chaotic, sensory-heavy play behaviors (e.g., throwing safe items, animalistic play) without attempting to impose rigid, conventional play scripts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These younger preschoolers thrive in highly collaborative, sensory-heavy, and chaotic pretend play, often acting out animalistic or ravenous scenarios. They become easily overwhelmed and resistant when faced with multi-step directions or individualistic tasks that strip away peer support. The evidence reveals they uniquely require minimal adult interference to develop their play narratives, alongside single-step routines and collaborative task structures to prevent task refusal.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It looks like you are gathering a lot of sheets and blankets in the dramatic play area.
+
+STUDENT: Let’s make a tent! (Isaac and Martina pull several large sheets and blankets and drape them over an upended wooden structure.)
+
+TUTOR: You are bringing a lot of items over to the tent.
+
+STUDENT: (Tucker, Josefa, and Bonnie fill a pushcart with every dish, plastic food item, and scrap of play money they can carry, and dump it all into the tent on top of the others.)
+
+TUTOR: What are you going to do with all that food inside the tent?
+
+STUDENT: (The children crawl back into the tent and noisily pretend to eat. They make loud gnashings and growlings, acting ravenous and animalistic as they gather large amounts of small plastic toys in their arms and throw the plastic food hither and yon in the air.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Initiating the 'Sleeping Family Game' and building a tent",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "dramatic play area during the two-hour morning free play period",
+      "materials": "several large sheets and blankets, upended wooden structure, pillows, seat cushions, long scarves, pushcart, plastic food item, play money, dress-up shoes, beaded necklaces, hats, clothes and plastic baby dolls",
+      "social_setting": "Group play with Bonnie, Tucker, Martina, Isaac and Josefa",
+      "time_context": "Just before 9 am"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "wildly escalating game",
+      "observable_behavior": "ravenous and animalistic, with loud gnashings and growlings as they and throw the plastic food hither and yon, gathering large amounts of these small plastic toys in their arms and throwing them in the air inside the tent.",
+      "internal_state": "delight",
+      "related_quotes": [
+        "Let’s make a tent",
+        "You are our kitty and puppy"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "announced that it was time to clean up",
+        "observable_behavior": "trudged slowly and wearily and complained that they did not know how to put things away, and that they were hungry or needed to use the toilet.",
+        "internal_state": "wearily",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

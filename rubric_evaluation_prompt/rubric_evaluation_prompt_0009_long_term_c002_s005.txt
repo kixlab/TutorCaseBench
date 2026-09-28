@@ -22,23 +22,17 @@ A tutor response does not need to satisfy every criterion to be considered accep
 ### RUBRIC (variable-length checklist)
 ────────────────────────────────
 
-Criterion 1: High-Frequency Micro-Lesson Scheduling
-  Check: The long-term plan structures instruction into very short (5-10 minute) blocks that occur multiple times a day, rather than single, prolonged sessions.
+Criterion 1: Unambiguous Instructional Scripting
+  Check: The long-term plan utilizes a highly explicit, systematic, and scripted instructional approach to ensure consistent language and eliminate ambiguity.
 
-Criterion 2: Distraction-Free Environmental Control
-  Check: The long-term plan explicitly specifies conducting instruction in a quiet, one-on-one setting with minimal auditory and visual distractions.
+Criterion 2: Continuous Schedule Maintenance
+  Check: The long-term plan includes an intensive, uninterrupted daily schedule that explicitly avoids breaks or gaps in instruction.
 
-Criterion 3: Ultra-Gradual Content Pacing
-  Check: The long-term plan restricts the introduction of new material to an extremely slow pace (e.g., one new sound per week) with heavy repetition of previously taught content.
+Criterion 3: Behavioral Support Integration
+  Check: The long-term plan incorporates teaming with a behavioral specialist (such as an ABA therapist) to manage reinforcement ratios and difficult behaviors.
 
-Criterion 4: Continuous Intervention Schedule
-  Check: The long-term plan mandates a continuous, daily instructional schedule (e.g., 60 days unbroken) to prevent rapid skill regression.
-
-Criterion 5: Structured Point and Praise System
-  Check: The long-term plan includes a formal token or point system where Sam earns points specifically for attention, effort, or accuracy, paired with specific verbal praise.
-
-Criterion 6: Integration of Specialized Behavioral Support
-  Check: The long-term plan incorporates teaming with a qualified behavioral specialist (e.g., ABA therapist) to manage reinforcement ratios and activity levels during instruction.
+Criterion 4: Systematic Reinforcement Fading
+  Check: The long-term plan outlines a strategy to gradually fade out external tangible reinforcements while maintaining specific verbal praise for academic behaviors.
 
 
 ────────────────────────────────
@@ -68,56 +62,51 @@ Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one ent
 ### STUDENT CONTEXT
 ────────────────────────────────
 
-Sam is a highly distractible student who actively resists academic instruction, particularly paper/pencil tasks, often responding with severe meltdowns and classroom roaming. He struggles significantly with phonemic retrieval and routine changes, experiencing rapid skill loss if instruction is interrupted. He uniquely requires highly structured, 5-10 minute micro-lessons in distraction-free environments, extremely slow pacing of new material, and constant, novel extrinsic reinforcement (including Premack's Principle) to maintain engagement.
+Sam is a highly distractible student who exhibits severe task resistance, active refusal, and prolonged meltdowns when faced with traditional academic demands. His core behavioral pattern involves escaping tasks by roaming and screaming, driven by frustration and a low tolerance for ambiguous language or prolonged instruction. He uniquely requires extremely short instructional bursts, highly scripted and unambiguous language, and robust, frequently rotated extrinsic reinforcement systems (such as 'first-then' framing and functional games) to build competence without triggering refusal.
 
 
 ────────────────────────────────
 ### DIALOGUE (situation the tutor is responding to)
 ────────────────────────────────
 
-TUTOR: Sam, here is your paper and pencil. Let's practice drawing and coloring.
+TUTOR: Here is the first clue for our treasure hunt. Let's sound out these words to find out where the prize is.
 
-STUDENT: (Refuses to participate in the lesson and pushes the paper away.) No.
+STUDENT: (Gets out of his chair and begins roaming the classroom instead of looking at the clue.)
 
-TUTOR: We need to finish this paper and pencil task.
+TUTOR: Please come back to your seat and look at the paper.
 
-STUDENT: (Gets out of his chair at the desk.)
+STUDENT: No! I don't want to read it.
 
-TUTOR: Please come back to your desk and pick up your pencil.
+TUTOR: We need to read the sentence to get the next clue.
 
-STUDENT: (Displays rage-like behaviors and begins roaming the classroom.)
+STUDENT: (Throws the clue on the floor and begins having a meltdown, screaming and completely refusing to participate in the instructional task.)
 
 FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
 Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
 {
   "content": {
     "task": {
-      "content": "drawing and coloring, and paper/pencil tasks",
-      "learning_goal": ""
+      "content": "Sound out words and link words into short sentences",
+      "learning_goal": "To develop automaticity and provide a purpose to sound out words"
     },
     "context": {
-      "environment": "general education kindergarten classroom",
-      "materials": "paper/pencil",
-      "social_setting": "one-to-one teacher assistance at his desk",
+      "environment": "One-to-one instruction",
+      "materials": "Clues incorporating words that Sam knew, and a prize",
+      "social_setting": "Working with the interventionist",
       "time_context": ""
     },
     "challenging_behavior_trigger": {
-      "condition": "when asked to do paper/pencil tasks",
-      "observable_behavior": "displayed rage-like behaviors, getting out of his chair and roaming the classroom",
-      "internal_state": "demonstrates significant difficulty controlling his impulses and maintaining the level of attention necessary",
-      "related_quotes": [
-        "often displayed rage-like behaviors when asked to do paper/pencil tasks",
-        "getting out of his chair and roaming the classroom"
-      ]
+      "condition": "When required to apply new skills or generalize to alternative contexts",
+      "observable_behavior": "Actively resisted attempts to be taught academic content and expressed no interest in learning to read",
+      "internal_state": "Did not easily infer cause and effect or relationships of one item to another",
+      "related_quotes": []
     },
     "behavior_patterns": [
       {
-        "condition": "Despite having one-to-one teacher assistance at his desk",
-        "observable_behavior": "refused to participate in academic tasks, getting out of his chair and roaming the classroom",
+        "condition": "When requested to perform any instructional tasks",
+        "observable_behavior": "Had meltdowns and refused to participate",
         "internal_state": "",
-        "related_quotes": [
-          "refused to participate in academic tasks, getting out of his chair and roaming the classroom"
-        ]
+        "related_quotes": []
       }
     ]
   }

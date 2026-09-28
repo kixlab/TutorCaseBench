@@ -1,0 +1,72 @@
+{
+  "category_id": "472",
+  "category_title": "Young children with persistent challenging behaviors and communication delays",
+  "scenario_id": "845",
+  "scenario_title": "Bedtime routine transition at home",
+  "minimal_context": "Kayden and his mother are at home in the evening, and she prompts him to start getting ready for bed.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Kayden, it is time to start to get ready for bed."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Starts crying) No!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Come on, we need to get ready for bed now."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Cries louder)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Stop crying and let's go."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Screams and starts hitting)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Kayden, it is time to start to get ready for bed.\n\nSTUDENT: (Starts crying) No!\n\nTUTOR: Come on, we need to get ready for bed now.\n\nSTUDENT: (Cries louder)\n\nTUTOR: Stop crying and let's go.\n\nSTUDENT: (Screams and starts hitting)",
+  "immediate_dialogue_prompt": 1424,
+  "long_term_dialogue_prompt": 1425,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Start to get ready for bed",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Home during bedtime routine",
+        "materials": "Pajamas, favorite book, low-energy games, puzzle",
+        "social_setting": "One-on-one with mother",
+        "time_context": "Evening, just before bedtime"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The prompt from mom for Kayden to start to get ready for bed",
+        "observable_behavior": "Some amount of screaming, crying, and/or hitting will likely occur",
+        "internal_state": "Screaming and hitting usually result in more attention from mom",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "After the prompt to get ready for bed, at some point between delivery of the prompt and Kayden actually falling asleep",
+          "observable_behavior": "Screaming, crying, and/or hitting",
+          "internal_state": "Seeking attention in the form of repeated prompts, reprimands, and mom lying down in bed with him",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

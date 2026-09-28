@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Task Simplification and Chunking
+  Check: The tutor's response must explicitly break the current task into smaller steps, provide concrete hints, or reduce the immediate workload.
+
+Criterion 2: Explicit Consequence Management
+  Check: The tutor must clearly state a direct consequence for non-completion, such as losing access to a preferred activity (e.g., a game) or receiving a visible negative mark on their grade.
+
+Criterion 3: Elimination of Repetitive Drills
+  Check: The tutor must avoid forcing the student to repeat the exact same type of task (e.g., sending another identical email) and instead pivot the task format or requirements.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a low-achieving learner who quickly disengages, gets bored, or resorts to copying when tasks feel repetitive, difficult, or high-pressure. They uniquely require tasks to be heavily scaffolded or chunked to build a sense of competence, and they are strongly motivated by immediate accountability, loss of privileges (like gaming), and hands-on or autonomous task formats rather than traditional repetitive assignments.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For today's assignment, I need you to type out the specifications of a PC, specifically the CPU, Motherboard, Hard Disk, and Memory, and send it to me by e-mail.
+
+STUDENT: Another e-mail? We just sent one about the CPU alone a few days ago.
+
+TUTOR: Yes, please complete this one as well.
+
+STUDENT: I'm getting really tired of this repetition process. We keep doing the exact same e-mail assignments over and over.
+
+TUTOR: It is part of the coursework. Please keep working on it.
+
+STUDENT: I'm not doing it. My motivation for these e-mail assignments is completely gone, so I'm just not going to send this one.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "send specifications of a PC in regards to its four main features, central processing unit CPU, the main board (Motherboard), Hard Disk, and Memory",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "At the first of the semester and before making blogs",
+      "materials": "whiteboard, e-mail",
+      "social_setting": "",
+      "time_context": "After few days"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "after another two assignments requested to be sent by e-mail",
+      "observable_behavior": "not all of them had sent the e-mails, little by little the students motivation to make e-mail assignment were coming down",
+      "internal_state": "felt the repetition process",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "after another two assignments requested to be sent by e-mail",
+        "observable_behavior": "not all of them had sent the e-mails, little by little the students motivation to make e-mail assignment were coming down",
+        "internal_state": "felt the repetition process",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

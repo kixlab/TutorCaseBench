@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Pre-emptive Pressure-Free Guarantees
+  Check: The tutor's long-term plan includes proactive, explicit reassurances (e.g., before the course or before new modules) that the student will never be hurried or pressured.
+
+Criterion 2: Unconditional Retention for Relapses
+  Check: The tutor's long-term plan includes repeated, explicit guarantees that the student's place will be held open and accommodated if she experiences a mental health relapse.
+
+Criterion 3: Cultivation of Peer Acceptance
+  Check: The tutor's long-term plan incorporates strategies to actively foster a non-judgmental group culture where the student feels accepted by her peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shirley is a 61-year-old student with bipolar affective disorder who carries severe trauma from past educational experiences, making her terrified of ridicule and highly sensitive to pressure. She uniquely requires an environment completely devoid of time or performance pressure, where teachers actively model vulnerability and explicitly guarantee that mistakes and mental health relapses are accommodated.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please finish preparing your ingredients. We have ten minutes left before I come around to assess everyone's cookery tasks in front of the class.
+
+STUDENT: Ten minutes? And you're going to assess us in front of everyone? I am really afraid I won't be able to cope with this kind of pressure.
+
+TUTOR: Just keep working on it and do your best.
+
+STUDENT: I can't take pressure anymore. Having to perform in front of others with a time limit is too much for me.
+
+TUTOR: We need to stay on schedule for the class assessment.
+
+STUDENT: If you put me under any pressure, I will leave. I am packing up my things right now.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Performing cookery tasks within the classroom environment",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom environment",
+      "materials": "",
+      "social_setting": "In front of others",
+      "time_context": "Under time pressure"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Being under time pressure, being pressurised to perform in front of others, or being assessed",
+      "observable_behavior": "Threatening to leave the course",
+      "internal_state": "Fear of not being able to cope with the pressure that learning might cause",
+      "related_quotes": [
+        "One thing I loved about this class was that you did not pressurise us as I can ’t take pressure anymore. If you had put me under any pressure I would have left."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "If put under any pressure",
+        "observable_behavior": "Would have left the class",
+        "internal_state": "Cannot take pressure anymore",
+        "related_quotes": [
+          "If you had put me under any pressure I would have left."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

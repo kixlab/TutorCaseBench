@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Immediate Response Latency
+  Check: The tutor's response must address the student's behavior or precursor instantly, without ignoring the action, allowing time to pass, or waiting for the behavior to worsen.
+
+Criterion 2: Establishing Physical Proximity and Eye Contact
+  Check: The tutor must explicitly describe moving closer to the student (e.g., stepping toward them, standing within one meter, or appropriate physical contact) and/or establishing direct eye contact.
+
+Criterion 3: Positive Redirection and Feedback
+  Check: The tutor must use positive, encouraging language or constructive redirection, completely avoiding negative reprimands, scolding, or punitive statements.
+
+Criterion 4: Interactive Instructional Antecedents
+  Check: The tutor must include an interactive element (e.g., asking a direct question, involving the student in a specific task) rather than just delivering passive instructions or commands.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe behavioral disorders, including high-risk aggressive and disruptive actions like shouting, hitting, and leaving their desk. They are highly sensitive to delayed teacher responses, negative reprimands, and a lack of physical proximity, which rapidly escalate their behaviors. They uniquely require immediate, positive interactions, close physical proximity, and proactive instructional antecedents to maintain stimulus control and prevent escalation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to spend the next ten minutes reading a story about nature. Please sit at your desk and listen while I read.
+
+STUDENT: (Twists body to face the back of the room, looking away from the learning stimuli for more than 5 seconds) I don't want to hear a story.
+
+TUTOR: Please pay attention.
+
+STUDENT: (Speaks to another student while the teacher talks) This is stupid, let's do something else.
+
+TUTOR: You need to be quiet.
+
+STUDENT: (Stands up and walks away from the desk, with no body part touching the chair for more than 5 seconds, and raises voice beyond average volume) I'm leaving! I'm not doing this!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "reading/storytelling about holidays/nature",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "self-contained classroom",
+      "materials": "desk, chair",
+      "social_setting": "10-minute teacher-led lesson segments",
+      "time_context": "10-minute segments"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when the teacher neglects to discriminate antecedents, lacks to respond, responds with signiﬁcant delay",
+      "observable_behavior": "moving (i.e., head or body shift or twist to directions other than the location of the learning stimuli for more than 5 seconds) and talking (i.e., speaking to self or to others while the teacher talks)",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "while performing a learning assignment that does not require talking",
+        "observable_behavior": "talking (i.e., speaking to self or to others)",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "when appropriate classroom contingencies are weak or less systematic",
+        "observable_behavior": "leaving (i.e., being away from one’s desk, while no body part touches the chair, for more than 5 seconds)",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

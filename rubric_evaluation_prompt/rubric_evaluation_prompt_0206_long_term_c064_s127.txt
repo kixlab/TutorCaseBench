@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Relational and Emotional Monitoring
+  Check: The long-term plan includes regular, genuine check-ins focused on the student's emotional well-being and sense of belonging, explicitly avoiding purely administrative or certificate-driven meetings.
+
+Criterion 2: Low-Sensory Grouping Strategies
+  Check: The long-term plan incorporates structured time in small groups (3-5 students) or individual settings outside the noisy general classroom.
+
+Criterion 3: Individualized Pacing and Instruction
+  Check: The long-term plan explicitly allows for flexible pacing and differentiated instructional methods tailored to the student's specific learning preferences.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles profoundly with executive functioning, sensory overload (particularly auditory triggers like fans or AC), and feelings of depression and alienation. They become easily paralyzed by long-term academic planning and large assignments, leading to task avoidance and withdrawal. To function academically, they uniquely require extreme task granularity (daily micro-tasks), technological accommodations to block noise and ease writing, and genuine, empathetic emotional support rather than administrative isolation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please take out your paper and begin writing your answers for the exam.
+
+STUDENT: I have a hard time with handwritten exams. Can I type this on the computer instead? That suits me better.
+
+TUTOR: Let's just stick to the paper for today. Do your best to focus on the questions.
+
+STUDENT: Mmm, well some said that I could kind of go to another room and do the assignments, but that didn't provide the right support anyway. I just want to use the computer.
+
+TUTOR: We need to stay in the classroom right now. Just try to ignore the background noise and keep writing.
+
+STUDENT: I can't. I have always found it difficult if there are sounds, for example sounds from fans and air conditioners or such. I can concentrate on the noise from the air conditioner and completely lose concentration of anything else.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Taking exams and completing schoolwork/lectures",
+      "learning_goal": "Concentrating on learning things"
+    },
+    "context": {
+      "environment": "Classroom environment with sounds from fans and air conditioners, or a separate quiet room",
+      "materials": "Computers, MP-3 players, projector, PowerPoint presentation",
+      "social_setting": "General classroom or lecture setting",
+      "time_context": "During lectures and exams"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Presence of sounds from fans and air conditioners in the classroom environment",
+      "observable_behavior": "Completely losing concentration of anything else",
+      "internal_state": "Finding it difficult to concentrate on learning",
+      "related_quotes": [
+        "I have always found it difficult if there are sounds, for example sounds from fans and air conditioners or such. I can concentrate on the noise from the air conditioner and completely lose concentration of anything else."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When required to handwrite exams or assignments",
+        "observable_behavior": "Experiencing difficulties with handwriting",
+        "internal_state": "",
+        "related_quotes": [
+          "There were hardly any handwritten exams, instead they were typed on the computer. That suited me."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Advance Transition Warnings
+  Check: The tutor provides a clear warning, countdown, or heads-up before a transition or new activity begins.
+
+Criterion 2: Emotional and Expectation Triage
+  Check: The tutor asks a question to gauge the student's emotional state or explicitly reminds them of a specific behavioral expectation before or during a task.
+
+Criterion 3: Supported Follow-Through
+  Check: The tutor offers direct assistance, guided help, or a collaborative approach to complete the requested task when the student resists.
+
+Criterion 4: Planned Ignoring of Tantrums
+  Check: The tutor deliberately ignores tantrum behaviors (e.g., yelling, throwing) by redirecting their own focus, stepping back, or withholding verbal attention from the negative behavior.
+
+Criterion 5: Concrete 'If-Then' or Visual Referencing
+  Check: The tutor explicitly references a visual support (e.g., schedule, picture, cue card) or uses a clear 'If [action], then [result]' statement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an academically advanced but highly active learner who exhibits chronic noncompliance, physical aggression, and defiance, particularly during transitions or when asked to complete tasks. They are a profound visual learner who becomes completely lost and dysregulated without pictorial supports and predictable routines. Crucially, they require continuous, permanent visual and structural scaffolding, as prematurely withdrawing these supports leads to immediate and significant behavioral regression.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to clean up and transition to the next activity in our school routine.
+
+STUDENT: (Literally runs around in a circle) I can't sit still!
+
+TUTOR: Please stop running and come over here so we can move on.
+
+STUDENT: (Looks around the classroom, appearing completely lost without his visual schedule pictures) No!
+
+TUTOR: You need to follow the classroom rules and finish out this request.
+
+STUDENT: (Yells and tries to hit) No! Those rules don't apply to me! I want to run!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "transition successfully to the next activity in the school routine",
+      "learning_goal": "finishing out a request"
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "visual schedule, pictures, classroom rules, If . . . then strips, cue cards for problem solving, stickers on a chart",
+      "social_setting": "regular day",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "finishing out a request",
+      "observable_behavior": "He just wants to run, he wants to yell, he wants to hit",
+      "internal_state": "he understands what we want to do but his behavior gets in his way",
+      "related_quotes": [
+        "He just wants to run, he wants to yell, he wants to hit, and he understands . . . he's so incredibly smart, he understands what we want to do but his behavior gets in his way of his regular day of finishing out a request."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "because he just can't sit still",
+        "observable_behavior": "literally run around in a circle",
+        "internal_state": "",
+        "related_quotes": [
+          "He will . . . literally run around in a circle, because he just can't sit still."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

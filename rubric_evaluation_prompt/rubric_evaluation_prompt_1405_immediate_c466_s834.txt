@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Trust Affirmation
+  Check: The tutor explicitly addresses or validates the student's trust in their peers (belayers) or the equipment rather than simply instructing them to proceed.
+
+Criterion 2: Metaphoric Verbal Commitment
+  Check: The tutor prompts the student to make a verbal statement or reflection that links the immediate physical challenge to a social behavior or personal goal (e.g., mutual support, leaving negative behaviors behind).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences intense fear and hesitation when faced with physical risks, specifically heights and falling. They uniquely require explicit reassurance of trust in their peers and equipment, and they overcome their physical freeze response when tutors use metaphoric reflections that link the physical challenge to social behaviors (like bullying or peer support).
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright, it is your turn to jump off the platform for the zip line.
+
+STUDENT: I'm not gonna do that. I am sort of afraid of heights.
+
+TUTOR: Just step closer to the edge and get ready.
+
+STUDENT: I am really scared of falling. I don't know if I can do this.
+
+TUTOR: The equipment is set up. You just need to jump.
+
+STUDENT: (Stands frozen on the platform) I know I need to trust the belayers and trust the equipment, but I'm too scared of falling to take the extra step right now.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Jumping off the platform for the zip line",
+      "learning_goal": "Conquer fear of heights and reach a new personal goal"
+    },
+    "context": {
+      "environment": "High platform of the zip line",
+      "materials": "Zip line, platform, belay system, equipment",
+      "social_setting": "Peers acting as belayers",
+      "time_context": "Prior to jumping off the platform"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Standing on the high platform of the zip line, preparing to jump",
+      "observable_behavior": "Preparing to jump while facing physical height",
+      "internal_state": "Sort of afraid of heights, really scared of falling",
+      "related_quotes": [
+        "I am sort of afraid of heights",
+        "I learned that I am really scared of falling."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participating in high course elements involving physical height",
+        "observable_behavior": "Taking the extra step and doing what they never thought they could do before",
+        "internal_state": "Finding out they were a lot more gutsy than they thought",
+        "related_quotes": [
+          "I definitely found out I was a lot more gutsy than I thought I was.",
+          "I could take the extra step and do what I never thought I could do before."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

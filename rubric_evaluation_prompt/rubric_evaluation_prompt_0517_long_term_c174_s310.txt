@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Unwavering Routine Maintenance
+  Check: The tutor's long-term plan explicitly commits to continuing the standard teaching routine and syllabus without altering demands or showing emotional disruption from her outbursts.
+
+Criterion 2: Consistent Equitable Rule Enforcement
+  Check: The tutor's long-term strategy includes repeatedly enforcing standard classroom rules (e.g., raising hands, punctuality) for Shelli exactly as they do for the rest of the class.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shelli is a middle-aged ultra-orthodox student who publicly challenges instructor authority and disrupts class when course content conflicts with her religious worldview. She frequently speaks out of turn, publishes public complaints, and demands personal attention to argue her points. The evidence reveals she uniquely requires strict, concise boundary-setting, professional distance (no extra 1-on-1 time), and appeals to her own religious or educational frameworks to manage her rebellion.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the next case study, which describes a discipline problem involving a non-observant pupil in a diverse school setting.
+
+STUDENT: (Looking down and marking other papers) I cannot accept these stories describing non-observant pupils and schools.
+
+TUTOR: What do you think about the situation presented in the text?
+
+STUDENT: (Speaking loudly without permission) I object to what is being said here. The openness is unacceptable, and I will support my opinion by quoting verses from the Bible.
+
+TUTOR: Let's just focus on the classroom management strategies for now.
+
+STUDENT: (Stands up) This subject is not appropriate. I am leaving the classroom.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in class discussions about teacher-pupil relationships and classroom scenarios involving diverse student populations.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Attending a weekly 90-minute lecture in the 'Navigation in the Classroom and Solving Discipline Problems' course at a university School of Education.",
+      "materials": "Articles, papers, Bible verses.",
+      "social_setting": "Heterogenic group in a non-Haredi environment.",
+      "time_context": "During the lecture."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the subject discussed did not seem appropriate to her or she did not agree with the lecturer.",
+      "observable_behavior": "Talked loudly, expressed her opinion without being granted permission, objected to what others and the lecturer had to say, supported her own opinion by quoting verses from the Bible, left the classroom abruptly.",
+      "internal_state": "Scared of the openness and the straightforwardness of things said.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the lecture when not actively participating.",
+        "observable_behavior": "Read articles, marked papers or dealt with other things during the lecture.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,128 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Role and Task Division
+  Check: The tutor's immediate response must explicitly divide the current work into distinct roles or assign a specific, independent sub-task exclusively to the student.
+
+Criterion 2: Open-Ended Task Framing
+  Check: The tutor must frame the immediate activity or question as open-ended, discovery-based, or subjective, rather than a task with a single right answer (such as a multiple-choice question).
+
+Criterion 3: Contribution Protection
+  Check: The tutor must establish a boundary, rule, or facilitation move that protects the student's contribution from being immediately corrected, interrupted, or overridden by peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is easily marginalized in mixed-ability groups, shutting down and disengaging when high-achieving peers dominate tasks, interrupt them, or revise their work. They uniquely require structured interdependence where tasks are explicitly divided, contributions are protected from peer override, and activities are open-ended to prevent a race to a single 'correct' answer.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please work with your group on this multiple-choice test. The goal is to make sure that every member understood the lessons.
+
+STUDENT: The better students went faster and they did not always clearly explain information to me.
+
+TUTOR: Have you tried asking them for additional explanations?
+
+STUDENT: I won't risk asking for additional explanations. I feel uncomfortable when I express my ideas because they just 'jumped into my mouth' when I get stuck.
+
+TUTOR: You should still try to contribute to the group's answers.
+
+STUDENT: Why do they always have to recheck my work? I feel devalued when other members revise what I’ve done. The group decisions are mostly made by only one or two members, so I'm put into a jobless situation where I have nothing to do but listen passively or fall to sleep.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "working on an assessment as a multiple-choice test",
+      "learning_goal": "make sure that every member understood the lessons"
+    },
+    "context": {
+      "environment": "mixed-ability groups that consisted of a balance of five low- to five high-achievers",
+      "materials": "multiple-choice tests, group project, detailed and comprehensive powerpoint presentation",
+      "social_setting": "cooperative learning groups",
+      "time_context": "90-minute lessons"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "higher-achieving students usually ‘jumped into their mouth ’(i.e., demeaned them) when they got stuck",
+      "observable_behavior": "listen passively to others or ‘fall to sleep ’",
+      "internal_state": "felt uncomfortable when they expressed their ideas to others",
+      "related_quotes": [
+        "jumped into their mouth"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "better students went faster and they did not always clearly explain information to the lower-achieving students",
+        "observable_behavior": "not risk asking for additional explanations",
+        "internal_state": "felt bored and lost confidence",
+        "related_quotes": []
+      },
+      {
+        "condition": "group decisions were mostly made by only one or two members",
+        "observable_behavior": "put into a ‘jobless ’situation where they had nothing to do but listen passively to others or‘fall to sleep ’",
+        "internal_state": "feel devalued when other members revise what I’ve done",
+        "related_quotes": [
+          "Why do they always have to recheck my work?",
+          "I feel devalued when other members revise what I’ve done"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

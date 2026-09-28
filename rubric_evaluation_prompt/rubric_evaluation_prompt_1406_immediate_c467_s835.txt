@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Demystification of Professional Conventions
+  Check: The tutor explicitly explains the meaning, purpose, or mechanics of a professional convention (e.g., formal phrasing, email etiquette) without making the student feel inadequate for not already knowing it.
+
+Criterion 2: Validation of Tentative Efforts
+  Check: The tutor explicitly validates the student's attempt, mistake, or impulsive action by framing it positively as a step toward progress or a natural part of the learning process.
+
+Criterion 3: Bridging to Lived Experience
+  Check: The tutor uses analogies, idioms, or cultural references to connect the academic or professional task to the student's real-world experiences or understanding.
+
+Criterion 4: Collaborative Scaffolding of Revisions
+  Check: The tutor prompts a discussion about why certain content (e.g., survey questions, email drafts) might need to be adjusted for the target audience, rather than simply dictating the changes.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are overage 8th-graders with histories of repeated academic failure, resulting in damaged learner identities. They are highly engaged in collaborative, inquiry-driven projects but feel deep embarrassment when they do not know professional conventions, often acting impulsively (e.g., hastily sending unreviewed emails) to hide their lack of knowledge. They uniquely need explicit, non-judgmental demystification of professional norms, validation that mistakes are 'steps toward progress,' and a cognitive apprenticeship approach that connects new academic discourses to their lived experiences.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now that the professor of adolescent sex and family health replied to our interview request, please use the laptop to write an email back to her.
+
+STUDENT: I’ve never written messages to companies before. It helps me send emails to people for professional purposes, but I don't really know what to say to her.
+
+TUTOR: Just try your best to draft a response.
+
+STUDENT: She wrote, 'Sure. When were you hoping to do this? Best...' I don't know what 'Best' means at the end. I'm just going to type something.
+
+TUTOR: Okay, let me see what you wrote before you send it.
+
+STUDENT: (Quickly deletes a sentence and hits send) I already sent it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "writes an email requesting an interview with a professor of adolescent sex and family health at a local university hospital",
+      "learning_goal": "developing more students’ literacy and critical thinking skills"
+    },
+    "context": {
+      "environment": "New York City high school",
+      "materials": "laptop",
+      "social_setting": "collaborative and inquiry-driven process",
+      "time_context": "after school until 6pm twice a week"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Misunderstanding her email, 'Sure. When were you hoping to do this? Best _____'",
+      "observable_behavior": "quickly deleted that sentence and sent off the message... When the teacher asked to see what he wrote, he said: 'I already sent it.'",
+      "internal_state": "Embarrassed at not knowing the conventions of business letter writing",
+      "related_quotes": [
+        "I already sent it.",
+        "I’ve never written messages to companies before. It helps me send emails to people for professional purposes."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Expecting that a response might take days or weeks or not come at all",
+        "observable_behavior": "He didn’t know what this meant (when told 'The squeaky wheel gets the oil')",
+        "internal_state": "histories of repeated academic failure so often result in identity formation associated with being the 'bad student'",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

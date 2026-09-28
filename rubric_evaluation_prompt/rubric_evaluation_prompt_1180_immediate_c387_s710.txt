@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Pre-Independent Scaffolding
+  Check: The tutor extends guided practice, works through an example with him, or explicitly checks his understanding before directing him to work completely independently.
+
+Criterion 2: Structured Help-Seeking Routine
+  Check: The tutor offers or reminds Jay of a specific, non-disruptive way to get help (e.g., moving to a back table, raising a hand, using a help card).
+
+Criterion 3: Separation of Consequence and Support
+  Check: The tutor does not threaten or apply a punishment (such as losing recess or free time) that involves keeping Jay in to do the work with 1-on-1 teacher support.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jay is a third-grade student who uses disruptive behaviors (blurting, bellowing) to avoid independent seatwork when he feels the material is too difficult. He uniquely needs extended guided practice to build confidence and a structured, non-disruptive routine to access teacher support, as punitive measures that result in 1-on-1 help inadvertently reinforce his disruptions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, we've finished going over the new math concepts. It's time to begin your independent practice on the worksheet at your desks.
+
+STUDENT: (Fails to attempt his individual seatwork and blurts out loudly) This is too hard! I'm not doing this!
+
+TUTOR: Jay, please focus on your own paper and try to start the first problem.
+
+STUDENT: (Bellows across the room) I said I don't know how to do it! It's impossible!
+
+TUTOR: Just do your best and keep trying.
+
+STUDENT: (Persistently calls out and bellows, causing disruptions to the point where other students complain, while still failing to attempt the seatwork) I need help! You have to show me! I'm not doing it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent practice of the new content in math class",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Third grader in a suburban school classroom with a back table",
+      "materials": "Paper and assigned task/individual seatwork",
+      "social_setting": "Whole-class instruction transitioning to independent seatwork with other students present",
+      "time_context": "Math class on days that new content was presented"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Ms. L. gave the direction to begin independent practice of the new content",
+      "observable_behavior": "Persistently calling out during instruction to the point where other students were complaining about the disruptions; using outbursts, blurts, and bellows; failed to attempt his individual seatwork",
+      "internal_state": "Did not understand the new material well enough to complete the work independently; felt unsure of the materials",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with independent seatwork that was too difficult for him to complete without assistance",
+        "observable_behavior": "Causing disruptions to avoid the independent seatwork; outbursts, blurts, and bellows",
+        "internal_state": "Felt unsure of the materials",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

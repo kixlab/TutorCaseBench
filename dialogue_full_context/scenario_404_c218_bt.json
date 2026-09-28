@@ -1,0 +1,76 @@
+{
+  "category_id": "218",
+  "category_title": "Students in vocational settings who struggle with professional norms like punctuality",
+  "scenario_id": "404",
+  "scenario_title": "Punctuality and daily workplace routines",
+  "minimal_context": "The student is arriving late to their long-day vocational program at the TAFE college and needs to complete the daily sign-in routine.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is past 8:30am. I also noticed you didn't sign off yesterday when you left."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Yeah, I forgot to sign off."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please try to remember next time. Why are you arriving late this morning?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I couldn't get here on time today. I'm just really tired."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You still need to make sure you get here when the program starts."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I'm tired from moving house, I couldn't help being late.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is past 8:30am. I also noticed you didn't sign off yesterday when you left.\n\nSTUDENT: Yeah, I forgot to sign off.\n\nTUTOR: Please try to remember next time. Why are you arriving late this morning?\n\nSTUDENT: I couldn't get here on time today. I'm just really tired.\n\nTUTOR: You still need to make sure you get here when the program starts.\n\nSTUDENT: I'm tired from moving house, I couldn't help being late.",
+  "immediate_dialogue_prompt": 667,
+  "long_term_dialogue_prompt": 668,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "participating in a long-day (8:30am to 4pm) vocational program",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "TAFE college setting",
+        "materials": "classroom routines such as signing in and out each day",
+        "social_setting": "students with educational histories or needs that had made further participation in mainstream school settings untenable, supported by a youth worker at all times",
+        "time_context": "long-day (8:30am to 4pm)"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When confronting non-compliant behaviours",
+        "observable_behavior": "late student explained he was tired from moving house",
+        "internal_state": "tired",
+        "related_quotes": [
+          "tired from moving house"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "signing in and out each day",
+          "observable_behavior": "forgot to sign off",
+          "internal_state": "",
+          "related_quotes": [
+            "Some of you forgot to sign off."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

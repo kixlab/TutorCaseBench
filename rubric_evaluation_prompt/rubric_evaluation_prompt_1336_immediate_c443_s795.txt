@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Digital Media Pivot
+  Check: The tutor's response must incorporate or explicitly allow the use of digital tools (e.g., internet research, video platforms, digital creation) as a core part of the immediate task.
+
+Criterion 2: Validation of Gritty Lived Experiences
+  Check: The tutor must accept and engage with the student's proposed real-world or 'taboo' topics without censoring them, disciplining them, or forcing a return to the original 'safe' text.
+
+Criterion 3: Abandonment of Independent Transmission
+  Check: The tutor must immediately shift away from independent, solitary assignments (like reading alone or doing worksheets) toward a collaborative, student-directed, or interactive approach.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student strongly resists traditional, independent transmission pedagogy, often walking out or shutting down when given worksheets or assigned reading. They are deeply motivated by digital multiliteracies (internet research, video creation) and need their gritty, real-world lived experiences (including 'taboo' topics like gangs and drugs) validated. To succeed, they require extreme flexibility, collaborative project-based learning, and literacy skills embedded within topics they initiate.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read the next chapter in your textbook on your own, answer the comprehension questions, and complete the grammar worksheet.
+
+STUDENT: I'm tired and I don't care about the novel. (Gets up and wanders to one of the classroom computers to watch video clips on YouTube)
+
+TUTOR: You need to finish your independent work right now.
+
+STUDENT: I prefer learning how to locate information on the Internet, read, make notes, and write about guns, gangs, and drugs rather than reading the stories in the textbooks and answering comprehension questions.
+
+TUTOR: We are doing the textbook questions today. Please go back to your desk.
+
+STUDENT: (Interrupting and challenging the teacher) I'm not complying with this. (Walks out of the classroom)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read a chapter, answer literal-level questions on it, and complete vocabulary, punctuation, and grammar worksheets",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Grade 7-8 alternative education classroom with four classroom computers",
+      "materials": "Textbooks, vocabulary worksheets, punctuation and grammar worksheets",
+      "social_setting": "Independent work (work to do on their own)",
+      "time_context": "During initial English language arts and content area classes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Whenever given work to do on their own",
+      "observable_behavior": "Not complying, walking out of the classroom, constantly interrupting, and challenging the teacher's authority",
+      "internal_state": "Tired, unmotivated, very disengaged, and don't care about the novel",
+      "related_quotes": [
+        "preferred learning how to locate information on the Internet, read, make notes, and write about guns, gangs, and drugs rather than reading the stories in the textbooks and answering comprehension questions"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During traditional literacy instruction periods",
+        "observable_behavior": "Absenteeism rates were high, very little academic work was being completed, and students wandered to the four classroom computers to surf for information, watch video clips on YouTube, and play interactive video games",
+        "internal_state": "Disengagement and resistance to traditional pedagogy",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

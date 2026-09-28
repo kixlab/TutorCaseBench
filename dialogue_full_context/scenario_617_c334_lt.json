@@ -1,0 +1,74 @@
+{
+  "category_id": "334",
+  "category_title": "Students with high mobility and off-task verbalizations during independent work",
+  "scenario_id": "617",
+  "scenario_title": "Table work and snack time transitions",
+  "minimal_context": "The student is transitioning from table work to having a snack at the same table.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Now that the table work is done, it is time to stay at the same table and have our snack."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Moves in his chair and begins talking to the student next to him.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Kyle, listen and watch."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Stands up from his chair and starts talking to various students at the table.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Do you want to eat out in the hallway?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "No. (Continues standing and talking to various students instead of eating his snack.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Now that the table work is done, it is time to stay at the same table and have our snack.\n\nSTUDENT: (Moves in his chair and begins talking to the student next to him.)\n\nTUTOR: Kyle, listen and watch.\n\nSTUDENT: (Stands up from his chair and starts talking to various students at the table.)\n\nTUTOR: Do you want to eat out in the hallway?\n\nSTUDENT: No. (Continues standing and talking to various students instead of eating his snack.)",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 1026,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "table work and having snack",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "at the same table",
+        "materials": "snack",
+        "social_setting": "talking to various students",
+        "time_context": "After the work was done"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "during table work and snack time",
+        "observable_behavior": "moving in his chair, standing and talking to various students",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When the teacher issued threats of exclusion ('Do you want to eat out in the hallway?')",
+          "observable_behavior": "Kyle said, 'No'",
+          "internal_state": "",
+          "related_quotes": [
+            "No"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

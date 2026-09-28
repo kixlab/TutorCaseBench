@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Text-Based Physical Prompting
+  Check: The tutor's immediate response provides or prompts the use of a physical, text-based tool (such as a communication book or printed cards) containing conversational starters.
+
+Criterion 2: Competing Motor Action
+  Check: The tutor ensures the immediate intervention requires a physical motor action (e.g., turning pages, flipping cards, holding an object) that actively occupies Hugh's hands.
+
+Criterion 3: Explicit Interaction Sequencing
+  Check: The tutor explicitly instructs or models a specific, step-by-step sequence for the interaction (e.g., read the prompt, wait for the peer's response, turn the page, ask the next question).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Hugh is a skilled reader who struggles to initiate social interactions, often standing silently near peers while engaging in stereotypic face- and arm-picking and restricting his topics to specific interests like anime. He uniquely requires a physical, text-based communication tool that serves a dual purpose: prompting his conversational turns and occupying his hands to prevent skin-picking.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Hugh, it is the lunch period. Go ahead and find some peers to eat with and start a conversation.
+
+STUDENT: (Rubs his eyes and looks around) I am trying to locate peers from anime club or orchestra.
+
+TUTOR: There is a group of students right over there. Why don't you go over to them?
+
+STUDENT: (Walks over and stands near the group of students without disabilities, picking at his arm) Anime club...
+
+TUTOR: You are standing right next to them. Go ahead and talk to them.
+
+STUDENT: (Does not initiate to or interact with the peers. Continues to stand near the group while engaging in repetitive face- and arm-picking and finger movements.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Initiate to or interact with peers without disabilities",
+      "learning_goal": "Learning to talk to new friends at school"
+    },
+    "context": {
+      "environment": "At lunch",
+      "materials": "Communication books with only a typed conversational opener",
+      "social_setting": "Near groups of students without disabilities",
+      "time_context": "Lunch period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Trying to locate peers from these groups with whom to eat",
+      "observable_behavior": "Stood near groups of students without disabilities, but did not initiate to or interact with them",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During baseline observations in general education classes and lunch",
+        "observable_behavior": "Engage in repetitive stereotypic behavior, including hand and finger movements, eye rubbing, verbal stereotypy, repetitive handling of objects, and skin picking (face- and arm-picking)",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When attempting to converse with peers",
+        "observable_behavior": "Displayed restricted conversational topics",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

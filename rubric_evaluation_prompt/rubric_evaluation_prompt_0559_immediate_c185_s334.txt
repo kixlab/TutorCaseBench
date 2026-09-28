@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured De-escalation Space
+  Check: The tutor directs the student to a specific cool-down space or reflection period (e.g., a thinking corner or chair for a set time) before attempting to discuss or resolve the conflict.
+
+Criterion 2: Empathy-Building Inquiry
+  Check: The tutor asks a direct perspective-taking question (e.g., 'How would you feel if someone did that to you?') to prompt empathy for the affected peer.
+
+Criterion 3: Facilitation of Voluntary Resolution
+  Check: The tutor asks an open-ended question prompting the student to decide the next step (e.g., 'What do you need to do now?') and strictly avoids explicitly commanding the student to apologize.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student frequently resorts to physical aggression (hitting, pushing, throwing objects) during peer conflicts, particularly over sharing toys. Because their immediate reaction is physical rather than verbal, they require structured cool-down periods, empathy-building prompts, and opportunities to voluntarily resolve conflicts rather than being forced to apologize.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are playing in the park now. Go ahead and play in the sand with your friends.
+
+STUDENT: (Runs over to the sand area and pushes a friend out of the way)
+
+TUTOR: Let's try to play together.
+
+STUDENT: No! (Hits the friend who tries to sit next to him)
+
+TUTOR: What is happening over there?
+
+STUDENT: (Kicks the friend and starts throwing sand and stones at them)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Playing in the park",
+      "learning_goal": "To make sure our friend is not hurt"
+    },
+    "context": {
+      "environment": "Park",
+      "materials": "Sand, stone, red chair",
+      "social_setting": "Friends were in the park",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During play in the park",
+      "observable_behavior": "Threw sand and stone, running, pushing our friends, hitting, kicking",
+      "internal_state": "",
+      "related_quotes": [
+        "The teacher is angry because he threw sand and stone. The teacher said, “Go and sit on that red chair. We will go to the park and you will stay here and wait. Then the child started to sit and wait while his friends were in the park.”",
+        "…Not running, not pushing our friends, not hitting, not kicking, not throwing stones"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When interacting with peers in the park",
+        "observable_behavior": "Throwing sand and stone, pushing, hitting, kicking",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

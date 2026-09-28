@@ -1,74 +1,69 @@
 {
   "category_id": "002",
-  "category_title": "Child with ASD, ADHD, and Specific Learning Disability exhibiting academic resistance and behavioral outbursts",
+  "category_title": "Child with ASD, ADHD, and Specific Learning Disability exhibiting significant behavioral resistance to reading instruction",
   "scenario_id": "005",
-  "scenario_title": "General education classroom paper and pencil tasks",
-  "minimal_context": "Sam is sitting at his desk in the general education kindergarten classroom with a teacher for a paper and pencil drawing task.",
+  "scenario_title": "Developing reading automaticity through functional activities",
+  "minimal_context": "Sam is working one-on-one with an interventionist to sound out words on treasure hunt clues to find a prize.",
   "dialogue": [
     {
       "turn_id": 1,
       "speaker": "tutor",
-      "message": "Sam, here is your paper and pencil. Let's practice drawing and coloring."
+      "message": "Here is the first clue for our treasure hunt. Let's sound out these words to find out where the prize is."
     },
     {
       "turn_id": 2,
       "speaker": "student",
-      "message": "(Refuses to participate in the lesson and pushes the paper away.) No."
+      "message": "(Gets out of his chair and begins roaming the classroom instead of looking at the clue.)"
     },
     {
       "turn_id": 3,
       "speaker": "tutor",
-      "message": "We need to finish this paper and pencil task."
+      "message": "Please come back to your seat and look at the paper."
     },
     {
       "turn_id": 4,
       "speaker": "student",
-      "message": "(Gets out of his chair at the desk.)"
+      "message": "No! I don't want to read it."
     },
     {
       "turn_id": 5,
       "speaker": "tutor",
-      "message": "Please come back to your desk and pick up your pencil."
+      "message": "We need to read the sentence to get the next clue."
     },
     {
       "turn_id": 6,
       "speaker": "student",
-      "message": "(Displays rage-like behaviors and begins roaming the classroom.)",
+      "message": "(Throws the clue on the floor and begins having a meltdown, screaming and completely refusing to participate in the instructional task.)",
       "is_challenging_behavior": true
     }
   ],
-  "dialogue_combined": "TUTOR: Sam, here is your paper and pencil. Let's practice drawing and coloring.\n\nSTUDENT: (Refuses to participate in the lesson and pushes the paper away.) No.\n\nTUTOR: We need to finish this paper and pencil task.\n\nSTUDENT: (Gets out of his chair at the desk.)\n\nTUTOR: Please come back to your desk and pick up your pencil.\n\nSTUDENT: (Displays rage-like behaviors and begins roaming the classroom.)",
+  "dialogue_combined": "TUTOR: Here is the first clue for our treasure hunt. Let's sound out these words to find out where the prize is.\n\nSTUDENT: (Gets out of his chair and begins roaming the classroom instead of looking at the clue.)\n\nTUTOR: Please come back to your seat and look at the paper.\n\nSTUDENT: No! I don't want to read it.\n\nTUTOR: We need to read the sentence to get the next clue.\n\nSTUDENT: (Throws the clue on the floor and begins having a meltdown, screaming and completely refusing to participate in the instructional task.)",
   "immediate_dialogue_prompt": 8,
   "long_term_dialogue_prompt": 9,
   "full_context": {
     "content": {
       "task": {
-        "content": "drawing and coloring, and paper/pencil tasks",
-        "learning_goal": ""
+        "content": "Sound out words and link words into short sentences",
+        "learning_goal": "To develop automaticity and provide a purpose to sound out words"
       },
       "context": {
-        "environment": "general education kindergarten classroom",
-        "materials": "paper/pencil",
-        "social_setting": "one-to-one teacher assistance at his desk",
+        "environment": "One-to-one instruction",
+        "materials": "Clues incorporating words that Sam knew, and a prize",
+        "social_setting": "Working with the interventionist",
         "time_context": ""
       },
       "challenging_behavior_trigger": {
-        "condition": "when asked to do paper/pencil tasks",
-        "observable_behavior": "displayed rage-like behaviors, getting out of his chair and roaming the classroom",
-        "internal_state": "demonstrates significant difficulty controlling his impulses and maintaining the level of attention necessary",
-        "related_quotes": [
-          "often displayed rage-like behaviors when asked to do paper/pencil tasks",
-          "getting out of his chair and roaming the classroom"
-        ]
+        "condition": "When required to apply new skills or generalize to alternative contexts",
+        "observable_behavior": "Actively resisted attempts to be taught academic content and expressed no interest in learning to read",
+        "internal_state": "Did not easily infer cause and effect or relationships of one item to another",
+        "related_quotes": []
       },
       "behavior_patterns": [
         {
-          "condition": "Despite having one-to-one teacher assistance at his desk",
-          "observable_behavior": "refused to participate in academic tasks, getting out of his chair and roaming the classroom",
+          "condition": "When requested to perform any instructional tasks",
+          "observable_behavior": "Had meltdowns and refused to participate",
           "internal_state": "",
-          "related_quotes": [
-            "refused to participate in academic tasks, getting out of his chair and roaming the classroom"
-          ]
+          "related_quotes": []
         }
       ]
     }

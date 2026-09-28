@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Anchoring for Abstract Concepts
+  Check: The tutor provides, references, or prompts the use of visual media (e.g., film scenes, images, or highly concrete visual descriptions) before asking the student to analyze the text.
+
+Criterion 2: Emotion-First Engagement
+  Check: The tutor asks the student to share their emotional reaction or feelings about a character, scene, or event rather than asking for rote factual recall.
+
+Criterion 3: Visual-Based Inference
+  Check: The tutor prompts the student to make a prediction or inference based on visual cues or observed behaviors rather than abstract textual evidence.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These students are shy and struggle to articulate ideas or visualize abstract historical events from print text alone, often resulting in vague or incorrect answers on traditional assessments. Their core behavioral pattern is compliance without engagement when faced with rote tasks, masking their actual capacity for deep comprehension. They uniquely require visual media to anchor abstract concepts and multimodal, choice-based creative assessments to confidently express their understanding and emotional empathy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please complete these two short writing assignments based on the text we just finished.
+
+STUDENT: I felt confused by the poem at first and then we reread it and I understood it a little better, but I don't know what to write.
+
+TUTOR: Just write down what you remember about the historical events we discussed.
+
+STUDENT: I have a lot of confusion about why Jews were targeted, hated and segregated in Germany at the time of the Third Reich. I can't explain it.
+
+TUTOR: Try your best to put your thoughts on the paper for the assignment.
+
+STUDENT: Writing assignments are more difficult because you have to remember all the information and then put it how you want to say it on paper. But it doesn’t always come out how you want it to.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Complete two short writing assignments based on the text.",
+      "learning_goal": "Measure the students’ progress."
+    },
+    "context": {
+      "environment": "Classroom during assessment",
+      "materials": "Short writing assignments, notebooks, tests, reports, creative project materials",
+      "social_setting": "Independent work",
+      "time_context": "End of the unit"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Having to remember all the information and then put it how you want to say it on paper.",
+      "observable_behavior": "Scored poorly on two short writing assignments based on it.",
+      "internal_state": "It doesn’t always come out how you want it to.",
+      "related_quotes": [
+        "Writing assignments are more difficult because you have to remember all the information and then put it how you want to say it on paper. But it doesn’t always come out how you want it to."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When required to articulate ideas in writing.",
+        "observable_behavior": "Had difficulties articulating their ideas both orally and in writing.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

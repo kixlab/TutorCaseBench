@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Direct Problem-Solving Support
+  Check: The tutor provides direct, concrete assistance or explanation for the specific problem the student is asking about, rather than telling them to figure it out on their own.
+
+Criterion 2: Validation of Help-Seeking
+  Check: The tutor explicitly acknowledges and validates the student's proactive effort to seek help (e.g., thanking them for coming, affirming their question, or expressing willingness to help).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly proactive in seeking help to compensate for a lack of academic support at home, but is extremely sensitive to feeling ignored or dismissed. When met with generic 'try it yourself' approaches, they feel invisible and quickly withdraw. They require direct, individualized assistance and a strong relational foundation where they feel the teacher genuinely wants them to succeed.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is almost time for class. Here is the homework assignment.
+
+STUDENT: I have a question about something I do not understand in the homework. I came to your office so you could help me understand the problem.
+
+TUTOR: Just read the instructions again. What do you think the answer is?
+
+STUDENT: I need someone who helps me to do the homework, like those I do not understand. The bell rings at 8:15 a.m. and I want to have the homework ready when I go to class.
+
+TUTOR: Keep trying on your own. I need to finish checking these other papers right now.
+
+STUDENT: (Puts the homework away) I need extra assistance because my parents cannot help me at home due to their language limitations. If you will not provide extra instruction, I will just leave.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "homework, like those I do not understand",
+      "learning_goal": "understand the problem. So when I go to class I have the homework ready"
+    },
+    "context": {
+      "environment": "in the classroom or teacher's office",
+      "materials": "homework",
+      "social_setting": "one-on-one assistance from the teacher or teacher's aide",
+      "time_context": "on the day the homework is due, just before 8:15a.m. when they ring the bell"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Mexican students explicitly ask for help in the classroom and the teacher ignores the Mexican students' requests while responding to similar requests from Euro-American students",
+      "observable_behavior": "decides it is better not to ask for help at all",
+      "internal_state": "feels invisible, as though we were not there",
+      "related_quotes": [
+        "We sometimes would ask the teacher several times for help. We would say, ‘teacher! can you come and help us? ’And imagine this; it is as though we were not there."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when I have a question about something I do not understand in their homework",
+        "observable_behavior": "on the day the homework is due I go to their ofﬁce and they help me",
+        "internal_state": "seeking to compensate for the lack of academic support at home due to parents' language and educational limitations",
+        "related_quotes": [
+          "They help me understand the problem. So when I go to class I have the homework ready."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

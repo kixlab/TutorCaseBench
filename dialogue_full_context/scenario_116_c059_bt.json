@@ -1,0 +1,74 @@
+{
+  "category_id": "059",
+  "category_title": "Young autistic children in early language learning stages who engage in sequentially organized play",
+  "scenario_id": "116",
+  "scenario_title": "Redirecting away from proposed book activity during free-play",
+  "minimal_context": "The caregiver and child are in a clinic playroom where the caregiver proposes looking at a book on the table.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Do you want to look at the book?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Runs to the table, touches the book on the table, and gazes at the book.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Let's look at the book together."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Takes hand off the book.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Come back, we should look at the book."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Runs off screen and begins to play with a different toy.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Do you want to look at the book?\n\nSTUDENT: (Runs to the table, touches the book on the table, and gazes at the book.)\n\nTUTOR: Let's look at the book together.\n\nSTUDENT: (Takes hand off the book.)\n\nTUTOR: Come back, we should look at the book.\n\nSTUDENT: (Runs off screen and begins to play with a different toy.)",
+  "immediate_dialogue_prompt": 187,
+  "long_term_dialogue_prompt": 188,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Looking at a book on the table",
+        "learning_goal": "Joint engagement and interactional turn-taking"
+      },
+      "context": {
+        "environment": "15-minute free-play session in a University clinic playroom",
+        "materials": "book on table, beads, jar",
+        "social_setting": "Caregiver-child interaction",
+        "time_context": "15-minute session"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When Mom proposes looking at a book on the table",
+        "observable_behavior": "touches book on table, then takes hand off book, runs off screen, and begins to play with a different toy",
+        "internal_state": "",
+        "related_quotes": [
+          "Do you want to <look at the book>?"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When the caregiver repeats a proposal over multiple turns that the child does not accept",
+          "observable_behavior": "begins to play with a different toy",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

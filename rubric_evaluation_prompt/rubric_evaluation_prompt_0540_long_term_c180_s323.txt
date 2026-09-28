@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Hyper-Personalized Thematic Integration
+  Check: The tutor's long-term plan consistently anchors reading, writing, or vocabulary activities in Derek's specific interest in dump trucks and tractors.
+
+Criterion 2: Confidence Building via Familiarity
+  Check: The tutor plans to begin sessions or units with familiar, independent-level texts or highly preferred activities to nurture his independence and confidence.
+
+Criterion 3: Scaffolded Output via Templates
+  Check: The tutor incorporates the use of structured templates or sentence starters to help Derek successfully generate and complete his own ideas over time.
+
+Criterion 4: Multimedia Ownership and Celebration
+  Check: The tutor integrates technology or multimedia tools (e.g., audio recording, digital photography) to allow Derek to capture, own, and share his completed literacy work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Derek is an unmotivated rising first grader who experiences severe emotional frustration with difficult literacy tasks and explicitly views himself as a non-reader. He uniquely requires instruction heavily anchored in his intense interest in dump trucks and tractors, alongside concrete manipulatives and heavy scaffolding (like modeling and templates) to bypass his mechanical deficits and build confidence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start by talking about reading. Do you like to read for fun?
+
+STUDENT: Umm, no. I like to play outside.
+
+TUTOR: Okay. What is your favorite book to read?
+
+STUDENT: Don ’t have one. I like tractors though.
+
+TUTOR: Let's look at this list of words on the paper. Try to read as many as you can out loud.
+
+STUDENT: (Looks at the list) I... (Stops and looks away) It’s not fun because I can ’t. No, that is never fun.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to read the pre-primer word list from the Qualitative Reading Inventory (QRI) and answering open-ended questions to assess attitude toward reading",
+      "learning_goal": "To assess oral reading and attitude toward reading"
+    },
+    "context": {
+      "environment": "Literacy Corner in a college library",
+      "materials": "Pre-primer word list from the Qualitative Reading Inventory (QRI), familiar texts on Derek's independent level, books about dump trucks and tractors",
+      "social_setting": "One-on-one tutoring",
+      "time_context": "Initial assessment during his first full week of summer"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to read the pre-primer word list and only recognizing and reading the word 'I' with only 10% accuracy",
+      "observable_behavior": "Exhibited academic and emotional frustrations, stated that reading 'is never fun' and responded that he was 'unable to read'",
+      "internal_state": "Limited interest in reading and writing; felt unable to read",
+      "related_quotes": [
+        "It’s not fun because I can ’t.",
+        "No, that is never fun.",
+        "Umm, no. I like to play outside."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked open-ended questions about reading for fun or reading out loud",
+        "observable_behavior": "Responded negatively, stating he never reads out loud and does not have a favorite book, though he likes tractors",
+        "internal_state": "Believes reading is not fun because of his inability to do it",
+        "related_quotes": [
+          "Never.",
+          "Don ’t have one. I like tractors though."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

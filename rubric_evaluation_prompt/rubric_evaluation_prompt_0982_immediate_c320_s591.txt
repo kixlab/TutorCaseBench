@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Strict Extinction of Aggression
+  Check: The tutor completely ignores the aggressive behavior, provides no reprimand, and explicitly continues the activity or conversation that initially diverted their attention.
+
+Criterion 2: Physical Distancing During Outbursts
+  Check: The tutor explicitly states they are physically moving away, stepping back, or moving out of reach when the student becomes aggressive.
+
+Criterion 3: Proactive Choice Provision
+  Check: The tutor offers the student clear choices regarding destinations, activities, or materials, and encourages her to request them appropriately.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student uses physical aggression, such as hitting or swinging a cane, to demand attention when an instructor's focus shifts to someone or something else. She uniquely requires a strict extinction protocol where aggression is completely ignored and the instructor physically moves out of reach, combined with proactive choice-making and systematic reinforcement for tolerating periods without direct attention.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are in the music room now. Do you want to play on the drums or the tambourine as a reward?
+
+STUDENT: (Chooses the tambourine and begins playing with it.)
+
+TUTOR: Okay, go ahead. (Turns toward the music teacher sitting at his desk) Do you have a moment for a quick word?
+
+STUDENT: (Pauses playing the tambourine, realizing that the instructor is no longer providing their full attention.)
+
+TUTOR: (Continues conversation with the music teacher) Yes, we just finished up our last activity.
+
+STUDENT: (Moves nearby and strikes the instructor to immediately get the attention she is seeking.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Selecting a reward activity and playing with a tambourine",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Music room",
+      "materials": "Drums, tambourine",
+      "social_setting": "Music teacher who is sitting at his desk is nearby",
+      "time_context": "Once they are in the music room"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "As she is playing with it, the instructor has a word with the music teacher who is sitting at his desk.",
+      "observable_behavior": "The student, who is nearby, once again strikes the instructor.",
+      "internal_state": "The student realizes that the instructor is not providing his or her full attention.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the instructor tells the music teacher that she had better stop talking after being struck",
+        "observable_behavior": "The student immediately received the attention that she sought and discovered that violent behavior was an effective way to get the result that she wanted.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Tolerance of Minor Deviance
+  Check: The tutor either ignores a brief, harmless off-task behavior or uses a gentle, task-focused reminder rather than issuing a punitive reprimand for a minor infraction.
+
+Criterion 2: Temporal and Spatial Boundary Enforcement
+  Check: The tutor explicitly limits the duration of the student's off-task behavior (e.g., prompting a return to work after a short break) or directs the student to remain within their assigned physical space.
+
+Criterion 3: Strict Safety and Conflict Intervention
+  Check: The tutor firmly and immediately intervenes if the student engages in unsafe physical behavior (e.g., misusing equipment) or if peer interactions show signs of escalating beyond playful provocation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student uses minor deviances, such as chatting or wandering, as a coping mechanism to avoid boredom during repetitive tasks. They require short 'drop-outs' to sustain overall engagement, but their behavior must be carefully monitored to prevent safety hazards, genuine conflicts, or excessive off-task time.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the instruction cards at this station and start practicing your somersaults and jumps. Make sure to manage your repetitions.
+
+STUDENT: Here, I arrive at the activity, quickly read the sheet to go through the various exercises. Here, I want to check if the exercises are hard. (Executes them one by one, slowly and precisely)
+
+TUTOR: Keep practicing the exercises on the sheet.
+
+STUDENT: Well, I try my best and then I practice this somersault, the hardest! (Makes a correct jump, puts up the equipment, and waits idly)
+
+TUTOR: It is time for your next repetition.
+
+STUDENT: (Chats with friends, gives a kick to a mat, and begins wandering about the gym) I work a bit but in the end it's boring to do the same thing over and over again, so I have a laugh with my mates. It's no big deal, and after that I work as well.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Gymnastics workshops involving somersaults and jumps... using instruction cards to self-evaluate and manage repetitions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Secondary school PE class, multiple activity stations (workshops) spread across a gymnasium",
+      "materials": "Equipment like gym mats and trampolines, instruction sheets",
+      "social_setting": "Students work in small groups of 3-5 people",
+      "time_context": "During the active phase of the lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When students began wandering about the gym in search of an opportunity for change",
+      "observable_behavior": "Made a correct jump, put up the equipment, chatted with friends, gave a kick to a mat, made another jump, wandered around, waited idly, did some off-task behavior, read the exercise sheet, and called to the teacher",
+      "internal_state": "Dynamic of the students' activity is the result of a compromise between two contradictory concerns, work, and entertainment",
+      "related_quotes": [
+        "Fortunately I can have a bit of fun now and again; otherwise it would be boring ...I wouldn't even come to class anymore. [ ...] I work a bit but in the end it's boring to do the same thing over and over again, so I have a laugh with my mates ...It's no big deal, and after that I work as well."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When students were involved in a task accompanying the motor task",
+        "observable_behavior": "Getting ready to go, waiting for their turn to go through, replacing or setting up equipment, talking to the teacher, helping a friend, or filling in the exercise sheet",
+        "internal_state": "Know that the teacher will be more lenient if he sees them working several times, repeatedly and thus regularly all along the lesson",
+        "related_quotes": [
+          "Here, I arrive at the activity, quickly read the sheet ...to go through the various exercises ...Here, I want to check if the exercises are hard (he executes them one by one, slowly and precisely). [ ...] Well, I try my best and then I practice this somersault, the hardest!"
+        ]
+      },
+      {
+        "condition": "When students were passive or apathetic",
+        "observable_behavior": "Doubled up while standing in line, were lying on the mats, or began wandering about the gym",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Responsive Schedule Modification
+  Check: The tutor's long-term plan includes regular check-ins to review and modify the student's weekly schedule based on their current emotional and motivational capacity.
+
+Criterion 2: Maintenance of Normative Academic Goals
+  Check: The tutor incorporates standard, age-appropriate academic milestones (such as exit exams) into the student's long-term learning plan.
+
+Criterion 3: Structured Behavioral Tracking
+  Check: The tutor utilizes a structured, weekly behavioral tracking system (such as points or levels) that ties the student's past behavior to future permits and limitations.
+
+Criterion 4: Diagnosis-Specific Instructional Stance
+  Check: The tutor explicitly tailors the overarching environmental structure of the learning plan (such as emphasizing stability versus flexibility) to the student's specific psychiatric diagnosis.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is hospitalized with severe mental disorders and experiences radical mood swings that lead to abrupt task refusal or destruction of work. They uniquely require a non-judgmental environment that strictly separates educational tasks from psychological therapy, relying on pre-known consequences and flexible scheduling rather than traditional discipline.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's continue preparing for your upcoming Matriculation Exam. We need to go over the practice questions we started yesterday.
+
+STUDENT: I don't want to look at it. My inner world is just too stormy and complicated today.
+
+TUTOR: Try to focus on the first page. What do you think the answer to the first question is?
+
+STUDENT: I can't focus! My mood keeps swinging and I just feel really bad right now.
+
+TUTOR: We have put a lot of effort into preparing you for this exam. Just keep trying.
+
+STUDENT: I don't care about the effort! I'm in a terrible mood and I've decided I'm not going to take the exam at all.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Preparing for a Matriculation Exam",
+      "learning_goal": "Get its students to succeed in their studies"
+    },
+    "context": {
+      "environment": "Ziv School",
+      "materials": "",
+      "social_setting": "",
+      "time_context": "At any given time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Suddenly arrive in a bad mood",
+      "observable_behavior": "Decide not to take it",
+      "internal_state": "Frequent and radical mood swings",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "At any given time",
+        "observable_behavior": "Frequent and radical mood swings",
+        "internal_state": "Inner world is stormy or complicated",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

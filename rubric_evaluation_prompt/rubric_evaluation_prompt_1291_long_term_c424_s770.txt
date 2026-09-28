@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Gradual Interval-Based Goal Scaling
+  Check: The tutor's long-term plan must define specific, incremental interval-based goals for sharing (e.g., starting at a baseline percentage of observed intervals and increasing it over time).
+
+Criterion 5: Daily Targeted Routine Practice
+  Check: The tutor's long-term plan must embed the sharing observation and practice within a consistent, daily, time-bounded routine (e.g., a daily 10-minute center time).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Darin is a preschooler who excels at independent multi-step tasks but struggles significantly with sharing during collaborative play, often hiding or taking peers' objects. He becomes defensive with reactive corrections but responds exceptionally well to proactive, pre-activity role-playing where he gets to act as the 'teacher' to a puppet.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Darin and Alex, please use these different materials to build a castle together.
+
+STUDENT: (Takes blocks from Alex's pile) Give me that.
+
+TUTOR: Alex is asking for a block to help build.
+
+STUDENT: I had that first.
+
+TUTOR: Remember to share your materials so you can finish the castle.
+
+STUDENT: (Hides the blocks behind his back) That's mine!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "accomplish a common goal (e.g., building something, creating something)",
+      "learning_goal": "politely share his objects with a friend when asked and/or offer objects to his friend"
+    },
+    "context": {
+      "environment": "10-min center time activity in the preschool classroom",
+      "materials": "different materials, hand puppet",
+      "social_setting": "Darin and a friend",
+      "time_context": "entire two minute interval"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when the friend makes a request",
+      "observable_behavior": "not giving an object when the friend makes a request",
+      "internal_state": "",
+      "related_quotes": [
+        "Give me that",
+        "I had that first",
+        "That’s mine"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When Darin and a friend are given different materials and asked to accomplish a common goal",
+        "observable_behavior": "does not share throughout the entire two minute interval and may be observed taking the friends’ objects, hiding objects behind his back",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Factual Repetition
+  Check: The tutor's response must explicitly repeat, reflect, or acknowledge the specific factual events Sally has just listed.
+
+Criterion 2: Emotional Expansion
+  Check: The tutor's response must expand on Sally's factual statements by introducing, modeling, or scaffolding specific emotional vocabulary or subjective interpretations.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sally is a student with receptive language delays who communicates well factually but struggles significantly to express emotions, often defaulting to straightforward, reportage-style lists. She requires explicit scaffolding to help her connect objective events to subjective emotional experiences.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Sally, can you tell me what happened when you presented to your class today?
+
+STUDENT: (Maintains eye contact) I stood at the front. I held my project. I read it to the class.
+
+TUTOR: What else happened?
+
+STUDENT: The teacher talked. The students clapped. Then I went back to my desk.
+
+TUTOR: How did you feel when you were presenting?
+
+STUDENT: (Appears withdrawn and self-contained) I read the words. Then it was finished.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Recalling what happened when Sally presented to her class",
+      "learning_goal": "Expressing feelings and emotional content"
+    },
+    "context": {
+      "environment": "School setting",
+      "materials": "",
+      "social_setting": "Interactions where she is recounting",
+      "time_context": "When the story was first presented"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When first presenting the story about her class presentation",
+      "observable_behavior": "Presented a straightforward reportage-style list of what happened, with little emotional content. Appeared as withdrawn and self-contained.",
+      "internal_state": "Difficulties in expressing her feelings",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In interactions when recounting",
+        "observable_behavior": "Able to listen, join in, and maintain eye contact, but appears withdrawn and self-contained",
+        "internal_state": "Difficulties in expressing her feelings",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

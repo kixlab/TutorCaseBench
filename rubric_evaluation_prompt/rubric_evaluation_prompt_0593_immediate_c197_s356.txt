@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physical Distance and Intermittent Check-ins
+  Check: The tutor's response must explicitly establish physical distance (e.g., stepping away, giving space) and offer support only intermittently rather than hovering.
+
+Criterion 2: Extended Wait Time
+  Check: The tutor must explicitly provide or encourage wait time, allowing the student space to process without immediately supplying the answer or a verbal hint.
+
+Criterion 3: Non-Verbal Prompting
+  Check: The tutor must utilize or suggest visual, gestural, or environmental prompts rather than relying solely on verbal instructions or verbal hints.
+
+Criterion 4: Structured Independence Incentives
+  Check: The tutor must incorporate a structured reward or contingency system (e.g., 'first-then' phrasing, token system, tick chart) to motivate independent effort.
+
+Criterion 5: Focus on Process and Accessibility
+  Check: The tutor must focus the interaction on the student's understanding, skill development, or task accessibility (e.g., breaking it down) rather than merely pushing for task completion.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits high learned helplessness and psychological dependence on adult support, often refusing to attempt tasks independently. However, they also desire social normalization and may actively reject constant adult proximity. They uniquely require physical space, extended wait time, non-verbal prompting, and structured fading of support to break the cycle of dependency and build true autonomy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is your turn to share in circle time. What was your favorite part of the story?
+
+STUDENT: (Stays quiet, looking down) Um...
+
+TUTOR: Do you remember what happened at the end?
+
+STUDENT: I know, I'm trying to think...
+
+TUTOR: You liked the part with the dog. Just tell everyone you liked the dog.
+
+STUDENT: Like we do a circle time and I’m just trying to think of the answers . . . and you tell me it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a 'circle time' activity and attempting to formulate answers to questions.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mainstream primary classroom setting during circle time.",
+      "materials": "Visual or gestural prompts.",
+      "social_setting": "Group circle time with SNA present.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a pupil is attempting to process information or answer a question.",
+      "observable_behavior": "Trying to think of the answers but being interrupted by the SNA telling them the answer.",
+      "internal_state": "",
+      "related_quotes": [
+        "Like we do a circle time and I’m just trying to think of the answers . . . and [the SNA] tells me it"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked a question during circle time.",
+        "observable_behavior": "Trying to think of the answers.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

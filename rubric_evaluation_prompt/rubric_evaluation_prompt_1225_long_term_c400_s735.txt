@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Objective Consequence Review
+  Check: The long-term plan includes using objective methods (like video review) to help the student analyze how their behavior looks to others and how it prevents them from achieving their desired outcomes.
+
+Criterion 2: Temporal Chunking
+  Check: The long-term plan structures learning into short, manageable segments (e.g., 15 minutes) separated by scheduled breaks.
+
+Criterion 3: Explicit Target-Reward Linkage
+  Check: The long-term plan establishes 1-2 specific behavioral targets tied directly to interest-based rewards at the end of each session, explicitly avoiding sanctions or subjective effort grades.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits high callous-unemotional traits, reduced empathy, and proactive aggression to achieve their goals, alongside severe difficulties with inhibition (described as a 'broken stop button'). They uniquely require interventions that appeal strictly to their self-interest and utilize structured, reward-focused contingencies, as traditional sanctions and empathy-induction completely fail.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is playtime now. You can go outside and choose an activity.
+
+STUDENT: I want to start my own game of football.
+
+TUTOR: Okay, go ahead and find what you need to play.
+
+STUDENT: I want to play with the ball that boy is playing with.
+
+TUTOR: He is using it right now. What do you think you should do?
+
+STUDENT: (Pushes the other boy hard to the ground to take the ball) If I hurt him, he will stop playing with the ball, then I can use it to start my own game of football.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Start my own game of football",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Playtime",
+      "materials": "Ball, video recordings of behavior",
+      "social_setting": "Another boy playing with a ball",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the student wants to play with the ball that another boy is playing with",
+      "observable_behavior": "Engages in proactive aggression, hurting the boy so he will stop playing with the ball",
+      "internal_state": "I want to play with the ball that boy is playing with. If I hurt him, he will stop playing with the ball, then I can use it to start my own game of football.",
+      "related_quotes": [
+        "I want to play with the ball that boy is playing with. If I hurt him, he will stop playing with the ball, then I can use it to start my own game of football."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When wanting a desired outcome or object",
+        "observable_behavior": "Extreme behaviour, leading to injury and damage",
+        "internal_state": "Reduced emotional responsiveness to others, including diminished affective empathy and remorse",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Task Difficulty Calibration
+  Check: The tutor's long-term plan includes assessing and adjusting the difficulty, pacing, or structure of independent tasks to ensure they match the student's current skill level.
+
+Criterion 2: Emotion Regulation Scaffolding
+  Check: The tutor incorporates strategies to explicitly teach, model, or practice appropriate ways for the student to process and express frustration, boredom, or hurt feelings.
+
+Criterion 3: Sustained Impulse Control Support
+  Check: The tutor establishes consistent routines, environmental cues, or ongoing external supports designed to help the student practice inhibiting inappropriate actions (like blurting or bothering peers).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with impulse control, frequently engaging in disruptive behaviors (blurting out, bothering peers, playing with objects) when bored, waiting, or facing task difficulties. They lack internal self-regulation and rely heavily on emotional outbursts or withdrawal when frustrated. The evidence reveals they uniquely require proactive external regulation, highly specific task instructions, and tasks carefully calibrated to their skill level to prevent disengagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please go ahead and start working on your independent assignment.
+
+STUDENT: (Moves his eyes to his paper and leans on his hands, expressing boredom. He wipes the paper and plays with a pen, then glances at the teacher.)
+
+TUTOR: Keep trying to focus on your paper.
+
+STUDENT: (Looks at his peer's paper, gets up, walks towards the teacher, but turns around and goes back to his desk. He yawns, expressing boredom.)
+
+TUTOR: Just do your best to finish the task.
+
+STUDENT: (Begins to play with a pen and a rubber. Looks at Pekka, leans towards him and whispers) Pekka …Pekka …Pekka. (Waits for a response, then says) Pekka …look. (He looks at his own rubber and continues rolling it with his pen.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working on an independent assignment",
+      "learning_goal": "Concentrating and orienting on tasks"
+    },
+    "context": {
+      "environment": "Classroom setting during tasks",
+      "materials": "Pen, rubber, paper",
+      "social_setting": "Teacher is talking to another student",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When temporarily losing focus on the task and experiencing boredom",
+      "observable_behavior": "Yawns, expressing boredom, and begins to play with a pen and a rubber. Looks at Pekka, leans towards him and whispers, 'Pekka …Pekka …Pekka' and waits for his response. Says, 'Pekka …look'. Rolls rubber with his pen.",
+      "internal_state": "Boredom",
+      "related_quotes": [
+        "Pekka …Pekka …Pekka",
+        "Pekka …look"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When struggling to stay on task and looking for external cues or help",
+        "observable_behavior": "Moves his eyes to his paper and leans on his hands. Wipes the paper and plays with a pen. Glances at the teacher. Gets up, walks towards the teacher but turns around and goes back to his desk.",
+        "internal_state": "Expresses boredom",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

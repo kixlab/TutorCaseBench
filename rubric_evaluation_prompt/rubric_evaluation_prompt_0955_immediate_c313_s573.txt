@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Academic Redirection
+  Check: The tutor explicitly redirects the student's attention to a specific element of the academic task, rather than using generic or passive prompts (e.g., 'try to work').
+
+Criterion 2: Active Group Conferencing
+  Check: The tutor actively steps in to conference with the student's group, asks targeted questions about their group process, or explicitly states they are sitting in to observe their interactions.
+
+Criterion 3: Scaffolded Peer Interaction
+  Check: The tutor provides a specific, structured instruction for how the student must interact with their peers in that exact moment (e.g., assigning a micro-role, providing a specific discussion question, or defining a turn-taking rule).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly social but struggles with academic focus, often derailing group work with off-task conversations or choosing to work entirely independently to avoid peer frustration. They lack intrinsic cooperative skills and require explicit structures, active monitoring, and direct instruction in team dynamics to collaborate effectively.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please get into your groups of two or three and start working on your collaborative social studies project.
+
+STUDENT: Hey guys! It's so great to be in a group with you. Did you see that new movie that came out this weekend?
+
+TUTOR: Let's try to look at the assignment.
+
+STUDENT: Yeah, we will in a second. I'm just easily distracted today. But seriously, the ending of that movie was crazy, right?
+
+TUTOR: Keep trying to work on the project.
+
+STUDENT: I'm trying, but I just have a total lack of focuses right now. Anyway, what are you guys doing after school today?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Collaborative projects in a high school social studies classroom",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "High school social studies classroom",
+      "materials": "",
+      "social_setting": "Mixed-age groups of 2-3",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When student groups demonstrate high social interaction that is not academically focused",
+      "observable_behavior": "Having social conversations that were not academically focused",
+      "internal_state": "Lack of focuses or easily distracted",
+      "related_quotes": [
+        "lack of focuses",
+        "easily distracted"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Walking around and observing each group",
+        "observable_behavior": "Maintaining frequent to constant positive communication; conversations were lighthearted and they showed a respect for one another",
+        "internal_state": "Lack of focuses or easily distracted",
+        "related_quotes": [
+          "lack of focuses",
+          "easily distracted"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

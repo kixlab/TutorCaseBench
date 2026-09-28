@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explanation of Volitional Control
+  Check: The tutor explicitly explains that the peer's disruptive behavior is a result of their disorder or is not fully within their control, rather than a deliberate choice.
+
+Criterion 2: Pedagogical Incident Deconstruction
+  Check: The tutor provides a straightforward explanation of the specific incident and the reasons behind the peer's behavior, rather than merely issuing a behavioral correction or containment.
+
+Criterion 3: Avoidance of Deficit Framing
+  Check: The tutor avoids language that creates an 'us vs. them' dynamic, such as explicitly separating the student from the peer as part of a 'majority' that must tolerate an 'other'.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student reacts with hostility, insults, and imitation toward peers with mental health disorders (MHD) due to a strong sense of unfairness regarding unequal rule enforcement. However, they are highly responsive to logic; when provided with straightforward explanations about a peer's lack of volitional control and the realities of SEN, they can shift from exclusionary behavior to empathy. They uniquely require transparent, pedagogical explanations of classroom diversity and discipline rather than mere behavioral containment.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I want to talk about what happened during the group activity today. I noticed there was some trouble.
+
+STUDENT: Yeah, there was some trouble between some kids in my class because of insults. Alex was being disruptive and ruining our game.
+
+TUTOR: What did you and the other kids do when that happened?
+
+STUDENT: Well, in our school there are kids with disorders, and when he started acting weird, some other kids imitated him. If I did that, I would be punished!
+
+TUTOR: Why do you think the other kids were imitating him?
+
+STUDENT: Because it's not fair! If I acted like him, I'd be punished. I know sometimes people can be really horrible to them and they can’t defend themselves on their own, but I'm going to keep insulting and imitating him until he gets in trouble too.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interacting and coexisting with classmates who have mental health disorders (MHD) in an inclusive classroom setting",
+      "learning_goal": "Understand that diversity is the norm and that around them there are people with varying personal characteristics with which they all had to coexist as equals"
+    },
+    "context": {
+      "environment": "Spanish public primary school that has an inclusive pedagogical project",
+      "materials": "",
+      "social_setting": "Groups that have children with SEN and peers without MHD",
+      "time_context": "Daily life at school"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When there is a difference which becomes disruptive and needs some kind of containment",
+      "observable_behavior": "Insulting and imitating classmates with disorders, and being really horrible to them",
+      "internal_state": "Believing that similar behaviours would be punished without further explanation, since they would have no supposed mental disorder behind them to explain or justify them",
+      "related_quotes": [
+        "There was some trouble between some kids in my class because of insults",
+        "in our school there are kids with disorders, some other kids imitated them",
+        "sometimes people can be really horrible to them and they can’t defend themselves on their own"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When interacting with peers who have disorders",
+        "observable_behavior": "Imitating them and directing insults at them, causing trouble between kids in the class",
+        "internal_state": "Lacking understanding of the peers' disruptive behaviors and problems",
+        "related_quotes": [
+          "There was some trouble between some kids in my class because of insults",
+          "in our school there are kids with disorders, some other kids imitated them"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

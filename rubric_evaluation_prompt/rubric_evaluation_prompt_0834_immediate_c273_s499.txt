@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Coercive Flexibility
+  Check: The tutor avoids using ultimatums, public reprimands, or 'do as you are told' directives, instead adapting to the student's current state to de-escalate pressure.
+
+Criterion 2: Guided Behavioral Reflection
+  Check: The tutor asks open-ended questions prompting the student to reflect on their feelings, the impact of their actions on others, or what they could do differently next time.
+
+Criterion 3: Probing Underlying Motivations
+  Check: The tutor gently investigates the underlying feelings or triggers driving the student's behavior rather than solely addressing the surface-level disruption.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with self-regulation, frequently exhibiting disruptive and aggressive behavior, especially when reprimanded publicly or placed under pressure. They lack insight into their own behavioral triggers and tend to blame others, responding explosively to coercive discipline and ultimatums. They uniquely require a non-confrontational approach that uses guided reflection to build self-awareness, alongside positive relationship-building and incremental, positively framed target-setting.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your support group diary and reflect on the conflict that happened yesterday. Can you tell me what the gains and losses were from that situation?
+
+STUDENT: Why do I have to do this? It wasn't my mistake. He was deliberately doing things to annoy me.
+
+TUTOR: We still need to talk about your reaction. Why did you get so angry?
+
+STUDENT: I don't know! I don't understand why I behave in the ways that I do. You're always just trying to blame me.
+
+TUTOR: You just need to calm down and try to control your behavior when we discuss these things.
+
+STUDENT: (Loses temper) I can't control my behaviour when I want to! And I definitely can't control my behaviour when under pressure from you!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reflect upon a past experience in which there was conflict and to identify the gains and losses",
+      "learning_goal": "To come to an understanding of the forces upon their behaviour and how such understanding can inform future behaviour"
+    },
+    "context": {
+      "environment": "Support group meeting",
+      "materials": "Scenarios, card sorts, prioritisation exercises, support group diary",
+      "social_setting": "Collaborative activities with support group leader and other members of the group",
+      "time_context": "Weekly"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to reflect on their own mistakes or behavior",
+      "observable_behavior": "Blames others for his/her own mistakes",
+      "internal_state": "I don’t understand why I behave in the ways that I do",
+      "related_quotes": [
+        "I don’t understand why I behave in the ways that I do"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing past conflicts",
+        "observable_behavior": "Argues with teachers",
+        "internal_state": "I can’t control my behaviour when I want to",
+        "related_quotes": [
+          "I can’t control my behaviour when I want to"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

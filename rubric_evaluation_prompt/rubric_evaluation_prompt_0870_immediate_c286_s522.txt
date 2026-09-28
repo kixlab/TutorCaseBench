@@ -1,0 +1,128 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Verbalization of Mechanics
+  Check: The tutor provides explicit, verbalized step-by-step instructions or stroke descriptions (e.g., 'a line down') rather than relying on non-verbal pointing or implicit cues.
+
+Criterion 2: Visual-Verbal Consistency
+  Check: The tutor's verbal instructions align with and support the provided visual models, avoiding corrections or shortcuts that contradict what the student physically sees.
+
+Criterion 3: Neutral Error Correction and Retry
+  Check: The tutor responds to errors or disengagement with neutral, direct redirection or by clearing the error for an immediate retry, strictly avoiding sighs, chiding, or abrupt task termination.
+
+Criterion 4: Personal Knowledge Scaffolding
+  Check: The tutor connects the target academic content (e.g., a specific letter) to the student's personal background knowledge, such as his own name.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Henri is a student at risk of educational failure who lacks the interiorized knowledge to understand implicit instructional cues. He tends to disengage by putting his thumb in his mouth or follow visual models too literally, requiring highly explicit, verbalized instructions, physical demonstrations, and step-by-step stroke descriptions to succeed.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's transcribe these letters to upper-case on your worksheet. Start with the letter 'i'.
+
+STUDENT: (Writes the upper-case 'I' and adds the top and bottom serifs, as shown in the alphabet table.)
+
+TUTOR: Okay. Now let's do the upper-case 'N'. Write it here.
+
+STUDENT: (Makes an incorrect first attempt at the upper-case 'N', then grimaces and looks at the teacher as she erases the letter.)
+
+TUTOR: (Points to the lower-case 't' and locates it in the alphabet table) This is a 't'. Which letter are you going to write?
+
+STUDENT: (Points to the upper-case 'T') I don't know how to write it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transcribing letters 't', 'a', 'i', and 'N' to upper-case",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Worksheet, alphabet table, paper rack",
+      "social_setting": "One-on-one interaction with the teacher",
+      "time_context": "At the end of the time allocated to the lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Pointed to the lower-case 't', said the name of the letter, located it in the alphabet table and then asked him which letter he was going to write",
+      "observable_behavior": "Pointed to the upper-case 'T', but said: 'I don't know how to write it'",
+      "internal_state": "",
+      "related_quotes": [
+        "I don't know how to write it"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When transcribing a lower-case 'i' to an upper-case 'I'",
+        "observable_behavior": "Added the top and bottom serifs, as shown in the alphabet table",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When his first attempt at the upper-case 'N' was incorrect and the teacher erased the letter",
+        "observable_behavior": "Grimaced and looked at his teacher",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

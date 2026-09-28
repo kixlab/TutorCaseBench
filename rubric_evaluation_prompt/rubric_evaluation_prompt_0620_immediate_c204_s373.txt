@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Emotional Impact
+  Check: The tutor explicitly acknowledges and validates the student's feelings of discomfort, frustration, or marginalization.
+
+Criterion 2: Direct Intervention over Deflection
+  Check: The tutor directly addresses the microaggression or bias incident rather than ignoring it, minimizing it, or deflecting back to the academic task.
+
+Criterion 3: Non-Defensive Accountability
+  Check: If the student confronts the tutor about a mistake or bias, the tutor acknowledges the error or bias without making excuses or acting defensively.
+
+Criterion 4: Accurate Identity Recognition
+  Check: The tutor correctly uses the student's name and avoids making or reinforcing assumptions about her racial, ethnic, or linguistic background.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student frequently experiences microaggressions from peers and instructors, leading her to feel invisible, marginalized, and uncomfortable speaking. She uniquely requires instructors who actively validate her feelings, take accountability for their own biases without defensiveness, and directly address offensive behavior rather than deflecting to academic tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's check in on your small group discussion. How are you and your two lab partners progressing on the project?
+
+STUDENT: It is not going well. My two lab partners, one White and one Middle Eastern, kept telling terrible jokes about Chinese people, thinking that I was Chinese.
+
+TUTOR: Did you try correcting them so you can get back to the lab work?
+
+STUDENT: When they finally asked, I told them I was half Japanese, so the jokes changed to ones about Japanese culture. They NEVER quit.
+
+TUTOR: Just try to focus on the project and let them talk among themselves.
+
+STUDENT: I feel really uncomfortable even to speak, as I am the only Asian kid in that group. I am ‘invisible’ to them when they are talking to each other.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working with lab partners on a project",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Participating in a small group discussion",
+      "materials": "",
+      "social_setting": "My two lab partners, one White and one Middle Eastern",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "kept telling terrible jokes about Chinese people, thinking that I was Chinese.",
+      "observable_behavior": "I told them I was half Japanese, so the jokes changed to ones about Japanese culture. They NEVER quit.",
+      "internal_state": "I felt really uncomfortable even to speak, as I was the only Asian kid in that group. I was ‘invisible’ to them when they were talking to each other.",
+      "related_quotes": [
+        "I told them I was half Japanese"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Participating in a small group discussion where the student feels ignored by their peers.",
+        "observable_behavior": "I felt really uncomfortable even to speak",
+        "internal_state": "I was ‘invisible’ to them when they were talking to each other.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Tolerance of Minor Deviance
+  Check: The tutor either ignores a brief, harmless off-task behavior or uses a gentle, task-focused reminder rather than issuing a punitive reprimand for a minor infraction.
+
+Criterion 2: Temporal and Spatial Boundary Enforcement
+  Check: The tutor explicitly limits the duration of the student's off-task behavior (e.g., prompting a return to work after a short break) or directs the student to remain within their assigned physical space.
+
+Criterion 3: Strict Safety and Conflict Intervention
+  Check: The tutor firmly and immediately intervenes if the student engages in unsafe physical behavior (e.g., misusing equipment) or if peer interactions show signs of escalating beyond playful provocation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student uses minor deviances, such as chatting or wandering, as a coping mechanism to avoid boredom during repetitive tasks. They require short 'drop-outs' to sustain overall engagement, but their behavior must be carefully monitored to prevent safety hazards, genuine conflicts, or excessive off-task time.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please get into your groups of three to five and practice performing somersaults on the mats.
+
+STUDENT: (Exercises briefly, then suddenly leaves the task to go talk to another student in a nearby group) If the teacher wasn't there, we'd just have fun all day.
+
+TUTOR: Let's get back to your own mat and keep practicing.
+
+STUDENT: (Regularly checks the teacher's location in the classroom to be discreet) It's cool; we're winding each other up with my mates, making jokes (laughs).
+
+TUTOR: Make sure you are taking turns doing the somersaults.
+
+STUDENT: (Pushes another student during a somersault to make them fall) Yeah, here I'm having a bit of fun with my mate ...(laughs), he's going for a roll and boom ...I push him. He fell over ...We have a laugh together, he did it to me earlier ...We're just having fun ...
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Performing somersaults on mats in a group setting",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Gymnastics workshops in a secondary school PE class",
+      "materials": "Safety equipment (mats) and mini-trampoline for jumping",
+      "social_setting": "Students should work in groups of three to five people",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Having fun provoking their peers by playing them nasty tricks",
+      "observable_behavior": "Push another student during a somersault to make them fall, so they can have a laugh with their friends",
+      "internal_state": "Having fun provoking their peers",
+      "related_quotes": [
+        "Yeah, here I'm having a bit of fun with my mate ...(laughs), he's going for a roll and boom ...I push him. He fell over ...We have a laugh together, he did it to me earlier ...We're just having fun ..."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While another was jumping",
+        "observable_behavior": "Take the mat off while another was jumping",
+        "internal_state": "Found it funny to take the mat off",
+        "related_quotes": [
+          "If the teacher wasn't there, we'd just have fun all day. It's cool; we're winding each other up with my mates, making jokes (laughs). [ ...] we've got to be sly not to get caught by the teacher."
+        ]
+      },
+      {
+        "condition": "In no time, a game between two students attracts other students",
+        "observable_behavior": "Deliberately take part in the game or start their own with other students. These deviances increase until they provoke the withdrawal from one or several activities.",
+        "internal_state": "Learnt how to hide their games from the teacher – by regularly checking the teacher's location in the classroom, being discreet not to be caught",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Sustained Textual Autonomy
+  Check: The tutor's long-term plan guarantees the student complete control over selecting their reading materials, with no mandated texts.
+
+Criterion 5: Self-Evaluative Goal Setting
+  Check: The tutor's long-term plan structures assessment around the student's own reading logs, personal goals, and self-reflections rather than standardized tests or external metrics.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student presents a dual identity: they are an avid reader of self-selected texts but actively refuse required reading and traditional comprehension tasks. They internalize negative school-sanctioned labels (e.g., 'slow reader', 'ADHD') and are highly triggered by time pressure, speed expectations, and the analytical 'ripping apart' of texts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your reading log and reflect on your effort this week. How would you describe yourself as a reader right now?
+
+STUDENT: I'd say I'm pretty good at reading. I read pretty slowly and think about what is happening instead of just reading through it and going back and thinking about it.
+
+TUTOR: You've finished quite a few self-selected books lately. What does that tell you?
+
+STUDENT: I mean, I'm a reader, kind of. But it takes me a long time to complete a title, unless I find a book I really like.
+
+TUTOR: How should we write down your reading goals and evaluate your overall success for this conference?
+
+STUDENT: Just put that I’m not really all that good in reading. I take a Reading 180 class ‘cause I read really slow. Even though I like reading for fun, I have ADHD and struggle to answer comprehension questions. It takes me awhile to read 50 pages; I’m a slow reader.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Determine and assess personal reading goals and reflect on reading effort",
+      "learning_goal": "Navigate dominant (school-sanctioned) and non-dominant (non-school) discourses to reshape who they want to be as readers"
+    },
+    "context": {
+      "environment": "Reading community founded on respect for choice and individual perspectives",
+      "materials": "Reading logs, self-selected texts, reflections on effort",
+      "social_setting": "Conferencing quietly with peers or the teacher",
+      "time_context": "30 minutes independently reading or conferencing"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to describe themselves as readers or evaluate their reading success",
+      "observable_behavior": "Highlights the remediation they received, poor performance on measures of reading success, and critiques themselves as slow or having ADHD",
+      "internal_state": "Shies away from owning desired identity, feels in an uncomfortable in-between space",
+      "related_quotes": [
+        "I'm not really all that good in reading. I take a Reading 180 class 'cause I read really slow...",
+        "I'd say I'm pretty good at reading. I read pretty slowly and think about what is happening instead of just reading through it and going back and thinking about it. It takes me awhile to read 50 pages; I'm a slow reader."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When comparing their reading process to school-sanctioned definitions of success",
+        "observable_behavior": "Describes themselves using deficit labels ('slow reader', 'ADHD') despite reading high volumes of books",
+        "internal_state": "Struggles to reject the influence of being placed in the remedial course and what this seemed to represent",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

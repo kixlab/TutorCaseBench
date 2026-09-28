@@ -1,0 +1,132 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Theatrical Validation of Engagement
+  Check: The tutor's response includes exaggerated, highly visible, or public praise and acknowledgment when the student is on task.
+
+Criterion 2: Strategic Ignorance of Minor Infractions
+  Check: The tutor deliberately ignores or avoids verbally correcting minor, non-dangerous off-task behaviors (e.g., a quick unauthorized jump or brief distraction).
+
+Criterion 3: High Threshold for Explicit Discipline
+  Check: The tutor only issues direct reprimands or stops the activity if the student's behavior becomes physically harmful to others, unsafe, or excessively prolonged.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student rapidly alternates between disruptive, transgressive play and ostentatious task engagement, seeking public validation when working but reacting with anger to overt monitoring or frequent reprimands. They uniquely require a delicate balance of theatrical praise for compliance, strategic ignorance of minor misbehaviors, and covert monitoring, with explicit discipline reserved strictly for unsafe or prolonged disruptions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, we are at the 'Jumping over' workshop. Please line up and practice your straight jumps over the horse.
+
+STUDENT: Teacher, look! I'm doing the exercise. Is it good? I need help for the stall turn so you can see I'm working!
+
+TUTOR: Yes, that is fine. Keep practicing your jumps while I go check on the other group.
+
+STUDENT: (Looks towards the teacher) There I make the jump, it's easy, I'm going to have fun. (Insults Aris as he prepares to jump over the horse, causing Aris to miss and fall).
+
+TUTOR: What is going on over there? Please just do the straight jumps like I asked.
+
+STUDENT: (Sees the teacher leaving) The teacher can't see us, he's looking in the other direction. Let's play at who will do the most spectacular jump! (Attempts a somersault instead of a straight jump).
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Executing a jump in the 'Jumping over' workshop and stall turn",
+      "learning_goal": "straight jumps"
+    },
+    "context": {
+      "environment": "Gymnastics classes, organized into small workshops... systematically organized the workshops along the wall of the gym",
+      "materials": "horse",
+      "social_setting": "Waiting in line at the 'Jumping over' workshop while the teacher is occupied with another group.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "I see the teacher leaving... he's looking in the other direction",
+      "observable_behavior": "take the opportunity to play a little bit with my friend Alexis, frequently tried somersaults even though the teacher asked them for 'straight jumps'",
+      "internal_state": "The teacher can’t see us, he’s looking in the other direction.",
+      "related_quotes": [
+        "I’m working ...and here I see the teacher leaving, so I take the opportunity to play a little bit with my friend Alexis. The teacher can’t see us, he’s looking in the other direction."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "then I see the teacher coming",
+        "observable_behavior": "so I do the exercise and I take the opportunity to ask him if it’s good., calling the teacher so he can see me working. I ask him for help for the stall turn",
+        "internal_state": "I want to be sure ...and I want to show him that I’m working !",
+        "related_quotes": [
+          "Here, we are playing (they play at who will do the most spectacular jump), then I see the teacher coming so I do the exercise and I take the opportunity to ask him if it’s good.",
+          "Yes, I know, but I want to be sure ...and I want to show him that I’m working !",
+          "Here, I’m calling the teacher so he can see me working. I ask him for help for the stall turn ( ...), so he can’t say I’m not working. I show him I’m working and he’s happy."
+        ]
+      },
+      {
+        "condition": "When Aris is preparing to make his jump over the horse",
+        "observable_behavior": "insults Aris when Aris is preparing to make his jump over the horse. Aris misses his jump and falls in the reception, which causes the hilarity of the group., tries to flee Aris, who pursues him. Aris catches him and gives him a violent blow on the shoulder. Soufiane shouts while laughing 'Stop, stop !'",
+        "internal_state": "There I make the jump, it’s easy, I’m going to have fun.",
+        "related_quotes": [
+          "There I make the jump, it’s easy, I’m going to have fun.",
+          "I see where the teacher is (if he’s far away) so I can fool around with my friend (Aris)."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

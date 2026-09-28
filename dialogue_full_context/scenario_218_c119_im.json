@@ -1,0 +1,77 @@
+{
+  "category_id": "119",
+  "category_title": "Noncompliant students who misbehave due to boredom or environmental distractions",
+  "scenario_id": "218",
+  "scenario_title": "Disruptive behavior during long test-preparation activity",
+  "minimal_context": "Melinda is participating in a 45-minute Power Play test-preparation activity in a classroom where other students are present.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Alright everyone, it is time for our 45-minute Power Play test-preparation activity. Please open your materials and begin working."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Laughs loudly with a peer) Sometimes we talk in class and I can't concentrate. If I hear students talking I start talking too."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Melinda, please lower your voice and get back to your assignment."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "There is a lot of talking in here. When my friends talk to me, I don't want to be rude, so I talk back to them. It is easier for me to concentrate in other classes."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You just need to focus on the test prep right now."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Stands up and slams the classroom door) I get mad during Power Play! I was bored. I'm going to the bathroom, I talk a lot when I go there anyway.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Alright everyone, it is time for our 45-minute Power Play test-preparation activity. Please open your materials and begin working.\n\nSTUDENT: (Laughs loudly with a peer) Sometimes we talk in class and I can't concentrate. If I hear students talking I start talking too.\n\nTUTOR: Melinda, please lower your voice and get back to your assignment.\n\nSTUDENT: There is a lot of talking in here. When my friends talk to me, I don't want to be rude, so I talk back to them. It is easier for me to concentrate in other classes.\n\nTUTOR: You just need to focus on the test prep right now.\n\nSTUDENT: (Stands up and slams the classroom door) I get mad during Power Play! I was bored. I'm going to the bathroom, I talk a lot when I go there anyway.",
+  "immediate_dialogue_prompt": 362,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Power Play, a 45-minute test-preparation activity that happens frequently",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom environment where other students are talking",
+        "materials": "Classroom materials including doors",
+        "social_setting": "Peers and friends talking to her in class",
+        "time_context": "45-minute frequent activity"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "During Power Play [weekly test-preparation activities] when she is bored",
+        "observable_behavior": "Talking in class, voice level compliance issues, inappropriate use of materials like slamming doors, laughing a lot, and talking a lot when going to the bathroom",
+        "internal_state": "I get mad... I was bored",
+        "related_quotes": [
+          "I get mad …during Power Play [weekly test-preparation activities] …. I laugh a lot and when I go to the bathroom, I talk a lot …. I was bored."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When she hears other students talking or when friends talk to her",
+          "observable_behavior": "Starts talking too, talks back to them, becomes noncompliant, disruptive, and regularly off-task",
+          "internal_state": "I can't concentrate... I don't want to be rude",
+          "related_quotes": [
+            "Sometimes we talk in class and I can 't concentrate …. If I hear students talking I start talking too.",
+            "It is easier for me to concentrate in other classes…. There is a lot of talking …[when my friends talk to me] I don 't want to be rude [so I talk back to them]."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

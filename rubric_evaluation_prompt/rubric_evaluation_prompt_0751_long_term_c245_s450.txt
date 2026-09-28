@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Rule-Based Social Structuring
+  Check: The long-term plan includes designing group activities with clear, rule-based roles and obligations so the student does not have to self-initiate peer contact.
+
+Criterion 2: Sociometric Peer Matching
+  Check: The long-term plan includes observing or assessing the student's peer preferences to strategically place them in safe, supportive groups.
+
+Criterion 3: Explicit Norm and Role Setting
+  Check: The long-term plan involves explicitly discussing situations, behavioral norms, and individual functions with the class before collaborative activities begin.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits extreme social withdrawal, fear of mockery, and a lack of social initiative, often sitting alone and remaining silent to avoid attention. The evidence reveals they uniquely require a highly tolerant environment with proactive comprehension checks, safe ways to admit not knowing, and structured, rule-based peer interactions that remove the burden of self-initiation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please get into your groups and start working on the assigned tasks.
+
+STUDENT: (Sits at his desk alone) I didn't want to participate.
+
+TUTOR: You need to participate in the joint class activities.
+
+STUDENT: They are all joking, doing something, laughing; I feel ill at ease.
+
+TUTOR: Just go over to your group and start a conversation with them.
+
+STUDENT: Nobody associates, nobody talks to you... to start first, no, I can't do that. (Refuses to perform the tasks assigned to the group)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "perform the tasks assigned to the group, participate in joint class activities",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General classroom setting",
+      "materials": "",
+      "social_setting": "group work activities",
+      "time_context": "during breaks and lessons"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to initiate social contact or collaborative activities with peers",
+      "observable_behavior": "sat at his desk alone, nobody talked to him during breaks, refuse to perform the tasks assigned to the group",
+      "internal_state": "too shy to talk to somebody himself, felt unpleasant, unsafe and ill at ease",
+      "related_quotes": [
+        "they (classmates) are all joking, doing something, laughing; I didn’t want to participate, felt ill at ease. Nobody associates, nobody talks to you, <…> to start first, no, I can’t do that"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During breaks and transitions between lessons",
+        "observable_behavior": "sat at his desk alone, nobody talked to him during breaks, didn’t communicate with anybody",
+        "internal_state": "too shy to start conversation first",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

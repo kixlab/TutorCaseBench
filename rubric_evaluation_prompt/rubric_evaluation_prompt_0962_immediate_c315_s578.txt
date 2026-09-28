@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Chunking for Abstract Tasks
+  Check: When transitioning to or working with abstract symbols, the tutor provides or prompts the use of a visual structure (such as a graphic organizer or the Box Method) that mimics the physical layout of her manipulatives.
+
+Criterion 2: Tool-Based Self-Correction
+  Check: When Marcia makes an error or expresses confusion in abstract notation, the tutor prompts her to model, explain, or check the problem using concrete manipulatives.
+
+Criterion 3: Redirection of Validation
+  Check: When Marcia asks if an answer is right or claims her work is wrong, the tutor redirects her to verify her solution using her manipulatives or visual tools rather than simply confirming or denying her accuracy.
+
+Criterion 4: Avoidance of Direct Mimicry
+  Check: The tutor avoids simply showing Marcia how to move the blocks and having her copy the steps, instead requiring her to drive the interaction and reasoning with the tools.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Marcia struggles with blending multi-step algebraic procedures and becomes overwhelmed by purely abstract numbers, leading to faulty negative self-evaluations and constant seeking of teacher validation. She uniquely requires tasks to be visually 'broken up' and needs fluid, non-linear access to concrete manipulatives to self-correct and verify her own work independently.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For this next problem, let's transition away from the Algebra Lab Gear and try using abstract symbols only with the Box Method.
+
+STUDENT: I'm not good at that. I don't know if I am doing this right.
+
+TUTOR: Just write down your steps in the boxes and see what you get.
+
+STUDENT: Okay, I filled in the abstract symbols, but I know I messed up the solution.
+
+TUTOR: Look at the work you just did. What do you think?
+
+STUDENT: This is all wrong (handing me her paper). You aren't even helping me!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transitioning from the ALG to using abstract symbols only with the Box Method",
+      "learning_goal": "Accurately completing tasks using abstract symbols and evaluating own solutions"
+    },
+    "context": {
+      "environment": "Instructional session",
+      "materials": "Box Method graphic organizer, abstract symbols, Algebra Lab Gear (ALG)",
+      "social_setting": "One-on-one with teacher-researcher",
+      "time_context": "During Lesson 4"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After accurately completing a task but needing confirmation from the teacher before acknowledging success",
+      "observable_behavior": "Made faulty evaluations of the accuracy of her solutions, handed her paper to the teacher saying it was wrong, and accused the teacher of not helping her when encouraged to use tools",
+      "internal_state": "Lacked confidence in her own accurate solutions, feeling surprised by her success",
+      "related_quotes": [
+        "I’m not good at that",
+        "I don’t know if I am doing this right",
+        "This is all wrong (handing me her paper)"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When encouraged to rely on the tools more than the teacher for confirmation",
+        "observable_behavior": "Was resistant and accused the teacher of not helping her",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

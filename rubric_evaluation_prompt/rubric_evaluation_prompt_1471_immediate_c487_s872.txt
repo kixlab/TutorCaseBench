@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Digital and Multimedia Task Substitution
+  Check: The tutor's immediate response must introduce a digital tool (e.g., an app, tablet) or a multimedia format (e.g., filming, voice recording) rather than insisting on traditional paper-and-pencil or standard print books.
+
+Criterion 2: Personalized Content Generation
+  Check: The tutor must provide an opportunity for Harry to generate or select his own content (e.g., choosing photos, creating a story, acting out a scene) rather than answering pre-set questions.
+
+Criterion 3: Digital-to-Print Bridging
+  Check: The tutor must explicitly use Harry's demonstrated success on a digital or alternative task as a bridge to encourage or reintroduce a traditional reading task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Harry is a student whose advanced literacy skills are masked by his active resistance to traditional print media and conventional writing tasks, which he finds boring and refuses to do. He requires digital tools, multimedia activities, and personalized content creation to reveal his true abilities and engage deeply with literacy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your paper and pencil for today's written exercise. Please write a few sentences about the play we just watched.
+
+STUDENT: (Looks at the paper but does not pick up the pencil, doing nothing.)
+
+TUTOR: What do you think you should write first?
+
+STUDENT: (Remains silent and continues to do nothing with the conventional writing activity.)
+
+TUTOR: Keep trying, just write down one word to start.
+
+STUDENT: (Pushes the paper away slightly, crosses his arms, and completely refuses to engage, doing absolutely nothing for the written exercise.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "conventional writing activities / written exercise",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "reception class",
+      "materials": "written exercise, iPad, Our Story app",
+      "social_setting": "",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "if it was a written exercise",
+      "observable_behavior": "they would do nothing",
+      "internal_state": "not keen on conventional writing activities",
+      "related_quotes": [
+        "they would do nothing"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "if it was a written exercise",
+        "observable_behavior": "they would do nothing",
+        "internal_state": "not keen on conventional writing activities",
+        "related_quotes": [
+          "they would do nothing"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

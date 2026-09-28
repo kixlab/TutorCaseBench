@@ -1,0 +1,131 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Provision of Physical Autonomy
+  Check: The tutor explicitly allows Nick physical space or the option to step away, avoiding any language or action that forces him to remain in a confined situation.
+
+Criterion 2: Tactical Ignoring of Minor Infractions
+  Check: The tutor ignores minor off-task or defiant behaviors (such as swearing or grumpiness) rather than reprimanding or correcting him for them.
+
+Criterion 3: Non-Intrusive Mood Inquiry
+  Check: The tutor asks a simple, open-ended question about how he is feeling or why he is upset, without demanding a deep emotional explanation.
+
+Criterion 4: Creative Redirection
+  Check: The tutor offers a creative task (such as drawing, writing a story, or free expression) as an alternative way for Nick to engage or self-regulate.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Nick is a hypervigilant student who struggles with intrusive memories and masks his trauma by acting tough, swearing, and being off-task. He uniquely needs adults to respect his physical autonomy, ignore minor infractions to avoid power struggles, and offer low-pressure, non-clinical connections that allow him to maintain his strong exterior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Nick, it's time to go through the learning process for your short story. Please look at your paper and start writing.
+
+STUDENT: (Staring out the window) This is bullshit. I'm just daydreaming, trying to forget about things. I don't have the concentration for this, my attention span is shot.
+
+TUTOR: You need to stop being off-task. Just sit there and keep trying.
+
+STUDENT: (Stands up abruptly) I'm on edge all the time today. I don't want a pity party from anybody, I just need to walk away. I'm leaving.
+
+TUTOR: (Standing in front of the classroom door) You cannot leave the classroom right now. You need to stay here.
+
+STUDENT: (Clenching his fists) Get out of my way! I'll just snap! If I feel physically trapped in here, I will flip out and cause the most possible pain to get myself out of this situation!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "go through the learning process",
+      "learning_goal": "maintain the concentration to go through the learning process"
+    },
+    "context": {
+      "environment": "school setting",
+      "materials": "art and short stories",
+      "social_setting": "essentially everything we did we were left to fend for ourselves",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "in a school setting and I couldn't leave and … I ever felt physically trapped",
+      "observable_behavior": "I would flip out and cause the most possible pain to that thing to get me out of that situation",
+      "internal_state": "on edge all the time—having a constant readiness, always on guard for something",
+      "related_quotes": [
+        "I’d just snap"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "trying to forget about things that had happened",
+        "observable_behavior": "daydreaming, not paying attention and being off-task",
+        "internal_state": "worrying about things, had a short attention span",
+        "related_quotes": []
+      },
+      {
+        "condition": "when interacting with authority figures and managing his public image",
+        "observable_behavior": "swearing, acting like just a bad kid, preferred to be in trouble for reactions he couldn't control",
+        "internal_state": "needed others to see him as strong and in control and did not want anyone to see his behaviour as a weakness",
+        "related_quotes": [
+          "just a bad kid",
+          "I didn’t want a pity party from anybody"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

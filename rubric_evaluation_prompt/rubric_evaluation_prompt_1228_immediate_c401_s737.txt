@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Unconditional Answer Validation
+  Check: The tutor's response must explicitly accept, explore, or validate the student's contribution without dismissing it as silly or incorrect.
+
+Criterion 2: Absence of Condescension
+  Check: The tutor's response must be completely free of surprise, judgment, or language implying the student should already know the answer.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a history of academic failure and lacks basic academic or cultural knowledge, often responding to direct questions with shrugs, vague answers, or conceptual confusion (e.g., confusing race and religion). They uniquely require an environment of absolute non-judgment where their answers are taken seriously to prevent feelings of ridicule and subsequent withdrawal.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are discussing the Bill of Rights and religious freedom. The Lord's prayer is from what religion? Who says the Lord's prayer?
+
+STUDENT: Church people.
+
+TUTOR: From what religion? Have you ever said the Lord's prayer?
+
+STUDENT: (Shrugs) Yeah.
+
+TUTOR: What's your religion?
+
+STUDENT: Black?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a whole-class lesson about the Bill of Rights led by Mr. Strong; the teacher is asking questions about the Lord's Prayer and religious affiliation to explain the concept of religious freedom.",
+      "learning_goal": "discerning the difference between his ethnicity and his religion"
+    },
+    "context": {
+      "environment": "Community Day School classroom",
+      "materials": "",
+      "social_setting": "whole-class lesson",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Answering direct questions from the teacher about personal background and religious concepts during a classroom discussion about the Bill of Rights.",
+      "observable_behavior": "Confuses racial identity with religious identity, answering 'Black?' when asked 'What's your religion?'",
+      "internal_state": "not discerning the difference between his ethnicity and his religion",
+      "related_quotes": [
+        "Black?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Responding to teacher's initial questions about religious practices in a classroom setting",
+        "observable_behavior": "uses a shrug to indicate lack of knowledge",
+        "internal_state": "did not know something",
+        "related_quotes": []
+      },
+      {
+        "condition": "When asked who says the Lord's prayer",
+        "observable_behavior": "provides a vague answer",
+        "internal_state": "",
+        "related_quotes": [
+          "Church people."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

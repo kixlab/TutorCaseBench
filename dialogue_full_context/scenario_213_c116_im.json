@@ -1,0 +1,74 @@
+{
+  "category_id": "116",
+  "category_title": "Struggling readers who use speech recognition to test and confirm their own diction",
+  "scenario_id": "213",
+  "scenario_title": "Persistent repetition to confirm diction during SR drafting",
+  "minimal_context": "Alyson is using speech recognition on an iPad in the writing center to dictate her version of Mary Had a Little Lamb.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's work on your version of Mary Had a Little Lamb using the speech recognition on your iPad."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Dictates into the iPad) Carla had a baby pit bull."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Go ahead and check what it typed."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Erases the transcription) It wrote 'hey baby pit bull.' (Dictates again) a baby pit bull."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Try it again."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Deletes the incorrect text again) a baby pit bull. (Erases the transcription and repeats dictating the same phrase 10 to 15 times to see her oral language transcribed accurately)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's work on your version of Mary Had a Little Lamb using the speech recognition on your iPad.\n\nSTUDENT: (Dictates into the iPad) Carla had a baby pit bull.\n\nTUTOR: Go ahead and check what it typed.\n\nSTUDENT: (Erases the transcription) It wrote 'hey baby pit bull.' (Dictates again) a baby pit bull.\n\nTUTOR: Try it again.\n\nSTUDENT: (Deletes the incorrect text again) a baby pit bull. (Erases the transcription and repeats dictating the same phrase 10 to 15 times to see her oral language transcribed accurately)",
+  "immediate_dialogue_prompt": 355,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "worked on her version of Mary Had a Little Lamb by dictating, \"Carla had a baby pit bull.\"",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "supervised writing center",
+        "materials": "SR on an iPad",
+        "social_setting": "",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "SR consistently wrote, \"Carla had hey baby pit bull.\"",
+        "observable_behavior": "Ten to 15 times, Alyson deleted the incorrect text and dictated, \"a baby pit bull.\"",
+        "internal_state": "She wanted to see her oral language transcribed accurately. SR was not being used to compose but to confirm her diction for a.",
+        "related_quotes": [
+          "a baby pit bull"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When SR was inaccurate",
+          "observable_behavior": "commonly erased inaccurate transcriptions and repeated dictations of single words, phrases, or sentences over 15 times",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

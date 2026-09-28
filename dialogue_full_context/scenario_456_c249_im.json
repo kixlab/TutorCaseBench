@@ -1,0 +1,72 @@
+{
+  "category_id": "249",
+  "category_title": "First-grade students who struggle with independent literacy tasks and prefer social or auditory reading",
+  "scenario_id": "456",
+  "scenario_title": "Independent writing of text connections at workstations",
+  "minimal_context": "The student is at a workstation during independent work time, tasked with writing a text-to-text connection to their book in their journal.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please sit at your workstation and write a connection to your book in your journal."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Stares at the blank journal page) I don't know how to write it by myself."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just think about what the book reminds you of and write it down."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Puts the pencil down and looks around the room) Can I just tell my partner about the book instead?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "No, this is independent work time. You need to write your connection."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Pushes the journal away, completely off-task, and starts playing with a shoelace instead of attempting to share the text-to-text connection.) I can't write it.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please sit at your workstation and write a connection to your book in your journal.\n\nSTUDENT: (Stares at the blank journal page) I don't know how to write it by myself.\n\nTUTOR: Just think about what the book reminds you of and write it down.\n\nSTUDENT: (Puts the pencil down and looks around the room) Can I just tell my partner about the book instead?\n\nTUTOR: No, this is independent work time. You need to write your connection.\n\nSTUDENT: (Pushes the journal away, completely off-task, and starts playing with a shoelace instead of attempting to share the text-to-text connection.) I can't write it.",
+  "immediate_dialogue_prompt": 759,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "write a connection to their book",
+        "learning_goal": "share text-to-text connections"
+      },
+      "context": {
+        "environment": "Workstations",
+        "materials": "journals, book",
+        "social_setting": "independent work time",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "instructed to write a connection to their book",
+        "observable_behavior": "struggle with writing independently",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "working on their spelling words or writing in journals",
+          "observable_behavior": "most likely to be off-task",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

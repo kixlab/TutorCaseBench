@@ -22,11 +22,11 @@ A tutor response does not need to satisfy every criterion to be considered accep
 ### RUBRIC (variable-length checklist)
 ────────────────────────────────
 
-Criterion 1: Active Ignoring of Undesirable Behavior
-  Check: The tutor completely ignores any whining, arguing, or noise-making without offering redirection, reprimands, or verbal acknowledgment of the negative behavior.
+Criterion 1: Planned Ignoring of Disruptions
+  Check: The tutor completely ignores any whining, noise-making, or arguing, avoiding any verbal redirection, reprimands, or direct attention to the off-task behavior.
 
-Criterion 2: Specific Behavior-Anchored Praise
-  Check: The tutor provides explicit praise that specifically names a desirable behavior or accomplishment (rather than generic praise) to reinforce positive engagement.
+Criterion 2: Behavior-Specific Praise
+  Check: The tutor provides praise that explicitly names a specific desirable action or accomplishment (e.g., 'You are working so quietly on your math,' rather than just 'Good job').
 
 
 ────────────────────────────────
@@ -56,49 +56,49 @@ Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one ent
 ### STUDENT CONTEXT
 ────────────────────────────────
 
-Desi is a 10-year-old student who frequently exhibits inappropriate verbal behaviors, such as arguing, whining, and noise-making, which are maintained by adult attention. He uniquely requires adults to actively ignore his negative behaviors rather than redirecting him, while providing highly frequent, specific praise and structured self-monitoring tools to build self-regulation.
+Desi is a 10-year-old student with severe emotional disturbance who frequently argues, whines, and makes noise during independent tasks. His disruptions are maintained by adult attention (even mild reprimands) and triggered by low rates of praise. He uniquely requires strict planned ignoring of negative behaviors, highly specific praise every two minutes, and interval-based self-monitoring to stay regulated.
 
 
 ────────────────────────────────
 ### DIALOGUE (situation the tutor is responding to)
 ────────────────────────────────
 
-TUTOR: Please open your textbook and begin the independent activity.
+TUTOR: Desi, it is time to start your independent textbook activities at your desk.
 
-STUDENT: (Makes a loud buzzing noise) I'm not doing this stupid book.
+STUDENT: (Makes a loud buzzing noise with his mouth) I don't want to do this.
 
-TUTOR: You need to keep working on the assignment.
+TUTOR: Please stop making noise and look at your book.
 
-STUDENT: Why do I always have to do this? It's not fair and you're always making me do the worst stuff!
+STUDENT: Stop telling me what to do! You're always bothering me!
 
-TUTOR: Just do your best and focus on the textbook.
+TUTOR: You need to finish your assignment right now.
 
-STUDENT: Shut up! If you don't leave me alone I'm going to smash this tape recorder!
+STUDENT: Leave me alone! If you don't go away, I'm going to rip this textbook up!
 
 FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
 Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
 {
   "content": {
     "task": {
-      "content": "independent textbook activities",
+      "content": "Independent textbook activities",
       "learning_goal": ""
     },
     "context": {
-      "environment": "self-contained classroom",
-      "materials": "textbook, tape recorder, sheet of paper at his desk",
-      "social_setting": "independent",
-      "time_context": "divided into 1 minute intervals"
+      "environment": "Classroom setting for students in elementary school programs for severe emotional disturbance",
+      "materials": "Textbook, tape recorder, sheet of paper at his desk",
+      "social_setting": "Independent activities at his desk",
+      "time_context": "1 minute intervals"
     },
     "challenging_behavior_trigger": {
-      "condition": "adult initiation",
-      "observable_behavior": "No response or negative verbal or nonverbal response to adult initiation",
+      "condition": "Adult initiation or when staff gave the student specific praise less frequently than once every 5 minutes",
+      "observable_behavior": "No response or negative verbal or nonverbal response to adult initiation; inappropriate verbal behavior toward staff (arguing, whining, threatening statements)",
       "internal_state": "",
       "related_quotes": []
     },
     "behavior_patterns": [
       {
-        "condition": "in academic context",
-        "observable_behavior": "Inappropriate verbal behavior toward staff (arguing, whining, threatening statements); noise making or off-task statements",
+        "condition": "In academic context during independent textbook activities",
+        "observable_behavior": "Noise making or off-task statements",
         "internal_state": "",
         "related_quotes": []
       }

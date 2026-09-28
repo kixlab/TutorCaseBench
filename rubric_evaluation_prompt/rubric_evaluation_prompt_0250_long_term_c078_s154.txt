@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Phased Project Structuring
+  Check: The tutor's long-term plan breaks assignments or studying into smaller, distinct phases, each requiring its own deadline and evidence of completion.
+
+Criterion 2: Routine External Monitoring
+  Check: The tutor establishes a recurring, explicit system for checking the student's notebooks, agendas, or homework completion on a regular basis.
+
+Criterion 3: Collaborative Environment Tailoring
+  Check: The tutor includes a mechanism for regularly asking the student about their learning preferences or focus needs in order to adjust their ongoing study environment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with chronic procrastination, disorganization, and sustained mental effort, frequently becoming overwhelmed by large tasks and attributing their difficulties to 'laziness.' They lack internal self-regulation and agency, leading to lost assignments, crumpled papers, and last-minute emotional distress. To succeed, they uniquely require high levels of external monitoring, explicit instruction on how to organize, and large projects broken down into accountable, bite-sized phases.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your four-page research assignment. You have the instruction sheet and rubric here, and it needs to be completed.
+
+STUDENT: I started thinking about it pretty much right away when we got the sheet, but I haven't done the actual work. I guess I'm just lazy when it comes to tasks that take sustained mental effort.
+
+TUTOR: What are some ways you might improve your progress on this assignment?
+
+STUDENT: I mean, if I could just be more organized and do not procrastinate... Like, I just... like, I'll sit home... I've got, like, a four-page thing due in two days and I say I'm going to get it done, then next thing I know, it's 12:00 the day before and I don't have it done yet.
+
+TUTOR: Well, it is due tomorrow. Go ahead and start writing the four pages now.
+
+STUDENT: I can't, I'm completely daunted by the scope of this project! I started freaking out because it's 4 a.m., and it's due the next day, and I have no idea what I wrote... 'cause it's so late... so I burst out into tears and I ran downstairs and I was, like, crying to my mom.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Managing long-term projects and research assignments, such as a four-page assignment",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Responding to long-term assignments after receiving the instruction sheet/rubric",
+      "materials": "instruction sheet/rubric, four-page assignment",
+      "social_setting": "Working independently at home or in a tutoring session",
+      "time_context": "12:00 the day before it is due, or 4 a.m. the day it is due"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "being daunted by the scope of a project and tasks that involve sustained mental effort",
+      "observable_behavior": "procrastinate on the actual work and end up rushing to complete assignments by their deadlines, burst out into tears, crying to my mom",
+      "internal_state": "freaking out because it’s 4 a.m., and it’s due the next day, and I have no idea what I wrote",
+      "related_quotes": [
+        "I started freaking out because it’s 4 a.m., and it’s due the next day, and I have no idea what I wrote … ’cause it’s so late … so I burst out into tears and I ran downstairs and I was, like, crying to my mom.",
+        "Like, I just … like, I’ll sit home … I’ve got, like, a four-page thing due in two days and I say I’m going to get it done, then next thing I know, it’s 12:00 the day before and I don’t have it done yet."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When specifically prompted with a question regarding ways they might improve their grades",
+        "observable_behavior": "suggested ideas such as do not procrastinate, complete work, be more organized... but they did not embrace these ideas as things they would implement; used words such as 'if' and 'I could,' suggesting these were hypothetical plans",
+        "internal_state": "Not one student was convinced his or her grades would improve if he or she were to study more",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

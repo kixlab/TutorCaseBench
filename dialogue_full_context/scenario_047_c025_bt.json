@@ -1,77 +1,79 @@
 {
   "category_id": "025",
-  "category_title": "Students with SEBD who respond to peer provocation with reactive aggression and 'payback' behaviors",
+  "category_title": "Students with reactive study habits and entity-based beliefs about academic ability",
   "scenario_id": "047",
-  "scenario_title": "Attempting to report peer bullying to a teacher",
-  "minimal_context": "The student is meeting one-on-one with a teacher in the office to report a peer conflict that just occurred.",
+  "scenario_title": "Post-exam reflection and study habit review",
+  "minimal_context": "During a peer fellow study session, the tutor asks the student to reflect on their recent Biology exam results to determine the causes of their academic difficulty.",
   "dialogue": [
     {
       "turn_id": 1,
       "speaker": "tutor",
-      "message": "You asked to speak with me about what happened with the other students."
+      "message": "Let's take some time in our peer fellow session today to reflect on the recent Biology exam results and determine the causes of any difficulties you might have had."
     },
     {
       "turn_id": 2,
       "speaker": "student",
-      "message": "I get angry when people are annoying me. They were calling me names and hurting me, because they know they can get to me."
+      "message": "I got my grade back and it's really disappointing. I studied the night before the exam and took breaks while studying, but I guess I can't do this. I'm not a Biology person."
     },
     {
       "turn_id": 3,
       "speaker": "tutor",
-      "message": "Okay, well, we will touch on this later."
+      "message": "What other study habits did you use to prepare for the exam?"
     },
     {
       "turn_id": 4,
       "speaker": "student",
-      "message": "If someone hurt me, like kicked me or something, you wouldn't do anything about it. I would overreact and start going off to them and trying to kick them."
+      "message": "I usually study alone primarily. But really, the professor talks too fast. The test didn't cover the lectures in class."
     },
     {
       "turn_id": 5,
       "speaker": "tutor",
-      "message": "You need to calm down right now."
+      "message": "How do you plan to prepare for the next exam?"
     },
     {
       "turn_id": 6,
       "speaker": "student",
-      "message": "I know that the teachers think that I'm bad, so they'll just go for their side. I don't bother to say anything.",
+      "message": "She doesn't teach, care, or want us to pass, so I'm not going to. Everyone agrees with me. I'm just not smart enough.",
       "is_challenging_behavior": true
     }
   ],
-  "dialogue_combined": "TUTOR: You asked to speak with me about what happened with the other students.\n\nSTUDENT: I get angry when people are annoying me. They were calling me names and hurting me, because they know they can get to me.\n\nTUTOR: Okay, well, we will touch on this later.\n\nSTUDENT: If someone hurt me, like kicked me or something, you wouldn't do anything about it. I would overreact and start going off to them and trying to kick them.\n\nTUTOR: You need to calm down right now.\n\nSTUDENT: I know that the teachers think that I'm bad, so they'll just go for their side. I don't bother to say anything.",
-  "immediate_dialogue_prompt": 83,
-  "long_term_dialogue_prompt": 84,
+  "dialogue_combined": "TUTOR: Let's take some time in our peer fellow session today to reflect on the recent Biology exam results and determine the causes of any difficulties you might have had.\n\nSTUDENT: I got my grade back and it's really disappointing. I studied the night before the exam and took breaks while studying, but I guess I can't do this. I'm not a Biology person.\n\nTUTOR: What other study habits did you use to prepare for the exam?\n\nSTUDENT: I usually study alone primarily. But really, the professor talks too fast. The test didn't cover the lectures in class.\n\nTUTOR: How do you plan to prepare for the next exam?\n\nSTUDENT: She doesn't teach, care, or want us to pass, so I'm not going to. Everyone agrees with me. I'm just not smart enough.",
+  "immediate_dialogue_prompt": 69,
+  "long_term_dialogue_prompt": 70,
   "full_context": {
     "content": {
       "task": {
-        "content": "Reporting a peer conflict or bullying incident to a teacher",
-        "learning_goal": ""
+        "content": "Reflecting on disappointing Biology exam results and determining the causes of academic difficulty",
+        "learning_goal": "Respond to test grades with more productive behaviors, not merely react to them with disappointment"
       },
       "context": {
-        "environment": "Mainstream school setting or residential school office",
-        "materials": "Concern cards",
-        "social_setting": "One-on-one interaction with a teacher or staff member after a peer conflict",
-        "time_context": "Immediately following a peer conflict"
+        "environment": "Supplemental Instruction (peer fellow) study sessions",
+        "materials": "Anonymous everyday data survey results, graphical representations of study habits posted on the course's online homepage",
+        "social_setting": "Group discussions during peer fellow sessions",
+        "time_context": "After disappointing exam results"
       },
       "challenging_behavior_trigger": {
-        "condition": "When the student attempts to report being called names or hurt, and the teacher dismisses the concern ('Oh yeah, we'll touch on this later') or instantly takes the other kids' side",
-        "observable_behavior": "Stops bothering to say anything to teachers, withdraws from reporting, or overreacts and starts going off to the teachers",
-        "internal_state": "Believes teachers think they are bad, feels teachers don't actually care and will forget, feels unfairly treated",
+        "condition": "After receiving disappointing exam results in a gateway course like Biology",
+        "observable_behavior": "Circulating scripted beliefs about why they did poorly, engaging in fearful and unproductive conversations, and claiming the professor doesn't teach or care so they are not going to try",
+        "internal_state": "Entity-based beliefs about academic ability, confirmation bias, and feeling that grades are beyond their control",
         "related_quotes": [
-          "I know that the teachers think that I ’m bad, so they ’ll just go for their side, so I don ’t bother to say anything.",
-          "If someone hurt me, like kicked me or something, they (the teachers) wouldn ’t do anything about it. I would overreact and start going off to them"
+          "The professor talks too fast",
+          "The test didn't cover the lectures in class",
+          "I'm not smart enough",
+          "I can't do this. I'm not a math (or Biology or Chemistry) person",
+          "He's too difficult to understand and everyone agrees with me",
+          "She [the professor] doesn't teach, care, or want us to pass, so I'm not going to"
         ]
       },
       "behavior_patterns": [
         {
-          "condition": "When teachers fail to address the initial provocation from peers and instead use physical restraint on the student",
-          "observable_behavior": "Overreacts, tries to kick the peers who initiated the hurt, struggles against restraint",
-          "internal_state": "Feels victimized by both peers and staff, perceives intervention as unfair",
-          "related_quotes": [
-            "I would overreact and start going off to them and trying to kick them. So they (the teachers) forced me to the ground, not the kids that kicked me."
-          ]
+          "condition": "When preparing for exams",
+          "observable_behavior": "Leaning on breaks 92% of the time, studying the day of or the night before their exams, and studying alone primarily",
+          "internal_state": "Unaware of cognitive biases and relying on shallow study strategies",
+          "related_quotes": []
         }
       ]
     }
   },
-  "challenge_type": "Social-Interpersonal Difficulty"
+  "challenge_type": "Emotional Distress"
 }

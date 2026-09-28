@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Contextual Decoding
+  Check: The tutor's response demonstrates an attempt to decode Maliha's unclear speech or gestures by guessing or verifying her meaning based on the immediate context.
+
+Criterion 2: Choice-Based Prompting
+  Check: The tutor asks a question that provides two or more specific options or words for Maliha to choose from (e.g., 'Did X happen or did Y happen?').
+
+Criterion 3: Patient Scaffolding
+  Check: The tutor provides an open-ended prompt or acknowledges her attempt, and supplies a specific word or phrase to help complete her thought when she struggles.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Maliha is a persistent communicator who faces significant expressive language barriers, including stuttering, unclear pronunciation, and difficulty retrieving words. She compensates by using physical touch, gestures, and role-play to convey her meaning. She uniquely requires educators to act as 'living auxiliary tools' who decode her context, provide vocabulary choices, and prioritize shared meaning over articulation correction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is lunch time, please eat your food.
+
+STUDENT: (Trying to say something while her mouth is full) Aaaii Gaa …bee.
+
+TUTOR: What do you want?
+
+STUDENT: (Stutters and repeats sounds, appearing to struggle to find appropriate words to express herself)
+
+TUTOR: I don't understand what you are saying.
+
+STUDENT: (Trying to say something while her mouth is full) Gai …kb e …eed.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to request garlic bread while eating other items",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Meal table",
+      "materials": "Garlic bread, fish fingers, chicken nuggets, potato chips, vegetable rolls",
+      "social_setting": "Around the child, some other children were served garlic bread",
+      "time_context": "Lunch time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Trying to say something while her mouth was full and pronunciation was not clear enough",
+      "observable_behavior": "Saying 'Aaaii Gaa …bee' and 'Gai …kb e …eed [bread]'",
+      "internal_state": "Intended to have garlic bread",
+      "related_quotes": [
+        "Aaaii Gaa …bee.",
+        "Gai …kb e …eed [bread]."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When pronunciations of some words are not clear enough",
+        "observable_behavior": "Stutters and repeats words and sounds during communications",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

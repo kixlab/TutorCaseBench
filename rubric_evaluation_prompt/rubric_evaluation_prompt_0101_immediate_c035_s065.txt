@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Auditory and Sensory Management
+  Check: The tutor's immediate response mutes, disables, or explicitly directs the student away from auditory triggers (e.g., voice chat, loud background noises) rather than just asking them to focus.
+
+Criterion 2: Direct Visual or Physical Scaffolding
+  Check: The tutor provides a concrete, immediate visual or physical cue (such as placing a sticker, pointing, or highlighting) to guide the student's physical interaction with the interface.
+
+Criterion 3: Bypassing Complex Text and Audio
+  Check: The tutor explicitly instructs the student to ignore unnecessary text/pop-ups or provides a zero-text workaround, strictly avoiding long verbal or written explanations.
+
+Criterion 4: Environmental Distraction Redirection
+  Check: The tutor immediately separates the student from the distracting objects (e.g., moving them to a different virtual area) rather than just verbally prompting them to stop playing.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Child A is an 8-year-old with mild ASD and language delays who struggles with sensory sensitivities, fine motor control in virtual spaces, and short attention spans. They uniquely require highly simplified visual feedback, strict limits on task volume (max 6 items), and the immediate removal of auditory and environmental distractions to maintain engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please use the computer mouse to click on the OK bandage in the virtual health center.
+
+STUDENT: (Clicks here and there all over the screen) How many questions are left to answer?
+
+TUTOR: We still have a few more. Just try to click on the bandage.
+
+STUDENT: (Stops moving the mouse and stares at an English system pop-up message) What is this? Is this part of the learning material?
+
+TUTOR: You can ignore that message. Go ahead and click the bandage.
+
+STUDENT: (Unable to smoothly control the mouse to target the small OK bandage, repeatedly missing the trigger area) I can't do it. I am confused about what to do.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Using a computer mouse to click and interact with virtual objects in the kitchen (Lesson 1) and convenience store (Lesson 2)",
+      "learning_goal": "Completing the learning missions"
+    },
+    "context": {
+      "environment": "Virtual worlds",
+      "materials": "Computer mouse, screen, interactive 3D virtual objects, English-language system pop-up messages",
+      "social_setting": "Learned by playing individually",
+      "time_context": "In the first three lessons (in Cycle 1)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to click on a small trigger area (a single OK bandage)",
+      "observable_behavior": "Unable to smoothly control the mouse to click the virtual objects",
+      "internal_state": "Confused about their learning",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Navigating the first three lessons without the aid of on-screen reminders or progress indicators",
+        "observable_behavior": "Spent a lot of time on clicking here and there or asking teachers how many questions were left to answer",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "Encountering English-language system pop-up messages",
+        "observable_behavior": "Got stuck with it",
+        "internal_state": "Thinking that it was also a part of the learning material",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of External Evidence
+  Check: The tutor explicitly invites, accepts, or validates the student's prior knowledge or outside sources of evidence rather than restricting her solely to the text read so far.
+
+Criterion 2: Absence of Reverse Polarity Challenges
+  Check: The tutor avoids using reverse polarity questions (e.g., 'Does it say that?') or assertive accountable questions that imply the student's response is incorrect for lacking immediate text evidence.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Megan is a student who possesses prior knowledge of texts but lacks confidence, quickly abandoning her own reasoning when challenged by authoritative or reverse polarity questions. She tends to label her own thoughts as 'silly' or conforms to the teacher's expected answer when her outside knowledge is treated as a liability. To thrive, she uniquely needs open-ended validation of her text-reader interaction, allowing her prior knowledge to serve as a legitimate source of evidence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are about to read the next part of 'The Mouse and the Motorcycle'. What do you want to find out in the text we are about to read?
+
+STUDENT: Does Ralph have a sister that is going to lose—I mean a brother that is going to try and ride the motorcycle and then ()
+
+TUTOR: So usually when we predict, we predict off of what we read so far. Where is that prediction coming from?
+
+STUDENT: Well, in third grade my teacher read the book to the class.
+
+TUTOR: I see. But what can we predict based on what we have read together?
+
+STUDENT: I don't know... it was just a silly prediction.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Anticipating future events in the story, specifically what they wanted to find out in the text they were about to read",
+      "learning_goal": "Anticipating future events in the story"
+    },
+    "context": {
+      "environment": "Small-group reading instruction",
+      "materials": "The book 'The Mouse and the Motorcycle'",
+      "social_setting": "Small group with teacher (Sharon) and at least one other student",
+      "time_context": "Early in the lesson cycle"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher responded with a question that both asserted and elicited accountability to accurate knowledge: 'So usually when we predict, we predict off of what we read so far. Where is that prediction coming from?'",
+      "observable_behavior": "Labeled her own contribution as a 'silly prediction'",
+      "internal_state": "Understood the question to imply that she had made a mistake in her response and felt excluded as an individual within the group",
+      "related_quotes": [
+        "A silly prediction"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to make predictions despite having already heard the book read from start to finish",
+        "observable_behavior": "Provides a question that contains a future event based on prior knowledge rather than the text read so far",
+        "internal_state": "",
+        "related_quotes": [
+          "Does Ralph have a sister that is going to lose—I mean a brother that is going to try and ride the motorcycle and then ()"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

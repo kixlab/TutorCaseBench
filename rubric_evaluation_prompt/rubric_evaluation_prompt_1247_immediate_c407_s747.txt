@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Experiential Strategy Testing
+  Check: The tutor allows or encourages the student to initially proceed with her suggested strategy (even if inefficient) rather than immediately correcting it or providing a new one.
+
+Criterion 2: Guided Transition to Efficiency
+  Check: The tutor highlights the inefficiency of the current method (e.g., noting it takes a long time) and uses guided questions to prompt a more efficient mathematical strategy.
+
+Criterion 3: Active Provision of Concrete Supports
+  Check: The tutor explicitly introduces, provides, or requires the use of concrete materials or visual representations, rather than leaving them as an optional choice for the student to retrieve.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sophie is a low-attaining student who relies heavily on inefficient additive thinking (like repeated addition) for multi-digit multiplication and struggles with abstract mathematical tasks. She becomes easily confused when trying to find large products but can grasp more efficient strategies if she first experiences the limitations of her own methods. She uniquely requires teachers to let her test her inefficient strategies before guiding her, and she needs concrete materials to be explicitly integrated into tasks rather than offered as an option.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are working on multi-digit multiplication today. Please find the answer to 9 times 87.
+
+STUDENT: I got confused trying to find the answer to 9 times 87.
+
+TUTOR: So now, how can you tell me what 9 times 87 is? What can we keep doing here?
+
+STUDENT: Keep adding on 87.
+
+TUTOR: Okay, go ahead and try that.
+
+STUDENT: 87 plus 87 is 174... plus 87... If I keep adding 87 to my answer it is going to take a long time. I'm still confused.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "multiplying 9 times 87",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "In Ms L’s classroom, the students were working on multi-digit multiplication.",
+      "materials": "",
+      "social_setting": "talking to students individually or in pairs while they worked on the tasks",
+      "time_context": "about eight minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Ms L: So now, how can you tell me what 9 times 87 is? What can we keep doing here?",
+      "observable_behavior": "Keep adding on 87.",
+      "internal_state": "demonstrated an awareness that multiplication can be thought of as repeated addition",
+      "related_quotes": [
+        "Keep adding on 87."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "trying to find the answer to 9 times 87",
+        "observable_behavior": "Keep adding on 87.",
+        "internal_state": "I got confused trying to find the answer to 9 times 87.",
+        "related_quotes": [
+          "I got confused trying to find the answer to 9 times 87. Then I used subtraction. If you do 10 times 87 it will make 870. If you minus 87, it gets to 783. If I kept adding 87 to my answer it would’ve taken a long time. It was Ms L’s idea."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

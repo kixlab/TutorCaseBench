@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Concrete Math Fluency Scaffolding
+  Check: The tutor provides or prompts the use of concrete math fluency aids (e.g., number lines, flashcards, corrective feedback) rather than offering generic encouragement to 'try harder' or 'do your best'.
+
+Criterion 2: Itemized Organizational Checklists
+  Check: The tutor uses or prompts a specific, itemized checklist (e.g., a multi-item binder check) to help Isaac locate or organize materials, rather than giving general commands to check his bag or planner.
+
+Criterion 3: Somatic Calming and Feeling Identification
+  Check: The tutor prompts Isaac to identify his internal physical feelings of anger and use concrete calming strategies (e.g., deep breathing, counting) rather than telling him to 'use his words' or 'ignore' peers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Isaac is a seventh-grade student who exhibits intense task resistance, material destruction, and emotional outbursts when faced with math frustration or peer conflicts. His behavioral challenges are rooted in specific deficits: a lack of math fact fluency, poor independent organizational skills, and an inability to regulate anger in the moment. He requires highly concrete, individualized tools—such as explicit fluency aids, itemized self-monitoring checklists, and direct role-play—because general expectations and abstract discussions consistently fail to change his behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Good morning, Isaac. It is time for our morning check-in. Please take out your planner and hand in last night's homework.
+
+STUDENT: I don't have it. I didn't even know what assignment was due.
+
+TUTOR: You need to keep track of your assignments. Look in your backpack and see what materials you brought for class today.
+
+STUDENT: (Digs through his bag) I don't have my materials. I think I actually completed the assignment, but I can't find it anywhere in here.
+
+TUTOR: If you cannot find your work, you will have to sit down and redo the assignment right now.
+
+STUDENT: No! I'm not doing it again! (Pushes his desk away and refuses to open his book)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Organizing and tracking academic assignments and materials for class, and completing homework assignments",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Sectioned binder, planner, binder checklist",
+      "social_setting": "Morning check-in with teacher",
+      "time_context": "Each morning"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Arriving at class when assignments are due",
+      "observable_behavior": "Frequently showed up to class without any materials, completed only classwork that he found easy, and frequently failed to turn in homework assignments",
+      "internal_state": "Sometimes did not know what assignment was due and other times had completed the assignment, but could not find it",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When given directions to participate",
+        "observable_behavior": "Refusal to participate or follow directions, leading to disruptive or disrespectful behavior in the classroom",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

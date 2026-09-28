@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Relational Consistency and Inclusion
+  Check: The long-term plan must include frequent, dedicated one-on-one time (e.g., during lunch, after school, or designated breaks) to build trust, explicitly avoiding exclusionary discipline like sending him out of the room.
+
+Criterion 2: Arts-Based Modalities
+  Check: The plan must incorporate visual arts, drawing, painting, or spatial activities as a primary method for engaging the student in learning or expression.
+
+Criterion 3: Personal Narrative Integration
+  Check: The plan must include structured opportunities for the student to share personal stories or family photographs (e.g., photo elicitation or life-story splicing) to foster emotional connection.
+
+Criterion 4: Visual, Tiered Behavior Tracking
+  Check: The plan must implement a multi-level, visual (e.g., color-coded) behavior tracking system that emphasizes positive achievement tiers rather than solely punitive measures.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jamal is a first-grade student who exhibits severe emotional distress, trauma-related task resistance, and attention-seeking behaviors when faced with basic academic tasks. He uniquely requires consistent one-on-one relationship building, arts-based interventions (like drawing and photo elicitation), and positive visual behavior tracking, while exclusionary discipline (sending him away) completely fails.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at these photographs of our families and share stories about them.
+
+STUDENT: I never want to leave school. You are like my nana.
+
+TUTOR: Thank you. Let's look at this first photograph of you. What can you tell me about it?
+
+STUDENT: I look happy.
+
+TUTOR: Can you tell me anything else about what is happening in the picture?
+
+STUDENT: It doesn’t look like a snake!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "shared photographs of themselves and their families, and shared stories about these photographs",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "lunch break and/or after school",
+      "materials": "photographs of themselves and their families, portraits and pictures",
+      "social_setting": "worked with Jamal every day... She and Jamal",
+      "time_context": "every day during lunch break and/or after school"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "initial response to photographs",
+      "observable_behavior": "They were not more descriptive than this: ‘I look happy.’ ‘It doesn’t look like a snake!’",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During seven weeks of this action research",
+        "observable_behavior": "Jamal also drew and painted portraits and pictures, and shared stories of them with Patty.",
+        "internal_state": "grown to be very sweet and compassionate toward Patty, as well as toward other children",
+        "related_quotes": [
+          "nana"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

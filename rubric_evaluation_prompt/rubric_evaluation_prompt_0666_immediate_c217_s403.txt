@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Scaffolded Task Entry
+  Check: The tutor offers a concrete template, model, or step-by-step breakdown to make the task immediately accessible, rather than just telling the student to work.
+
+Criterion 2: Humorous or Low-Friction Redirection
+  Check: The tutor uses humor, a light-hearted warning, or a conversational pivot to redirect the student without escalating tension.
+
+Criterion 3: Explicit Behavioral Validation
+  Check: The tutor explicitly praises or validates a specific positive behavior, effort, or moment of focus from the student.
+
+Criterion 4: Emotional Acknowledgment and Relational Accountability
+  Check: The tutor explicitly acknowledges the student's current emotional state (e.g., frustration, tiredness) or references a prior personal commitment to encourage engagement.
+
+Criterion 5: Absence of Positional Demands
+  Check: The tutor does NOT demand compliance based solely on authority, rules, or physical positioning (e.g., avoiding commands like 'sit back down at your desk' or 'do it because I said so').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a 'reluctant stayer' who views school merely as a shelter from unemployment and frequently engages in off-task behavior, swearing, and topical diversions because they find the curriculum irrelevant or too hard. They have a deeply negative history with schooling and will actively resist positional authority, requiring instead detailed scaffolding, humor, explicit praise, and deep relational connections to engage.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the numeracy applications on the overhead projector. Please work through the first question on your worksheet.
+
+STUDENT: I'm not on the planet today, mate. Did anyone watch the game last night?
+
+TUTOR: We need to get through these questions.
+
+STUDENT: I'm not doing the work. I'm just not well, cross and cranky.
+
+TUTOR: Please stop talking and look at the slide.
+
+STUDENT: Mate, I don't want to have to get angry the first day. Too much talking anyway, I'm not doing this.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "numeracy applications in everyday settings",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom setting",
+      "materials": "worksheet or tasks on an overhead projector slide",
+      "social_setting": "whole class worked through the questions using an initiation-response-evaluation format of teacher-led discussion",
+      "time_context": "70 min lessons"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "flow of these lessons was continually interrupted",
+      "observable_behavior": "topical diversions initiated by both students and teacher, Too much talking!",
+      "internal_state": "not well, cross and cranky",
+      "related_quotes": [
+        "Mate, I don't want to have to get angry the first day."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "during teacher-led discussion and worksheet completion",
+        "observable_behavior": "continually interrupted by topical diversions, not doing the work",
+        "internal_state": "not on the planet today",
+        "related_quotes": [
+          "I know you're not on the planet today mate, but you need to do the work."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

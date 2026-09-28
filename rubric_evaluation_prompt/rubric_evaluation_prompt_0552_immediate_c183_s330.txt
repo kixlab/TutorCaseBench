@@ -1,0 +1,132 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Rejection of Superficial Agreement
+  Check: The tutor explicitly refuses to accept automatic, superficial answers by pausing, prompting for elaboration, or asking Michael to explain his reasoning.
+
+Criterion 2: Confrontation of Observational Discrepancies
+  Check: The tutor presents a specific discrepancy between Michael's stated perception and external observations (e.g., teacher reports) and prompts him to respond to the contrast.
+
+Criterion 3: Guided Realism in Goal Setting
+  Check: The tutor guides Michael to narrow down a broad goal into a specific, manageable first step without dictating the goal to him.
+
+Criterion 4: Concrete Exploration of Alternatives
+  Check: The tutor asks specific, probing questions about the mechanics, potential obstacles, or impact of a proposed behavior (e.g., 'What could go wrong?', 'How would that help?').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Michael is a young adult with an intellectual disability who exhibits chronic lateness and passive agreement to avoid cognitive complexity or please adults. Because he defaults to automatic, superficial answers ('Sure', 'I don't know'), he requires systematic problem-solving interviews, direct confrontation of observational discrepancies, and guided, realistic goal-setting to build authentic ownership of his behavior change.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at this table of your daily events. First, let's talk about getting lunch at 11:00 AM. The notes say you spend time trying to cut into line.
+
+STUDENT: I sit by myself so I do not get in trouble.
+
+TUTOR: Okay. Let's look at the morning transition. The hall teachers say you go into the restroom and do not come out until prompted.
+
+STUDENT: Too far to next bell; I get late.
+
+TUTOR: What about how you walk to this classroom? The notes say you take the staircase closest to our classroom, which requires you to walk all the way down the hall twice.
+
+STUDENT: Going a way I like to go by the windows or something.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "discussing daily events and identifying interfering behaviors",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Problem-Solving Observation and Waking Day Interview",
+      "materials": "table indicating daily events with columns for notes about the students' description of the events and an additional column for the teacher's comments and questions",
+      "social_setting": "One-on-one interview",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When student perceptions contradict observational data during the problem-solving interview",
+      "observable_behavior": "Takes the staircase closest to our classroom, which requires him to walk all the way down the hall twice",
+      "internal_state": "",
+      "related_quotes": [
+        "Going a way I like to go by the windows or something."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the 7:40 AM transition from the bus to the classroom",
+        "observable_behavior": "goes into the restroom and does not come out until prompted; at times is late for first bell",
+        "internal_state": "",
+        "related_quotes": [
+          "Too far to next bell; I get late"
+        ]
+      },
+      {
+        "condition": "While getting lunch at 11:00 AM",
+        "observable_behavior": "tries to 'cut' into line instead of going to the end. He spends time trying to cut into line and ends up at the very end.",
+        "internal_state": "Appears to be in a rush",
+        "related_quotes": [
+          "I sit by myself so I do not get in trouble"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

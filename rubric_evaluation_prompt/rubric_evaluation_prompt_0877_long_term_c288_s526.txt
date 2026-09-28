@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Process-Oriented Assessment
+  Check: The tutor's long-term plan explicitly outlines grading or rewarding the stages of writing (e.g., rough drafts, revisions, self-assessments) rather than focusing solely on the final essay.
+
+Criterion 2: Regular Reflective Dialogue
+  Check: The tutor incorporates recurring, structured discussions (e.g., weekly circles or check-ins) dedicated to sharing concerns, barriers, and successes regarding the writing process.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe task resistance toward writing, often abandoning assignments because they attribute failure to innate traits (e.g., background, lack of natural talent) rather than effort. They are highly triggered by product-oriented grading and vague feedback, which makes them feel embarrassed and hopeless. To re-engage, they uniquely require process-oriented assessment, explicit step-by-step checklists, balanced and highly specific feedback, and low-stakes creative fluency exercises to bypass their fear of the blank page.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please self-evaluate your writing draft using the correction goal sheet and the four-point Likert scale, where 0 means 'need help with this' and 3 means 'personal best'.
+
+STUDENT: I don't know how to grade my own work. I took an AP English class and that teacher never told me what I was doing wrong. She would just say I got an F.
+
+TUTOR: Just look at what you wrote and try to pick a number on the scale.
+
+STUDENT: I can't. Before this class I thought that I was the worst writer in the world. Without knowing where I did good and where I messed up, I just feel like I'm failing.
+
+TUTOR: You need to finish the evaluation so you can get credit for the draft.
+
+STUDENT: I'm not completing the assignment. I'm just embarrassed by my writing and I've lost hope of ever being successful.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Self-evaluating writing drafts using a correction goal sheet and Likert scale during the final six weeks of the study.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "12th grade expository writing class",
+      "materials": "correctional goal sheets, four point Likert scale with 0 meaning 'need help with this' and 3 meaning 'personal best'",
+      "social_setting": "combined evaluation from a peer, the author, and the teacher",
+      "time_context": "final six weeks of the study"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "I took an AP English class and that teacher never told me what I was doing wrong.",
+      "observable_behavior": "not completing the assignment",
+      "internal_state": "embarrassed, thought that I was the worst writer in the world",
+      "related_quotes": [
+        "Thank you [the teacher] for actually grading my essays and writing comments on my papers where I did good and where I messed up. I took an AP English class and that teacher never told me what I was doing wrong. She would just say I got an F. I actually feel like I can go to college and write an essay without being embarrassed."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "pressuring students to find value only in their ability to produce rather than the growth within the process of learning",
+        "observable_behavior": "discouraged by obstacles to achievement",
+        "internal_state": "lose hope of ever being successful",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

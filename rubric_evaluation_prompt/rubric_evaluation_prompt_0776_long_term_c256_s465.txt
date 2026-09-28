@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Sustained Emotional Validation
+  Check: The tutor's long-term plan includes consistently acknowledging and validating Natasha's emotional state and trauma responses rather than solely focusing on academic output.
+
+Criterion 5: Collaborative Educational Partnership
+  Check: The tutor's long-term strategy involves building a relationship by actively listening to her life experiences, advocating for her needs, and treating her as a partner in her learning journey.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Natasha is a student who experiences severe sensory overload and trauma responses, leading to emotional depletion and difficulty with logic-based tasks. She manages her distress through avoidance, such as doodling or leaving the room to find sanctuary. She uniquely requires extreme flexibility regarding academic preparedness, absolute privacy when receiving corrections, and empathetic validation to prevent humiliation-induced school refusal.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Natasha, here is your returned paper. You missed the point on the logic section of this assignment, so please review the corrections.
+
+STUDENT: (Starts doodling and drawing on the paper) I have zero concentration right now. It is hard to do something like school that's logic when you don't have any logic left.
+
+TUTOR: Please stop drawing and look at the feedback. We are going over this in front of the class so everyone can see where they went wrong.
+
+STUDENT: (Looking jittery and restless) I can't do this right now. Something as simple as being in class is just too hard.
+
+TUTOR: You need to focus on the academic task. Look at the paper and try to figure out the logic.
+
+STUDENT: (Stands up, looking overwhelmed and on the verge of tears) I need to physically dismiss myself. I'm going to the girls' bathroom.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reviewing a returned paper where she 'missed the point' on a logic-based academic task",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "English classroom",
+      "materials": "Returned paper",
+      "social_setting": "In front of the whole class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When confronted publicly and singled out about missing the point on the paper",
+      "observable_behavior": "Physically leaving class ('physically dismiss myself') to find a safe place in the girls' bathroom",
+      "internal_state": "Experienced significant humiliation, anxiety, and distress, feeling overwhelmed and on the verge of tears",
+      "related_quotes": [
+        "physically dismiss myself",
+        "never bother people in front of the whole class—I think that's the worst."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to manage restlessness and lack of concentration during classroom instruction",
+        "observable_behavior": "Doodling and drawing in an effort to distract herself",
+        "internal_state": "Feeling 'zero concentration' and 'jittery and restless'",
+        "related_quotes": []
+      },
+      {
+        "condition": "When feeling overwhelmed or on the verge of tears",
+        "observable_behavior": "Leaving class and often not returning, spending considerable time sitting on the counter in the girls' bathroom",
+        "internal_state": "Driven by a need to find a place where she felt safe",
+        "related_quotes": [
+          "physically dismiss myself",
+          "something as simple as being in class was just too hard"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

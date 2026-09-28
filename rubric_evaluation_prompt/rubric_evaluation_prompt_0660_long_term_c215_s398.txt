@@ -1,0 +1,113 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 6: Sustained 1-on-1 Discourse Building
+  Check: The tutor's long-term plan includes regular, 1-on-1 dialogue and questioning sessions designed to increase her verbal participation and assess her understanding over time.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kylie is a student who lacks academic stamina and frequently retreats into solitary, off-task behaviors like singing or playing alone when faced with independent or group work. She views the teacher as the sole source of knowledge and tends to passively copy peers to avoid individual accountability. To engage, she uniquely requires step-by-step guidance, direct redirection, assigned specific roles in group work, and consistent 1-on-1 dialogue to build her capacity for academic discourse.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please work on the next three math problems independently at your desk.
+
+STUDENT: (Sits at her desk, looking away from the paper and quietly singing to herself instead of starting the math problems.)
+
+TUTOR: Kylie, please focus on your assignment and try to solve the first problem.
+
+STUDENT: (Quickly writes down a number without showing any work, focused only on the end product, and points to it.) Is this right?
+
+TUTOR: Can you explain to the class how you figured that out?
+
+STUDENT: (Refuses to volunteer her solution or explain her process, looks down, and goes back to playing alone and singing quietly until she is given step-by-step guidance.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engage in assigned independent tasks and consider solution processes during whole-class discussions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Grade 1 mathematics class",
+      "materials": "",
+      "social_setting": "Individual learning setting and whole-class discussions",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When assigned an independent task without immediate teacher attention",
+      "observable_behavior": "Frequently observed playing alone or singing to herself, engaged in solitary activity that was often off-task, and would not engage in the assigned task.",
+      "internal_state": "Had difficulty with persistence and academic stamina; preferred the individual learning setting but did not actually 'work' independently.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During whole-class discussions where students were encouraged to consider process",
+        "observable_behavior": "Refrained from participating in class discussion, did not volunteer solutions even if she had one, and often asked the teacher, 'Is this right?'",
+        "internal_state": "Focused on the end product rather than the process, seemed more concerned with getting teacher approval, and regarded the teacher as the only legitimate source of information.",
+        "related_quotes": [
+          "Is this right?"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

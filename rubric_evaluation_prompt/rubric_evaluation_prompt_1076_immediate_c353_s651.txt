@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Verbatim Paraphrasing and Validation
+  Check: The tutor explicitly repeats or paraphrases Kevin's exact words to validate his contribution, ask a clarifying question, or connect his idea to the broader discussion.
+
+Criterion 2: Pop Culture Acceptance
+  Check: The tutor encourages or builds upon Kevin's references to popular culture (e.g., TV, movies, video games) rather than redirecting him away from them.
+
+Criterion 3: Pivot from Isolated Phonics
+  Check: The tutor avoids forcing rote letter-sound drills or isolated phonics tasks, instead embedding literacy concepts within meaningful discussion or story contexts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kevin is a kindergarten student with high oral engagement but intense resistance to isolated print-based skills, often reacting with loud anger to rote phonics tasks. He uniquely requires his oral contributions, pop culture interests, and cultural background to be validated through interactive read-alouds rather than traditional skills drills.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Good morning, Kevin. It's time for our morning literacy lesson. Let's look at the board and practice sounding out these words.
+
+STUDENT: (Keeps to himself and looks away from the board) I don't want to sound them out.
+
+TUTOR: Let's just try the first one together. What sound does this letter make?
+
+STUDENT: (Crosses his arms and refuses to look at the letters) No.
+
+TUTOR: Kevin, please sit up and pay attention to the lesson.
+
+STUDENT: (Yells in a loud, angry voice) I don’t want to learn how to read! I don’t even like letters!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "skills-oriented activities that were part of his reading instruction, including phonological awareness and sounding out words",
+      "learning_goal": "develop the conceptual understandings that would lead to independent reading"
+    },
+    "context": {
+      "environment": "morning meeting and literacy instruction block",
+      "materials": "skills-oriented reading materials, letters, picture books (including multicultural and African American stories)",
+      "social_setting": "kindergarten classroom with teacher and peers",
+      "time_context": "In the mornings"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Kevin was asked to pay attention to the lesson",
+      "observable_behavior": "responded in a loud angry voice, 'I don’t want to learn how to read! I don’t even like letters!'",
+      "internal_state": "disengaged and frustrated",
+      "related_quotes": [
+        "I don’t want to learn how to read! I don’t even like letters!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "struggle with his phonological awareness",
+        "observable_behavior": "resist sounding out words in various instructional contexts",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "In the mornings",
+        "observable_behavior": "some days he would walk into the classroom very engaged... and on other days he was angry and kept to himself",
+        "internal_state": "angry",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

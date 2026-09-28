@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Scaffolded Engagement
+  Check: The tutor proactively offers a specific, structured tool to start or continue the task (e.g., introducing a graphic organizer, a concrete metaphor/prop, or a guided question) rather than just asking how he is doing or telling him to 'just write.'
+
+Criterion 2: Concrete Revision Tactics
+  Check: When addressing revision, the tutor provides a concrete, low-effort strategy (such as a 'cut and paste' method) or explicitly names specific elements to add (e.g., an active verb, a feeling, a simile) rather than giving generic advice to 'add creativity' or 'write more.'
+
+Criterion 3: Personal Experience Connection
+  Check: The tutor explicitly prompts Tyrone to connect the writing task to his own life experiences, personal interests, or family.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Tyrone is a quiet, independent student who struggles with task initiation, language fluency, and idea generation, often masking his difficulties by sitting silently and claiming he is doing 'Great.' He uniquely requires proactive one-on-one engagement, concrete structural tools (like graphic organizers or cut-and-paste strategies), and multimodal or highly personal prompts to overcome his resistance to writing.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our daily writing. Think about what you do on a day off from school. Now, write a story about a time when you had a day off from school.
+
+STUDENT: (Sits quietly at his desk without being able to start writing, preferring to work alone in the noisy atmosphere.)
+
+TUTOR: How is your writing going?
+
+STUDENT: Great.
+
+TUTOR: Okay, please continue working on your story.
+
+STUDENT: (He writes, 'I would read a book . play vido games with my brother .' then stops. He sits quietly again, having trouble generating and articulating ideas, and gives up on writing a cohesive story.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Think about what you do on a day off from school. Now, write a story about a time when you had a day off from school.",
+      "learning_goal": "Write a cohesive story"
+    },
+    "context": {
+      "environment": "Daily writing time during the morning block in a noisy atmosphere",
+      "materials": "Writing materials, graphic organizers, technology for digital storytelling",
+      "social_setting": "General classroom environment where he prefers working alone",
+      "time_context": "Morning block"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to start writing independently",
+      "observable_behavior": "Sit quietly without being able to start writing, gave up writing easily",
+      "internal_state": "Trouble generating and articulating ideas",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Whenever asked how his writing was going",
+        "observable_behavior": "Would respond, 'Great.' Did not like to ask for help during writing time",
+        "internal_state": "Maintained a good attitude in spite of his struggles",
+        "related_quotes": [
+          "Great."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

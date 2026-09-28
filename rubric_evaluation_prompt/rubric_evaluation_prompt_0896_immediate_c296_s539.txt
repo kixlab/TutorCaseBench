@@ -1,0 +1,134 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Gentle Social Correction
+  Check: If the student uses a defensive put-down or inappropriate language, the tutor must use a brief, questioning intervention (e.g., 'I'm sorry?', 'Excuse me?') to signal inappropriateness rather than delivering a lecture or ignoring the behavior.
+
+Criterion 2: Everyday Language Validation
+  Check: The tutor must accept, repeat, or constructively engage with the student's everyday phrasing rather than immediately correcting it to formal scientific terminology.
+
+Criterion 3: Explicit Demand for Defense
+  Check: The tutor must explicitly ask the student (or their peers) to clarify, explain, or 'defend' their claims or disagreements.
+
+Criterion 4: Active Knowledge Scaffolding
+  Check: The tutor must actively intervene to provide, review, or scaffold missing background knowledge (e.g., through a quick review or supplementary example) when the student's responses indicate a conceptual gap.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jorge is an enthusiastic student who actively participates but struggles with the language and evidence requirements of scientific exploratory talk. When challenged without having the evidence to defend his ideas, he characteristically resorts to defensive social put-downs. He uniquely requires a structured environment where the teacher actively facilitates, validates his everyday language, explicitly demands reasoning, and swiftly but gently corrects inappropriate social behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's discuss the article about the Challenger expedition. We are generating questions about the ocean floor.
+
+STUDENT: Oooh! I got one more! How deep is it?
+
+TUTOR: That is a question we can write down. What about the main topic, do you think there is life down there?
+
+STUDENT: There is life down there!
+
+TUTOR: Marvin just said he disagrees with you because sand is what's under the water. How would you respond to him?
+
+STUDENT: Well you're retarded.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Small-group discussion about whether there is life on the ocean floor",
+      "learning_goal": "generating questions about the ocean floor"
+    },
+    "context": {
+      "environment": "Small-group discussion",
+      "materials": "article about the Challenger expedition",
+      "social_setting": "Small-group discussion with peers",
+      "time_context": "following the reading of an article"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Jorge sought to defend his thinking, he perhaps lacked the evidence to refute Marvin’s challenge",
+      "observable_behavior": "employed a familiar strategy for adolescents: the put-down",
+      "internal_state": "lacked the evidence to refute Marvin’s challenge",
+      "related_quotes": [
+        "Well you’re retarded."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "focused on a student’s question about whether or not there is life on the ocean floor",
+        "observable_behavior": "excitement concerning the question he was about to share",
+        "internal_state": "excitement",
+        "related_quotes": [
+          "Oooh! I got one more!",
+          "How deep is it?"
+        ]
+      },
+      {
+        "condition": "after Jorge’s derisive remark and apology",
+        "observable_behavior": "restates his hypothesis",
+        "internal_state": "",
+        "related_quotes": [
+          "My bad. Sorry, sorry, sorry.",
+          "There is life down there!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Co-Designed Artistic Inquiry
+  Check: The long-term plan includes collaborating with Yusef to design an inquiry project that integrates advanced literature with his comic book or manga artwork.
+
+Criterion 2: Asynchronous Relational Bridge
+  Check: The long-term plan establishes a shared, non-confrontational communication method (such as a joint journal passed back and forth) to build a relationship outside of direct instruction.
+
+Criterion 3: Out-of-School Support Integration
+  Check: The long-term plan includes steps to engage with Yusef's family or utilize external support services (like family counseling) to address underlying behavioral drivers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Yusef is a highly capable, voracious reader and aspiring comic book artist who finishes standard work quickly, leading to boredom, internet surfing, and superior behavior toward peers. He reacts to authoritative behavioral management with extreme hostility and withdrawal, uniquely requiring advanced intellectual incentives, integration of his artistic identity, and non-confrontational relational building to remain engaged.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, please continue reading the assigned book for today's lesson and complete the regular class work on your desks.
+
+STUDENT: (Closes the assigned book and turns to the class computer, beginning to surf the Internet) I already finished the book. It didn't take long.
+
+TUTOR: Since you are done, please sit quietly and wait for the other students to finish.
+
+STUDENT: Why do I have to wait for them? They're so slow. I'm not sitting here doing nothing just because they can't keep up. (Continues clicking on the computer, exhibiting a superior attitude toward classmates)
+
+TUTOR: Yusef, you need to log off the computer and move back to your old seat right now. We will be having a meeting about this later.
+
+STUDENT: I'm not going to any meeting and I'm not moving. I hate you. You're a bastard. (Crosses arms and completely refuses to talk anymore)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "10th-grade English class instruction and regular class work",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "10th-grade English classroom",
+      "materials": "Class computer, assigned books for class, joint journal, student's artwork, novels by Franz Kafka and Gabriel García Márquez",
+      "social_setting": "Whole class setting with classmates",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher forced Yusef to rejoin the class by asking him to take his old seat and planned a meeting",
+      "observable_behavior": "Extremely negative reaction; refused to talk to the teacher, refused to come to the meeting, and told several colleagues in the English Department that he 'hates' the teacher and that the teacher is a 'bastard'",
+      "internal_state": "Upset, feeling a 'wall was constructed' between himself and the teacher",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While the teacher was teaching",
+        "observable_behavior": "Disengaged from the class and began surfing the Internet on the class computer",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "During class interactions with peers",
+        "observable_behavior": "Exhibiting disrespectful behavior toward his classmates and expressed feelings of superiority over them and feelings of racism toward African Americans",
+        "internal_state": "Feelings of superiority and racism",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

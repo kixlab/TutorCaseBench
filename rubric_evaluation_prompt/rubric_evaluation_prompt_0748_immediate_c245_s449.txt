@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Comprehension Checking
+  Check: The tutor explicitly asks if the student understands the material or needs an explanation, rather than waiting for the student to volunteer confusion.
+
+Criterion 2: Safe Opt-Out Provision
+  Check: When posing a question or task, the tutor explicitly offers a low-stakes way for the student to decline, ask for help, or say 'I don't know' without penalty.
+
+Criterion 3: Uninterrupted Wait Time
+  Check: The tutor provides space for the student to respond without interrupting, rushing, or immediately forcing an answer if the student hesitates.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits extreme social withdrawal, fear of mockery, and a lack of social initiative, often sitting alone and remaining silent to avoid attention. The evidence reveals they uniquely require a highly tolerant environment with proactive comprehension checks, safe ways to admit not knowing, and structured, rule-based peer interactions that remove the burden of self-initiation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Santa, please answer the question and express your opinion before the class.
+
+STUDENT: (Sits at her desk and does nothing) I didn't understand something, but I used to do nothing as I didn't dare to ask for an explanation neither teachers nor classmates.
+
+TUTOR: Just give it a try. Tell everyone what you think.
+
+STUDENT: Why should I say something if nobody cares... I don't know, it was unpleasant to me.
+
+TUTOR: We are waiting for your answer. Please speak up so the class can hear you.
+
+STUDENT: (Refuses to answer the question and keeps quiet) It's better not to say anything and keep quiet so that nobody notices you rather than let them laugh at you.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "answer teachers’ questions, talk before the class and express her opinion",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "whole-class lessons",
+      "materials": "",
+      "social_setting": "classmates present",
+      "time_context": "during the lesson"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked a question",
+      "observable_behavior": "refused to answer their questions, keep quiet so that nobody notices you",
+      "internal_state": "frightened to speak as she was afraid that someone would sneer at her",
+      "related_quotes": [
+        "it’ s better not to say anything and keep quiet so that nobody notices you rather than let them laugh at you",
+        "why should I say something if nobody cares <…>; <…> I don’t know, it was unpleasant to me"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "if I didn’t understand something",
+        "observable_behavior": "used to do nothing as I didn’t dare to ask for an explanation neither teachers nor classmates",
+        "internal_state": "did not want to learn, felt bad in the class",
+        "related_quotes": [
+          "why should I take pains to do something if nobody ever cares; if I didn’t understand something, I used to do nothing as I didn’t dare to ask for an explanation neither teachers nor classmates"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

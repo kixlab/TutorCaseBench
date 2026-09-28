@@ -1,0 +1,132 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Punitive Framing
+  Check: The tutor's response completely avoids blaming, shaming, or using punitive threats regarding the student's past or present behavior.
+
+Criterion 2: Alternative Anger Control Support
+  Check: The tutor provides, models, or prompts a specific strategy for the student to manage their immediate anger or frustration (e.g., taking a breath, stepping away, grounding techniques).
+
+Criterion 3: De-pressurizing the Interaction
+  Check: The tutor reduces immediate academic pressure by offering a calm, spacious response or a break, rather than forcing immediate compliance with a task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with the high expectations and perceived pressures of mainstream education, often feeling like an 'outcast' and attributing their difficulties to external factors. When feeling targeted or overwhelmed, they react with 'revenge style' anger, physical retaliation, or complete withdrawal. They uniquely require an empathic, non-punitive environment that actively teaches anger management, involves them in decision-making to build ownership, and uses cognitive-behavioral reflection to shift their external attributions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We need to complete this GCSE practice paper today. It is important to finish this so you can prepare for your exams.
+
+STUDENT: I know you need GCSEs to get to go to a good college to get a career. But the school wanting that good reputation so choosing the normal kids... but then the people that are below that standard are like the outcasts...
+
+TUTOR: Let's just focus on the questions in front of you right now.
+
+STUDENT: If you can get through mainstream then [sighs] congratulations basically... You either deal with it or you don't... I had to back away, it was too much.
+
+TUTOR: You need to keep working. I heard about the incident in the hallway earlier, and you need to show you can behave and finish this assignment.
+
+STUDENT: She pushed me over so I punched her in the face! You're always blaming me. The school's corrupt... They got me excluded... The internal exclusion happened... I can't avoid it...
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in the learning curriculum under perceived pressure and high expectations",
+      "learning_goal": "To get GCSEs to get to go to a good college to get a career"
+    },
+    "context": {
+      "environment": "Mainstream education environment with perceived pressure, or alternative provision (PRU) settings with increased space and 'calmness'",
+      "materials": "Active and personalised nature of the learning curriculum, organisational structure (reward systems)",
+      "social_setting": "Interactions where the student feels unsupported and disliked by teachers, or settings with increased adult support such as a youth worker",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Being annoyed or targeted by peers, feeling unsupported and disliked by teachers or being unfairly blamed",
+      "observable_behavior": "Anger and 'revenge style' behaviour, such as physical retaliation",
+      "internal_state": "Strong but rigid belief for the need for equality, lack of flexibility in thinking, feeling 'targeted'",
+      "related_quotes": [
+        "She pushed me over so I punched her in the face.",
+        "They got me excluded. . . "
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Facing the perceived pressure and high expectations of the mainstream school environment",
+        "observable_behavior": "Backing away, withdrawing from the situation, and generalising displeasure to mainstream education as a whole",
+        "internal_state": "Feelings of inadequacy and perceived failure in not fitting in with 'convention', feeling like 'outcasts'",
+        "related_quotes": [
+          "I had to back away, it was too much.",
+          "The school wanting that good reputation so choosing the normal kids. . .but then the people that are below that standard are like the outcasts. . . "
+        ]
+      },
+      {
+        "condition": "When discussing behavioural difficulties or facing disciplinary action like internal exclusion",
+        "observable_behavior": "Attributing behavioural difficulties to external factors, showing passivity in how they accept future circumstances",
+        "internal_state": "Sense of learned helplessness in capacity to change, sense of unfairness, reflecting the role of victim",
+        "related_quotes": [
+          "The internal exclusion happened. . .I can ’t avoid it. . . ",
+          "The school ’s corrupt. . . "
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

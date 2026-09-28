@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Physical Repositioning for Comfort
+  Check: The tutor's response must include a physical adjustment or repositioning of the student (e.g., moving her to a softer surface, changing her posture) in response to her signs of distress.
+
+Criterion 2: Tactile and Auditory Stimulation
+  Check: The tutor's response must incorporate tactile play (e.g., stroking, holding hands, physical movement) or specific auditory stimuli (e.g., sound buttons, distinct noises) to interact with the student.
+
+Criterion 3: Omission of Visual-Only or Verbal-Only Prompts
+  Check: The tutor's response must NOT rely on presenting visual choices or asking purely verbal questions to prompt a response from the student.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Leah is a student with profound multiple learning difficulties and visual impairment who communicates primarily through facial expressions, vocalizations, and physical reactions. Her core behavioral pattern involves expressing physical discomfort through frowning and escalating repetitive vocalizations, while showing passivity toward standard verbal or visual prompts. The evidence reveals she uniquely needs immediate physical repositioning to alleviate distress, followed by tactile and auditory stimulation to successfully engage in activities.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is 5pm. Let's sit here in your wheelchair and read the Gruffalo book.
+
+STUDENT: (Frowns) Ah.
+
+TUTOR: I will press the buttons to make the noises of the animals.
+
+STUDENT: (Says the word repetitively while continuing to frown) Ah. Ah.
+
+TUTOR: Let's keep going with the story. Listen to this part.
+
+STUDENT: (Vocalisations gradually become louder and more persistent, demonstrating she is unhappy and uncomfortable in her wheelchair) Ah! Ah!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Settling after a period of distress and engaging in a story session",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "residential lounge",
+      "materials": "wheelchair, soft 'wedge', 'Gruffalo' book with buttons to make the noises, Sid the puppet",
+      "social_setting": "A member of staff joined Leah and sat next to her on the floor",
+      "time_context": "5pm in a home setting"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Feeling uncomfortable in her wheelchair towards the end of the day",
+      "observable_behavior": "frowning and saying 'Ah' repetitively, vocalisations gradually became louder and more persistent",
+      "internal_state": "unhappy and uncomfortable",
+      "related_quotes": [
+        "Ah"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When initially moved to the soft wedge",
+        "observable_behavior": "she was making fewer vocalisations, although she was still frowning",
+        "internal_state": "somewhat calmer",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Natural Pronunciation Recasting
+  Check: The tutor models the correct pronunciation of the misarticulated word (e.g., 'inspires') naturally in their response without demanding that the student repeat it perfectly.
+
+Criterion 2: Validation of Vocabulary Application
+  Check: The tutor acknowledges, affirms, or builds upon the student's accurate contextual use of the vocabulary word or the content of her response.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Helen is a confident kindergarten student with an articulation-related SLD who actively takes leadership roles in peer discussions and eagerly uses novel vocabulary. She uniquely requires an environment where her articulation errors are gently modeled rather than penalized, alongside explicit vocabulary instruction and structured peer-talk opportunities to foster her oral language development.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We just finished reading Rocket Writes a Story. Now it is time for our turn and talk. Who is someone that inspires you?
+
+STUDENT: I'll start! I declared that I couldn’t sleep last night because I was thinking about this.
+
+TUTOR: Okay. What did you think about?
+
+STUDENT: I looked outside and I saw a bird perch on the end of a tree branch, and then I thought about my family.
+
+TUTOR: So, who is someone that inspires you?
+
+STUDENT: My sister. She sires [sic] me to get my homework done. My sister sires me [sic].
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to the prompt 'Who is someone that inspires you?' during peer talk about Rocket Writes a Story",
+      "learning_goal": "Application of the words during peer discussions"
+    },
+    "context": {
+      "environment": "Kindergarten classroom during interactive read-aloud sessions",
+      "materials": "Rocket Writes a Story (Hills 2012)",
+      "social_setting": "Peer conversations / turn and talk to partners",
+      "time_context": "During the peer talk"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When using the explicitly taught vocabulary word 'inspires'",
+      "observable_behavior": "Unable to pronounce it correctly; said 'She sires [sic] me to get my homework done. My sister sires me [sic].'",
+      "internal_state": "Comfortable using the word",
+      "related_quotes": [
+        "My sister. She sires [sic] me to get my homework done. My sister sires me [sic]."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participating in peer conversations and using explicitly taught vocabulary words",
+        "observable_behavior": "Demonstrated difficulty with articulation; could not articulate certain sounds in words, but took a leadership role, was the first to engage in peer talk, and consistently and accurately used novel words in context",
+        "internal_state": "Appeared to be confident",
+        "related_quotes": [
+          "I declared that I couldn’t sleep.",
+          "I saw a bird perch on the end of a tree branch."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

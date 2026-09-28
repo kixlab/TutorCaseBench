@@ -1,0 +1,72 @@
+{
+  "category_id": "116",
+  "category_title": "Struggling readers who use speech recognition to test and confirm their own diction",
+  "scenario_id": "214",
+  "scenario_title": "Deleting entire drafts due to SR inaccuracies and skipping the writing process",
+  "minimal_context": "The student is at the writing center using a speech recognition tool to dictate complete ideas.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's work on your story at the writing center. You can use the speech recognition tool to dictate your complete ideas."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I want to skip brainstorming and drafting. I am just going to dictate my complete ideas into the microphone."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, go ahead and try that."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "The speech recognition was inaccurate. It didn't type my complete idea right."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What do you think you should do next?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Deletes the entire draft) I am deleting the entire sentence and draft. To me, what I dictate is the final composition.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's work on your story at the writing center. You can use the speech recognition tool to dictate your complete ideas.\n\nSTUDENT: I want to skip brainstorming and drafting. I am just going to dictate my complete ideas into the microphone.\n\nTUTOR: Okay, go ahead and try that.\n\nSTUDENT: The speech recognition was inaccurate. It didn't type my complete idea right.\n\nTUTOR: What do you think you should do next?\n\nSTUDENT: (Deletes the entire draft) I am deleting the entire sentence and draft. To me, what I dictate is the final composition.",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 356,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "dictated complete ideas",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "supervised writing center",
+        "materials": "SR, chart paper",
+        "social_setting": "",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when SR was inaccurate",
+        "observable_behavior": "deleted entire sentences and drafts",
+        "internal_state": "To them, what they dictated was the final composition. Students wanted to skip brainstorming and drafting and go straight to revising.",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When using SR to compose",
+          "observable_behavior": "consistently ignored the writing process",
+          "internal_state": "wanted to skip brainstorming and drafting and go straight to revising",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

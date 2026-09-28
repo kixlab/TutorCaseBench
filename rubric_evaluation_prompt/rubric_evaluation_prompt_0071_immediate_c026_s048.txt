@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Require Symbolic Exchange
+  Check: The tutor prompts or requires the student to use a specific alternative communication method (e.g., handing over a picture, making a sign) before granting access to a desired item or activity.
+
+Criterion 2: Immediate Request Fulfillment
+  Check: The tutor immediately provides the requested item, praise, or social reward as soon as the student successfully uses an appropriate communication system.
+
+Criterion 3: Multimodal Instruction Delivery
+  Check: The tutor pairs verbal instructions or prompts with gestures, specific tonality, or visual supports.
+
+Criterion 4: Utilize Fixations for Engagement
+  Check: The tutor incorporates the student's current focus, fixation, or nonverbal behavior into the activity to initiate a communication exchange, rather than forcing a sudden transition.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has severe communication barriers and relies on aggression, crying, or inappropriate laughter when their primary needs are misunderstood or when faced with abrupt environmental changes. They uniquely require alternative communication systems (like PECS or signs) and multimodal support, as traditional verbal-only methods fail and trigger severe frustration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for lunch. We are sitting at the table, and your food and water are right here.
+
+STUDENT: (Reaches directly for the water cup, ignoring the PECS symbols on the table, expecting to receive the water without having to ask.)
+
+TUTOR: What do you want? You need to tell me.
+
+STUDENT: (Begins to rock back and forth in the chair, displaying stereotyped behaviors, and makes passive, frustrated vocalizations directed at the water.)
+
+TUTOR: I don't understand what you are trying to say. Just wait a minute.
+
+STUDENT: (Starts crying loudly and aggressively hits the table with both hands because the request for water was not quickly and correctly decoded.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "meeting some basic needs as receiving water, food, and pause",
+      "learning_goal": "build gradually from simple to complex forms functional communication"
+    },
+    "context": {
+      "environment": "daily activity: table",
+      "materials": "a word, a sign of photos, an image, a symbol (PECS)",
+      "social_setting": "assist severely disabled children",
+      "time_context": "during school time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to communicate primary instrumental needs (food, water, etc.) through nonverbal means that are not quickly and correctly decoded by those who assist",
+      "observable_behavior": "communication behavior as crying, crying, aggression directed towards oneself or the environment",
+      "internal_state": "expressing frustrations, weaknesses, or desires",
+      "related_quotes": [
+        "Why should I say so many words, or show these items (PECS) when anyway I can receive what I want without asking?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when functional communication is missing (or rarely occurs)",
+        "observable_behavior": "stimulation, stereotyped behaviors, avoidance behaviors",
+        "internal_state": "oriented towards meeting immediate needs",
+        "related_quotes": [
+          "If you do not receive an item that you want, unless you properly formulate the request - give in exchange a word, a sign or a symbol/picture, and then there is nothing left for me but to obey"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,74 @@
+{
+  "category_id": "045",
+  "category_title": "Socially isolated student with ADHD who struggles with behavioral regulation and seeks adult validation",
+  "scenario_id": "086",
+  "scenario_title": "Whole-class instruction disturbance and peer friction",
+  "minimal_context": "The teacher is explaining a task to the students during whole-class instruction.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Alright class, please listen while I explain what the task is."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Causes a disturbance while the teacher is explaining) Hey, what are you guys looking at back there?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Jacob, please be quiet. I will repeat the sentence."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Continues causing a disturbance) I'm just trying to see what they are doing."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "I am going to repeat the same sentence again so everyone can hear."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Turns around as several children begin to shake their heads and roll their eyes) It is not fair because I do not intentionally wish to ruin it for the others.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Alright class, please listen while I explain what the task is.\n\nSTUDENT: (Causes a disturbance while the teacher is explaining) Hey, what are you guys looking at back there?\n\nTUTOR: Jacob, please be quiet. I will repeat the sentence.\n\nSTUDENT: (Continues causing a disturbance) I'm just trying to see what they are doing.\n\nTUTOR: I am going to repeat the same sentence again so everyone can hear.\n\nSTUDENT: (Turns around as several children begin to shake their heads and roll their eyes) It is not fair because I do not intentionally wish to ruin it for the others.",
+  "immediate_dialogue_prompt": 136,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Whole-class instruction where the teacher is explaining a task",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Whole-class instruction",
+        "materials": "",
+        "social_setting": "Whole-class instruction with peers present",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "As the teacher continues to repeat the same sentence, several children begin to shake their heads or roll their eyes",
+        "observable_behavior": "Jacob turns around and says that it is not fair because he does not intentionally wish to ruin it for the others.",
+        "internal_state": "does not intentionally wish to ruin it for the others",
+        "related_quotes": [
+          "it is not fair because he does not intentionally wish to ruin it for the others."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "While the teacher explains what the task is",
+          "observable_behavior": "causing a disturbance",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

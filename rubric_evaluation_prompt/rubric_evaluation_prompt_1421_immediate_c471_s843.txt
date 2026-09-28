@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Short-Term Task Granularity
+  Check: The tutor directs the student to a specific, bite-sized task to complete right now, rather than discussing or assigning the broader multi-week plan.
+
+Criterion 2: Tutor-Driven Pacing
+  Check: The tutor explicitly sets the schedule or target for the immediate session (e.g., 'We will spend the next 10 minutes on X') rather than asking the student what they want to work on or how they want to pace themselves.
+
+Criterion 3: Immediate Accountability
+  Check: The tutor establishes a clear, immediate check-in point (e.g., 'Show me your answer as soon as you finish this first problem') to ensure the student is held accountable during the current session.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with procrastination and task initiation when faced with long-term, open-ended work plans, often doing nothing until the deadline. They uniquely require tightly structured, short-term tasks with immediate accountability, as self-pacing and repetitive assignments cause them to minimize effort or disengage entirely.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the new math and science work plan for the next three weeks. You can go ahead and start working at your own pace.
+
+STUDENT: (Puts the work plan on the desk and stares at it without opening the book) Okay.
+
+TUTOR: What do you think you will work on first?
+
+STUDENT: I don't know. I normally procrastinate because I struggle to get started.
+
+TUTOR: Well, just try your best to get something done during this study lesson.
+
+STUDENT: (Leans back in the chair) This is how I normally work: At school, the first couple of weeks, I do nothing. I'll just delay the work plan until the last few days.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working on math and science tasks assigned in a work plan over a two or three week period.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Study lessons—that is, lessons devoted to working on the assignments from the work plan",
+      "materials": "work plan containing various tasks and requirements",
+      "social_setting": "students are working at their own pace",
+      "time_context": "vary between 2 and 10 hours per week"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Attempting to begin work on a new set of tasks in a work plan at the start of a new period.",
+      "observable_behavior": "spend most of the school time ‘almost doing nothing’",
+      "internal_state": "struggle to get started",
+      "related_quotes": [
+        "This is how I normally work: At school, the ﬁrst couple of weeks, I do nothing, but sometimes I manage to complete a couple of tasks every lesson."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During classroom 'study lessons' where students are working at their own pace.",
+        "observable_behavior": "do little required schoolwork within the ﬁrst weeks of the work-plan period and delaying their required work until the last few days",
+        "internal_state": "struggle to get started",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

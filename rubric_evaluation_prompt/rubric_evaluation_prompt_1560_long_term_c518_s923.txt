@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Visual Structuring
+  Check: The tutor's long-term plan incorporates the consistent, proactive use of visual schedules, behavior charts, and clear routines to structure transitions.
+
+Criterion 2: Positive Reinforcement Integration
+  Check: The tutor plans for systematic positive reinforcement, including verbal praise, tangible rewards, or extra privileges, contingent on appropriate behavior.
+
+Criterion 3: Elopement Prevention Planning
+  Check: The tutor includes specific, individualized strategies in the behavioral plan designed to anticipate and prevent escape attempts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Joseph is a bright, curious fourth-grader with severe disabilities who experiences intense sensory overload and frustration, often leading to physical aggression and elopement. He uniquely requires a highly structured environment with sensory supports and safe spaces, as poorly timed verbal prompts or forceful interventions during moments of distress rapidly escalate his behavior into severe physical crises.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Joseph, let's get started on our reading activity. Please sit at your desk and look at the book.
+
+STUDENT: (Squeezes his fidget toy tightly, looking around the classroom and covering his ears) Too loud... I can't.
+
+TUTOR: Just try your best to focus on the reading activity with the rest of the class.
+
+STUDENT: (Throws the fidget toy on the floor, beginning to yell as his frustration grows) No! Too much!
+
+TUTOR: Joseph, please lower your voice and stay in your seat.
+
+STUDENT: (Screams loudly, pushes away from the desk, and runs toward the classroom door to escape, urinating on the floor as he tries to leave the room)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Focus and participate in educational activities",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom and school building",
+      "materials": "Sensory tools, including weighted blankets and fidget toys",
+      "social_setting": "Classmates present in the learning environment",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Triggered by feelings of frustration, sensory overload, or difficulty communicating his needs effectively",
+      "observable_behavior": "Attempting to escape the classroom and school building, yelling, screaming, and urinating inappropriately in the classroom",
+      "internal_state": "Felt overwhelmed",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When sensory issues escalated beyond what tools could mitigate",
+        "observable_behavior": "Pattern of attempting to escape the classroom and school building",
+        "internal_state": "Level of frustration experienced by Joseph",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

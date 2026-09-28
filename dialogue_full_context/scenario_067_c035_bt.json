@@ -1,67 +1,67 @@
 {
   "category_id": "035",
-  "category_title": "Students with complex learning and behavioral disabilities (developmental delay)",
+  "category_title": "Elementary students with ASD and language delay who generalize virtual experiences to real-world social interactions",
   "scenario_id": "067",
-  "scenario_title": "Letter formation and orientation errors",
-  "minimal_context": "The student is drawing a picture and writing a short sentence to label it.",
+  "scenario_title": "Distraction by Interactive Objects and Voice Chat",
+  "minimal_context": "The student is placed outside a virtual convenience store for Lesson 2 and is expected to move inside to complete their assigned mission.",
   "dialogue": [
     {
       "turn_id": 1,
       "speaker": "tutor",
-      "message": "You can draw a picture now and then label it with a short sentence."
+      "message": "We are starting Lesson 2 now. Please move into the convenience store to complete your mission."
     },
     {
       "turn_id": 2,
       "speaker": "student",
-      "message": "(Draws and colours a picture) I am done drawing."
+      "message": "(Stays outside the convenience store and begins playing with the objects nearby with peers instead of moving on to complete the tasks)"
     },
     {
       "turn_id": 3,
       "speaker": "tutor",
-      "message": "Please write a short sentence to label your drawing."
+      "message": "What do you think you should do next?"
     },
     {
       "turn_id": 4,
       "speaker": "student",
-      "message": "I will write the label."
+      "message": "(Discovers the voice chat function and hears their own voice) Ahhh! Hello? Ahhh!"
     },
     {
       "turn_id": 5,
       "speaker": "tutor",
-      "message": "Keep going."
+      "message": "Please focus on the lesson."
     },
     {
       "turn_id": 6,
       "speaker": "student",
-      "message": "(Writes the short sentence to label the drawing, but forms the letters the wrong way round) Here is my sentence.",
+      "message": "(Laughs loudly and continues making noises into the voice chat, playing with the objects outside with peers, with their attention totally distracted away from the learning process)",
       "is_challenging_behavior": true
     }
   ],
-  "dialogue_combined": "TUTOR: You can draw a picture now and then label it with a short sentence.\n\nSTUDENT: (Draws and colours a picture) I am done drawing.\n\nTUTOR: Please write a short sentence to label your drawing.\n\nSTUDENT: I will write the label.\n\nTUTOR: Keep going.\n\nSTUDENT: (Writes the short sentence to label the drawing, but forms the letters the wrong way round) Here is my sentence.",
-  "immediate_dialogue_prompt": 115,
-  "long_term_dialogue_prompt": 116,
+  "dialogue_combined": "TUTOR: We are starting Lesson 2 now. Please move into the convenience store to complete your mission.\n\nSTUDENT: (Stays outside the convenience store and begins playing with the objects nearby with peers instead of moving on to complete the tasks)\n\nTUTOR: What do you think you should do next?\n\nSTUDENT: (Discovers the voice chat function and hears their own voice) Ahhh! Hello? Ahhh!\n\nTUTOR: Please focus on the lesson.\n\nSTUDENT: (Laughs loudly and continues making noises into the voice chat, playing with the objects outside with peers, with their attention totally distracted away from the learning process)",
+  "immediate_dialogue_prompt": 105,
+  "long_term_dialogue_prompt": 106,
   "full_context": {
     "content": {
       "task": {
-        "content": "Express herself through drawings and labelling them with short sentences",
-        "learning_goal": "Learn correct letter formation"
+        "content": "Exploring a convenience store (Lesson 2)",
+        "learning_goal": "Successfully carried out the assigned mission"
       },
       "context": {
-        "environment": "Classroom",
-        "materials": "Drawings, mirror, worksheets with dotted letters",
-        "social_setting": "Independent work",
-        "time_context": ""
+        "environment": "Outside the exploration context of Lesson 2 (in a convenience store)",
+        "materials": "Objects a great fun to play with their peers, voice chat function, text chat function",
+        "social_setting": "Playing with their peers",
+        "time_context": "At the start of the learning activity"
       },
       "challenging_behavior_trigger": {
-        "condition": "When labelling drawings with short sentences",
-        "observable_behavior": "Often form letters wrong way round",
-        "internal_state": "",
+        "condition": "Placed outside the exploration context of Lesson 2... near objects a great fun to play with",
+        "observable_behavior": "Did not move on completing the tasks because they found those objects a great fun to play with their peers",
+        "internal_state": "Attention was totally distracted away from the learning process",
         "related_quotes": []
       },
       "behavior_patterns": [
         {
-          "condition": "When writing letters",
-          "observable_behavior": "Form letters wrong way round",
+          "condition": "When they found that they could hear their own and others’ voices",
+          "observable_behavior": "Began to make noises, laugh and totally lose attention to learning activities",
           "internal_state": "",
           "related_quotes": []
         }

@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Systematic Motivation Tracking
+  Check: The long-term plan must include a specific routine or method for regularly assessing the student's motivation levels during the intervention.
+
+Criterion 2: Adaptive Instructional Modification
+  Check: The long-term plan must explicitly state that instructional methods, materials, or environmental setups will be adjusted based on the ongoing motivation assessments.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits low motivation and task resistance, often manifesting as complaints about the physical environment (noise, seating) and attempts to control the lesson flow. The evidence reveals they have a high need for personal autonomy and are triggered by rigid, teacher-directed sequences that limit their choices or interrupt their reading.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's get started with our independent reading. Please sit in your regular chair and begin your book.
+
+STUDENT: This chair is uncomfortable. I would prefer to spend more time reading in the comfy blue chair. And it's a little bit noisier in here than my classroom.
+
+TUTOR: Just sit there for today and try to focus on your reading.
+
+STUDENT: It's harder to read in here. The school should install an insulated pod in this room so I can have a quiet place to read.
+
+TUTOR: Okay, please stop reading your book now so we can do spelling and sounds.
+
+STUDENT: My classroom teacher doesn’t stop us when we’re reading to do spelling or to do sounds and stuff. I don't get to make much decisions in here.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent reading",
+      "learning_goal": "build foundational reading skills"
+    },
+    "context": {
+      "environment": "Pullout reading intervention room, 'a little bit noisier' than the classroom",
+      "materials": "Regular 'uncomfortable' chairs",
+      "social_setting": "Intervention setting",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "(being) interrupted during independent reading to do spelling or to do sounds and stuff",
+      "observable_behavior": "Reported that it was 'harder to read' in the intervention setting",
+      "internal_state": "Low motivation due to a noise level that interfered with reading",
+      "related_quotes": [
+        "harder to read",
+        "[The classroom teacher] doesn’t stop us when we’re reading to do spelling or to do sounds and stuff ...And, she lets us have a little bit more snack."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When directed to read in regular chairs",
+        "observable_behavior": "Explained that she would prefer to spend more time reading in a blue 'comfy' cushioned chair",
+        "internal_state": "Physical discomfort",
+        "related_quotes": [
+          "comfy",
+          "uncomfortable"
+        ]
+      },
+      {
+        "condition": "When experiencing noise in the intervention room",
+        "observable_behavior": "Suggested that the reading intervention could be improved if the school installed an insulated 'pod' in the intervention room",
+        "internal_state": "Maintained that such a contraption would guarantee him a quiet place to read",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

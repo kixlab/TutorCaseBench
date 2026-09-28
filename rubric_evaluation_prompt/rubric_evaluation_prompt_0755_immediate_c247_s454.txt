@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Active or Real-World Application
+  Check: The tutor's response incorporates physical movement, standing, or applying the concept to a tangible, real-world scenario rather than abstract desk work.
+
+Criterion 2: Visual Scaffolding
+  Check: The tutor provides or suggests using visual aids (e.g., pictures, diagrams, videos, or computer programs) to explain the concept.
+
+Criterion 3: Avoidance of Passive Sedentary Demands
+  Check: The tutor does not demand that the student sit still, remain silent, or passively copy text.
+
+Criterion 4: Balanced Exploratory Task
+  Check: The tutor introduces an exploratory activity or question that requires active investigation rather than rote memorization, keeping the challenge level accessible.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly kinesthetic and social, struggling severely in traditional, sedentary classroom environments where they are expected to sit still and passively copy information. When forced into rigid, solitary desk work, they react with extreme boredom, inattention, and physical altercations with peers. They uniquely require active physical engagement, visual aids, and collaborative peer discussion to process information and remain behaviorally regulated.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please sit quietly at your desk and copy the trigonometry formulas from the whiteboard. We will use these later to find the heights of different structures.
+
+STUDENT: I feel bored all the time sitting down. I prefer standing up and working in groups rather than alone.
+
+TUTOR: We are working individually right now. Please just look at the board and write down the notes.
+
+STUDENT: Mentally I cannot understand this just by looking at text. Pictures make a big difference for me, I wouldn't have understood without them.
+
+TUTOR: You just need to sit still and keep trying to copy what is written.
+
+STUDENT: I can't just be like a statue and copy all the time from the whiteboard and gaze at it! (Turns around and shoves the classmate behind him) Stop kicking my chair, do you want to fight?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Discussing trigonometry and finding the heights of a number of structures",
+      "learning_goal": "Apply mathematical knowledge in a real life context"
+    },
+    "context": {
+      "environment": "Mainstream class with rigid boundaries, school grounds",
+      "materials": "Whiteboard, visuals such as videos and computer programmes, pictures",
+      "social_setting": "Sitting down alone, working in groups",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to 'be like statues' or to 'copy all the time from the whiteboard and gaze at it'",
+      "observable_behavior": "Fights with other students and sometimes even with teachers, stops paying attention",
+      "internal_state": "Feels bored all the time sitting down, mentally cannot understand",
+      "related_quotes": [
+        "In the other class [i.e., mainstream] I feel bored all the time sitting down.",
+        "I fight with the other students and sometimes even with teachers.",
+        "Mentally I cannot understand, but visually I can cope...pictures make a big difference for me...I wouldn’t have understood without them.",
+        "be like statues",
+        "copy all the time from the whiteboard and gaze at it"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When solely expected to sit down and listen in traditional teaching",
+        "observable_behavior": "Fights with other students and teachers, fails to pay attention",
+        "internal_state": "Bored all the time",
+        "related_quotes": [
+          "In the other class [i.e., mainstream] I feel bored all the time sitting down.",
+          "I fight with the other students and sometimes even with teachers."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

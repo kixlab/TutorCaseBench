@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Behavioral Reflection
+  Check: The tutor prompts Amy to explore the reasons behind her feelings and identify alternative, better choices for future behavior.
+
+Criterion 2: Active Practice via Role-Play or Verbal Recall
+  Check: The tutor invites Amy to verbally recall calming strategies or engage in a role-play scenario to practice how she will apply them.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Amy is a 9-year-old student who struggles with anger control, often resorting to verbal and physical aggression when she feels out of control. She has a specific skill deficit in emotional regulation and requires explicit instruction in self-calming strategies. She responds best to structured reflection, role-play, art-based projects, and peer leadership opportunities rather than forced compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We need to complete this 'Thinking about My Behavior' worksheet about what happened yesterday.
+
+STUDENT: I don't want to do it. I've been 'getting in trouble' for as long as I can remember, and this won't change anything.
+
+TUTOR: Please just answer the first question on the paper.
+
+STUDENT: I already told you what happened. I felt out of control and I got angry.
+
+TUTOR: Write that down on the 'Understanding Feelings Can Affect My Behavior' page.
+
+STUDENT: I said I'm not doing it! You better leave me alone or I'll hit you, just like I hit that kid in the after-school program!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in the school's after-school program and completing behavioral reflection worksheets",
+      "learning_goal": "reduce her physical and verbal aggression and increase her prosocial behaviors"
+    },
+    "context": {
+      "environment": "school's after-school program and 45-minute pull-out counseling sessions",
+      "materials": "Worksheets titled 'Thinking about My Behavior,' 'Understanding Feelings Can Affect My Behavior,' and 'Problem Solving Steps', Second Step curriculum, materials to make a 'Ways to Calm Down' poster",
+      "social_setting": "interacting with peers and one-on-one with PBIS team member",
+      "time_context": "during school hours and after-school program, four weekly sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when she felt out of control",
+      "observable_behavior": "verbally threatened two students during school hours and physically hit another student while participating in the school's after-school program",
+      "internal_state": "often got angry",
+      "related_quotes": [
+        "getting in trouble"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "in response to being angry",
+        "observable_behavior": "became aggressive with peers",
+        "internal_state": "felt out of control",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

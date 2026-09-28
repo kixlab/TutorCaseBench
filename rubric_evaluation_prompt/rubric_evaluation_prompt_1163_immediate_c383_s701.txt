@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Metacognitive Emotional Tracking
+  Check: The tutor prompts the student to express her in-the-moment feelings, reactions, or levels of engagement with the text, rather than solely asking for factual comprehension.
+
+Criterion 2: Autonomy in Text Selection
+  Check: The tutor provides the student with meaningful choices among diverse, high-interest genres or topics, rather than assigning a single mandatory text.
+
+Criterion 3: Connecting to Personal Literacy History
+  Check: The tutor invites the student to share or reflect on her personal history, childhood memories, or past experiences related to reading and writing.
+
+Criterion 4: Avoidance of Rote Mechanics
+  Check: The tutor does NOT force the reading of standardized test passages or focus the interaction on rote test-taking mechanics.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Angelica is an adolescent who actively resists rote instruction and institutional labels of being a 'struggling reader' by withholding effort and skimming texts. However, she demonstrates deep engagement and stamina when provided with autonomy, diverse high-interest texts, and opportunities to explore her personal identity as a reader. She uniquely requires interventions that validate her personal reading experiences and non-traditional literacy practices rather than focusing on standardized test mechanics.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are going to read passages from past standardized tests and answer the multiple choice questions. The goal is making sure we go back to the passage to find the answers.
+
+STUDENT: Great, it's another reading class. I really didn't like to read as much because it would be really boring and stuff.
+
+TUTOR: We need to practice this for an hour every single day. Please go ahead and start reading the first passage.
+
+STUDENT: Every year since third grade I've been in a reading class and I had to read for like an hour every single day. I'm just really bored with it.
+
+TUTOR: Just try to get through it. Look at the first question and see what you think.
+
+STUDENT: (Circles an answer quickly) I would read the stories and I wouldn't pay attention to the stories. And I would read the questions and I would, just from what I remembered, I would pick the answer. And I would never go back to the story.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read passages from past standardized tests and answer multiple choice questions",
+      "learning_goal": "Making sure we go back to the passage when we take the [state standardized] test"
+    },
+    "context": {
+      "environment": "Reading class",
+      "materials": "Passages from past standardized tests, multiple choice questions, sticky notes, notebooks",
+      "social_setting": "Classroom setting with teacher and partner share",
+      "time_context": "For an hour every single day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The design of these tests—that stripped her of agency to choose what, when, and how she read",
+      "observable_behavior": "I would read the stories and I wouldn't pay attention to the stories. And I would read the questions and I would, just from what I remembered, I would pick the answer. And I would never go back to the story.",
+      "internal_state": "Really bored with it",
+      "related_quotes": [
+        "I would read the stories and I wouldn't pay attention to the stories. And I would read the questions and I would, just from what I remembered, I would pick the answer. And I would never go back to the story."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Entering yet another reading class in her ninth grade year and seeing all these books",
+        "observable_behavior": "I thought [that] because I saw all these books and I'm just like 'great, it's another reading class.'",
+        "internal_state": "Expected her typical experience: boredom and lack of agency",
+        "related_quotes": [
+          "I really didn't like to read as much because it would be really boring and stuff …"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

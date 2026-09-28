@@ -1,0 +1,77 @@
+{
+  "category_id": "187",
+  "category_title": "Preschoolers exhibiting desirable social behaviors such as sharing and following classroom rules",
+  "scenario_id": "337",
+  "scenario_title": "Peer interaction and following classroom rules",
+  "minimal_context": "The student is in the classroom and is expected to put the toys away and share with friends.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time to put the toys away now."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Runs in the classroom instead of putting the toys away) I am still playing!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please stop running and help with the toys."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Grabs a toy from another child, refusing to share with friends) I want this one!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What should you do with your friends?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Pushes the friend and throws the toy at them) No!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time to put the toys away now.\n\nSTUDENT: (Runs in the classroom instead of putting the toys away) I am still playing!\n\nTUTOR: Please stop running and help with the toys.\n\nSTUDENT: (Grabs a toy from another child, refusing to share with friends) I want this one!\n\nTUTOR: What should you do with your friends?\n\nSTUDENT: (Pushes the friend and throws the toy at them) No!",
+  "immediate_dialogue_prompt": 563,
+  "long_term_dialogue_prompt": 564,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Having a good breakfast, eating well, putting the toys away, sharing with friends, and behaving yourself",
+        "learning_goal": "To make sure our friend is not hurt and for the good of our friends"
+      },
+      "context": {
+        "environment": "Classroom and the park",
+        "materials": "Toys, stars, stickers, pictures",
+        "social_setting": "With friends and the teacher",
+        "time_context": "First two weeks of school and during breakfast"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When children exhibit behaviors that affect others (undesirable social behaviors)",
+        "observable_behavior": "Hitting friends, pushing friends, pinching off friends, throwing toys at friends, kicking friends, and running in the classroom",
+        "internal_state": "Do not know the rules",
+        "related_quotes": [
+          "No hitting, no pinching off friends. Not throwing toys, not throwing anything",
+          "…Not running, not pushing our friends, not hitting, not kicking, not throwing stones, sharing toys with our friends"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When exhibiting behaviors that affect others",
+          "observable_behavior": "Hitting friends, pushing friends, pinching off friends, throwing toys at friends, kicking friends",
+          "internal_state": "",
+          "related_quotes": [
+            "No hitting, no pinching off friends. Not throwing toys, not throwing anything"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

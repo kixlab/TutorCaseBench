@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Design Interest Integration
+  Check: The tutor's long-term plan incorporates Avery's specific interests in design, patterns, clothing, or jewelry into the mathematical problem-solving contexts.
+
+Criterion 5: Mastery Goal Orientation
+  Check: The tutor's long-term strategy explicitly shifts the focus away from correct answers (performance) and toward valuing effort, process, and improvement (mastery).
+
+Criterion 6: Open-Ended Construction Tasks
+  Check: The tutor plans open-ended activities where Avery uses math concepts to construct, design, or make something, rather than assigning closed-ended worksheets or standard problem sets.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Avery is a student with severe math anxiety who hyper-focuses on performance and struggles with spatial organization and standard fraction diagrams, often misidentifying denominators based on remaining parts. She uniquely needs math to be reframed through her interests in design and patterns, using concrete manipulables and open-ended construction tasks to shift her focus from getting the 'right answer' to mastering the process.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the quilt template divided into nine parts. Please use these pre-cut triangles, rectangles, and trapezoids to cover all nine parts so they add up to one whole square.
+
+STUDENT: (Looks at the classification chart) There are so many different sizes here... 1/2, 1/3, 1/6, 1/9, 1/18. I'm really bad at spatial organization and figuring out how smaller pieces make up bigger shapes.
+
+TUTOR: Just try placing some of the shapes on the template.
+
+STUDENT: (Places a triangle and a rectangle on the board) Is this right? Tell me if this is the right answer.
+
+TUTOR: What do you think? Keep trying to fill the square.
+
+STUDENT: I don't know! I can't focus on the pattern because I'm just worried about simply getting the problem right. This whole thing is making me really anxious.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Design a quilt square, divided into nine parts, and then use varying shapes and sizes to cover all nine parts so they add up to one whole square.",
+      "learning_goal": "See how bigger shapes were made up of smaller pieces and understand the underlying concepts of fractions."
+    },
+    "context": {
+      "environment": "Once-a-week tutoring sessions",
+      "materials": "Quilt template downloaded from the Riverbend Community Math Center, pre-cut shapes of different sizes (triangles, rectangles, and trapezoids), classification chart.",
+      "social_setting": "One-on-one tutoring session",
+      "time_context": "Two to four of our once-a-week sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When faced with a task requiring spatial organization and fractions",
+      "observable_behavior": "Worried about simply getting the problem right",
+      "internal_state": "Math anxiety; struggle with spatial organization",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When engaging with math tasks generally",
+        "observable_behavior": "Focuses on performance rather than understanding underlying concepts",
+        "internal_state": "Undercurrent of anxiety",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

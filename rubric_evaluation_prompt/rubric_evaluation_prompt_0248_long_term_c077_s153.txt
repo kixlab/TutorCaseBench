@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Regulative Discourse
+  Check: The tutor's long-term plan includes strategies for explicitly unpacking, teaching, and tracking (e.g., via diaries) the specific behaviors required for success.
+
+Criterion 2: Public Identity Celebration
+  Check: The tutor's long-term plan incorporates systematic, public celebration of the student's milestones, positive choices, or new learner identity across different settings.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits externalizing behaviors such as tantrums, work refusal, and disruption when facing academic challenges, losing games, or failing administrative tasks. They uniquely require explicit visibility of behavioral expectations (regulative discourse), strict accountability without excuses, and the integration of high-interest topics (rugby league) and role models to maintain engagement and build a positive learner identity.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please take a pencil from the communal stationery and start on the next section of the worksheet. The questions get a bit harder here.
+
+STUDENT: (Pushes the worksheet away) I'm not doing it.
+
+TUTOR: Why don't you just give it a try?
+
+STUDENT: No. I'm not participating in this.
+
+TUTOR: You need to finish this assignment before the end of class.
+
+STUDENT: (Knocks the communal stationery off the desk cluster) I'm not doing this work! It's too hard and I don't care!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Managing the increasing difficulty of their academic work",
+      "learning_goal": "Succeeding in school and improving academic achievement and social competence"
+    },
+    "context": {
+      "environment": "In the TLC classroom",
+      "materials": "Communal stationery",
+      "social_setting": "Seated in such a way as to facilitate small group work, in clusters of desks",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Where students fail to regulate their behaviour or manage the increasing difficulty of their academic work",
+      "observable_behavior": "Exhibiting behaviours that made full-participation in the classroom difficult, such as truancy or work refusal",
+      "internal_state": "Sense of efficacy about succeeding in school can decrease, becoming entrenched in a downward cycle",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When disengaging from school",
+        "observable_behavior": "Increased classroom disruption, absenteeism/truancy and exclusions, as well as low academic standards and non-participation",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

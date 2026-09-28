@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Collaborative Academic Scaffolding
+  Check: The long-term plan must include strategies for co-problem-solving or guided scaffolding that keep the student engaged in academic tasks without forcing them to struggle independently.
+
+Criterion 2: Seamless Integration of Support
+  Check: The long-term plan must deliver academic assistance in a way that blends into the general classroom environment, explicitly avoiding singling the student out or making their need for help publicly visible.
+
+Criterion 3: Peer Climate and Psychological Safety
+  Check: The long-term plan must incorporate proactive measures to address peer dynamics, such as implementing bystander support, normalizing mistakes, or building a classroom culture that mitigates the fear of teasing.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with quiet avoidance and freezing behaviors, which are heavily driven by a fear of peer ridicule and looking 'silly.' When faced with independent work or public performance, they withdraw and refuse to ask for help. They uniquely require a warm, collaborative environment where support is normalized and they are never singled out or forced into isolated struggle.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please come up to the board and solve this math problem for the class.
+
+STUDENT: (Walks to the board but stands quietly, not actively participating or picking up the marker.)
+
+TUTOR: You need to try to do it yourself.
+
+STUDENT: (Looks back at the other students, not seeking help or asking any questions about the math problem.)
+
+TUTOR: Go ahead and write the first step on the board.
+
+STUDENT: I get to that point and I freeze.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "math",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "board",
+      "social_setting": "called to the board",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when she was called to the board, the teacher 'said we have to . . . do it ourselves'",
+      "observable_behavior": "I freeze",
+      "internal_state": "",
+      "related_quotes": [
+        "I get to that point and I freeze"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when students were concerned about peer teasing during classroom activities",
+        "observable_behavior": "avoidant responses, such as not actively participating in class activities or seeking help",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

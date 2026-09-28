@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Strict Task Limitation
+  Check: The tutor's lesson plan or system design strictly caps continuous learning tasks at a maximum of 6 items per round before providing a break or transition.
+
+Criterion 2: Auditory Environment Control
+  Check: The tutor's long-term strategy includes disabling voice chat during initial learning phases and proactively minimizing or muting background music and sound effects.
+
+Criterion 3: Interface Simplification
+  Check: The tutor modifies the learning environment to enlarge interaction targets (e.g., making a whole box clickable) and disables all non-essential system messages or pop-ups.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has ADHD and a comorbid language delay, resulting in a very short attention span (max 6 items) and high distractibility. They are highly sensitive to auditory stimuli (background noises, voices) and easily derailed by complex feedback, unfamiliar text, or small interaction targets. They uniquely require a highly simplified, visually driven environment with strict task limits, explicit progress tracking, and the removal of unnecessary sensory and interface noise.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's complete the learning mission. Use the mouse to click on the single OK bandage in the health center.
+
+STUDENT: (Struggles to smoothly control the mouse to click the virtual object) How many questions are left to answer?
+
+TUTOR: We still have a few more. Just try your best to click it.
+
+STUDENT: (Clicks here and there on the screen, missing the bandage) A box popped up with English words.
+
+TUTOR: What do you think you should do next?
+
+STUDENT: (Spends a lot of time staring at the English pop-up) Is this part of the learning material? (Gets stuck clicking on the unfamiliar English words instead of the bandage)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "completing the learning missions",
+      "learning_goal": "click on a single OK bandage"
+    },
+    "context": {
+      "environment": "In the first three lessons (in Cycle 1)",
+      "materials": "computer mouse, interactive 3D virtual objects, English system pop-up messages, single OK bandage, screen",
+      "social_setting": "teacher was busy keeping them engaged",
+      "time_context": "In the first three lessons (in Cycle 1)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "unnecessary information... usually in English, a language that they were unfamiliar with",
+      "observable_behavior": "spend much time on and got stuck with it",
+      "internal_state": "thinking that it was also a part of the learning material",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In the first three lessons (in Cycle 1)",
+        "observable_behavior": "spent a lot of time on clicking here and there or asking teachers how many questions were left to answer",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "click on a single OK bandage cannot be easily done",
+        "observable_behavior": "unable to smoothly control the mouse to click the virtual objects",
+        "internal_state": "confused about their learning",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

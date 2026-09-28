@@ -1,0 +1,139 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Descriptive Praise for Compliance
+  Check: The tutor provides specific, descriptive praise for on-task behavior (either Delon's or a peer's) to positively fulfill his need for attention.
+
+Criterion 2: Withholding Attention for Disruption
+  Check: The tutor ignores minor disruptions or uses only brief, minimal redirection, explicitly avoiding reprimands, lectures, or arguing.
+
+Criterion 3: Blocking Activity Escape
+  Check: The tutor requires Delon to remain in the activity or area, explicitly avoiding timeouts, removal, or allowing him to leave the circle.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Delon is a preschooler who uses disruptive and aggressive behaviors during circle time to gain attention and escape the activity. The evidence reveals he uniquely needs proactive environmental structuring, explicit rule instruction, and differential reinforcement (praising positive behavior while actively ignoring disruptions) rather than traditional reprimands or removal, which inadvertently reward his behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, let's sit in our circle. I am going to open our circle time book and begin to read.
+
+STUDENT: (Makes an animal noise and starts shouting) I can’t see the book!
+
+TUTOR: Please sit still and be quiet.
+
+STUDENT: (Shouts) This is boring! (Hums a song and pretends to touch the peer sitting in front of him)
+
+TUTOR: Let's keep reading. Now, I am going to ask another student a question. Sarah, what do you think happens next?
+
+STUDENT: (Touches the peer sitting next to him, then hits the peer)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in circle time activities, such as listening to a book being read or other students answering questions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Preschool classroom during circle time",
+      "materials": "Circle time book, pictures and words defining classroom expectations posted",
+      "social_setting": "Seated within a group of boys who played with him and encouraged his disruptive behavior",
+      "time_context": "20 min (the length of the circle)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Ms. Beth asks another student a question",
+      "observable_behavior": "Delon hits the peer sitting next to him",
+      "internal_state": "obtaining her attention and avoiding circle time",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Ms. Beth opens a circle time book and begins to read",
+        "observable_behavior": "Delon makes an animal noise and starts shouting",
+        "internal_state": "",
+        "related_quotes": [
+          "I can’t see the book!"
+        ]
+      },
+      {
+        "condition": "Ms. Beth is reading",
+        "observable_behavior": "Delon shouts",
+        "internal_state": "",
+        "related_quotes": [
+          "this is boring!"
+        ]
+      },
+      {
+        "condition": "Ms. Beth begins to read",
+        "observable_behavior": "Delon hums a song and pretends to touch the peer sitting in front of him",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "Student is answering question",
+        "observable_behavior": "Delon touches the peer sitting next to him",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

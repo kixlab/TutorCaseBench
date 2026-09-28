@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Declarative and Suggestive Communication
+  Check: The tutor uses declarative comments or gentle suggestions rather than direct questions or explicit commands to guide the student's attention or behavior.
+
+Criterion 2: Provision of Reassurance and Spatial Safety
+  Check: The tutor offers reassurance or allows the student to maintain physical proximity to the tutor, explicitly avoiding forcing the student closer to anxiety-inducing stimuli.
+
+Criterion 3: Gentle Turn-Taking Invitations
+  Check: The tutor gently suggests a simple, shared turn-taking activity without demanding immediate participation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly anxious, wary of novel stimuli, and easily distracted by sensory elements in their environment, often coping through repetitive behaviors or seeking physical reassurance. They experience emotional distress and withdrawal when faced with direct demands or forced proximity to triggers. The evidence reveals they uniquely require a highly non-directive approach—emphasizing comments over questions—and need to be given control over the session structure to feel safe enough to engage.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to spend the next 20 minutes in the dinner hall with the dog.
+
+STUDENT: (The student walks away, becoming very preoccupied with touching surfaces in the room and following markings on the floor in a repetitive manner.)
+
+TUTOR: Please come back over here and look at the dog.
+
+STUDENT: (The student continues performing mannerisms, showing an over-riding interest in the camera equipment rather than the dog.)
+
+TUTOR: I am going to bring the dog closer to you now so you can see him.
+
+STUDENT: (The student shows immediate wariness, watching the dog in order to move away as it gets too close, resulting in an anxious withdrawal.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "20-minute semi-standardized sessions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "school dinner hall",
+      "materials": "dog aids, camera equipment, markings on the floor, surfaces in the room",
+      "social_setting": "teacher and dog present",
+      "time_context": "20-minute sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "if it [the dog] got too close",
+      "observable_behavior": "watching the dog in order to move away",
+      "internal_state": "wariness",
+      "related_quotes": [
+        "awareness and visual interest in the dog was accompanied by wariness, watching the dog in order to move away if it got too close"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "throughout the sessions",
+        "observable_behavior": "very preoccupied with touching surfaces in the room, or following markings on the floor in a repetitive manner... performing mannerisms",
+        "internal_state": "over-riding interest in and motivation for things in the environment other than the dog",
+        "related_quotes": [
+          "the student was very preoccupied with touching surfaces in the room, or following markings on the floor in a repetitive manner",
+          "characterised by an over-riding interest in and motivation for things in the environment other than the dog – for instance, sensory qualities of the room or dog aids, camera equipment or performing mannerisms"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

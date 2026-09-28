@@ -1,0 +1,72 @@
+{
+  "category_id": "131",
+  "category_title": "Students with learning/speech disabilities who are on-task during active music-making but off-task during noninstructional transitions",
+  "scenario_id": "238",
+  "scenario_title": "Waiting turns during center activities",
+  "minimal_context": "The student is participating in Session 2 centers and is expected to wait their turn for a large group game with the teacher.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are starting Session 2 centers. Please sit here and wait your turn for the large group game with me."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Turns away from the large group game and leans over to watch the other students playing the flash card game with a partner)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Please face forward and wait."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Ignores the instruction and begins talking to the peers, becoming off-task during this noninstructional waiting time)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "It will be your turn soon, just wait quietly."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Gets up and walks away from the teacher entirely, demonstrating a high percentage of off-task behavior rather than waiting for their turn at the game)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are starting Session 2 centers. Please sit here and wait your turn for the large group game with me.\n\nSTUDENT: (Turns away from the large group game and leans over to watch the other students playing the flash card game with a partner)\n\nTUTOR: Please face forward and wait.\n\nSTUDENT: (Ignores the instruction and begins talking to the peers, becoming off-task during this noninstructional waiting time)\n\nTUTOR: It will be your turn soon, just wait quietly.\n\nSTUDENT: (Gets up and walks away from the teacher entirely, demonstrating a high percentage of off-task behavior rather than waiting for their turn at the game)",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 396,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Participating in 'centers' during Session 2, involving flash card games with partners or waiting for a turn in a large group game",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Session 2",
+        "materials": "flash card game",
+        "social_setting": "centers, either playing a flash card game with a partner or waiting their turn at a game with the teacher in a large group",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "waiting their turn at a game with the teacher in a large group",
+        "observable_behavior": "highest percentage of time off-task",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "noninstructional transitions or periods between activities",
+          "observable_behavior": "highest percentage of time off-task during noninstructional time",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

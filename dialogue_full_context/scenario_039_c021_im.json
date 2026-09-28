@@ -1,0 +1,78 @@
+{
+  "category_id": "021",
+  "category_title": "Bored students who engage in off-task behaviors",
+  "scenario_id": "039",
+  "scenario_title": "Algebra dictation and problem solving",
+  "minimal_context": "An 8th grade student is asked to solve algebra problems dictated from a course book.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please open your course books. I am going to dictate the algebra problems for you to solve."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "When the teacher lectures in a plain way, I cannot solve the problems in that course."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just keep reading from the book and write down what I say."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Some of our teachers lecture so plain, that is, there is no visuality or discussion and interpretation, we just read from our course books, thus the classes are boring and I don’t like paying attention to the course."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "It has been 20 minutes, you need to focus only on the course."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "They come, they tell and tell and tell and leave, they only dictate even in algebra. We feel sleepy, one of our friends felt asleep during the course.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please open your course books. I am going to dictate the algebra problems for you to solve.\n\nSTUDENT: When the teacher lectures in a plain way, I cannot solve the problems in that course.\n\nTUTOR: Just keep reading from the book and write down what I say.\n\nSTUDENT: Some of our teachers lecture so plain, that is, there is no visuality or discussion and interpretation, we just read from our course books, thus the classes are boring and I don’t like paying attention to the course.\n\nTUTOR: It has been 20 minutes, you need to focus only on the course.\n\nSTUDENT: They come, they tell and tell and tell and leave, they only dictate even in algebra. We feel sleepy, one of our friends felt asleep during the course.",
+  "immediate_dialogue_prompt": 57,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Solving problems in \"algebra\"",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "\"8th grade\" class",
+        "materials": "\"course books\"",
+        "social_setting": "",
+        "time_context": "\"after 20 minutes\""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "\"after 20 minutes\" of the teacher focusing \"only on the course\" and dictating",
+        "observable_behavior": "Students \"feel sleepy\", \"felt asleep during the course\", and \"talk during the class\"",
+        "internal_state": "\"bored\"",
+        "related_quotes": [
+          "As most of the teachers focus only on the course, all of the students feel sleepy after 20 minutes, apart from some few in the front, the rest sleeps",
+          "We feel sleepy, one of our friends felt asleep during the course"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "\"When the teacher lectures in a plain way\"",
+          "observable_behavior": "\"I cannot solve the problems in that course\"",
+          "internal_state": "\"don’t like paying attention\"",
+          "related_quotes": [
+            "When the teacher lectures in a plain way, I cannot solve the problems in that course",
+            "we just read from our course books, thus the classes are boring and I don’t like paying attention to the course"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Workplace Routine Integration
+  Check: The long-term plan establishes daily administrative routines (such as signing in and out) as explicit workplace practices rather than school compliance tasks.
+
+Criterion 2: Professional Simulation and Task Variation
+  Check: The long-term plan incorporates extended professional role-plays interspersed with diverse, practical, hands-on activities (e.g., mock interviews, research) to maintain engagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a history of friction with mainstream schooling, often exhibiting non-compliant behaviors like lateness, loud disruptions, and ignoring routines. They reject traditional, authority-based school discipline, which only worsens their resistance. They uniquely require a vocational approach where all routines, corrections, and tasks are explicitly framed around real-world workplace expectations rather than classroom compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for your professional meeting role-play with the college principal to discuss the fundraising event.
+
+STUDENT: (Speaking very loudly) Yeah, okay! Are we doing the marketing or purchasing stuff today? I don't even know!
+
+TUTOR: Please lower your volume and focus on the meeting.
+
+STUDENT: I am focused! But I brought my mate to come to the meeting with me.
+
+TUTOR: The meeting was organised for you with the principal.
+
+STUDENT: (Loudly) Well I'm not going in alone! If my mate can't turn up with me, I'm not doing the role-play at all!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "planning and conducting a fundraising event for charity... professional meeting role-play with the college principal",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "TAFE college setting",
+      "materials": "extended role play of a committee undertaking the various tasks of planning, marketing, purchasing, risk management and health and safety",
+      "social_setting": "supported by a youth worker at all times",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The meeting was organised for you with [college principal]",
+      "observable_behavior": "turn up with someone else",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During classroom work",
+        "observable_behavior": "high decibels, lack of focus",
+        "internal_state": "",
+        "related_quotes": [
+          "Oy! How about we bring decibels down –focus on this, focus!"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

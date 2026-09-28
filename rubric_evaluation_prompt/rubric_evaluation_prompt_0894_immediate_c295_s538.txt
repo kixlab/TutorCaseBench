@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Low-Barrier Response Mechanisms
+  Check: The tutor provides a low-stakes, structured, or non-verbal way for the student to participate (e.g., a rating scale, multiple choice, or visual signal) rather than relying solely on open-ended verbal elaboration.
+
+Criterion 2: Explicit Processing Time
+  Check: The tutor explicitly builds in or encourages a pause for thinking (e.g., 'take a moment to think' or 'hands down and think') before expecting a response.
+
+Criterion 3: Visual Anchoring of Ideas
+  Check: The tutor uses or suggests using a visual representation (e.g., writing on a board, creating a visual rule, or explicitly noting that the idea will be written down) to anchor the verbal discussion.
+
+Criterion 4: Contribution Formalization
+  Check: The tutor explicitly validates the student's brief contribution and rephrases or formalizes it into a broader concept or rule, rather than demanding the student elaborate verbally.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is quiet and passive, often masking their lack of engagement by appearing attentive while simply waiting for discussions to end. When they do participate, their contributions are extremely brief (often under four words), and they tend to shut down when asked open-ended follow-up questions. They uniquely require low-barrier participation methods, visual anchoring of ideas, and explicit instruction on how to be an active listener.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are finding some possible arrangements of equal rows for 24 plants in a vegetable garden. Riley, what is one way to arrange them?
+
+STUDENT: (Puts hand up) I did two 12 times…
+
+TUTOR: Okay. What else can you tell us about that?
+
+STUDENT: That is all.
+
+TUTOR: What do you think happens to the rows if we halve the 12?
+
+STUDENT: (Sits quietly and appears attentive. He does not contribute anything else, making it difficult to conclude whether he is actually listening or simply waiting quietly for the discussion to end.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Find some possible arrangements of equal rows for 24 plants in a vegetable garden.",
+      "learning_goal": "Understanding that halving one side of a multiplication expression necessitated the other side 'going up'."
+    },
+    "context": {
+      "environment": "Teacher-directed whole-class discussions at the end of mathematics lessons.",
+      "materials": "Board, overhead projector, traffic light system (red, yellow, green).",
+      "social_setting": "Whole-class discussion.",
+      "time_context": "At the end of a lesson."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the whole-class discussions.",
+      "observable_behavior": "Sat quietly during the whole-class discussions. Was not observed contributing to any of the whole-class discussions.",
+      "internal_state": "Difficult to conclude whether they were listening or simply waiting quietly for the discussion to end.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When making a rare contribution to the discussion.",
+        "observable_behavior": "Contributions were not more than four words long.",
+        "internal_state": "",
+        "related_quotes": [
+          "I did two 12 times…",
+          "Yeah because I just half… it would be 6 but when I halve 12 that needs to go up"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

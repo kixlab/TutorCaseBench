@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Audio or Read-Aloud Scaffolding
+  Check: The tutor provides or suggests accessing the text through read-alouds, audio recordings, or shared reading rather than requiring silent independent reading.
+
+Criterion 2: Chunked Processing Pauses
+  Check: The tutor breaks the reading into short segments and explicitly prompts Jennifer to pause, write down thoughts, or discuss before moving on to the next section.
+
+Criterion 3: Facilitation of Collaborative Talk
+  Check: The tutor prompts Jennifer to discuss her questions with peers or acts as a collaborative discussion partner to help her verbally process the text.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jennifer is a struggling reader who frequently disengages from independent reading due to cognitive overload from complex texts and unfamiliar vocabulary. She uniquely requires structured opportunities to verbally process information with peers, using collaborative talk and chunked reading to 'clean her head out' and readjust her schema.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent reading. Please choose a novel from the shelf and read quietly at your desk.
+
+STUDENT: (Spends a large amount of time looking through the books on the shelf without selecting one) My interest has gone down in middle school. I hate reading. Reading is boring.
+
+TUTOR: Please just select a book and sit down to read.
+
+STUDENT: (Sits down with a book and starts skimming the text pictures and captions instead of reading) Some of the words are hard. I don’t get it.
+
+TUTOR: Keep reading and see if you can figure it out.
+
+STUDENT: (Pushes the book away, completely disengaged) I get to the point that I barely understand it. I'm just confused by it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading independently during designated classroom reading time",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Designated classroom reading time",
+      "materials": "Novels, short stories on CD, and student-made booklets",
+      "social_setting": "Independent reading",
+      "time_context": "During reading time prior to or during the early stages of the literature discussion group intervention"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Encountering the complexity of texts and unfamiliar vocabulary",
+      "observable_behavior": "Disengaged from reading, choosing to either skim the text pictures and captions or spend large amounts of time 'finding' a book",
+      "internal_state": "Confused by content area text, feeling that reading is boring and they barely understand it",
+      "related_quotes": [
+        "I hate reading. Reading is boring.",
+        "confused by it [content area text]",
+        "don’t get it",
+        "get to the point that I barely understand it",
+        "some of the words are hard"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During reading time",
+        "observable_behavior": "Disengaged from reading, choosing to either skim the text pictures and captions or spend large amounts of time 'finding' a book",
+        "internal_state": "My interest has gone down in middle school.",
+        "related_quotes": [
+          "My interest has gone down in middle school."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

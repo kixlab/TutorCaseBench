@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Scaffolding Independent Inquiry
+  Check: The long-term plan includes specific task designs or strategies aimed at transitioning Amber from answering direct adult questions to formulating her own questions and goals.
+
+Criterion 5: Structured External Scaffolding
+  Check: The long-term plan incorporates structured support or 'scaffolding from others' (peers or mentors) in a deliberate way that builds her interest without relying on unstructured group work.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Amber is a reserved student who struggles to engage in unstructured group activities and rarely volunteers ideas spontaneously. She uniquely requires direct, one-on-one adult attention, specific targeted questions, and strong positive social reinforcement to participate and build confidence. Over time, she needs carefully designed scaffolding to help her transition from relying on adult prompts to formulating her own questions and goals.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's observe the crabs together as a group. What questions do you all have about them?
+
+STUDENT: (Stands quietly with the group, not blurting out any ideas.)
+
+TUTOR: Feel free to just say your questions out loud for the group.
+
+STUDENT: (Remains reserved and does not say anything to the group.)
+
+TUTOR: We need everyone to participate. Who has a question?
+
+STUDENT: (Continues to stay silent, as she only seems to ask her good questions when she has the direct attention of an adult.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Observing crabs and asking questions",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Out-of-school biology workshop session",
+      "materials": "Crabs",
+      "social_setting": "Group activity where she does not have the attention of an adult",
+      "time_context": "July 18"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When she does not have the attention of an adult",
+      "observable_behavior": "She is more reserved and seems only to ask her questions when she has the attention of an adult. She doesn't just blurt ideas out as much.",
+      "internal_state": "",
+      "related_quotes": [
+        "Amber has some good questions, but she is more reserved and seems only to ask her questions when she has the attention of an adult. She doesn't just blurt ideas out as much."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During group activities",
+        "observable_behavior": "She is more reserved and seems only to ask her questions when she has the attention of an adult. She doesn't just blurt ideas out as much.",
+        "internal_state": "",
+        "related_quotes": [
+          "Amber has some good questions, but she is more reserved and seems only to ask her questions when she has the attention of an adult."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

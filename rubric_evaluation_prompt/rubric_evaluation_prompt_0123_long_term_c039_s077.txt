@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Facilitate Contextual Explanation
+  Check: The long-term plan includes specific, non-judgmental methods (e.g., collective biography, photo elicitation, or regular check-ins) that allow the student to explain the reasoning behind his actions.
+
+Criterion 2: Dismantle Surveillance and Social Shaming
+  Check: The long-term plan explicitly moves away from behavioristic tracking, public behavioral charts, or peer-shaming tactics, focusing instead on inclusive, appreciative engagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Dennis is a student who experiences profound emotional distress, self-harm, and 'defensive learning' due to a deep fear of 'doing stupid things' and being constantly surveilled. The evidence reveals he uniquely needs adults to relinquish physical and coercive dominance, and instead provide non-judgmental spaces where he can explain the logical reasons behind his actions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Dennis, you took the cardboard cover off the camera. The instruction was to leave it on.
+
+STUDENT: I do bad things. I am noisy.
+
+TUTOR: Since you didn't follow the instructions, you need to go sit in the chair in the corner by the blackboard.
+
+STUDENT: In school they keep an eye on me all the time, so that I do not do stupid things. All the time, I am afraid of doing stupid things and being yelled at.
+
+TUTOR: Please just sit in the corner and face away from the class.
+
+STUDENT: (Accepts being put in the corner in a chair at the blackboard, head faced away from class) I didn't mind. Then I do not have to be afraid of doing stupid things.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Following instructions regarding a camera (not taking the cardboard cover off)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during a Danish lesson",
+      "materials": "Camera with a cardboard cover",
+      "social_setting": "Whole class setting with the teacher at the blackboard",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Teacher lecturing the student from the blackboard in front of the class for having taken the cardboard cover off the camera",
+      "observable_behavior": "Accepts being put in the corner in a chair at the blackboard, head faced away from class.",
+      "internal_state": "Afraid of doing stupid things and being yelled at; feels he is kept an eye on all the time.",
+      "related_quotes": [
+        "in school they keep an eye on me all the time, so that I do not do stupid things",
+        "all the time, I am afraid of doing stupid things and being yelled at.",
+        "then I do not have to be afraid of doing stupid things",
+        "I didn ’t m i n d ."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During classroom chaos/disruption when chased by the teacher",
+        "observable_behavior": "Placed in the corner at the blackboard with the teacher standing bent over him.",
+        "internal_state": "Describes himself in negative terms, feeling that he does bad things and is noisy.",
+        "related_quotes": [
+          "I d o b a d t h i n g s",
+          "I a m n o i s y"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

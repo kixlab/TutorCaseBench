@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Community-Oriented Data Interpretation
+  Check: The tutor explicitly connects the student's quantitative data to community-level collaboration or shared cognitive opportunities, rather than just evaluating individual performance.
+
+Criterion 2: Structured Action Planning
+  Check: The tutor provides specific, structured metacognitive prompts (e.g., asking for an analysis, motivation, or concrete plan) to help the student formulate exactly how they will improve their peer interactions.
+
+Criterion 3: Scaffolded Idea Generation
+  Check: The tutor uses Socratic questioning or guided dialogue to help the student formulate, refine, or validate a specific question or explanation, directly reducing their uncertainty about what to share.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly engaged in reading but avoids building on peers' digital notes due to a deep-seated fear that their ideas are inadequate. They tend to fixate on surface-level quantitative analytics and require structured metacognitive scaffolding, as well as physical collaborative preparation, to build the self-efficacy needed for digital knowledge building.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at your Knowledge Connections Analyzer data to answer our question: Are we a community that collaborates? What do your reading and build-on percentages show?
+
+STUDENT: For example, reading others' notes, I have read many notes, the percentage is 99% which is pretty high. However, when I look at built-on to others' notes, the percentage is only about 20%, which is pretty low.
+
+TUTOR: What does that data tell you about your interactions?
+
+STUDENT: The data tells me that the interaction between the other students and me is not sufficient. I need to communicate more with peers.
+
+TUTOR: Why do you think your build-on percentage is at 20% right now?
+
+STUDENT: I just look at the quantitative data. I even write notes at home, because I am afraid that my point or idea is not good enough...
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Analyzing personal interaction data (reading vs. building-on percentages) using the Knowledge Connections Analyzer (KCA) tool to answer the question 'Are we a community that collaborates?'",
+      "learning_goal": "To reflect on individual performance and interactions with other students, identify strengths and weaknesses, and generate further plans to bridge communication gaps"
+    },
+    "context": {
+      "environment": "Interview and reflection session after a visual arts lesson on 'Design'",
+      "materials": "Knowledge Connections Analyzer (KCA) tool, reflective journal prompts, KCA prompt sheets",
+      "social_setting": "Individual reflection on community interaction data",
+      "time_context": "During the reflective assessment phase (weeks 9-17)"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When reviewing KCA data showing a 99% reading rate but only a 20% build-on rate to others' notes",
+      "observable_behavior": "Reported writing notes at home instead of interacting directly with peers; initially noticed only the quantitative data generated by the KCA",
+      "internal_state": "Afraid that their point or idea is not good enough; feels interaction with other students is not sufficient",
+      "related_quotes": [
+        "reading others’ notes, I have read many notes, the percentage is 99% which is pretty high. However, when I look at built-on to others’ notes, the percentage is only about 20%, which is pretty low",
+        "The data tells me that the interaction between the other students and me is not sufficient. I need to communicate more with peers",
+        "I even write notes at home , because I am afraid that my point or idea is not good enough ..."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Initial use of the Knowledge Connections Analyzer (KCA) tool",
+        "observable_behavior": "Noticed only the quantitative data generated by the KCA; did not recognize the cognitive opportunities afforded by the qualitative information provided",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

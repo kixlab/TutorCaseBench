@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Curriculum-Aligned Task Modification
+  Check: The tutor's response must engage the student in a foundational academic task (e.g., letter/number identification, writing) that is directly connected to the general education content her peers are working on, explicitly avoiding unrelated 'busy work'.
+
+Criterion 2: Peer-Modeled Communication Prompting
+  Check: The tutor's response must prompt or facilitate an interaction between the student and a peer to model appropriate communication or behavior, rather than solely correcting the student in isolation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Molly is an 11-year-old student who relies on echolalia, inappropriate noises, and physical actions (like grabbing) to communicate and socialize. She exhibits avoidance behaviors when isolated from her peers or given unrelated 'busy work'. She uniquely requires foundational academic tasks to be embedded within age-appropriate, grade-level materials and consistent access to peer modeling to develop functional communication.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: The rest of the group is reading an article about Japan. Molly, here is a worksheet for you to color while they read.
+
+STUDENT: (Laughs aloud) Worksheet for you to color.
+
+TUTOR: Yes, go ahead and start coloring.
+
+STUDENT: (Makes inappropriate noises for bodily functions while sitting next to the group)
+
+TUTOR: Please work quietly on your coloring.
+
+STUDENT: (Turns her body to look away from the instructional personnel and her collaborative general education classmates, completely ignoring the unrelated worksheet)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading an article about the culture of Japan and participating in group work",
+      "learning_goal": "Identification of letters and numbers as well as writing focused on general education content"
+    },
+    "context": {
+      "environment": "General education contexts",
+      "materials": "Age appropriate and at grade level material (e.g., an article about the culture of Japan), worksheets to color",
+      "social_setting": "Group work with collaborative general education classmates",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When they did not participate in the class instructional activities and were given unrelated activities",
+      "observable_behavior": "Looking away from instructional personnel or collaborative general education classmates",
+      "internal_state": "Efforts at avoidance",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When she occasionally would try to socialize with others",
+        "observable_behavior": "Laughing aloud, inappropriately making noises for bodily functions, or repeating a phrase she had heard earlier",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

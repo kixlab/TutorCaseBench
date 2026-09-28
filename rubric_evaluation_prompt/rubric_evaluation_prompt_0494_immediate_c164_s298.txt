@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Collaborative Brainstorming Framing
+  Check: The tutor's response must frame the interaction as a shared, low-stakes brainstorming or thought-partnering exercise rather than demanding a definitive answer or public statement.
+
+Criterion 2: Respect for Contemplative Silence
+  Check: The tutor must allow the student space to process, explicitly avoiding demanding immediate verbal participation, calling out her silence, or framing her quietness as a deficit.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a thoughtful, active listener whose silence is often misinterpreted as reluctance or inability to engage. She frequently navigates deep contradictions between critical academic discourses and her lived familial and cultural allegiances, which can cause her to trail off or feel like a 'hypocrite.' She requires intimate, low-stakes settings to share her critiques and needs her silence to be respected as a valid form of participation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's practice your group's presentation on domestic violence. We need to go over your critique of the problem and your suggestions for remediation.
+
+STUDENT: I don’t understand how this can happen, how you can have such a big problem with domestic violence in today’s society!
+
+TUTOR: What else were you going to say about that part?
+
+STUDENT: But … that’s the way it is. I know we are supposed to critique it, but I forgave my dad for what he did to us. I guess I'm just a hypocrite.
+
+TUTOR: Okay, let's move on to the next section where you critique traditional gender roles.
+
+STUDENT: Well, the woman is expected to tend the home while the man is expected to be the breadwinner. But... personally, I want to be a homemaker, but that’s because I want my kids to turn out o.k., and someone has to be home with them. If you’re both working, it’s just like .... (trails off into silence)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Presenting a critique of the problem (domestic violence) and suggestions for its remediation, and critiquing traditional gender roles",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom discussions and presentations over the spring semester of 2008",
+      "materials": "",
+      "social_setting": "Domestic Violence project group",
+      "time_context": "spring semester of 2008"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When presumptively ‘appropriate’ conversational topics and critiques incurred dissonance with the intimacies of students’ personal and familial lives or cultural mores",
+      "observable_behavior": "Said forcefully, ‘I don’t understand how this can happen...’ then trailed off: ‘But … that’s the way it is.’ Also offered an incisive critique of traditional gender roles, immediately added, ‘Personally, I want to be a homemaker...’ and trailed off again.",
+      "internal_state": "Navigating apparent contradictions to maintain allegiance to their families and culture(s) while also moving through processes of conscientización",
+      "related_quotes": [
+        "I don’t understand how this can happen, how you can have such a big problem [with domestic violence in today’s society]!",
+        "But … that’s the way it is.",
+        "Personally, I want to be a homemaker, but that’s because I want my kids to turn out o.k., and someone has to be home with them."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When delivering thoughts and critiques in the more intimate settings of project groups",
+        "observable_behavior": "Calling herself a ‘hypocrite’ when describing this situation",
+        "internal_state": "Difficulty of living with a father who was threatening and abusive to her and her mother, but because she loved her father, she ‘forgave’ him",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

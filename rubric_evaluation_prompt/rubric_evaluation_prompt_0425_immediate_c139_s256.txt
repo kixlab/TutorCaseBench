@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Covert Submission Avenue
+  Check: The tutor offers a private, unobserved method for Jimmy to submit his work or demonstrate his knowledge away from peers.
+
+Criterion 2: Omission of Intellectual Praise
+  Check: The tutor refrains from praising the academic quality, depth, or intelligence of Jimmy's work.
+
+Criterion 3: Affective Dialogue on Giftedness
+  Check: The tutor initiates a dialogue about the personal, emotional, or life impacts of giftedness (e.g., sharing personal experience, asking about his satisfaction with hiding his abilities).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jimmy is a highly gifted student who masks his abilities and withdraws in class (e.g., sleeping, refusing to submit work) to avoid social ridicule from peers who view being smart as 'uncool.' He secretly produces high-quality work but views his intellect as a curse. He uniquely requires covert methods to submit work and affective mentoring that validates his social struggle rather than traditional intellectual praise.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Jimmy, we are starting the English writing assignment now. Please get your paper out and begin working.
+
+STUDENT: (Keeps his head down on the desk without taking out any materials)
+
+TUTOR: You need to complete the assignment and turn it in so you can get a grade.
+
+STUDENT: I do the work, I just don't turn it in and sometimes I do it in a different way.
+
+TUTOR: If you have the work done, you should just hand it in right now.
+
+STUDENT: (Scoffs) (Puts his head back down to sleep to drown out the classroom environment, refusing to speak or engage any further while his peers are present)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attending and participating in junior and senior English classes, and completing coursework.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Junior and senior English classes",
+      "materials": "Personal composition notebook",
+      "social_setting": "Classroom environment with peers present",
+      "time_context": "During first and second class periods"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Navigating the classroom environment and managing academic requirements among peers",
+      "observable_behavior": "Would attend approximately 50 %of the time for his first class; the second class only about 25 %. When he did attend, he usually just put his head down and went to sleep. If asked a question directly he would answer, but he would never voluntarily speak or engage in class.",
+      "internal_state": "Wanted to escape the constraints he felt trapped within; learned it was 'uncool' to be smart as an African-American male and chose to sacrifice his performance in exchange for positive and accepted social standing among his peers.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked why he wouldn't turn in work even if only the teacher saw it",
+        "observable_behavior": "States that he completes the assignments but refuses to submit them.",
+        "internal_state": "Struggling to reach a fresh start while going unnoticed by his peers.",
+        "related_quotes": [
+          "I do the work, I just don't turn it in and sometimes I do it in a different way"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

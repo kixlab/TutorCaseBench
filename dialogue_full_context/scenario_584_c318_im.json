@@ -1,0 +1,76 @@
+{
+  "category_id": "318",
+  "category_title": "Adolescents with Major Depressive Disorder experiencing psychomotor retardation, cognitive disorganization, and emotional volatility",
+  "scenario_id": "584",
+  "scenario_title": "Algebra II Problem Solving and Calculation Errors",
+  "minimal_context": "The student is working on Algebra II problems from a textbook on a whiteboard during a one-on-one session at home.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's look at the next Algebra II problem from the textbook. Please solve it on the whiteboard."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Holds very still and is slow to reach out for a pencil) I get it. I can work while you’re here."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, go ahead and write out your steps."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Moves at about half-speed through the algebra work, struggling to translate the book examples to the book problems, and makes a calculation error)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Your answer is incorrect. Look at your calculations and try reworking it."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Gets bogged down and spends an extended period reworking the calculation error, circling around and around and not seeing an escape) Why bother?",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's look at the next Algebra II problem from the textbook. Please solve it on the whiteboard.\n\nSTUDENT: (Holds very still and is slow to reach out for a pencil) I get it. I can work while you’re here.\n\nTUTOR: Okay, go ahead and write out your steps.\n\nSTUDENT: (Moves at about half-speed through the algebra work, struggling to translate the book examples to the book problems, and makes a calculation error)\n\nTUTOR: Your answer is incorrect. Look at your calculations and try reworking it.\n\nSTUDENT: (Gets bogged down and spends an extended period reworking the calculation error, circling around and around and not seeing an escape) Why bother?",
+  "immediate_dialogue_prompt": 973,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Algebra II problems from a textbook",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "HHI session at home",
+        "materials": "Textbook, whiteboard",
+        "social_setting": "One-on-one instructional session",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the error is in calculation rather than concept",
+        "observable_behavior": "Gets bogged down by problems and will spend extended periods reworking them, circling around and around and not seeing an escape",
+        "internal_state": "Responsibilities stretch in from of him like an endless chain",
+        "related_quotes": [
+          "Why bother?"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When he says he 'gets' a math problem",
+          "observable_behavior": "His accuracy is about 50%, holds very still on some days, and is slow to reach out for a pencil",
+          "internal_state": "It seems to be to keep me happy; math is a source of frustration for him from the fluid way instructors use mathematical terms",
+          "related_quotes": [
+            "I can work while you’re here."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

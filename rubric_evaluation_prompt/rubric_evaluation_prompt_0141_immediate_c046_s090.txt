@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Time and Expectation Framing
+  Check: The tutor explicitly announces the session duration using consistent phrasing (e.g., 'Today you have X minutes') and/or references visual charts and rules to frame the activity or transition.
+
+Criterion 2: Visual Emotional Co-regulation
+  Check: The tutor offers a visual emotional scale (e.g., a 5-point scale with colors/faces) to help the student identify their feelings, rather than demanding verbal explanations or dismissing their physical complaints.
+
+Criterion 3: Task Simplification for Immediate Success
+  Check: The tutor breaks the activity down into simple, structured steps or provides visual instruction cards to ensure the student can easily succeed without feeling overwhelmed.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits internalizing anxiety, characterized by 'Freeze' or 'Flight' responses such as withdrawing, shaking, crying, and somatic complaints (e.g., feeling cold or unwell) when faced with new activities or transitions. They uniquely require highly predictable environments, concrete visual supports (like schedules and emotion scales), and 'easy-to-success' tasks to feel safe enough to engage and co-regulate.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Our 60 minutes are up. It is time to leave the session, so please put the plastic tracks and the motor car away.
+
+STUDENT: (Stops moving the car and stays back, watching instead of packing up. He goes into a shell and doesn't speak.)
+
+TUTOR: What are you doing? You need to pack up your things so we can transition out of the room.
+
+STUDENT: (Avoids eye contact and looks down at his shaking legs.) I'm not feeling well.
+
+TUTOR: We just need to go now. Please stand up and leave the toys on the table.
+
+STUDENT: (Starts crying and becomes completely quiet and withdrawn, refusing to move.) Whenever it's time to leave I want to cry.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Transitioning out of the session after unstructured constructive play (e.g., a set of plastic tracks with a motor car that could move).",
+      "learning_goal": "Successfully terminate the session and transition out."
+    },
+    "context": {
+      "environment": "Play-based intervention group setting.",
+      "materials": "Visual expectations or rules, visual chart with time.",
+      "social_setting": "Group setting with peers and facilitator.",
+      "time_context": "At the end of a 60 min session."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When it is time to leave the session.",
+      "observable_behavior": "Crying, quiet and withdrawn.",
+      "internal_state": "Wanting to cry due to the transition.",
+      "related_quotes": [
+        "whenever it’s time to leave I want to cry"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When facing transitions or the end of a preferred structured environment.",
+        "observable_behavior": "Crying, not communicating, goes into a shell.",
+        "internal_state": "Upset, worried.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

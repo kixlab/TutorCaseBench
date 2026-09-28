@@ -1,0 +1,77 @@
+{
+  "category_id": "511",
+  "category_title": "Students who strategically refuse special education services to avoid stigma",
+  "scenario_id": "910",
+  "scenario_title": "Refusing forced assistance during an exam",
+  "minimal_context": "The student is taking an exam at their desk in the regular classroom while an instructional aide is present.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is your exam. Please begin working on it at your desk."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I'ma just let it go and do it here."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You haven't started yet. Let me look at your paper."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I don't even bother anymore. You're just not gonna understand."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Well, just let me help you. (Reaches to take the test)"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Grabs the paperwork and pulls it towards himself) No, I don't need your help - I don't want your help. I'm not - nah - get out of here.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is your exam. Please begin working on it at your desk.\n\nSTUDENT: I'ma just let it go and do it here.\n\nTUTOR: You haven't started yet. Let me look at your paper.\n\nSTUDENT: I don't even bother anymore. You're just not gonna understand.\n\nTUTOR: Well, just let me help you. (Reaches to take the test)\n\nSTUDENT: (Grabs the paperwork and pulls it towards himself) No, I don't need your help - I don't want your help. I'm not - nah - get out of here.",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 1539,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Taking an exam",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Taking tests in the regular classroom instead of the learning center",
+        "materials": "Test, paper work",
+        "social_setting": "Instructional aide present during the exam",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Instructional aide looked at the blank test, said 'You make me sick,' and then tried to grab the test to help",
+        "observable_behavior": "Laughed, grabbed paper work and put it towards himself, verbally refused help saying 'I don't need your help - I don't want your help' and 'get out of here'",
+        "internal_state": "Felt staff are 'just not gonna understand'",
+        "related_quotes": [
+          "‘No, I don ’t need your help. ’She tried to grab my test and I grabbed my paper work and I put it towards me and I was like ‘I don ’t need your help –I don ’t want your help. ’She was like, ‘Well, just let me help you. ’‘I’m not –nah–get out of here. ’",
+          "get out of here; get out of my face."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When deciding where to complete tests",
+          "observable_behavior": "Stops requesting to be sent to the learning center to complete tests, deciding to 'just let it go and do it here'",
+          "internal_state": "Believes staff are 'not gonna understand'",
+          "related_quotes": [
+            "I don ’t even bother anymore. …It doesn ’t bother me. I think about it and it ’sj u s t ,t h e y ’re not gonna understand, you know, they ’re just not gonna understand. I ’ma just let it go and do it here. ’"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

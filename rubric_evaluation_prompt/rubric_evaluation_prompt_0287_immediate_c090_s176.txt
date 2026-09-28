@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Verbalization of Math Reasoning
+  Check: The tutor prompts the student to talk through the problem verbally (e.g., via a think-aloud or partner discussion) before or while writing the explanation.
+
+Criterion 2: Visual Scaffolding for Drafting
+  Check: The tutor encourages the student to draw or sketch a visual representation of the math problem to help formulate their written answer.
+
+Criterion 3: De-emphasizing Spelling Mechanics
+  Check: The tutor explicitly removes the pressure of spelling (e.g., by providing a vocabulary list/word wall, or instructing the student to ignore spelling mistakes while drafting).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student holds a rigid belief that math and writing are separate domains, showing strong resistance and frustration when asked to write math explanations. They are easily cognitively frozen by spelling difficulties during drafting. However, they are highly responsive to explicit modeling, visual sketching, verbal think-alouds, and a structured, gradual release of responsibility.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at the grocery store parking lot problem on the board. I want you to solve it and answer it in paragraph form in your math journals.
+
+STUDENT: Math is numbers not letters. Math and writing don’t go 2-gether.
+
+TUTOR: Just try your best to write down the steps you take to find the answer.
+
+STUDENT: I hate to write expesially in math.
+
+TUTOR: You need to tell how you solve the problem in writing.
+
+STUDENT: I can’t evn get why she would me make me rite in her class. Nobody has made me tell how I solve problems and never in writing did I have to do this!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "The grocery store parking lot that will hold 1,000 vehicles, two-ﬁfths of the parking spaces are for cars. When you went to buy groceries, there were 200 cars and some trucks in the parking lot. The parking lot was three-fourths full. How many trucks were in it?",
+      "learning_goal": "answer it in paragraph form"
+    },
+    "context": {
+      "environment": "math class",
+      "materials": "word problem on the board, math journals, word wall of math terms",
+      "social_setting": "working independently and with partners",
+      "time_context": "Each day, beginning math class"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Nobody has made them tell how they solve problems and never in writing did they have to do this",
+      "observable_behavior": "get easily frustrated, indicated a negative stance toward writing",
+      "internal_state": "frustrated",
+      "related_quotes": [
+        "I can’t evn (even) get why she would me make me rite (write) in her class.",
+        "Math is numbers not letters.",
+        "I hate to write expesially (especially) in math.",
+        "Math and writing don’t go 2-gether (together)."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When kids get stuck with spelling",
+        "observable_behavior": "they are frozen and cannot move forward until they have the correct spelling",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "as I modeled my own thought process",
+        "observable_behavior": "Students seemed surprised and confused",
+        "internal_state": "surprised and confused",
+        "related_quotes": [
+          "I thought she was crazy at ﬁrst but now I think out loud all the time."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Dyadic Partnership Structure
+  Check: The long-term plan structures peer collaboration exclusively as pairing (dyads) rather than larger groups.
+
+Criterion 2: Structured Scarcity for Negotiation
+  Check: The long-term plan includes specific constraints (such as item limits) that naturally force K and his partner to share resources and negotiate.
+
+Criterion 3: Provision of Individualized Space
+  Check: The long-term plan explicitly incorporates a balance between collaborative tasks and designated private spaces or individualization opportunities for K.
+
+Criterion 4: Differentiated Adult Support Roles
+  Check: The long-term plan utilizes distinct adult roles (e.g., one acting as a design critic and another as a technical/task facilitator) to support K's engagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+K is a technically patient student who struggles significantly with social complexity, contextual shifts, and imaginative play. He becomes overwhelmed and passive when facing simultaneous interactions or group demands. To thrive, he uniquely requires carefully scaffolded imaginative prompts, 1-on-1 peer pairing rather than groups, and a structured balance between forced collaboration (via resource limits) and private, individualized spaces.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review your virtual restaurant design. What did you add to this area?
+
+STUDENT: Entertainment table, I added entertainment ta …table.
+
+TUTOR: I see the virtual hotdog stand you made. I am starving... Can you offer me a hotdog?
+
+STUDENT: No, I am not hungry now.
+
+TUTOR: I mean for me, as your customer. How do you serve the food?
+
+STUDENT: (Types in text chat instead of using voice) ... (Appears passive and irresponsive, unable to act out serving the food using the virtual hotdog stand)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interacting with a design critic (Adult X) who was using imaginative play cues during a review of the virtual restaurant design.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "OpenSim-based virtual environment",
+      "materials": "virtual hotdog stand",
+      "social_setting": "Interacting with a design critic",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when a design inquiry was less compromising or when the conversation topic was shifted, and when presented with cues of imaginative play (e.g. 'I am starving …Can you offer me a hotdog?')",
+      "observable_behavior": "appearing passive and irresponsive, providing a literal response, and explaining his design choices to a design critic with a hint of uncertainty",
+      "internal_state": "hard time adapting to the contextual change, could not swiftly interpret the cues of imaginative play",
+      "related_quotes": [
+        "No, I am not hungry now.",
+        "Entertainment table, I added entertainment ta …table."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "answering questions or describing an object",
+        "observable_behavior": "lacked skills in answering questions or describing an object in a full or complex sentence",
+        "internal_state": "preferred text chat to voice chat during virtual communication",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

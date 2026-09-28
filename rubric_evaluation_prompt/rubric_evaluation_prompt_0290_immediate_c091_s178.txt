@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: De-escalation through Space and Reassurance
+  Check: The tutor responds to resistance or withdrawal by backing off, ignoring the challenging behavior, or offering verbal reassurance (e.g., 'It's OK') rather than forcing compliance or physically interfering.
+
+Criterion 2: Parallel Enthusiastic Modeling
+  Check: The tutor continues to enthusiastically describe and interact with the materials themselves, allowing Hannah to observe and opt-in when ready without demanding she join in.
+
+Criterion 3: Interest-First Instruction
+  Check: The tutor avoids giving direct commands (e.g., 'look', 'point', 'read this together') unless they have first successfully captured Hannah's interest using enticing materials.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Hannah is a student with severe communication impairment who exhibits strong physical and vocal resistance (kicking, hitting, loud vocalizations) to adult-led agendas and interference. She uniquely requires adults to follow her lead, back off during resistance, and build intrinsic motivation through enthusiastic, parallel modeling of enticing materials rather than direct instruction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's sit down and look at this lift and reveal flap book together.
+
+STUDENT: (Takes the book and begins looking rapidly through it independently, appearing to be absorbed in it.)
+
+TUTOR: Let me help you turn the page and see what is under this flap.
+
+STUDENT: (Turns away from the adult and pushes the adult's hand away from the book.)
+
+TUTOR: We need to read this together. Look at this page.
+
+STUDENT: (Moves away, pushes the adult away, and goes back to spending time looking at the book independently to withdraw from the attempt to interact.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "looking rapidly through favourite books",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "individual work sessions",
+      "materials": "books with ‘lift and reveal’ flaps",
+      "social_setting": "one-on-one with adult",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "adult interference",
+      "observable_behavior": "withdraw from adults’ attempts to interact with her by Spending time looking at a book independently, and appearing to be absorbed in it",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when the student withdrew from the adult-led activity",
+        "observable_behavior": "turning away, moving away, pushing an object, or the adult, away",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,113 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Peer Advocacy
+  Check: The tutor's long-term plan includes educating the rest of the class about the student's unique needs and modeling how to interact with them (e.g., conducting a discussion when the student is absent).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is frequently unresponsive to verbal instructions and exhibits physical aggression or property destruction when seated near peers. They require a highly structured approach utilizing visual rewards, deliberate wait time, non-verbal behavioral corrections, and proactive peer education to foster a supportive environment.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our group activity. Please sit with your peers and remember to follow the class rules.
+
+STUDENT: (Makes different kinds of sounds and does not respond to the interaction.)
+
+TUTOR: Let's try to be quiet and listen to the instructions.
+
+STUDENT: (Continues making sounds, not complying with the class rules while sitting next to the other students.)
+
+TUTOR: Please sit nicely with your friends.
+
+STUDENT: (Exhibits negative behavior by reaching out, pulling on their peers' hair, and hitting them.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "comply with class rules",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "",
+      "social_setting": "peers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "negative behavior of the student in my classroom",
+      "observable_behavior": "pulling on their peers’ hair, hitting them",
+      "internal_state": "",
+      "related_quotes": [
+        "no"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "doesn’t comply with class rules and the students complain about it",
+        "observable_behavior": "The student makes sounds, different kinds of sounds.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

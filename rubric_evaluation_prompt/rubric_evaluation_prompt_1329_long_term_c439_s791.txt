@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Displacement Concepts
+  Check: The tutor's long-term plan includes explicitly introducing and discussing the psychological concept of 'displacement' to help the student connect his home experiences to bullying behavior.
+
+Criterion 2: Confidentiality and Opt-Out Assurance
+  Check: The tutor's long-term plan includes individual meetings that explicitly guarantee confidentiality and provide the student with a clear, ongoing option to opt out of the activities.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits bullying behavior that is deeply rooted in his own trauma from physical abuse at home. He projects his victimization onto others, viewing aggression as a symptom of sadness rather than malice. He uniquely requires highly structured, non-physical role-play to safely project his feelings, alongside explicit discussions of displacement and strict guarantees of confidentiality.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to do a 20-minute role-play activity using this script and scarf. Let's look at the second part of the script. Who do you think the victim could talk to about the bullying incident?
+
+STUDENT: He could talk only with his grandparents and his teacher.
+
+TUTOR: What about the bully? What could be a solution for him?
+
+STUDENT: Apology would be the right thing to do in order to ﬁnd a way out of his problem but at the same time it would be a mistake since by apologising he would show weakness and nobody would hold him in high esteem anymore.
+
+TUTOR: Let's think about the bully's intentions. Why do you think the bully acted aggressively during the incident?
+
+STUDENT: Maybe his father had hit him that morning and he was so sad …he didn ’t really want to harm the other child.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to questions about a bully's intentions during a 20-minute role-play activity involving semi-structured scripts and monologues about a bullying incident.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Individual meetings",
+      "materials": "Semi-structured scripts, a scarf",
+      "social_setting": "The researcher met them individually",
+      "time_context": "20-minute role-play activity"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When explaining why the bully might have acted aggressively during the role-play",
+      "observable_behavior": "Stated that the bully might act in that way because that day he was very sad, and that he didn't really want to harm the other child",
+      "internal_state": "Projecting his own experience of physical abuse by his father (displacement)",
+      "related_quotes": [
+        "Maybe his father had hit him that morning and he was so sad …he didn ’t really want to harm the other child"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Identifying potential people the victim could talk to during the second part of the role-play activity",
+        "observable_behavior": "Said that the victim could talk only with his grandparents and his teacher, since the boy's grandparents were his shelter when his father got angry with him",
+        "internal_state": "Seemed to have a very close relationship with his teacher: she knew about his problem and he often discussed this with her",
+        "related_quotes": []
+      },
+      {
+        "condition": "Discussing potential solutions for the bully character during the role-play debrief",
+        "observable_behavior": "Admitted that apology was not easy for bullies as it threatened their ideal self-image",
+        "internal_state": "Believed that by apologising he would show weakness and nobody would hold him in high esteem anymore",
+        "related_quotes": [
+          "Apology would be the right thing to do in order to ﬁnd a way out of his problem but at the same time it would be a mistake since by apologising he would show weakness and nobody would hold him in high esteem anymore."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

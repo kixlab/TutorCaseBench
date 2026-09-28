@@ -1,0 +1,76 @@
+{
+  "category_id": "120",
+  "category_title": "Students who commit property damage but demonstrate accountability",
+  "scenario_id": "219",
+  "scenario_title": "Youth Court hearing for property damage",
+  "minimal_context": "Felix is participating in a Youth Court hearing to negotiate a sentence for a broken metal window grate.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are here at the Youth Court hearing to discuss the broken metal window grate."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I broke it when wrestling around with another student."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We need to assign you to an after-school consequence program for the damage."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I am in drug and alcohol classes after school."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What do you propose we do about the damage then?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "After I realized the gate was broken I took it down and was trying to fix it. I am in construction. I can fix it.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are here at the Youth Court hearing to discuss the broken metal window grate.\n\nSTUDENT: I broke it when wrestling around with another student.\n\nTUTOR: We need to assign you to an after-school consequence program for the damage.\n\nSTUDENT: I am in drug and alcohol classes after school.\n\nTUTOR: What do you propose we do about the damage then?\n\nSTUDENT: After I realized the gate was broken I took it down and was trying to fix it. I am in construction. I can fix it.",
+  "immediate_dialogue_prompt": 363,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Participating in a Youth Court hearing regarding property damage and negotiating a sentence",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Youth Court hearing at Marshall (6-12 school)",
+        "materials": "Broken metal window grate",
+        "social_setting": "Hearing with a jury and judge",
+        "time_context": "After school"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When wrestling around with another student",
+        "observable_behavior": "Broke a metal window grate. After he realized the gate was broken he took it down and 'was trying to fix it.'",
+        "internal_state": "Realized the gate was broken",
+        "related_quotes": [
+          "was trying to fix it"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When negotiating a sentence during the hearing",
+          "observable_behavior": "Responded that he was in drug and alcohol classes after school but would be willing to work on fixing the grate",
+          "internal_state": "Willing to work on fixing the grate",
+          "related_quotes": [
+            "in construction. I can fix it."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

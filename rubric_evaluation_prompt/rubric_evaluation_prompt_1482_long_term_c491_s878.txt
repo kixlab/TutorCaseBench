@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Culturally Responsive Climate Maintenance
+  Check: The long-term plan must include proactive strategies to ensure culturally responsive communication and explicitly prevent stereotype threat or derogatory language.
+
+Criterion 2: Safe Processing Time Accommodation
+  Check: The long-term plan must establish a norm of allowing adequate wait time for responses without displaying frustration, sarcasm, or pressure.
+
+Criterion 3: Microaggression Repair Protocol
+  Check: The long-term plan must include a clear strategy for recognizing, addressing, and repairing the impact of any microaggressions or hostile interactions that occur.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly sensitive to language-based microaggressions, sarcasm, and instructor impatience, particularly when needing time to formulate answers. When targeted by derogatory remarks or frustration, he experiences stereotype threat and completely withdraws into silence. He uniquely requires a culturally responsive environment that provides safe processing time and actively prevents 'Othering.'
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review the homework assignment. Please read your answer for question number three.
+
+STUDENT: (Looks down at his desk, pausing as he tries to formulate his answer) I...
+
+TUTOR: English Channel! Come on, what's the answer?
+
+STUDENT: (Flushes red and closes his notebook, not responding.)
+
+TUTOR: Well? We are waiting for you to share your answer with the class.
+
+STUDENT: (Remains completely silent and disengaged for the duration of the class, staring blankly at the desk, thinking, "Did that really just happen? Do I have to prove myself as a member of my group yet again?")
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Going over a homework assignment, randomly calls on him to answer a question",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Remedial English class",
+      "materials": "Homework assignment",
+      "social_setting": "Classroom setting with instructor and other students",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When he does not respond immediately, the instructor yells, “English Channel!” at the student",
+      "observable_behavior": "The student, flushes, does not respond and is silent for the duration of the class",
+      "internal_state": "Cognitive distraction and disruption of attention, an attempt to make meaning of the event, activation of a stereotype threat, feeling disempowered, and feeling distinctly uncomfortable afterwards",
+      "related_quotes": [
+        "Did that really just happen?",
+        "Do I have to prove myself as a member of my group yet again?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Following a microaggressive event",
+        "observable_behavior": "Behavioral disruptions leading to an individual’s disengagement, withdrawal, or eruptions followed by silencing of students",
+        "internal_state": "Anxiety, depression, anger, and questioning of social belongingness",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

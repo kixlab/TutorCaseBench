@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Fluency and Speed Monitoring
+  Check: The long-term plan includes a structured method (such as an IEP checklist) for monitoring and gradually increasing her response rate or handwriting speed to counterbalance her perfectionism.
+
+Criterion 2: Foundational Skill Differentiation
+  Check: The long-term plan incorporates specific, differentiated foundational learning objectives (such as matching, recognizing math symbols, or identifying numbers) tailored to her developmental level.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Student B is a Year 5 student with ASD who exhibits severe perfectionism, particularly regarding neat handwriting, which drastically slows her work pace. She has a very low tolerance for errors, often restarting entire tasks if she makes a single mistake. The evidence shows she uniquely requires explicit verbal prompts to initiate tasks and verification tools like calculators to confirm answers and prevent frustration-induced restarts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to do the x20 math game on your Nintendo DS. Please begin answering the sums.
+
+STUDENT: (Sits looking at the Nintendo DS screen without starting the activity, waiting to be told what to do.)
+
+TUTOR: Go ahead and start writing your answers.
+
+STUDENT: (Slowly and carefully writes the first answer with the stylus, taking a long time to ensure the numbers are perfectly neat.)
+
+TUTOR: Okay, try the next math sum.
+
+STUDENT: (Writes an incorrect answer, looks away from the screen, and then immediately restarts the entire x20 game from the beginning.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "tasks in the x20 game",
+      "learning_goal": "answering the maths sums"
+    },
+    "context": {
+      "environment": "intervention",
+      "materials": "Nintendo DS, stylus, calculator",
+      "social_setting": "started the DS activities independently",
+      "time_context": "During the intervention period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "if she answered an item incorrectly",
+      "observable_behavior": "would tend to restart the x20",
+      "internal_state": "easily distracted",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the intervention commenced",
+        "observable_behavior": "verbal prompting was required to initiate her use of the DSs and to help her understand the tasks",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When writing answers",
+        "observable_behavior": "very preoccupied with writing neatly and correctly and this slowed her response rate",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

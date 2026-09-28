@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Student Inference
+  Check: The tutor's response explicitly acknowledges, validates, or explores the student's logical inference or outside knowledge as a valuable contribution to the discussion.
+
+Criterion 2: Absence of Literal Text Demands
+  Check: The tutor does not ask the student to locate specific, literal text evidence to prove a logical conjecture.
+
+Criterion 3: Avoidance of Fill-in-the-Blank Prompting
+  Check: The tutor avoids using designedly incomplete utterances (e.g., trailing off a sentence) that force the student to guess a specific literal phrase.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Samantha is a student who actively engages in meaning-making by drawing logical inferences from her own knowledge. She becomes easily discouraged when her reasoned conjectures are treated as errors because they lack literal text evidence. She uniquely needs instructional approaches that validate her reasoning as a legitimate source of understanding and avoid strict demands for literal text extraction.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's answer the cause and effect question about the article. Because Kilauea's so dangerous...?
+
+STUDENT: Um not very many people, um, um use- not - A lot of people like it, but they don’t want to get too close to it.
+
+TUTOR: Is that what the article says?
+
+STUDENT: Well, if it's a dangerous volcano, people wouldn't want to get close to it.
+
+TUTOR: Can you show me where it says that in the text?
+
+STUDENT: It doesn't.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Answering a cause/effect question about the volcano Kilauea",
+      "learning_goal": "Summarization skills"
+    },
+    "context": {
+      "environment": "Small-group lesson",
+      "materials": "An article about the volcano Kilauea",
+      "social_setting": "Working with the teacher and two other students",
+      "time_context": "After a discussion about the section’s main ideas and details"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher asked 'Can you show me where it says that in the text?' after the student gave a logical and reasoned conjecture",
+      "observable_behavior": "Responded immediately by saying, 'It doesn't', without spending time searching the text",
+      "internal_state": "Fully aware that her response was not taken from the text; discouraged from using her own knowledge",
+      "related_quotes": [
+        "It doesn't"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the teacher used a designedly incomplete utterance to structure the response (e.g., 'Because Kilauea’s so dangerous?')",
+        "observable_behavior": "Provided a response that suggested a reasonable effect resulting from Kilauea’s dangers but created a context for error correction",
+        "internal_state": "Engaging in meaning-making processes using her own knowledge",
+        "related_quotes": [
+          "Um not very many people, um, um use- not - A lot of people like it, but they don’t want to get too close to it"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

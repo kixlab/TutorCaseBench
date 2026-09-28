@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Framing Creativity as Experience
+  Check: The long-term plan explicitly frames creative activities (e.g., drawing, writing) as exploratory experiences or trials, actively removing competitive or talent-based expectations.
+
+Criterion 5: Gradual Thematic Progression
+  Check: The long-term plan structures projects to progress from broader, less vulnerable themes (e.g., the student's relationship with the world) to more specific, interpersonal themes (e.g., the student's relationship with others).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student comes from a disadvantaged background with a history of academic failure, leading to deep-seated negative self-perception. They exhibit task resistance, such as walking out or refusing group work, particularly when triggered by demands to express deep inner feelings or their 'soul'. They uniquely require a highly relaxed, non-judgmental environment where creative tasks are framed as low-stakes experiences rather than talent-based competitions, allowing them to gradually open up.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For our first graffiti mural, I want you to get into your groups and brainstorm. I'd like you to speak about what you have in your soul and share your inner feelings and emotions with the group to plan the wall.
+
+STUDENT: I'm not working in a group for this. And I'm not talking about what's in my 'soul'. That's weird.
+
+TUTOR: Just try to sit with your group and exteriorize your feelings. What are some things you are angry or passionate about?
+
+STUDENT: I don't have any feelings to show you. I'm always failing at this school stuff anyway, so I don't know why you expect me to have good ideas.
+
+TUTOR: Everyone has something to contribute. Please just join the group and tell them one emotion you want to put on the wall.
+
+STUDENT: (Stands up and pushes chair away) I said I'm not doing it! I'm not sitting in that group talking about my feelings. I'm out of here.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Presenting the project and asking students to speak or show what they had in their soul, exteriorise feelings, and think about the issues and the information that they wanted for their murals, their ideas, feelings, emotions, anger and so on.",
+      "learning_goal": "To make students think their relationship with what surrounds them going from the general 'World' for the particular 'others' to the achievement of two murals."
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Graffiti murals",
+      "social_setting": "Group work on the first wall, class as a space for sharing opinions and ideas",
+      "time_context": "In the beginning of the programme"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When presenting the project and asking them to speak or show what they had in their soul",
+      "observable_behavior": "Refused to work in a group, conversation, disturbs, walks out of class, modifies the activity, uncooperative",
+      "internal_state": "A kind of fear of what we asked them for, too difficult to get exteriorised feelings",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to work on the first wall",
+        "observable_behavior": "Refused to work in a group",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "During school activities",
+        "observable_behavior": "Conversation, disturbs, walks out of class, modifies the activity, uncooperative",
+        "internal_state": "Discouragement and failure, see themselves more negatively",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Instructional Program Adaptation
+  Check: The long-term plan includes specific strategies for modifying or adapting the instructional materials, pacing, or activities to better suit the student's cognitive and engagement needs.
+
+Criterion 2: Strategic Physical Proximity
+  Check: The long-term plan explicitly incorporates seating the student in the front row or maintaining close physical proximity to the teacher during lessons.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has mild intellectual disabilities and frequently exhibits off-task or disruptive behaviors (e.g., wandering, talking, playing with objects) when under-engaged during standard lessons. The evidence reveals they uniquely require high levels of direct academic contact, continuous active tasks, strategic physical proximity (front-row seating), and positive reinforcement rather than reprimands to maintain focus.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our Social Studies lesson. Please look at the board and copy the notes into your notebook.
+
+STUDENT: (Turns around to the desk behind) Did you watch the cartoon on TV this morning?
+
+TUTOR: Please pay attention to the lesson and start writing.
+
+STUDENT: (Stands up from the desk and reaches over) I'm going to use your red pencil.
+
+TUTOR: You need to sit back down and do your own assignment.
+
+STUDENT: (Starts walking around the classroom, talking aloud) I don't want to write! Hey, look at this pencil I got! (Pokes another student's arm)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in Turkish and Social Studies courses",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Inclusive classrooms, with students sitting in the front desks or back rows",
+      "materials": "Friends’ possessions",
+      "social_setting": "Inclusive classrooms in which there were students with mild intellectual disabilities",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Not engaging in classroom activities",
+      "observable_behavior": "Talking to friends irrelevant to the lesson, talking aloud, disturbing friends, hitting friends, taking her/his friends’ possessions without permission, walking in the class, standing up without permission, or acting against the teachers’ instructions",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Not engaging in classroom activities",
+        "observable_behavior": "Behaviors that interrupt the lesson, disturbing or distracting the teacher or other students",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

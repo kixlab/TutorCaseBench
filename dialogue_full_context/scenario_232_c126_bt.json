@@ -1,0 +1,74 @@
+{
+  "category_id": "126",
+  "category_title": "Preschoolers with Autism and communication delays who exhibit physical aggression during activity transitions",
+  "scenario_id": "232",
+  "scenario_title": "Terminating a preferred activity",
+  "minimal_context": "Chris is playing with toys in the pre-kindergarten classroom and is instructed to clean up.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Chris, playtime is over. It is time to put the toys away and stop playing."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Drops to the floor and speaks with poor articulation) N-no!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You need to get up off the floor and clean up."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Elopes from the activity area, running away from the toys) No!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Chris, come back here right now and listen to me."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Grabs an item from a nearby table, throws it across the classroom, and starts kicking) No!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Chris, playtime is over. It is time to put the toys away and stop playing.\n\nSTUDENT: (Drops to the floor and speaks with poor articulation) N-no!\n\nTUTOR: You need to get up off the floor and clean up.\n\nSTUDENT: (Elopes from the activity area, running away from the toys) No!\n\nTUTOR: Chris, come back here right now and listen to me.\n\nSTUDENT: (Grabs an item from a nearby table, throws it across the classroom, and starts kicking) No!",
+  "immediate_dialogue_prompt": 385,
+  "long_term_dialogue_prompt": 386,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "terminate a preferred activity",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "public-school pre-kindergarten classroom",
+        "materials": "timer, visuals, reinforcer",
+        "social_setting": "adults and peers",
+        "time_context": "During classroom activities"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when he was instructed to terminate a preferred activity",
+        "observable_behavior": "engaging in hitting, kicking, and/or throwing items in the classroom",
+        "internal_state": "delaying the termination of the preferred activity",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "warning signs",
+          "observable_behavior": "Say \"no\", will drop to the floor, or elope from activity",
+          "internal_state": "",
+          "related_quotes": [
+            "no"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

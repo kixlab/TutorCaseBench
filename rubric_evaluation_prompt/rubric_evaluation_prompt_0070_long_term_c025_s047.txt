@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Anonymous Peer Data Integration
+  Check: The long-term plan must include presenting the student with anonymous data or graphical representations comparing different study habits (e.g., those of 'A' students versus others).
+
+Criterion 2: Structured Break Regulation
+  Check: The long-term plan must incorporate specific, time-bound rules for taking breaks (e.g., 5-15 minutes per hour) with an emphasis on returning to the task punctually.
+
+Criterion 3: Spaced and Integrated Study Planning
+  Check: The long-term plan must require the student to map out study sessions several days in advance of exams, integrating discussions of *how* to study alongside *what* to study.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits strong entity-based beliefs ('I'm not smart enough') and externalizes blame onto professors when facing poor grades. They rely on shallow study strategies like cramming and excessive break-taking, but respond well when peers normalize struggles and use objective, anonymous data to gently challenge their cognitive biases.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's take some time in our peer fellow session today to reflect on the recent Biology exam results and determine the causes of any difficulties you might have had.
+
+STUDENT: I got my grade back and it's really disappointing. I studied the night before the exam and took breaks while studying, but I guess I can't do this. I'm not a Biology person.
+
+TUTOR: What other study habits did you use to prepare for the exam?
+
+STUDENT: I usually study alone primarily. But really, the professor talks too fast. The test didn't cover the lectures in class.
+
+TUTOR: How do you plan to prepare for the next exam?
+
+STUDENT: She doesn't teach, care, or want us to pass, so I'm not going to. Everyone agrees with me. I'm just not smart enough.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reflecting on disappointing Biology exam results and determining the causes of academic difficulty",
+      "learning_goal": "Respond to test grades with more productive behaviors, not merely react to them with disappointment"
+    },
+    "context": {
+      "environment": "Supplemental Instruction (peer fellow) study sessions",
+      "materials": "Anonymous everyday data survey results, graphical representations of study habits posted on the course's online homepage",
+      "social_setting": "Group discussions during peer fellow sessions",
+      "time_context": "After disappointing exam results"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After receiving disappointing exam results in a gateway course like Biology",
+      "observable_behavior": "Circulating scripted beliefs about why they did poorly, engaging in fearful and unproductive conversations, and claiming the professor doesn't teach or care so they are not going to try",
+      "internal_state": "Entity-based beliefs about academic ability, confirmation bias, and feeling that grades are beyond their control",
+      "related_quotes": [
+        "The professor talks too fast",
+        "The test didn't cover the lectures in class",
+        "I'm not smart enough",
+        "I can't do this. I'm not a math (or Biology or Chemistry) person",
+        "He's too difficult to understand and everyone agrees with me",
+        "She [the professor] doesn't teach, care, or want us to pass, so I'm not going to"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When preparing for exams",
+        "observable_behavior": "Leaning on breaks 92% of the time, studying the day of or the night before their exams, and studying alone primarily",
+        "internal_state": "Unaware of cognitive biases and relying on shallow study strategies",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

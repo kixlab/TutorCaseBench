@@ -1,0 +1,131 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Informal Reasoning
+  Check: The tutor's response accepts, explores, or builds upon Ed's informal strategy rather than redirecting him to a standard formal method.
+
+Criterion 2: Indirect Error Handling
+  Check: The tutor addresses errors using hints, questions, or concrete prompts without explicitly stating the error, providing direct correction, or modeling the correct steps.
+
+Criterion 3: Concrete Scaffolding for Impasses
+  Check: If Ed is stuck or makes a procedural error, the tutor introduces a concrete reference (e.g., play money, real-world analogies, or visual aids) rather than relying solely on verbal diagnostic questions.
+
+Criterion 4: Selective Cognitive Offloading
+  Check: The tutor helps track or record Ed's mental steps to reduce his cognitive load, but explicitly refrains from writing down or validating mathematically incorrect formal notations.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ed is an insecure, low-achieving student who constructs meaningful informal math strategies but struggles with fragile memory, context changes, and procedural errors like switching the subtrahend and minuend. He interprets direct correction, modeling, and standard diagnostic questioning as negative feedback. He requires tutors to 'go along' with his informal reasoning, use concrete tools like play money when he is stuck, and explicitly remind him of past successes to prevent regression.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Ed, you are calculating the change for a 7.70NIS ice cream when paying with 20NIS. You answered 13.30. Can you explain how you calculated your answer?
+
+STUDENT: Twenty minus 7 gives 13.
+
+TUTOR: I see. And then what?
+
+STUDENT: To add 30 agorot to the 70.
+
+TUTOR: Okay, go ahead and write that on the blackboard. What do you get?
+
+STUDENT: It becomes seven point one hundred [7.100].
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "calculating change for a 7.70NIS ice cream with 20NIS",
+      "learning_goal": "fostering formal documentation practices"
+    },
+    "context": {
+      "environment": "teacher-led group discussion in Lesson 5",
+      "materials": "blackboard, play money",
+      "social_setting": "group discussion",
+      "time_context": "Lesson 5"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The teacher asked Ed to explain how he calculated his answer as a diagnostic measure",
+      "observable_behavior": "changed his strategy to adding the decimals and returning to the money context (agorot)",
+      "internal_state": "interpreted it as negative feedback in a manner typical to an insecure LAS",
+      "related_quotes": [
+        "Twenty minus 7 gives 13.",
+        "To add 30 agorot to the 70."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Attempting to document the calculation process for 20 - 7.70 on the board",
+        "observable_behavior": "added 30 agorot to 7.70 and declared, 'It becomes 7.100'",
+        "internal_state": "saw the representation he constructed as an appropriate solution strategy: it has NIS to the left of the decimal point and agorot to the right",
+        "related_quotes": [
+          "It becomes seven point one hundred [7.100]."
+        ]
+      },
+      {
+        "condition": "Correcting a procedural error while solving 20 - 8",
+        "observable_behavior": "switched the subtrahend and the minuend",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

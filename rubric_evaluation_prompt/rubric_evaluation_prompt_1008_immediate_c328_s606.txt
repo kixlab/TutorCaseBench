@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Theatrical Validation of Engagement
+  Check: The tutor's response includes exaggerated, highly visible, or public praise and acknowledgment when the student is on task.
+
+Criterion 2: Strategic Ignorance of Minor Infractions
+  Check: The tutor deliberately ignores or avoids verbally correcting minor, non-dangerous off-task behaviors (e.g., a quick unauthorized jump or brief distraction).
+
+Criterion 3: High Threshold for Explicit Discipline
+  Check: The tutor only issues direct reprimands or stops the activity if the student's behavior becomes physically harmful to others, unsafe, or excessively prolonged.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student rapidly alternates between disruptive, transgressive play and ostentatious task engagement, seeking public validation when working but reacting with anger to overt monitoring or frequent reprimands. They uniquely require a delicate balance of theatrical praise for compliance, strategic ignorance of minor misbehaviors, and covert monitoring, with explicit discipline reserved strictly for unsafe or prolonged disruptions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start the tumbling workshop and practice your somersaults.
+
+STUDENT: (Performs the required somersault, then stays lying down on his back for 10 seconds) I did the somersault.
+
+TUTOR: Get up and keep practicing.
+
+STUDENT: (Trips up Maureen and laughs) I'm practicing.
+
+TUTOR: Pay attention to the exercise.
+
+STUDENT: (Quickly shoves Ines just when she does the exercise so she falls, then pushes Alice who was about to do a roll) Me and my friends have a good laugh. I do it quickly and discreetly so I don't get caught by the teacher.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Performing somersaults in the 'Tumbling' workshop",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Gymnastics classes, organized into small workshops... systematically organized the workshops along the wall of the gym",
+      "materials": "",
+      "social_setting": "Working in a group with peers (Maureen, Alice, Ines)",
+      "time_context": "Within a 50-second period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Alice was about to do a roll",
+      "observable_behavior": "changed his behaviour eight times. He performed the required somersault, stayed 10 seconds lying down on his back, tripped up Maureen, laughed, pushed Alice who was about to do a roll, messed up with Alice by lightly slapping her, took a long run before jumping, then did the required somersault without getting up afterwards.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "just when she does the exercise",
+        "observable_behavior": "quickly shove Ines just when she does the exercise so she falls",
+        "internal_state": "me and my friends have a good laugh",
+        "related_quotes": [
+          "In fact, I shove Ines just when she does the exercise so she falls and ...me and my friends have a good laugh.",
+          "Yes, I do it quickly and discreetly so I don’t get caught by the teacher. ( ...) After that we go back to work and the teacher won’t say anything to us."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

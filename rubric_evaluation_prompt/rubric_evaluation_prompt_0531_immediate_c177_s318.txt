@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Avoidance of Procedural Dictation
+  Check: The tutor's response does not dictate step-by-step procedural instructions or explicitly tell the student exactly how to format or execute the math problem.
+
+Criterion 2: Integration of Action and Speed Interests
+  Check: The tutor incorporates elements of physical action, speed, or the student's natural interests into the immediate framing of the math task.
+
+Criterion 3: Active Measurement or Recording Role
+  Check: The tutor assigns or encourages a specific, active role for the student focused on precise measurement, timing, or recording data.
+
+Criterion 4: Space for Independent Momentum
+  Check: The tutor provides space for the student to drive the inquiry, either by stepping back when the student shows confidence or by prompting the student to ask and answer their own questions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Terry is a high-intensity student who rushes through tasks and suffers from severe math anxiety, viewing math as a 'scary movie.' He becomes easily overwhelmed and frustrated by direct procedural instruction, which triggers emotional outbursts. He uniquely needs his love for speed and action channeled into open-ended, interest-based investigations where success is defined by mastery and effort rather than performance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are going to calculate the average time it takes for two different kinds of parachutes to reach the ground with the Lego man.
+
+STUDENT: Where’s the stool? Where are the parachutes? What will be attached? A Lego man? Cool!
+
+TUTOR: Here are the materials: tape, yarn, plastic bags, and a hole punch. Let's get started.
+
+STUDENT: (Moving fast through the flurry of materials) How about a hippo? Let’s try a giraffe! Which one will hit the ground faster?
+
+TUTOR: Please just use the computer-generated stopwatch to time the drops so we can record the times.
+
+STUDENT: Let’s just tie them all together and watch them all crash into the ground at once!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Calculate the average time it took for two different kinds of parachutes to reach the ground with the courageous Lego man",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "After school",
+      "materials": "Tape, yarn, Lego characters, hole punch, plastic bags, computer-generated stopwatch",
+      "social_setting": "Once-a-week sessions",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The experiment began with a flurry of materials",
+      "observable_behavior": "He was a ball of action and words, blurting out rapid questions and suggesting to tie them all together and watch them all crash into the ground at once",
+      "internal_state": "Definite inner intensity",
+      "related_quotes": [
+        "Where’s the stool? Where are the parachutes? What will be attached? A Lego man? Cool! How about a hippo? Let’s try a giraffe! Which one will hit the ground faster? Let’s just tie them all together and watch them all crash into the ground at once!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When engaging with hands-on materials",
+        "observable_behavior": "Moving at the speed he loves most: fast!",
+        "internal_state": "Definite inner intensity",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

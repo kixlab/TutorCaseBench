@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Collaborative Text Discussion
+  Check: The tutor's response must include an invitation to discuss the book, such as asking a probing question or prompting her to share a fact or favorite part.
+
+Criterion 2: Direct Vocabulary Explanation
+  Check: The tutor must directly provide the meaning, pronunciation, or identity of the unfamiliar word Erica is stuck on, rather than telling her to figure it out independently.
+
+Criterion 3: Reading Modeling
+  Check: The tutor must offer to read a portion of the text aloud to Erica or read alongside her to model the reading process.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Erica is a highly collaborative reader who struggles with independent silent reading when she encounters unfamiliar vocabulary. She uniquely requires direct one-on-one attention, explicit vocabulary explanations, and teacher modeling to stay engaged and comprehend the text.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start your silent reading session and read your book about monkeys.
+
+STUDENT: I like how you come to us. Can I tell you interesting facts about the monkeys or read to you a favourite part of the book?
+
+TUTOR: Just read quietly to yourself for now.
+
+STUDENT: But I don't know what this says. Which kind of monkey is this?
+
+TUTOR: Keep trying to read it on your own.
+
+STUDENT: (Stops reading) No, if I don't understand any words, you need to explain for me. Then you will do it the same as me. I can't read it until you sit and do it with me.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Silent reading session, reading a book (e.g., about monkeys)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during the new silent reading session",
+      "materials": "Book (e.g., about monkeys)",
+      "social_setting": "Teacher moving around the class, working with different students, providing one-on-one interaction",
+      "time_context": "During silent reading session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the student does not understand any words in the book",
+      "observable_behavior": "Stops and needs the teacher to explain the words",
+      "internal_state": "",
+      "related_quotes": [
+        "So, if I don ’t understand any words, Miss will explain for me. Then Miss will do it the same as me."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the teacher comes around to provide special attention",
+        "observable_behavior": "Tells interesting facts, reads a favourite part of the book to the teacher, and discusses the book",
+        "internal_state": "Makes me feel happy",
+        "related_quotes": [
+          "I like how Miss sometimes comes to us and we tell her interesting facts or we can read to her a favourite part of the book",
+          "Makes me feel happy."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Textual Autonomy
+  Check: The tutor explicitly allows, encourages, or provides options for Demetrius to choose his own reading material rather than enforcing a pre-assigned or uniform text.
+
+Criterion 2: Personalized Goal-Setting
+  Check: The tutor prompts Demetrius to set a personal reading goal, log his progress, or reflect on his own effort for the current session.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Demetrius is a polite, highly motivated student who consistently struggles in traditional English classes that rely on whole-class assigned texts due to a lack of early reading models at home. He uniquely requires complete autonomy in text selection, personalized goal-setting, and a supportive reading community to build his identity as a successful reader.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Demetrius, it is time for our 30 minutes of independent reading. Please take out the assigned class novel and begin reading the next chapter.
+
+STUDENT: Okay, I have it out. I will try to read it.
+
+TUTOR: Just focus on the pages we need to cover today.
+
+STUDENT: I'm trying, but it's hard for me to read this specific book. We are not really a family that reads that much, except for me, so I'm used to just reading by myself when I find something I like.
+
+TUTOR: Keep trying, we all have to read this same book for the course.
+
+STUDENT: I know that if you read you do better in school or English, and I really want to get a good grade. But I wasn't really raised to be read to, and I just can't get through this assigned text no matter how politely I sit here.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading one whole-class text for instruction",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "English courses and reading-intensive elective course",
+      "materials": "One whole-class text, self-selected texts, reading logs",
+      "social_setting": "Whole-class instruction, book groups, conferencing quietly with peers or the teacher",
+      "time_context": "30 minutes independently reading"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When participating in required English courses that primarily focused on one whole-class text for instruction",
+      "observable_behavior": "Consistently received poor grades in his English courses despite being a polite, friendly student",
+      "internal_state": "Understood family norms as socially constructed and actively distanced himself from his non-reading family",
+      "related_quotes": [
+        "We are not really a family that reads that much, except for me.",
+        "It was not an impairment but in a way it was . . . I wasn’t really raised to be read to"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Describing the process of learning to read and seeking academic assistance",
+        "observable_behavior": "Solicited the extra help he needed to become a good reader",
+        "internal_state": "Assumed responsibility for his successful reading growth; ownership over his reading suggests that being a successful reader was something he wanted for himself",
+        "related_quotes": [
+          "So I was self-taught at first, and then I started getting extra help, and just started loving to read.",
+          "If I had kids, I would definitely read to them because it is proven that if you read to a kid or you make them read, then overall, they do better in school or English."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

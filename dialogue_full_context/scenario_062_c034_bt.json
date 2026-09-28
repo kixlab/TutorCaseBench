@@ -1,0 +1,72 @@
+{
+  "category_id": "034",
+  "category_title": "Elementary students with ADHD and language delay who improve concentration and social helpfulness through virtual games",
+  "scenario_id": "062",
+  "scenario_title": "Distraction by interactive playground objects in convenience store",
+  "minimal_context": "The student is starting Lesson 2 outside a virtual convenience store with the goal of entering to complete question-based learning tasks.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's start Lesson 2. Please go into the convenience store and complete the learning tasks."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Answers a few questions) Look at the kids walking outside the classroom!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Let's keep going with the questions."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I answered six questions already. I want to stay out here."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please move on to completing the tasks."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Stays outside the convenience store) These objects are great fun to play with! Hey, let's play! (Plays with peers, attention totally distracted away from the learning process)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's start Lesson 2. Please go into the convenience store and complete the learning tasks.\n\nSTUDENT: (Answers a few questions) Look at the kids walking outside the classroom!\n\nTUTOR: Let's keep going with the questions.\n\nSTUDENT: I answered six questions already. I want to stay out here.\n\nTUTOR: Please move on to completing the tasks.\n\nSTUDENT: (Stays outside the convenience store) These objects are great fun to play with! Hey, let's play! (Plays with peers, attention totally distracted away from the learning process)",
+  "immediate_dialogue_prompt": 95,
+  "long_term_dialogue_prompt": 96,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "exploration context of Lesson 2 (in a convenience store)",
+        "learning_goal": "completing the tasks"
+      },
+      "context": {
+        "environment": "outside the exploration context of Lesson 2 (in a convenience store)",
+        "materials": "fun objects to play with their peers, question-based learning items",
+        "social_setting": "playing with their peers",
+        "time_context": "At first"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "placed outside the exploration context of Lesson 2 (in a convenience store)",
+        "observable_behavior": "did not move on completing the tasks because they found those objects a great fun to play with their peers. Their attention was totally distracted away from the learning process.",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "after answering 6 questions",
+          "observable_behavior": "lost their attention and were easily distracted by the surroundings, such as the kids walking outside the classroom",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

@@ -1,0 +1,72 @@
+{
+  "category_id": "477",
+  "category_title": "Students exhibiting disruptive behaviors in elementary classrooms",
+  "scenario_id": "852",
+  "scenario_title": "Academic instruction with disruptive behaviors and rule violations",
+  "minimal_context": "The student is working on a math sheet and responding to academic questions during classroom instruction.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's look at the next problem on your math sheet. Who can tell me the answer to number three?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "It's forty-two!"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You need to raise your hand. Just write it down and move on to number four."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Gets out of seat and walks over to a peer's desk) Hey, did you get forty-two for that one?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Sit back down right now and stop interrupting the class."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Loudly crumbles up the math sheet and starts making repetitive clicking noises with their tongue)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's look at the next problem on your math sheet. Who can tell me the answer to number three?\n\nSTUDENT: It's forty-two!\n\nTUTOR: You need to raise your hand. Just write it down and move on to number four.\n\nSTUDENT: (Gets out of seat and walks over to a peer's desk) Hey, did you get forty-two for that one?\n\nTUTOR: Sit back down right now and stop interrupting the class.\n\nSTUDENT: (Loudly crumbles up the math sheet and starts making repetitive clicking noises with their tongue)",
+  "immediate_dialogue_prompt": 1437,
+  "long_term_dialogue_prompt": 1438,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Engaging in academic instruction, responding to academic questions, and working on a math sheet",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Ongoing classroom activities during academic instruction",
+        "materials": "Math sheet, paper",
+        "social_setting": "Individual student or group of students with teacher and peers",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When teachers revert to making harsh or critical comments",
+        "observable_behavior": "Increases disruptive behaviors such as out of seat without permission talking to peer, ripping or crumbling paper in a loud way, and making covert noises",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When expectation is to raise hand",
+          "observable_behavior": "Student calls out answers when expectation is to raise hand",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

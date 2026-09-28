@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Audio-Assisted Self-Correction
+  Check: The long-term plan includes recording the student's reading and playing it back to him so he can independently identify and analyze his own miscues.
+
+Criterion 2: Meaning-Focused Error Triage
+  Check: The long-term plan explicitly prioritizes correcting meaning-changing miscues while praising high-quality miscues and ignoring dialect-based variations.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Tommy is a confident reader who becomes overwhelmed by high word density, leading him to skip text and over-rely on picture clues. He often makes meaning-changing miscues based on illustrations but believes he is using effective reading strategies. He uniquely needs his visual strategies validated before being redirected to explicit text chunking, as well as audio playback of his reading to help him independently recognize his errors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read this page out loud for me.
+
+STUDENT: (Looks at the page) That's a lot of words. I'm just going to skip down to this line here.
+
+TUTOR: Okay, go ahead and read that part.
+
+STUDENT: Pulled on his, pulled on his shirt and put.
+
+TUTOR: Look at the words again. Are you sure it says shirt?
+
+STUDENT: (Points confidently to the illustration on the page) Yeah, shirt. You see his shirt?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Oral reading of a text containing the sentence 'Pulled on his sneakers-zup!'",
+      "learning_goal": "To monitor reading and understand the text by self-correcting low-quality miscues that change the meaning."
+    },
+    "context": {
+      "environment": "Tutoring session",
+      "materials": "Text with pictures and a high number of words on a page, audio recording device",
+      "social_setting": "One-on-one or small group with a teacher",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When encountering the word 'sneakers' while relying on picture clues",
+      "observable_behavior": "Read 'Pulled on his sneakers-zup!' as 'Put on his shirt-zot!' and explained the miscue by pointing to the picture clues.",
+      "internal_state": "Believed he was a good reader and was already employing effective reading strategies",
+      "related_quotes": [
+        "Pulled on his, pulled on his shirt and put.",
+        "Yeah, shirt . You see his shirt ?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When overwhelmed with the number of words on a page",
+        "observable_behavior": "Began with skipping words, lines, and phrases; relied heavily on picture support.",
+        "internal_state": "Often overwhelmed",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

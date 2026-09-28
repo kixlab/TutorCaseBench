@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Rule Reinforcement
+  Check: The tutor's response must explicitly state, remind, or enforce a specific rule or structural boundary of the dialogue/activity.
+
+Criterion 2: Prompting Self-Generated Inquiry
+  Check: The tutor must invite the student to generate, formulate, or share their own question or topic for discussion.
+
+Criterion 3: Philosophical Clarification
+  Check: The tutor must ask the student to expand on, clarify, or provide an example for their argument or viewpoint.
+
+Criterion 4: Neutral Perspective Juxtaposition
+  Check: The tutor must present, invite, or highlight a contrasting viewpoint from a peer without injecting their own personal opinion or content into the debate.
+
+Criterion 5: Avoidance of Authoritative Suppression
+  Check: The tutor's response must NOT rely solely on authoritative commands (e.g., 'be quiet', 'calm down') or threats of staff intervention to manage the student's behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly impulsive, easily bored by standard tasks, and prone to aggressive outbursts when facing peer disagreement, which they interpret as personal attacks. They uniquely require frequent rule reinforcement, the autonomy to generate their own philosophical questions, and the use of structured argumentation to build genuine self-regulation rather than relying on external staff control.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Welcome to our discussion circle. Today's question is: Is there life after death?
+
+STUDENT: No way. When you're dead, you're just dead.
+
+TUTOR: Someone else just shared that they believe in an afterlife. What do you think about that?
+
+STUDENT: That's just a story people make up! It doesn't make any sense at all.
+
+TUTOR: Let's wait and hear what the person next to you is saying.
+
+STUDENT: (Interrupting loudly without waiting to be called) But they are wrong! You can't prove it! I'm telling you, there's nothing after you die!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in a Community of Philosophical Inquiry (CoPI) session and engaging in structured argumentative dialogue discussing questions like 'Is there life after death?'",
+      "learning_goal": "Agree/disagree with at least one previous speaker and give reasons for their agreement/disagreement"
+    },
+    "context": {
+      "environment": "Locked classroom",
+      "materials": "None specified",
+      "social_setting": "Participants sit in a circle in order to see one another, with the facilitator outside the circle",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When children were excited and animated by the discussion and arguments",
+      "observable_behavior": "Made a contribution without waiting to be called by the facilitator",
+      "internal_state": "Level of impulsivity",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When participants wish to contribute",
+        "observable_behavior": "Interruptions on-task related to the dialogue",
+        "internal_state": "Excited and animated",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

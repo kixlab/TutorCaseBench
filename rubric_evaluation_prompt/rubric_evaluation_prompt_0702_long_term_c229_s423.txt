@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Authentic Integration of Student Input
+  Check: The tutor's long-term plan must include mechanisms for the student's interests and negotiations to genuinely alter the curriculum, schedule, or classroom practices.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly autonomous and deeply invested in meaningful tasks, using physical resistance (like lying on the floor) and verbal protests to disrupt rigid schedules when they want to continue working. The evidence reveals they uniquely need their advocacy and proposed compromises to be taken seriously and allowed to genuinely alter the schedule, rather than being reprimanded or falsely placated.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Welcome back from lunch and recess. It is time to transition to our planned math activity.
+
+STUDENT: We should keep writing. We can do math tomorrow. Talking about race is important. I might forget what I want to say.
+
+TUTOR: We need to follow the schedule we have set for today.
+
+STUDENT: What if we took turns? So, like, people that want to write can. People who want to do math, can.
+
+TUTOR: We all need to do the same activity right now. Please get ready for math.
+
+STUDENT: Well, I'm going to be super mad if I can't finish my writing. I will just be here and not do anything! (Lies down on the floor)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing their opinions and reasons about race",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Class meeting",
+      "materials": "Writing materials and papers",
+      "social_setting": "Group discussion",
+      "time_context": "After lunch and recess, transitioning to planned math activity"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When facing the possibility of not finishing their writing",
+      "observable_behavior": "Lies down on the floor and threatens to not do anything",
+      "internal_state": "Super mad",
+      "related_quotes": [
+        "I will just be here and not do anything!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing how to fit more writing in the day instead of the planned math activity",
+        "observable_behavior": "Verbally protests the schedule, argues to keep writing, and proposes alternative schedules like taking turns",
+        "internal_state": "Felt talking about race was important and might forget what to say",
+        "related_quotes": [
+          "We should keep writing. We can do math tomorrow.",
+          "What if we took turns? So, like, people that want to write can. People who want to do math, can."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

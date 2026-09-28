@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Facilitation of Physical Separation
+  Check: The tutor's response must offer or support a concrete physical change in the student's environment, such as moving to a different table or area.
+
+Criterion 2: Direct Instigator Intervention
+  Check: The tutor must explicitly state they will intervene with the provoking peers to stop the behavior, rather than only addressing the target student.
+
+Criterion 3: Omission of Passive Coping Advice
+  Check: The tutor's response must NOT advise the student to simply ignore the peers, stay quiet, or endure the situation without external changes.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly reactive to persistent peer provocation, such as rude comments or physical intimidation. While she initially tries to ignore the behavior, her tolerance is low, and she characteristically escalates to physical aggression when peers persist or get in her face. She uniquely requires active adult intervention to stop instigators and concrete physical separation, as passive advice to 'just ignore it' leaves her feeling trapped and guarantees an explosive outburst.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please continue working on your assignment at your table.
+
+STUDENT: I'm trying to do my work, but they kept saying rude comments to me. I just sometimes ignore them.
+
+TUTOR: Just try your best to ignore them and focus on your paper.
+
+STUDENT: They kept talking about me. When I can't ignore it no more, I just go off.
+
+TUTOR: Let's just keep working quietly at our seats.
+
+STUDENT: I didn't want to fight her, but she got in my face and she pushed me from my seat! She said 'Let's throw hands', so I just snapped on her!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Student is \"trying to do my work\"",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting with multiple tables",
+      "materials": "Classwork materials",
+      "social_setting": "Sitting at a table with peers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a peer \"got in my face, [and] she pushed me from my seat\" or says \"Let's throw hands\"",
+      "observable_behavior": "The student engages in a physical fight (\"we just got to fight\") or \"just snapped on her\"",
+      "internal_state": "\"I got mad because he got in my face, so I was ready to fight him\"",
+      "related_quotes": [
+        "Let’s throw hands",
+        "I didn’t want to fight her, but [it happened] when she got in my face, [and] she pushed me from my seat",
+        "I got mad because he got in my face, so I was ready to fight him"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When peers \"kept talking about me . . . kept saying rude comments to me\"",
+        "observable_behavior": "Initially \"I just sometimes ignore them\", but eventually \"I just go off on them\"",
+        "internal_state": "\"when I can’t ignore it no more\"",
+        "related_quotes": [
+          "when I can’t ignore it no more . . . I just go off"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

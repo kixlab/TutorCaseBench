@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Inquiry into Academic Difficulty
+  Check: The tutor explicitly asks if the student is confused, stuck, or needs help with the material.
+
+Criterion 2: Anxiety-Minimizing Accommodation
+  Check: The tutor offers a low-pressure alternative, private check-in, or specific accommodation that reduces the social or performance anxiety of the immediate task.
+
+Criterion 3: Suspension of Direct Compliance Demands
+  Check: The tutor does NOT issue a flat directive to just complete or submit the work without first addressing potential underlying difficulties.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student masks academic struggles and severe social anxiety through avoidance behaviors like missing homework, requesting bathroom breaks, or skipping class. Their non-compliance is actually a silent signal for help, as they are too embarrassed to self-assert their needs. They uniquely require educators to proactively inquire about their difficulties, provide anxiety-minimizing accommodations, and offer timeline flexibility rather than issuing direct demands for compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I noticed you didn't submit your independent practice today. You need to turn it in.
+
+STUDENT: (Looks away) I didn't do it.
+
+TUTOR: Well, you need to complete it. Just get it done and turn it in tomorrow.
+
+STUDENT: Elementary school was easier, and I didn't get as distracted. My teachers knew me better, and they found out what I liked, and they don't do that in middle school.
+
+TUTOR: You are in middle school now, so you just need to do the work. Do you have any questions about the assignment?
+
+STUDENT: (Shakes head, refusing to ask questions out of fear of embarrassment) No. But if I don't do the homework, it means I am having trouble or I didn't understand the assignment. You just tell me to turn it in instead of asking if I'm having difficulties.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent practice and homework assignments",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Middle school",
+      "materials": "Homework assignments",
+      "social_setting": "Interacting with teachers regarding missing assignments",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When having trouble or not understanding the assignment",
+      "observable_behavior": "Not turning in homework or doing it poorly, and not asking questions",
+      "internal_state": "Fear of embarrassment",
+      "related_quotes": [
+        "If I don’t do the homework, it means I am having trouble or I didn’t understand [the assignment]."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When deciding whether to seek clarification on difficult concepts",
+        "observable_behavior": "Would not ask questions",
+        "internal_state": "Fear of embarrassment",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

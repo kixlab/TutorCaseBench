@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Culturally_Familiar_Text_Selection
+  Check: The tutor's long-term plan incorporates culturally familiar texts, such as island legends or topics aligned with his background knowledge, to introduce new strategies.
+
+Criterion 2: Collaborative_Learning_Integration
+  Check: The tutor plans for peer collaboration or small-group retelling sessions rather than relying solely on independent, isolated tasks.
+
+Criterion 3: Deferred_Mechanical_Correction
+  Check: The tutor's long-term writing plan explicitly separates drafting from editing, ensuring that spelling and handwriting are only addressed after the content draft is fully generated.
+
+Criterion 4: Asset_Based_Behavioral_Framing
+  Check: The tutor accommodates Juan's energetic, interactive communication style as a tool for collaborative learning rather than penalizing or labeling it as disruptive.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Juan is a 5th-grade Chamorro student who struggles with reading comprehension and writing, often rushing through tasks and fixating on penmanship rather than content. He becomes easily frustrated by unfamiliar texts and relies on guessing words from initial letters. However, he thrives when allowed to use oral retelling as a cognitive bridge and engages deeply with culturally familiar texts in collaborative, small-group settings.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please write down your ideas for the story on your sheet of paper, and then review it to see what changes you can make.
+
+STUDENT: (Quickly scribbles a few words on the paper) Done! I finished it already.
+
+TUTOR: Let's look at your story. What can you add to make the ideas more cohesive?
+
+STUDENT: (Erasing a word and rewriting it) I’ve seen my writing... My penmanship is not so good. I need to practice it.
+
+TUTOR: We can worry about the handwriting later. Let's focus on adding more sentences to the story right now.
+
+STUDENT: But Pedro always gets A’s for penmanship on his report card... I want to get A’s, too. I don't need to add more, I just need to make these letters look neater.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General classroom writing assignments, getting ideas onto paper, and editing the content of his writing",
+      "learning_goal": "Developing cohesive ideas and using conventions appropriate to grade level"
+    },
+    "context": {
+      "environment": "General classroom",
+      "materials": "Sheet of paper, writing assignments, copies of the legend",
+      "social_setting": "Small group setting",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When engaging in writing tasks and editing processes",
+      "observable_behavior": "Rushes and produces work that is not to his full potential, ideas are not well developed or cohesive, does little editing to the content of his writing; changes made are to handwriting or spelling only",
+      "internal_state": "Focuses heavily on form, rather than content; equates good writing with neat penmanship; describes himself as a poor writer because of poor penmanship",
+      "related_quotes": [
+        "I’ve seen my writing... My penmanship is not so good. I need to practice it.",
+        "Pedro always gets A’s for penmanship on his report card... I want to get A’s, too."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When impatience causes him to rush",
+        "observable_behavior": "Produces work that is not to his full potential",
+        "internal_state": "Impatience",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

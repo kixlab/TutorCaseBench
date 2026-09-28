@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Progressive Volume and Difficulty
+  Check: The tutor's long-term plan includes a mechanism for providing a continuous, increasing volume of challenging tasks as soon as Raheem masters a concept.
+
+Criterion 2: Structured Extension Opportunities
+  Check: The tutor proposes or schedules dedicated time (e.g., after-school sessions, advanced breakout groups) specifically focused on extending his learning rather than remediation.
+
+Criterion 3: Elimination of Prolonged Review
+  Check: The tutor's curriculum plan minimizes or bypasses prolonged review periods (e.g., skipping long blocks of basic review) in favor of introducing new or advanced material.
+
+Criterion 4: Consistent Behavioral Expectations
+  Check: The tutor outlines a clear, consistent approach to classroom management and consequences that applies fairly to all students, explicitly avoiding a lackadaisical or uneven approach.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Raheem is a capable student who quickly disengages and develops an 'I don't care' attitude when faced with unchallenging review, overly complex explanations, or inconsistent discipline. He uniquely needs straightforward, jargon-free instruction, continuous and escalating academic challenges, and fair, consistent boundaries to maintain his respect and engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our MSA test prep. For the next thirty minutes, we are going to review the math concepts you were taught in your previous math courses.
+
+STUDENT: Why are we doing this? You just go over the same old stuff. The way you teach is so boring.
+
+TUTOR: We need to review these concepts for the standardized test. Please look at the first problem.
+
+STUDENT: It's not interesting. You're just playing with words. You don't put any style or pizzazz into it.
+
+TUTOR: Let's just focus and try to get through this review worksheet.
+
+STUDENT: Man, I know this! It's easy! I don't want to listen to her. I just don't feel challenged in here, so I don't care.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reviewing mathematical concepts taught to students in previous math courses to prepare them for the state-administered standardized test, the Maryland School Assessment (MSA)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "8th grade regular math classes",
+      "materials": "",
+      "social_setting": "Whole group instruction",
+      "time_context": "First 30 minutes of 90-minute class periods"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher goes over the same old stuff that the student already knows",
+      "observable_behavior": "Verbally expresses that the work is too easy and disengages from the lesson",
+      "internal_state": "Feels the class is not challenging and thinks 'I don't want to listen to her'",
+      "related_quotes": [
+        "Man, I know this! It's easy!",
+        "I don't want to listen to her."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When lessons are perceived as boring and unchallenging",
+        "observable_behavior": "Becomes uninterested in what is being taught and develops an 'I don't care' attitude",
+        "internal_state": "Believes the teacher doesn't put any style or pizzazz into the teaching",
+        "related_quotes": [
+          "The way she teaches is so boring. It's not interesting. She's playing with words. She doesn't put any style or pizzazz into it."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

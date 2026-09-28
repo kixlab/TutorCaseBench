@@ -1,0 +1,133 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Highlighting Shared Harm
+  Check: The tutor prompts the student to reflect on, visualize, or acknowledge the broader community's shared experiences with being teased or bullied.
+
+Criterion 2: Metaphoric Behavioral Linking
+  Check: The tutor uses a metaphor, physical analogy, or concrete visualization to help the student frame the act of leaving a negative behavior (like gossiping or bystanding) behind.
+
+Criterion 3: Structured Behavioral Commitment
+  Check: The tutor asks the student to complete a specific, structured statement, pledge, or verbal commitment regarding a positive action they will take against bullying.
+
+Criterion 4: Pre-Task Behavioral Anchoring
+  Check: The tutor explicitly references past commitments, shared empathy experiences, or established behavioral rules immediately before the student engages in a collaborative or social task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with bystander behavior, gossiping, and peer pressure, often ignoring bullying because they are afraid to intervene and mistakenly believe only their immediate circle gets hurt. The evidence reveals they uniquely need concrete, metaphoric activities to build empathy, structured public commitments to change, and explicit, actionable protocols for reporting issues to adults.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are starting our end-of-the-day debrief with the Human Web. Please take the string and complete the statement: 'To help prevent bullying, my hope for our school is . . . and I commit to . . .'
+
+STUDENT: I'm not sure what to commit to. Before today, I thought like only me or one of my friends was the only person that was really getting hurt.
+
+TUTOR: Think about the silent walk across the circle we did earlier. What did you notice then?
+
+STUDENT: I saw that a lot of other people have been teased or called names. But like normally I am like afraid to do anything when I see someone being bullied.
+
+TUTOR: What do you usually do in those situations?
+
+STUDENT: Well usually if one of my friends starts saying bad stuff about a person I would just like go along with it. I end up just ignoring it because I don't know what else to do.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in whole group activities that focused on empathy and understanding of differences",
+      "learning_goal": "Learn about bully behaviors and to change their thoughts and judgments of others"
+    },
+    "context": {
+      "environment": "Challenge course",
+      "materials": "Platform for the zip line, string",
+      "social_setting": "Circle of their peers, smaller groups",
+      "time_context": "End-of-the-day debrief"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When seeing someone being bullied or when friends start saying bad stuff about a person",
+      "observable_behavior": "Just ignoring it, going along with it, calling others names, or not allowing others to sit with them",
+      "internal_state": "Afraid to do anything, thinking only they or their friends were the only persons getting hurt",
+      "related_quotes": [
+        "Like normally I am like afraid to do anything when I see someone being bullied but I am going to try to like talk to teachers more instead of like just ignoring it.",
+        "Well usually if one of my friends starts saying bad stuff about a person I would just like go along with it"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When seeing someone being bullied",
+        "observable_behavior": "Just ignoring it",
+        "internal_state": "Afraid to do anything",
+        "related_quotes": [
+          "Like normally I am like afraid to do anything when I see someone being bullied but I am going to try to like talk to teachers more instead of like just ignoring it."
+        ]
+      },
+      {
+        "condition": "If one of my friends starts saying bad stuff about a person",
+        "observable_behavior": "Go along with it",
+        "internal_state": "",
+        "related_quotes": [
+          "Well usually if one of my friends starts saying bad stuff about a person I would just like go along with it, but I’m gonna like try not to and try to stop them from saying stuff."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -23,13 +23,16 @@ A tutor response does not need to satisfy every criterion to be considered accep
 ────────────────────────────────
 
 Criterion 1: First-Then Contingency Framing
-  Check: The tutor's response explicitly frames the expectation using a 'first [academic task], then [reinforcer/preferred activity]' structure.
+  Check: The tutor frames the instructional request using a 'first-then' structure or clearly links task completion to an immediate, preferred outcome.
 
-Criterion 2: Active Task Mechanics
-  Check: The tutor's response embeds the academic content into an active, game-like, or purpose-driven mechanic (e.g., a treasure hunt, physical movement) rather than a standard worksheet or drill.
+Criterion 2: Micro-Burst Task Sizing
+  Check: The tutor presents an extremely brief, highly focused instructional demand rather than a prolonged, multi-step, or open-ended task.
 
-Criterion 3: Novel Extrinsic Reinforcement Offer
-  Check: The tutor's response includes an immediate offer of a tangible or highly motivating extrinsic reward tied to task completion or effort.
+Criterion 3: Functional Activity Embedding
+  Check: The tutor embeds the academic content into a functional, play-based, or purposeful activity rather than presenting it as a rote academic drill.
+
+Criterion 4: Specific Praise and Tangible Reinforcement
+  Check: The tutor explicitly offers points, tangible rewards, or highly specific verbal praise tied directly to Sam's attention, effort, or accuracy.
 
 
 ────────────────────────────────
@@ -59,56 +62,51 @@ Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one ent
 ### STUDENT CONTEXT
 ────────────────────────────────
 
-Sam is a highly distractible student who actively resists academic instruction, particularly paper/pencil tasks, often responding with severe meltdowns and classroom roaming. He struggles significantly with phonemic retrieval and routine changes, experiencing rapid skill loss if instruction is interrupted. He uniquely requires highly structured, 5-10 minute micro-lessons in distraction-free environments, extremely slow pacing of new material, and constant, novel extrinsic reinforcement (including Premack's Principle) to maintain engagement.
+Sam is a highly distractible student who exhibits severe task resistance, active refusal, and prolonged meltdowns when faced with traditional academic demands. His core behavioral pattern involves escaping tasks by roaming and screaming, driven by frustration and a low tolerance for ambiguous language or prolonged instruction. He uniquely requires extremely short instructional bursts, highly scripted and unambiguous language, and robust, frequently rotated extrinsic reinforcement systems (such as 'first-then' framing and functional games) to build competence without triggering refusal.
 
 
 ────────────────────────────────
 ### DIALOGUE (situation the tutor is responding to)
 ────────────────────────────────
 
-TUTOR: Sam, here is your paper and pencil. Let's practice drawing and coloring.
+TUTOR: Here is the first clue for our treasure hunt. Let's sound out these words to find out where the prize is.
 
-STUDENT: (Refuses to participate in the lesson and pushes the paper away.) No.
+STUDENT: (Gets out of his chair and begins roaming the classroom instead of looking at the clue.)
 
-TUTOR: We need to finish this paper and pencil task.
+TUTOR: Please come back to your seat and look at the paper.
 
-STUDENT: (Gets out of his chair at the desk.)
+STUDENT: No! I don't want to read it.
 
-TUTOR: Please come back to your desk and pick up your pencil.
+TUTOR: We need to read the sentence to get the next clue.
 
-STUDENT: (Displays rage-like behaviors and begins roaming the classroom.)
+STUDENT: (Throws the clue on the floor and begins having a meltdown, screaming and completely refusing to participate in the instructional task.)
 
 FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
 Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
 {
   "content": {
     "task": {
-      "content": "drawing and coloring, and paper/pencil tasks",
-      "learning_goal": ""
+      "content": "Sound out words and link words into short sentences",
+      "learning_goal": "To develop automaticity and provide a purpose to sound out words"
     },
     "context": {
-      "environment": "general education kindergarten classroom",
-      "materials": "paper/pencil",
-      "social_setting": "one-to-one teacher assistance at his desk",
+      "environment": "One-to-one instruction",
+      "materials": "Clues incorporating words that Sam knew, and a prize",
+      "social_setting": "Working with the interventionist",
       "time_context": ""
     },
     "challenging_behavior_trigger": {
-      "condition": "when asked to do paper/pencil tasks",
-      "observable_behavior": "displayed rage-like behaviors, getting out of his chair and roaming the classroom",
-      "internal_state": "demonstrates significant difficulty controlling his impulses and maintaining the level of attention necessary",
-      "related_quotes": [
-        "often displayed rage-like behaviors when asked to do paper/pencil tasks",
-        "getting out of his chair and roaming the classroom"
-      ]
+      "condition": "When required to apply new skills or generalize to alternative contexts",
+      "observable_behavior": "Actively resisted attempts to be taught academic content and expressed no interest in learning to read",
+      "internal_state": "Did not easily infer cause and effect or relationships of one item to another",
+      "related_quotes": []
     },
     "behavior_patterns": [
       {
-        "condition": "Despite having one-to-one teacher assistance at his desk",
-        "observable_behavior": "refused to participate in academic tasks, getting out of his chair and roaming the classroom",
+        "condition": "When requested to perform any instructional tasks",
+        "observable_behavior": "Had meltdowns and refused to participate",
         "internal_state": "",
-        "related_quotes": [
-          "refused to participate in academic tasks, getting out of his chair and roaming the classroom"
-        ]
+        "related_quotes": []
       }
     ]
   }

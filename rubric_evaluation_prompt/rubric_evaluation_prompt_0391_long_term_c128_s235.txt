@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Autonomy in Reading and Environment
+  Check: The long-term plan explicitly includes giving the student choices about what materials they read (e.g., books with humor or illustrations) and where they sit.
+
+Criterion 2: Strategic Session Scheduling
+  Check: The long-term plan reschedules reading sessions to an earlier time in the day, explicitly avoiding the post-lunch period.
+
+Criterion 3: Routine Social Sharing
+  Check: The long-term plan establishes a recurring, dedicated time (e.g., daily) specifically for the student to talk about and share their reading with others.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits passive noncompliance by 'fake reading'—turning pages and maintaining silence to appear engaged while actively avoiding cognitive effort. They uniquely require autonomy over their reading choices and environment, opportunities for social interaction around texts, and active dialogue with the teacher rather than passive monitoring for quiet compliance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our silent reading session. Please open your books and read independently and quietly.
+
+STUDENT: (Whispers in a low voice to a classmate in the corner and keeps turning the pages without stopping to read.)
+
+TUTOR: Please make sure you are looking at your book.
+
+STUDENT: (Swaps books with the classmate, opening a text that has many words and no illustrations.)
+
+TUTOR: Are you reading your new book now?
+
+STUDENT: I'm just going to kind of fake read it. Like, look at the words but don't actually read it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read independently and quietly",
+      "learning_goal": "Engage in reading"
+    },
+    "context": {
+      "environment": "Classroom, after the lunch break",
+      "materials": "Books, including those with too many words and no humor/illustrations",
+      "social_setting": "Whole class silent reading session, teacher at desk looking through folders",
+      "time_context": "Approximately 15 to 20 minutes, 4 days a week"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When forced to read books with too many words and no humor/illustrations",
+      "observable_behavior": "Look at the words but don't actually read it; fake read it",
+      "internal_state": "Deliberately disengage from reading",
+      "related_quotes": [
+        "Then I would kind of fake read it. Like, look at the words but don ’t actually read it."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to read independently and quietly while teacher monitors from desk",
+        "observable_behavior": "Most of the students were not reading; several kept turning pages; two students had swapped their books twice; four students seated in at the corner continued to whisper in a low voice",
+        "internal_state": "Superficial engagement in reading",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

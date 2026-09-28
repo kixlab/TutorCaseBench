@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Single Redirection to Sensory Tool
+  Check: The tutor provides exactly one calm prompt directing Tommy to use his sensory tool (e.g., stress ball) instead of scratching.
+
+Criterion 2: Withholding Attention for Scratching
+  Check: After a single redirection, the tutor refrains from commenting on, reacting to, or giving further attention to the scratching behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Tommy is a 16-year-old student with autism who engages in constant skin scratching during stressful or challenging tasks to self-soothe. He uniquely requires a socially appropriate sensory replacement (like a stress ball) combined with scheduled praise and planned ignoring to manage his sensory needs without inappropriate behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your math work for today. Please sit at this table next to your classmates and complete the assignment.
+
+STUDENT: (Begins completing his work and simultaneously scratches his own skin) Okay.
+
+TUTOR: Keep going with the math problems.
+
+STUDENT: I am feeling nervous. Scratching feels good and helps calm me down.
+
+TUTOR: Just try your best to finish the page.
+
+STUDENT: (Reaches over to the student sitting next to him, grabs the peer’s hand, and uses it to scratch his own skin)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "completing his work",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "mild/moderate special education classroom setting",
+      "materials": "math work, squishy, stress-relief ball",
+      "social_setting": "close proximity to peers or staff",
+      "time_context": "throughout the class period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "proximity to others created a greater probability",
+      "observable_behavior": "grab a peer’s hand or arm and use it to scratch his own skin",
+      "internal_state": "feeling nervous",
+      "related_quotes": [
+        "he was aware of his behavior, he tended to scratch when he was feeling nervous, and scratching felt good and helped calm him down."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when it involved Tommy’s peers",
+        "observable_behavior": "grab a peer’s hand or arm and use it to scratch his own skin",
+        "internal_state": "feeling nervous",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

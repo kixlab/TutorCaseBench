@@ -1,0 +1,115 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Task Sequencing Flexibility
+  Check: The tutor allows the student to choose the order of activities or reading materials rather than rigidly enforcing a predetermined sequence.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Josh is a first-grade student who struggles with distractibility during structured reading interventions but remains motivated when given autonomy. The evidence reveals he uniquely needs flexibility in task sequencing, specifically the ability to choose the order of his reading materials, to maintain engagement and counteract his distractibility.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our 30-minute reading session by doing our Wilson Fundations drills.
+
+STUDENT: I like coming here. I can read books out of order.
+
+TUTOR: Okay. Please look at the drill sheet now.
+
+STUDENT: (Looks away from the drill sheet, becoming distracted by the other materials on the table) Can we look at the books?
+
+TUTOR: We need to finish the drills first. Keep trying.
+
+STUDENT: (Appears somewhat less engaged, looking around the room instead of focusing on the task) But I want to read books out of order.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "(1) reread one or more LLI-leveled texts, (2) do various Wilson Fundations drills, (3) be introduced to and begin reading a new LLI book, and (4) discuss and/or write about what was read.",
+      "learning_goal": "build foundational reading skills"
+    },
+    "context": {
+      "environment": "intervention lessons developed by Mrs. Lori (lead reading specialist)",
+      "materials": "Fountas and Pinnell’s Leveled Literacy Intervention (LLI) texts (fiction and nonfiction), Wilson Fundations materials",
+      "social_setting": "pullout reading intervention",
+      "time_context": "30-min intervention session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the 30-min intervention session",
+      "observable_behavior": "Exhibits distractibility, resulting in being rated as 'somewhat less engaged' than others by the researcher",
+      "internal_state": "indicated a preference for the intervention",
+      "related_quotes": [
+        "Can read books out of order"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "While participating in the standard intervention activities",
+        "observable_behavior": "distractibility noted by both the researcher and the teacher on engagement questionnaires",
+        "internal_state": "motivated and prefers the intervention setting",
+        "related_quotes": [
+          "Can read books out of order"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

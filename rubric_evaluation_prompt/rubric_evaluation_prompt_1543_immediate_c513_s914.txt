@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Behavior-Specific Praise
+  Check: If the tutor provides praise, it must explicitly name the specific action, strategy, or behavior the student performed correctly (e.g., 'You did a great job using context clues'), avoiding purely generic praise like 'Good job'.
+
+Criterion 2: High-Frequency, Achievable Prompts
+  Check: The tutor must break down the task by asking a specific, bite-sized question or providing a prompt designed to elicit an immediate, highly accurate response from the student, rather than asking broad or multi-step questions.
+
+Criterion 3: Direct Re-teaching and Clarification
+  Check: If the student struggles, expresses confusion, or makes an error, the tutor must directly explain the concept, clarify the misconception, or provide step-by-step assistance rather than just prompting them to try harder or look at it again.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has learning disabilities and struggles with low motivation, poor frustration tolerance, and task resistance when faced with difficult work. They frequently disengage or interrupt instruction when overwhelmed. To maintain engagement and promote learning, they uniquely require highly specific, contingent praise and a very high frequency of achievable opportunities to respond (OTRs) to build momentum and prevent frustration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start your 15-minute independent warm-up activity on the worksheet covering yesterday's material.
+
+STUDENT: (Sits with eyes and head not oriented towards the independent seatwork assignment) I don't remember how to do this.
+
+TUTOR: Just look at the first question and see what you can do.
+
+STUDENT: It's too hard. I don't get the content at all.
+
+TUTOR: Keep trying, you still have time left to finish.
+
+STUDENT: (Pushes the worksheet away, not holding a pencil or responding to questions in written form) I'm not doing it. I'm just going to sit here.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing a 15-minute independent warm-up activity involving previously instructed material",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Secondary inclusive classroom (English I or Algebra I)",
+      "materials": "Independent seatwork assignments, independent worksheet, or work materials specifically designated for completion",
+      "social_setting": "Independent practice while special education teachers circulated among the students to provide individual assistance",
+      "time_context": "15 minutes in duration"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When presented difficult tasks or struggling with class content",
+      "observable_behavior": "Time not attending to classroom instruction or completing teacher-assigned tasks, displaying resistance to academic demands",
+      "internal_state": "Low levels of motivation and poor frustration tolerance",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During independent seatwork assignments",
+        "observable_behavior": "Eyes and head not oriented towards independent seatwork assignments, not appropriately interacting with assigned work either through silent reading or through responding to questions in written form",
+        "internal_state": "Disengagement",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

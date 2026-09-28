@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Validation of Contributions
+  Check: The tutor explicitly acknowledges, validates, or repeats a specific part of the student's contribution before moving the conversation forward.
+
+Criterion 2: Text Evidence Springboarding
+  Check: The tutor prompts the student to consult the text, read from the book, or find evidence to support or expand upon her ideas.
+
+Criterion 3: Dialogic Framing over 'Right Answer' Focus
+  Check: The tutor frames the interaction around sharing ideas or exploring perspectives, and strictly avoids mechanical test-prep language (e.g., 'find the right answer', 'underline/highlight').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Joselyn is a brave, agentive multilingual learner who actively volunteers her ideas but is heavily triggered by testing culture, often reducing collaborative discussions to a search for the 'right answer.' To thrive and avoid her historical pattern of task avoidance, she uniquely requires explicit validation of her contributions to encourage text exploration, as well as structured turn-taking tools to ensure equitable participation.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's answer the question: How does George describe the importance of science to the audience? Please use page 285 of the text.
+
+STUDENT: If we didn’t have science, we wouldn’t understand the universe and we wouldn’t make good decisions, or how science could be really important to us so that we can make our future better.
+
+TUTOR: Okay. What else does it say?
+
+STUDENT: And on 285 [Begins reading from the book] I wanted to tell you about it because science is really important.
+
+TUTOR: Why do you think we are discussing this in a small group?
+
+STUDENT: Because maybe one of our members may have the right answer? [2 second pause] Or maybe she wants us to share ideas with one another.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Answer the question: 'How does George describe the importance of science to the audience?' using page 285 of the text.",
+      "learning_goal": "Recall prior knowledge to summarize key ideas from the chapter read the day prior to support meaning making."
+    },
+    "context": {
+      "environment": "Oval-shaped tables, an indication the physical space could support collaborative learning.",
+      "materials": "Colored post-its, text ('George's Secret Key to the Universe').",
+      "social_setting": "Small group discussion.",
+      "time_context": "During the 90 minutes of literacy/social studies instruction."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When reflecting on the purpose of small group and partner discussions.",
+      "observable_behavior": "Hesitates and questions Laura's motives in using small group discussion as a means to facilitate peer collaboration, initially explaining the utility is to 'have the right answer'.",
+      "internal_state": "Overshadowed by the standardization movement of testing.",
+      "related_quotes": [
+        "Because maybe one of our members may have the right answer? [2 second pause] Or maybe she wants us to share ideas with one another."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During these initial years when Joselyn struggled as a student.",
+        "observable_behavior": "Often refused to enter her classroom.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

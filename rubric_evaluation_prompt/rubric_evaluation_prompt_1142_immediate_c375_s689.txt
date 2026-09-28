@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Mastery and Deep Learning Framing
+  Check: The tutor explicitly frames the immediate task, feedback, or goal around personal growth, effort, or understanding the material, rather than grades, speed, or correctness relative to others.
+
+Criterion 2: Redirection from Social Comparison
+  Check: If the student expresses concern about peers, speed, or grades, the tutor actively redirects their attention away from normative comparisons and back to their individual learning process.
+
+Criterion 3: Immediate Task Calibration
+  Check: The tutor adjusts, scaffolds, or explicitly confirms the task difficulty to ensure it aligns with the student's current ability level.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has moderate to high self-efficacy and good self-monitoring skills, but struggles with partial planning and is easily derailed by performance-approach goals (e.g., comparing themselves to peers). They uniquely require an environment that emphasizes mastery and personal improvement over grades, alongside well-structured tasks matched to their ability level to maintain focus and engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start your geometry assignment. You need to color and mark the angles and sides of the triangles.
+
+STUDENT: I feel confident about this. I know my success comes from my own effort, as well as the help of my teachers and parents.
+
+TUTOR: Go ahead and begin working.
+
+STUDENT: I am using correction strategies as I go. I made a correct evaluation of the quality of my product on this first triangle, so I am fixing the marks.
+
+TUTOR: What are you going to do for the next one?
+
+STUDENT: (Starts coloring the next triangle immediately) I'm just going to start marking it. Even though I'm trying, my use of learning and self-regulation strategies is still not optimal because my planning is only partial.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Geometry assignment... involved coloring and marking angles and sides of triangles",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Geometry assignment below grade level",
+      "social_setting": "",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When engaged in the task",
+      "observable_behavior": "While they engaged in planning, it was partial",
+      "internal_state": "Moderate to high perceptions of self-efficacy",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When using learning and self-regulation strategies",
+        "observable_behavior": "Use of learning and self-regulation strategies was still not optimal",
+        "internal_state": "Mixed pattern of causal attributions to success and failure that included some internal attributions such as effort, and external but controllable attributions",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

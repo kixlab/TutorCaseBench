@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Enthusiasm
+  Check: The tutor's response must include a positive statement or empathy regarding Joey's excitement or desire to answer the question.
+
+Criterion 2: Objective Behavior Description
+  Check: The tutor must explicitly and neutrally describe the inappropriate behavior Joey just displayed (e.g., shouting out, waving hands).
+
+Criterion 3: Explicit Replacement Practice
+  Check: The tutor must provide clear instructions on how to appropriately get attention (e.g., raise hand, wait to be called on) and prompt Joey to practice it in that moment.
+
+Criterion 4: Reinforcement of Practice
+  Check: The tutor must provide or explicitly set up immediate positive feedback or a reward for Joey successfully practicing the replacement behavior.
+
+Criterion 5: Absence of Dismissive Prompts
+  Check: The tutor's response must NOT rely on quick, uninstructive corrections such as 'shh', 'quiet', or simply telling him to stop.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Joey is an enthusiastic 10-year-old who shouts out answers and waves his hands because he has never been explicitly taught appropriate classroom participation skills. He does not respond to quick corrections like 'shh'; instead, he uniquely requires a structured corrective teaching approach that validates his excitement, objectively names his behavior, and explicitly practices the correct alternative.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, we are going to review the reading assignment. Who can tell me the main character's name?
+
+STUDENT: (Looks very excited to participate in class and starts raising his hand.)
+
+TUTOR: Take a moment to think about it.
+
+STUDENT: (Waves his hand in the air eagerly.)
+
+TUTOR: I'm looking for someone to answer.
+
+STUDENT: It's Thomas! Thomas is the main character! (Shouts out the answer as he waves his hands in the air.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "responding to a question asked by the teacher during a whole-class instructional session",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "",
+      "social_setting": "whole-class instructional session before transitioning to an assigned task",
+      "time_context": "Shortly following this event and after the teacher has designated a task to the class"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "in response to a question by the teacher",
+      "observable_behavior": "shouts out an answer as he waves his hands in the air",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "in response to a question by the teacher",
+        "observable_behavior": "shouts out an answer as he waves his hands in the air",
+        "internal_state": "very excited to participate in class",
+        "related_quotes": [
+          "When I asked a question just now, you shouted out the answer and waved your hand in the air."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

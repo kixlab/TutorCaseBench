@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Collaborative Pre-Writing Structures
+  Check: The long-term plan must incorporate regular, structured opportunities for peer collaboration or turn-and-talk discussions immediately prior to writing tasks.
+
+Criterion 2: Interest-Driven Reading Environment
+  Check: The long-term plan must include provisions for an inviting physical space or dedicated access to high-interest, choice-based reading materials (e.g., books about his specific interests like dinosaurs).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Nico is an enthusiastic but insecure reader who struggles with his reading identity due to leveled assessment systems. When recalling complex plot details, he tends to fragment his storytelling and use elongated pauses. He uniquely requires convergent questioning to anchor his thoughts in the moment, and collaborative peer discussion to catalyze his writing over time.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's summarize the chapter we read yesterday from 'George’s Secret Key to the Universe'. Who would like to start us off?
+
+STUDENT: I’m not a good reader but I do read a lot, [pause] I would say I’m working my way up. I can try.
+
+TUTOR: Thank you for volunteering. What happened in the story?
+
+STUDENT: (Raises hand) His mom asked him what’s wrong and then he told her, but then she remembers that he had the book and some pages fell off...
+
+TUTOR: Okay, keep going. What else happened?
+
+STUDENT: ...and he started to remember that he couldn’t give up because he didn’t want to mess up anymore because Anne is with her grandma and Eric is in the black hole and::: Because it say some information about ho::w to::: to get out
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Summarizing key ideas from a chapter of 'George’s Secret Key to the Universe' read the day prior",
+      "learning_goal": "Recalling prior knowledge and key text details to support meaning making of that day’s reading"
+    },
+    "context": {
+      "environment": "Fifth-grade classroom with oval-shaped tables, and a leveled library decorated with a rug and red bean bags",
+      "materials": "'George’s Secret Key to the Universe' book, books about dinosaurs, videos",
+      "social_setting": "Whole class discussion and small group discussions",
+      "time_context": "During the 90-minute literacy/social studies instruction block, and independently after eating lunch"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When trying to recall key details and explain complex plot elements during a whole class summary",
+      "observable_behavior": "Begins to fragment elements of the story, using intonation in ways to bring pauses into the conversation by enunciating certain words (e.g., 'and:::', 'ho::w to::: to get out')",
+      "internal_state": "",
+      "related_quotes": [
+        "His mom asked him what’s wrong and then he told her, but then she remembers that he had the book and some pages fell off and he started to remember that he couldn’t give up because he didn’t want to mess up anymore because Anne is with her grandma and Eric is in the black hole and:::",
+        "Because it say some information about ho::w to::: to get out"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to describe himself as a reader",
+        "observable_behavior": "Paused and shared that he is not a good reader but reads a lot, clarifying he is not at a level where he reads high books",
+        "internal_state": "Aware of the Fountas & Pinnell system used to assess students and views himself as 'working my way up'",
+        "related_quotes": [
+          "I’m not a good reader but I do read a lot, [pause] I would say I’m working my way up"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

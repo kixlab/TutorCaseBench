@@ -1,0 +1,131 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sensory and Energy Accommodation
+  Check: The tutor accommodates the student's sensory distractions or need for physical energy regulation (e.g., allowing a physical break, removing the distractor) rather than simply demanding she focus on the task.
+
+Criterion 2: Concrete Task Structuring
+  Check: The tutor provides clear, specific, and concrete steps for how to proceed with the immediate task rather than giving vague directives to 'keep working'.
+
+Criterion 3: Error Normalization and De-escalation
+  Check: The tutor responds to errors or confusion with neutral, supportive feedback that normalizes the struggle and explicitly avoids shaming or punitive language.
+
+Criterion 4: Safe Engagement and Stress Reduction
+  Check: The tutor allows the student to process new material privately or step away from a stressor, explicitly avoiding forcing her into immediate public performance.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a gifted girl with ADHD who struggles with sensory distractibility, high physical energy, and profound boredom during repetitive tasks. She uniquely requires physical activity to regulate her energy, curriculum compacting to avoid redundant work, and autonomy in her learning. She is highly sensitive to negative feedback and public performance of new material, which trigger intense anxiety and self-discouragement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are learning about cells today. Can you explain the difference between osmosis and diffusion?
+
+STUDENT: (Looking at the fish tank next to her) Oh, pretty! Look at the pretty fish.
+
+TUTOR: Please focus on the lesson. What's the function of cytoplasm?
+
+STUDENT: Ummm, to distribute proteins?
+
+TUTOR: No.
+
+STUDENT: Now I feel like an idiot. I can’t get the difference between osmosis, like going into the cell, and diffusion which is also just another way of inserting something into the cell. It makes me feel discouraged with myself.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Answering 'What's the function of psytoplasm?' and differentiating between osmosis and diffusion",
+      "learning_goal": "Learning about cells"
+    },
+    "context": {
+      "environment": "Science classroom",
+      "materials": "A lot of equipment around, a fish tank next to the student",
+      "social_setting": "Classroom setting with teacher asking direct questions",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher asks a direct question while the student is distracted by the fish tank, and then says 'No' to her answer",
+      "observable_behavior": "Answers uncertainly 'Ummm, to distribute proteins?'",
+      "internal_state": "Feels like an idiot",
+      "related_quotes": [
+        "I’m like, “Oh, pretty!” and there’s a fish tank next to me and I am, “Look at the pretty fish.”",
+        "Then [my teacher’s] like, “What’s the function of psytoplasm?” and I’m like, “Ummm, to distribute proteins?” And he’s like, “No” and then I feel like an idiot."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When struggling to get the difference between concepts like osmosis and diffusion and the teacher makes her feel bad about it",
+        "observable_behavior": "Fails to differentiate between the concepts",
+        "internal_state": "Feels really bad, feels discouraged with herself, does not like the class as much",
+        "related_quotes": []
+      },
+      {
+        "condition": "If there is something distracting, like someone doing something wrong or chewing gum loudly",
+        "observable_behavior": "Has a hard time paying attention",
+        "internal_state": "Bothered by the slightest things",
+        "related_quotes": [
+          "I have a hard time paying attention if there is something distracting …if someone’s doing something wrong or chewing gum loudly, that bothers me."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

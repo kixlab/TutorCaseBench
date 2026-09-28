@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Accommodation of Physical Self-Regulation
+  Check: The tutor's response must validate or accommodate Bill's requests for specific physical seating arrangements or postures, provided they are safe and feasible.
+
+Criterion 2: Redirection from Physical Distractions
+  Check: The tutor must actively monitor Bill's chosen location and explicitly direct him to adjust his physical placement if he is near objects that cause distraction.
+
+Criterion 3: Reinforcement of Physical Conduct Rules
+  Check: The tutor must provide clear, direct verbal reminders of the rules regarding physical conduct, stillness, and focus during the task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Bill is a student who strives to be a highly disciplined test-taker by meticulously regulating his physical space, such as needing a specific 'lucky spot' and adjusting his desk to touch his belly. However, his attempts to isolate himself can backfire if he sits near physical distractions. He uniquely requires a tutor who validates and accommodates his physical self-regulation routines while actively monitoring and redirecting his placement to prevent off-task behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright everyone, it is time to get ready for the SRI assessment. Please find a seat so I can distribute the test booklets.
+
+STUDENT: (Walking back from using the bathroom) Someone moved their table to my spot.
+
+TUTOR: Just find another open table for now.
+
+STUDENT: But that is my regular testing spot. I claimed it as my own.
+
+TUTOR: Any seat will work for the test. Please sit down so we can begin.
+
+STUDENT: Can I please sit at my regular spot? I need to pull the table close to my body and sit still there.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Preparation for an SRI assessment in March",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Regular testing spot in the classroom",
+      "materials": "Table, chair, test booklets",
+      "social_setting": "Classroom setting with peers and Ms. Cayenne, the classroom teacher",
+      "time_context": "March"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Another peer moved her table to his regular testing spot while he was using the bathroom",
+      "observable_behavior": "Asked Ms. Cayenne if he could sit at his regular spot",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "After securing his preferred seat",
+        "observable_behavior": "Adjusted his table, pulling it closer to his body, sat still, and waited silently as the teachers distributed test booklets",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Positive Incremental Goal Setting
+  Check: The long-term plan must include setting small, positively framed behavioral goals that gradually build toward broader behavioral expectations.
+
+Criterion 2: Relational Flexibility
+  Check: The long-term plan must explicitly incorporate strategies for maintaining a positive relationship and demonstrating flexibility to navigate his unpredictable moods.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+David is a student who struggles with impulse control and often shows off or becomes confrontational under peer pressure. While he claims he can control his behavior, he lacks insight into his underlying motivations and often defaults to 'Don't know' when questioned. He uniquely requires collaborative, peer-assisted reflection to uncover these hidden forces, alongside positive, incremental goal-setting and flexible teacher relationships to navigate his unpredictable moods.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: David, let's look back at the situation where you were showing off in front of your friends. Once you had time to calm down, what did you lose from the situation?
+
+STUDENT: Confidence.
+
+TUTOR: Why did you feel less confident?
+
+STUDENT: Because I’d done bad things.
+
+TUTOR: What made you do those things when your friends were there?
+
+STUDENT: Don’t know. I’ll admit this. I know I’m no’ a pure angel in class but I can behave when I want to behave.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reflect upon a past experience in which there was conflict and to identify the gains and losses (not only pertaining to themselves personally) which arose from the situation, and then to respond to the question: 'What would you do differently if you were faced with the same situation again?'",
+      "learning_goal": "Promote reflection and discussion to achieve an understanding of the forces upon their behaviour and how such understanding can inform future behaviour"
+    },
+    "context": {
+      "environment": "Collaborative support group activity where a common feature is that there are no worksheets",
+      "materials": "Transcript derived from video-camera footage, scenarios, card sorts, prioritisation exercises",
+      "social_setting": "Group discussion with a Support Group Leader (SGL) and other members of the group",
+      "time_context": "Once the pupil had time to calm down after a situation"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the Support Group Leader asks the pupil to explain the underlying reason for their feelings (e.g., 'Why did you feel less confident?') after they admitted losing confidence",
+      "observable_behavior": "Gives a vague, dismissive response ('Don't know') while simultaneously asserting capacity for self-control ('I can behave when I want to behave')",
+      "internal_state": "Feels a loss of confidence because they had 'done bad things', but does not understand why they behave in the ways that they do",
+      "related_quotes": [
+        "Don’t know.",
+        "Confidence.",
+        "Because I’d done bad things.",
+        "I’ll admit this. I know I’m no’ a pure angel in XXXX but I can behave when I want to behave."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When in front of friends",
+        "observable_behavior": "Showing off",
+        "internal_state": "Cannot control behavior when under pressure or when they want to",
+        "related_quotes": []
+      },
+      {
+        "condition": "When facing potential conflict situations like a reprimand in the classroom",
+        "observable_behavior": "Becomes rude, resentful, angry, agitated, argumentative, bad-tempered and/or confrontational, resulting in a tantrum",
+        "internal_state": "",
+        "related_quotes": [
+          "Any situation like this results in a tantrum from . . . "
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

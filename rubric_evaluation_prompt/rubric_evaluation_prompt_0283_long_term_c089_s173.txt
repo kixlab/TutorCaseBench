@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Self-Paced Active Learning
+  Check: The tutor's plan shifts the student away from whole-class instruction toward self-paced, independent practice where the student controls the tempo.
+
+Criterion 2: Proactive Comprehension Monitoring
+  Check: The tutor includes a routine of physically circulating and checking the student's actual work to verify understanding, rather than relying on the student to self-report confusion.
+
+Criterion 3: Guided Self-Correction
+  Check: The tutor establishes a practice of asking the student to identify their own errors (e.g., 'what do you think went wrong?') rather than simply providing the correct answer.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly kinetic, attention-seeking, and prone to disruptive behavior (like playing PC games or banging on keyboards) when bored, frustrated, or forced to listen to long verbal instructions. They uniquely require a balance of firm accountability to stay on task and active, self-paced, or physical learning alternatives to channel their energy constructively.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please watch this video demonstration on how to play the chords on the keyboard, and read the handout with the letter names so you know what keys to play.
+
+STUDENT: (Cannot stop touching the keyboard) Miss, Miss, how to play?
+
+TUTOR: Just listen to the instructions and follow along with the video.
+
+STUDENT: (Becomes restless and opens a PC game on the computer) I'm having a hard time following the chord changes.
+
+TUTOR: Please close the game and pay attention to the instructions.
+
+STUDENT: (Decides to play the keyboard really loudly) I don't want to listen to instructions!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Learning basic keyboard chord playing using video demonstrations and handouts illustrating a keyboard with corresponding letter names",
+      "learning_goal": "so that students would know what keys to play"
+    },
+    "context": {
+      "environment": "keyboard lab",
+      "materials": "keyboard, computer, video demonstrations, handouts illustrating a keyboard with corresponding letter names, box notation, SONAR software",
+      "social_setting": "instruction-based lesson",
+      "time_context": "At the beginning of the trialling when providing grounding"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "being required to listen to instructions",
+      "observable_behavior": "cannot stop himself touching the keyboard... decided to play the keyboard really loudly",
+      "internal_state": "releasing their energies on the music as opposed to being required to listen to instructions",
+      "related_quotes": [
+        "Miss, Miss, how to play?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the students had a hard time following the chord changes",
+        "observable_behavior": "started to become restless and some played PC games on their computers",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

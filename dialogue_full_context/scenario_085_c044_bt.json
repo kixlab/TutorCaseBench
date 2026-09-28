@@ -1,0 +1,72 @@
+{
+  "category_id": "044",
+  "category_title": "Integrated student with ADHD who uses self-regulation and support staff to manage sensory/social overwhelm",
+  "scenario_id": "085",
+  "scenario_title": "High noise level during classroom lesson",
+  "minimal_context": "Adam is participating in a classroom lesson with his peers at a table.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Adam, the classroom lesson is starting. Please sit at the table and work with the others."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "It's too loud. I feel this lesson is the hardest to manage right now."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Everyone is just talking about the assignment. Try to focus."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I can't cope with the situation by myself. I feel like I'm going to become angry and lose the ability to control my anger."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "We need to get through this lesson. Please stay at the table."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Covers his ears and sits underneath a table) The noise level is too high!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Adam, the classroom lesson is starting. Please sit at the table and work with the others.\n\nSTUDENT: It's too loud. I feel this lesson is the hardest to manage right now.\n\nTUTOR: Everyone is just talking about the assignment. Try to focus.\n\nSTUDENT: I can't cope with the situation by myself. I feel like I'm going to become angry and lose the ability to control my anger.\n\nTUTOR: We need to get through this lesson. Please stay at the table.\n\nSTUDENT: (Covers his ears and sits underneath a table) The noise level is too high!",
+  "immediate_dialogue_prompt": 134,
+  "long_term_dialogue_prompt": 135,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Classroom lesson",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "classroom",
+        "materials": "a table",
+        "social_setting": "classroom community",
+        "time_context": "specific times when he felt the lesson was hardest to manage"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the noise level was too high",
+        "observable_behavior": "covered his ears and sat underneath a table",
+        "internal_state": "felt the lesson was hardest to manage",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "in his previous reactions to these situations",
+          "observable_behavior": "become angry, lose the ability to control his anger or hit others",
+          "internal_state": "could not cope with the situation by himself",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

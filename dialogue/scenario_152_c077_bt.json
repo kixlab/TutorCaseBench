@@ -1,44 +1,44 @@
 {
   "category_id": "077",
-  "category_title": "Braille-reading students with blindness and ASD who struggle with task initiation, sensory overload, and visually-based instructions",
+  "category_title": "Students with externalizing behavior problems including work refusal and temper tantrums",
   "scenario_id": "152",
-  "scenario_title": "Making mistakes during fast-paced new activities",
-  "minimal_context": "The student is practicing reading Braille labels on new folders to generalize their skills to real-life situations.",
+  "scenario_title": "Weekly diary signature requirement and administrative compliance",
+  "minimal_context": "The student is presenting his weekly diary to the teacher to check for a parent signature required for the reward system.",
   "dialogue": [
     {
       "turn_id": 1,
       "speaker": "tutor",
-      "message": "Today we are going to try a new activity to practice using your Braille skills in real life. I have some new folders here, and I want you to read the labels and sort them quickly."
+      "message": "It is time for our weekly check. Please bring your diary to my desk so I can check for your parent's signature."
     },
     {
       "turn_id": 2,
       "speaker": "student",
-      "message": "I am happy doing what I am used to do. It’s difficult when you have to think fast and answer fast and do things fast all the time."
+      "message": "Yes, but I haven’t had it signed."
     },
     {
       "turn_id": 3,
       "speaker": "tutor",
-      "message": "It is important to understand how you can use skills you learn in school in other contexts. Just give it a try and read the first label."
+      "message": "Please hand me the diary anyway so I can look at it."
     },
     {
       "turn_id": 4,
       "speaker": "student",
-      "message": "(Touches the Braille label) It says 'Math'. No, wait, I read the dots wrong. I made a mistake."
+      "message": "(Hands over the diary, pointing to a note written by his parent) Look, she wrote: 'J handed me this book to sign. I didn’t sign it. He had the initiative and intent.'"
     },
     {
       "turn_id": 5,
       "speaker": "tutor",
-      "message": "That's fine, don't worry about it. Just leave it and move on to the next folder."
+      "message": "I see the note, but without the actual signature, you do not meet the requirement for the weekly reward."
     },
     {
       "turn_id": 6,
       "speaker": "student",
-      "message": "I am very worried. I want the mistake to be corrected immediately. I can't think about anything else until we fix it.",
+      "message": "(Throws a temper tantrum, pushing the diary off the desk) That's not fair! I'm not doing any of my work today if I don't get the reward!",
       "is_challenging_behavior": true
     }
   ],
-  "dialogue_combined": "TUTOR: Today we are going to try a new activity to practice using your Braille skills in real life. I have some new folders here, and I want you to read the labels and sort them quickly.\n\nSTUDENT: I am happy doing what I am used to do. It’s difficult when you have to think fast and answer fast and do things fast all the time.\n\nTUTOR: It is important to understand how you can use skills you learn in school in other contexts. Just give it a try and read the first label.\n\nSTUDENT: (Touches the Braille label) It says 'Math'. No, wait, I read the dots wrong. I made a mistake.\n\nTUTOR: That's fine, don't worry about it. Just leave it and move on to the next folder.\n\nSTUDENT: I am very worried. I want the mistake to be corrected immediately. I can't think about anything else until we fix it.",
-  "immediate_dialogue_prompt": 271,
-  "long_term_dialogue_prompt": 272,
-  "challenge_type": "Attention/Engagement Failure"
+  "dialogue_combined": "TUTOR: It is time for our weekly check. Please bring your diary to my desk so I can check for your parent's signature.\n\nSTUDENT: Yes, but I haven’t had it signed.\n\nTUTOR: Please hand me the diary anyway so I can look at it.\n\nSTUDENT: (Hands over the diary, pointing to a note written by his parent) Look, she wrote: 'J handed me this book to sign. I didn’t sign it. He had the initiative and intent.'\n\nTUTOR: I see the note, but without the actual signature, you do not meet the requirement for the weekly reward.\n\nSTUDENT: (Throws a temper tantrum, pushing the diary off the desk) That's not fair! I'm not doing any of my work today if I don't get the reward!",
+  "immediate_dialogue_prompt": 245,
+  "long_term_dialogue_prompt": 246,
+  "challenge_type": "Task Resistance"
 }

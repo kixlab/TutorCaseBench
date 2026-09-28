@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Praise-to-Correction Ratio
+  Check: The tutor's long-term plan explicitly incorporates a system or strategy to ensure positive feedback and praise significantly outweigh corrective feedback across sessions.
+
+Criterion 2: Minimization of Unstructured Down Time
+  Check: The tutor's long-term strategy outlines methods to increase the overall proportion of active teaching time and eliminate periods where the student is left to work independently without active adult engagement.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is generally successful but prone to off-task and mildly disruptive behaviors (texting, wandering) when instructional pacing slows, down time occurs, or their appropriate bids for attention (like raising a hand) are ignored. They uniquely require a high-paced instructional environment with frequent opportunities to respond (4-6 per minute), immediate acknowledgment of their engagement, and consistent positive reinforcement to prevent boredom-induced or attention-seeking disruptions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please continue typing your science report on the computer independently.
+
+STUDENT: (Raises hand) I finished typing the first section. What should I do next?
+
+TUTOR: Just keep working on your assignment.
+
+STUDENT: (Stops typing and looks away from the computer screen) But I don't have anything else to type right now.
+
+TUTOR: Do what you think is best.
+
+STUDENT: (Makes a loud sighing noise, wanders out of seat, and walks over to a classmate's desk) Hey, what are you doing on your screen?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "actively completing an assigned task (e.g., typing on computer, manipulating assigned materials)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "reading, math, social studies, or science",
+      "materials": "computer, assigned materials",
+      "social_setting": "student completed an independent activity",
+      "time_context": "15-minute observation intervals"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "teachers tended not to respond to students even when the student appropriately elicited such with a raised hand",
+      "observable_behavior": "wandering out of seat, noises, bothering peer",
+      "internal_state": "great incentive for students to act in a negative manner to garner teacher attention",
+      "related_quotes": [
+        "teachers tended not to respond to students even when the student appropriately elicited such with a raised hand",
+        "great incentive for students to act in a negative manner to garner teacher attention"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "teacher was not actively delivering instruction, was not academically engaging students or was involved in independent task with no interactions with student",
+        "observable_behavior": "engaging in an activity that was incompatible with any assigned task",
+        "internal_state": "",
+        "related_quotes": [
+          "engaging in an activity that was incompatible with any assigned task"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

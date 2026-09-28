@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Barrier Removal
+  Check: The tutor's response must proactively offer or provide the missing resource/material without penalizing, shaming, or lecturing the student for not having it.
+
+Criterion 2: Low-Stakes Engagement
+  Check: The tutor must direct the student to a simple, low-friction task (e.g., reading a preferred book) or a strategic, low-pressure environment rather than forcing immediate compliance with the standard task.
+
+Criterion 3: Absence of Lecturing
+  Check: The tutor's response must completely avoid lecturing, preaching, or reprimanding the student about rules, responsibility, or his defiant attitude.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jayson is a confident, defiant student who frequently disrupts class and avoids written work by claiming he forgot his materials. He uses a tough facade to mask his vulnerabilities and resists traditional authoritative discipline. The evidence reveals he uniquely needs teachers to proactively remove logistical barriers without penalty, provide low-pressure engagement opportunities, and drop their own authoritative/masculine facades to build genuine trust.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please come in and take the empty seat in the back.
+
+STUDENT: (Walks in a few minutes after the bell, looking confident and defiant.)
+
+TUTOR: We are reviewing the classroom rules right now.
+
+STUDENT: (Stands confidently and defiantly, looking like trouble.)
+
+TUTOR: Please sit down and take out a book.
+
+STUDENT: (Remains confident and defiant, looking like trouble and beginning to disrupt the class instead of taking out a book.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "take out a book",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "my class",
+      "materials": "Monster by Walter Dean Myers",
+      "social_setting": "seat in the back where he wouldn't bother other students",
+      "time_context": "a few minutes after the bell"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "walked in a few minutes after the bell",
+      "observable_behavior": "Confident and defiant, he looked like trouble.",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "in a previous teacher's class prior to being moved",
+        "observable_behavior": "He continuously disrupted the class and all the teacher's attempts at intervention had failed.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

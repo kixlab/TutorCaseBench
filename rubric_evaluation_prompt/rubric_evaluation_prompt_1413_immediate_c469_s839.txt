@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Preservation of Physical Agency
+  Check: The tutor's response must avoid giving overly directive physical instructions or attempting to physically control, assist, or correct his movements.
+
+Criterion 2: Peer-Level Play Integration
+  Check: The tutor must position themselves as a co-player or peer by playfully joining the game, following his lead, or providing enthusiastic social reinforcement (e.g., cheering, clapping).
+
+Criterion 3: Commentary-Driven Verbal Elicitation
+  Check: The tutor must provide a running commentary on Jamie's physical actions or prompt imaginative role-play related to his current physical activity.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jamie is a highly active, physically competent, and determined child who excels in self-directed physical play. However, his spontaneity and independence immediately vanish when adults provide overly directive, hand-over-hand assistance. He uniquely requires adults to interact with him as peers, using running commentary and playful participation to encourage his verbalization while allowing him to maintain physical control of the activity.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to play football in the hallway now.
+
+STUDENT: Play football shall we? Right chaps, run!
+
+TUTOR: Please pass the ball to me.
+
+STUDENT: Right. Yeah. (He verbally directs where the tutor should stand instead of passing the ball.)
+
+TUTOR: I am standing here. Go ahead and pass it now.
+
+STUDENT: (He ignores the instruction, concentrating fully on his own physical skills. Supremely confident in the familiar activity, he keeps the ball to himself, kicking, blocking, and tackling with skill while varying the pressure of his kicks.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Playing football",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "hallway at home",
+      "materials": "ball",
+      "social_setting": "with his older cousin and father",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When engaging in a familiar activity where he is supremely confident",
+      "observable_behavior": "kicks, blocks and tackles with skill, varying the pressure of his kicks and concentrating fully",
+      "internal_state": "supremely confident",
+      "related_quotes": [
+        "play football shall we?",
+        "right chaps, run!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When playing independently without adult commentary",
+        "observable_behavior": "verbally directs his cousin to where she should stand, but concentrates fully on physical skills",
+        "internal_state": "",
+        "related_quotes": [
+          "right",
+          "yeah"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

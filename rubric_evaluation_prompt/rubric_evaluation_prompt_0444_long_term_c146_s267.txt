@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Superhero Thematic Integration
+  Check: The tutor's long-term plan includes embedding superhero themes into writing prompts or using themed materials (like superhero shield graphic organizers).
+
+Criterion 2: Escape Extinction
+  Check: The tutor's plan maintains the expectation that the writing task must be completed, ensuring the task is not removed or abandoned when Benjamin acts out.
+
+Criterion 3: Strategic Task Sequencing
+  Check: The tutor incorporates high-probability request sequences or systematically intersperses easy and hard tasks to build momentum before presenting difficult writing demands.
+
+Criterion 4: Systematic Break Fading
+  Check: The tutor implements a structured work/break schedule that is designed to gradually decrease the frequency of breaks as Benjamin's stamina improves.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Benjamin is a student who finds writing tasks highly aversive, leading him to use continuous talk-outs (often about superheroes) and disruptive behavior to delay or escape work. His motivation to avoid tasks increases with task length and when encountering skill deficits. He uniquely requires writing tasks to be broken down, modified in response modality, and connected to his interests, alongside explicit prompting to use a functional communication system (colored cards) to appropriately request help.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent work. Please get out your paper and start writing your sentences.
+
+STUDENT: Did you know that some superheroes can fly faster than an airplane? Whoosh!
+
+TUTOR: Please focus on your assignment.
+
+STUDENT: (Shuffles his red, yellow, and green cards around on the desk) I'm making a traffic light with these cards. Red means stop!
+
+TUTOR: You need to leave the cards alone and start writing your sentences now.
+
+STUDENT: I can't, I'm too busy! The green card means go, so the cars are driving super fast! Vroom! I'm not doing this writing stuff!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing assignments, specifically writing sentences.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Independent work time in a general classroom setting.",
+      "materials": "Colored cards (red card for need help, yellow card for quick question, green card for no help needed), color-coded bins (start, still working, done), and graphic organizers in the shape of superhero shields.",
+      "social_setting": "Independent work time with peers present.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When assigned writing sentences, to delay the start of his writing task or avoid it entirely.",
+      "observable_behavior": "Continuous talk outs (i.e., verbal comments unrelated to the task) and disruptive off-task behaviors.",
+      "internal_state": "Writing sentences was aversive, and his motivation to get out of the task increased.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During independent work time when assigned tasks.",
+        "observable_behavior": "Repeatedly engage in the same disruptive off-task and talking-out behaviors.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

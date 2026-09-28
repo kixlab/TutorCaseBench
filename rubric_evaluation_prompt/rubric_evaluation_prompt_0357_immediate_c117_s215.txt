@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Graphosemantic Comparison Dialogue
+  Check: The tutor prompts the student to compare her intended spoken words with the visual representation of the inaccurate transcription (e.g., asking how she knows the text is incorrect).
+
+Criterion 2: Adult Dictation Assistance
+  Check: The tutor offers to dictate the student's intended sentence into the technology themselves to generate a 100% accurate transcription for the student to copy.
+
+Criterion 3: Inappropriate Transcription Removal
+  Check: The tutor actively intervenes to delete or modify inappropriate or nonsensical transcriptions before or as soon as the student notices them.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Maggie is a first-grade student who struggles with reading but possesses strong graphosemantic awareness, allowing her to easily spot when speech recognition (SR) software misinterprets her dictation. She is highly motivated to write but becomes frustrated and stalled by inaccurate transcriptions, often skipping the brainstorming phase entirely. She uniquely requires adult dictation to bypass technological failures and metacognitive dialogue to bridge the gap between her oral intent and the written output.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to write the final sentence for your story, 'Victoria Had a Little Dog'. Go ahead and use the iPad to dictate your idea.
+
+STUDENT: (Skips brainstorming and speaks directly into the iPad) The dog would say, hello.
+
+TUTOR: Okay, the iPad transcribed your words. It says: 'Follow dog I don't know that for'.
+
+STUDENT: That’s not what I said!
+
+TUTOR: Why don't you just copy those words onto your paper so we can move on to the next activity?
+
+STUDENT: (Refuses to copy the text onto her paper and deletes the entire sentence from the screen instead)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Drafting a story titled 'Victoria Had a Little Dog' using SR on an iPad and transcribing the results onto paper, specifically dictating the final sentence: 'The dog would say, hello'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Supervised writing center",
+      "materials": "iPad with Speech Recognition (SR) software, paper, chart paper",
+      "social_setting": "Independent or small-group writing time with teacher available for assistance",
+      "time_context": "Mid-April"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the SR software inaccurately transcribes her dictated sentence (e.g., transcribing 'Follow dog I don't know that for' instead of 'The dog would say, hello')",
+      "observable_behavior": "Recognizes the transcription is inaccurate, exclaims 'That's not what I said!', and does not copy the inaccurate text to her paper",
+      "internal_state": "Readily recognizes when SR transcriptions are inaccurate despite struggling to read at the first-grade level",
+      "related_quotes": [
+        "That’s not what I said!"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When using SR technology for compositions",
+        "observable_behavior": "Consistently ignores the writing process, skips brainstorming and drafting to go straight to revising, dictates complete ideas, and deletes entire sentences and drafts when SR is inaccurate",
+        "internal_state": "Considers what they dictated to be the final composition",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

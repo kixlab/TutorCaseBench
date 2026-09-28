@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Peer-Mediated Social Consequences
+  Check: The tutor's long-term plan includes strategies to empower peers to set their own boundaries, speak up, or exclude the student if she is being hurtful.
+
+Criterion 2: Uncensored Observation
+  Check: The tutor's long-term plan explicitly commits to observing or monitoring the play theme over time without banning or censoring it.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student uses a 'sassy girl' persona to explore power dynamics, relational aggression, and meanness. Direct adult reprimands or censorship cause her to push the behavior underground or engage in mock aggression. She uniquely needs adults to observe rather than censor her imaginative play, while empowering her peers to enforce natural social boundaries.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Kiara, I saw you hitting the other children with that large plastic bat. Hitting is not allowed on the playground.
+
+STUDENT: We are not being mean. We are just playing mean girls.
+
+TUTOR: You still need to follow the rules. Please put the bat in the bin.
+
+STUDENT: (Throws the bat in the bin) I don’t want to go in our castle. Come on Kim Bear ... let’s go.
+
+TUTOR: Where are you two going to play now?
+
+STUDENT: (Swings her hand toward you in mock aggression, curls up her fingers waving them mockingly, and then forcefully but covertly pulls a younger peer's arm down, keeping it out of your gaze)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Outdoor play on the playground involving chasing, engaging in mock fighting, and teasing and hitting other male and female children.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Playground",
+      "materials": "Large plastic bat, bin",
+      "social_setting": "Outdoor play with peers and teacher present",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After being reprimanded by the teacher for hitting with a bat.",
+      "observable_behavior": "Threw the bat in the bin followed by 'mock' aggression where she swung her hand toward the researcher and then engaged in non-verbal taunting by curling up her fingers and waving them mockingly. Forcefully, but covertly, pulled a younger peer's arm down, out of the gaze of the teacher.",
+      "internal_state": "Resistance to the teacher's direct instructions that hitting was not allowed.",
+      "related_quotes": [
+        "I don’t want to go in our castle. Come on Kim Bear ... let’s go."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When negotiating with the teacher regarding classroom behavior and play themes.",
+        "observable_behavior": "Argued with teacher that they were not mean because they were just playing mean girls.",
+        "internal_state": "Constructed a 'secondary adjustment' and resistance to the teachers and school rules about proper and normative behavior in the classroom.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

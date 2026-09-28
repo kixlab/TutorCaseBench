@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Play-Work Negotiation
+  Check: The tutor's response must offer a compromise or negotiation that allows the student some time or opportunity to explore/play in the 3D environment in exchange for completing academic work.
+
+Criterion 2: Currency and Status Leveraging
+  Check: The tutor must explicitly connect the completion of the academic task to earning digital rewards, virtual currency, or achieving competitive status/items for their avatar.
+
+Criterion 3: Absence of Rigid Redirection
+  Check: The tutor's response must NOT consist solely of rigid commands to return to the task, nagging, or strict enforcement of academic focus without offering a game-based incentive or compromise.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is academically at-risk and lacks intrinsic motivation for traditional schoolwork, frequently abandoning tasks to play in 3D virtual environments. They are highly motivated by digital rewards, avatar customization, and peer competition, requiring a tutor who negotiates a balance between play and work rather than rigidly enforcing academic focus.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to start our after-school session. Please open your assigned academic quest and begin working on your digital document submission.
+
+STUDENT: I want to get what my classmate has. The bird on the shoulder… That one needs how many lumins?
+
+TUTOR: We need to focus on the academic content right now. Please look at the quest.
+
+STUDENT: Can I use genuine currency to exchange for lumins and cols in the virtual environment instead of doing this?
+
+TUTOR: No, you have to complete the assigned work first. Go back to your document.
+
+STUDENT: I like the 3D space as I can play with airplane, car, and boat. ... the 3D world is very fun. (Moves avatar away from the quest area to play with the yacht)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Academic content learning in the form of quests assigned to the students, where submission of quest is in the form of an attached digital document, presentation, or spreadsheet",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "After-school programme on Tuesdays and Thursdays from 1.00 p.m. to 2.30 p.m.",
+      "materials": "Quest Atlantis (QA) 3D multi-user virtual environment (MUVE), computer, lumins, cols, avatars, digital artefacts, Q-Packs",
+      "social_setting": "After-school setting where teachers act as council members for review and feedback",
+      "time_context": "One and a half hours twice weekly"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the expectations of the teachers who conducted the sessions were to focus on the academic content learning in the form of quests assigned to the students",
+      "observable_behavior": "Playing with the cars, airplanes, yacht, and gym (LYT) in the 3D space instead of focusing on academic quests",
+      "internal_state": "Very interested in the 3D environment; attracted to their favourite Internet game and Blog sites, 3D space, lumins, cols, avatars, digital artefacts found within QA, as opposed to the academic related work",
+      "related_quotes": [
+        "I like the 3D space as I can play with airplane, car, and boat",
+        "... the 3D world is very fun"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When comparing achievements within the virtual environment with peers",
+        "observable_behavior": "Compared their achievements within the virtual environment in terms of the number of lumins, cols, and items in their respective Q-Packs",
+        "internal_state": "Motivated by the recognition and reward system to attempt and submit their quests so that they could get more lumins to change their respective avatars",
+        "related_quotes": [
+          "I want to get what my classmate has. The bird on the shoulder… That one needs how many lumins?",
+          "One of the students even asked whether he could use genuine currency to exchange for lumins and cols in the virtual environment."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

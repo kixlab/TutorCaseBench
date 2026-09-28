@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Transition Task
+  Check: The tutor provides a specific, low-stakes transition task (such as copying notes or reviewing a guide) for the first few minutes rather than immediately demanding he solve math problems.
+
+Criterion 2: Explicit Reference Scaffolding
+  Check: The tutor supplies or directs Earl to pre-prepared class notes, examples, or reference materials to use as a guide while working on his assignment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Earl is an 8th-grade student who struggles with lateness, lack of home support, and boredom with repetitive math tasks, often resulting in off-task and distracting behavior upon arrival. The evidence shows he uniquely requires a structured transition period and explicit reference materials (like pre-prepared notes) to successfully bridge the gap into academic work.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Earl, please take a seat and start re-working the math problems from class today.
+
+STUDENT: (Walks in 10 minutes late and talks loudly to another student) I can’t always go, like I have been twice this month only because I can’t just walk home.
+
+TUTOR: Let's get started on the homework now.
+
+STUDENT: My mom gets home late and doesn’t have time or know how to help me. She is usually cooking dinner or with my little brother and sister. Tutoring is kinda boring ‘cuz I know we're going to do the same stuff.
+
+TUTOR: Just look at the problems and try your best to do them.
+
+STUDENT: (Turns away from the assignment to distract the student next to him) Sometimes it’s just the same lesson or homework. I lose focus ‘cuz it ends up being like, a lot of math.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Doing homework or re-working problems from class",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "30 to 60 minute tutoring session",
+      "materials": "Copies of class notes, homework",
+      "social_setting": "Small group tutoring where not that many kids are there",
+      "time_context": "After school, arriving late by 10 or more minutes"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Arriving late by 10 or more minutes to the tutoring session",
+      "observable_behavior": "He would come in off-task and distracting others.",
+      "internal_state": "Frustrated with school, much of it stemming from not having assistance outside of school.",
+      "related_quotes": [
+        "I can’t always go [to tutoring], like I have been twice this month only because I can’t just walk home.",
+        "My mom gets home late and doesn’t have time or know how to help me. She is usually cooking dinner or with my little brother and sister."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When tutoring involves the same lesson or homework as regular class",
+        "observable_behavior": "I lose focus ‘cuz it ends up being like, a lot of math.",
+        "internal_state": "Tutoring is kinda boring ‘cuz I know Ms. Pruitt is going to do the same stuff.",
+        "related_quotes": [
+          "I don’t really like my teacher and I have to go to tutoring with her. Tutoring is kinda boring ‘cuz I know Ms. Pruitt is going to do the same stuff. Sometimes it’s just the same lesson or homework. I lose focus ‘cuz it ends up being like, a lot of math."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

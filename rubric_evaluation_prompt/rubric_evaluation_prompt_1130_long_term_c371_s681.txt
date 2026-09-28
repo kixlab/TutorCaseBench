@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Career Role Simulation
+  Check: The tutor's long-term plan includes activities or modules that simulate professional scenarios and directly relate to the student's desired technical career.
+
+Criterion 2: Structured Self-Assessment and Reflection
+  Check: The tutor incorporates recurring mechanisms for the student to self-assess their skills, reflect on their difficulties in writing, and compare their self-assessment with the tutor's feedback.
+
+Criterion 3: Independent Information-Seeking
+  Check: The tutor designs long-term goals that require the student to independently search for and synthesize information based on their personal interests, rather than just memorizing provided facts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a history of academic failure and low self-esteem, leading to quick disengagement when faced with purely theoretical or highly prescriptive tasks. They uniquely require learning to be grounded in personal relevance or their future career (e.g., as an electrician), alongside high autonomy, patient pacing, and constant feedback to build their sense of competence.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are examining the chemical components of cigarette smoke. Please follow the exact steps on your record sheet to test the black filter and the cigarette ash.
+
+STUDENT: Why do we have to follow this exactly? This is too prescriptive and rigid, and it's not giving us any room to plan or decide how to do the test.
+
+TUTOR: Just read the instructions on the sheet and do what it says.
+
+STUDENT: But this involves a larger amount of previous chemical knowledge. It is not easy to understand what we are even looking at.
+
+TUTOR: Keep trying to get through the steps on the record sheet with your group.
+
+STUDENT: I'm not doing this anymore. I don't enjoy this module because it doesn't make us think and it doesn't let us actually participate. We can't even deal with unexpected difficulties because it's too oriented.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Performing a laboratory activity examining chemical components of cigarette smoke",
+      "learning_goal": "Attempting to understand the chemical components of cigarette ash and acid-base nature of materials"
+    },
+    "context": {
+      "environment": "Cigarettes module",
+      "materials": "black filter, record sheet concerning a number of competencies, individual written reflections",
+      "social_setting": "worked in groups",
+      "time_context": "developed after the other three modules"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "the module was too much prescriptive and rigid, not giving enough room for the students to plan, to decide, and to deal with unexpected difficulties",
+      "observable_behavior": "students didn’t enjoy the module",
+      "internal_state": "considered that the module Cigarettes was not easy to understand, it didn’t made them think and it didn’t let them to participate",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When an activity involves a larger amount of previous chemical knowledge and is too much oriented",
+        "observable_behavior": "students didn’t enjoy the module",
+        "internal_state": "considered that the module Cigarettes was not easy to understand, it didn’t made them think and it didn’t let them to participate",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

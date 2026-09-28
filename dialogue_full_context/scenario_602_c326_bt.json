@@ -1,0 +1,75 @@
+{
+  "category_id": "326",
+  "category_title": "Low socially competent children who engage in disruptive alternative activities when bored",
+  "scenario_id": "602",
+  "scenario_title": "Independent assignment with boredom and peer distraction",
+  "minimal_context": "The student is working on an independent assignment at their desk while the teacher is talking to another student.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please go ahead and start working on your independent assignment."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Moves his eyes to his paper and leans on his hands, expressing boredom. He wipes the paper and plays with a pen, then glances at the teacher.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Keep trying to focus on your paper."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Looks at his peer's paper, gets up, walks towards the teacher, but turns around and goes back to his desk. He yawns, expressing boredom.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just do your best to finish the task."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Begins to play with a pen and a rubber. Looks at Pekka, leans towards him and whispers) Pekka …Pekka …Pekka. (Waits for a response, then says) Pekka …look. (He looks at his own rubber and continues rolling it with his pen.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please go ahead and start working on your independent assignment.\n\nSTUDENT: (Moves his eyes to his paper and leans on his hands, expressing boredom. He wipes the paper and plays with a pen, then glances at the teacher.)\n\nTUTOR: Keep trying to focus on your paper.\n\nSTUDENT: (Looks at his peer's paper, gets up, walks towards the teacher, but turns around and goes back to his desk. He yawns, expressing boredom.)\n\nTUTOR: Just do your best to finish the task.\n\nSTUDENT: (Begins to play with a pen and a rubber. Looks at Pekka, leans towards him and whispers) Pekka …Pekka …Pekka. (Waits for a response, then says) Pekka …look. (He looks at his own rubber and continues rolling it with his pen.)",
+  "immediate_dialogue_prompt": 1000,
+  "long_term_dialogue_prompt": 1001,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Working on an independent assignment",
+        "learning_goal": "Concentrating and orienting on tasks"
+      },
+      "context": {
+        "environment": "Classroom setting during tasks",
+        "materials": "Pen, rubber, paper",
+        "social_setting": "Teacher is talking to another student",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When temporarily losing focus on the task and experiencing boredom",
+        "observable_behavior": "Yawns, expressing boredom, and begins to play with a pen and a rubber. Looks at Pekka, leans towards him and whispers, 'Pekka …Pekka …Pekka' and waits for his response. Says, 'Pekka …look'. Rolls rubber with his pen.",
+        "internal_state": "Boredom",
+        "related_quotes": [
+          "Pekka …Pekka …Pekka",
+          "Pekka …look"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When struggling to stay on task and looking for external cues or help",
+          "observable_behavior": "Moves his eyes to his paper and leans on his hands. Wipes the paper and plays with a pen. Glances at the teacher. Gets up, walks towards the teacher but turns around and goes back to his desk.",
+          "internal_state": "Expresses boredom",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

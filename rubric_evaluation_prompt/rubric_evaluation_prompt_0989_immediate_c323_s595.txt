@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Space for Independent Execution
+  Check: The tutor's response must provide the initial prompt, task, or boundary and then explicitly offer Amir space to work independently without immediate follow-up steps or hovering.
+
+Criterion 2: Absence of Unsolicited Micro-Corrections
+  Check: The tutor must refrain from offering unsolicited advice, step-by-step instructions, or immediate corrections unless Amir explicitly requests help.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Amir is a highly independent learner who thrives on autonomy and explicit real-world relevance but quickly abandons tasks if he feels micromanaged. The evidence reveals he uniquely needs instructors to provide upfront boundaries and materials, get him started, and then step back entirely, offering help only when explicitly requested rather than guiding him step-by-step.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the Rubik's Cube. I will sit here and guide you every step of the way so you can solve it.
+
+STUDENT: Okay. I'm just sittin' there trying to solve it. I'll keep trying and trying and trying.
+
+TUTOR: You made a mistake. Let me tell you all these little things you could do to make it easier.
+
+STUDENT: Every time I messed up I got a little more discouraged.
+
+TUTOR: Just keep trying. I will keep sitting here and guiding you.
+
+STUDENT: I gave up on it because I had like lost the little twinkle in my eye about finally solving the Rubik’s Cube and being able to brag to people. I never really started trying again cause I didn’t see the point.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attempting to solve a Rubik’s Cube",
+      "learning_goal": "finally solving the Rubik’s Cube and being able to brag to people"
+    },
+    "context": {
+      "environment": "negative learning experience outside of school",
+      "materials": "Rubik’s Cube",
+      "social_setting": "One-on-one informal learning where his dad tried to teach him",
+      "time_context": "for like an hour on end"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "every time I messed up while he kept telling me all these little things you could do to make it easier",
+      "observable_behavior": "gave up on it, never really started trying again",
+      "internal_state": "got a little more discouraged, lost the little twinkle in my eye, didn’t see the point",
+      "related_quotes": [
+        "I kept trying and trying and trying but every time I messed up I got a little more discouraged",
+        "gave up on it because I had like lost the little twinkle in my eye about finally solving the Rubik’s Cube",
+        "never really started trying again cause I didn’t see the point."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "sitting there and guiding me every step of the way",
+        "observable_behavior": "kept trying and trying and trying but eventually gave up",
+        "internal_state": "got a little more discouraged every time he messed up",
+        "related_quotes": [
+          "instead of sitting there and guiding me every step of the way they would get me started and wait until I got like interested in it"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

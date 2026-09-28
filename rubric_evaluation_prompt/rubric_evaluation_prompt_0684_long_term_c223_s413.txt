@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Uncompromising Task Scope
+  Check: The long-term plan requires the student to grapple with the full, demanding scale of the assignment (e.g., a 15-page paper) without reducing the overall expectations or workload.
+
+Criterion 2: Integration of College Knowledge
+  Check: The long-term plan explicitly incorporates the development of academic behaviors—such as transitioning to appropriate technology or managing time—alongside traditional writing instruction.
+
+Criterion 3: Iterative Trial-and-Error
+  Check: The long-term plan structures multiple cycles of drafting and deep revision where initial failure or inadequacy is expected, normalized, and used as a primary learning tool.
+
+Criterion 4: Peer-Centric Feedback Loop
+  Check: The long-term plan mandates reciprocal peer review and cooperative learning, actively decentering the tutor as the sole source of feedback and authority.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an underprepared writer who attempts to tackle demanding college-level assignments using inadequate tools, such as drafting a 15-page paper on a cell phone. They hold deep misconceptions about the writing process, viewing revision as mere spelling correction and dismissing peer review as a waste of time. They require a demanding, experiential curriculum that normalizes struggle, enforces productive failure, and shifts their reliance from the teacher to a community of peers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please exchange the three separate drafts of your research papers with your small group and begin the peer-review critique.
+
+STUDENT: I always thought that peer review was a big waste of time because only the teacher’s opinion matters anyway.
+
+TUTOR: Just try to read through their drafts and write down what you think.
+
+STUDENT: I'm just going to wait for your feedback. Like I said, only the teacher's opinion matters for my grade.
+
+TUTOR: It is important to work with your group. Please share your thoughts with them.
+
+STUDENT: I'm not doing it. It's an everyone-for-him-or-herself culture. When you’re drowning, the last person you think to turn to is someone else who doesn’t know how to swim.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in critiquing three separate drafts of their peers’ research papers, and receiving extensive critique on their own assignment drafts.",
+      "learning_goal": "To sponsor the learning advantages associated with small groups."
+    },
+    "context": {
+      "environment": "One of nine classrooms hosting a peer-review workshop group.",
+      "materials": "Three separate drafts of peers' research papers.",
+      "social_setting": "Small groups assigned to classrooms for reciprocal peer-review.",
+      "time_context": "Throughout the duration of the writing program."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Initial reluctance to seek help from peers who are also struggling.",
+      "observable_behavior": "Stated, “When you’re drowning, the last person you think to turn to is someone else who doesn’t know how to swim.”",
+      "internal_state": "Perceived college as an “everyone-for-him-or-herself” culture.",
+      "related_quotes": [
+        "When you’re drowning, the last person you think to turn to is someone else who doesn’t know how to swim."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Participating in peer-review workshops.",
+        "observable_behavior": "Expressed that they “always thought that peer review was a big waste of time because only the teacher’s opinion matters anyway”.",
+        "internal_state": "Belief that peer feedback is valueless compared to instructor feedback.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

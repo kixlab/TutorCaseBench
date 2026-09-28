@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Threat Reduction via Expression or Collaboration
+  Check: The tutor's response incorporates a low-threat activity, such as prompting the student to journal/express her anxieties or suggesting a collaborative peer activity, rather than immediately pushing individual academic tasks.
+
+Criterion 2: Non-Confrontation of Self-Concept
+  Check: The tutor does NOT directly argue against, correct, or try to 'fix' the student's negative self-statements (e.g., avoiding phrases like 'You aren't dumb' or 'Don't say that about yourself').
+
+Criterion 3: Avoidance of Direct Strategy Imposition
+  Check: The tutor does NOT explicitly command, lecture, or pressure the student to abandon her current study strategies in favor of new ones in the moment.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with high anxiety, fear of failure, and deeply ingrained low self-esteem, frequently referring to herself as 'dumb'. She is highly defensive about her current study habits (like rereading) and resists direct instruction or attempts to change her self-view. She uniquely requires interventions that indirectly model success and reduce environmental threat, rather than direct confrontation or standard strategy training.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For this task, please examine the learning objectives for our math module and describe in writing which resources you will use to study.
+
+STUDENT: I looked at the modules, but I'm not going to study differently. I already use many of the tactics presented in the training.
+
+TUTOR: Please write down the specific strategies you plan to use for these objectives.
+
+STUDENT: I'm just going to read the textbook chapters again. Like I wrote down, rereading and spacing can help me better memorize the material.
+
+TUTOR: What do you think about trying some of the other new strategies we discussed instead of just rereading?
+
+STUDENT: I'm not changing how I study. It's not going to make a difference anyway because everyone knows I am just dumb.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Examine the tasks posed and resources provided in their course and to describe in writing the resources that are appropriate for each learning objective",
+      "learning_goal": "Enhance students' ability to self-regulate learning"
+    },
+    "context": {
+      "environment": "Developmental mathematics context with collaborative learning activities",
+      "materials": "Adaptive learning technologies (ALEKS), online LMS, instructor provided resources, journaling materials, model answers",
+      "social_setting": "Modular math course, second attempt, collaborative learning situations",
+      "time_context": "First week of a revisited modular math course"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After viewing the modules and being prompted to apply the learning principle in their own course",
+      "observable_behavior": "Indicated that they would not study differently, selected additional ones – such as rereading – which are known to be less effective, and keeps saying everyone knows she is 'dumb'",
+      "internal_state": "High anxiety and fear of failure, very low self-esteem, believed that they already used many of the tactics presented",
+      "related_quotes": [
+        "rereading and spacing can help me better memorize the material",
+        "dumb"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When facing assessments or evaluating her own ability",
+        "observable_behavior": "Keeps saying everyone knows she is 'dumb'",
+        "internal_state": "Very low self-esteem, high anxiety and fear of failure",
+        "related_quotes": [
+          "dumb"
+        ]
+      },
+      {
+        "condition": "When presented with new study strategies in training",
+        "observable_behavior": "Indicated that they would not study differently, selected additional ones – such as rereading",
+        "internal_state": "Believed that they already used many of the tactics presented in the intervention, deriving from history of past success",
+        "related_quotes": [
+          "rereading and spacing can help me better memorize the material"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Discreet Academic Affirmation
+  Check: The tutor's long-term plan includes strategies to affirm José's academic success privately or in ways that do not single him out socially among his peers.
+
+Criterion 2: Out-of-School Relational Building
+  Check: The tutor plans to build personal relationships outside of standard academic contexts (e.g., discussing out-of-school interests, family, or community).
+
+Criterion 3: Capability-Based Assessment over Remediation
+  Check: The tutor evaluates José's true academic capability based on deep engagement rather than relying on superficial metrics or faked poor performance that would lead to remediation.
+
+Criterion 4: Responsive Behavioral Rewarding
+  Check: The tutor's behavioral management plan explicitly recognizes and rewards José's conscious efforts to improve in the present, rather than punishing him cumulatively for past mischief.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+José is a highly capable student who intentionally masks his intelligence with disruptive behavior and feigned distraction to avoid the social stigma of being a 'schoolboy.' He is easily bored by monotonous test prep but thrives on high-interest topics, often asking advanced questions. He uniquely requires teachers who validate his intellect, firmly challenge his indifference, and build authentic connections without singling him out socially.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for independent practice. Please read the passage about the elephant and complete the corresponding questions.
+
+STUDENT: (Taps pencil rapidly on the desk) I'm already done with it.
+
+TUTOR: That was very fast. Did you read the entire passage?
+
+STUDENT: No, I just read paragraph one and two on the elephant. Then I saw the questions and then—um—it said paragraph six. So I just went to paragraph six.
+
+TUTOR: You need to read every paragraph to prepare for the TAKS test. Please sit still and read it again.
+
+STUDENT: (Starts stomping his feet, then stands up and begins walking around the room) I'm not doing that. I don't want to be a schoolboy kissing up to the teacher just to get a lot of good scores.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Completing practice reading passages and corresponding questions on topics like elephants",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "5th grade language arts class",
+      "materials": "Practice reading passages, corresponding questions, pencils",
+      "social_setting": "Independent work time",
+      "time_context": "Pre-TAKS (high-stakes testing) preparation period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to complete day-to-day banking-education activities and high-stakes test preparation",
+      "observable_behavior": "Tapping his pencil, his feet start stomping, his mouth is going, and he's up walking around the room",
+      "internal_state": "Desiring to disassociate from a 'schoolboy' label, which he defined as someone who 'would be kissing up to the teacher'",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "In an effort to rush through the reading passages and corresponding questions",
+        "observable_behavior": "Pretending to read practice passages, reading ahead, and skimming for pertinent information instead of reading fully",
+        "internal_state": "Downplaying intelligence to avoid being authored as a schoolboy",
+        "related_quotes": [
+          "No, I just read paragraph one and two on the elephant. Then I saw the questions and then—um—it said paragraph six. So I just went to paragraph six."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

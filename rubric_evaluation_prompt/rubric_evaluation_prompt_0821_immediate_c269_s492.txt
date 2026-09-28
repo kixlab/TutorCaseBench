@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Micro-Stepping Without Leading
+  Check: The tutor breaks the problem into a smaller, manageable step or specific focus area WITHOUT using heavy leading questions or prompting her to guess.
+
+Criterion 2: Reflective Process Interrogation
+  Check: The tutor asks reflective questions about Idit's current work or process (e.g., asking why she wants to erase, or if there is another way to write it) rather than just telling her what to do next.
+
+Criterion 3: Persistence Through Avoidance
+  Check: The tutor maintains engagement and continues to gently query or prompt Idit even after she expresses inability, embarrassment, or task refusal.
+
+Criterion 4: Absence of Performance Justification
+  Check: The tutor completely avoids motivating the task by referencing tests, grades, or external academic requirements.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Idit is a student who experiences severe math anxiety, particularly with fractions, which she masks through ritualistic rule-following, erasing work to restart, and explicit task refusal. When overwhelmed, she exhibits physical distress (collapsing, clapping) and relies on anxious guessing if heavily prompted. She uniquely needs her avoidance narratives challenged through gentle persistence, reflective questioning on her process, and a shift away from performance-based metrics toward foundational understanding.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please solve this arithmetic exercise on the paper: 2/3 * 9.
+
+STUDENT: (Looks at paper) Now, here I'll put two thirds times nine and I'll make from it one thing so it will be easier for me... So, here I'll write... I'll do like this, two times nine divided by three times one. (Looks at interviewer) Is it right to do like that?
+
+TUTOR: What do you think you should do next?
+
+STUDENT: (Quietly, biting lip, looking down) With fractions I'm not good so I don't know... (Looks up at interviewer, raised, contracted eyebrows, slightly anxious expression) Maybe by half?
+
+TUTOR: Just keep trying to solve it.
+
+STUDENT: (Thinks) It can be simplified. (Erases what she has written) Because I have to solve the exercise from the beginning... I simplify the nine and then I'll get three and one.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solving the arithmetic exercise '2/3 * 9' and looking for a substitution set",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mathematical interview",
+      "materials": "Paper",
+      "social_setting": "One-on-one with interviewer",
+      "time_context": "First mathematical interview and final 7th-grade interview"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When unsure of a step while solving an exercise",
+      "observable_behavior": "Erases what she has written because 'I have to solve the exercise from the beginning', looks at interviewer asking 'Is it right to do like that?'",
+      "internal_state": "",
+      "related_quotes": [
+        "Is it right to do like that?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When provided with heavy scaffolding and leading questions",
+        "observable_behavior": "(Quietly, biting lip, looking down ) With fractions I'm not good so I don't know ... (Looks up at interviewer, raised, contracted eyebrows, slightly anxious expression ) Maybe by half?",
+        "internal_state": "Slightly anxious expression",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

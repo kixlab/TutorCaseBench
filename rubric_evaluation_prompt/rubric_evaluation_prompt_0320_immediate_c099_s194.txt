@@ -1,0 +1,134 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Linguistic Scaffolding
+  Check: The tutor provides a specific sentence frame or rigid linguistic structure for the student to use when formulating their response.
+
+Criterion 2: Emotional Withdrawal Autonomy
+  Check: The tutor explicitly permits, validates, or facilitates the student's choice to temporarily leave the session or take a break to self-regulate.
+
+Criterion 3: Explicit Turn-Taking Management
+  Check: The tutor enforces a clear procedural rule for when the student is allowed to speak, such as reminding them to raise a hand or wait their turn.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits external acting-out and disruptive behavior, often triggered by frustration when they cannot organize and convey their thoughts during peer interactions. The evidence reveals they uniquely need rigid linguistic structures to reduce the cognitive load of formulating arguments, alongside the autonomy to step away when emotionally overwhelmed. By providing strict conversational scaffolding and low-stakes entry points, the student can engage more reflectively and manage their frustration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are sitting in our circle for today's discussion. Your sister just shared her idea about the passage. What are your thoughts on what she said?
+
+STUDENT: (Tapping his chair loudly) I don't know. What she said is just wrong.
+
+TUTOR: Why do you think it's wrong? Go ahead and explain your point to the group.
+
+STUDENT: Because... it's just... sometimes it’s really difficult, you need to follow the story and you need to think about what the person’s saying... and I can't figure out how to say it!
+
+TUTOR: Take your time and just tell us what you are thinking.
+
+STUDENT: (Stands up abruptly) I can't organize my thoughts! I'm getting angry about it and I can't cope right now, I'm leaving the session!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in verbal dialogue during CoPI sessions, interacting with a sibling class-mate, and articulating thoughts.",
+      "learning_goal": "Engaged in a shared search for meaning where each contribution builds on previous ones."
+    },
+    "context": {
+      "environment": "Whole class sitting in a circle where all participants are equidistant, with the facilitator remaining outside the circle.",
+      "materials": "Stimulus passage",
+      "social_setting": "Group philosophical inquiry with peers and a sibling class-mate.",
+      "time_context": "One hour each week as part of normal classwork over 10 weeks."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Where he had previously found it difficult to organise and convey his thoughts, or when dealing with a sibling class-mate's contributions.",
+      "observable_behavior": "Would become frustrated by this, exhibit distracting behaviours, or find himself unable to cope emotionally or behaviourally.",
+      "internal_state": "Feeling angry and frustrated about being unable to articulate points.",
+      "related_quotes": [
+        "It helps me think and I don’t get angry about it",
+        "Sometimes it’s really difficult, you need to follow the story and you need to think about what the person’s saying and you need to agree or disagree and you know someone’s not going to get upset."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Where he had previously found it difficult to organise and convey his thoughts",
+        "observable_behavior": "Would become frustrated by this",
+        "internal_state": "Angry",
+        "related_quotes": [
+          "It helps me think and I don’t get angry about it"
+        ]
+      },
+      {
+        "condition": "If he found himself unable to cope emotionally or behaviourally",
+        "observable_behavior": "Remove himself from the session",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "During CoPI sessions",
+        "observable_behavior": "Distracting behaviours",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

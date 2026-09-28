@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Relational Prerequisite for Sensitive Content
+  Check: The long-term plan includes sequencing sensitive or trauma-related units later in the curriculum, ensuring time is dedicated to building classroom relationships first.
+
+Criterion 2: Routine Empathy Building
+  Check: The long-term plan incorporates daily or regular low-stakes writing exercises that explicitly direct students to practice productive, positive, and empathetic interactions.
+
+Criterion 3: Teacher Bias Reflection and Validation
+  Check: The long-term plan includes strategies for the tutor to reflect on their own biases and explicitly validate the student's prior knowledge or starting perspective during discussions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles to demonstrate empathy toward trauma victims, often providing dismissive or disturbing written responses that characterize victims as merely complaining. He uniquely requires private, non-judgmental spaces to unpack his impressions, as public confrontation exacerbates the issue, alongside a long-term approach that builds relational trust before tackling sensitive topics.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For our concluding activity on the novel Speak, please create a newspaper headline that describes the experiences of the protagonist.
+
+STUDENT: I'm not sure what kind of headline to make. She doesn't really do much to fix her situation.
+
+TUTOR: What do you think would make a good headline?
+
+STUDENT: Probably something about how she just acts like a victim the whole time instead of doing anything.
+
+TUTOR: Go ahead and write down your headline.
+
+STUDENT: Okay, I wrote: 'Girl continues to moan and complain and refuses help.'
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Creating newspaper headlines to describe the experiences of the protagonist in the novel Speak during a concluding unit activity.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "public classroom space",
+      "materials": "novel Speak",
+      "social_setting": "class",
+      "time_context": "concluding unit activity"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when students created newspaper headlines about the novel",
+      "observable_behavior": "wrote, “Girl continues to moan and complain and refuses help.”",
+      "internal_state": "seemed dismissive of the severity of sexual assault",
+      "related_quotes": [
+        "Girl continues to moan and complain and refuses help."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When a student provides a disturbing or dismissive written response to trauma literature.",
+        "observable_behavior": "not responding positively to trauma literature",
+        "internal_state": "seeming dismissiveness, ideas, and impressions",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

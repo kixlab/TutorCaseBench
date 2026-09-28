@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Sustained Environmental Scaffolding
+  Check: The tutor's long-term plan includes the consistent use of physical markers or environmental modifications (e.g., marked zones) to anchor learning throughout the unit.
+
+Criterion 2: Development of Cooperative Structures
+  Check: The tutor's long-term plan builds shared cooperative goals or team structures to give peer observation and feedback a meaningful, collaborative purpose.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a beginner who struggles with academic and behavioral issues, often rejecting abstract observation tasks and strategic planning when they see no point, especially when paired with an opponent. They uniquely require highly structured, short-cycle tasks with concrete physical targets (like marked zones) and cooperative framing to invest effort and avoid defensive resistance.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the detailed observation worksheet. While your partner plays this set, I need you to watch and record the zones where the points are scored.
+
+STUDENT: I don't see the point of the work required. I'm playing against him next anyway.
+
+TUTOR: Just try your best to observe. What are you going to tell him during the break between sets?
+
+STUDENT: I'll just tell him 'You played well' or 'You played badly'. I don't need to write anything down.
+
+TUTOR: Please look at the paper and try to identify the specific zones.
+
+STUDENT: (Pushes the paper away) No, I'm not filling out the worksheet correctly or identifying the zones. I don't want this.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Observing a partner during a badminton match and transcribing point locations onto a worksheet",
+      "learning_goal": "acquire methodological skills"
+    },
+    "context": {
+      "environment": "General classroom setting for first-year secondary school students... during a six-lesson badminton unit",
+      "materials": "detailed observation worksheet",
+      "social_setting": "placed in a dyad with a future opponent",
+      "time_context": "breaks between sets of seven points"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Using a detailed observation worksheet to record the zones where points were scored during a match",
+      "observable_behavior": "the material artefact was rejected... did not ﬁll out the worksheet correctly by the identifying the zones",
+      "internal_state": "develop an emotional and meaningful relationship to knowledge... If they do not see the point of the work required of them, their investment is likely to be low or inexistent",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Providing feedback to a partner during breaks between sets of seven points",
+        "observable_behavior": "displayed a predominantly emotional coaching style... higher proportion of unrealised coaching",
+        "internal_state": "",
+        "related_quotes": [
+          "You played well",
+          "You played badly"
+        ]
+      },
+      {
+        "condition": "When placed in a dyad with a future opponent",
+        "observable_behavior": "did not invest in the beginning of the learning cycle",
+        "internal_state": "set up defensive strategies to protect their own competence",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

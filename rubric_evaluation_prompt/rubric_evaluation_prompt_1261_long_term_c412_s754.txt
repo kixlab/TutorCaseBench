@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Adult-to-Adult Dynamic
+  Check: The tutor's long-term plan or communication style treats the student as a near-adult peer, such as inviting the use of first names or explicitly removing formal hierarchical language.
+
+Criterion 2: Debatable Content Centering
+  Check: The tutor designs lessons around debatable, controversial topics or unresolved issues rather than passive reading of settled facts.
+
+Criterion 3: Upfront Strategy Transparency
+  Check: The tutor explicitly names and models the academic strategy together with the student before requiring independent application.
+
+Criterion 4: High-Predictability Routines
+  Check: The tutor establishes and references a consistent, recurring instructional cycle (e.g., a set multi-week routine) so the student always knows what is expected.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are older, marginalized urban students with histories of truancy who distrust authority and are easily intimidated by complex academic tasks, often trying to do the bare minimum to graduate. They uniquely require an adult-to-adult dynamic, highly predictable routines, debatable topics to spark engagement, and explicit strategies to translate intimidating prompts into their own words.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the prompt for the five-paragraph persuasive essay we need to practice for the U.S. history Regents exam.
+
+STUDENT: I’m gonna take the Regents in 3 weeks and I am nervous. I never took it before because I never attended social studies class at my other school.
+
+TUTOR: Let's just focus on the prompt in front of you. What do you think?
+
+STUDENT: I don't like writing. This whole thing is just too much.
+
+TUTOR: Just try to start writing the first paragraph.
+
+STUDENT: I look at it and be like, I can’t write this.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "organize a five-paragraph persuasive essay",
+      "learning_goal": "prepared students for the U.S. history Regents exam and for college"
+    },
+    "context": {
+      "environment": "classroom",
+      "materials": "writing task or prompt",
+      "social_setting": "working on the strategy together",
+      "time_context": "preparing for the Regents in 3 weeks"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when they give us a task",
+      "observable_behavior": "look at it and be like, I can't write this",
+      "internal_state": "intimidated by complex writing tasks, not liking writing",
+      "related_quotes": [
+        "I would look at it and be like, I can’t write this."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When students are intimidated by complex writing tasks or prompts",
+        "observable_behavior": "express inability to write, state they cannot do the task",
+        "internal_state": "scared to write, nervous",
+        "related_quotes": [
+          "I went from not liking writing. I would look at it and be like, I can’t write this."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

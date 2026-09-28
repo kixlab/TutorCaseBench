@@ -1,0 +1,77 @@
+{
+  "category_id": "063",
+  "category_title": "Gifted girls with ADHD experiencing organizational failure and academic anxiety",
+  "scenario_id": "125",
+  "scenario_title": "Homework completion and organizational failure",
+  "minimal_context": "The student is attempting to complete a large volume of Algebra 2 homework.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's look at your Algebra 2 homework. You have a lot of problems to finish today."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I was struggling. I just wasn't getting what he said at all. Since I was GT, most of the kids got stuff faster than me, so I wouldn't really get the material."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just keep trying. Let's work on the next section."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I spend a lot of time doing homework or attempting to do homework. There's a lot of time spent not doing homework but not doing anything else either because I still have homework to do, if that makes sense."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You just need to focus and get it done so you can turn it in."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "He gave out a lot of homework that I couldn't really finish and if I did, I forgot to turn it in so I got marked off a lot for that. I wanted to cry.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's look at your Algebra 2 homework. You have a lot of problems to finish today.\n\nSTUDENT: I was struggling. I just wasn't getting what he said at all. Since I was GT, most of the kids got stuff faster than me, so I wouldn't really get the material.\n\nTUTOR: Just keep trying. Let's work on the next section.\n\nSTUDENT: I spend a lot of time doing homework or attempting to do homework. There's a lot of time spent not doing homework but not doing anything else either because I still have homework to do, if that makes sense.\n\nTUTOR: You just need to focus and get it done so you can turn it in.\n\nSTUDENT: He gave out a lot of homework that I couldn't really finish and if I did, I forgot to turn it in so I got marked off a lot for that. I wanted to cry.",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 202,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "homework",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "attempting to do homework",
+        "materials": "homework assignments",
+        "social_setting": "most of the kids got stuff faster than me",
+        "time_context": "spend a lot of time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "gave out a lot of homework that I couldn't really finish",
+        "observable_behavior": "time spent not doing homework but not doing anything else either",
+        "internal_state": "I wanted to cry",
+        "related_quotes": [
+          "I spend a lot of time doing homework or attempting to do homework. There’s a lot of time spent not doing homework but not doing anything else either because I still have homework to do, if that makes sense.",
+          "I wanted to cry."
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "if I did [finish homework]",
+          "observable_behavior": "forgot to turn it in so I got marked off a lot for that",
+          "internal_state": "struggling, wasn't getting what he said at all",
+          "related_quotes": [
+            "[My teacher] gave out a lot of homework that I couldn’t really finish and if I did, I forgot to turn it in so I got marked off a lot for that. Since I was GT, most of the kids got stuff faster than me, so I wouldn’t really get the material."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prioritize Meaning Over Mechanics
+  Check: The tutor encourages the student to focus on her ideas, story, or emotions, and explicitly avoids correcting spelling, grammar, or sentence structure during the initial drafting phase.
+
+Criterion 2: Offer Mechanical Bypass Tools
+  Check: The tutor suggests using technology (like speech-to-text or outlining software) or alternative formats (like poetry) to help the student capture her thoughts without worrying about traditional formatting.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Raquel is a highly creative student who identifies as a writer and performer but struggles with the mechanical aspects of writing (spelling, organization) due to a learning disability. She experiences significant anxiety regarding the stigma of special education and societal pressures about her body image. She uniquely needs interventions that bypass mechanical barriers (via technology or poetry) and inclusive, multimodal opportunities that validate her intersectional identity without isolating her.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today in Writing Club, please use your Chromebook to write the first draft of your personal narrative about your grandmother.
+
+STUDENT: It’s just something that connects to me. I write a lot, something that I love.
+
+TUTOR: That's good. Go ahead and type the beginning of your story.
+
+STUDENT: My grand mother once had a twin but she past away and she had a husband named johny and everyone loved him but about time i was born he past away so i basicly grew up without a grandfather.
+
+TUTOR: Keep writing, but make sure to check your spelling and how you organize your sentences.
+
+STUDENT: But one day my mom dropped me and my big sister off at my grand moms house.so my sister was upstairs in my grand moms room watching tv and i was layin on the couch (just a baby) and my grand mom was in the kitchen with her mind distracted on cooking .Then i had fell off the couch, when she her a loud BANG,BOOM! she came running but she tripped over a bucket and fractured her leg but she told me later on in my life that she managed to get to me because she” loves me.”And that is one of the reasons why i love and admire my grandmother.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Writing a first draft of a personal narrative about her grandmother",
+      "learning_goal": "Focusing on authentic purposes for writing and telling an intriguing story following a sequential narrative"
+    },
+    "context": {
+      "environment": "Writing Club, an optional, unstructured elective that met weekly",
+      "materials": "Chromebooks, technology tools such as Inspiration and speech-to-text software",
+      "social_setting": "Collaborative environment where students can select genres and topics",
+      "time_context": "Weekly meetings"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When producing initial written work that is evaluated for formal mechanics",
+      "observable_behavior": "Produces writing that appears to be disorganized and lacking in grammatical structure, demonstrating deficits in spelling and organizational structure",
+      "internal_state": "Identifies as a creative writer and fashion designer, not by her learning disability diagnosis",
+      "related_quotes": [
+        "It’s just something that connects to me. I write a lot, something that I love"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When engaging in traditional writing tasks without multimodal options",
+        "observable_behavior": "Writing appears disorganized at first glance, despite containing sequential narrative, onomatopoeia, quotation marks, and a strong conclusion sentence",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

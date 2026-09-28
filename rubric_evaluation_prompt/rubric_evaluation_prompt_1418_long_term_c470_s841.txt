@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Strategy Instruction
+  Check: The tutor's long-term plan includes dedicated mini-lessons to explicitly teach comprehension or writing strategies prior to independent application.
+
+Criterion 2: Diverse Modalities for Demonstration
+  Check: The tutor's long-term plan incorporates multiple, non-test formats for the student to demonstrate learning, such as class blogs, discussions, or creative projects.
+
+Criterion 3: Relationship Building over Test Prep
+  Check: The tutor's long-term plan explicitly prioritizes relationship-building and engagement over standardized test preparation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This middle school student is significantly behind grade level, exhibits low self-efficacy, and frequently refuses to participate, sneaks naps, or gives brief, unelaborated answers. They view literacy merely as a test-taking skill and experience severe anxiety about reading aloud. They uniquely require independent practice before public performance, explicit strategy instruction, and specific clarifying feedback, while strictly avoiding any focus on standardized tests.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please log into the computers and respond to today's question about the characters' actions in 'Stargirl' on the class blog.
+
+STUDENT: I just wrote that I agree with Maria. She did a good thing.
+
+TUTOR: Can you write a little more about that?
+
+STUDENT: Why? I gave a specific answer to the specific question. Is this going to be on the standardized test?
+
+TUTOR: Just try to add another sentence to your blog post.
+
+STUDENT: (Whispers to a peer and pushes the keyboard away) I'm refusing to work on this anymore. I already wrote my two sentences and I don't care about developing my writing skills if it's not for a test score.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to teacher-posted questions about the novel 'Stargirl' on the class blog",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Computer Time rotation",
+      "materials": "class blog, computers",
+      "social_setting": "communicating with each other",
+      "time_context": "20-25 minute rotation"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "In the beginning, the students briefly answered the daily questions.",
+      "observable_behavior": "rarely elaborated beyond a specific answer to a specific question",
+      "internal_state": "viewed reading and writing specifically as skills necessary for performance on standardized tests",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When responding to peers on the blog",
+        "observable_behavior": "wrote that they agreed with each other and gave one to two sentences explaining what they thought",
+        "internal_state": "attitudes of indifference toward test scores",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

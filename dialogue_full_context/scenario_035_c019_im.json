@@ -1,0 +1,77 @@
+{
+  "category_id": "019",
+  "category_title": "Independent learners who struggle to visualize spatial relationships in three-dimensional word problems",
+  "scenario_id": "035",
+  "scenario_title": "3D Juice Carton Straw Problem with Physical Extension",
+  "minimal_context": "The student and tutor are working one-on-one on a paper diagram to solve a 3D juice carton problem involving a straw with a 1.5cm extension.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's look at the juice carton problem on the paper. We need to find where the straw would sit in the carton and account for a 1.5cm extension."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "Oh… Ok, we have to use 4 and, oh, yes. (Solves for the hypotenuse of a right triangle on the diagram)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think we should do next?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I set up the problem and solved for the unknown hypotenuse. I found the answer to the problem."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What about the straw extending further than the box?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Is it times 1.5?",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's look at the juice carton problem on the paper. We need to find where the straw would sit in the carton and account for a 1.5cm extension.\n\nSTUDENT: Oh… Ok, we have to use 4 and, oh, yes. (Solves for the hypotenuse of a right triangle on the diagram)\n\nTUTOR: What do you think we should do next?\n\nSTUDENT: I set up the problem and solved for the unknown hypotenuse. I found the answer to the problem.\n\nTUTOR: What about the straw extending further than the box?\n\nSTUDENT: Is it times 1.5?",
+  "immediate_dialogue_prompt": 52,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "3D juice carton straw problem, solving for where the straw would need to sit in the carton and accounting for a 1.5cm extension",
+        "learning_goal": "Solve for the unknown hypotenuse and account for a physical extension"
+      },
+      "context": {
+        "environment": "Teaching session",
+        "materials": "Diagram on paper",
+        "social_setting": "One-on-one tutoring session with Sophia",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "After Lisa solved for an irrelevant piece of the diagram (i.e., the hypotenuse of a right triangle that was not needed for finding the answer)",
+        "observable_behavior": "Lisa thought she had found the answer to the problem, not realizing the straw extended further than the box. Guessed the mathematical operation for the extension.",
+        "internal_state": "Failing to account for the 1.5cm extension of the straw",
+        "related_quotes": [
+          "Oh… Ok, we have to use 4 and, oh, yes.",
+          "Is it times 1.5?"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When calculating the internal diagonal of the juice carton",
+          "observable_behavior": "Lisa thought she had found the answer to the problem, not realizing the straw extended further than the box.",
+          "internal_state": "",
+          "related_quotes": [
+            "Is it times 1.5?"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Positive Behavioral Reinforcement
+  Check: The tutor's long-term plan incorporates positive behavioral supports (PBIS) that reward cooperation and civility rather than relying on punishment or negative consequences for misbehavior.
+
+Criterion 2: Nurturing Relational Context
+  Check: The tutor's long-term strategy explicitly focuses on building a trusting, mutually respectful relationship through nurturing, one-on-one interactions.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Henry is a third-grade student whose behavior is highly dependent on his social environment, acting aggressively in punitive settings but cooperatively in nurturing, one-on-one contexts. He struggles with a rigid punishment-obedience moral orientation that causes confusion when rules conflict with preventing harm. He uniquely needs repetition for memory recall, simple 'why' questions to navigate moral reasoning, and a strictly non-punitive, positive behavioral approach to prevent oppositional triggers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Henry, it is time to participate in the interview. Please look at the first question.
+
+STUDENT: Okay, I'll read it. I am eager to share my thoughts.
+
+TUTOR: We need to keep going. Please read the next one.
+
+STUDENT: I don't want to read anymore. I'm not doing it.
+
+TUTOR: You need to follow the instructions. What is your answer?
+
+STUDENT: (Pushes the paper away aggressively) I'm not cooperating! Leave me alone!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Cooperating with general classroom expectations and participating in interviews",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom community vs. individual interview setting",
+      "materials": "",
+      "social_setting": "Interactions with teachers and authority figures",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When teachers rely on punishment, trouble, and few opportunities for personal reward to define the moral context of the classroom",
+      "observable_behavior": "Behavior described as disruptive, noncompliant, and aggressive",
+      "internal_state": "Motivated to do that which they know they should not in order to avoid negative consequences",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When placed in a friendly, nurturing social context deliberately focused on building mutually respecting, trusting relationships",
+        "observable_behavior": "Demonstrated cooperative behavior throughout every interview without incident; eager to share thoughts and always polite and respectful",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

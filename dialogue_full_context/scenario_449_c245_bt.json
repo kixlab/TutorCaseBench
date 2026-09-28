@@ -1,0 +1,77 @@
+{
+  "category_id": "245",
+  "category_title": "Socially withdrawn learners characterized by fear of mockery, isolation, and lack of social initiative",
+  "scenario_id": "449",
+  "scenario_title": "Answering direct questions during whole-class lessons",
+  "minimal_context": "The student is asked to answer a direct question and express her opinion in front of her classmates during a whole-class lesson.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Santa, please answer the question and express your opinion before the class."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Sits at her desk and does nothing) I didn't understand something, but I used to do nothing as I didn't dare to ask for an explanation neither teachers nor classmates."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just give it a try. Tell everyone what you think."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Why should I say something if nobody cares... I don't know, it was unpleasant to me."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "We are waiting for your answer. Please speak up so the class can hear you."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Refuses to answer the question and keeps quiet) It's better not to say anything and keep quiet so that nobody notices you rather than let them laugh at you.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Santa, please answer the question and express your opinion before the class.\n\nSTUDENT: (Sits at her desk and does nothing) I didn't understand something, but I used to do nothing as I didn't dare to ask for an explanation neither teachers nor classmates.\n\nTUTOR: Just give it a try. Tell everyone what you think.\n\nSTUDENT: Why should I say something if nobody cares... I don't know, it was unpleasant to me.\n\nTUTOR: We are waiting for your answer. Please speak up so the class can hear you.\n\nSTUDENT: (Refuses to answer the question and keeps quiet) It's better not to say anything and keep quiet so that nobody notices you rather than let them laugh at you.",
+  "immediate_dialogue_prompt": 748,
+  "long_term_dialogue_prompt": 749,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "answer teachers’ questions, talk before the class and express her opinion",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "whole-class lessons",
+        "materials": "",
+        "social_setting": "classmates present",
+        "time_context": "during the lesson"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When asked a question",
+        "observable_behavior": "refused to answer their questions, keep quiet so that nobody notices you",
+        "internal_state": "frightened to speak as she was afraid that someone would sneer at her",
+        "related_quotes": [
+          "it’ s better not to say anything and keep quiet so that nobody notices you rather than let them laugh at you",
+          "why should I say something if nobody cares <…>; <…> I don’t know, it was unpleasant to me"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "if I didn’t understand something",
+          "observable_behavior": "used to do nothing as I didn’t dare to ask for an explanation neither teachers nor classmates",
+          "internal_state": "did not want to learn, felt bad in the class",
+          "related_quotes": [
+            "why should I take pains to do something if nobody ever cares; if I didn’t understand something, I used to do nothing as I didn’t dare to ask for an explanation neither teachers nor classmates"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Social-Interpersonal Difficulty"
+}

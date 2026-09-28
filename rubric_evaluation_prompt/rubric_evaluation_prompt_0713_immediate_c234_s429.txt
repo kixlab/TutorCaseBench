@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Active Verbal Prompting
+  Check: The tutor directly engages the student with a specific question, quiz, or interactive prompt rather than expecting them to passively listen or read.
+
+Criterion 2: Integration of Purposeful Movement
+  Check: The tutor assigns the student a structured physical task or responsibility (e.g., collecting items, moving to a specific location to help) to channel their energy.
+
+Criterion 3: Brisk Pacing and Task Variation
+  Check: The tutor breaks the current activity into smaller, varied segments or introduces a spontaneous shift in the task format to maintain a brisk pace.
+
+Criterion 4: Avoidance of Punitive Confrontation
+  Check: The tutor redirects the student using engagement or task modification without issuing warnings, threats, or explicitly citing classroom rules.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits significant hyperactive-impulsive and motoric behaviors, frequently wandering, fidgeting, and interrupting during passive tasks like silent reading or written work. They become easily frustrated by traditional feedback and uniquely require active, fast-paced engagement and structured physical movement. Traditional punitive measures, warnings, and strict rule-based systems consistently fail to produce lasting behavioral change for this student.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Alright class, please stay seated and read the story silently while I go over the instructions for our next activity.
+
+STUDENT: (Sits with a dreamy and glazed look, not opening the book and not responding immediately to the instructions.)
+
+TUTOR: Did you hear me? It is time to read silently.
+
+STUDENT: (Stands up and starts walking around the classroom when staying seated is expected, talking out of turn.) I don't want to read right now.
+
+TUTOR: Please go back to your seat and listen to the instructions.
+
+STUDENT: (Interrupts the teacher's instruction, walks to a peer's desk, takes away their stationery items, and starts making noises and arguing with the peer.) No, I need this pencil! Vroom!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "passive classroom activities (e.g. listening to teacher instruction and reading silently)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "regular elementary classroom setting",
+      "materials": "stationery items",
+      "social_setting": "large numbers of students",
+      "time_context": "while the teacher was giving instructions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "while the teacher was giving instructions",
+      "observable_behavior": "distracting students by taking away their stationery items, making noises, engaging in arguments/conversations with peers",
+      "internal_state": "dreamy or glazed look",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when staying seated is expected",
+        "observable_behavior": "walking around the classroom when staying seated is expected, talking out of turn, intrusive verbalizations, not following through on instructions and interrupting teacher instruction",
+        "internal_state": "difficulties in sustaining attention",
+        "related_quotes": []
+      },
+      {
+        "condition": "classroom interruptions",
+        "observable_behavior": "did not respond immediately to name being called out",
+        "internal_state": "easily distracted by classroom interruptions",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

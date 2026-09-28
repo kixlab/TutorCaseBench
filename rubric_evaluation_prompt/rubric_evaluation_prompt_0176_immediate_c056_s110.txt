@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Non-Verbal Proximity and Cues
+  Check: The tutor uses physical proximity, standing nearby, or subtle non-verbal cues to redirect Gail back to the task, rather than relying solely on verbal reprimands.
+
+Criterion 2: Environmental Redirection
+  Check: The tutor suggests or facilitates moving Gail to a quieter, less distracting environment (e.g., the library or a quiet corner) to complete her work.
+
+Criterion 3: Collaborative Physical Organization
+  Check: The tutor actively participates in physically organizing Gail's materials, desk, or workspace with her, rather than just telling her to get organized.
+
+Criterion 4: Actionable Redirection
+  Check: The tutor provides a specific, actionable step for Gail to take immediately, avoiding statements that merely observe or criticize her lack of organization.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Gail is a highly intelligent student with inattentive ADHD whose primary challenges are severe time management and executive functioning deficits. Rather than being disruptive, she goes off-task by hyper-focusing on minor activities (e.g., rearranging keys, washing hands) and frequently misses instructions during transitions. She uniquely requires subtle non-verbal redirection, environmental shifts, and highly concrete, repetitive organizational systems rather than mere verbal reminders or goal-setting.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please put your extra credit poster boards along the wall and then start your Science test.
+
+STUDENT: (Takes an inordinate amount of time putting the poster board along the wall. Sits down, but soon gets up to use the restroom, spending two minutes rearranging the keys on the hooks before leaving.)
+
+TUTOR: Make sure you sign back in and continue your test.
+
+STUDENT: (Spends a minute reading the time on the clock to sign in, takes a circuitous route back to her desk, marks one answer, and then starts writing on her hand.)
+
+TUTOR: Who is still working on their test? Please focus on finishing.
+
+STUDENT: (Goes across the room to wash her hands at the sink for two minutes. After returning, she starts marking her knee and turns around to watch the girls behind her whispering and trying on each other's glasses.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Taking a Science test today and turning in extra credit projects",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during Science period, with a sink and keys on hooks for the restroom",
+      "materials": "Science test, extra credit poster board, pens, clipboard and keys",
+      "social_setting": "Whole class setting where most of the other class members are finished with their tests and are working on homework for tomorrow or reading books, with some girls whispering quietly behind her",
+      "time_context": "1:30 pm to 2:15 pm"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "For the 15 minutes remaining of this Science period, she goes off task again 3 minutes later",
+      "observable_behavior": "starts writing on her hand, marks one answer on her test and then goes across the room to wash the stuff off her hands at the sink, begins looking around at the other students milling around the class, marking her knee again, turns to watch them switching glasses and trying on other students’ glasses in the group",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When signing out for the restroom and returning to her desk",
+        "observable_behavior": "spends two minutes (timed) rearranging the keys on the hooks, spends another minute signing back in by reading the time on the clock, and taking a circuitous route back to her desk",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Whole-Student Mentorship Focus
+  Check: The tutor's long-term plan must include building a relationship that explicitly addresses or makes space for her broader life circumstances and survival needs, rather than focusing strictly on academic content.
+
+Criterion 2: Non-Judgmental Framing of Underachievement
+  Check: The tutor's long-term plan must frame her academic underachievement as a result of her external stressors, completely avoiding language that blames her or frames her lack of work as a conscious choice.
+
+Criterion 3: Avoidance of Academic Accommodations
+  Check: The tutor's long-term plan must NOT rely on academic accommodations (e.g., compacting units, independent study, alternative submission methods) as the solution to her lack of output.
+
+Criterion 4: Avoidance of Superficial Motivation
+  Check: The tutor's long-term plan must NOT rely on generic daily affirmations, motivational speeches, or superficial 'you can do it' talks to drive behavioral change.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Mariah is a highly gifted student facing extreme external stressors (homelessness, full-time work) who uses the classroom as a social haven and does the bare minimum academically at the last minute to survive. She uniquely requires educators to act as non-threatening mentors who address her holistic life circumstances, as standard academic accommodations and superficial motivational talks completely fail to change her output.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Mariah, it is time to work on the written essay for senior English. Please start writing your analysis of the text.
+
+STUDENT: The text is actually fascinating! The author's use of symbolism really shows the protagonist's isolation. I was just explaining to the group over there how the recurring motif of the ocean represents his feeling of drowning in responsibilities.
+
+TUTOR: That is a good thought. Go ahead and put those ideas on your paper.
+
+STUDENT: Yeah, I'll get to it. But honestly, discussing it is so much better. Hey guys, don't you agree the protagonist is just misunderstood? It's way more interesting to talk about it together.
+
+TUTOR: We have been on this unit for weeks now, and today is the last day I can accept work. You need to submit your written assignment.
+
+STUDENT: (Pulls a wrinkled and stained paper from her bag) Fine, here. I wrote down a few sentences about it. That should be enough for a D so I can pass, right? I have a full-time shift right after this.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Attending class and submitting written assignments for senior English",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "The classroom became her social haven",
+      "materials": "wrinkled and stained paper",
+      "social_setting": "attempting to be the social center of her universe",
+      "time_context": "seven to eight weeks"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Requirement to produce written work over a seven to eight week period",
+      "observable_behavior": "turn in no work for seven to eight weeks, and then turn in just enough to pass with a D on the very last day that work was accepted. In reading her cursory sentences on wrinkled and stained paper, my heart sank",
+      "internal_state": "thought with deep levels of reflection and cognition",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When present in the classroom",
+        "observable_behavior": "attend sporadically, engage highly through verbal interaction when present... gave me no product other than her participation",
+        "internal_state": "engaging, articulate, and thought with deep levels of reflection and cognition",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

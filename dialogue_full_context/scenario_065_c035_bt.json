@@ -1,0 +1,78 @@
+{
+  "category_id": "035",
+  "category_title": "Elementary students with ASD and language delay who generalize virtual experiences to real-world social interactions",
+  "scenario_id": "065",
+  "scenario_title": "Mouse Control and Navigation Confusion in Early Virtual Lessons",
+  "minimal_context": "The student is using a computer mouse to click on virtual objects in a simulated health center to complete their learning missions.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please use the computer mouse to click on the OK bandage in the virtual health center."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Clicks here and there all over the screen) How many questions are left to answer?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We still have a few more. Just try to click on the bandage."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Stops moving the mouse and stares at an English system pop-up message) What is this? Is this part of the learning material?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "You can ignore that message. Go ahead and click the bandage."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Unable to smoothly control the mouse to target the small OK bandage, repeatedly missing the trigger area) I can't do it. I am confused about what to do.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please use the computer mouse to click on the OK bandage in the virtual health center.\n\nSTUDENT: (Clicks here and there all over the screen) How many questions are left to answer?\n\nTUTOR: We still have a few more. Just try to click on the bandage.\n\nSTUDENT: (Stops moving the mouse and stares at an English system pop-up message) What is this? Is this part of the learning material?\n\nTUTOR: You can ignore that message. Go ahead and click the bandage.\n\nSTUDENT: (Unable to smoothly control the mouse to target the small OK bandage, repeatedly missing the trigger area) I can't do it. I am confused about what to do.",
+  "immediate_dialogue_prompt": 101,
+  "long_term_dialogue_prompt": 102,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Using a computer mouse to click and interact with virtual objects in the kitchen (Lesson 1) and convenience store (Lesson 2)",
+        "learning_goal": "Completing the learning missions"
+      },
+      "context": {
+        "environment": "Virtual worlds",
+        "materials": "Computer mouse, screen, interactive 3D virtual objects, English-language system pop-up messages",
+        "social_setting": "Learned by playing individually",
+        "time_context": "In the first three lessons (in Cycle 1)"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Attempting to click on a small trigger area (a single OK bandage)",
+        "observable_behavior": "Unable to smoothly control the mouse to click the virtual objects",
+        "internal_state": "Confused about their learning",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Navigating the first three lessons without the aid of on-screen reminders or progress indicators",
+          "observable_behavior": "Spent a lot of time on clicking here and there or asking teachers how many questions were left to answer",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "Encountering English-language system pop-up messages",
+          "observable_behavior": "Got stuck with it",
+          "internal_state": "Thinking that it was also a part of the learning material",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

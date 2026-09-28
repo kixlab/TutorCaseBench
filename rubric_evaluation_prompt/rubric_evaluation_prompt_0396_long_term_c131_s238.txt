@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Maximization of Active Music-Making
+  Check: The tutor's long-term plan must prioritize continuous, active music-making activities and explicitly minimize passive listening or transition times.
+
+Criterion 2: Intentional Peer Interaction Design
+  Check: The tutor's long-term strategy must include purposefully planned opportunities for formal and informal peer collaboration during tasks.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with passive waiting and noninstructional transitions, frequently going off-task when expected to wait their turn or work strictly independently. The evidence reveals they uniquely need continuous, active engagement (specifically music-making) and explicitly structured opportunities to collaborate with peers rather than being forced into solo work or passive waiting.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are starting Session 2 centers. Please sit here and wait your turn for the large group game with me.
+
+STUDENT: (Turns away from the large group game and leans over to watch the other students playing the flash card game with a partner)
+
+TUTOR: Please face forward and wait.
+
+STUDENT: (Ignores the instruction and begins talking to the peers, becoming off-task during this noninstructional waiting time)
+
+TUTOR: It will be your turn soon, just wait quietly.
+
+STUDENT: (Gets up and walks away from the teacher entirely, demonstrating a high percentage of off-task behavior rather than waiting for their turn at the game)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in 'centers' during Session 2, involving flash card games with partners or waiting for a turn in a large group game",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Session 2",
+      "materials": "flash card game",
+      "social_setting": "centers, either playing a flash card game with a partner or waiting their turn at a game with the teacher in a large group",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "waiting their turn at a game with the teacher in a large group",
+      "observable_behavior": "highest percentage of time off-task",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "noninstructional transitions or periods between activities",
+        "observable_behavior": "highest percentage of time off-task during noninstructional time",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Natural Routine Embedding
+  Check: The tutor's long-term plan integrates learning or behavioral trials directly into Dennis's natural daily routines (e.g., during actual lunch time or regular classroom activities) rather than proposing pull-out sessions or artificial environments.
+
+Criterion 2: Leveraging Natural Establishing Operations
+  Check: The tutor's long-term strategy explicitly plans to use Dennis's natural motivational states (e.g., using actual meal times to teach food requesting, or actual difficult tasks to teach break requesting) to drive instruction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Dennis is a 15-year-old student with Down's syndrome and an intellectual disability who communicates via short utterances and gestures. He frequently uses verbal outbursts to escape academic demands or to access preferred foods when hungry. The evidence reveals he uniquely requires interventions embedded in his natural classroom routines to capture genuine motivational states, alongside highly salient, clear contingencies with sufficient reinforcement duration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Dennis, it is the beginning of lunch time. I am taking your snack and putting it up here on the counter where you can see it.
+
+STUDENT: (Points to the counter) My snack.
+
+TUTOR: Not right now, we are waiting.
+
+STUDENT: (Reaches toward the food) Want it.
+
+TUTOR: You need to sit quietly first.
+
+STUDENT: No! Stop it!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Access to the item identified as most preferred (tangible food item)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Lunch in the cafeteria",
+      "materials": "Tangible (food item)",
+      "social_setting": "Beginning of meal time",
+      "time_context": "Beginning of meal time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "The teacher removed the item from the participant and placed the item in sight but out of the participant’s reach",
+      "observable_behavior": "Verbal outbursts such as 'No' or 'Stop it'",
+      "internal_state": "Placed participants in a hunger state, thereby increasing the value of the tangible (food item)",
+      "related_quotes": [
+        "No",
+        "Stop it"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the tangible test condition",
+        "observable_behavior": "Engaged in the highest levels of challenging behavior (35% of trials)",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

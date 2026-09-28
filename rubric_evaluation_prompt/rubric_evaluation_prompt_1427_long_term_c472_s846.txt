@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Visual Routine Mapping
+  Check: The long-term plan incorporates visual schedules or visual supports to explicitly map out the steps of challenging routines.
+
+Criterion 2: Proactive Attention Satiation
+  Check: The long-term plan schedules dedicated time for positive, mutually enjoyable adult interaction immediately preceding known behavioral triggers.
+
+Criterion 3: Structural Predictability
+  Check: The long-term plan establishes a fixed, predictable pattern or schedule for when challenging routines (such as running errands) will occur.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kayden is a 3-year-old with communication delays who uses challenging behaviors (screaming, hitting, throwing toys) to escape tasks like cleanup or to gain adult attention and desired items. He uniquely requires highly predictable routines, visual supports, and proactive contingencies (like First-Then statements), as reactive strategies—such as reprimands or redirection—inadvertently reinforce his challenging behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Okay Kayden, I picked you up from childcare. Now we are going to run some errands and go grocery shopping.
+
+STUDENT: (Starts crying in the car seat)
+
+TUTOR: We just need to get a few things from the store.
+
+STUDENT: (Crying gets louder as they pull into the store parking lot)
+
+TUTOR: Let's go inside now.
+
+STUDENT: (Spends the time screaming and crying continuously while being taken into the grocery store)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Running errands, such as grocery shopping",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "In the car and stores",
+      "materials": "Small bag in the car, snacks, toys, books, visual supports",
+      "social_setting": "With mother",
+      "time_context": "On her way home after picking up Kayden from childcare"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Being told they will be running errands",
+      "observable_behavior": "Screaming and crying",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During the time spent running errands after childcare",
+        "observable_behavior": "Spends much of the time screaming and crying",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

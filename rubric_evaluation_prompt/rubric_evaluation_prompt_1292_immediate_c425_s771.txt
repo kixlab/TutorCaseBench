@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Prompting for Help-Seeking
+  Check: The tutor's response must explicitly prompt, model, or encourage Zeke to ask for help rather than simply telling him to keep trying or work harder.
+
+Criterion 2: Playful Modeling and Joint Attention
+  Check: The tutor's response must incorporate a playful or peer-based modeling strategy (such as using a puppet, a peer tutor, or a playful role-play) to demonstrate the task or the act of asking for help.
+
+Criterion 3: Immediate Tangible Reinforcement
+  Check: The tutor's response must offer or reference a specific tangible reward (e.g., a preferred sticker for his chart) contingent on him asking for help or attempting the task without crying.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Zeke is a preschooler who struggles with emotional regulation, often whining, crying loudly for extended periods, or walking away when tasks (like dressing or fine motor activities) feel too difficult. He uniquely requires explicit modeling for asking for help, visual step-by-step prompts, and tangible reinforcement (sticker charts) to persist through frustration.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Zeke, it is time for recess. Please put on your coat.
+
+STUDENT: (Looks at the coat and begins to whine) It's too hard.
+
+TUTOR: Just give it a try.
+
+STUDENT: (Struggles with the sleeve and starts crying softly)
+
+TUTOR: Keep working on it, you need your coat to go outside.
+
+STUDENT: (Drops the coat and cries loudly, with the crying episode lasting for over 77 seconds)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "getting dressed or undressed (e.g., putting or taking off his coat)",
+      "learning_goal": "attempt the task or ask for help without crying"
+    },
+    "context": {
+      "environment": "arrival routine, before recess, and dismissal routine",
+      "materials": "visual prompt mounted above his coat hook that includes pictures of the steps for putting on/taking off his clothes, preferred sticker for his sticker chart",
+      "social_setting": "Mr. Cho’s class",
+      "time_context": "arrival routine, before recess, and dismissal routine"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Zeke perceives a task to be too difficult",
+      "observable_behavior": "Zeke whines, cries softly or cries loudly",
+      "internal_state": "perceives a task to be too difficult",
+      "related_quotes": [
+        "When Zeke perceives a task to be too difficult (e.g., getting dressed, fine motor tasks), Zeke whines, cries softly or cries loudly."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "during arrival routine, before recess, and dismissal routine",
+        "observable_behavior": "crying episodes are lasting 77 seconds or longer with five or more episodes per day",
+        "internal_state": "",
+        "related_quotes": [
+          "On average his crying episodes are lasting 77 seconds or longer with five or more episodes per day."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

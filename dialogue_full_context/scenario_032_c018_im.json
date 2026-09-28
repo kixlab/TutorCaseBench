@@ -1,0 +1,75 @@
+{
+  "category_id": "018",
+  "category_title": "Quiet students who struggle with cognitive overload during multi-step symbolic equations",
+  "scenario_id": "032",
+  "scenario_title": "Initial introduction of distributive property causing cognitive overload",
+  "minimal_context": "Greg is working independently on his classwork and needs to solve the equation 2(2x + 9) = 50.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is the next problem on your classwork: 2(2x + 9) = 50. What is your first step?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Stops his steady rhythm of working and looks at the equation) Um. The parentheses…?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "What do you think you should do with the parentheses?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "Times?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Times what? How will you get that across these?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(silence)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is the next problem on your classwork: 2(2x + 9) = 50. What is your first step?\n\nSTUDENT: (Stops his steady rhythm of working and looks at the equation) Um. The parentheses…?\n\nTUTOR: What do you think you should do with the parentheses?\n\nSTUDENT: Times?\n\nTUTOR: Times what? How will you get that across these?\n\nSTUDENT: (silence)",
+  "immediate_dialogue_prompt": 49,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "2(2x + 9) = 50",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "tutoring session",
+        "materials": "classwork",
+        "social_setting": "working independently",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "encountering the multi-step nature of the problem and the abundance of mathematical symbols to process",
+        "observable_behavior": "(silence)",
+        "internal_state": "cognitive overload and misconception that he needed to solve what was inside the parentheses first",
+        "related_quotes": [
+          "Um. The parentheses…?",
+          "Times?"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When prompted to explain how to apply the distributive property",
+          "observable_behavior": "(silence)",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Avoidance of Direct Resolution
+  Check: The tutor's response must NOT include telling the children to stop fighting, dictating a specific solution, or removing the contested object.
+
+Criterion 2: Perspective and Emotion Scaffolding
+  Check: The tutor explicitly prompts the child to reflect on the other child's point of view, emotions, or the consequences of their actions (e.g., asking for their opinion, pointing out a peer's sadness).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This toddler struggles with physical aggression and opposition during peer conflicts over limited resources, such as toys or treats. They are highly sensitive to direct adult intervention, which triggers dependency and attention-seeking, uniquely requiring a non-intrusive approach that scaffolds emotional recognition and allows them to navigate conflicts autonomously.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: You can both use the toys during free-play.
+
+STUDENT: (Shifts from parallel play to grabbing a toy from the peer) I want this one!
+
+TUTOR: Please try to get along with each other.
+
+STUDENT: (Looks directly at the adult to attract attention) Help me! Make him give it to me!
+
+TUTOR: Just figure it out together.
+
+STUDENT: (Screams as intensity increases) No, mine! (Shows opposition, pushes the peer, and uses physical aggression to acquire the object)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Interacting with peers during free-play",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Italian nurseries during free-play",
+      "materials": "objects, a toy",
+      "social_setting": "peer group's interactions, parallel play",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "acquisition of objects and object possession",
+      "observable_behavior": "opposition, intensity increasing, and aggressive behaviour",
+      "internal_state": "incompatible goals",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "contests over a toy",
+        "observable_behavior": "aggressive competition",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "frequent adult intervention in peer conflicts",
+        "observable_behavior": "requests for help, behaviour designed to attract adult attention",
+        "internal_state": "dependent on adults' interventions",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

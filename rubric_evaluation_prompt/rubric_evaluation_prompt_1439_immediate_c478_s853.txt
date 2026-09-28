@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Private Collaborative Reflection
+  Check: The tutor initiates a private, one-on-one dialogue to ask about the student's feelings or discomfort, rather than reprimanding them publicly.
+
+Criterion 2: Pre-Transition Clarity
+  Check: The tutor delivers clear, step-by-step instructions for the activity before initiating any grouping or physical transitions.
+
+Criterion 3: Dynamic Pacing and Gamification
+  Check: The tutor introduces a game element, active task, or shifts the current activity to something more dynamic, rather than assigning repetitive busywork.
+
+Criterion 4: Non-Authoritarian De-escalation
+  Check: The tutor maintains a calm, supportive tone without raising their voice, issuing threats, or asserting dominance (e.g., avoiding phrases like 'I am in charge').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe misbehavior, ranging from disruptive talking and disrespect to physical aggression, often triggered by boredom, academic frustration, and difficulties with English. They escalate rapidly when met with authoritarian control, yelling, or public reprimands. To stay engaged and regulated, they uniquely require dynamic, game-based activities, clear instructions before transitions, and private, collaborative reflection to address their frustrations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please open your books and begin the English reading activity.
+
+STUDENT: I'm not doing this. (Turns to a classmate) You're an idiot.
+
+TUTOR: Please focus on your own reading.
+
+STUDENT: (Stands up and shoves the classmate) I'll do whatever I want, just for fun!
+
+TUTOR: Stop fighting immediately and step back.
+
+STUDENT: (Gets into a full physical fight, creating total chaos among the 40 students, and as the incident gets completely out of control and a school police officer arrives, wrestles with them and grabs hold of the officer's gun) Get away from me!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General classroom activities during the teaching practicum in English as a Foreign Language (EFL) settings",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "secondary school English classroom",
+      "materials": "police officer's gun",
+      "social_setting": "relatively large groups of 40 students",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "as the incident was getting out of control",
+      "observable_behavior": "got into a fight in class... the students got hold of the police officer’s gun",
+      "internal_state": "changing moods of students",
+      "related_quotes": [
+        "just for fun"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "major acts of misbehavior",
+        "observable_behavior": "yelling at each other, physical aggression, and insulting or bullying other students",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

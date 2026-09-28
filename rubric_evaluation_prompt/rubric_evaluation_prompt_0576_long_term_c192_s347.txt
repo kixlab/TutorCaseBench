@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Transition Role-Play Integration
+  Check: The tutor's long-term plan incorporates sustained dramatic play activities using physical props (e.g., boxes, makeshift trucks, spatial outlines) where the student can actively role-play the moving process.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences high anxiety regarding environmental transitions, specifically fearing the loss of familiar materials, spaces, and relationships. Their distress manifests as repetitive, concrete questioning about what will happen to specific items and people. They uniquely require direct reassurance and tangible, participatory activities—such as labeling items, journaling, and dramatic play—to gain a sense of control and consistency during the transition.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's work on our feeling journals today. Please draw or write about the upcoming move to the new school.
+
+STUDENT: (Looking at the pictures of the current preschool) I feel a little nervous. This is where we did this project.
+
+TUTOR: Just write down what you are thinking about.
+
+STUDENT: I will miss the playground because I would play here.
+
+TUTOR: Keep drawing in your journal.
+
+STUDENT: (Pushes the journal away) I don’t want to move. I like this school.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in a journal writing activity prior to the transition where children were asked to reflect on the upcoming move and their feelings about the old and new schools",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "dramatic play center and journal writing activity",
+      "materials": "feeling journals, drawings, tape in ‘house-like’ shapes, pictures of the current preschool and the new preschool, makeshift moving truck, packing and moving supplies (bubble wrap, boxes, suitcases)",
+      "social_setting": "classroom activity",
+      "time_context": "prior to the transition"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "prior to the transition",
+      "observable_behavior": "stated, ‘I don’t want to move. I like this school.’, mentioned aspects of their current school in terms of ‘this is where I did this’ or ‘this is where we did this project’",
+      "internal_state": "feeling sad or a little nervous",
+      "related_quotes": [
+        "I don’t want to move. I like this school.",
+        "I will miss the playground because I would play here."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "prior to the transition",
+        "observable_behavior": "stated, ‘I don’t want to move. I like this school.’, mentioned aspects of their current school in terms of ‘this is where I did this’ or ‘this is where we did this project’",
+        "internal_state": "feeling sad or a little nervous",
+        "related_quotes": [
+          "I don’t want to move. I like this school.",
+          "I will miss the playground because I would play here."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,72 @@
+{
+  "category_id": "415",
+  "category_title": "Student with EBD who yells, throws objects, and wanders during instruction",
+  "scenario_id": "759",
+  "scenario_title": "Independent worksheets without teacher attention",
+  "minimal_context": "Malcolm is assigned an independent math worksheet to complete by himself in the pull-out special education classroom.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Here is your independent math worksheet. I need you to work on this by yourself for the next ten minutes while I sit at my desk."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "This is too hard! I'm not doing this stupid math."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just try to answer the questions on your own."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Stands up and starts wandering around the classroom) I said I'm not doing it! You're ugly anyway!"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please go back to your desk and keep trying."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Yells loudly, throws the pencil across the room, and drops to roll on the floor) No! I'm not doing it!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Here is your independent math worksheet. I need you to work on this by yourself for the next ten minutes while I sit at my desk.\n\nSTUDENT: This is too hard! I'm not doing this stupid math.\n\nTUTOR: Just try to answer the questions on your own.\n\nSTUDENT: (Stands up and starts wandering around the classroom) I said I'm not doing it! You're ugly anyway!\n\nTUTOR: Please go back to your desk and keep trying.\n\nSTUDENT: (Yells loudly, throws the pencil across the room, and drops to roll on the floor) No! I'm not doing it!",
+  "immediate_dialogue_prompt": 1270,
+  "long_term_dialogue_prompt": 1271,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "independent reading, math, or writing worksheets",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "pull-out special education classroom",
+        "materials": "independent reading, math, or writing worksheets",
+        "social_setting": "10-minute brief analog FA trials",
+        "time_context": "during instruction time"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "when presented with difficult tasks and teacher attention was absent",
+        "observable_behavior": "yelling during class, throwing objects, rolling on the floor, wandering the classroom during instruction time, and making rude comments to other students",
+        "internal_state": "attempting to engage the teacher for attention and assistance potentially lessens the aversive nature of the task (i.e., escape)",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "when presented with difficult tasks",
+          "observable_behavior": "engaged in problem behavior to avoid the work",
+          "internal_state": "history of off-task and problem behavior in the presence of challenging tasks appears to have been established, most likely due to the repeated failure experienced across their schooling",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

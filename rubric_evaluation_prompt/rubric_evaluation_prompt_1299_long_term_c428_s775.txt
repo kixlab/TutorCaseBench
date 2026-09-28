@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Formal Behavioral Programming
+  Check: The long-term plan must include the development, implementation, or maintenance of a formal, structured behavioral plan or programming.
+
+Criterion 2: Medication Compliance Support
+  Check: The long-term plan must incorporate strategies, coordination, or monitoring to ensure medication compliance.
+
+Criterion 3: Non-Punitive and Non-Exclusionary Framework
+  Check: The long-term plan must explicitly avoid reliance on harsh, punitive discipline or informal exclusionary practices (such as sending him home early).
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Robert is a student with ADHD whose behavior is characterized by severe impulsivity, constant physical movement, and a lack of reflection. He is highly triggered by unstructured time and harsh, punitive reprimands, which can escalate his behavior to physical threats. He uniquely requires formal, structured behavioral programming and consistent medication management rather than ad-hoc or exclusionary disciplinary measures.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to work on our math worksheets. Please sit at your desk and get started.
+
+STUDENT: (Crawls under the desk instead of sitting in the chair) I don't want to do math today!
+
+TUTOR: Robert, you need to come out from under the desk and do your work.
+
+STUDENT: (Slides out from under the desk, stands up, and starts hopping around the aisle) No! I'm not sitting down!
+
+TUTOR: Stop hopping right now. Sit in your chair.
+
+STUDENT: (Stops hopping, balls his fists, and steps aggressively toward the teacher) Make me! I'll hit you if you try to make me sit down!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General school attendance and behavior",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Second-grade setting",
+      "materials": "",
+      "social_setting": "Teacher was often out of the room",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "With neither a behavioral plan nor a plan to ensure Robert's compliance with medication",
+      "observable_behavior": "his behavior continued to prove challenging, and when an occasion arose where he physically threatened a teacher",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Upon his return to full-day school after half-day attendance",
+        "observable_behavior": "Robert's behavior was much deteriorated.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

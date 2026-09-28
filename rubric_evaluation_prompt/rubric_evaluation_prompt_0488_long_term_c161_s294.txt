@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prioritization of Facilitative Engagement
+  Check: The tutor's long-term plan explicitly prioritizes building positive shared engagement and following the student's interests over achieving specific academic compliance or task completion.
+
+Criterion 2: High-Frequency Micro-Sessions
+  Check: The tutor's long-term plan incorporates short, daily (or highly frequent) interaction sessions dedicated specifically to practicing facilitative play and communication.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Charlie is a student with ASD who possesses a wide vocabulary but infrequently communicates, often relying on one-word responses and ignoring adults to pursue his own agenda. He is highly sensitive to directive communication, demands, and rushing, which immediately trigger protests and task resistance. To engage him successfully, adults must control access to motivating items, eliminate demands, and adopt a facilitative style that follows his lead and reduces the adult communication rate.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to do a bubble lesson today. Look at the bubbles.
+
+STUDENT: (Shows no interest in interacting with the adult and gives a one-word response) Bubbles.
+
+TUTOR: Tell me what you want me to do with them.
+
+STUDENT: (Takes the highly motivating item from the table to work away on his own agenda) Open.
+
+TUTOR: Give the bubbles back to me right now. You need to sit still and listen.
+
+STUDENT: (Protests immediately following the directive communication and turns away, exhibiting ignoring behaviours) No!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "“bubble ”lesson",
+      "learning_goal": "got so much more language from him"
+    },
+    "context": {
+      "environment": "interaction sessions",
+      "materials": "highly motivating item",
+      "social_setting": "interacting with adults",
+      "time_context": "ten minutes every day"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "immediately followed their adults’ directive communication",
+      "observable_behavior": "protest at a rate ranging from 0.42 – 4.6 incidences per minute",
+      "internal_state": "did not like demands and expectations placed on them",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "if I didn’t [control access to items]",
+        "observable_behavior": "he would work away on his own agenda",
+        "internal_state": "shows no interest in interacting with adults or peers",
+        "related_quotes": [
+          "if I didn’t he would work away on his own agenda"
+        ]
+      },
+      {
+        "condition": "During the pre-PD interactions",
+        "observable_behavior": "one-word responses mainly and ‘ignoring’ behaviours",
+        "internal_state": "Tolerates but shows no interest in interacting",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

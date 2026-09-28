@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Integration of Lived Experiences
+  Check: The long-term plan must include strategies to connect writing assignments directly to the student's personal life, culture, or community experiences.
+
+Criterion 2: Dialogue on Systemic Perceptions
+  Check: The long-term plan must incorporate regular opportunities (e.g., Socratic circles, reflective discussions) for the student to discuss school climate, systemic inequalities, or how their achievement is perceived by others.
+
+Criterion 3: Rejection of Deficit Narratives
+  Check: The long-term plan must explicitly avoid attributing the student's academic struggles to their family makeup, socio-economic status, or cultural background, and instead focus on providing systemic or instructional support.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has internalized systemic educational inequalities, believing that their writing ability is innately deficient due to their Mexican heritage and family background. They bury their creative instincts to conform to school expectations and require a culturally responsive environment that validates their identity and openly addresses systemic barriers to build the safety needed for academic risk-taking.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are starting our pre-focus group interview today. Can you tell me a bit about your past experiences with writing in your English classes?
+
+STUDENT: I usually just bury my own ideas and try to write whatever the school expects me to write. I just try to fit into the mold they want.
+
+TUTOR: How has that approach worked for you?
+
+STUDENT: It doesn't. I feel like I'm just viewed as deficient anyway because of my family makeup and personal background.
+
+TUTOR: What do you mean by that?
+
+STUDENT: I’ve never passed an English class in my life. And don’t plan on it now. I’m Mexican so how am I really supposed to be good at this stuff?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Responding to pre-focus group interview questions about writing difficulty and past experiences in English classes",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Urban school setting historically affected by education disparities",
+      "materials": "",
+      "social_setting": "Pre-focus group interview",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked about writing difficulty and past experiences in English classes",
+      "observable_behavior": "Attributed all writing failures to personal characteristics such as native tongue, family make-up, cultural background, and innate talent",
+      "internal_state": "Initial beliefs that writing is an inherent skill that may be connected to one’s race or linguistic background",
+      "related_quotes": [
+        "I’ve never passed an English class in my life. And don’t plan on it now. I’m Mexican so how am I really supposed to be good at this stuff?"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When trying to fit into an expected mold created by the school system",
+        "observable_behavior": "Bury their creative instincts",
+        "internal_state": "Viewed as deficient based on personal background and characteristics",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

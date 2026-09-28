@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Protected Response Time
+  Check: The tutor pre-alerts Shaffer to an upcoming question and/or explicitly enforces a silent wait time (e.g., telling the class to wait, preventing yelled answers) to allow him to formulate his response.
+
+Criterion 2: Bridging and Fading
+  Check: The tutor explicitly initiates a peer interaction or conversation and then actively withdraws (e.g., stepping back, creating an excuse to leave) to let the peers interact directly.
+
+Criterion 3: Explicit Transition Prompting
+  Check: The tutor provides a direct, timely prompt for Shaffer to initiate physical movement or transition to a new activity, rather than waiting for him to move on his own.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Shaffer is an academically capable student who communicates via typing and exhibits significantly delayed physical responses. Because he is easily marginalized in fast-paced environments, he uniquely requires educators to enforce strict wait times, pre-alert him to questions, and actively bridge peer interactions before intentionally fading into the background.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Shaffer, it is time for group work. Please discuss the assignment with the classmates at your table.
+
+STUDENT: (Sits as a silent young man in the front row staring straight ahead, tapping his thumbs together.)
+
+TUTOR: Go ahead and start talking to them.
+
+STUDENT: (Types slowly) I think it’s so difficult to initiate conversation questions if you don’t have a teacher in the introduction.
+
+TUTOR: I am sitting right here next to you. Just tell them your thoughts.
+
+STUDENT: (Continues staring straight ahead and tapping his thumbs together, unable to connect with the other kids) I look to an adult to really make the bridge... adults must quietly step into the background, camouflaging their help.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working with classmates during group work or free periods",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "General education classes and special education room",
+      "materials": "Short film about his experience of autism, snacks",
+      "social_setting": "Sitting in the front row, peers present but unsure how to approach him, adults nearby",
+      "time_context": "During group work, free periods, or diversity group meetings"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When adults are constantly by his side without fading back",
+      "observable_behavior": "Sits quietly next to an adult, missing opportunities to interact directly with classmates",
+      "internal_state": "I think it’s so difficult to initiate conversation questions if you don’t have a teacher in the introduction. I look to an adult to really make the bridge.",
+      "related_quotes": [
+        "I am thinking that people only can have the greatest feelings of security where the teachers are having the intelligence to be a bridge that can cross over the distances of inconsolation of the sad feelings … I think it’s so difficult to initiate conversation questions if you don’t have a teacher in the introduction. I look to an adult to really make the bridge."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When peers are present but unsure how to approach him",
+        "observable_behavior": "Silent young man in the front row staring straight ahead, tapping his thumbs together",
+        "internal_state": "Willing and ready to connect with other kids, but needs adults to smooth the way with friendship and then stand back",
+        "related_quotes": [
+          "We are willing and ready to connect with other kids, and adults must quietly step into the background, camouflaging their help as a tiger who may hide in full view. It’s the needed disguise of the adult who smooths the way with the friendship, then stands back in the shadows, observing the complicated dance of steps taking you to the feeling of confidence."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Interruption of Repetitive Actions
+  Check: The tutor explicitly interrupts an incorrect or repetitive physical action (e.g., verbally stating a clear rule or physically pausing his hand) rather than letting the loop continue.
+
+Criterion 2: Single-Point Visual Redirection
+  Check: The tutor directs Rico's attention to one specific item or image at a time, strictly avoiding rapid or alternating pointing between multiple objects.
+
+Criterion 3: Deliberate Non-Verbal Anchoring
+  Check: The tutor pairs their verbal instruction with a clear, deliberate non-verbal cue (e.g., a specific hand movement or facial expression) to anchor his attention.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Rico is a student who struggles with partial sensory processing, leading to discrepancy gestures where his physical actions, visual focus, and verbalizations do not match. He is easily overwhelmed by spatial relations on a 2D page, which triggers distraction and echolalia. He uniquely requires explicit interruption of repetitive loops, single-point visual redirection, and foundational multi-sensory work with 3D concrete objects before tackling 2D tasks.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at this task sheet. Find the images shaped like a beam and a ball, and put a checkmark next to them.
+
+STUDENT: (Focuses on the objects with irregular hand movements. He moves his hand as if about to put a checkmark on the pencil and cap, but hesitates and turns his attention to the tissue box) Tissue... tissue...
+
+TUTOR: Keep looking at the pictures. Which one is the beam?
+
+STUDENT: (His view slowly turns, observing the variety of objects. He makes a discrepancy gesture, pointing his finger at the image of the cap while looking at the beam)
+
+TUTOR: What about the ball? Can you find the ball?
+
+STUDENT: (He ignores the image of the marbles. His hand movements give a checkmark on the picture of the hat instead. He stares at the canned milk and repeats quickly) Canned milk, canned milk.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Identifying the shape of a 'beam' and 'ball' on a task sheet using images of concrete objects",
+      "learning_goal": "Identify appropriate concrete objects specified geometry"
+    },
+    "context": {
+      "environment": "Learning process",
+      "materials": "Task sheet with images of concrete objects including a pencil, cap, tissue box, marbles, hat, and canned milk, as well as concrete objects such as dice and cardboard",
+      "social_setting": "Teacher guiding students working on task",
+      "time_context": "When the work task"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When attempting to identify the picture 'beam' or 'ball' among multiple images",
+      "observable_behavior": "Hesitated, turned his attention to observe the image 'Tissue' in the picture 'cap', discrepancy gesture pointing to an image 'cap' on the 'beam', hand movements still give a '√' in the picture 'hat' again, ignored the image 'marbles'",
+      "internal_state": "Distracted on spatial relations, difficulty repeating ideas visually perceived image, distraction on observation to perceive the form",
+      "related_quotes": [
+        "canned milk"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When observing a variety of objects that are interrelated",
+        "observable_behavior": "Facial expressions focus to hold objects observation with irregular hand movements move, view slowly turns observing a variety of objects but difficult to maintain his observations",
+        "internal_state": "Difficulty selecting or process information so that individual processing of sensory information by partially corrects",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

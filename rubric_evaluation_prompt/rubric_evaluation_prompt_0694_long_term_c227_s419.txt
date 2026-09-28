@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Reading Load Accommodation
+  Check: The tutor's long-term plan incorporates consistent read-aloud supports or text-reduction strategies for tasks with high reading demands.
+
+Criterion 2: Structured Inquiry Progression
+  Check: The tutor structures inquiry tasks into heavily scaffolded, teacher-guided steps or structured small-group collaborations rather than assigning independent discovery labs.
+
+Criterion 3: Post-Exploration Vocabulary Anchoring
+  Check: The tutor explicitly introduces and reinforces specific scientific vocabulary immediately following exploratory activities to solidify the concepts.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is quietly compliant and appears on-task, but masks significant academic struggles—particularly with reading comprehension and independent inquiry—by guessing, searching the internet, or copying peers. They rarely self-advocate or ask for help, meaning their silence often indicates confusion rather than understanding. They uniquely require proactive scaffolding, visual/read-aloud accommodations, and immediate, direct intervention the moment they signal any uncertainty.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please look at your Forest Preserve Field Trip artifact and tell me what your group's research question was.
+
+STUDENT: (Looks at the artifact) It has something to do with the bug thing, like are there more bugs in the grass line or in what area I think that’s what this is.
+
+TUTOR: Alright. Now let's look at your forest preserve data table. Can you analyze the information here?
+
+STUDENT: (Looks quietly at the data table) I think it’s what we saw in the forest.
+
+TUTOR: What scientific question can you ask based on this information?
+
+STUDENT: (Stares silently at the reading materials on the table and does not ask a question)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reviewing the Forest Preserve Field Trip artifact (written work completed during the lab) to identify the research question and analyzing and interpreting data from the Forest Preserve Field Trip data table",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Student interview reviewing inquiry and noninquiry tasks associated with the unit",
+      "materials": "Forest Preserve Field Trip artifact, forest preserve data table, written work completed during the lab",
+      "social_setting": "One-on-one student interview",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to come up with his group's question while looking back on his artifact, and when asked about his forest preserve data table",
+      "observable_behavior": "Had difficulty coming up with his group's question, and was unable to analyze the information",
+      "internal_state": "",
+      "related_quotes": [
+        "It has something to do with the bug thing, like are there more bugs in the grass line or in what area I think that’s what this is.",
+        "I think it’s what we saw in the forest."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to ask scientific questions independently",
+        "observable_behavior": "Unable to ask scientific questions",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

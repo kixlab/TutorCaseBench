@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Private Challenge of Racial Ideology
+  Check: The tutor's immediate response privately prompts the student to reflect on why race matters or directly challenges her assertion that race should be disregarded.
+
+Criterion 2: Academic Contextualization of Interpersonal Conflict
+  Check: The tutor introduces an academic resource, sociological concept, or methodological framework (such as an article on campus racism or privilege) to help the student analyze her emotional reaction.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Donna is a white student who holds color-blind racial ideologies and becomes deeply frustrated when minority peers emphasize race and diversity in academic settings. She publicly disregards these peers but privately vents her intense frustrations, requiring a tutor who can provide a safe, confidential space for her emotions while firmly challenging her perspectives through targeted academic resources and private dialogue.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For this week's journal, please reflect on your group's progress in discussing interview questions and interviewee selection for the research project.
+
+STUDENT: I have some mean and terrible thoughts about Charles. Because this is a journal entry, I feel the freedom to express these thoughts.
+
+TUTOR: Please explain what happened during your group meeting.
+
+STUDENT: When we were discussing interview questions Charles contributed that he felt there was no racial diversity on our campus and depending on the age and race of the student we interviewed, they would have different answers. He got really loud and rambled on in an increasingly dominant voice about how he was Hispanic and older.
+
+TUTOR: How did you respond to his comments?
+
+STUDENT: On the discussion boards he talks about how he wants team cohesion so we can work better together yet he continually mentions his race and age. I am just disregarding his words. I don't understand this, we're all different and come from different backgrounds. Race shouldn't matter and we should see past it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "discussing interview questions and interviewee selection for the group research project",
+      "learning_goal": "discuss data, methodological questions, and group dynamics"
+    },
+    "context": {
+      "environment": "classroom discussion and on-line group discussions",
+      "materials": "weekly journals, discussion boards, article on campus racism",
+      "social_setting": "research team of peers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When we were discussing interview questions Charles contributed that he felt there was no racial diversity on our campus and depending on the age and race of the student we interviewed, they would have different answers. He got really loud and rambled on in an increasingly dominant voice about how he was Hispanic and older",
+      "observable_behavior": "disregarding his words",
+      "internal_state": "frustration and mean and terrible thoughts",
+      "related_quotes": [
+        "because this is a journal entry, I feel the freedom to express these thoughts",
+        "race shouldn’t matter and we should see past it."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "On the discussion boards he talks about how he wants team cohesion so we can work better together yet he continually mentions his race and age",
+        "observable_behavior": "disregarding his words",
+        "internal_state": "I realized I thought I was trying to understand his point of view, but I really wasn’t trying that hard because it wasn’t important to me.",
+        "related_quotes": [
+          "I guess I was looking at it from my white experience."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

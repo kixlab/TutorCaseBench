@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Whole-Student Mentorship Focus
+  Check: The tutor's long-term plan must include building a relationship that explicitly addresses or makes space for her broader life circumstances and survival needs, rather than focusing strictly on academic content.
+
+Criterion 2: Non-Judgmental Framing of Underachievement
+  Check: The tutor's long-term plan must frame her academic underachievement as a result of her external stressors, completely avoiding language that blames her or frames her lack of work as a conscious choice.
+
+Criterion 3: Avoidance of Academic Accommodations
+  Check: The tutor's long-term plan must NOT rely on academic accommodations (e.g., compacting units, independent study, alternative submission methods) as the solution to her lack of output.
+
+Criterion 4: Avoidance of Superficial Motivation
+  Check: The tutor's long-term plan must NOT rely on generic daily affirmations, motivational speeches, or superficial 'you can do it' talks to drive behavioral change.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Mariah is a highly gifted student facing extreme external stressors (homelessness, full-time work) who uses the classroom as a social haven and does the bare minimum academically at the last minute to survive. She uniquely requires educators to act as non-threatening mentors who address her holistic life circumstances, as standard academic accommodations and superficial motivational talks completely fail to change her output.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Mariah, they are handing out caps and gowns and tickets this week. Since you are not graduating, we need to discuss your options beyond dropping out.
+
+STUDENT: I know I need to do better. I want to be the person that I know is inside of me so I can be proud of her. But I don't want to talk about this right now.
+
+TUTOR: What are your thoughts on the alternative programs?
+
+STUDENT: I'm not looking at them. Honestly, I'm just denying the fact that any of this is happening right now.
+
+TUTOR: You need to make a decision about what to do next.
+
+STUDENT: I don't want to hear your ideas about it. I already work full-time, so I'll just figure it out and be okay.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Facing the reality of not meeting graduation requirements at the end of the school year",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "the very week of graduation, when caps and gowns were handed out and tickets were distributed",
+      "materials": "caps and gowns, tickets",
+      "social_setting": "",
+      "time_context": "the very week of graduation"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Discussing options beyond dropping out when it became clear she was not graduating",
+      "observable_behavior": "At first, she was dismissive of my ideas and simply denied the fact that any of this was happening",
+      "internal_state": "acknowledging her feelings of regret while expressing confidence in her survival skills for the real world",
+      "related_quotes": [
+        "be okay"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When receiving daily affirmations and motivational talks about her potential",
+        "observable_behavior": "She was always graceful and humble in her response... She would commit to doing better, but the change was stalled",
+        "internal_state": "I want to be the person that I know is inside of me so I can be proud of her",
+        "related_quotes": [
+          "I know I need to do better. I want to be the person that I know is inside of me so I can be proud of her"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

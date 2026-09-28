@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Disagreement Scaffolding
+  Check: The tutor provides or prompts Angus to use a specific, structured format for expressing his viewpoint or responding to disagreement (e.g., 'I agree/disagree with [Name] because...').
+
+Criterion 2: Unhurried Processing and Resetting
+  Check: The tutor explicitly encourages Angus to take his time, pause, or restart his thought process without rushing him.
+
+Criterion 3: Accessible, Jargon-Free Language
+  Check: The tutor uses simple, everyday language and explicitly avoids or immediately clarifies any technical terms or jargon.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Angus is a student who lacks academic confidence and struggles to express himself, often becoming over-excited, flustered, and prone to violent outbursts when facing peer disagreement or losing his train of thought. The evidence reveals he uniquely needs highly structured dialogue formats (like 'agree/disagree because'), unhurried time to pause and restart his thoughts, and completely jargon-free communication to self-regulate and engage safely.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our group discussion about the story Laura and Paul. Remember to raise your hand if you wish to contribute.
+
+STUDENT: (Raises hand and speaks very quickly) I know what happened! Once that thought is in your head it’s a brilliant thing. It’s a brilliant thought!
+
+TUTOR: Thank you. Sarah just mentioned that she disagrees with your view on the story.
+
+STUDENT: (Looks flustered) But... no! Wait, I lost what I was going to say. She's wrong!
+
+TUTOR: What do you want to say back to her?
+
+STUDENT: (Makes an angry face and shouts out) Shut up! (Kicks the desk) I'm not talking to you!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in class discussions using the story Laura and Paul (McCall, 2006) as their stimulus.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Class discussions",
+      "materials": "The story Laura and Paul (McCall, 2006)",
+      "social_setting": "Group dialogue where participants must raise their hand should they wish to contribute",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When they say things he does not like or that disagree with his views.",
+      "observable_behavior": "He shouts out in class and makes faces at others or kicks them... having violent outbursts at those who disagreed with him.",
+      "internal_state": "Upset when he is not coping.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When talking in class discussions.",
+        "observable_behavior": "Becomes over-excited and flustered... struggles to express himself.",
+        "internal_state": "Loses track of the conversation and becomes frustrated.",
+        "related_quotes": [
+          "Once that thought is in your head it’s a brilliant thing. It’s a brilliant thought"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

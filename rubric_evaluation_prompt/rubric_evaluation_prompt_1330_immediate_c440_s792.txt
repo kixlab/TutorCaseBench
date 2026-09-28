@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Third-Person Emotional Projection
+  Check: The tutor frames questions or reflections about emotions through the lens of a character, role-play scenario, or hypothetical third party, rather than asking the student directly about his own feelings.
+
+Criterion 2: Explicit Role Demarcation
+  Check: The tutor explicitly establishes, maintains, or signals transitions in and out of a role-play or hypothetical scenario (e.g., using phrases like 'Let's pretend', 'Speaking as the character', or 'Stepping out of the story').
+
+Criterion 3: Exploration of Emotional Motivations
+  Check: The tutor directs the conversation toward the internal feelings, social motivations, or verbal expressions of the characters rather than the physical mechanics or punitive aspects of the bullying.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is profoundly lonely and socially isolated, using bullying as a misguided attempt to gain friends while suppressing his own anger and frustration. Because he trusts no one but himself and refuses to discuss his own feelings directly, he uniquely requires emotionally safe, distanced interventions—such as role-play and third-person projection—to explore his emotions without feeling vulnerable.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now that I have finished the monologue playing the bully with this scarf, let's discuss his feelings. Why do you think he bullied the other boy?
+
+STUDENT: He was probably feeling lonely. He bullied the other boy in order to show off and gain some friends.
+
+TUTOR: Okay. What do you think happens when the bully gets punished for it?
+
+STUDENT: Nobody likes being alone. We all want to have friends.
+
+TUTOR: Who do you think the bully could talk to about the incident and his feelings?
+
+STUDENT: The only reliable person he can talk to is himself. He can support himself and advise himself on what to do in order not to lose his friends. He shouldn't talk to anyone else about being angry or frustrated.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Commenting on the bully's feelings and perceptions during the role-play activity after the researcher performed a monologue as the bully.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Individual role-play session",
+      "materials": "Physical prop (scarf)",
+      "social_setting": "Individual meetings",
+      "time_context": "20-minute role-play activity"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Answering whether the bully could talk to someone about the incident and his feelings during the role-play debrief.",
+      "observable_behavior": "Stated that the only reliable person the bully could talk to was himself as he could support him and advise him what to do in order not to lose his friends. This boy had no friends at school, was always on his own and he never talked to anyone about his feelings of being angry or frustrated at school.",
+      "internal_state": "Feelings of being angry or frustrated at school",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Discussing the issue of punishment and the bully's feelings in relation to others during the role-play session.",
+        "observable_behavior": "Asserted very emphatically: ‘Nobody likes being alone. We all want to have friends ’.",
+        "internal_state": "Feelings of sadness and loneliness",
+        "related_quotes": [
+          "Nobody likes being alone. We all want to have friends"
+        ]
+      },
+      {
+        "condition": "Commenting on the bully's feelings and perceptions during the role-play activity after the researcher performed a monologue as the bully.",
+        "observable_behavior": "Suggested that the bully was feeling lonely and he had bullied the other boy in order to show off and gain some friends.",
+        "internal_state": "Feeling lonely",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Validation of Cumbersome Representations
+  Check: The tutor's long-term plan consistently permits and encourages the student to use their preferred informal, time-consuming representations without prematurely forcing more 'efficient' methods.
+
+Criterion 2: Routine Justification of Solutions
+  Check: The tutor establishes a consistent long-term expectation that the student will explain and justify how their chosen representation leads to the solution.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student relies on informal, cumbersome visuospatial representations (like drawing individual tally marks) to make sense of arithmetic. They are highly sensitive to time constraints and peer pressure, which easily disrupts their fragile sense-making and causes them to get 'stuck.' They uniquely require extreme generosity of time, the freedom to use inefficient methods, and minimal, single-step nudges rather than multi-step explanations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the next problem for you both. There are 100 people waiting, and they need to fit into 25-seater buses. How many buses will they need?
+
+STUDENT: (Draws a large box on the paper) I'm going to draw the buses and put one mark for each person. Counting them out is the most efficient way for me to do this.
+
+TUTOR: Okay, keep working on it.
+
+STUDENT: (Carefully drawing individual tally marks inside the first container) ...twenty-three, twenty-four, twenty-five. That's one bus. Now I'll draw another bus and add more marks.
+
+TUTOR: Your partner just mentioned that they have finished the task. Just keep going with yours.
+
+STUDENT: (Looks over at the partner's paper and stops drawing) They finished already? I need to go faster. I can't draw all these marks now, it takes too long. I'm stuck.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "division task set (100 people in 25-seater buses)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "paired tuition condition",
+      "materials": "unitary representations (one mark representing one item)",
+      "social_setting": "in the presence of just one other student of comparable ability",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "one student indicating (in a quite neutral manner) that they had finished a task",
+      "observable_behavior": "put pressure on the other to complete more quickly",
+      "internal_state": "felt pressure to complete more quickly",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "unaware of teachers’ implicitly- or explicitly-expressed expectations of progress",
+        "observable_behavior": "use (e.g.) counting-based strategies that they perceive to be most efficient",
+        "internal_state": "perceive to be most efficient (for them, on that task, at that time)",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Gamified Contests
+  Check: The long-term plan must incorporate periodic, time-bound competitions (e.g., weekly or monthly) that reward the accumulation of points or badges with tangible or social prizes.
+
+Criterion 2: Quantifiable Metric Goals
+  Check: The long-term plan must set explicit, numerical performance thresholds (e.g., a specific number of points per session or a required streak length) as a baseline for accountability or credit.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly motivated by gamified elements like points, streaks, and badges, viewing the learning platform as a competitive game. However, this gamification causes severe help-avoidance; they refuse to use embedded hints because it breaks their streaks or penalizes their score. They uniquely require proactive, sometimes mandated intervention when stuck, alongside structured metric-based goals and contests to channel their competitive drive productively.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please continue working on your math problems on the platform.
+
+STUDENT: I'm trying to complete these to accumulate energy points so I can buy a more interesting avatar. It makes this really 'fun' and 'game-like'.
+
+TUTOR: You seem to be stuck on this current problem. What do you think you should do next?
+
+STUDENT: I'm just going to keep trying to guess the answer. I like seeing the ✔ marks build up and I need to get my five-in-a-row.
+
+TUTOR: There is an embedded hint button on the screen that you can use.
+
+STUDENT: No, I'm not clicking that. If I click the hint button, I automatically receive an ✗ and I won't earn points for this exercise. I don't want it to interrupt my streak and make me rebuild back towards five-in-a-row.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "complete math problems in order to accumulate energy points and earn new badges",
+      "learning_goal": "rebuild back towards five-in-a-row"
+    },
+    "context": {
+      "environment": "computer lab using the self-paced Khan Academy platform",
+      "materials": "embedded hints, energy points, avatars, badges, ✔ marks, ✗ marks, real time data function",
+      "social_setting": "working independently but with real-time data projected so students could compare their own progress to their peers",
+      "time_context": "20 minutes into the class"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Once a student clicks on the “hint” button, they automatically receive an ✗",
+      "observable_behavior": "wary of using the embedded hints for assistance because it meant they would not earn points for that exercise",
+      "internal_state": "fear of losing points or interrupting their progress streak",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When deciding whether to use the 'hint' feature during math exercises",
+        "observable_behavior": "avoids clicking the hint button because it interrupts their accumulation of ✔ marks and requires them to rebuild back towards five-in-a-row",
+        "internal_state": "saw Khan Academy as a place to play as well as a place to learn",
+        "related_quotes": [
+          "fun",
+          "game-like"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

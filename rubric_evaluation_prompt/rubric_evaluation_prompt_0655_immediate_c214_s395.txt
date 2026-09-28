@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prompting Process Verbalization
+  Check: The tutor asks Chris to explain how he arrived at his answer or asks a clarifying question that prompts him to re-evaluate his calculation.
+
+Criterion 2: Encouraging Semiconcrete Modeling
+  Check: The tutor explicitly encourages or validates Chris's use of physical representations, drawing, or finger counting to show his work.
+
+Criterion 3: Peer Explanation and Comparison
+  Check: The tutor directs Chris to explain his method to a peer or prompts him to compare his strategy with a peer's strategy.
+
+Criterion 4: Bridging to Abstract Sentences
+  Check: The tutor explicitly instructs Chris to create a 'math sentence' or equation to represent the word problem.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Chris is a student who processes information slowly and relies heavily on semiconcrete math strategies, such as finger counting and drawing, making the transition to abstract algorithms difficult. He becomes easily confused when familiar word problem contexts change (e.g., from towers to flowers). However, he is highly capable of self-correcting calculation errors when prompted to verbalize his reasoning or explain his methods to peers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the next problem for our small group. If we have 2 towers of 7, how many cubes do we have?
+
+STUDENT: (Processes the task slowly) Cubes... 7.
+
+TUTOR: Try looking at it again. What is the total?
+
+STUDENT: 15.
+
+TUTOR: Can you explain how you got that answer?
+
+STUDENT: Um, I knew there were 7 in there so I counted like 8, 9, 10, 11, 12, 13, 14 —oh my gosh.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solve the problem: '2 towers of 7, how many cubes do we have.'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Small group instruction",
+      "materials": "",
+      "social_setting": "Small group",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked for the total cubes in 2 towers of 7",
+      "observable_behavior": "Initially answers '7', then when prompted answers '15', appears to count with eyes",
+      "internal_state": "",
+      "related_quotes": [
+        "Cubes —7. 7.",
+        "15.",
+        "Um, I knew there were 7 in there so I counted like 8, 9, 10, 11, 12, 13, 14 —oh my gosh."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When solving quotative and partitive division problems and complex word problems involving larger numbers",
+        "observable_behavior": "More teacher scaffolds were needed for Chris to reach successful solutions and reasoning",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

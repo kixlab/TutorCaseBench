@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Proactive Visual or Physical Prompting
+  Check: The tutor's response includes proactive visual or physical prompts (e.g., pointing, modeling, or visual cues) to guide the student, rather than waiting for her to ask for help.
+
+Criterion 2: Integration of Concrete Manipulatives
+  Check: The tutor explicitly prompts the student to use concrete physical aids, such as counters, to work through the problem before attempting an answer.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Student D is an 11-year-old who experiences high anxiety and task resistance during math, often guessing or giving up instead of asking for help. She uniquely requires proactive prompting, concrete manipulatives like counters, and visual schedules to bridge the gap between abstract digital math problems and her foundational understanding of math symbols.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for your 20-minute Nintendo DS session. Please look at the first math problem on the screen.
+
+STUDENT: (Looks at the screen and then turns to the classmate sitting next to her) I know that is a plus and a times sign, but I don't know what to do. Hey, what did you get for this one?
+
+TUTOR: Please focus on your own screen and try to work it out.
+
+STUDENT: (Quickly taps a random number on the DS screen) I'll just put this.
+
+TUTOR: That is not the right answer. Look at the symbols again and try one more time.
+
+STUDENT: (Puts the Nintendo DS down on the desk, crosses her arms, and stares blankly at the screen without saying anything or asking for help)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "x20 mental math game on the DS",
+      "learning_goal": "recognising maths symbols, matching maths symbols, verbalising correct answers, writing single and double digit numbers, using tools (calculator, manipulative, etc.) to solve maths problems, and solving single digit addition, subtraction and multiplication problems"
+    },
+    "context": {
+      "environment": "daily 20-minute Nintendo DS intervention session",
+      "materials": "Nintendo DS, visual schedule, concrete aids such as counters",
+      "social_setting": "working with the support of peers, teachers, or education assistants (EAs)",
+      "time_context": "20-minute session"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "when she found the task difficult",
+      "observable_behavior": "tended to guess the answers, would give up, and would not ask for this help",
+      "internal_state": "had difficulty knowing the function required of all the mathematical symbols",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "when processing mathematical symbols for addition and multiplication",
+        "observable_behavior": "confused the processes of addition and multiplication, and preferred the support of her peers, rather than that of the teachers",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

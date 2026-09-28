@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Physical Arrangement
+  Check: The tutor establishes or maintains a highly structured physical arrangement (e.g., circle seating) and explicitly avoids unstructured clustering (e.g., congregating on the carpet).
+
+Criterion 2: Autonomous De-escalation Space
+  Check: The tutor allows Bruce to temporarily remove himself from the session when frustrated, without forcing him to stay or immediately re-engage.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Bruce is a student who struggles with emotional regulation, particularly when faced with peer disagreement or unstructured environments. His core behavioral pattern involves becoming angry and removing himself from sessions when frustrated. The evidence reveals he uniquely requires consistent, tight physical and conversational structures to feel secure and regulate his emotions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our group discussion. Please come congregate on the carpet with the other children.
+
+STUDENT: (Opts to sit at his desk) I am staying at my desk.
+
+TUTOR: We need everyone together for the discussion. Please find a spot on the carpet.
+
+STUDENT: No, I dislike the disorder and clutter of sitting with the other children down there.
+
+TUTOR: You need to join us on the carpet right now so we can start.
+
+STUDENT: (Becomes angry) I said no! I am not sitting in that clutter!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Group discussion time",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting during group discussion time",
+      "materials": "Carpet, student desk, chairs arranged in a circle",
+      "social_setting": "Children congregated around the teacher on the carpet, or seated in a circle with the facilitator outside",
+      "time_context": "During normal class time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to join the other children seated on the carpet for group discussion",
+      "observable_behavior": "Opted to sit at his desk while the other children congregated around the teacher",
+      "internal_state": "Disliked the disorder and clutter of sitting with the other children on these occasions",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with changes, for example, in timetabling",
+        "observable_behavior": "Becomes angry and aggressive with other children and adults",
+        "internal_state": "Shows great difficulty in regulating his emotions generally",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

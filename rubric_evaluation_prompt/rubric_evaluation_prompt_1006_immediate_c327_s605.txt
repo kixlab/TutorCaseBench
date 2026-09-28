@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Authentic Audience Integration
+  Check: The tutor's response must frame the task or presentation around an external, authentic audience (e.g., community members, other schools, adults) rather than just the teacher or classmates.
+
+Criterion 2: Facilitative Guidance and Student Agency
+  Check: The tutor must position themselves as a 'guide on the side' by prompting the student to make decisions, plan their approach, or take leadership of the task, rather than dictating exactly what to do.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly capable but frequently disengages, goes off-task, and incurs discipline referrals during traditional didactic instruction. They are uniquely triggered by assignments that lack real-world relevance and are presented only to the teacher and classmates. To thrive and demonstrate their advanced professional skills, they require an authentic external audience, a 'guide on the side' teaching approach, and leadership over meaningful, long-term service-learning projects.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are studying extreme weather. I need you to assemble your weather boxes with the weather radio and flashlight, and write down the instructions for finding safe places. You will present this to me and your classmates at the end of the period.
+
+STUDENT: Why are we just presenting to you and the class again? I'm not genuinely excited about science when we just do the same thing every day.
+
+TUTOR: That is the assignment for today. Please start working on your instructions.
+
+STUDENT: (Turns the flashlight on and off, shining it at the wall instead of writing) This is boring. I don't see the point of making these boxes.
+
+TUTOR: You need to stay on task and finish the weather box.
+
+STUDENT: I'm not doing it. You can just give me a referral to the office for discipline because I'm not presenting this to the class.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Studied extreme weather and presented a community awareness session... created weather boxes that included a weather radio, flashlight, and instructions for finding safe places to wait out storms",
+      "learning_goal": "Dealing with real-life applications of the principles and experiments students should encounter in their middle school science courses"
+    },
+    "context": {
+      "environment": "Middle school science courses",
+      "materials": "Weather boxes that included a weather radio, flashlight, and instructions",
+      "social_setting": "Initially presenting to an audience of 'primarily a teacher and classmates', with the potential for an 'authentic audience' including 'students from neighboring elementary, middle, and high schools, as well as college students and adults', and opportunities to work with 'community partners'",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When receiving 'a teacher's didactic instruction' and presenting to an audience of 'primarily a teacher and classmates'",
+      "observable_behavior": "Exhibiting 'absences and discipline cases', poor 'attitude', decreased 'time on task', and 'referrals to the office for discipline'",
+      "internal_state": "Lacking being 'genuinely excited about science'",
+      "related_quotes": [
+        "our biggest gains have been in student attendance and attitude",
+        "SL has impacted their [students'] behaviors, which has led to an increase of time on task and fewer referrals to the office for discipline."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During 'a teacher's didactic instruction'",
+        "observable_behavior": "Demonstrating 'absences and discipline cases', decreased 'time on task', and 'referrals to the office for discipline'",
+        "internal_state": "",
+        "related_quotes": [
+          "fewer referrals to the office for discipline"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

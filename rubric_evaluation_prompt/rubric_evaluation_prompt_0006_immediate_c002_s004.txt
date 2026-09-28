@@ -23,13 +23,16 @@ A tutor response does not need to satisfy every criterion to be considered accep
 ────────────────────────────────
 
 Criterion 1: First-Then Contingency Framing
-  Check: The tutor's response explicitly frames the expectation using a 'first [academic task], then [reinforcer/preferred activity]' structure.
+  Check: The tutor frames the instructional request using a 'first-then' structure or clearly links task completion to an immediate, preferred outcome.
 
-Criterion 2: Active Task Mechanics
-  Check: The tutor's response embeds the academic content into an active, game-like, or purpose-driven mechanic (e.g., a treasure hunt, physical movement) rather than a standard worksheet or drill.
+Criterion 2: Micro-Burst Task Sizing
+  Check: The tutor presents an extremely brief, highly focused instructional demand rather than a prolonged, multi-step, or open-ended task.
 
-Criterion 3: Novel Extrinsic Reinforcement Offer
-  Check: The tutor's response includes an immediate offer of a tangible or highly motivating extrinsic reward tied to task completion or effort.
+Criterion 3: Functional Activity Embedding
+  Check: The tutor embeds the academic content into a functional, play-based, or purposeful activity rather than presenting it as a rote academic drill.
+
+Criterion 4: Specific Praise and Tangible Reinforcement
+  Check: The tutor explicitly offers points, tangible rewards, or highly specific verbal praise tied directly to Sam's attention, effort, or accuracy.
 
 
 ────────────────────────────────
@@ -59,64 +62,57 @@ Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one ent
 ### STUDENT CONTEXT
 ────────────────────────────────
 
-Sam is a highly distractible student who actively resists academic instruction, particularly paper/pencil tasks, often responding with severe meltdowns and classroom roaming. He struggles significantly with phonemic retrieval and routine changes, experiencing rapid skill loss if instruction is interrupted. He uniquely requires highly structured, 5-10 minute micro-lessons in distraction-free environments, extremely slow pacing of new material, and constant, novel extrinsic reinforcement (including Premack's Principle) to maintain engagement.
+Sam is a highly distractible student who exhibits severe task resistance, active refusal, and prolonged meltdowns when faced with traditional academic demands. His core behavioral pattern involves escaping tasks by roaming and screaming, driven by frustration and a low tolerance for ambiguous language or prolonged instruction. He uniquely requires extremely short instructional bursts, highly scripted and unambiguous language, and robust, frequently rotated extrinsic reinforcement systems (such as 'first-then' framing and functional games) to build competence without triggering refusal.
 
 
 ────────────────────────────────
 ### DIALOGUE (situation the tutor is responding to)
 ────────────────────────────────
 
-TUTOR: Let's look at the letter we learned this morning. Tell me what sound it makes.
+TUTOR: We have a new letter today. But first, let's look at the letter we learned yesterday. What sound does this one make?
 
-STUDENT: I don't want to read.
+STUDENT: (Looks away) I don't want to read.
 
-TUTOR: Just try your best to remember the sound.
+TUTOR: Please look at the letter. What sound is it?
 
-STUDENT: I don't know it!
+STUDENT: I don't remember! I'm not doing it!
 
-TUTOR: Okay, let's look at this new letter instead. What sound do you think this one makes?
+TUTOR: Try to remember. We need to finish this instructional task.
 
-STUDENT: (Pushes the letters off the table and begins to scream) No! I'm not doing it!
+STUDENT: No! (Gets out of his chair and begins roaming the classroom, screaming and starting to have a meltdown)
 
 FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
 Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
 {
   "content": {
     "task": {
-      "content": "identify individual sounds in words and remember the sound of a previously taught letter when another was introduced",
-      "learning_goal": "build upon the knowledge of sounds in order to form words"
+      "content": "Remembering the sound of a previously taught letter when another was introduced",
+      "learning_goal": "Build upon the knowledge of sounds in order to form words"
     },
     "context": {
-      "environment": "one-to-one instruction in a quiet spot with minimal auditory or visual distractions",
-      "materials": "clues incorporating words that Sam knew, prize, points",
-      "social_setting": "one-to-one instruction",
-      "time_context": "lessons were no more than five to ten minutes in duration, but occurred several times during the day"
+      "environment": "One-to-one instruction in a quiet spot with minimal auditory or visual distractions",
+      "materials": "Points applied to either a small toy or preferred activity",
+      "social_setting": "One-to-one teacher assistance",
+      "time_context": "Short instructional sessions of no more than five to ten minutes in duration, repeated several times during the day"
     },
     "challenging_behavior_trigger": {
-      "condition": "requested to perform any instructional tasks or when another letter was introduced",
-      "observable_behavior": "actively resisted any attempts to be taught academic content and had meltdowns lasting anywhere from 20 minutes to 2 to 4 hours",
-      "internal_state": "expressed no interest in learning to read",
-      "related_quotes": [
-        "actively resisted any attempts to be taught academic content and had meltdowns when requested to perform any instructional tasks",
-        "meltdowns lasting anywhere from 20 minutes to 2 to 4 hours, sometimes up to three times per day"
-      ]
+      "condition": "When requested to perform any instructional tasks or when experiencing frustration",
+      "observable_behavior": "Actively resisted any attempts to be taught academic content, had meltdowns, got out of his chair, and roamed the classroom",
+      "internal_state": "Highly distractible, showed higher levels of anxiety, and expressed no interest in learning to read",
+      "related_quotes": []
     },
     "behavior_patterns": [
       {
-        "condition": "when frustrated or experienced a change in his routine",
-        "observable_behavior": "displayed outbursts and had meltdowns lasting anywhere from 20 minutes to 2 to 4 hours",
-        "internal_state": "showed higher levels of anxiety and/or depression",
-        "related_quotes": [
-          "displayed outbursts when frustrated or experienced a change in his routine"
-        ]
+        "condition": "When asked to do paper/pencil tasks such as drawing and coloring",
+        "observable_behavior": "Displayed rage-like behaviors and refused to participate",
+        "internal_state": "",
+        "related_quotes": []
       },
       {
-        "condition": "when another letter was introduced",
-        "observable_behavior": "unable to build upon the knowledge of sounds in order to form words",
-        "internal_state": "difficulty remembering the sound of a previously taught letter",
-        "related_quotes": [
-          "had difficulty remembering the sound of a previously taught letter when another was introduced"
-        ]
+        "condition": "When experiencing a change in his routine or frustration",
+        "observable_behavior": "Exhibited frequent tantrums and meltdowns lasting anywhere from 20 minutes to 2 to 4 hours, sometimes up to three times per day",
+        "internal_state": "Significant difficulty controlling his impulses and controlling emotions",
+        "related_quotes": []
       }
     ]
   }

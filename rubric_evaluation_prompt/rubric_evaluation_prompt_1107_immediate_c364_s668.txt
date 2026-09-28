@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prompting Physical Embodiment
+  Check: The tutor explicitly directs or encourages the student to use their hands, fingers, or physical gestures to represent the numbers or concepts in the problem.
+
+Criterion 2: Spatial and Visual Anchoring
+  Check: The tutor directs the student's attention to specific physical locations on a visual aid (e.g., pointing to a chart, moving to the board) rather than relying on abstract verbal descriptions.
+
+Criterion 3: Bypassing Oral-Only Simplification
+  Check: The tutor does not attempt to resolve the student's confusion solely by simplifying vocabulary or repeating verbal instructions without introducing a physical or visual component.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Liliana is an English language learner who struggles to verbally articulate mathematical reasoning, often shrugging or remaining silent when pressed for explanations. Her core differentiating need is the use of physical embodiment—specifically using her hands and fingers as artifacts—and spatial proximity to visual aids to process and communicate math concepts. Standard oral-only interventions or simplified vocabulary are insufficient for her to develop conceptual understanding.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at the problem on the board. Can you identify the title of the problem?
+
+STUDENT: (Puts LH palm up, fingers extended, over the paper on the desk with the RH holding the pencil) mmmm, I don’t know.
+
+TUTOR: Okay. Let's look at the math problem using the data chart. What is the answer?
+
+STUDENT: (LH left up with five fingers extended and palm facing self) Because, I know what’s one plus // I know the answer. Number 3.
+
+TUTOR: How does it get to 15?
+
+STUDENT: (Shrugs shoulders up and down, with LH still up in the air with elbow resting on desk. Looks at hand, LH palm rotated out over desk and then opens palm towards her face) Because the number...
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Answering a variety of questions written on the whiteboard using a data chart titled 'Hands and Fingers' and explaining the mathematical reasoning for the answer",
+      "learning_goal": "Develop a conceptual understanding of how the answer was constructed and unpacking the explanation of the solution in English"
+    },
+    "context": {
+      "environment": "Working at their desks and moving from desk to chart on the whiteboard",
+      "materials": "Paper and pencil activity, whiteboard, data chart titled 'Hands and Fingers'",
+      "social_setting": "A one-on-one interaction between Mrs. Dee and Liliana while other students are working at their desks",
+      "time_context": "During Day 15"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When a student provides a correct numerical answer but cannot yet articulate the mathematical reasoning behind it and is asked 'How does it get to 15?'",
+      "observable_behavior": "Shrugs shoulders up and down, with LH still up in the air with elbow resting on desk. Looks at hand, LH palm rotated out over desk and then opens palm towards her face",
+      "internal_state": "Expressing uncertainty",
+      "related_quotes": [
+        "Because, I know what’s one plus // I know the answer. Number 3",
+        "mmmm, I don’t know."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to identify the title of the problem",
+        "observable_behavior": "Puts LH palm up, fingers extended, over the paper on the desk with the RH holding the pencil",
+        "internal_state": "Unable to recognize and state it",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

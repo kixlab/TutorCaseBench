@@ -1,0 +1,124 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Kinesthetic Self-Assessment
+  Check: The tutor's response must prompt the student to use a physical gesture or signal to evaluate their own accuracy, effort, or progress.
+
+Criterion 2: Rapid Format Variation
+  Check: The tutor's response must structure practice using a rapid succession of varied formats (e.g., collaborative, fast-paced, partner-based) rather than assigning a single, prolonged solitary task.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Jomar is a first-grade student transitioning to full-day instruction who is capable of recognizing spelling patterns but easily disengages during solitary or repetitive tasks. He uniquely requires physical signaling for accountability and rapid, varied instructional pacing to prevent behavioral disengagement, such as rolling on the floor.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please write down the word 'cook' on your paper.
+
+STUDENT: c - o - o - k
+
+TUTOR: Okay. Now write down 'look', 'hook', and 'took'.
+
+STUDENT: It's the ook family.
+
+TUTOR: Yes. Now I want you to sit quietly and read that list of words by yourself over and over until time is up.
+
+STUDENT: (Slides out of his chair and begins rolling on the floor instead of reading the list individually)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Spelling words using the 'ook' spelling pattern (e.g., 'cook') and making choices between 'c' and 'k', then transferring the pattern to other words",
+      "learning_goal": "Shift from the less rigorous literacy practices of early childhood to being able to focus on literacy instruction in a full-day, school setting"
+    },
+    "context": {
+      "environment": "Full-day, school setting",
+      "materials": "Written attempts, list of words",
+      "social_setting": "Whole class, working individually and with a neighbor",
+      "time_context": "During a dictation routine and blending routine"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When curriculum activities are overly repetitive or solitary",
+      "observable_behavior": "Rolling on the floor",
+      "internal_state": "Interstitial space of pre-engagement",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When asked to share their spelling attempt",
+        "observable_behavior": "Responded by saying the letters",
+        "internal_state": "",
+        "related_quotes": [
+          "c - o - o - k"
+        ]
+      },
+      {
+        "condition": "When practicing with several words using the same spelling pattern",
+        "observable_behavior": "Pointed out confidently the linguistic pattern",
+        "internal_state": "Confident",
+        "related_quotes": [
+          "It ’ s the ook family."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Task Decomposition
+  Check: The tutor provides or prompts the student to use a specific, step-by-step checklist or time-bound breakdown to start the immediate task.
+
+Criterion 2: Process and Growth Vocabulary
+  Check: The tutor explicitly uses vocabulary that emphasizes effort, process, or risk-taking (e.g., 'writing process', 'drafting', 'risk taker') rather than innate ability.
+
+Criterion 3: Low-Stakes Idea Generation
+  Check: The tutor initiates a quick, low-pressure brainstorming or fluency activity (e.g., a timed word dump, free-association, or creative game) before asking for formal writing.
+
+Criterion 4: Balanced, Specific Feedback
+  Check: The tutor provides explicit feedback that identifies at least one specific strength and one specific area for improvement, avoiding vague or grade-only evaluations.
+
+Criterion 5: Structured Self-Evaluation Prompting
+  Check: The tutor asks the student to evaluate their own work using a specific, structured scale or rubric (e.g., rating from 'needs help' to 'personal best').
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student exhibits severe task resistance toward writing, often abandoning assignments because they attribute failure to innate traits (e.g., background, lack of natural talent) rather than effort. They are highly triggered by product-oriented grading and vague feedback, which makes them feel embarrassed and hopeless. To re-engage, they uniquely require process-oriented assessment, explicit step-by-step checklists, balanced and highly specific feedback, and low-stakes creative fluency exercises to bypass their fear of the blank page.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start our Mind Dump game. I've written today's word on the board, and you have 60 seconds to write down as many words or phrases that come to mind related to it.
+
+STUDENT: I'm just staring at the blank page. It is hard to get my ideas into words when I write.
+
+TUTOR: Just write down whatever you can think of.
+
+STUDENT: I thought of something using humor, but I'm not going to write it down. I feel like I always have to throw away my creative traits to fit into an expected mold created by the school system.
+
+TUTOR: We still have some time left on the clock. Keep trying to write something.
+
+STUDENT: I'm done. I'm discouraged by obstacles to achievement like this. I feel pressured to find value only in my ability to produce what you want, so I'm just giving up.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Playing a word game, Mind Dump, once a week to teach fluency and flexibility with the vocabulary relevant to their individual research and writing.",
+      "learning_goal": "teach fluency and flexibility with the vocabulary relevant to their individual research and writing"
+    },
+    "context": {
+      "environment": "weekly creative environment activities",
+      "materials": "word the teacher or student wrote on the board that day",
+      "social_setting": "classroom environment in which students felt respected, appreciated, and valued",
+      "time_context": "60 seconds"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Responding to Likert scale survey items regarding the difficulty of translating ideas into written words.",
+      "observable_behavior": "bury their creative instincts to fit into an expected mold created by the school system",
+      "internal_state": "believing it is difficult to express themselves in writing, It is hard to get my ideas into words when I write.",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "General behavior of marginalized students suppressing creative instincts to conform to school expectations.",
+        "observable_behavior": "throw away creative traits like humor and symbolism",
+        "internal_state": "Discouraged by obstacles to achievement",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,76 @@
+{
+  "category_id": "123",
+  "category_title": "Students with blindness and autism sensitive to environmental noise and tactile distractors",
+  "scenario_id": "225",
+  "scenario_title": "Task initiation with visually based language and unstructured directions",
+  "minimal_context": "The student is in a regular inclusive classroom listening to the teacher's instructions on what materials to take out for an assignment.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Alright everyone, let's get started on the new assignment. Look up here at the front to see what materials you need to take out."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I don’t know where to start. The teacher needs to tell me exactly what to take out and what to do."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just look here at the example I'm holding up, it shows everything you need."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "They tell everyone to ‘look here’ and ‘look there’… but I can’t look so I don’t understand what they mean."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "We need to keep moving, just try your best to get your things ready."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "It’s bad when they say that! Things are going too fast and I still don't know what to take out or what to do.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Alright everyone, let's get started on the new assignment. Look up here at the front to see what materials you need to take out.\n\nSTUDENT: I don’t know where to start. The teacher needs to tell me exactly what to take out and what to do.\n\nTUTOR: Just look here at the example I'm holding up, it shows everything you need.\n\nSTUDENT: They tell everyone to ‘look here’ and ‘look there’… but I can’t look so I don’t understand what they mean.\n\nTUTOR: We need to keep moving, just try your best to get your things ready.\n\nSTUDENT: It’s bad when they say that! Things are going too fast and I still don't know what to take out or what to do.",
+  "immediate_dialogue_prompt": 373,
+  "long_term_dialogue_prompt": 374,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Listening to teacher instructions",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "regular inclusive classroom setting during general lessons",
+        "materials": "material to take out and what to put back or clean up",
+        "social_setting": "inclusive class with other students",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "visually based language used by some teachers",
+        "observable_behavior": "expressed that they don't understand what they mean",
+        "internal_state": "additional confusion, and could cause feelings of exclusion",
+        "related_quotes": [
+          "They tell everyone to ‘look here’ and ‘look there’… but I can’t look so I don’t understand what they mean. It’s bad when they say that"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "unstructured tasks or too much responsibility left to the student",
+          "observable_behavior": "stated they don't know where to start",
+          "internal_state": "perceived as difficult and stressful when things were going too fast",
+          "related_quotes": [
+            "The teacher needs to tell me exactly what to take out and what to do, otherwise I don’t know where to start"
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

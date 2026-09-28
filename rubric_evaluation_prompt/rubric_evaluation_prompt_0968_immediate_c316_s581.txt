@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Immediate Social and Sensory De-escalation
+  Check: The tutor immediately reduces social or environmental pressure (e.g., excusing them from group participation, moving them to a quiet space, or shifting to a private 1-on-1 focus) when the student shows signs of fatigue or slowness.
+
+Criterion 2: Instant, Calibrated Scaffolding
+  Check: The tutor provides immediate, direct assistance or modifies the task difficulty on the spot, rather than telling the student to 'keep trying' or 'try to remember'.
+
+Criterion 3: Avoidance of Nap Directives
+  Check: The tutor does NOT suggest that the student take a nap or go to sleep as a solution to their fatigue attack.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student experiences severe daytime sleepiness, fatigue attacks, and cognitive slowness, which manifest as slurred speech, loss of concentration, and complete withdrawal ('absolute restraining order') during severe episodes. They uniquely require immediate reduction of social and sensory load during fatigue attacks, morning-heavy scheduling for demanding tasks, and highly predictable, low-effort instruction to preserve their limited energy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please begin working on your history exam now that the whole class is seated.
+
+STUDENT: I don't... I forgot how to answer these. I knew this before, but the skills are just lost.
+
+TUTOR: Read the questions again and see what you can remember.
+
+STUDENT: I can't concentrate with everyone in here... I'm having a fatigue attack.
+
+TUTOR: Just try to stay awake and finish the test.
+
+STUDENT: (Speech is slurred and unclear) Can't... think... (puts head down on the desk, unable to continue functioning)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "exams and theoretical subjects",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "working in a large group",
+      "materials": "exams",
+      "social_setting": "large group",
+      "time_context": "morning"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "working in a large group",
+      "observable_behavior": "Problems in concentration and working were the most evident",
+      "internal_state": "daytime sleepiness and fatigue attacks",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "at the beginning of the illness",
+        "observable_behavior": "skills that had been learned previously were lost",
+        "internal_state": "The illness has weakened the children's overall ability to function and learning processes considerably.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

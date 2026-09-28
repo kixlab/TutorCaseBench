@@ -1,0 +1,121 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Oral Input and Discussion
+  Check: The tutor reads the text aloud, provides oral explanations, or initiates an oral discussion, and explicitly avoids requiring the student to read the text independently.
+
+Criterion 2: Note-Taking Relief
+  Check: The tutor offers to act as a scribe, provides pre-written notes, or shares presentation materials instead of requiring the student to take their own notes.
+
+Criterion 3: Balanced Collaborative Agency
+  Check: The tutor prompts the student to actively elaborate, organize, or explain their understanding orally while the tutor handles the mechanical tasks of reading or writing.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is a highly strategic and self-regulated learner who possesses a strong sense of agency but struggles with severe word-level decoding difficulties. They become stressed and slowed down by independent reading and rapid note-taking demands. They uniquely require oral discussions, read-aloud support, provided notes, and alternative media to bypass their decoding barriers and leverage their strong comprehension skills.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please read this 891-word text about socialization, norms, and sanctions by yourself and write down notes on the most important information before the deadline.
+
+STUDENT: I am trying to read it, but I am getting slowed down by having to cope with the difficult words.
+
+TUTOR: Just keep reading and do your best to take notes.
+
+STUDENT: I want to make notes on the most important information, but working toward this deadline is making me stressed.
+
+TUTOR: Try to finish reading the text by yourself.
+
+STUDENT: I feel that I don’t learn very well from merely reading a text by myself. I think it works just fine to talk about the topics, to discuss them, but doing this alone is too slow.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Studying an 891-word expository social studies text about socialization, norms, and sanctions",
+      "learning_goal": "Processing the material and making notes on the most important information"
+    },
+    "context": {
+      "environment": "Classroom instruction",
+      "materials": "Expository social studies text, blackboard, PowerPoint slides, transparencies",
+      "social_setting": "Group or the class as a whole",
+      "time_context": "Working toward deadlines"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher presents information during lessons that requires rapid copying, or when reading text independently",
+      "observable_behavior": "Slowed down during work, expressing that it takes too long to write down what is presented",
+      "internal_state": "Feeling stressed when working toward deadlines; feeling they do not learn well from merely reading by themselves",
+      "related_quotes": [
+        "I feel that I don’t learn very well from merely reading a text by myself."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When working with text and having to cope with difficult words",
+        "observable_behavior": "Slowed reading pace, actively seeking help from teachers, remaining attentive but struggling to take notes quickly",
+        "internal_state": "Appreciates when teachers understand their word-level reading difficulties",
+        "related_quotes": [
+          "I think it works just fine to talk about the topics, to discuss them."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

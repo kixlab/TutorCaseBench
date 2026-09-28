@@ -1,0 +1,74 @@
+{
+  "category_id": "315",
+  "category_title": "High school students with learning disabilities and ADHD who struggle to break down multi-step algebraic tasks",
+  "scenario_id": "579",
+  "scenario_title": "Conceptual error when multiplying binomials abstractly",
+  "minimal_context": "Marcia is multiplying the binomials (x + 3) and (x + 5) using only abstract notation during a one-on-one instructional session.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Let's try multiplying (x + 3) and (x + 5) using only the abstract symbolism on your paper."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "It’s so much more hard because it’s not broken up then. Like what I do is I see the blocks and I read it and I write it then I move it."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just try to do it with the numbers this time."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "But when it’s all numbers then I forgot where to break it up and what’s what."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Write down what you think the answer is."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Okay, I'll just multiply the x's and the numbers. It's x2 + 15. Is that right? I can't tell if it's right without the blocks.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Let's try multiplying (x + 3) and (x + 5) using only the abstract symbolism on your paper.\n\nSTUDENT: It’s so much more hard because it’s not broken up then. Like what I do is I see the blocks and I read it and I write it then I move it.\n\nTUTOR: Just try to do it with the numbers this time.\n\nSTUDENT: But when it’s all numbers then I forgot where to break it up and what’s what.\n\nTUTOR: Write down what you think the answer is.\n\nSTUDENT: Okay, I'll just multiply the x's and the numbers. It's x2 + 15. Is that right? I can't tell if it's right without the blocks.",
+  "immediate_dialogue_prompt": 964,
+  "long_term_dialogue_prompt": 965,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Multiplying (x + 3) (x + 5) using only abstract symbolism",
+        "learning_goal": "Accurately multiplying linear expressions using abstract notation"
+      },
+      "context": {
+        "environment": "Instructional session",
+        "materials": "Abstract notation materials, Algebra Lab Gear (ALG) blocks available for reference",
+        "social_setting": "One-on-one with teacher-researcher",
+        "time_context": "When monitoring performance"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When multiplying (x + 3) (x + 5) using only abstract symbolism",
+        "observable_behavior": "First responded x2 + 15, making a conceptual error by omitting the middle term",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When working with abstract numbers without visual supports",
+          "observable_behavior": "Forgets where to break the problem up and what the numbers represent",
+          "internal_state": "Experiences difficulty blending the steps together",
+          "related_quotes": [
+            "But when it’s all numbers then I forgot where to break it up and what’s what."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Emotional Distress"
+}

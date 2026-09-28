@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 5: Tangible Reward Integration
+  Check: The tutor's long-term plan includes a system for awarding tangible, trackable rewards (e.g., stamps, points, or tokens) for hard work.
+
+Criterion 6: Task-Based Goal Tracking
+  Check: The tutor establishes a structured tracking system (like a report card or lesson-by-lesson goals) that explicitly measures task completion and academic performance rather than behavior.
+
+Criterion 7: Positive Parental Feedback Loop
+  Check: The tutor incorporates a mechanism for regularly sharing positive feedback or reports with the student's parents or guardians.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This Year 7 student is highly sensitive to public behavioral criticism, which causes them to withdraw into a 'stay quiet' response and damages the teacher-pupil relationship. Conversely, they are highly motivated by objective academic criticism (like low marks) and tangible rewards. They uniquely require behavioral corrections to be private and expectations to be framed around task-based goals rather than punitive sanctions.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Class, please focus on answering the questions correctly on your worksheet. I am giving a verbal warning to anyone not attending to the lesson.
+
+STUDENT: (Stops talking and sits quietly, but does not work hard on the questions.)
+
+TUTOR: You haven't written anything. If you don't complete this, you will be disallowed from going on the school trip.
+
+STUDENT: (Does even less work, pushing the paper away.)
+
+TUTOR: I am telling you off in front of the class right now. You need to pick up your pen and work.
+
+STUDENT: (Stays completely quiet and withdraws, showing their response to the teacher is at stake due to the public admonishment.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Performance in task-based work and answering questions correctly",
+      "learning_goal": "Complying with classroom rules such as sitting quietly, attending to the lesson"
+    },
+    "context": {
+      "environment": "Whole class",
+      "materials": "Pupil's planner, ink stamper, reports home, school trip",
+      "social_setting": "In front of the class, contact with parents",
+      "time_context": "Each lesson, break"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Being told off in front of the class",
+      "observable_behavior": "Stay quiet response",
+      "internal_state": "Pupils' response to teachers is at stake",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Being disallowed from going on the school trip",
+        "observable_behavior": "Do less work and attracts the third lowest response for behave well",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "Being made to miss break",
+        "observable_behavior": "Prompts unproductive responses",
+        "internal_state": "Considerable damage to the teacher-pupil relationship",
+        "related_quotes": []
+      },
+      {
+        "condition": "Whole class punishment",
+        "observable_behavior": "Stay quiet and behave well",
+        "internal_state": "Out of a sense of peer affiliation and a wish not to be the cause of further whole class condemnation",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

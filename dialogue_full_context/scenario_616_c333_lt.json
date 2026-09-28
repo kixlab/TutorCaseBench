@@ -1,0 +1,72 @@
+{
+  "category_id": "333",
+  "category_title": "Students exhibiting physical resistance to classroom routines",
+  "scenario_id": "616",
+  "scenario_title": "Morning routine during the Pledge of Allegiance",
+  "minimal_context": "Stephen is in the classroom during the morning routine and is expected to stand for the Pledge of Allegiance.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time for the morning routine. Please stand up for the Pledge of Allegiance."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Remains seated in his chair and does not stand for the Pledge of Allegiance.)"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You need to stand up now. (Walks up to him and raises him from the chair)"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Starts moving, trying to get away from her.)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "(Holds him strongly) If you continue with this behavior, you won't have computer."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Continues moving and physically resisting, trying to get away from her hold.)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time for the morning routine. Please stand up for the Pledge of Allegiance.\n\nSTUDENT: (Remains seated in his chair and does not stand for the Pledge of Allegiance.)\n\nTUTOR: You need to stand up now. (Walks up to him and raises him from the chair)\n\nSTUDENT: (Starts moving, trying to get away from her.)\n\nTUTOR: (Holds him strongly) If you continue with this behavior, you won't have computer.\n\nSTUDENT: (Continues moving and physically resisting, trying to get away from her hold.)",
+  "immediate_dialogue_prompt": null,
+  "long_term_dialogue_prompt": 1025,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Morning routine during the Pledge of Allegiance.",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Classroom during morning routine",
+        "materials": "Chair",
+        "social_setting": "Teacher interacting directly with the student",
+        "time_context": "Morning routine"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When the teacher walked up to him, raised him from the chair, and held him standing for the whole time",
+        "observable_behavior": "He was moving, trying to get away from her",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "During the Pledge of Allegiance",
+          "observable_behavior": "Stephen didn ’t stand for the Pledge of Allegiance.",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

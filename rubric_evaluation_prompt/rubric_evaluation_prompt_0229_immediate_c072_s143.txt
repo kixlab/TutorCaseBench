@@ -1,0 +1,123 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Responsiveness to Non-Verbal Resistance
+  Check: The tutor immediately stops, pauses, or alters their current action when Tony displays physical resistance, grimacing, or turning away, rather than continuing to physically prompt him.
+
+Criterion 2: Student-Led Engagement
+  Check: The tutor allows Tony to direct the interaction (e.g., by following his gaze, letting him hold an object of his choice, or waiting for his initiation) rather than forcing engagement with a specific, tutor-chosen item.
+
+Criterion 3: Simplified Communication
+  Check: The tutor uses minimal, simple verbal language, relying instead on clear environmental cues, gestures, or pacing to communicate their intent.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Tony is a non-symbolic communicator with quadriplegic cerebral palsy who expresses his preferences and distress through facial expressions, vocalizations, and physical resistance. He becomes highly distressed by intrusive physical prompting, unpredictable handling, and complex verbal instructions. Effective support for Tony requires abandoning forced compliance in favor of predictable routines, simplified communication, and mutually acceptable interactions where his autonomy is respected.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at this storybook together. Look at this page.
+
+STUDENT: (Turns away from the book and the staff member.)
+
+TUTOR: Okay, let's try something else. Look at this toy snake. (Dances the toy snake in front of him)
+
+STUDENT: (Turns away, his mouth opens wide, eyes close, looking alarmed.)
+
+TUTOR: How about the toy tiger instead? (Dances the toy tiger in front of him)
+
+STUDENT: (His hand comes up to ward off the tiger as he screams.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Play/sensory activity",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Play/sensory activity",
+      "materials": "toy tiger, toy snake, storybook",
+      "social_setting": "Mary is standing beside him",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Mary has a toy tiger dancing in front of Tony",
+      "observable_behavior": "his hand comes up to ward off the tiger as he screams",
+      "internal_state": "Anti Attuning",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Mary has a toy snake dancing in front of Tony",
+        "observable_behavior": "he turns away, his mouth opens wide, eyes close, he looks alarmed",
+        "internal_state": "Distressed",
+        "related_quotes": []
+      },
+      {
+        "condition": "Al is showing Tony a page of a storybook. Mary points to it and speaks about it",
+        "observable_behavior": "Tony turns away from the book and the two staff",
+        "internal_state": "Disinterested",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Speed-Enhancing Transcription Techniques
+  Check: The tutor's long-term plan includes explicit instruction or practice in using abbreviations, mnemonics, or shorthand to increase writing speed.
+
+Criterion 2: Self-Regulated Comprehension Monitoring
+  Check: The tutor's long-term plan incorporates teaching self-regulation behaviors, such as checking for gaps in notes or self-questioning for comprehension.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Ben is a conscientious student who equates high-volume note-taking with learning, leading him to struggle with keeping up during fast-paced lectures. He uniquely needs strategies that allow him to maintain his high output (like abbreviations) while providing structure (categorized notes, pre-quizzes) to guide his attention and manage cognitive load.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to watch this 15-minute video lecture on Electro-Plasma Rockets. Please use your strategic note-taking paper to take notes while it plays.
+
+STUDENT: Okay. I want to write down as many points as possible. Main points means facts, so I want to write more to learn off of.
+
+TUTOR: Alright, I am starting the video now. Just do your best to take notes.
+
+STUDENT: (Writing quickly) I'm using abbreviations to increase my speed so I can record more lecture points. When you write a lot of notes down, you feel good about yourself.
+
+TUTOR: The video is moving to the next section. How are your notes coming along?
+
+STUDENT: It's going too fast! I decided to work as fast as I can and write the words down that I wanted because the more work the better, but I'm struggling a great deal with writing fast enough. Forget about three to six main points, I want to put more than you’re supposed to do, but I can't keep up with the lecture!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Recording notes during a 15-minute video lecture on Electro-Plasma Rockets",
+      "learning_goal": "capturing a high volume of facts for future study"
+    },
+    "context": {
+      "environment": "7th grade science class",
+      "materials": "strategic note-taking (SN) paper",
+      "social_setting": "video and in-person lectures",
+      "time_context": "15-minute video lecture"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "fast pace of both the video lectures and the in-person lectures",
+      "observable_behavior": "struggled a great deal with writing fast enough and keeping up with the lecture as he took notes",
+      "internal_state": "viewed “main points” as information that he needed to know after the class ended... including more points in his notes meant having access to more important information",
+      "related_quotes": [
+        "I decided to work as fast as I can and write the words down that I wanted because, like I said, the more work the better. And you learn a lot more when you do more work so you can study off of it… Forget about three to six [main points], but put more than you’re supposed to do… So main points means facts. So I want to write more to learn off of."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When successfully constructing a set of notes that included many main points, vocabulary words, and definitions",
+        "observable_behavior": "put his energy toward filling out these sections of the strategic note-taking packet",
+        "internal_state": "improved Ben’s self-concept",
+        "related_quotes": [
+          "When you write a lot of notes down, you feel good about yourself."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

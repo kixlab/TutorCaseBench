@@ -1,0 +1,125 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Declarative Communication
+  Check: The tutor's response must rely on declarative statements, observations, or comments rather than direct questions to engage the student.
+
+Criterion 2: Suggestive Prompting
+  Check: The tutor must avoid direct commands or instructions, instead framing actions as gentle suggestions, open invitations, or modeled play.
+
+Criterion 3: Parallel Engagement
+  Check: The tutor must use the environment or objects as a shared focus (e.g., praising the student's interaction with the dog, modeling play) rather than demanding direct interpersonal attention.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Student B is an anxious learner who withdraws and relies on delayed echolalia (talking about cartoons) when faced with direct demands or novel situations. He uniquely requires a highly facilitative, non-directive approach where the tutor uses comments and suggestions rather than questions and commands, allowing him to gradually gain control over his environment.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are in the dinner hall today. Here is the dog, and I have a rope, some balls, and brushes. Come over here and interact with him.
+
+STUDENT: (Shows little attention to the teacher) I want to talk about my favourite cartoons.
+
+TUTOR: Look at the animal right here. What do you see?
+
+STUDENT: Bear.
+
+TUTOR: Try using the brush or the rope with him.
+
+STUDENT: (Appears anxious of the dog and withdraws from interactions, continuing to talk mainly about favourite cartoons)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "20-minute semi-standardized sessions... In the initial session with the dog, the teacher followed a structured plan, so as to introduce all objects to the student.",
+      "learning_goal": "encourage interactions (through verbal, gestural or physical prompts) between dog and child... and to use this interaction as a ‘way in’ for them to also engage with the child"
+    },
+    "context": {
+      "environment": "school dinner hall",
+      "materials": "dog, objects (rope, balls, brushes)",
+      "social_setting": "time alone with the teacher",
+      "time_context": "20-minute semi-standardized sessions"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Initially, when introduced to the dog",
+      "observable_behavior": "withdrew from interactions... referred to him as a 'bear'... speech in initial sessions also comprised mainly talk about favourite cartoons",
+      "internal_state": "anxious of the dog",
+      "related_quotes": [
+        "bear"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "in time alone with the teacher",
+        "observable_behavior": "generally little attention or engagement with the teacher, unless clearly directed by the teacher",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "in initial sessions",
+        "observable_behavior": "speech... comprised mainly talk about favourite cartoons",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

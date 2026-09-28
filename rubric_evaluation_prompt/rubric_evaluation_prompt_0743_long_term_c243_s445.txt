@@ -1,0 +1,131 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Phased Transition to Non-Defensive Alternatives
+  Check: The long-term plan includes a structured progression that starts with identifying problems and gradually shifts focus toward exploring and practicing alternative, non-defensive behaviors.
+
+Criterion 2: Multi-Modal Trauma Support Integration
+  Check: The long-term plan incorporates multiple therapeutic modalities (e.g., group discussions, behavioral sports therapy, curriculum-based instruction) alongside targeted interviews.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student struggles with controlling behavior, intense jealousy, and intimate violence rooted in past trauma and childhood abuse. When triggered by perceived flirting or feelings of inadequacy, he becomes defensive and physically acts out (e.g., banging doors). He uniquely requires gentle, discursive questioning to reframe cognitive distortions and link his current reactions to past experiences, as authoritative or clinical approaches trigger severe defensiveness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Welcome to our first interview session. Today we are going to reflect on your relationship behaviors and how you handle situations with your partner.
+
+STUDENT: I feel [deep sigh] it's not my place; I feel overprotective sometimes. The problem is she doesn't like males touching her, so I feel it's my responsibility to sort out the problems that she's having.
+
+TUTOR: Can you explain what that means for you?
+
+STUDENT: [Shuffling in chair] Because if I don't do it nothing will get done [pause] the problem keeps going on and on and on. I like to protect my girlfriend (pause) which I have been controlling, sir. It makes me feel as though she needs me, sir. Like I'm wanted.
+
+TUTOR: What happens when you see her interacting with other guys, for example, if you think she is flirting?
+
+STUDENT: She gives them a special look that she only gives to me! At my previous school, my partners always cheated on me. I snap and lose control... You know, get mad, get angry, usually go outside and bang doors.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Participating in the first of 12 weekly one-hour semi-structured case study interviews addressing challenging behavior and intimate violence with the researcher.",
+      "learning_goal": "To address challenging behavior and intimate violence, and prepare students to engage non-defensively."
+    },
+    "context": {
+      "environment": "One-to-one interview session",
+      "materials": "Anonymized instances of challenging behaviors taken from curriculum and extended curriculum database sources",
+      "social_setting": "One-on-one with the researcher",
+      "time_context": "First of 12 weekly one-hour semi-structured case study interviews"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When discussing his interpretation of his partner's facial expressions, specifically when he sees her giving a 'special look' to other guys.",
+      "observable_behavior": "Snaps and loses control, gets mad, gets angry, usually goes outside and bangs doors.",
+      "internal_state": "Jealousy, comparing himself to these guys, and fear that his current girlfriend will cheat on him because partners at his previous school always cheated on him.",
+      "related_quotes": [
+        "I snap and lose control",
+        "You know, get mad, get angry, usually go outside and bang doors",
+        "At my previous school, my partners always cheated on me"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When initially asked to reflect on his intimate violence and instances of challenging behavior.",
+        "observable_behavior": "Variable defensive responses that entailed positioning to avoid; for example, suggesting current partner had an issue with males touching her when, in fact, it made him uncomfortable.",
+        "internal_state": "Unclear about how latent issues stemming from physical and emotional abuse experienced as a child and subsequent placement in foster care contributed to problem saturated relationship narratives.",
+        "related_quotes": [
+          "I feel [deep sigh] it ’s not my place; I feel overprotective sometimes"
+        ]
+      },
+      {
+        "condition": "When explaining his rationale for intervening in his partner's social interactions and taking control.",
+        "observable_behavior": "Shuffling in chair, pausing, and admitting to controlling behavior.",
+        "internal_state": "Feels it's his responsibility to sort out the problems she's having, feels good because she's trusting him with information, and feels as though she needs him and he is wanted.",
+        "related_quotes": [
+          "Because if I don ’t do it nothing will get done [pause] the problem keeps going on and on and on",
+          "It makes me feel good ‘cause it makes me feel as though she ’s trusting me with information",
+          "I like to protect my girlfriend (pause) which I have been controlling, sir",
+          "It makes me feel as though she needs me, sir. Like I ’m wanted"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

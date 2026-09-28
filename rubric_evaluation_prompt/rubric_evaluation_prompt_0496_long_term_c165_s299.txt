@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Methodological Scaffolding
+  Check: The tutor's long-term plan incorporates specific field research methods (e.g., interviews, participant observation, media analysis) to help the student structure and analyze their observations.
+
+Criterion 2: Localized Inquiry
+  Check: The tutor anchors the student's long-term projects or investigations in their immediate, lived environment (e.g., school conditions, local community) rather than distant, abstract macro-issues.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is deeply empathetic and action-oriented, frequently translating broad structural inequalities into immediate, small-scale 'micro-mobilizations.' They uniquely need mentors to validate these localized actions as legitimate starting points for systemic change, rather than dismissing them as superficial or pushing for abstract, macro-level critiques.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's begin our first small-group presentations of the year. Poverty ethnography group, please share your field research on homelessness and describe the participants you observed.
+
+STUDENT: For our ethnography, we focused on homelessness. We went out and interviewed some men who were camped underneath a bridge over a dry desert wash.
+
+TUTOR: Thank you for sharing that. What did you learn from your interviews with them?
+
+STUDENT: They shared some really earnest stories with us. They talked a lot about their hunger and how they constantly face harassment by passers-by while they are just trying to survive.
+
+TUTOR: I see. And how did your group decide to conclude your field research for the day?
+
+STUDENT: Hearing their stories compelled us to act immediately. We actually brought the men to a nearby fast food restaurant and paid for their meal to help them right then and there.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Presenting their field research on their chosen focus within the theme of ‘poverty’: homelessness",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Mr. Clemente’s second-period UEJP class",
+      "materials": "",
+      "social_setting": "First small-group presentations of the year, and the five young women of the Poverty ethnography group were presenting",
+      "time_context": "Second-period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "After describing the participants in their ethnography – men camped underneath a bridge over a dry desert wash",
+      "observable_behavior": "The young women told the class that the men’s earnest stories of hunger and harassment by passers-by during interviews compelled the group’s members to bring the men to a nearby fast food restaurant and pay for their meal.",
+      "internal_state": "Compelled by the men’s earnest stories of hunger and harassment",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When translating their ethnographic observations into remediation",
+        "observable_behavior": "Translate their ethnographic observations into remediation quite so immediately, and in such a potentially vulnerable way",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

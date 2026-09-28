@@ -1,0 +1,72 @@
+{
+  "category_id": "127",
+  "category_title": "Adolescents and adults with moderate to severe intellectual disabilities who use manual signs and speech",
+  "scenario_id": "234",
+  "scenario_title": "Communication during mealtimes",
+  "minimal_context": "The student is eating lunch with a familiar staff member while practicing functional communication.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time for lunch. What would you like to eat today?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Holding a spoon, speaking verbally without using any key word signs) I want soup."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, here is your soup. Do you want anything to drink?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Looking at the cup, continuing to use only speech) Juice."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Here is your juice. How is your food?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Eating with both hands occupied, completely refraining from using spontaneous manual signs to answer) It is good.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time for lunch. What would you like to eat today?\n\nSTUDENT: (Holding a spoon, speaking verbally without using any key word signs) I want soup.\n\nTUTOR: Okay, here is your soup. Do you want anything to drink?\n\nSTUDENT: (Looking at the cup, continuing to use only speech) Juice.\n\nTUTOR: Here is your juice. How is your food?\n\nSTUDENT: (Eating with both hands occupied, completely refraining from using spontaneous manual signs to answer) It is good.",
+  "immediate_dialogue_prompt": 389,
+  "long_term_dialogue_prompt": null,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "mealtimes",
+        "learning_goal": "functional communication"
+      },
+      "context": {
+        "environment": "mealtimes",
+        "materials": "",
+        "social_setting": "observed with familiar direct support staff",
+        "time_context": "during daily activities"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When staff did not use signs",
+        "observable_behavior": "refrain from using signs during mealtimes",
+        "internal_state": "individuals may have more free use of their hands during communicative activities compared with work activities and mealtimes",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When staff communicated without signs",
+          "observable_behavior": "spontaneous sign rate of students/clients dropped 34.58% during mealtimes",
+          "internal_state": "did not perceive an acute need for manual signs during work activities and mealtimes",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

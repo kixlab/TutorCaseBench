@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Calibration for High Independent Success
+  Check: The tutor's long-term plan explicitly includes selecting, modifying, or scaffolding tasks to ensure the student can complete them with a high degree of accuracy.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+George is a 15-year-old student with autism who uses off-task behavior, peer threats, and task resistance to escape difficult assignments due to a history of academic failure. He uniquely requires high rates of teacher attention, frequent specific performance feedback, and tasks calibrated for high success to lessen the aversive nature of academic work.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is your math worksheet. Please complete these problems independently.
+
+STUDENT: (Leaves the pencil on the desk) Did you see the new movie trailer that dropped yesterday? The main character drives a red sports car.
+
+TUTOR: We need to focus on the math worksheet right now.
+
+STUDENT: Stop interrupting me! I'm talking about the movie. The car goes zero to sixty in three seconds.
+
+TUTOR: Please just start with problem number one.
+
+STUDENT: I'm not doing this stupid math! And tell him to stop looking at me or I'm going to smash his face!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Independent reading, math, or writing worksheets identified as 'hard' (unlikely to complete with 50% accuracy)",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Pull-out special education classroom at a middle school",
+      "materials": "Independent reading, math, or writing worksheets, timers worn by teachers",
+      "social_setting": "General classroom instruction and work time",
+      "time_context": "10-minute brief analog FA trials"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When presented with a hard task and received no teacher attention",
+      "observable_behavior": "Failure to start work when prompted, fixating on off-topic points during instruction, negative responses to correction from adults, and verbally threatening peers",
+      "internal_state": "A clear history of off-task and problem behavior in the presence of challenging tasks appears to have been established, most likely due to the repeated failure experienced across their schooling",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When prompted to start work",
+        "observable_behavior": "Failure to start work when prompted and fixating on off-topic points during instruction",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When receiving correction from adults",
+        "observable_behavior": "Negative responses to correction from adults and verbally threatening peers",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

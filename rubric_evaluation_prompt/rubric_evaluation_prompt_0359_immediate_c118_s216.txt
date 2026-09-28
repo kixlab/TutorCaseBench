@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Uninterrupted Perspective Sharing
+  Check: The tutor explicitly invites Kyle to share his side of the story and allows him space to explain his perspective without interrupting, dismissing, or rushing him.
+
+Criterion 2: Agency in Resolution
+  Check: The tutor offers Kyle at least one choice or explicitly includes his input when determining the next steps, resolution, or consequence.
+
+Criterion 3: Strict Professionalism
+  Check: The tutor maintains a serious, respectful tone throughout the interaction, completely avoiding sarcasm, jokes, or dismissive remarks.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kyle is a student who is highly sensitive to perceived disrespect, unfairness, and inconsistent rule enforcement from authority figures. When he feels targeted, mocked, or dismissed, he reacts with loud, passive defiance; however, he engages positively and accepts responsibility when treated with strict professionalism, given an uninterrupted voice, and offered choices.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Everyone, please take your seats and start your classwork. Kyle, what happened between you and Mrs. W? If you have problems today, I will write your name on the board.
+
+STUDENT: I just came into class and sat down. Why are you bringing that up?
+
+TUTOR: I'm just letting you know. You're like Mrs. W's son.
+
+STUDENT: That joke is weird. You're offending me.
+
+TUTOR: That is enough talking back. I am putting your name on the board right now.
+
+STUDENT: (Gets loud) You started making me mad! When I'm doing my work and someone is bothering me, I'm the one that then gets in trouble! (Erases his name from the board when the teacher turns to look at the rest of the class)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Doing classwork",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Board where names are written",
+      "social_setting": "Teacher and other students present",
+      "time_context": "When coming into class"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the teacher asked what happened with the dean, threatened to write his name on the board, and made a weird joke that he was like the dean's son",
+      "observable_behavior": "Talking back, getting loud, and removing his name from the board when the teacher was not looking",
+      "internal_state": "Felt offended and mad",
+      "related_quotes": [
+        "I came into class and the teacher asked me what happened between me and Mrs. W [dean]. He said if I have problems today he will write my name on the board. I sat down and then teacher started making me mad so I was talking back. He called Mrs. W; he offended me ….H es a i dIw a sl i k eM r s .W 's son, like a joke or something. The joke was weird."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When doing his work and someone is bothering him or says something to him",
+        "observable_behavior": "Gets loud, does not control his emotions, and makes inappropriate remarks to the other student",
+        "internal_state": "Feels he is the one that then gets in trouble",
+        "related_quotes": [
+          "When [I 'm] doing [his] work and someone is bothering [me, he 'll] say something to them but [I 'm] the one that then gets in trouble.",
+          "I did not refer to the teacher …it is not appropriate. I said it to another student after he said something to me."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

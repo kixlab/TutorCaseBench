@@ -1,0 +1,128 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Verbalization of Mechanics
+  Check: The tutor provides explicit, verbalized step-by-step instructions or stroke descriptions (e.g., 'a line down') rather than relying on non-verbal pointing or implicit cues.
+
+Criterion 2: Visual-Verbal Consistency
+  Check: The tutor's verbal instructions align with and support the provided visual models, avoiding corrections or shortcuts that contradict what the student physically sees.
+
+Criterion 3: Neutral Error Correction and Retry
+  Check: The tutor responds to errors or disengagement with neutral, direct redirection or by clearing the error for an immediate retry, strictly avoiding sighs, chiding, or abrupt task termination.
+
+Criterion 4: Personal Knowledge Scaffolding
+  Check: The tutor connects the target academic content (e.g., a specific letter) to the student's personal background knowledge, such as his own name.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Henri is a student at risk of educational failure who lacks the interiorized knowledge to understand implicit instructional cues. He tends to disengage by putting his thumb in his mouth or follow visual models too literally, requiring highly explicit, verbalized instructions, physical demonstrations, and step-by-step stroke descriptions to succeed.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Henri, please start your worksheet. Look at this word here. (Points to the lower-case 'y' in 'yumi') What is the name of the first letter?
+
+STUDENT: l
+
+TUTOR: Not quite. Just go ahead and copy the letters into the boxes on your paper.
+
+STUDENT: (Copies the lower-case letters into the boxes, being very particular about adding the serifs exactly as seen on the worksheet, reproducing the top and bottom horizontal lines for the upper-case 'I'.)
+
+TUTOR: Keep going and finish the rest of the worksheet by yourself.
+
+STUDENT: (Stops working, sits with his thumb in his mouth, and does not take responsibility for completing the assigned task.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Identifying the first letter of the word 'yumi' and transcribing letters",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during independent group work workshop",
+      "materials": "Worksheet, alphabet table",
+      "social_setting": "Returning to the classroom from a specialist support session and joining the group",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When Henri returned to the class from a specialist support session",
+      "observable_behavior": "Sat with his thumb in his mouth",
+      "internal_state": "Insufficient interiorised knowledge of the instructional discourse",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When directed to the worksheet by pointing to the lower-case 'y' in 'yumi' and asked: 'What is the name of the first letter?'",
+        "observable_behavior": "Answered: 'l'",
+        "internal_state": "",
+        "related_quotes": [
+          "l"
+        ]
+      },
+      {
+        "condition": "Working independently on the transcription worksheet",
+        "observable_behavior": "Sometimes transcribing the letters and at other times copying the lower-case letters into the boxes, all the time being very particular about adding the serifs as seen on the worksheet",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

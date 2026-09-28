@@ -1,0 +1,78 @@
+{
+  "category_id": "121",
+  "category_title": "Students performing ritualistic 'maths-like' behaviors",
+  "scenario_id": "220",
+  "scenario_title": "Written division task with nonsensical symbol arrangement",
+  "minimal_context": "The student is participating in a one-on-one interview and is asked to use paper and pen to calculate the number of 50-seater coaches needed for 192 passengers.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please use the paper and pen to solve this problem: There are 192 people travelling in 50-seater coaches. How many coaches are needed?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Writes on the paper, imitating the general appearance of standard notational forms) Here is my answer. 310 coaches."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "That answer is incorrect."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Accepts the failure and puts her pen down) Okay. What's the next instruction?"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Can you explain how you got 310?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Expresses surprise at the question, pointing to her paper which shows fragments of notation surrounded by nonsensical activity) I just arranged the numbers so it looked like math. I don't get it anyway. Are we moving on?",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please use the paper and pen to solve this problem: There are 192 people travelling in 50-seater coaches. How many coaches are needed?\n\nSTUDENT: (Writes on the paper, imitating the general appearance of standard notational forms) Here is my answer. 310 coaches.\n\nTUTOR: That answer is incorrect.\n\nSTUDENT: (Accepts the failure and puts her pen down) Okay. What's the next instruction?\n\nTUTOR: Can you explain how you got 310?\n\nSTUDENT: (Expresses surprise at the question, pointing to her paper which shows fragments of notation surrounded by nonsensical activity) I just arranged the numbers so it looked like math. I don't get it anyway. Are we moving on?",
+  "immediate_dialogue_prompt": 364,
+  "long_term_dialogue_prompt": 365,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Passengers task: with 192 people travelling in 50-seater coaches, finding the number of coaches needed",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Individual task-based interviews",
+        "materials": "Paper and pen for written calculations",
+        "social_setting": "One-on-one with interviewer",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "The student’s first attempt at the task",
+        "observable_behavior": "Produced the figure of 310 coaches, which she presented as her answer; arranged symbols in a manner that looked 'mathematical' with fragments of notation and algorithm surrounded by nonsensical activity",
+        "internal_state": "Secure in the knowledge that she had arranged some symbols in a manner that looked 'mathematical', with a vague hope that the end product might be pronounced correct, and no expectation of working through a challenge, learning anything new, or becoming more proficient",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "On being told their initial solutions to tasks were incorrect",
+          "observable_behavior": "Accepted the failure and simply waited for the next instruction",
+          "internal_state": "Little interest in either the true solution or why their strategy had not worked; did not independently respond by thinking critically about the strategy used or attempting an alternative",
+          "related_quotes": []
+        },
+        {
+          "condition": "When asked how they had obtained their incorrect answer",
+          "observable_behavior": "Expressed surprise",
+          "internal_state": "Unaware that genuine numerical reasoning is an intended goal; not expecting to understand what they are doing",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

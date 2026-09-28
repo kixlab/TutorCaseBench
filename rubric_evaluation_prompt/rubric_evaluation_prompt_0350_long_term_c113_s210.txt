@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: IEP-Integrated Progress Tracking
+  Check: The long-term plan includes a mechanism for translating the student's IEP objectives into a monitorable checklist to track incremental progress.
+
+Criterion 2: Differentiated Objective Setting
+  Check: The long-term plan outlines specific, differentiated learning objectives that match the student's current math capabilities rather than generic grade-level expectations.
+
+Criterion 3: Untimed Assessment Strategy
+  Check: The long-term assessment plan explicitly replaces or modifies timed standardized tests with untimed or alternative evaluation methods.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Student C is a Year 6 student with learning difficulties who struggles with basic math and is easily distracted by his environment and timers. He uniquely requires explicit verbal redirection, the use of concrete manipulatives, and frequent teacher approval to persist through difficult tasks without anxiety.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please start the x20 session on the Nintendo DS and work on the addition and multiplication problems.
+
+STUDENT: (Looks up to make eye contact) I'm going to use my fingers to count for this addition problem.
+
+TUTOR: Okay, continue.
+
+STUDENT: (Makes eye contact again) The multiplication and large numbers are really hard. I need to get the counters.
+
+TUTOR: Keep trying.
+
+STUDENT: (Drops the counters and turns away from the Nintendo DS to watch the rest of the classroom) What are those people doing over there?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solving addition, subtraction, multiplication and large numbers on the x20 session of the Nintendo DS",
+      "learning_goal": "recognising numbers, recognising maths symbols, matching maths symbols, verbalising correct answers, writing single and double digit numbers, using tools (calculator, manipulative, etc.) to solve maths problems, and solving single digit addition, subtraction and multiplication problems"
+    },
+    "context": {
+      "environment": "Classroom setting with People and objects around him",
+      "materials": "Nintendo DS, counters, rulers, number lines, and finger counting",
+      "social_setting": "Teacher present for approval and eye contact",
+      "time_context": "Middle to final stages of the intervention period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When People and objects around him occasionally distracted him",
+      "observable_behavior": "distracted occasionally",
+      "internal_state": "",
+      "related_quotes": [
+        "People and objects around him occasionally distracted him",
+        "He was still distracted occasionally"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When struggling with addition, subtraction, multiplication and large numbers",
+        "observable_behavior": "sought approval and would make eye contact with his teacher",
+        "internal_state": "",
+        "related_quotes": [
+          "He sought approval and would make eye contact with his teacher"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

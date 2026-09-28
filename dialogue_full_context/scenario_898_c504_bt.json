@@ -1,0 +1,72 @@
+{
+  "category_id": "504",
+  "category_title": "Collaborative students capable of peer discussion and simple mathematical reasoning",
+  "scenario_id": "898",
+  "scenario_title": "Addition with regrouping and standard written form",
+  "minimal_context": "The student is copying a horizontal math sentence from the blackboard into an exercise book to solve it using standard vertical form.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please copy the math sentence from the blackboard into your exercise book and change it to the standard vertical form."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Slowly and carefully copies the horizontal sentence from the blackboard, but makes a mistake when setting up the numbers in the vertical form) I wrote it."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Okay, now go ahead and find the total."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Computes the numerals in the ones column) Eight and four makes twelve. (Writes the '1' in the ones place and carries the '2' to the tens column) Finished."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Please check your answer to make sure it is correct."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Looks quietly at the exercise book for a moment, reviewing the carried '2' and the '1' in the ones place) I checked it. It is correct.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please copy the math sentence from the blackboard into your exercise book and change it to the standard vertical form.\n\nSTUDENT: (Slowly and carefully copies the horizontal sentence from the blackboard, but makes a mistake when setting up the numbers in the vertical form) I wrote it.\n\nTUTOR: Okay, now go ahead and find the total.\n\nSTUDENT: (Computes the numerals in the ones column) Eight and four makes twelve. (Writes the '1' in the ones place and carries the '2' to the tens column) Finished.\n\nTUTOR: Please check your answer to make sure it is correct.\n\nSTUDENT: (Looks quietly at the exercise book for a moment, reviewing the carried '2' and the '1' in the ones place) I checked it. It is correct.",
+  "immediate_dialogue_prompt": 1517,
+  "long_term_dialogue_prompt": 1518,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Converting horizontal math sentences to standard vertical form and performing addition with regrouping",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Mathematics remediation classroom",
+        "materials": "Exercise book, blackboard, piece of paper with two leaves drawn on it",
+        "social_setting": "Guided practice",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Computing the numerals in the ones and writing the sum wrongly in case of addition with regrouping",
+        "observable_behavior": "They “carried” the wrong numeral to the tens and put the other numeral at the ones. They failed to identify the error when they checked their answers",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Instructed to copy mathematical sentences from the blackboard and change that to standard written form",
+          "observable_behavior": "All of them made mistakes",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 4: Observation-Based Curriculum Integration
+  Check: The tutor's long-term plan includes a mechanism for observing Patrick's daily interests and explicitly building future curriculum or projects around those specific observations.
+
+Criterion 5: Multi-Modal Exploration Scaffolding
+  Check: The tutor's long-term strategy involves planning and offering multiple different mediums, materials, or methods for Patrick to explore any given topic.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Patrick is a 5-year-old who experiences intense emotional distress and physical outbursts (like kicking furniture) during school transitions and restrictive activities. His core behavioral pattern stems from a high need for autonomy and a strong attachment to his home environment/interests. The evidence reveals he uniquely requires adults to validate his specific frustrations, follow his spontaneous ideas for modifying activities, and use tangible artifacts to bridge the gap between home and school.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Here is the tree bark, paper, and crayons. Everyone take a spot at the table and start making your bark rubbings.
+
+STUDENT: Hurry up and move, you're in my way!
+
+TUTOR: Let's just try to share the space and use the crayons.
+
+STUDENT: (Kicks the table leg) I don't want to do this with them. They are too slow.
+
+TUTOR: Just put your paper over the bark and rub the crayon on it to see what happens.
+
+STUDENT: I'm bored, bored, bored! I don't want to do rubbings with these crayons!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Explore tree bark and create bark rubbings.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom setting during a project activity",
+      "materials": "Tree bark, crayons, paper, paint",
+      "social_setting": "Group activity with peers and teachers",
+      "time_context": "Morning activity period"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When provided crayons and paper as an invitation to create bark rubbings",
+      "observable_behavior": "Expressed verbal dissatisfaction with the activity",
+      "internal_state": "",
+      "related_quotes": [
+        "bored, bored, bored"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "During interactions with his peers in group activities",
+        "observable_behavior": "Vocalized his frustration and impatience with the members of the group",
+        "internal_state": "Frustration",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

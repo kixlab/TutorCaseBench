@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Acknowledge and Extend Repeated Responses
+  Check: The tutor acknowledges or validates the student's shared or repeated answer and follows up with an extension question prompting her for a new, independent example.
+
+Criterion 2: Relatable Contextualization of New Concepts
+  Check: The tutor introduces new words or concepts by combining a child-friendly definition, a relatable real-life example, and the context of how it was used in the source material.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Sidney is a highly social, attention-seeking student who frequently competes with peers, yells out spontaneously, and corrects classmates who drift off-topic. When she does not get to speak first, she often repeats her peers' answers rather than generating her own. She uniquely needs her shared responses validated followed by explicit extension questions that prompt her to draw on her rich home life experiences, helping her transition to independent expressive thought.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's do our turn and talk for 'Rocket Writes a Story'. Sidney, you can share your example for the word 'declared' first.
+
+STUDENT: My mom declared I would get homework done so that I could watch SpongeBob and play with the dog.
+
+TUTOR: Okay. Now let's talk about the next word. This time, your partner will share their example first.
+
+STUDENT: (Waits as her peer responds before her) I am willing to express my thoughts now.
+
+TUTOR: Go ahead, what is your example?
+
+STUDENT: (Repeats her peer's response) I'll just say the same thing my partner said.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in peer talk during the early stages of the study, specifically during the discussion of 'Rocket Writes a Story'",
+      "learning_goal": "Application of the words during peer discussions"
+    },
+    "context": {
+      "environment": "Interactive read-aloud (IRA) session",
+      "materials": "Text 'Rocket Writes a Story'",
+      "social_setting": "Turn and talk to partners at strategically planned locations",
+      "time_context": "Early stages of the study"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "During the times allocated for peer talk when peers respond before her",
+      "observable_behavior": "Repeated her peers’ responses",
+      "internal_state": "",
+      "related_quotes": [
+        "My mom declared I would get homework done so that I could watch SpongeBob and play with the dog."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When peers respond before her",
+        "observable_behavior": "Repeated her peers’ responses",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Emotional Normalization
+  Check: The tutor explicitly acknowledges and normalizes the student's feelings of frustration, fear, or inadequacy regarding the research process.
+
+Criterion 2: Layered Skill Practice
+  Check: The tutor breaks the target research task down into a smaller, low-stakes practice activity or micro-step rather than demanding immediate execution of the full task.
+
+Criterion 3: Collaborative Strategy Adjustment
+  Check: The tutor proposes or co-creates alternative strategies, such as new writing approaches or adjusting the distribution of labor, to help the student move forward.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are high-achieving honors students who experience severe anxiety, self-doubt, and feelings of inadequacy when transitioning from theoretical learning to the messy, non-linear reality of qualitative research. Because their academic identities are threatened by this disequilibrium, they uniquely require explicit emotional normalization, layered low-stakes practice, and private channels to process their struggles without feeling evaluated.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Now that the research deadlines are nearing, it is time to move from the assigned readings to actually coding and analyzing your field notes.
+
+STUDENT: I was really optimistic about my abilities to successfully engage in the research process early on. But now that we actually have to do it, I'm starting to question my abilities, despite the fact that I have previously taken another research methods class.
+
+TUTOR: Just try to process the information and find patterns in your data.
+
+STUDENT: It is much easier to regurgitate information than to process it, try to find patterns, make sense of it, and see it applied in the larger picture. I'm surprised at my feelings of frustration and inadequacy given the relative ease I've experienced in my other honors courses.
+
+TUTOR: Go ahead and start coding the data you collected.
+
+STUDENT: I'm absolutely petrified. Talking and reading about versus doing qualitative research is the same as if I read a book on 'the process of how to successfully catch an Amazon Marmoset', and then someone tossed me into the rain forest expecting me to find my way. My anticipation has melted into fear and doubt, and I can not help but think I am way out of my league.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Progressing through the research steps of the honors qualitative methods project, including data collection, analysis, and interpretation; specifically coding, analyzing data, interviewing, and observing.",
+      "learning_goal": "To process information, try to find patterns, make sense of it, and see it applied in the larger picture."
+    },
+    "context": {
+      "environment": "Upper-division qualitative research methods honors seminar, including a cafeteria area for observation.",
+      "materials": "Weekly journals, field notes, assigned readings.",
+      "social_setting": "Research team of peers, class discussions, and private dialogue with the instructor.",
+      "time_context": "As research deadlines neared and students actually began to engage in research."
+    },
+    "challenging_behavior_trigger": {
+      "condition": "As research deadlines neared and students actually began to engage in research, moving from reading about the process to doing it.",
+      "observable_behavior": "Questioned her abilities despite the fact that she had previously taken another research methods class; described her experience in the course in terms of a child's perception of an amusement park.",
+      "internal_state": "Significant anxiety about their abilities to accomplish research tasks; anticipation melted into fear and doubt; absolutely petrified.",
+      "related_quotes": [
+        "Talking and reading about versus doing qualitative research is the same as if I read a book on ‘the process of how to successfully catch an Amazon Marmoset ’, and then someone tossed me into the rain forest expecting me to find my way, identify which freakin ’species of monkey is a marmoset, and then catch the little creature.",
+        "My moment had finally come. As I stood in front of the gargantuan wooden structure all I could hear was the screams of passengers ...my anticipation melted into fear and doubt. I was absolutely petrified. As I was strapped into the roller coaster seat I could not help but think it was too big for me, I was way out of my league."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with the cognitive work of analysis.",
+        "observable_behavior": "Noted in her journal that it is much easier to regurgitate information than to process it.",
+        "internal_state": "Caused students significant anxiety; surprised at their feelings of frustration and inadequacy given the relatively ease they experienced in other courses.",
+        "related_quotes": [
+          "It is much easier to regurgitate information than to process it, try to find patterns, make sense of it, and see it applied in the larger picture "
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

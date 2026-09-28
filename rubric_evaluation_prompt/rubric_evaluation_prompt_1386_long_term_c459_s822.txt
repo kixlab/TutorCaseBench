@@ -1,0 +1,116 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Efficiency and Abbreviation Strategy Building
+  Check: The tutor's long-term plan includes teaching Noah specific strategies to write fewer words, such as creating personal abbreviations or omitting small words/articles.
+
+Criterion 2: Gradual Pacing and Guided Practice
+  Check: The tutor's long-term plan incorporates explicit modeling and guided practice with recorded or paced materials to help Noah gradually adjust to real-time lecture speeds.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Noah is a 7th-grade student with a learning disability who struggles with the temporal and cognitive demands of fast-paced lectures, often failing to capture any critical points on blank paper. He thrives when provided with explicit structural scaffolds, such as pre-lecture priming, structured note-taking templates, and strategies that allow him to write faster using abbreviations.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: We are going to watch this 15-minute video lecture on Electro-Plasma Rockets. Please take notes on the important points using your notebook paper.
+
+STUDENT: He's talking really fast. I'm trying to write these bigger sentences but it takes too much time.
+
+TUTOR: Just keep listening and write down what you hear.
+
+STUDENT: I don't know what the most important part of the topic is. I'm missing the clues about what I'm supposed to be paying attention to.
+
+TUTOR: Try your best to catch up and focus on the main ideas.
+
+STUDENT: I can't do it. I'm writing too slow to understand the information from the lecture, and I have zero critical points written down so far.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Recording notes during a 15-minute video lecture on Electro-Plasma Rockets",
+      "learning_goal": "Understand important points to store in long-term memory and apply fundamental scientific principles to postlecture quiz problems"
+    },
+    "context": {
+      "environment": "7th grade science class",
+      "materials": "15-minute video lecture, traditional note-taking materials, strategic note-taking (SN) paper with specific boxes, 10-point multiple-choice pre-lecture quiz",
+      "social_setting": "Classroom lecture",
+      "time_context": "15-minute video lecture"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Recording notes during a 15-minute video lecture on Electro-Plasma Rockets using traditional note-taking (pre-intervention)",
+      "observable_behavior": "Poor note-taking, scoring 0 out of a possible 15 CLP in the initial assessment",
+      "internal_state": "Struggling to manage temporal demands and identify significant points",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When trying to record notes during a lecture without strategy training",
+        "observable_behavior": "Writes 'bigger sentences', fails to capture critical lecture points",
+        "internal_state": "Struggles to understand information from the lectures and use memory effectively due to writing speed",
+        "related_quotes": [
+          "I could write more, and I could write it in less time, ‘cause I would write bigger sentences smaller."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

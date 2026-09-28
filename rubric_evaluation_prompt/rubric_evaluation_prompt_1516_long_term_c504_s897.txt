@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Culturally Relevant Contexts
+  Check: The tutor's long-term plan incorporates culturally familiar, real-world scenarios (e.g., fishing, hunting) to introduce and contextualize mathematical operations.
+
+Criterion 2: Gentle, Unpressured Pacing
+  Check: The tutor's approach explicitly emphasizes a slow pace, gentle communication, and the removal of time constraints to allow the student to think.
+
+Criterion 3: Integrated Conceptual-Procedural Progression
+  Check: The tutor's curriculum plan consistently pairs conceptual modeling with formal procedural instruction throughout the learning process, rather than waiting for conceptual mastery first.
+
+Criterion 4: Simple, Mathematically Proper Language
+  Check: The tutor plans to consistently use simple, mathematically accurate language to describe the student's physical manipulations and drawings.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These students are shy, sensitive, and prone to panic under pressure, working slowly but carefully. Their core challenge is bridging concrete counting with abstract place value and regrouping, often making persistent errors like treating the '1' in '16' as a single unit. They uniquely require a gentle, unpressured environment where simple manipulatives or drawings are simultaneously linked to formal mathematical sentences and culturally relevant contexts.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: I have five straws here to represent five fish. Can you find how many fish are left after two fish are cooked?
+
+STUDENT: (The students are very quiet at first. Then Diane speaks up softly.) Three fish are left. (She carefully counts five straws, removes two, and counts the remaining straws.)
+
+TUTOR: Okay. Now, let's look at the blackboard. Can you compare '+ =' with '- =' and tell me the difference between these two operations?
+
+STUDENT: (The students remain very quiet, as they are not used to talking in class.)
+
+TUTOR: What do you think the difference is?
+
+STUDENT: (The students look puzzled by the question and stay completely silent, unsure of how to explain the difference between the abstract symbols.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Solving a subtraction word problem about fish and comparing addition and subtraction operations",
+      "learning_goal": "Tell the difference between these two operations"
+    },
+    "context": {
+      "environment": "Quiet and relaxing environment",
+      "materials": "Straws as manipulatives, blackboard",
+      "social_setting": "Teacher-led instruction with students",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Asked to compare “ + = ” with “ – = ” and tell the difference between these two operations",
+      "observable_behavior": "Students looked puzzled",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Asked to find the fish left after two fish were cooked",
+        "observable_behavior": "All of them were very quiet",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

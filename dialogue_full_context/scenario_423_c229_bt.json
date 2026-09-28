@@ -1,0 +1,77 @@
+{
+  "category_id": "229",
+  "category_title": "Students who use physical and verbal resistance to negotiate classroom autonomy",
+  "scenario_id": "423",
+  "scenario_title": "Negotiating schedule to continue persuasive writing",
+  "minimal_context": "The student is participating in a class meeting after lunch to transition to a planned math activity, but wants to continue writing their opinions about race.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Welcome back from lunch and recess. It is time to transition to our planned math activity."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "We should keep writing. We can do math tomorrow. Talking about race is important. I might forget what I want to say."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "We need to follow the schedule we have set for today."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "What if we took turns? So, like, people that want to write can. People who want to do math, can."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "We all need to do the same activity right now. Please get ready for math."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Well, I'm going to be super mad if I can't finish my writing. I will just be here and not do anything! (Lies down on the floor)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Welcome back from lunch and recess. It is time to transition to our planned math activity.\n\nSTUDENT: We should keep writing. We can do math tomorrow. Talking about race is important. I might forget what I want to say.\n\nTUTOR: We need to follow the schedule we have set for today.\n\nSTUDENT: What if we took turns? So, like, people that want to write can. People who want to do math, can.\n\nTUTOR: We all need to do the same activity right now. Please get ready for math.\n\nSTUDENT: Well, I'm going to be super mad if I can't finish my writing. I will just be here and not do anything! (Lies down on the floor)",
+  "immediate_dialogue_prompt": 701,
+  "long_term_dialogue_prompt": 702,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Writing their opinions and reasons about race",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Class meeting",
+        "materials": "Writing materials and papers",
+        "social_setting": "Group discussion",
+        "time_context": "After lunch and recess, transitioning to planned math activity"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When facing the possibility of not finishing their writing",
+        "observable_behavior": "Lies down on the floor and threatens to not do anything",
+        "internal_state": "Super mad",
+        "related_quotes": [
+          "I will just be here and not do anything!"
+        ]
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When discussing how to fit more writing in the day instead of the planned math activity",
+          "observable_behavior": "Verbally protests the schedule, argues to keep writing, and proposes alternative schedules like taking turns",
+          "internal_state": "Felt talking about race was important and might forget what to say",
+          "related_quotes": [
+            "We should keep writing. We can do math tomorrow.",
+            "What if we took turns? So, like, people that want to write can. People who want to do math, can."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

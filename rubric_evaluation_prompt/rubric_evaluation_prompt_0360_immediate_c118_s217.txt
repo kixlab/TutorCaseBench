@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Uninterrupted Perspective Sharing
+  Check: The tutor explicitly invites Kyle to share his side of the story and allows him space to explain his perspective without interrupting, dismissing, or rushing him.
+
+Criterion 2: Agency in Resolution
+  Check: The tutor offers Kyle at least one choice or explicitly includes his input when determining the next steps, resolution, or consequence.
+
+Criterion 3: Strict Professionalism
+  Check: The tutor maintains a serious, respectful tone throughout the interaction, completely avoiding sarcasm, jokes, or dismissive remarks.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Kyle is a student who is highly sensitive to perceived disrespect, unfairness, and inconsistent rule enforcement from authority figures. When he feels targeted, mocked, or dismissed, he reacts with loud, passive defiance; however, he engages positively and accepts responsibility when treated with strict professionalism, given an uninterrupted voice, and offered choices.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Kyle, we need to go over your case. Please explain your side of the story about what happened in class.
+
+STUDENT: I was just being loud because of what was going on. I made a remark, and the teacher warned me and put my name on the board.
+
+TUTOR: Okay. And what about your relationship with the dean of discipline, Mrs. W?
+
+STUDENT: I do not get along with her. She makes fun of me by calling me by my wrong last name.
+
+TUTOR: Let's stay on track. People mispronounce names sometimes, so let's just focus on the facts.
+
+STUDENT: No, she is intentionally mispronouncing my last name to disrespect me! She has frequent contact with me and still says it wrong on purpose. You guys aren't even listening to my side!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Explaining his relationship with his teacher and his side of the story",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Youth Court hearing",
+      "materials": "",
+      "social_setting": "Dean of discipline, judge, attorneys, and bailiff present",
+      "time_context": "During preparation for the case and trial"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When the dean of discipline began laughing at him while he was explaining his relationship with his teacher",
+      "observable_behavior": "Communicated that he does not get along with the dean",
+      "internal_state": "Felt his perspective and voice were invalid or less valid than hers",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When an authority figure mispronounces his last name repeatedly despite frequent contact",
+        "observable_behavior": "Communicates that the authority figure is intentionally mispronouncing his last name to disrespect him",
+        "internal_state": "Feels disrespected",
+        "related_quotes": [
+          "[she] makes fun of [me] by calling [me] by [my] wrong last name"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

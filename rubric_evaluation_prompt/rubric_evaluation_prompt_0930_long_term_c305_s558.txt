@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Future-Focused 'Fresh Start' Framing
+  Check: The long-term plan explicitly communicates a 'clean slate' approach, focusing entirely on future opportunities rather than past academic or behavioral records.
+
+Criterion 2: Collaborative Goal-Setting
+  Check: The long-term plan includes structured time to help the student set specific short- and long-term goals to build extrinsic motivation.
+
+Criterion 3: Prioritizing Atmosphere Over Immediate Instruction
+  Check: The long-term plan dedicates significant initial time to informal, low-pressure activities (like free discussions) to build a warm environment before enforcing rigorous academic pacing.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student has a history of school failure, deeply distrusts adults, and expects to fail, often resulting in severe task resistance. They require a highly relational, flexible approach that repairs their damaged self-image through informal interactions and a focus on the future. The evidence reveals they uniquely need tutors to abandon strict rule enforcement and traditional assessments in favor of humanizing connection and explicit 'fresh start' framing.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for our daily reading. Please pick a novel and start reading the first chapter.
+
+STUDENT: I don't want to read. I'm not good at it and I'm just going to fail anyway.
+
+TUTOR: Just try to read a few pages and see how it goes.
+
+STUDENT: No. Teachers always say that, but it's a trick. My old teachers always did this.
+
+TUTOR: We read novels every day here. What do you think you should do next?
+
+STUDENT: I'm not reading it. I know exactly what happens next—you're just going to make me write a book report about it when I'm done, and I'm not doing that.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Reading novels every day in school",
+      "learning_goal": "read literature"
+    },
+    "context": {
+      "environment": "At the beginning of the autumn term",
+      "materials": "books, novels",
+      "social_setting": "class discussions, which may run relatively free",
+      "time_context": "every day in school"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "students are expected to read novels every day in school",
+      "observable_behavior": "students tend to connect reading to the practice of having to write about it",
+      "internal_state": "negative association between reading and the requirement to produce written book reports",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When expected to read literature",
+        "observable_behavior": "connect reading to the practice of having to write about it",
+        "internal_state": "damaged in the past by teachers at school",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

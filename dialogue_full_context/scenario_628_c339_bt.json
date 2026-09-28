@@ -1,0 +1,82 @@
+{
+  "category_id": "339",
+  "category_title": "Low-achieving students who follow the order of numbers in the text without building a situation model",
+  "scenario_id": "628",
+  "scenario_title": "Translating a word problem into an algebraic expression using superficial modeling",
+  "minimal_context": "The student is working with a tutor and a peer to find an algebraic expression for the pump operation time in the 'Open air bath problem'.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Please solve the 'Open air bath problem' by finding an algebraic expression for the pump operation time given varying rainy days."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Writes 7 · (12 − x)) Ehm, I have 7 times 12 minus x?"
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Can you explain how you got that expression?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "I don’t know, I have it anyway. The text says 7 days and 12... (stops explaining after reciting the first sentence without referring to the meaning of x or the rainy days)"
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "What do you think about the rest of the expression?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "Let's just agree on 7 · x − 12.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Please solve the 'Open air bath problem' by finding an algebraic expression for the pump operation time given varying rainy days.\n\nSTUDENT: (Writes 7 · (12 − x)) Ehm, I have 7 times 12 minus x?\n\nTUTOR: Can you explain how you got that expression?\n\nSTUDENT: I don’t know, I have it anyway. The text says 7 days and 12... (stops explaining after reciting the first sentence without referring to the meaning of x or the rainy days)\n\nTUTOR: What do you think about the rest of the expression?\n\nSTUDENT: Let's just agree on 7 · x − 12.",
+  "immediate_dialogue_prompt": 1040,
+  "long_term_dialogue_prompt": 1041,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Solving the 'Open air bath problem' (Fig 1) which requires finding an algebraic expression for pump operation time given varying rainy days.",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "Design experiment session",
+        "materials": "Cards with numbers and variables on a table, Word Problem Cracker (WPC) scaffolding tool",
+        "social_setting": "Working with a tutor and a peer",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "Finalizing a solution for the 'Open air bath problem' after a long discussion with the tutor.",
+        "observable_behavior": "agree on Meral’s expression 7 · x − 12 without referring to the meaning of the quantitative operation and relations given in the text.",
+        "internal_state": "cannot overcome the obstacle of superficial modeling",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "Explaining an algebraic expression for the 'Open air bath problem'",
+          "observable_behavior": "ordered according to the order of numbers in the text... explanation stagnates after reciting the first sentence about 7 days from the text.",
+          "internal_state": "implicitly apply this compensation strategy without building a complete situation or problem model.",
+          "related_quotes": [
+            "Ehm, I have 7 times 12 minus x?"
+          ]
+        },
+        {
+          "condition": "Explaining the components of an algebraic expression",
+          "observable_behavior": "makes successfully sense of the meaning of 7 and 12, but does not refer to the meaning of x... nor to the question of the task that includes the rainy days.",
+          "internal_state": "built a partial situation model without proceeding to the problem model.",
+          "related_quotes": [
+            "I don’t know, I have it anyway."
+          ]
+        }
+      ]
+    }
+  },
+  "challenge_type": "Academic Struggle"
+}

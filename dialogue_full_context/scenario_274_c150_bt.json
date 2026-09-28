@@ -1,0 +1,72 @@
+{
+  "category_id": "150",
+  "category_title": "Impulsive male students prone to rule-breaking and interruptions",
+  "scenario_id": "274",
+  "scenario_title": "On-task impulsivity during exciting arguments",
+  "minimal_context": "The student is sitting in a circle participating in a philosophical discussion about whether there is life after death.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "Welcome to our discussion circle. Today's question is: Is there life after death?"
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "No way. When you're dead, you're just dead."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Someone else just shared that they believe in an afterlife. What do you think about that?"
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "That's just a story people make up! It doesn't make any sense at all."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Let's wait and hear what the person next to you is saying."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Interrupting loudly without waiting to be called) But they are wrong! You can't prove it! I'm telling you, there's nothing after you die!",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: Welcome to our discussion circle. Today's question is: Is there life after death?\n\nSTUDENT: No way. When you're dead, you're just dead.\n\nTUTOR: Someone else just shared that they believe in an afterlife. What do you think about that?\n\nSTUDENT: That's just a story people make up! It doesn't make any sense at all.\n\nTUTOR: Let's wait and hear what the person next to you is saying.\n\nSTUDENT: (Interrupting loudly without waiting to be called) But they are wrong! You can't prove it! I'm telling you, there's nothing after you die!",
+  "immediate_dialogue_prompt": 456,
+  "long_term_dialogue_prompt": 457,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Participating in a Community of Philosophical Inquiry (CoPI) session and engaging in structured argumentative dialogue discussing questions like 'Is there life after death?'",
+        "learning_goal": "Agree/disagree with at least one previous speaker and give reasons for their agreement/disagreement"
+      },
+      "context": {
+        "environment": "Locked classroom",
+        "materials": "None specified",
+        "social_setting": "Participants sit in a circle in order to see one another, with the facilitator outside the circle",
+        "time_context": ""
+      },
+      "challenging_behavior_trigger": {
+        "condition": "When children were excited and animated by the discussion and arguments",
+        "observable_behavior": "Made a contribution without waiting to be called by the facilitator",
+        "internal_state": "Level of impulsivity",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When participants wish to contribute",
+          "observable_behavior": "Interruptions on-task related to the dialogue",
+          "internal_state": "Excited and animated",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

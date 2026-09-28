@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Structured Multimodal Mapping
+  Check: The tutor's plan includes the use of graphic organizers or structured notes to help the student map visual or cinematic elements to textual descriptions.
+
+Criterion 2: Creative, Choice-Based Assessment
+  Check: The tutor incorporates alternative, creative ways for the student to demonstrate their understanding (e.g., multimedia projects, creative writing, choice-based tasks) instead of relying solely on traditional essays or tests.
+
+Criterion 3: Sustained Empathic Framing
+  Check: The tutor's long-term curriculum frames historical or literary events around personal, human experiences and empathy rather than abstract facts, dates, or numbers.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These students are shy and struggle to articulate ideas or visualize abstract historical events from print text alone, often resulting in vague or incorrect answers on traditional assessments. Their core behavioral pattern is compliance without engagement when faced with rote tasks, masking their actual capacity for deep comprehension. They uniquely require visual media to anchor abstract concepts and multimodal, choice-based creative assessments to confidently express their understanding and emotional empathy.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's review your homework quiz for the opening chapter of 'Night'. Can you describe why Moishe the Beadle was an important character?
+
+STUDENT: (Looks down at the desk, speaking very quietly) I don't know. I couldn't really write an answer down for that one.
+
+TUTOR: Take a look at the text again. What do you think happened with him?
+
+STUDENT: I read it, but my answers are probably wrong. Even with the descriptions, I was confused with certain things.
+
+TUTOR: What parts of the subsequent chapters were confusing to you?
+
+STUDENT: Like when Idek beat Elie. I still don’t understand why he did that. I wasn’t really sure what the gas chambers and the cattle cars looked like just from reading. It was hard to picture all of it.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Read subsequent chapters of the novel 'Night' independently and complete associated homework assignments and quizzes",
+      "learning_goal": "Teach students to recognize literary elements, the parts of a short story, and basic poetic elements"
+    },
+    "context": {
+      "environment": "Classroom setting",
+      "materials": "Novel 'Night', traditional worksheets, Cinego digital movie projector, graphic organizers",
+      "social_setting": "Round-robin reading and teacher-centered discussions",
+      "time_context": "Throughout the first half of the school year"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Despite the author’s vivid descriptions, they appeared confused",
+      "observable_behavior": "Homework answers and quizzes based on the novel contained answers that were incorrect and vague. For example, Alison could not describe why Moishe the Beadle was an important character in the opening chapter.",
+      "internal_state": "I wasn’t really sure what the gas chambers and the cattle cars looked like just from reading. It was hard to picture all of it",
+      "related_quotes": [
+        "I was confused with certain things like when Idek beat Elie. I still don’t understand why he did that. I wasn’t really sure what the gas chambers and the cattle cars looked like just from reading. It was hard to picture all of it and what it looked like but it was easier after watching the film."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Throughout the first half of the school year",
+        "observable_behavior": "Very shy, reluctant to participate and ask questions, and had difficulties articulating their ideas both orally and in writing.",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

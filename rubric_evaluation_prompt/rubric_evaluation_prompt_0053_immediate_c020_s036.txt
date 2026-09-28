@@ -1,0 +1,128 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Micro-Chunking Grammar
+  Check: The tutor breaks down the grammatical concept into small, specific components (e.g., focusing on just one rule, form, or function at a time) rather than explaining the whole topic at once.
+
+Criterion 2: Experiential Grounding
+  Check: The tutor provides or asks for a concrete, real-life scenario (e.g., shopping, daily routines) to illustrate the grammar point.
+
+Criterion 3: Targeted Needs Identification
+  Check: The tutor prompts the student to identify or narrow down the specific area, rule, or question they need help with, rather than agreeing to a broad, condensed review.
+
+Criterion 4: Visual Scaffolding for Novel Structures
+  Check: The tutor uses or suggests visual aids, such as timelines or instructional videos, when explaining complex tenses or novel structures.
+
+Criterion 5: L1 and Translation Integration
+  Check: The tutor explicitly supports the use of Arabic comparisons, translation tools (like Google Translate), or native-language bridging to clarify meaning.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly avoidant and intimidated in mainstream classes due to low self-efficacy, but eager and overwhelmed in remedial settings. They rely heavily on their native language (Arabic) and struggle with English structures that lack direct translations. They uniquely require a highly structured approach that uses micro-chunking, visual timelines, real-life examples, and explicit L1/translation bridging to build confidence and assimilate grammar.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Today we are going to look at the worksheet for count and non-count nouns, and learn the rules for 'some' and 'any'.
+
+STUDENT: Ok teacher I want to do units from one to four.
+
+TUTOR: Let's just start with the first rule on this page.
+
+STUDENT: Why this? Can you repeat?
+
+TUTOR: Just read the sentence on the worksheet again.
+
+STUDENT: (Speaks in Arabic) I didn't attend the classes for some reason, so I want to just catch up with my class. I want like a pill, a condensed, quick course to revise.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Learning grammar items such as the rule for 'some' and 'any', and count and non-count nouns",
+      "learning_goal": "To assimilate grammar items and understand their function, form and place in the grammatical unit of a sentence"
+    },
+    "context": {
+      "environment": "One to one basis remedial instruction session",
+      "materials": "Hard and soft copies of worksheets",
+      "social_setting": "One-on-one interaction with a tutor",
+      "time_context": "Session lasting only an hour"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When they didn't attend the classes for some reason, so they want to just catch up with their class",
+      "observable_behavior": "Requested a condensed, quick course to revise, stating 'ok teacher I want to do units from one to four.', and constantly spoke in Arabic",
+      "internal_state": "Expect to leave the remedial class with much more information and a better idea about the areas they didn't understand in class",
+      "related_quotes": [
+        "ok teacher I want to do units from one to four."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When the tutor explains something during the session",
+        "observable_behavior": "They ask a lot of questions, keep asking, and ask 'why this, can you repeat, then I repeat and they ask again'",
+        "internal_state": "",
+        "related_quotes": [
+          "why this",
+          "can you repeat"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

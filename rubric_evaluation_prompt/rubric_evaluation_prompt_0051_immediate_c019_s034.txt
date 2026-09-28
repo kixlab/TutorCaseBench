@@ -1,0 +1,130 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prompting Physical Spatial Blocking
+  Check: The tutor prompts the student to use their hands/arms to physically block out the 3D shape in the air, or vividly describes a physical, real-world spatial action to represent the volume of the 3D object.
+
+Criterion 2: Tactile Path Tracing for Internal Dimensions
+  Check: The tutor directs the student to physically point to, touch, or trace the path between specific, explicitly named corners/vertices of the object to identify the correct dimensions.
+
+Criterion 3: Dynamic Representation of Extensions
+  Check: The tutor describes or asks the student to perform a dynamic physical motion (e.g., sliding a finger outward, pulling an object out) to represent an extension beyond the main 3D shape.
+
+Criterion 4: Avoidance of Purely 2D/Verbal Explanations
+  Check: The tutor does NOT rely exclusively on referencing 2D diagram labels or mathematical formulas; the response must incorporate a physical, spatial, or gestural visualization strategy.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Lisa is an independent learner who successfully uses self-created visuals for 2D geometry but experiences cognitive disequilibrium with 3D spatial visualization. When given 2D diagrams of 3D problems, she guesses dimensions and forces 2D solutions, uniquely requiring dynamic, physical gestures (like blocking out space with arms or sliding fingers) to bridge the gap between the diagram and 3D reality.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's look at this next multistep word problem about fitting a long pole in the back of a loading truck. Here is the diagram of the rectangular prism with the labeled dimensions.
+
+STUDENT: Is it still Pythagorean Theorem? I’m not sure yet, because we don’t know the whole truck.
+
+TUTOR: How would you start setting it up on your scratch paper?
+
+STUDENT: Y eah, by drawing a picture of it like out of the truck. (She drew a triangle using dimensions given, but not the right dimensions.) It’s 5 and 4 as the legs?
+
+TUTOR: Take another look at the dimensions you chose for that triangle.
+
+STUDENT: Oh man. Y eah, is that supposed to be the way it is farthest in the truck? (Starts to guess again using a different combination of dimensions.) Is the next one going to be in here?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "A multistep, word problem about fitting a long pole in the back of a loading truck",
+      "learning_goal": "Three-dimensional use of the Pythagorean Theorem"
+    },
+    "context": {
+      "environment": "Teaching session",
+      "materials": "Scratch paper and a provided diagram that consisted only of a rectangular prism with some labeled dimensions",
+      "social_setting": "One-on-one tutoring session with Sophia",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When encountering a multistep, word problem that required three-dimensional use of the Pythagorean Theorem with only a 2D diagram",
+      "observable_behavior": "She drew a triangle using dimensions given, but not the right dimensions. Starts to guess again using a different combination of dimensions.",
+      "internal_state": "Struggling to visualize the internal diagonals of a 3D rectangular prism despite visual aids",
+      "related_quotes": [
+        "Is it still Pythagorean Theorem?",
+        "Y eah, by drawing a picture of it like out of the truck.",
+        "Y eah, is that supposed to be the way it is farthest in the truck?",
+        "Oh man.",
+        "It’s 5 and 4 as the legs?",
+        "Is the next one going to be in here?",
+        "I’m not sure yet, because we don’t know the whole truck."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When attempting to solve the 3D truck problem by drawing a 2D triangle",
+        "observable_behavior": "She drew a triangle using dimensions given, but not the right dimensions. Starts to guess again using a different combination of dimensions.",
+        "internal_state": "",
+        "related_quotes": [
+          "Y eah, by drawing a picture of it like out of the truck."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

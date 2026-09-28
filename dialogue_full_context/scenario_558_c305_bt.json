@@ -1,0 +1,72 @@
+{
+  "category_id": "305",
+  "category_title": "Students with a history of school failure and distrust of adults",
+  "scenario_id": "558",
+  "scenario_title": "Reading novels and the fear of book reports",
+  "minimal_context": "The student is asked to begin reading a novel during the daily reading time at the start of the autumn term.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "It is time for our daily reading. Please pick a novel and start reading the first chapter."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "I don't want to read. I'm not good at it and I'm just going to fail anyway."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "Just try to read a few pages and see how it goes."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "No. Teachers always say that, but it's a trick. My old teachers always did this."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "We read novels every day here. What do you think you should do next?"
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "I'm not reading it. I know exactly what happens next—you're just going to make me write a book report about it when I'm done, and I'm not doing that.",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: It is time for our daily reading. Please pick a novel and start reading the first chapter.\n\nSTUDENT: I don't want to read. I'm not good at it and I'm just going to fail anyway.\n\nTUTOR: Just try to read a few pages and see how it goes.\n\nSTUDENT: No. Teachers always say that, but it's a trick. My old teachers always did this.\n\nTUTOR: We read novels every day here. What do you think you should do next?\n\nSTUDENT: I'm not reading it. I know exactly what happens next—you're just going to make me write a book report about it when I'm done, and I'm not doing that.",
+  "immediate_dialogue_prompt": 929,
+  "long_term_dialogue_prompt": 930,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "Reading novels every day in school",
+        "learning_goal": "read literature"
+      },
+      "context": {
+        "environment": "At the beginning of the autumn term",
+        "materials": "books, novels",
+        "social_setting": "class discussions, which may run relatively free",
+        "time_context": "every day in school"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "students are expected to read novels every day in school",
+        "observable_behavior": "students tend to connect reading to the practice of having to write about it",
+        "internal_state": "negative association between reading and the requirement to produce written book reports",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "When expected to read literature",
+          "observable_behavior": "connect reading to the practice of having to write about it",
+          "internal_state": "damaged in the past by teachers at school",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Task Resistance"
+}

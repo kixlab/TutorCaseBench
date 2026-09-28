@@ -1,0 +1,117 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Age-Appropriate Material Sustention
+  Check: The tutor's long-term plan must explicitly commit to using age-appropriate, grade-level general education materials (e.g., the same articles her peers read) as the basis for her modified instruction.
+
+Criterion 2: Maximized Natural Peer Access
+  Check: The tutor's long-term plan must ensure the student's schedule aligns fully with her peers, specifically preventing her from arriving late or leaving early so she participates in all organizational and transitional activities.
+
+Criterion 3: Structured Collaborative Planning
+  Check: The tutor's long-term plan must include dedicated, collaborative planning sessions between general and special educators to design accommodations, explicitly avoiding reliance on ad-hoc communication like hallway chats or emails.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Molly is an 11-year-old student who relies on echolalia, inappropriate noises, and physical actions (like grabbing) to communicate and socialize. She exhibits avoidance behaviors when isolated from her peers or given unrelated 'busy work'. She uniquely requires foundational academic tasks to be embedded within age-appropriate, grade-level materials and consistent access to peer modeling to develop functional communication.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Molly, it is time for lunch. Go ahead and sit at the table with the other students and get your food out.
+
+STUDENT: (Laughs aloud and makes a loud bodily function noise while walking to the table) Time for lunch, time for lunch.
+
+TUTOR: Please just sit down and start eating your food.
+
+STUDENT: Please just sit down and start eating your food.
+
+TUTOR: Do you need something to eat?
+
+STUDENT: (Reaches across the table and grabs a classmate's lunch item without asking) Do you need something to eat?
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Communicating needs and interacting with others during lunch",
+      "learning_goal": "Use speech to communicate her needs with her general education classmates and adults"
+    },
+    "context": {
+      "environment": "Lunchroom or organizational activities",
+      "materials": "Lunch items",
+      "social_setting": "With general education classmates and adults",
+      "time_context": "During transitions or unstructured time"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When needing an item from someone else or attempting to communicate needs",
+      "observable_behavior": "Use echolalic speech and take items from people without asking (e.g., grabbing others' lunch items)",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When she did approach people",
+        "observable_behavior": "It often was in a socially inappropriate manner",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

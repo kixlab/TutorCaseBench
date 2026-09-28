@@ -1,0 +1,129 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Strict Task Volume Limitation
+  Check: The tutor's long-term plan structures learning into micro-chunks containing no more than 6 items or questions per round.
+
+Criterion 2: Persistent Visual Progress Indicators
+  Check: The tutor implements continuous visual signs or counters on the screen to show the student their current progress and exactly how many items remain.
+
+Criterion 3: Simplified Binary Feedback
+  Check: The tutor plans to use simple, non-verbal visual symbols (like 'O' and 'X') for correct/incorrect feedback instead of verbal or written explanations.
+
+Criterion 4: Contingent Reward System
+  Check: The tutor establishes a clear 'first/then' routine where access to fun virtual objects is explicitly contingent upon successfully completing the assigned learning mission.
+
+Criterion 5: Motor Accessibility Adaptation
+  Check: The tutor modifies the interface to be more forgiving, such as enlarging the trigger areas for interactive objects so they can be clicked from any angle.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Child A is an 8-year-old with mild ASD and language delays who struggles with sensory sensitivities, fine motor control in virtual spaces, and short attention spans. They uniquely require highly simplified visual feedback, strict limits on task volume (max 6 items), and the immediate removal of auditory and environmental distractions to maintain engagement.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Let's start the virtual zoo lesson. Please answer the 12 questions on the screen.
+
+STUDENT: (Answers a few questions, then looks away from the screen, distracted by the kids walking outside the classroom.) How many questions are left?
+
+TUTOR: Just keep going. Listen to the audio description for the next question.
+
+STUDENT: (Listens to the long aural feedback but becomes easily distracted by the extra information, losing attention to the learning task.)
+
+TUTOR: Please look back at the screen. We are on question number seven now.
+
+STUDENT: (Hears the peak sounds of the whale in the virtual zoo and reacts very sensitively to the sound, completely losing attention to the surroundings after having answered 6 questions.)
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Answering 10-12 question-based learning items in a virtual context",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Virtual zoo (lesson 4)",
+      "materials": "Background music/sound, aural and textual feedback",
+      "social_setting": "Learned by playing individually",
+      "time_context": "At the beginning"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Hearing the peak sounds of the whale in the zoo",
+      "observable_behavior": "Very sensitive to the peak sounds of the whale",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "After answering 6 questions",
+        "observable_behavior": "Lost their attention and were easily distracted by the surroundings, such as the kids walking outside the classroom",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "Receiving feedback (aural or textual) after answering questions",
+        "observable_behavior": "Easily distract children’s attention from learning",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

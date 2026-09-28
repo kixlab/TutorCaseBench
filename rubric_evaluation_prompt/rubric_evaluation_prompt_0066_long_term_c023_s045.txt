@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Cross-Curricular Broadcast Integration
+  Check: The long-term plan explicitly applies the radio/broadcast simulation to multiple core subject areas beyond just isolated literacy lessons.
+
+Criterion 2: Conversational and Situated Assessment
+  Check: The long-term plan replaces traditional standardized testing with performance-based, conversational, or role-play milestones to assess student progress.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This Grade 7 student reads at a pre-primer level and masks deep discouragement from repeated literacy failures with a 'nonchalant, failure-proofed' attitude. However, they are highly capable when traditional literacy demands are replaced with oral-first, authentic role-play. They uniquely require literacy to be scaffolded through simulated radio broadcasting (listening and speaking first) to bypass their trauma around standardized testing.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time for the Boys' Talk segment on ASTEP 101 FM. Please put on your headset and introduce the show to the radio audience, but remember you must speak formally in the target language.
+
+STUDENT: Man, why we have to talk like that? I can just do it how we normally talk.
+
+TUTOR: You need to practice using the formal target language for the listeners. Go ahead and start your introduction.
+
+STUDENT: Welcome to... um... Boys' Talk...
+
+TUTOR: Just think about what a host would say and keep trying to use formal English.
+
+STUDENT: (Pushes the microphone away) I'm not doing this anymore. It's boring and I don't care.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in role-play and attempting to use the target language appropriate for radio roles",
+      "learning_goal": "To build communicative experiences and manipulate concepts related to the world of radio"
+    },
+    "context": {
+      "environment": "A simulated radio station environment (ASTEP 101 FM) in the classroom",
+      "materials": "Old microphones, headsets, and recycled materials set up for a talk show or outside broadcast",
+      "social_setting": "Interacting with a studio audience, callers, and guests",
+      "time_context": "During gender-sensitive radio-talk shows such as Boys' Talk and Sports Watch"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When required to speak formally in the target language, as they are speakers of Jamaican Creole lacking secondary language skills",
+      "observable_behavior": "Initially described as 'not motivated to read and learn' and 'struggling'",
+      "internal_state": "discouraged",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Prior to the intervention of the university teachers",
+        "observable_behavior": "Under-achieve and misbehave",
+        "internal_state": "low self-esteem",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

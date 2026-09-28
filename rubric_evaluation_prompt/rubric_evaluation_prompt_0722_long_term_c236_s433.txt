@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Ongoing Individual Mentorship
+  Check: The tutor's long-term plan includes scheduling regular one-on-one check-ins to discuss the student's progress, behavior, and ways to make positive changes.
+
+Criterion 2: Built-in Academic Flexibility
+  Check: The tutor's long-term plan incorporates systemic flexibility for timelines, such as a standing policy for grace periods or renegotiable deadlines.
+
+Criterion 3: Proactive Family Communication
+  Check: The tutor's long-term plan includes proactively contacting the student's family (noting the use of a translator if necessary) to share both positive updates and concerns.
+
+Criterion 4: Equitable Conflict Investigation Protocol
+  Check: The tutor's long-term plan establishes a strategy for addressing peer conflicts that explicitly investigates and addresses verbal provocations (like racial slurs or microaggressions) rather than only penalizing the student's retaliation.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student frequently faces racial microaggressions and verbal abuse, leading to defensive retaliation that is often disproportionately punished by teachers who miss the initial provocation. They also exhibit task refusal to avoid public humiliation. The evidence reveals they uniquely need private, one-on-one academic support, empathetic flexibility with deadlines, and conflict resolution that addresses root-cause provocations rather than just reactive behaviors.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Student E, please come up to the chalkboard and write out your answer for the next problem.
+
+STUDENT: I'm not going up there.
+
+TUTOR: It is time for you to participate.
+
+STUDENT: I don't want to do it on the board.
+
+TUTOR: You need to show your work to the class.
+
+STUDENT: I said no! I'm not doing it on the board in front of everyone just so I can get embarrassed.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Refusing to perform academic tasks on the chalkboard in front of the class",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "chalkboard",
+      "social_setting": "in front of the class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "potential embarrassment",
+      "observable_behavior": "refused to do work on the board",
+      "internal_state": "fear of social humiliation",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "potential embarrassment",
+        "observable_behavior": "kept her from participating in class",
+        "internal_state": "to avoid humiliation",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

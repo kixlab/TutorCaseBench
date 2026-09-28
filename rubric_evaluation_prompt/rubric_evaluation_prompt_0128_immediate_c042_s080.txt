@@ -1,0 +1,120 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Prompting Physical Embodiment
+  Check: The tutor's response must prompt Simon to physically act out a concept, imagine a physical sensation, or use his body in the learning process.
+
+Criterion 2: Bypassing Abstract Debates
+  Check: The tutor must redirect the conversation toward the task or a physical interpretation without arguing against, correcting, or validating Simon's abstract factual claims.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Simon is an anxious student who masks his insecurities by arguing abstract, incorrect facts and using his ADHD diagnosis as a lawyer-like defense to avoid tasks. The evidence reveals he uniquely needs opportunities for physical embodiment to bypass his verbal defenses, as well as metaphorical distance (e.g., discussing a character's weakness) to safely process his own vulnerabilities.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Simon, please step into the circle, pretend to wield your weapon, and read the line from the text extract.
+
+STUDENT: Actually, the centrifugal force of swinging a weapon in a circle would disrupt the earth's gravitational pull. It's a scientific fact.
+
+TUTOR: Just try your best to act it out.
+
+STUDENT: I can't join in. The spatial dimensions of this circle are completely wrong for a tactical demonstration.
+
+TUTOR: Then just read the line from the text for us.
+
+STUDENT: I'm not doing it! I have to defend my position here. I can't join in because the historical parameters are flawed and it's making me anxious!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Pretend to 'hold' a weapon and cross the circle 'wielding' it before looking at text, then reading a specific line from a text extract: 'And the marrow came oozing out of his backbone as he lay'",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom circle",
+      "materials": "Text extract about warriors, imaginary weapons",
+      "social_setting": "Peers present in a circle, who usually ignore or laugh at him",
+      "time_context": "Before and during looking at text"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When expected to join in the activity",
+      "observable_behavior": "Holding back and arguing about why he couldn't join in",
+      "internal_state": "Often felt anxious",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When discussing topics in class",
+        "observable_behavior": "Would hold forth on something abstract, often getting his 'facts' wrong",
+        "internal_state": "",
+        "related_quotes": []
+      },
+      {
+        "condition": "When reading and encountering a complex word",
+        "observable_behavior": "Hesitating only on the word 'marrow'",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,114 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Scaffolded Language Production
+  Check: The tutor provides specific scaffolding, vocabulary options, or targeted feedback to help the student construct basic sentences, rather than demanding complex explanations or delivering a grammar lecture.
+
+Criterion 2: Facilitative Discourse Climate
+  Check: The tutor adopts a facilitative role by prompting the student to actively use their available language, avoiding taking total control of the dialogue or dictating exactly what the student must say.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+These are highly engaged, lower-level language learners who reliably participate but lack the linguistic resources for deep, rich discussions, often relying on basic 'display' language. They uniquely need a supportive climate that scaffolds their limited vocabulary during communicative practice, rather than forcing complex discussions or reverting to passive grammar lectures.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: For our face-to-face practice today, please discuss your plans for the weekend with your partner.
+
+STUDENT: My plan for the weekend is to listen to my favorite type of music.
+
+TUTOR: What else can you discuss about your plans?
+
+STUDENT: I will ask my partner. Do you share the same preferences? Yes, me too.
+
+TUTOR: Try to have a deeper conversation about why you like that music.
+
+STUDENT: I don't have the words to generate a rich discussion. I managed my online assignments and posted my few lines, but right now I can only use the language to display basic sentences like 'I like this music'.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "communicative practice",
+      "learning_goal": "facilitating language acquisition as opposed to conveying information"
+    },
+    "context": {
+      "environment": "classroom time",
+      "materials": "",
+      "social_setting": "F2F components of the blended course",
+      "time_context": "From the beginning of the semester"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "because they were lower-level language students with limited linguistic resources",
+      "observable_behavior": "use of the target language for display purposes rather than to generate rich discussions",
+      "internal_state": "",
+      "related_quotes": []
+    },
+    "behavior_patterns": [
+      {
+        "condition": "during the online components of the course",
+        "observable_behavior": "took more responsibility for managing and monitoring their own learning",
+        "internal_state": "did not expect or were not used to having the instructor be in total control",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

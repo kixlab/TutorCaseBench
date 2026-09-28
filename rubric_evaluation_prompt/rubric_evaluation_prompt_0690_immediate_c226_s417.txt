@@ -1,0 +1,126 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Content-Anchored Redirection
+  Check: The tutor redirects the student's off-task behavior by asking a specific, targeted question about the academic content rather than giving a generic behavioral command.
+
+Criterion 2: Reading Comprehension Bypass
+  Check: The tutor reads the text or question aloud, or explicitly breaks down the written information, to help the student bypass reading barriers.
+
+Criterion 3: Actionable Support upon Confusion
+  Check: The tutor provides direct instructional support or scaffolding immediately after the student expresses confusion, avoiding generic encouragement like 'keep trying.'
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student frequently disengages from independent work by socializing, playing games, or copying peers, which masks underlying difficulties with reading comprehension and academic vocabulary. They require direct, content-based redirection to re-engage and specific accommodations like read-alouds to bypass reading barriers. Generic check-ins without immediate, concrete support fail to help them.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please work with your small group to complete the science assignment on your iPads.
+
+STUDENT: (Turns away from the assignment to talk to a peer) I'm just trying to understand what was going on with that thing earlier.
+
+TUTOR: Let's do a quick check for understanding on the science material. Wiggle your fingers if you know what to do next.
+
+STUDENT: (Shows a thumbs-down and does not wiggle their fingers)
+
+TUTOR: Okay, just keep trying to figure it out with your group.
+
+STUDENT: (Opens a game on the iPad and looks over to copy off a friend's screen) If I can’t ‘Google’ the answer then I just don’t do it. I try to remember. I usually just wait for the answer.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Working in small groups to complete science assignments and participating in informal checks for understanding during whole-class instruction",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom during science instruction and independent/group work",
+      "materials": "iPads",
+      "social_setting": "Working in small groups and interacting with peers",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When it came to understanding the science material or encountering difficulty",
+      "observable_behavior": "Copied off of peers to complete assignments, played a game on the iPad, talked to other students during instruction, or just stared off during class",
+      "internal_state": "",
+      "related_quotes": [
+        "I try to remember. I usually just wait for the answer.",
+        "If I can’t ‘Google’ the answer then I just don’t do it."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When teachers gave direction for informal checks for understanding",
+        "observable_behavior": "Students showed thumbs-down or did not wiggle their finger",
+        "internal_state": "Indicated their lack of knowledge and communicated uncertainty",
+        "related_quotes": []
+      },
+      {
+        "condition": "When working in groups",
+        "observable_behavior": "Engaging in off-topic conversations and socializing with peers, which served as a distraction from their learning",
+        "internal_state": "",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

@@ -1,0 +1,118 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Explicit Evaluation Standards
+  Check: The long-term plan must include the use of clear, explicit rubrics or grading standards to guide the student's independent preparation.
+
+Criterion 2: Sustained Collaborative Exposure
+  Check: The long-term plan must incorporate sustained, high-stakes group work that requires regular peer interaction over an extended period.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is highly conscious of peer evaluation and feels a strong responsibility to act as a 'model student,' leading to withdrawal when faced with stubborn peers. They uniquely require instructor validation of their work before sharing it with groups, as well as active instructor mediation to ensure a non-judgmental environment. Over time, they benefit from clear rubrics and sustained group work to build assertiveness.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: It is time to work on the Marketing Management II group project. Please go ahead and share your ideas on the readings with your group members.
+
+STUDENT: Could you look at my work first? With my assignments, I still try to receive the instructor’s feedback; so when I share my work with others, I have the right answers.
+
+TUTOR: The goal of the seminar is to discuss the readings together. You should just share what you have with them now.
+
+STUDENT: I feel a sense of responsibility to act as a model student so that other members do not look down upon Korean students. I am very conscious of their evaluation of my performance.
+
+TUTOR: Just try to convince them to accept your ideas. What did they say when you started the discussion?
+
+STUDENT: With peers who are stubborn and defensive, I rarely say anything because I don’t want to bring negativity to the group. I just lost my self-confidence and withdrew from group participation before even attempting to convince others.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in group assignments and collaborative projects in a Marketing Management II course",
+      "learning_goal": "Autonomous, cooperative and interdependent learning"
+    },
+    "context": {
+      "environment": "Seminars where students participated in group discussions",
+      "materials": "Readings on theory, discussion of readings, assignments, and group projects with a rubric to follow",
+      "social_setting": "Working in a group with a diverse group of students from various cultural and ethnic backgrounds, with peer assessment on team work",
+      "time_context": "In the early stages of group work"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "With peers who are stubborn and defensive",
+      "observable_behavior": "Easily lost self-confidence and withdrew from group participation before even attempting to convince others, rarely say anything",
+      "internal_state": "Conscious of other peer members’ evaluation of their performance, don’t want to bring negativity to the group",
+      "related_quotes": [
+        "With peers who are stubborn and defensive, I rarely say anything because I don’t want to bring negativity to the group."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When preparing to share work with others",
+        "observable_behavior": "Try to receive the instructor’s feedback; so when I share my work with others, I have the right answers",
+        "internal_state": "Felt a sense of responsibility to act as model Korean students so that other members did not look down upon Korean students",
+        "related_quotes": [
+          "With my assignments, I still try to receive the instructor’s feedback; so when I share my work with others, I have the right answers. . . .I remind myself that for every assignment I have to do my best for myself and as a senior for the Korean juniors."
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

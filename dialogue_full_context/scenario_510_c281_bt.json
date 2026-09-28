@@ -1,0 +1,78 @@
+{
+  "category_id": "281",
+  "category_title": "Middle school students with diverse learning disorders and low reading engagement",
+  "scenario_id": "510",
+  "scenario_title": "Reading a story from the required curriculum",
+  "minimal_context": "The student is in a sixth-grade class reading a story from the required curriculum.",
+  "dialogue": [
+    {
+      "turn_id": 1,
+      "speaker": "tutor",
+      "message": "We are going to read the next story from the required curriculum. Please get your supplies out and begin reading."
+    },
+    {
+      "turn_id": 2,
+      "speaker": "student",
+      "message": "(Keeps eyes downcast curtained by hair) I don't have any supplies for the first day of school."
+    },
+    {
+      "turn_id": 3,
+      "speaker": "tutor",
+      "message": "You can borrow this pencil. Please look at the story."
+    },
+    {
+      "turn_id": 4,
+      "speaker": "student",
+      "message": "(Looks confused) It's boring. I'm worried that I won't be able to focus on reading a book."
+    },
+    {
+      "turn_id": 5,
+      "speaker": "tutor",
+      "message": "Just try to pay attention and keep reading."
+    },
+    {
+      "turn_id": 6,
+      "speaker": "student",
+      "message": "(Puts head on the desk, then leaves their seat for the fourth time in 10 minutes to sharpen the pencil they borrowed, 'accidentally' hitting someone on the way)",
+      "is_challenging_behavior": true
+    }
+  ],
+  "dialogue_combined": "TUTOR: We are going to read the next story from the required curriculum. Please get your supplies out and begin reading.\n\nSTUDENT: (Keeps eyes downcast curtained by hair) I don't have any supplies for the first day of school.\n\nTUTOR: You can borrow this pencil. Please look at the story.\n\nSTUDENT: (Looks confused) It's boring. I'm worried that I won't be able to focus on reading a book.\n\nTUTOR: Just try to pay attention and keep reading.\n\nSTUDENT: (Puts head on the desk, then leaves their seat for the fourth time in 10 minutes to sharpen the pencil they borrowed, 'accidentally' hitting someone on the way)",
+  "immediate_dialogue_prompt": 851,
+  "long_term_dialogue_prompt": 852,
+  "full_context": {
+    "content": {
+      "task": {
+        "content": "taking a story from the required curriculum",
+        "learning_goal": ""
+      },
+      "context": {
+        "environment": "sixth-grade class",
+        "materials": "story from the required curriculum, pencil they borrowed",
+        "social_setting": "class",
+        "time_context": "first few weeks of school"
+      },
+      "challenging_behavior_trigger": {
+        "condition": "first day of school and during regular classroom instruction",
+        "observable_behavior": "head on the desk, falling out of their seat, no supplies for the first day of school, ‘accidentally’ hitting someone as they leave their seat for the fourth time in 10 minutes to sharpen the pencil they borrowed",
+        "internal_state": "found it boring, worried that she would not be able to focus on reading a book",
+        "related_quotes": []
+      },
+      "behavior_patterns": [
+        {
+          "condition": "most of the time during instruction",
+          "observable_behavior": "looked confused most of the time, tendency to ‘float’ away",
+          "internal_state": "",
+          "related_quotes": []
+        },
+        {
+          "condition": "as the weeks progressed",
+          "observable_behavior": "frequent absences, forgotten homework, eyes downcast curtained by hair that was combed straight down",
+          "internal_state": "",
+          "related_quotes": []
+        }
+      ]
+    }
+  },
+  "challenge_type": "Attention/Engagement Failure"
+}

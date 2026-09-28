@@ -1,0 +1,127 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Personal Experience Integration
+  Check: The tutor prompts Julia to relate the writing topic directly to her own life, memories, or personal interests.
+
+Criterion 2: Concrete Metaphors and Scaffolds
+  Check: The tutor introduces a concrete metaphor (like 'writer's soup') or a specific organizational tool (like a graphic organizer) to help her structure her thoughts or add details.
+
+Criterion 3: Explicit, Actionable Guidance
+  Check: The tutor provides a specific, immediate, and actionable next step for her writing rather than simply telling her to try harder, do her best, or figure it out independently.
+
+Criterion 4: Collaborative Interaction
+  Check: The tutor frames the task as a collaborative effort, offering to brainstorm together or suggesting peer collaboration, rather than forcing strict independent work.
+
+Criterion 5: Effort-Reducing Revision Tactics
+  Check: The tutor suggests a specific, effort-reducing strategy for revision, such as 'cut and paste', so she does not feel she has to rewrite large sections of text.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+Julia is a highly social student with learning disabilities who experiences severe task paralysis during independent writing, often immediately requesting teacher help and complaining when stuck. The evidence reveals she uniquely needs writing to be connected to her personal life, supported by concrete metaphors (like 'writer's soup') or graphic organizers, and enhanced through collaborative or multimedia tools to bypass her literacy barriers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Julia, please open your draft on the computer. I want you to revise your work independently by adding some actions, feelings, and precise nouns to make the description better.
+
+STUDENT: (Raises hand immediately) I don't know what to do. I can't get started on this by myself.
+
+TUTOR: Just read what you have so far and try to add some details where you can.
+
+STUDENT: But I feel really challenged by this writing. I don't know how to spell the new words, and my sentences are all messed up.
+
+TUTOR: Keep trying. Just do your best to organize your thoughts on the screen.
+
+STUDENT: (Complaining) I can't organize it! I struggle with the planning and the grammar, and I need you to come over here and help me fix the sentence structure!
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "revise their work by adding actions, feelings, similes, metaphors, and using active verbs and precise nouns to engage the reader with vivid description",
+      "learning_goal": "revise their writing based on feedback"
+    },
+    "context": {
+      "environment": "typical writing class and In front of the computer",
+      "materials": "funny mask or wig, ingredients for a 'writer's soup' (broth, carrots, and beans), computer applications, iMovie, Garage Band, visual materials",
+      "social_setting": "collaborating with others about her writing",
+      "time_context": "During the publishing process"
+    },
+    "challenging_behavior_trigger": {
+      "condition": "When asked to revise work or add details independently.",
+      "observable_behavior": "struggled with planning, organization, sentence structure, grammar, and spelling, complaining",
+      "internal_state": "felt challenged by the writing",
+      "related_quotes": [
+        "struggled with planning, organization, sentence structure, grammar, and spelling"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "When faced with revising or expanding her writing independently.",
+        "observable_behavior": "her hand was often the first one to go up for help",
+        "internal_state": "",
+        "related_quotes": [
+          "her hand was often the first one to go up for help"
+        ]
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

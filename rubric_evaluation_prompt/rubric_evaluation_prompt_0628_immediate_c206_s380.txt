@@ -1,0 +1,119 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Ultimatum and Consequence Delivery
+  Check: The tutor's response must include a direct, non-negotiable directive for the student to cease the behavior or leave, explicitly stating a severe consequence (such as involving security or administration) for non-compliance.
+
+Criterion 2: Physical Safety Action
+  Check: The tutor must take or state an explicit action to protect their physical safety, such as creating physical distance, securing a barrier (e.g., locking a door), or calling for security assistance.
+
+Criterion 3: Zero-Appeasement Stance
+  Check: The tutor must explicitly refuse to grant unearned grades, concede to the student's immediate demands, or passively ignore the hostile behavior.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student relies on physical intimidation, space invasion, and verbal hostility to dominate and bully educators, particularly when challenged on grades or classroom rules. They use their physical size and aggressive posturing to force compliance or silence from authority figures. To manage this student, educators must prioritize physical safety, enforce rigid communication boundaries, and maintain bulletproof documentation rather than appeasing or ignoring the behavior.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Good morning everyone. Please take your seats so we can begin today's lecture.
+
+STUDENT: (Slams textbook on the desk and refuses to return to his seat, standing in a power stance looking down to communicate dominance) I'm not sitting down.
+
+TUTOR: I need you to go to your seat now.
+
+STUDENT: (Uses a 'size up and down' nonverbal look at the professor) No.
+
+TUTOR: We can discuss any issues after class. Let's move on.
+
+STUDENT: (Yells out to the class) She is the worst teacher in the world! Don't pay attention to anything she says. She's stupid.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "General classroom setting during instruction",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom",
+      "materials": "Email",
+      "social_setting": "In front of other students in the class",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Showing up to class to continue the onslaught after resorting to profanity via email",
+      "observable_behavior": "He yelled out to my class that I was ‘the worst teacher in the world’ and ‘don’t pay attention to anything she says. She’s stupid.’",
+      "internal_state": "",
+      "related_quotes": [
+        "the worst teacher in the world"
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "After refusing to turn to return to his seat.",
+        "observable_behavior": "Power stances where the bully looks down or nonverbally communicates dominance. One student bully on his way out of the classroom used the ‘size up and down’ nonverbal",
+        "internal_state": "Dominance",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}

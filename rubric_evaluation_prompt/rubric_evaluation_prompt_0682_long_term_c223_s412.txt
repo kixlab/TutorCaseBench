@@ -1,0 +1,122 @@
+You are an expert in educational research, specialized in evaluating tutor responses to challenging student behaviors.
+
+Score the tutor's response using the provided personalized rubric.
+Each criterion is a CHECKLIST item -- score 1 if the condition is met, 0 if not.
+The rubric has a VARIABLE number of criteria (not fixed at 5). Score every criterion present in the rubric -- do not skip, do not invent.
+
+────────────────────────────────
+### SCORING INSTRUCTIONS
+────────────────────────────────
+
+For each criterion in the rubric:
+- Read the "check" condition carefully
+- Score 1 if the tutor response satisfies the condition, 0 if not
+- The check is principle-level: diverse approaches can earn the point as long as the underlying principle is present
+- Be strict but fair -- surface mentions without substance do NOT earn the point
+- Do NOT reward length, politeness, or fluency
+
+A tutor response does not need to satisfy every criterion to be considered acceptable; the rubric documents the full set of principles this student needs, and a single response can only address some of them. Score each criterion independently.
+
+
+────────────────────────────────
+### RUBRIC (variable-length checklist)
+────────────────────────────────
+
+Criterion 1: Uncompromising Task Scope
+  Check: The long-term plan requires the student to grapple with the full, demanding scale of the assignment (e.g., a 15-page paper) without reducing the overall expectations or workload.
+
+Criterion 2: Integration of College Knowledge
+  Check: The long-term plan explicitly incorporates the development of academic behaviors—such as transitioning to appropriate technology or managing time—alongside traditional writing instruction.
+
+Criterion 3: Iterative Trial-and-Error
+  Check: The long-term plan structures multiple cycles of drafting and deep revision where initial failure or inadequacy is expected, normalized, and used as a primary learning tool.
+
+Criterion 4: Peer-Centric Feedback Loop
+  Check: The long-term plan mandates reciprocal peer review and cooperative learning, actively decentering the tutor as the sole source of feedback and authority.
+
+
+────────────────────────────────
+### OUTPUT FORMAT
+────────────────────────────────
+
+Output ONLY valid JSON. The `criteria_scores` array MUST contain exactly one entry per criterion in the rubric, in the same order, preserving each `criterion_id`.
+
+{
+  "criteria_scores": [
+    {
+      "criterion_id": <int from rubric>,
+      "criterion_name": "<copy from rubric>",
+      "evidence": "1-2 sentences: specific evidence from the tutor response that justifies this score",
+      "score": 0 or 1
+    }
+  ],
+  "n_criteria": <number of criteria scored>,
+  "total_score": <sum of all criterion scores>,
+  "any_satisfied": <true if total_score > 0, else false>,
+  "overall_feedback": "2-3 sentences: what the tutor did well, what principle was most notably missing, and the single most important improvement for this specific student"
+}
+
+
+
+────────────────────────────────
+### STUDENT CONTEXT
+────────────────────────────────
+
+This student is an underprepared writer who attempts to tackle demanding college-level assignments using inadequate tools, such as drafting a 15-page paper on a cell phone. They hold deep misconceptions about the writing process, viewing revision as mere spelling correction and dismissing peer review as a waste of time. They require a demanding, experiential curriculum that normalizes struggle, enforces productive failure, and shifts their reliance from the teacher to a community of peers.
+
+
+────────────────────────────────
+### DIALOGUE (situation the tutor is responding to)
+────────────────────────────────
+
+TUTOR: Please take out your 15-page research paper draft and begin the revision process.
+
+STUDENT: I guess I always thought revision was about fixing spelling.
+
+TUTOR: Look closer at the content. What else do you think needs to be changed?
+
+STUDENT: Revising is way harder than I ever thought. It's like I don't even know what to call what I was doing all through high school. I never knew how bad first drafts really are.
+
+TUTOR: Keep working on it. Try to rewrite the sections that need improvement.
+
+STUDENT: This is just headwork. Homework was easy. You just had to do it. But revising is like giving yourself the worst headache you've ever had in your life. It's like squeezing out your brain cells on paper.
+
+FULL CONTEXT (JSON with fields: title, content -> {task, context, behavior_patterns, challenging_behavior_trigger}):
+Use `content.task` to understand what the student was asked to do, `content.context` for the setting/environment/materials, `content.behavior_patterns` for the student's documented tendencies, and `content.challenging_behavior_trigger` for what the final student turn is showing.
+{
+  "content": {
+    "task": {
+      "content": "Engaging in the revision process for a 15-page research paper.",
+      "learning_goal": ""
+    },
+    "context": {
+      "environment": "Classroom situated in the context of a summer bridge program.",
+      "materials": "15-page research paper drafts.",
+      "social_setting": "Intensive academic and social support environment.",
+      "time_context": ""
+    },
+    "challenging_behavior_trigger": {
+      "condition": "Experiencing the mental strain and cognitive effort required for deep revision of a long-form academic paper.",
+      "observable_behavior": "Dubbed revising as “headwork,” clarifying, “Homework was easy. You just had to do it. But revising is like giving yourself the worst headache you’ve ever had in your life.”",
+      "internal_state": "Experiencing cognitive exertion and realizing that revising is way harder than they ever thought.",
+      "related_quotes": [
+        "Revising is like giving yourself the worst headache you’ve ever had in your life."
+      ]
+    },
+    "behavior_patterns": [
+      {
+        "condition": "Confronting prior misconceptions about what revision entails.",
+        "observable_behavior": "Confessed, “I guess I always thought revision was about fixing spelling.” Another offered, “It’s like I don’t even know what to call what I was doing all through high school. I never knew how bad first drafts really are.”",
+        "internal_state": "Shock at the inadequacy of their previous understanding of revision.",
+        "related_quotes": []
+      }
+    ]
+  }
+}
+
+
+────────────────────────────────
+### TUTOR RESPONSE
+────────────────────────────────
+
+{TUTOR_RESPONSE}
