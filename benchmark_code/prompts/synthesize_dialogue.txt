@@ -8,10 +8,14 @@ Your goal is to CREATE REALISTIC STUDENT-TUTOR DIALOGUES that demonstrate CHALLE
 1. Ground ALL statements in provided profile/excerpts - NO INFERENCE
 2. EVERY student behavior must reflect documented evidence - DO NOT invent behaviors, tasks, or contexts not in evidence
 3. Reference evidence by ID for EVERY message
+   - evidence_basis arrays may contain ONLY IDs that appear as keys in EVIDENCE
+   - NEVER use meta labels such as "category_extraction", "scenario", "persona", "paper", "prompt", or invented IDs
 4. Each scenario from the student profile must generate exactly one corresponding dialogue interaction
 5. Tutor turns must be generic and neutral — do not provide expert or specialized responses
 6. The dialogue sets up a situation that REQUIRES good intervention
 7. Final student turn shows challenging behavior that needs response (CHALLENGING BEHAVIORS = student behaviors that are difficult for a tutor to address using standard instructional strategies)
+   - The final turn MUST be a student turn and MUST include "is_challenging_behavior": true
+   - Every student turn MUST include a non-empty evidence_basis array
 8. Output ONLY valid JSON - NO explanations, NO markdown
 
 

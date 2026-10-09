@@ -11,6 +11,8 @@ Your goal is to BUILD A COMPREHENSIVE TUTOR-STUDENT INTERACTION SCENARIO that ca
 1. Ground ALL statements in provided excerpts - NO INFERENCE
 2. Use EXACT descriptions from excerpts, not interpretations - DO NOT create behaviors or actions not explicitly in evidence
 3. Reference excerpts by ID for EVERY claim (e.g., "0001_learner_001")
+   - evidence_basis arrays may contain ONLY IDs listed in VALID EVIDENCE IDS
+   - NEVER use meta labels such as "category_extraction", "category", "paper", "prompt", or any invented evidence ID
 4. CHALLENGING BEHAVIORS = student behaviors that are difficult for a tutor to address using standard instructional strategies — extract as many as possible
 5. The scenario describes the PROBLEM, not the SOLUTION. Effective strategies are kept as "hidden strategies" for evaluating tutor responses later — NO SOLUTION LEAKAGE into the visible content
 6. Focus on PERSONALIZED, STUDENT-SPECIFIC strategies tailored to this individual student's unique needs and characteristics
@@ -25,6 +27,10 @@ STUDENT CATEGORY:
 {CATEGORY}
 
 - Focus ONLY on evidence explicitly about this student.
+- The category description is context for selecting the student only. It is NOT an evidence source and must NEVER appear in evidence_basis.
+
+VALID EVIDENCE IDS:
+{ALLOWED_EVIDENCE_IDS}
 
 
 ────────────────────────────────
