@@ -2,6 +2,7 @@ import os
 import json
 import threading
 import time
+import contextvars
 from datetime import datetime, timezone
 from typing import Dict, Optional, Tuple, Any
 
@@ -13,7 +14,7 @@ from utils.prompt_utils import build_prompt
 # utils/llm_utils.py — Multi-Engine LLM Caller
 # =============================================================================
 #
-# Supports 6 LLM engines via a unified generate_llm_response() interface.
+# Supports 7 LLM engines via a unified generate_llm_response() interface.
 # Includes retry logic and token usage logging via LLM_CALL_LOG.
 #
 #   openai        : OpenAI API (GPT series)
@@ -22,6 +23,7 @@ from utils.prompt_utils import build_prompt
 #   vertex_openai : Llama / Qwen / Mistral via Vertex AI Partner MaaS
 #   anthropic     : Claude via AWS Bedrock
 #   together      : Together AI (OpenAI-compatible)
+#   openrouter    : OpenRouter (OpenAI-compatible; e.g. Qwen 3.5)
 #
 # Usage logging: set LLM_CALL_LOG=data/logs/llm_usage.jsonl in .env.local
 # to append one JSONL record per call (ts, engine, model, tokens, latency).
@@ -32,13 +34,39 @@ from utils.prompt_utils import build_prompt
 _PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 load_dotenv(dotenv_path=os.path.join(_PROJECT_ROOT, ".env.local"))
 PROMPT_SEPARATOR = "<System Prompt/User Prompt>"
+
 _LOG_LOCK = threading.Lock()
+_LOG_CONTEXT: "contextvars.ContextVar[dict]" = contextvars.ContextVar("llm_log_context", default={})
+
+_DEFAULT_MODEL_CONFIG_PATH = os.path.join(_PROJECT_ROOT, "config", "config_default_model.json")
+_DEFAULT_MODELS_CACHE: dict | None = None
+
+HIGH_REASONING_PROMPTS = {
+    "build_scenario", "synthesize_dialogue", "generate_rubric", "evaluate_with_rubric",
+    # "mcq_select_pair", "mcq_adapt_pair",
+    "mcq_select_distractors", "mcq_adapt_options",
+}
+
+
+def set_log_context(**tags):
+    """Tag subsequent usage-log records in this thread; returns a token for reset_log_context."""
+    return _LOG_CONTEXT.set(dict(tags))
+
+
+def reset_log_context(token) -> None:
+    try:
+        _LOG_CONTEXT.reset(token)
+    except Exception:
+        pass
 
 
 def _append_usage_log(record: dict) -> None:
     log_path = os.environ.get("LLM_CALL_LOG")
     if not log_path:
         return
+    ctx = _LOG_CONTEXT.get()
+    if ctx:
+        record = {**ctx, **record}  # context tags first; record's own fields win on conflict
     try:
         os.makedirs(os.path.dirname(log_path) or ".", exist_ok=True)
         with _LOG_LOCK:
@@ -49,8 +77,35 @@ def _append_usage_log(record: dict) -> None:
         print(f"  [usage log warning] {e}")
 
 
-_DEFAULT_MODEL_CONFIG_PATH = os.path.join(_PROJECT_ROOT, "config", "config_default_model.json")
-_DEFAULT_MODELS_CACHE: dict | None = None
+def _as_log_value(value: Any) -> Any:
+    """Convert SDK enum-ish values into JSON-friendly log values."""
+    if value is None:
+        return None
+    name = getattr(value, "name", None)
+    if name:
+        return name
+    return str(value)
+
+
+def _get_gemini_candidate_field(response: Any, field_name: str) -> Any:
+    try:
+        candidates = getattr(response, "candidates", None) or []
+        if not candidates:
+            return None
+        return getattr(candidates[0], field_name, None)
+    except Exception:
+        return None
+
+
+def _get_gemini_prompt_feedback_field(response: Any, field_name: str) -> Any:
+    try:
+        prompt_feedback = getattr(response, "prompt_feedback", None)
+        if prompt_feedback is None:
+            return None
+        return getattr(prompt_feedback, field_name, None)
+    except Exception:
+        return None
+
 
 def _load_default_models() -> dict:
     global _DEFAULT_MODELS_CACHE
@@ -112,20 +167,49 @@ def call_openai(prompt_filename: str, variables: Dict[str, str], model_name: str
             {"role": "system", "content": system_content},
             {"role": "user", "content": user_content},
         ],
-        max_completion_tokens=8000,
     )
+    # Pipeline 5 (use_api_defaults): cap output at 8000 for uniformity. Pipelines 1-4:
+    # leave uncapped so reasoning + extraction JSON both fit (mirrors Gemini config).
+    if use_api_defaults:
+        kwargs["max_completion_tokens"] = 8000
     # GPT-5 family (reasoning models) only accepts the default temperature=1.
     _no_temperature = model_name.startswith("gpt-5")
     if not use_api_defaults and not _no_temperature:
         kwargs["temperature"] = 0
+    # GPT-5 family: control reasoning depth (mirrors Gemini thinking_level HIGH set).
+    if not use_api_defaults and model_name.startswith("gpt-5"):
+        kwargs["reasoning_effort"] = (
+            "high"
+            if prompt_filename in HIGH_REASONING_PROMPTS
+            else "medium"
+        )
+
+    # Back off + retry on transient errors (429/timeout/connection) so a rate limit
+    # doesn't permanently drop the call. Mirrors call_gemini / call_vertex_openai.
+    from openai import RateLimitError, APITimeoutError, APIConnectionError
+    _RETRYABLE = (RateLimitError, APITimeoutError, APIConnectionError)
 
     t0 = time.time()
     status = "ok"
     response = None
     text = ""
+    finish_reason = None
     try:
-        response = client.chat.completions.create(**kwargs)
-        text = response.choices[0].message.content or ""
+        max_retries = 6
+        for attempt in range(max_retries):
+            try:
+                response = client.chat.completions.create(**kwargs)
+                text = response.choices[0].message.content or ""
+                finish_reason = getattr(response.choices[0], "finish_reason", None)
+                break
+            except _RETRYABLE as e:
+                if attempt < max_retries - 1:
+                    wait = min(15 * (2 ** attempt), 90)  # 15, 30, 60, 90, 90
+                    print(f"  [openai {type(e).__name__}] {model_name} "
+                          f"attempt {attempt+1}/{max_retries}, retrying in {wait}s...", flush=True)
+                    time.sleep(wait)
+                else:
+                    raise
     except Exception as e:
         status = f"error:{type(e).__name__}"
         raise
@@ -144,6 +228,9 @@ def call_openai(prompt_filename: str, variables: Dict[str, str], model_name: str
             "total_tokens":  getattr(usage, "total_tokens", None) if usage else None,
             "latency_ms": int((time.time() - t0) * 1000),
             "status": status,
+            "finish_reason": finish_reason,
+            "reasoning_effort": kwargs.get("reasoning_effort"),
+            "reasoning_tokens": getattr(getattr(usage, "completion_tokens_details", None), "reasoning_tokens", None) if usage else None,
         })
 
     return text, model_name, system_content, user_content
@@ -164,7 +251,7 @@ def _get_gemini_client(api_key: str):
         return _GEMINI_CLIENT_CACHE[api_key]
 
 
-def call_gemini(prompt_filename: str, variables: Dict[str, str], model_name: str, use_api_defaults: bool = False) -> Tuple[str, str, str, str]:
+def call_gemini(prompt_filename: str, variables: Dict[str, str], model_name: str, use_api_defaults: bool = False, thinking_level: Optional[str] = None) -> Tuple[str, str, str, str]:
     try:
         from google.genai import types as genai_types
         from google.genai.errors import ServerError, ClientError
@@ -188,8 +275,24 @@ def call_gemini(prompt_filename: str, variables: Dict[str, str], model_name: str
         config_kwargs["max_output_tokens"] = 8000
     if system_content:
         config_kwargs["system_instruction"] = system_content
+    resolved_thinking_level = None
     if not use_api_defaults:
         config_kwargs["temperature"] = 0
+        if thinking_level is not None:
+            level_name = str(thinking_level).upper()
+            try:
+                resolved_thinking_level = getattr(genai_types.ThinkingLevel, level_name)
+            except AttributeError as exc:
+                raise ValueError(f"Unsupported Gemini thinking_level: {thinking_level!r}") from exc
+        else:
+            resolved_thinking_level = (
+                genai_types.ThinkingLevel.HIGH
+                if prompt_filename in HIGH_REASONING_PROMPTS
+                else genai_types.ThinkingLevel.MEDIUM
+            )
+        config_kwargs["thinking_config"] = genai_types.ThinkingConfig(
+            thinking_level=resolved_thinking_level
+        )
 
     config = genai_types.GenerateContentConfig(**config_kwargs) if config_kwargs else None
 
@@ -197,6 +300,9 @@ def call_gemini(prompt_filename: str, variables: Dict[str, str], model_name: str
     status = "ok"
     response = None
     text = ""
+    finish_reason = None
+    safety_ratings = None
+    prompt_block_reason = None
     try:
         max_retries = 5
         for attempt in range(max_retries):
@@ -223,6 +329,11 @@ def call_gemini(prompt_filename: str, variables: Dict[str, str], model_name: str
                 else:
                     status = f"error:ClientError"
                     raise
+
+        finish_reason = _as_log_value(_get_gemini_candidate_field(response, "finish_reason"))
+        safety_ratings = _as_log_value(_get_gemini_candidate_field(response, "safety_ratings"))
+        prompt_block_reason = _as_log_value(_get_gemini_prompt_feedback_field(response, "block_reason"))
+
         try:
             text = response.text or ""
         except Exception:
@@ -244,9 +355,15 @@ def call_gemini(prompt_filename: str, variables: Dict[str, str], model_name: str
             "output_chars": len(text),
             "input_tokens":  getattr(meta, "prompt_token_count", None) if meta else None,
             "output_tokens": getattr(meta, "candidates_token_count", None) if meta else None,
+            "thoughts_tokens": getattr(meta, "thoughts_token_count", None) if meta else None,
             "total_tokens":  getattr(meta, "total_token_count", None) if meta else None,
             "latency_ms": int((time.time() - t0) * 1000),
             "status": status,
+            "finish_reason": finish_reason,
+            "prompt_block_reason": prompt_block_reason,
+            "safety_ratings": safety_ratings,
+            "thinking_level": _as_log_value(resolved_thinking_level),
+            "thinking_budget": None,
         })
     return text, model_name, system_content, user_content
 
@@ -393,6 +510,14 @@ def call_vertex_anthropic(prompt_filename: str, variables: Dict[str, str], model
     _no_temperature = "opus-4-7" in model_name
     if not use_api_defaults and not _no_temperature:
         kwargs["temperature"] = 0
+    # Claude Opus 4.7 controls reasoning depth via output_config={"effort": ...}
+    # (low/medium/high/xhigh/max; API default = high). Set HIGH for the deep-reasoning prompt set
+    # (mirrors gemini thinking_level HIGH / gpt reasoning_effort=high).
+    effort = None
+    if not use_api_defaults and prompt_filename in HIGH_REASONING_PROMPTS:
+        effort = "high"
+        kwargs["output_config"] = {"effort": "high"}
+        kwargs["max_tokens"] = 16000  # room for reasoning + the answer
 
     t0 = time.time()
     status = "ok"
@@ -432,6 +557,7 @@ def call_vertex_anthropic(prompt_filename: str, variables: Dict[str, str], model
             "total_tokens":  (getattr(usage, "input_tokens", 0) + getattr(usage, "output_tokens", 0)) if usage else None,
             "latency_ms": int((time.time() - t0) * 1000),
             "status": status,
+            "effort": effort,
         })
 
     return text, model_name, system_content, user_content
@@ -493,13 +619,33 @@ def call_vertex_openai(prompt_filename: str, variables: Dict[str, str], model_na
     if not use_api_defaults:
         kwargs["temperature"] = 0
 
+    # Vertex partner MaaS (esp. Llama-4-Maverick) has a very low quota — 429s hit even at
+    # workers=1. Unlike gemini this path had no retry, so every 429 permanently dropped a
+    # question. Back off and retry (rebuilding the client each time in case the bearer
+    # token expired during a long wait). Mirrors call_gemini's retry loop.
+    from openai import RateLimitError, APITimeoutError, APIConnectionError
+    _RETRYABLE = (RateLimitError, APITimeoutError, APIConnectionError)
+
     t0 = time.time()
     status = "ok"
     response = None
     text = ""
     try:
-        response = client.chat.completions.create(**kwargs)
-        text = response.choices[0].message.content or ""
+        max_retries = 6
+        for attempt in range(max_retries):
+            try:
+                response = client.chat.completions.create(**kwargs)
+                text = response.choices[0].message.content or ""
+                break
+            except _RETRYABLE as e:
+                if attempt < max_retries - 1:
+                    wait = min(15 * (2 ** attempt), 90)  # 15, 30, 60, 90, 90
+                    print(f"  [vertex_openai {type(e).__name__}] {model_name} "
+                          f"attempt {attempt+1}/{max_retries}, retrying in {wait}s...", flush=True)
+                    time.sleep(wait)
+                    client = _get_vertex_openai_client(region, project_id)  # refresh token
+                else:
+                    raise
     except Exception as e:
         status = f"error:{type(e).__name__}"
         raise
@@ -601,24 +747,104 @@ def call_together(prompt_filename: str, variables: Dict[str, str], model_name: s
 
 
 # ============================================================================================================================
+# OPENROUTER
+# ============================================================================================================================
+def call_openrouter(prompt_filename: str, variables: Dict[str, str], model_name: str, use_api_defaults: bool = False) -> Tuple[str, str, str, str]:
+    """OpenRouter uses the OpenAI Chat Completions schema with a custom base_url."""
+    try:
+        from openai import OpenAI
+    except ImportError:
+        raise RuntimeError("openai package not installed")
+
+    key = os.getenv("OPENROUTER_API_KEY")
+    if not key:
+        raise RuntimeError("OPENROUTER_API_KEY not set")
+
+    prompt = build_prompt(prompt_filename, variables)
+    system_content, user_content = _split_prompt(prompt)
+
+    client = OpenAI(
+        api_key=key,
+        base_url="https://openrouter.ai/api/v1",
+        default_headers={
+            "HTTP-Referer": "https://github.com/kixlab/google-iitp-student-simulator",
+            "X-Title": "google-iitp-student-simulator",
+        },
+    )
+    messages = []
+    if system_content:
+        messages.append({"role": "system", "content": system_content})
+    messages.append({"role": "user", "content": user_content})
+
+    kwargs = dict(model=model_name, messages=messages)
+    if not use_api_defaults:
+        kwargs["temperature"] = 0
+        kwargs["max_tokens"] = 8000
+
+    # Back off + retry on transient errors (429/timeout/connection) so a rate limit
+    # doesn't permanently drop the call. Mirrors call_gemini / call_vertex_openai.
+    from openai import RateLimitError, APITimeoutError, APIConnectionError
+    _RETRYABLE = (RateLimitError, APITimeoutError, APIConnectionError)
+
+    t0 = time.time()
+    status = "ok"
+    response = None
+    text = ""
+    try:
+        max_retries = 6
+        for attempt in range(max_retries):
+            try:
+                response = client.chat.completions.create(**kwargs)
+                text = response.choices[0].message.content or ""
+                break
+            except _RETRYABLE as e:
+                if attempt < max_retries - 1:
+                    wait = min(15 * (2 ** attempt), 90)  # 15, 30, 60, 90, 90
+                    print(f"  [openrouter {type(e).__name__}] {model_name} "
+                          f"attempt {attempt+1}/{max_retries}, retrying in {wait}s...", flush=True)
+                    time.sleep(wait)
+                else:
+                    raise
+    except Exception as e:
+        status = f"error:{type(e).__name__}"
+        raise
+    finally:
+        usage = getattr(response, "usage", None) if response is not None else None
+        completion_details = getattr(usage, "completion_tokens_details", None) if usage else None
+        _append_usage_log({
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "engine": "openrouter",
+            "model": model_name,
+            "prompt_filename": prompt_filename,
+            "system_chars": len(system_content),
+            "user_chars":   len(user_content),
+            "output_chars": len(text),
+            "input_tokens":  getattr(usage, "prompt_tokens", None) if usage else None,
+            "output_tokens": getattr(usage, "completion_tokens", None) if usage else None,
+            "total_tokens":  getattr(usage, "total_tokens", None) if usage else None,
+            "reasoning_tokens": getattr(completion_details, "reasoning_tokens", None) if completion_details else None,
+            "latency_ms": int((time.time() - t0) * 1000),
+            "status": status,
+        })
+
+    return text, model_name, system_content, user_content
+
+
+
+# ============================================================================================================================
 # LLM RESPONSE
 # ============================================================================================================================
-def generate_llm_response(
-    prompt_filename: str,
-    variables: Dict[str, str],
-    model_type: str,
-    model_name: str,
-    use_api_defaults: bool = False,
-) -> Optional[str]:
+def generate_llm_response(prompt_filename: str, variables: Dict[str, str], model_type: str, model_name: str, use_api_defaults: bool = False, thinking_level: Optional[str] = None) -> Optional[str]:
     """
     Call the specified LLM and return the response text.
 
     Args:
         prompt_filename: Name of the prompt template in prompts/
         variables: Placeholder substitutions for the template
-        model_type: "openai" | "gemini" | "vertex" (Claude via GCP Vertex) | "vertex_openai" (Llama/etc via Vertex partner MaaS) | "anthropic" (Claude via AWS Bedrock) | "together"
+        model_type: "openai" | "gemini" | "vertex" (Claude via GCP Vertex) | "vertex_openai" (Llama/etc via Vertex partner MaaS) | "anthropic" (Claude via AWS Bedrock) | "together" | "openrouter"
         model_name: Exact provider-side model ID
         use_api_defaults: If True, use API defaults (no temperature/token overrides). Use for pipeline 5.
+        thinking_level: Optional explicit Gemini thinking level (for example, "HIGH").
     """
     if model_type == "openai":
         text, resolved_model, system_content, user_content = call_openai(prompt_filename, variables, model_name, use_api_defaults)
@@ -626,7 +852,13 @@ def generate_llm_response(
         return text
 
     if model_type == "gemini":
-        text, resolved_model, system_content, user_content = call_gemini(prompt_filename, variables, model_name, use_api_defaults)
+        text, resolved_model, system_content, user_content = call_gemini(
+            prompt_filename,
+            variables,
+            model_name,
+            use_api_defaults,
+            thinking_level=thinking_level,
+        )
         _log_call("gemini", resolved_model, system_content, user_content)
         return text
 
@@ -650,4 +882,9 @@ def generate_llm_response(
         _log_call("together", resolved_model, system_content, user_content)
         return text
 
-    raise RuntimeError(f"Unsupported model_type: '{model_type}'. Use 'openai', 'gemini', 'vertex', 'vertex_openai', 'anthropic', or 'together'.")
+    if model_type == "openrouter":
+        text, resolved_model, system_content, user_content = call_openrouter(prompt_filename, variables, model_name, use_api_defaults)
+        _log_call("openrouter", resolved_model, system_content, user_content)
+        return text
+
+    raise RuntimeError(f"Unsupported model_type: '{model_type}'. Use 'openai', 'gemini', 'vertex', 'vertex_openai', 'anthropic', 'together', or 'openrouter'.")

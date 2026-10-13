@@ -12,27 +12,32 @@ from datetime import datetime
 # run_evaluation.py — Evaluation Batch Runner
 # =============================================================================
 #
-# Automatically scans data/pipeline5/response/ for all response files,
+# Automatically scans {data_root}/pipeline5/response/ for all response files,
 # extracts category IDs from their filenames, and batch-runs
 # evaluation_pipeline.py for each category.
 #
 # No need to specify --id manually for every category.
 #
+# All child evaluation_pipeline.py processes share one log run
+# (PIPELINE_RUN_ID / PIPELINE_LOG_SCOPE), so per-category LLM call logs
+# land in a single run directory.
+#
 # -----------------------------------------------------------------------------
 # PIPELINE FLOW
 # -----------------------------------------------------------------------------
 #
-#   data/pipeline5/response/
+#   {data_root}/pipeline5/response/
 #     (auto-collect category IDs from response filenames)
 #          │
 #          ├─ Step 1: Rubric generation       — skipped if rubric already exists
-#          │          evaluation_pipeline.py --rubric --id {cat_id}
+#          │          evaluation_pipeline.py --rubric --id {cat_id} --data-root {data_root}
+#          │          evaluation_pipeline.py --summary-rubric --data-root {data_root}
 #          │
 #          ├─ Step 2: Evaluate all responses
-#          │          evaluation_pipeline.py --evaluate-all --id {cat_id}
+#          │          evaluation_pipeline.py --evaluate-all --id {cat_id} --data-root {data_root}
 #          │
 #          └─ Step 3: Generate aggregate summary
-#                     evaluation_pipeline.py --summary-all
+#                     evaluation_pipeline.py --summary-all --data-root {data_root}
 #
 # -----------------------------------------------------------------------------
 # USAGE
@@ -54,18 +59,36 @@ from datetime import datetime
 #   python run_evaluation.py --types immediate
 #   python run_evaluation.py --types immediate long_term
 #
+#   # Use a different data root / log scope
+#   python run_evaluation.py --data-root experiments/reference
+#   python run_evaluation.py --log-scope evaluation_reference
+#
 # -----------------------------------------------------------------------------
 # OUTPUT DIRECTORY STRUCTURE
 # -----------------------------------------------------------------------------
 #
-#   data/
+#   {data_root}/                                                 # --data-root (default: data)
 #   ├── evaluation/
 #   │   ├── rubric/
 #   │   │   └── rubric_{cat_id}_{ts}.json                        # Generated rubrics (skipped if exists)
 #   │   └── result/
 #   │       └── {cat_id}_case_{n}_{type}_{model}_{ts}.json       # Per-file evaluation results
 #   └── summaries/
+#       ├── rubric_summary_{ts}.json                             # Rubric coverage summary (after Step 1)
 #       └── aggregate_summary_{ts}.json                          # Final aggregate summary
+#
+#   data/logs/{log_scope}/llm_calls/{run_id}/{cat_id}.jsonl      # Per-call LLM usage log
+#                                                                # log_scope = --log-scope (default: evaluation)
+#                                                                # run_id    = run_{YYYYmmdd_HHMMSS}
+#                                                                # (always under the project's data/, not --data-root)
+#
+# -----------------------------------------------------------------------------
+# ENVIRONMENT VARIABLES
+# -----------------------------------------------------------------------------
+#
+#   PIPELINE_RUN_ID    : Shared run id for child processes (default: run_{YYYYmmdd_HHMMSS})
+#   PIPELINE_LOG_SCOPE : Log scope folder (default: --log-scope)
+#   Both are only set if not already defined, so an outer caller can override them.
 #
 # =============================================================================
 
@@ -143,13 +166,23 @@ def main():
     parser.add_argument("--workers",        type=int, default=1, help="Parallel categories (default: 1)")
     parser.add_argument("--types",          nargs="+", choices=["immediate", "long_term"], default=["immediate", "long_term"])
     parser.add_argument("--model",          choices=["auto", "openai", "gemini"], default="auto")
+    parser.add_argument("--data-root",      default="data",
+                        help="Data root containing pipeline/evaluation folders (default: data)")
+    parser.add_argument("--log-scope",      default="evaluation",
+                        help="Directory name under data/logs for LLM JSONL logs")
     args = parser.parse_args()
 
-    data_root = os.path.join(BASE_DIR, "data")
+    data_root = os.path.abspath(args.data_root)
 
     start_time = datetime.now()
+    # Shared log run: child evaluation_pipeline.py subprocesses inherit these and route
+    # their per-category LLM call logs into one run dir (data/logs/{scope}/llm_calls/{run_id}/).
+    os.environ.setdefault("PIPELINE_RUN_ID", start_time.strftime("run_%Y%m%d_%H%M%S"))
+    os.environ.setdefault("PIPELINE_LOG_SCOPE", args.log_scope)
+
     print(f"\n{'='*70}")
     print(f"  EVALUATION BATCH RUN")
+    print(f"  Log run        : {os.environ['PIPELINE_LOG_SCOPE']}/{os.environ['PIPELINE_RUN_ID']}")
     print(f"  Data root      : {data_root}")
     print(f"  Workers        : {args.workers}")
     print(f"  Types          : {', '.join(args.types)}")
@@ -179,7 +212,7 @@ def main():
             jobs.append((
                 f"Rubric: {cat_id}",
                 [PYTHON, "evaluation_pipeline.py", "--rubric", "--id", cat_id,
-                 "--model", args.model],
+                 "--model", args.model, "--data-root", data_root],
                 "n\n",
             ))
 
@@ -187,6 +220,13 @@ def main():
         for ok, label in run_parallel(jobs, args.workers):
             if not ok:
                 errors.append(f"[Step 1] Rubric failed: {label}")
+
+        # Summarize rubrics after generation (informational — failure does not count as an error)
+        _, output = run_step_captured(
+            "Rubric summary",
+            [PYTHON, "evaluation_pipeline.py", "--summary-rubric", "--data-root", data_root],
+        )
+        print(output, flush=True)
 
     if args.rubric_only:
         _print_summary(errors, category_ids, start_time)
@@ -203,7 +243,7 @@ def main():
             f"Evaluate all: {cat_id}",
             [PYTHON, "evaluation_pipeline.py", "--evaluate-all", "--id", cat_id,
              "--model", args.model,
-             "--types"] + args.types,
+             "--types"] + args.types + ["--data-root", data_root],
             None,
         ))
 
@@ -218,7 +258,7 @@ def main():
 
     ok, output = run_step_captured(
         "Aggregate summary",
-        [PYTHON, "evaluation_pipeline.py", "--summary-all"],
+        [PYTHON, "evaluation_pipeline.py", "--summary-all", "--data-root", data_root],
     )
     print(output, flush=True)
     if not ok:

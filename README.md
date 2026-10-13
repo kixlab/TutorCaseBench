@@ -10,7 +10,7 @@ The benchmark is organized around three core units: **categories**, **scenarios*
 
 - A **category** corresponds to a distinct student profile drawn from a source paper. All scenarios within a category share the same learner characteristics and intervention evidence.
 - A **scenario** is one specific situation in which the student exhibits a challenging behavior, captured as a 6-turn tutor–student dialogue. Each scenario belongs to exactly one category.
-- A **rubric** is a checklist of evidence-suppotrted response principles used to evaluate open-ended responses, defined per category and **response type** (immediate or long-term).
+- A **rubric** is a checklist of evidence-supported response principles used to evaluate open-ended responses, defined per category and **response type** (immediate or long-term).
 
 Each scenario may generate up to two **evaluation prompts** — an *immediate* prompt asking what the tutor should say or do right now, and a *long-term* prompt asking what sustained interventions to implement over several weeks. A prompt is created only when the scenario includes a matching effective strategy in the source paper.
 
@@ -87,7 +87,7 @@ The central index table linking all benchmark components. Each row corresponds t
 | `response_type` | `immediate` or `long_term` |
 | `minimal_context` | One-sentence task-and-setting description shown to the responder |
 | `dialogue` | Full tutor–student dialogue text (TUTOR:/STUDENT: format) |
-| `mcq_ids` | Pipe-separated list of MCQ IDs linked to this scneario/dialogue prompt (e.g. `0001\|0002`) |
+| `mcq_ids` | Pipe-separated list of MCQ IDs linked to this scenario/dialogue prompt (e.g. `0001\|0002`) |
 | `challenge_type` | Type of challenging behavior exhibited (e.g. `Emotional Distress`) |
 | `rubric_criteria_immediate` | Formatted immediate rubric criteria for this category |
 | `rubric_criteria_long_term` | Formatted long-term rubric criteria for this category |
@@ -103,7 +103,6 @@ A registry of the source research papers from which student cases were drawn. Ea
 | `year` | Publication year |
 | `eric_id` | ERIC database identifier (e.g. `EJ1194362`) |
 | `eric_page` | Direct URL to the paper's ERIC page |
-| `abstract` | Abstract of the paper as retrieved from ERIC |
 | `in_dataset` | `"O"` if the paper's cases are included in the benchmark; empty otherwise |
 
 ---
@@ -111,7 +110,7 @@ A registry of the source research papers from which student cases were drawn. Ea
 ## 📂 Folder Structure
 
 ```
-benchmark/
+TutorCaseBench/
 ├── dataset_overall.csv                # Central index (see above)
 ├── document_list.csv                  # Source paper registry
 │
@@ -334,6 +333,7 @@ benchmark_code/
 ├── quaternary_pipeline.py
 ├── run_evaluation.py
 ├── run_study_group.py
+├── requirements.txt
 │
 ├── config/
 │   ├── config_default_model.json    # Default LLM per pipeline stage

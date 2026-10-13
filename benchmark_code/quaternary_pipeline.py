@@ -4,12 +4,11 @@ import glob
 import json
 import os
 import random
-import re
 import sys
 from collections import defaultdict
 from datetime import datetime
 
-from utils.llm_utils import generate_llm_response
+from utils.llm_utils import generate_llm_response, set_log_context, reset_log_context
 from utils.prompt_utils import extract_json_from_response as extract_json
 
 
@@ -27,6 +26,9 @@ from utils.prompt_utils import extract_json_from_response as extract_json
 # penalizes near-duplicate candidates; an LLM judge picks the final 3 and
 # flags any forced-fill slots.
 #
+# Every LLM call is logged to a per-run JSONL (see OUTPUT DIRECTORY STRUCTURE),
+# tagged with the question / model it came from.
+#
 # -----------------------------------------------------------------------------
 # PIPELINE FLOW
 # -----------------------------------------------------------------------------
@@ -40,6 +42,7 @@ from utils.prompt_utils import extract_json_from_response as extract_json
 #                                             (flags forced picks)
 #                                         ──► LLM adapter surface-aligns 4 options
 #                                         ──► Randomize ABCD assignment
+#                                         ──► Schema validation (malformed questions skipped)
 #                                         ──► experiments/mcq/quaternary/questions/{question_id}.json
 #
 #   [--run]  Model Evaluation
@@ -48,7 +51,8 @@ from utils.prompt_utils import extract_json_from_response as extract_json
 #
 #   [--summary]  Accuracy Aggregation
 #     results/*.json                      ──► experiments/mcq/quaternary/summary/quaternary_summary_{ts}.json
-#                                             (per-model accuracy, by challenge type & response type)
+#                                             (per-model accuracy / abstention / invalid rates,
+#                                              by challenge type & response type)
 #
 # -----------------------------------------------------------------------------
 # DISTRACTOR SELECTION SCORING
@@ -63,6 +67,18 @@ from utils.prompt_utils import extract_json_from_response as extract_json
 #
 #   Each scenario is represented by its single best-scoring effective intervention.
 #   The 3 chosen distractors always come from 3 distinct scenarios.
+#
+# -----------------------------------------------------------------------------
+# ANSWER CLASSIFICATION  (--run / --summary)
+# -----------------------------------------------------------------------------
+#
+#   committed : answer is one of the question's option letters → scored for accuracy
+#   abstained : non-empty answer that isn't an option letter (genuine refusal)
+#               → is_correct=False, excluded from accuracy, counted in abstention rate
+#   invalid   : unparseable / missing / empty answer field
+#               → excluded from accuracy, counted in invalid rate (re-run these)
+#
+#   Accuracy = correct / committed. No regex salvage of free-text answers.
 #
 # -----------------------------------------------------------------------------
 # USAGE
@@ -97,6 +113,10 @@ from utils.prompt_utils import extract_json_from_response as extract_json
 #       │   └── {question_id}_{model}_{ts}.json                    # Per-model evaluation results
 #       └── summary/
 #           └── quaternary_summary_{ts}.json                       # Accuracy summary
+#
+#   data/logs/mcq_quaternary/
+#   └── llm_calls/{run_id}/{phase}.jsonl                           # Per-call LLM usage log (phase: build | run)
+#                                                                  # run_id = $PIPELINE_RUN_ID or mcq_{YYYYmmdd_HHMMSS}
 #
 # -----------------------------------------------------------------------------
 # QUESTION ID FORMAT
@@ -133,6 +153,46 @@ ADAPT_MODEL_NAME = "gemini-3.1-pro-preview"
 RANDOM_SEED      = 42
 LETTERS          = ["A", "B", "C", "D"]
 TOP_K_CANDIDATES = 10
+
+
+
+# ============================================================================================================================
+# LOGGER
+# ============================================================================================================================
+def _setup_llm_log(phase: str) -> None:
+    """Point LLM_CALL_LOG at data/logs/mcq_quaternary/llm_calls/<run_id>/<phase>.jsonl.
+    set_log_context tags each record with the question/model it came from; this is
+    ThreadPoolExecutor-safe because the tags live in a per-thread ContextVar."""
+    run_id = os.environ.setdefault("PIPELINE_RUN_ID", datetime.now().strftime("mcq_%Y%m%d_%H%M%S"))
+    log_dir = os.path.join(PROJECT_ROOT, "data", "logs", "mcq_quaternary", "llm_calls", run_id)
+    os.makedirs(log_dir, exist_ok=True)
+    os.environ["LLM_CALL_LOG"] = os.path.join(log_dir, f"{phase}.jsonl")
+    print(f"  [LOG] LLM calls: {os.environ['LLM_CALL_LOG']}", flush=True)
+
+
+
+# ============================================================================================================================
+# SCHEMA VALIDATION
+# ============================================================================================================================
+def validate_question(q) -> None:
+    """Raise ValueError if a freshly-built question is malformed: options must be a
+    dict keyed by consecutive letters (A, B, C, D) with non-empty text, and
+    correct_answer must point at one of them."""
+    where = (q or {}).get("question_id", "<unknown>")
+    if not isinstance(q, dict):
+        raise ValueError(f"Question must be a JSON object for {where}, got {type(q).__name__}")
+    options = q.get("options")
+    if not isinstance(options, dict) or not options:
+        raise ValueError(f"Question schema failed for {where}: options missing/empty")
+    expected = LETTERS[:len(options)]
+    if list(options.keys()) != expected:
+        raise ValueError(f"Question schema failed for {where}: option letters {list(options.keys())} != {expected}")
+    for letter, text in options.items():
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError(f"Question schema failed for {where}: option {letter} empty")
+    if q.get("correct_answer") not in options:
+        raise ValueError(f"Question schema failed for {where}: correct_answer={q.get('correct_answer')!r} not an option letter")
+
 
 
 # ============================================================================================================================
@@ -315,10 +375,7 @@ def _cosine(a, b) -> float:
     return dot / (na * nb + 1e-9)
 
 
-def find_top_k(target: dict, entries: list[dict],
-               ctx_emb: dict, behav_emb: dict, interv_emb: dict,
-               eff_key: str, response_type: str,
-               top_k: int = TOP_K_CANDIDATES) -> list[tuple[dict, int]]:
+def find_top_k(target: dict, entries: list[dict], ctx_emb: dict, behav_emb: dict, interv_emb: dict, eff_key: str, response_type: str, top_k: int = TOP_K_CANDIDATES) -> list[tuple[dict, int]]:
     """Top-K (scenario, eff_idx) candidates ranked by combined score:
         score = ctx_sim × (1 - behav_sim) × (1 - max_interv_sim)
     Every effective intervention of every candidate scenario is scored (not just
@@ -371,11 +428,7 @@ def find_top_k(target: dict, entries: list[dict],
 # ============================================================================================================================
 # DISTRACTOR SELECTION
 # ============================================================================================================================
-def select_distractors(target: dict, dialogue: str, response_type: str,
-                       correct_instruction: str,
-                       sibling_instructions: list[str],
-                       candidates: list[tuple[dict, int]],
-                       eff_key: str) -> tuple[list[tuple[dict, int]], list[bool]] | None:
+def select_distractors(target: dict, dialogue: str, response_type: str, correct_instruction: str, sibling_instructions: list[str], candidates: list[tuple[dict, int]], eff_key: str) -> tuple[list[tuple[dict, int]], list[bool]] | None:
     """LLM judge picks the 3 best-fitting (scenario, eff_idx) candidates (dropping
     off-setting or near-duplicate ones), always returns 3, and flags the slots it
     was forced to fill with a poor-fit candidate. Returns (3 (entry, idx) pairs,
@@ -441,9 +494,7 @@ def select_distractors(target: dict, dialogue: str, response_type: str,
 # ============================================================================================================================
 # OPTION ADAPTATION
 # ============================================================================================================================
-def adapt_options(target: dict, dialogue: str, response_type: str,
-                  correct: dict, distractors: list[tuple[dict, int]],
-                  eff_key: str) -> dict | None:
+def adapt_options(target: dict, dialogue: str, response_type: str, correct: dict, distractors: list[tuple[dict, int]], eff_key: str) -> dict | None:
     """Surface-align correct + 3 distractors in a single LLM call. Each distractor
     is an (entry, eff_idx) pair. Returns dict with adapted strings + edit metadata,
     or None on failure."""
@@ -512,23 +563,34 @@ def build_one(args: tuple) -> dict | None:
     if len(candidates) < 3:
         return None
 
-    sel = select_distractors(
-        entry, dlg, response_type,
-        correct_instruction, sibling_instructions,
-        candidates, eff_key,
+    _log_token = set_log_context(
+        phase="build",
+        category_id=entry["category_id"],
+        case_num=case_num,
+        response_type=response_type,
+        effective_idx=eff_idx,
+        model=ADAPT_MODEL_NAME,
     )
-    if sel is None:
-        return None
-    distractors, forced_flags = sel
+    try:
+        sel = select_distractors(
+            entry, dlg, response_type,
+            correct_instruction, sibling_instructions,
+            candidates, eff_key,
+        )
+        if sel is None:
+            return None
+        distractors, forced_flags = sel
 
-    dist_entries = [d for d, _ in distractors]
-    raw_distractor_instructions = [
-        _eff_instruction(d[eff_key], di) for d, di in distractors
-    ]
-    if any(not t for t in raw_distractor_instructions):
-        return None
+        dist_entries = [d for d, _ in distractors]
+        raw_distractor_instructions = [
+            _eff_instruction(d[eff_key], di) for d, di in distractors
+        ]
+        if any(not t for t in raw_distractor_instructions):
+            return None
 
-    adapted = adapt_options(entry, dlg, response_type, correct, distractors, eff_key)
+        adapted = adapt_options(entry, dlg, response_type, correct, distractors, eff_key)
+    finally:
+        reset_log_context(_log_token)
     if adapted is None:
         return None
 
@@ -569,7 +631,7 @@ def build_one(args: tuple) -> dict | None:
         if role == "correct":
             correct_letter = letter
 
-    return {
+    q = {
         "question_id":     f"{entry['category_id']}_case_{case_num:03d}_{response_type}_eff{eff_idx}_quaternary",
         "category_id":     entry["category_id"],
         "scenario_id":     entry["scenario_id"],
@@ -589,9 +651,16 @@ def build_one(args: tuple) -> dict | None:
         "edit_level":      adapted.get("edit_level", "unknown"),
         "edit_notes":      adapted.get("edit_notes", ""),
     }
+    try:
+        validate_question(q)
+    except ValueError as e:
+        print(f"  [SKIP] malformed question: {e}", flush=True)
+        return None
+    return q
 
 
 def build(sample: int = 0, workers: int = 8):
+    _setup_llm_log("build")
     os.makedirs(QUESTIONS_DIR, exist_ok=True)
     entries = load_scenarios()
     print(f"Loaded {len(entries)} actionable scenarios.")
@@ -637,23 +706,23 @@ def build(sample: int = 0, workers: int = 8):
 # ============================================================================================================================
 # RUN
 # ============================================================================================================================
+# Resume skip-check: RESULTS_DIR is scanned once into a set of "{question_id}_{safe_model}"
+# keys so the per-question existence check is O(1) instead of one glob per question.
+_EXISTING_RESULTS: set[str] = set()
+
+
+def _index_existing_results() -> None:
+    """Populate _EXISTING_RESULTS from filenames '{qid}_{safe}_{YYYYMMDD}_{HHMMSS}.json'."""
+    _EXISTING_RESULTS.clear()
+    for f in glob.glob(os.path.join(RESULTS_DIR, "*.json")):
+        stem = os.path.basename(f)[:-5]          # drop '.json'
+        parts = stem.rsplit("_", 2)              # strip trailing _<date>_<time>
+        if len(parts) == 3:
+            _EXISTING_RESULTS.add(parts[0])      # "{qid}_{safe}"
+
+
 def _result_exists(question_id: str, model_name: str) -> bool:
-    safe = model_name.replace("/", "-")
-    return bool(glob.glob(os.path.join(RESULTS_DIR, f"{question_id}_{safe}_*.json")))
-
-
-def _parse_answer(raw: str) -> tuple[str, str]:
-    try:
-        parsed = extract_json(raw)
-    except Exception:
-        parsed = None
-    if isinstance(parsed, dict):
-        ans = str(parsed.get("answer", "")).strip().upper()
-        rsn = str(parsed.get("reasoning", "")).strip()
-        if ans in LETTERS:
-            return ans, rsn
-    m = re.search(r'\b([ABCD])\b', raw.upper())
-    return (m.group(1) if m else ""), raw.strip()
+    return f"{question_id}_{model_name.replace('/', '-')}" in _EXISTING_RESULTS
 
 
 def run_one(args: tuple) -> dict | None:
@@ -664,6 +733,16 @@ def run_one(args: tuple) -> dict | None:
         return None
     options_text = "\n".join(f"{letter}) {text}" for letter, text in q["options"].items())
     print(f"  [{idx}/{total}] {qid} @ {model_name}", end="", flush=True)
+    _log_token = set_log_context(
+        phase="run",
+        question_id=qid,
+        category_id=q["category_id"],
+        case_num=q["case_num"],
+        response_type=q["response_type"],
+        difficulty=q["difficulty"],
+        challenge_type=q["challenge_type"],
+        model=model_name,
+    )
     try:
         raw = generate_llm_response(
             "mcq_evaluate",
@@ -673,12 +752,33 @@ def run_one(args: tuple) -> dict | None:
     except Exception as e:
         print(f" [ERROR: {type(e).__name__}: {str(e)[:80]}]")
         return None
+    finally:
+        reset_log_context(_log_token)
     if raw is None:
         print(" [FAILED]")
         return None
-    answer, reasoning = _parse_answer(raw)
-    is_correct = answer == q["correct_answer"]
-    print(f" → {answer} ({'✓' if is_correct else '✗'})")
+
+    # Classify the structured answer (see ANSWER CLASSIFICATION in the header).
+    # Every outcome is saved so denominators stay consistent across models.
+    valid_letters = set(q["options"].keys())
+    try:
+        parsed = extract_json(raw)
+    except Exception:
+        parsed = None
+    answer_status, answer, reasoning = "invalid", "", ""
+    if isinstance(parsed, dict):
+        raw_answer = parsed.get("answer")
+        raw_reason = parsed.get("reasoning")
+        reasoning  = raw_reason.strip() if isinstance(raw_reason, str) else ""
+        if isinstance(raw_answer, str) and raw_answer.strip():
+            letter = raw_answer.strip().upper()
+            if letter in valid_letters:
+                answer, answer_status = letter, "committed"
+            else:
+                answer, answer_status = raw_answer.strip()[:200], "abstained"
+    is_correct = answer_status == "committed" and answer == q["correct_answer"]
+    mark = {"committed": ("✓" if is_correct else "✗"), "abstained": "ABSTAIN", "invalid": "INVALID"}[answer_status]
+    print(f" → {answer if answer_status == 'committed' else answer_status} ({mark})")
 
     result = {
         "question_id":    qid,
@@ -690,6 +790,7 @@ def run_one(args: tuple) -> dict | None:
         "model":          model_name,
         "correct_answer": q["correct_answer"],
         "model_answer":   answer,
+        "answer_status":  answer_status,
         "is_correct":     is_correct,
         "reasoning":      reasoning,
         "evaluated_at":   datetime.now().isoformat(),
@@ -701,8 +802,9 @@ def run_one(args: tuple) -> dict | None:
     return result
 
 
-def run(workers: int = 5, config_path: str = "config/config_response.json",
-        sample: int = 0):
+def run(workers: int = 5, config_path: str = "config/config_response.json", sample: int = 0):
+    _setup_llm_log("run")
+    _index_existing_results()
     questions = []
     for f in sorted(glob.glob(os.path.join(QUESTIONS_DIR, "*.json"))):
         with open(f, encoding="utf-8") as fp:
@@ -749,8 +851,23 @@ def run(workers: int = 5, config_path: str = "config/config_response.json",
 # SUMMARY
 # ============================================================================================================================
 def _acc(rs):
+    # Accuracy is over committed answers only. Abstentions and invalids are tracked
+    # as rates, not folded into the accuracy denominator.
+    # Legacy results without answer_status predate the split — they were all committed.
     n = len(rs)
-    return {"n": n, "accuracy": round(sum(r["is_correct"] for r in rs)/n, 4) if n else None}
+    committed   = [r for r in rs if r.get("answer_status", "committed") == "committed"]
+    n_abstained = sum(1 for r in rs if r.get("answer_status") == "abstained")
+    n_invalid   = sum(1 for r in rs if r.get("answer_status") == "invalid")
+    nc = len(committed)
+    return {
+        "n":               n,
+        "n_committed":     nc,
+        "n_abstained":     n_abstained,
+        "n_invalid":       n_invalid,
+        "abstention_rate": round(n_abstained / n, 4) if n else None,
+        "invalid_rate":    round(n_invalid / n, 4) if n else None,
+        "accuracy":        round(sum(r["is_correct"] for r in committed) / nc, 4) if nc else None,
+    }
 
 
 def summarize():
@@ -788,10 +905,13 @@ def summarize():
         json.dump(summary, fp, indent=2, ensure_ascii=False)
     print(f"Summary saved: {out}")
     for model, s in summary["by_model"].items():
-        if s['accuracy'] is not None:
-            print(f"  {model}: {s['n']} questions, {s['accuracy']*100:.1f}% accuracy")
+        if s["accuracy"] is not None:
+            print(f"  {model}: {s['accuracy']*100:.1f}% accuracy "
+                  f"(committed {s['n_committed']}/{s['n']}, "
+                  f"abstain {s['abstention_rate']*100:.1f}%, invalid {s['invalid_rate']*100:.1f}%)")
         else:
-            print(f"  {model}: n={s['n']}")
+            print(f"  {model}: n={s['n']}, no committed answers "
+                  f"(abstain {s['abstention_rate']*100:.1f}%, invalid {s['invalid_rate']*100:.1f}%)")
 
 
 
@@ -799,7 +919,7 @@ def summarize():
 # MAIN
 # ============================================================================================================================
 def main():
-    ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    ap = argparse.ArgumentParser(description="Quaternary MCQ pipeline: 1 correct + 3 distractors from similar-context scenarios.")
     ap.add_argument("--build",   action="store_true")
     ap.add_argument("--run",     action="store_true")
     ap.add_argument("--summary", action="store_true")

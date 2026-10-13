@@ -1,7 +1,7 @@
 # TutorCaseBench Code
 
 The main pipeline takes pedagogical case-study papers (PDFs) as input and automatically constructs dialogue datasets for evaluating LLM tutors.
-Codes are mainly consisted of 3 parts: main data construction pipeline, rubric-based evaluation pipeline, and MCQ generation & evaluation pipeline.
+The code mainly consists of 3 parts: main data construction pipeline, rubric-based evaluation pipeline, and MCQ generation & evaluation pipeline.
 
 ---
 
@@ -29,6 +29,7 @@ See the [.env.local section](#-envlocal).
 project_root/
 │
 ├── .env.local                          # API keys
+├── requirements.txt                    # Python dependencies
 │
 ├── main.py                             # Main pipeline (Pipelines 1–5)
 ├── evaluation_pipeline.py              # Rubric generation + response evaluation
@@ -406,7 +407,7 @@ python run_study_group.py data/docs/study_group/ --skip-response-generation
 |------|------|
 | `analyze_paper_utils.py` | Extracts text from PDFs using PyPDF2. Inserts `#PAGE{n}#` markers per page. Supports `excluded_pages`. |
 | `prompt_utils.py` | Loads `prompts/{name}.txt` and substitutes `{KEY}` placeholders. JSON parsing with `json_repair` fallback. |
-| `llm_utils.py` | Supports 6 LLM engines: OpenAI / Gemini / Bedrock (Claude) / Vertex AI (Claude) / Vertex OpenAI / Together. Includes retry logic and token usage logging via `LLM_CALL_LOG`. |
+| `llm_utils.py` | Supports 7 LLM engines: OpenAI / Gemini / Bedrock (Claude) / Vertex AI (Claude) / Vertex OpenAI / Together / OpenRouter. Includes retry logic and token usage logging via `LLM_CALL_LOG`. |
 | `output_utils.py` | Saves files as `data/{pipeline_name}/{step}_{id}_{timestamp}.json`. |
 | `generate_dialogue_utils.py` | Generates `immediate` and `long_term` `.txt` evaluation files from `synthesize_dialogue` output. |
 | `generate_response_utils.py` | Collects responses from all models in `config_response.json` for each dialogue file. Skips if file already exists. |
@@ -504,7 +505,7 @@ Defines the models used for response collection in Pipeline 5 and MCQ `--run`. T
     { "name": "gemma-4-31b-it",                                     "model_type": "gemini",       "description": "Gemma 4 31B Instruct (AI Studio)" },
     { "name": "deepseek-ai/DeepSeek-V4-Pro",                        "model_type": "together",     "description": "DeepSeek V4 Pro (Together)" },
     { "name": "openai/gpt-oss-120b",                                "model_type": "together",     "description": "GPT-OSS 120B (Together)" },
-    { "name": "Qwen/Qwen3.5-397B-A17B",                             "model_type": "together",     "description": "Qwen 3.5 397B MoE (Together)" }
+    { "name": "qwen/qwen3.5-397b-a17b",                             "model_type": "openrouter",     "description": "Qwen 3.5 397B MoE (OpenRouter)" }
   ],
   "output_dirs": {
     "dialogue": "data/pipeline4/dialogue",
@@ -520,11 +521,13 @@ Configures the rubric generation model, the evaluation model, and the list of mo
 {
   "rubric_model": {
     "model_type": "gemini",
-    "model_name": "gemini-3.1-pro-preview"
+    "model_name": "gemini-3.1-pro-preview",
+    "thinking_level": "HIGH"
   },
   "evaluation_model": {
     "model_type": "gemini",
-    "model_name": "gemini-3.1-pro-preview"
+    "model_name": "gemini-3.1-pro-preview",
+    "thinking_level": "HIGH"
   },
   "models_to_test": [
     { "name": "claude-opus-4-7",                                    "model_type": "vertex",       "description": "Claude Opus 4.7 (Vertex)" },
@@ -537,7 +540,7 @@ Configures the rubric generation model, the evaluation model, and the list of mo
     { "name": "gemma-4-31b-it",                                     "model_type": "gemini",       "description": "Gemma 4 31B Instruct (AI Studio)" },
     { "name": "deepseek-ai/DeepSeek-V4-Pro",                        "model_type": "together",     "description": "DeepSeek V4 Pro (Together)" },
     { "name": "openai/gpt-oss-120b",                                "model_type": "together",     "description": "GPT-OSS 120B (Together)" },
-    { "name": "Qwen/Qwen3.5-397B-A17B",                             "model_type": "together",     "description": "Qwen 3.5 397B MoE (Together)" }
+    { "name": "qwen/qwen3.5-397b-a17b",                             "model_type": "openrouter",     "description": "Qwen 3.5 397B MoE (Together)" }
   ]
 }
 ```
@@ -576,8 +579,8 @@ VERTEX_OAI_REGION=us-east5          # region varies by model (Llama 4: us-east5)
 # ── Together AI (model_type: "together") ───────────────────────
 TOGETHER_API_KEY=...
 
-# ── LLM call log (optional — logs tokens/latency as JSONL when set) ──
-LLM_CALL_LOG=data/logs/llm_usage.jsonl
+# ── OpenRouter (model_type: "openrouter") ───────────────────────
+OPENROUTER_API_KEY=...
 ```
 
 ---
@@ -585,7 +588,7 @@ LLM_CALL_LOG=data/logs/llm_usage.jsonl
 ## 📦 Installation
 
 ```bash
-pip install PyPDF2 json-repair python-dotenv openai google-genai anthropic boto3 google-auth
+pip install -r requirements.txt
 ```
 
 Engine-specific optional installs:

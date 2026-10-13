@@ -3,12 +3,18 @@ import json
 import os
 import glob
 import re
+import sys
+import io
 import concurrent.futures
 from datetime import datetime
 
 from utils.prompt_utils import extract_json_from_response
-from utils.llm_utils import generate_llm_response
+from utils.llm_utils import generate_llm_response, set_log_context, reset_log_context
 from utils.generate_response_utils import safe_model_label
+
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 
 # =============================================================================
@@ -21,24 +27,31 @@ from utils.generate_response_utils import safe_model_label
 # immediate and long_term types are fully independent:
 # each produces its own result file and is never merged.
 #
+# Newly generated rubrics and evaluation results are schema-validated.
+# An invalid rubric raises ValueError; an invalid evaluation result is skipped (not saved).
+#
 # -----------------------------------------------------------------------------
 # PIPELINE FLOW
 # -----------------------------------------------------------------------------
 #
 #   [--rubric]
 #     Pipeline 3 output (build_scenario)      ─┐
-#     Pipeline 4 output (synthesize_dialogue) ─┼─► LLM ──► rubric_{id}_{ts}.json
+#     Pipeline 4 output (synthesize_dialogue) ─┼─► LLM ──► schema check ──► rubric_{id}_{ts}.json
 #     Prompt: generate_rubric.txt             ─┘
 #
 #   [--evaluate / --evaluate-all]
 #     rubric_{id}_{ts}.json                   ─┐
 #     Pipeline 4 output (synthesize_dialogue) ─┤
-#     Pipeline 5 output (response .txt)       ─┼─► LLM ──► {id}_case_{n}_{type}_{model}_{ts}.json
+#     Pipeline 5 output (response .txt)       ─┼─► LLM ──► schema check ──► {id}_case_{n}_{type}_{model}_{ts}.json
 #     Prompt: evaluate_with_rubric.txt        ─┘
 #
 #   [--summary-all]
 #     evaluation/result/*.json               ──► aggregate_summary_{ts}.json
 #                                                (breakdown by model & challenge type)
+#
+#   [--summary-rubric]
+#     evaluation/rubric/*.json               ──► rubric_summary_{ts}.json
+#                                                (coverage, criteria distribution, by challenge type)
 #
 # -----------------------------------------------------------------------------
 # USAGE
@@ -65,19 +78,31 @@ from utils.generate_response_utils import safe_model_label
 #   # Generate aggregate summary across all categories
 #   python evaluation_pipeline.py --summary-all
 #
+#   # Summarize all generated rubrics
+#   python evaluation_pipeline.py --summary-rubric
+#
+#   # Use a different data root (applies to every mode)
+#   python evaluation_pipeline.py --summary-all --data-root experiments/reference
+#
 # -----------------------------------------------------------------------------
 # OUTPUT DIRECTORY STRUCTURE
 # -----------------------------------------------------------------------------
 #
-#   data/
+#   data/                                                        # or --data-root
 #   ├── evaluation/
 #   │   ├── rubric/
 #   │   │   └── rubric_{cat_id}_{ts}.json                        # Generated rubric
 #   │   └── result/
 #   │       └── {cat_id}_case_{n}_{type}_{model}_{ts}.json       # Evaluation result (per type, independent)
-#   └── summaries/
-#       ├── evaluation_summary_{cat_id}_{ts}.json                # Per-category summary
-#       └── aggregate_summary_{ts}.json                          # Aggregate summary across all categories
+#   ├── summaries/
+#   │   ├── evaluation_summary_{cat_id}_{ts}.json                # Per-category summary
+#   │   ├── aggregate_summary_{ts}.json                          # Aggregate summary across all categories
+#   │   └── rubric_summary_{ts}.json                             # Rubric coverage summary
+#   └── logs/
+#       └── {scope}/llm_calls/{run_id}/{cat_id}.jsonl            # Per-call LLM usage log
+#                                                                # scope  = $PIPELINE_LOG_SCOPE (default: evaluation)
+#                                                                # run_id = $PIPELINE_RUN_ID (default: manual_{YYYYmmdd_HHMMSS})
+#                                                                # (logs are written relative to CWD, not --data-root)
 #
 # -----------------------------------------------------------------------------
 # RUBRIC SCORE FORMAT
@@ -117,14 +142,37 @@ def load_eval_config() -> dict:
 
 def get_model_kwargs(cfg: dict, role: str) -> dict:
     entry = cfg.get(role, {})
-    return {
+    kwargs = {
         "model_type": entry.get("model_type"),
         "model_name": entry.get("model_name"),
     }
+    if entry.get("thinking_level") is not None:
+        kwargs["thinking_level"] = entry["thinking_level"]
+    return kwargs
 
 
 def get_models_to_test(cfg: dict) -> list[str]:
     return [m["name"] for m in cfg.get("models_to_test", [])]
+
+
+def configure_eval_llm_log(category_id: str) -> str:
+    """Route provider call telemetry to a per-category JSONL file (mirrors main.py).
+
+    Reads a shared PIPELINE_RUN_ID / PIPELINE_LOG_SCOPE (set by run_evaluation for the
+    batch) so parallel category subprocesses land in one run dir; falls back to a manual
+    run id for standalone CLI use. Sets LLM_CALL_LOG so generate_llm_response appends to it.
+    """
+    run_id = os.environ.get("PIPELINE_RUN_ID")
+    if not run_id:
+        run_id = datetime.now().strftime("manual_%Y%m%d_%H%M%S")
+        os.environ["PIPELINE_RUN_ID"] = run_id
+    log_scope = os.environ.get("PIPELINE_LOG_SCOPE", "evaluation")
+    log_dir = os.path.join("data", "logs", log_scope, "llm_calls", run_id)
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(log_dir, f"{category_id}.jsonl")
+    os.environ["LLM_CALL_LOG"] = log_path
+    return log_path
+
 
 
 # ============================================================================================================================
@@ -240,6 +288,130 @@ def load_tutor_response(filepath: str) -> str | None:
 
 
 # ============================================================================================================================
+# SCHEMA VALIDATION
+# ============================================================================================================================
+def validate_rubric_schema(data: dict, category_id: str, expected_types: set[str]) -> None:
+    """Raise if a generated rubric is missing fields needed by the evaluation step.
+
+    expected_types: subset of {"immediate", "long_term"} that MUST be present (non-null),
+    derived from which effective interventions the target student actually has. Types not
+    in expected_types must be null (per the prompt's RUBRIC_TYPES contract).
+    """
+    errors = []
+
+    if not isinstance(data, dict):
+        raise ValueError(f"Rubric output must be a JSON object, got {type(data).__name__}")
+
+    if data.get("category_id") != category_id:
+        errors.append(f"category_id={data.get('category_id')!r}")
+    if not isinstance(data.get("student_description"), str) or not data.get("student_description").strip():
+        errors.append("student_description")
+
+    pa = data.get("principle_analysis")
+    if not isinstance(pa, dict):
+        errors.append("principle_analysis")
+    else:
+        for key in ["from_target_interventions", "student_specific_synthesis"]:
+            if not isinstance(pa.get(key), str):
+                errors.append(f"principle_analysis.{key}")
+        for key in ["immediate_candidate_principles", "long_term_candidate_principles"]:
+            if not isinstance(pa.get(key), list):
+                errors.append(f"principle_analysis.{key}")
+
+    for rtype in ["immediate", "long_term"]:
+        key = f"{rtype}_rubric"
+        value = data.get(key)
+        if rtype not in expected_types:
+            # No effective evidence for this type → prompt requires null.
+            if value is not None:
+                errors.append(f"{key}(expected null)")
+            continue
+        # Expected type → must be a non-empty criteria list.
+        if not isinstance(value, dict):
+            errors.append(f"{key}(expected non-null object)")
+            continue
+        criteria = value.get("criteria")
+        if not isinstance(criteria, list) or not criteria:
+            errors.append(f"{key}.criteria(non-empty list)")
+            continue
+        seen_ids = set()
+        for idx, crit in enumerate(criteria, start=1):
+            path = f"{key}.criteria[{idx}]"
+            if not isinstance(crit, dict):
+                errors.append(path)
+                continue
+            cid = crit.get("criterion_id")
+            if not isinstance(cid, int) or isinstance(cid, bool):
+                errors.append(f"{path}.criterion_id={cid!r}")
+            elif cid in seen_ids:
+                errors.append(f"{path}.criterion_id_duplicate={cid}")
+            else:
+                seen_ids.add(cid)
+            for field in ["criterion_name", "rationale", "check"]:
+                if not isinstance(crit.get(field), str) or not crit.get(field).strip():
+                    errors.append(f"{path}.{field}")
+
+    if not expected_types:
+        errors.append("no expected rubric types (target has no effective interventions)")
+
+    if errors:
+        raise ValueError(f"Rubric schema validation failed for {category_id}: {', '.join(errors[:20])}")
+
+
+def validate_evaluation_schema(eval_result: dict, category_id: str, case_num: str, response_type: str, rubric_section: dict) -> None:
+    """Raise if a grading output doesn't line up with the rubric it scored against.
+
+    Checks: one criteria_score per rubric criterion (matching criterion_ids), each
+    score is 0/1 with evidence, and n_criteria / total_score / any_satisfied are
+    internally consistent with criteria_scores.
+    """
+    where = f"{category_id}/case_{case_num}/{response_type}"
+    errors = []
+    if not isinstance(eval_result, dict):
+        raise ValueError(f"Evaluation output must be a JSON object for {where}, got {type(eval_result).__name__}")
+
+    expected_ids = [c.get("criterion_id") for c in rubric_section.get("criteria", [])]
+    scores = eval_result.get("criteria_scores")
+    if not isinstance(scores, list):
+        raise ValueError(f"Evaluation schema failed for {where}: criteria_scores missing/not a list")
+
+    if len(scores) != len(expected_ids):
+        errors.append(f"criteria_scores.len={len(scores)} expected={len(expected_ids)}")
+
+    total = 0
+    for idx, cs in enumerate(scores, start=1):
+        path = f"criteria_scores[{idx}]"
+        if not isinstance(cs, dict):
+            errors.append(path); continue
+        cid = cs.get("criterion_id")
+        if not isinstance(cid, int) or isinstance(cid, bool):
+            errors.append(f"{path}.criterion_id={cid!r}")
+        elif cid not in expected_ids:
+            errors.append(f"{path}.unknown_criterion_id={cid}")
+        sc = cs.get("score")
+        if sc not in (0, 1):
+            errors.append(f"{path}.score={sc!r}")
+        else:
+            total += sc
+        if not isinstance(cs.get("evidence"), str) or not cs.get("evidence", "").strip():
+            errors.append(f"{path}.evidence")
+
+    n = eval_result.get("n_criteria")
+    if n != len(scores):
+        errors.append(f"n_criteria={n!r} != {len(scores)}")
+    ts = eval_result.get("total_score")
+    if ts != total:
+        errors.append(f"total_score={ts!r} != sum {total}")
+    asf = eval_result.get("any_satisfied")
+    if not isinstance(asf, bool) or asf != (total > 0):
+        errors.append(f"any_satisfied={asf!r} (expected {total > 0})")
+
+    if errors:
+        raise ValueError(f"Evaluation schema failed for {where}: {', '.join(errors[:20])}")
+
+
+
+# ============================================================================================================================
 # STEP 1 — Target student interventions
 # ============================================================================================================================
 def collect_target_interventions(scenario_data: dict) -> dict:
@@ -265,11 +437,7 @@ def collect_target_interventions(scenario_data: dict) -> dict:
 # ============================================================================================================================
 # STEP 2 — Generate rubric via LLM
 # ============================================================================================================================
-def build_rubric_context(
-    scenario_data: dict,
-    target_interventions: dict,
-    dialogue_examples: str = "",
-) -> dict:
+def build_rubric_context(scenario_data: dict, target_interventions: dict, dialogue_examples: str = "") -> dict:
     student_persona = scenario_data.get("student_persona", {})
     challenge       = scenario_data.get("challenge_categorization", {})
 
@@ -299,6 +467,7 @@ def generate_rubric(category_id: str, cfg: dict, model: str = "auto") -> tuple[d
     print("RUBRIC GENERATION")
     print("=" * 70)
     print(f"\nCategory ID : {category_id}\n")
+    print(f"  [LOG] LLM calls: {configure_eval_llm_log(category_id)}")
 
     # Skip if rubric already exists
     existing_rubric, existing_path = load_rubric(category_id)
@@ -336,6 +505,12 @@ def generate_rubric(category_id: str, cfg: dict, model: str = "auto") -> tuple[d
     rubric_data["category_id"]  = category_id
     rubric_data["generated_at"] = datetime.now().isoformat()
 
+    # Validate against the rubric types this student actually has evidence for
+    _expected_types = set()
+    if target_interventions.get("effective_immediate"): _expected_types.add("immediate")
+    if target_interventions.get("effective_long_term"): _expected_types.add("long_term")
+    validate_rubric_schema(rubric_data, category_id, _expected_types)
+
     rdir = _rubric_dir(category_id)
     os.makedirs(rdir, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -345,6 +520,7 @@ def generate_rubric(category_id: str, cfg: dict, model: str = "auto") -> tuple[d
     print(f"  Rubric saved to: {json_path}")
 
     return rubric_data, json_path
+
 
 
 # ============================================================================================================================
@@ -385,17 +561,7 @@ def _already_evaluated(category_id: str, case_num: str, response_type: str, mode
     return matches[-1] if matches else None
 
 
-def _evaluate_one(
-    category_id:   str,
-    case_num:      str,
-    response_type: str,
-    response_path: str,
-    rubric_data:   dict,
-    rubric_path:   str,
-    dialogue_case: dict,
-    eval_kwargs:   dict,
-    result_dir:    str | None = None,
-) -> dict | None:
+def _evaluate_one(category_id: str, case_num: str, response_type: str, response_path: str, rubric_data: dict, rubric_path: str, dialogue_case: dict, eval_kwargs: dict, result_dir: str | None = None) -> dict | None:
     rubric_key     = f"{response_type}_rubric"
     rubric_section = rubric_data.get(rubric_key)
     if not rubric_section:
@@ -415,18 +581,35 @@ def _evaluate_one(
         "TUTOR_RESPONSE":      tutor_response,
     }
 
+    # Tag this call's usage-log record with the case / response it graded
+    model_label = _extract_model_label(response_path)
+    log_token = set_log_context(
+        phase="evaluation",
+        category_id=category_id,
+        case_num=case_num,
+        response_type=response_type,
+        response_model=model_label,
+        response_file=os.path.basename(response_path),
+    )
     print(f"  >>> [{response_type}] Calling LLM...")
-    raw = generate_llm_response("evaluate_with_rubric", prompt_vars, **eval_kwargs)
+    try:
+        raw = generate_llm_response("evaluate_with_rubric", prompt_vars, **eval_kwargs)
+    finally:
+        reset_log_context(log_token)
     if not raw:
         print(f"  Error: No LLM response ({response_type})")
         return None
-
-    model_label = _extract_model_label(response_path)
 
     try:
         eval_result = extract_json_from_response(raw)
     except Exception as e:
         print(f"  Error: JSON parsing failed ({response_type}) — {e}")
+        return None
+
+    try:
+        validate_evaluation_schema(eval_result, category_id, case_num, response_type, rubric_section)
+    except ValueError as e:
+        print(f"  Error: {e}")
         return None
 
     eval_data = {
@@ -451,18 +634,12 @@ def _evaluate_one(
     return eval_data
 
 
-def run_evaluation(
-    category_id: str,
-    case_num: str,
-    cfg: dict,
-    immediate_path: str | None = None,
-    long_term_path: str | None = None,
-    model: str = "auto",
-) -> list[dict]:
+def run_evaluation(category_id: str, case_num: str, cfg: dict, immediate_path: str | None = None, long_term_path: str | None = None, model: str = "auto") -> list[dict]:
     print("\n" + "=" * 70)
     print("RUBRIC-BASED EVALUATION")
     print("=" * 70)
     print(f"\nCategory ID : {category_id}  |  Case : {case_num}\n")
+    print(f"  [LOG] LLM calls: {configure_eval_llm_log(category_id)}")
 
     if not immediate_path and not long_term_path:
         print("  Error: At least one of --immediate or --long-term must be provided")
@@ -513,11 +690,12 @@ def run_evaluation(
     return results
 
 
+
 # ============================================================================================================================
 # EVALUATE ALL
 # ============================================================================================================================
-def run_evaluate_all(category_id: str, cfg: dict, response_types: list[str],
-                     model: str = "auto", workers: int = 1):
+def run_evaluate_all(category_id: str, cfg: dict, response_types: list[str], model: str = "auto", workers: int = 1):
+    print(f"  [LOG] LLM calls: {configure_eval_llm_log(category_id)}")
     data_root    = _get_data_root(category_id)
     response_dir = os.path.join(data_root, "pipeline5", "response")
     result_dir   = _result_dir(category_id)
@@ -738,7 +916,7 @@ def generate_aggregate_summary() -> tuple[dict, str] | tuple[None, None]:
     """Aggregate evaluation results across ALL categories, broken down by challenge type."""
     from collections import defaultdict
 
-    data_roots = [os.path.join(BASE_DIR, "data")]
+    data_roots = [_get_data_root("")]
 
     challenge_type_cache: dict[str, str] = {}
 
@@ -795,7 +973,7 @@ def generate_aggregate_summary() -> tuple[dict, str] | tuple[None, None]:
         },
     }
 
-    summ_dir = os.path.join(BASE_DIR, "data", "summaries")
+    summ_dir = os.path.join(_get_data_root(""), "summaries")
     os.makedirs(summ_dir, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     out_path = os.path.join(summ_dir, f"aggregate_summary_{ts}.json")
@@ -804,6 +982,75 @@ def generate_aggregate_summary() -> tuple[dict, str] | tuple[None, None]:
 
     print(f"\n  Aggregate summary saved: {out_path}")
     print(f"  Total evaluated: {len(all_scores_flat)} across {len(scores_by_challenge)} challenge type(s)")
+    return summary, out_path
+
+
+def generate_rubric_summary() -> tuple[dict, str] | tuple[None, None]:
+    """Summarize all generated rubrics (coverage, criteria distribution, by challenge type)."""
+    import statistics as _st
+
+    # Latest rubric per category
+    rubric_root = os.path.join(_get_data_root(""), "evaluation", "rubric")
+    by_cat: dict[str, tuple[str, str]] = {}
+    for f in glob.glob(os.path.join(rubric_root, "rubric_*.json")):
+        m = re.search(r'rubric_(\d{4}-\d{2})_(\d{8}_\d{6})\.json', os.path.basename(f))
+        if not m:
+            continue
+        cid, ts = m.group(1), m.group(2)
+        if cid not in by_cat or ts > by_cat[cid][1]:
+            by_cat[cid] = (f, ts)
+    if not by_cat:
+        print("  No rubrics found.")
+        return None, None
+
+    imm_crit, lt_crit = [], []
+    both = imm_only = lt_only = thin = total_criteria = 0
+    ct_cnt: dict[str, int] = {}
+    ct_sum: dict[str, int] = {}
+    for cid, (f, _ts) in by_cat.items():
+        d = load_json(f) or {}
+        ir, lr = d.get("immediate_rubric"), d.get("long_term_rubric")
+        ni = len(ir["criteria"]) if isinstance(ir, dict) else 0
+        nl = len(lr["criteria"]) if isinstance(lr, dict) else 0
+        if isinstance(ir, dict) and isinstance(lr, dict): both += 1
+        elif isinstance(ir, dict): imm_only += 1
+        elif isinstance(lr, dict): lt_only += 1
+        if isinstance(ir, dict): imm_crit.append(ni)
+        if isinstance(lr, dict): lt_crit.append(nl)
+        if isinstance(ir, dict) and ni <= 1: thin += 1
+        total_criteria += ni + nl
+        ct = _get_challenge_type(cid, silent=True) or "unknown"
+        ct_cnt[ct] = ct_cnt.get(ct, 0) + 1
+        ct_sum[ct] = ct_sum.get(ct, 0) + ni + nl
+
+    def _stats(lst):
+        return {"n": len(lst), "min": min(lst), "max": max(lst), "mean": round(_st.mean(lst), 2)} if lst else {"n": 0}
+
+    summary = {
+        "generated_at": datetime.now().isoformat(),
+        "coverage": {"categories_with_rubric": len(by_cat), "total_criteria": total_criteria},
+        "composition": {"both_tracks": both, "immediate_only": imm_only, "long_term_only": lt_only},
+        "criteria_stats": {
+            "immediate": _stats(imm_crit),
+            "long_term": _stats(lt_crit),
+            "thin_immediate_le1": thin,
+        },
+        "by_challenge_type": {
+            ct: {"categories": ct_cnt[ct], "avg_criteria": round(ct_sum[ct] / ct_cnt[ct], 2)}
+            for ct in sorted(ct_cnt)
+        },
+    }
+
+    summ_dir = os.path.join(_get_data_root(""), "summaries")
+    os.makedirs(summ_dir, exist_ok=True)
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    out_path = os.path.join(summ_dir, f"rubric_summary_{ts}.json")
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2, ensure_ascii=False)
+
+    print(f"\n  Rubric summary saved: {out_path}")
+    print(f"  Categories: {len(by_cat)} | Total criteria: {total_criteria} "
+          f"| both={both} immediate_only={imm_only} long_term_only={lt_only}")
     return summary, out_path
 
 
@@ -848,10 +1095,12 @@ def main():
     mode.add_argument("--evaluate",     action="store_true", help="Evaluate a specific response file")
     mode.add_argument("--evaluate-all", action="store_true", dest="evaluate_all",
                       help="Evaluate all response files (one job per file, independent)")
+    mode.add_argument("--summary-rubric", action="store_true", dest="summary_rubric",
+                      help="Summarize all generated rubrics (coverage, criteria, by challenge type)")
     mode.add_argument("--summary-all",  action="store_true", dest="summary_all",
                       help="Aggregate evaluation results across all categories by challenge type")
 
-    parser.add_argument("--id",        default=None, help="Category ID (e.g., 0001-01) — required for all modes except --summary-all")
+    parser.add_argument("--id",        default=None, help="Category ID (e.g., 0001-01) — required for all modes except --summary-all / --summary-rubric")
     parser.add_argument("--case",      default="001",  help="Case number for --evaluate (default: 001)")
     parser.add_argument("--immediate", help="[--evaluate] Path to immediate response .txt file")
     parser.add_argument("--long-term", dest="long_term", help="[--evaluate] Path to long-term response .txt file")
@@ -865,7 +1114,7 @@ def main():
     parser.add_argument("--workers",        type=int, default=1,
                         help="Max parallel workers for evaluation within a category (default: 1)")
     parser.add_argument("--data-root", dest="data_root", default=None,
-                        help="Override data root directory (e.g. experiments/rag)")
+                        help="Override data root directory (e.g. experiments/reference)")
 
     args = parser.parse_args()
     category_id = args.id
@@ -874,7 +1123,7 @@ def main():
         global _DATA_ROOT_OVERRIDE
         _DATA_ROOT_OVERRIDE = os.path.abspath(args.data_root)
 
-    if not args.summary_all and not category_id:
+    if not args.summary_all and not args.summary_rubric and not category_id:
         parser.error("--id is required for this mode")
 
     if args.config == EVAL_CONFIG_FILE:
@@ -887,6 +1136,9 @@ def main():
 
     if args.summary_all:
         generate_aggregate_summary()
+
+    elif args.summary_rubric:
+        generate_rubric_summary()
 
     elif args.rubric:
         rubric_data, rubric_path = generate_rubric(category_id, cfg=cfg, model=args.model)

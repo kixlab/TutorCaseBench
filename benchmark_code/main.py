@@ -1,9 +1,12 @@
 import argparse
 import json
 import random
+import sys
+import io
 import os
 import re
 from glob import glob
+from datetime import datetime
 
 from utils.analyze_paper_utils import extract_text_from_pdf
 from utils.prompt_utils import extract_json_from_response
@@ -12,6 +15,10 @@ from utils.output_utils import save_json_output
 from utils.generate_dialogue_utils import generate_all_dialogue_files
 from utils.generate_response_utils import collect_model_responses
 from utils.pipeline_utils import auto_resolve_dependencies, resolve_pipeline_output
+
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 
 # =============================================================================
@@ -22,6 +29,7 @@ from utils.pipeline_utils import auto_resolve_dependencies, resolve_pipeline_out
 # to automatically construct dialogue datasets for evaluating LLM tutors.
 #
 # Each stage is automatically skipped if its output already exists.
+# Newly generated outputs (P1–P4) are schema-validated; a validation failure raises ValueError.
 #
 # -----------------------------------------------------------------------------
 # PIPELINE FLOW
@@ -70,7 +78,9 @@ from utils.pipeline_utils import auto_resolve_dependencies, resolve_pipeline_out
 #
 #   data/
 #   ├── logs/
-#   │   └── {paper_id}.txt                                        # Pipeline run log
+#   │   └── {scope}/                                              # PIPELINE_LOG_SCOPE (pipeline1..5 / full_pipeline / manual)
+#   │       ├── pipeline_detail/{run_id}/{paper_id}.txt           # Pipeline run log
+#   │       └── llm_calls/{run_id}/{paper_id}.jsonl               # Per-call LLM usage log
 #   │
 #   ├── pipeline1/
 #   │   ├── screen_paper/
@@ -105,7 +115,18 @@ from utils.pipeline_utils import auto_resolve_dependencies, resolve_pipeline_out
 #   screen_paper  : Paper rejected if any of the 3 dims
 #                   (student_behavior / learning_context / teacher_actions) scores below 3
 #   analyze_paper : Category excluded if any of the 3 dims scores 3 or below
+#                   (missing or invalid scores are treated as 0 → fail)
 #   extract_excerpt: Category excluded if learner or instruction excerpt count is 0
+#   build_scenario: Scenario skipped in P4 unless it has task / context / trigger /
+#                   behavior_patterns and at least one effective strategy
+#
+# -----------------------------------------------------------------------------
+# ENVIRONMENT VARIABLES
+# -----------------------------------------------------------------------------
+#
+#   PIPELINE_RUN_ID    : Run identifier for log folders (default: manual_{YYYYmmdd_HHMMSS})
+#   PIPELINE_LOG_SCOPE : Log scope folder (default: derived from --pipelineN-only flags)
+#   LLM_CALL_LOG       : Set automatically per paper by configure_paper_llm_log()
 #
 # =============================================================================
 
@@ -116,12 +137,21 @@ from utils.pipeline_utils import auto_resolve_dependencies, resolve_pipeline_out
 class PipelineLogger:
     def __init__(self, paper_id: str):
         self.paper_id = paper_id
-        self.log_dir = os.path.join("data", "logs")
+        run_id = os.environ.get("PIPELINE_RUN_ID")
+        if not run_id:
+            run_id = datetime.now().strftime("manual_%Y%m%d_%H%M%S")
+            os.environ["PIPELINE_RUN_ID"] = run_id
+        log_scope = os.environ.get("PIPELINE_LOG_SCOPE", "manual")
+        self.run_id = run_id
+        self.log_scope = log_scope
+        self.log_dir = os.path.join("data", "logs", log_scope, "pipeline_detail", run_id)
         os.makedirs(self.log_dir, exist_ok=True)
         self.log_path = os.path.join(self.log_dir, f"{paper_id}.txt")
         # Write header once
         with open(self.log_path, "a", encoding="utf-8") as f:
             f.write(f"\n{'='*60}\n")
+            f.write(f"[LOG] run_id={run_id}\n")
+            f.write(f"[LOG] pipeline={log_scope}\n")
             f.write(f"[LOG] paper_id={paper_id}\n")
             f.write(f"{'='*60}\n")
 
@@ -191,6 +221,42 @@ class PipelineLogger:
 # ============================================================================================================================
 # HELPERS
 # ============================================================================================================================
+def configure_paper_llm_log(paper_id: str) -> str:
+    """Route provider call telemetry to a per-paper JSONL file."""
+    run_id = os.environ.get("PIPELINE_RUN_ID")
+    if not run_id:
+        run_id = datetime.now().strftime("manual_%Y%m%d_%H%M%S")
+        os.environ["PIPELINE_RUN_ID"] = run_id
+    log_scope = os.environ.get("PIPELINE_LOG_SCOPE", "manual")
+    log_dir = os.path.join("data", "logs", log_scope, "llm_calls", run_id)
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(log_dir, f"{paper_id}.jsonl")
+    os.environ["LLM_CALL_LOG"] = log_path
+    return log_path
+
+
+def determine_log_scope(args) -> str:
+    if getattr(args, "pipeline1_only", False):
+        return "pipeline1"
+    if getattr(args, "pipeline2_only", False):
+        return "pipeline2"
+    if getattr(args, "pipeline3_only", False):
+        return "pipeline3"
+    if getattr(args, "pipeline4_only", False):
+        return "pipeline4"
+    if getattr(args, "pipeline5_only", False):
+        return "pipeline5"
+    return "full_pipeline"
+
+
+def parse_quality_score(value, default: int = 0) -> int:
+    """Parse a 1-5 quality score. Missing/invalid scores should fail gates."""
+    try:
+        return int(value)
+    except (ValueError, TypeError):
+        return default
+
+
 def load_scenario_config(config_path: str = "config/config_filter.json") -> dict:
     try:
         with open(config_path, "r", encoding="utf-8") as f:
@@ -214,8 +280,7 @@ def _epc_lookup(epc: dict, cat_id: str) -> int:
     return 0
 
 
-def annotate_pipeline2(learner_data: dict, instruction_data: dict, category_list: list,
-                       logger: PipelineLogger = None) -> list:
+def annotate_pipeline2(learner_data: dict, instruction_data: dict, category_list: list, logger: PipelineLogger = None) -> list:
     """Annotates each category with quality_gate info. Returns all categories (nothing dropped)."""
     learner_epc = learner_data.get("extraction_summary", {}).get("excerpts_per_category", {})
     instr_epc = instruction_data.get("extraction_summary", {}).get("excerpts_per_category", {})
@@ -239,6 +304,586 @@ def annotate_pipeline2(learner_data: dict, instruction_data: dict, category_list
     if logger:
         logger.log_pipeline2(learner_data, instruction_data, below_threshold_ids)
     return category_list
+
+
+
+# ============================================================================================================================
+# SCHEMA VALIDATION
+# ============================================================================================================================
+def normalize_pipeline1_schema(pipeline1_data: dict, paper_id: str, *, allow_rejected: bool = False) -> dict:
+    """Normalize only safe fields, then validate Pipeline 1 output schema."""
+    if not isinstance(pipeline1_data, dict):
+        raise ValueError(f"Pipeline 1 output must be a JSON object, got {type(pipeline1_data).__name__}")
+
+    original_id = pipeline1_data.get("id")
+    if original_id != paper_id:
+        print(f"  [ID NORMALIZED] paper id: {original_id!r} -> {paper_id!r}")
+    pipeline1_data["id"] = paper_id
+
+    if allow_rejected:
+        if not isinstance(pipeline1_data.get("screen"), dict):
+            raise ValueError("Rejected Pipeline 1 placeholder is missing screen result")
+        if not isinstance(pipeline1_data.get("category_list"), list):
+            raise ValueError("Rejected Pipeline 1 placeholder category_list must be a list")
+        pipeline1_data["status"] = "screen_rejected"
+        return pipeline1_data
+
+    categories = pipeline1_data.get("category_list", [])
+    if not isinstance(categories, list):
+        raise ValueError(f"Pipeline 1 category_list must be a list, got {type(categories).__name__}")
+
+    for idx, cat in enumerate(categories, start=1):
+        if not isinstance(cat, dict):
+            raise ValueError(f"Pipeline 1 category #{idx} must be an object, got {type(cat).__name__}")
+        expected_id = f"{paper_id}-{idx:02d}"
+        original_cat_id = cat.get("category_id")
+        if original_cat_id != expected_id:
+            print(f"  [ID NORMALIZED] category id: {original_cat_id!r} -> {expected_id!r}")
+        cat["category_id"] = expected_id
+
+        cat.setdefault("name", "")
+        cat.setdefault("categorization_reasoning", "")
+        label = cat.get("label", [])
+        if not isinstance(label, list):
+            raise ValueError(f"{expected_id}.label must be a list, got {type(label).__name__}")
+
+    validate_pipeline1_schema(pipeline1_data, paper_id)
+
+    return pipeline1_data
+
+
+def normalize_pipeline1_ids(pipeline1_data: dict, paper_id: str) -> dict:
+    """Backward-compatible alias for older scripts/imports."""
+    return normalize_pipeline1_schema(pipeline1_data, paper_id)
+
+
+def validate_pipeline1_schema(pipeline1_data: dict, paper_id: str) -> None:
+    """Raise if an analyzed Pipeline 1 output is missing required prompt-schema fields."""
+    missing = []
+
+    def require_dict(obj: dict, key: str, path: str) -> dict:
+        value = obj.get(key)
+        if not isinstance(value, dict):
+            missing.append(f"{path}.{key}")
+            return {}
+        return value
+
+    def require_list(obj: dict, key: str, path: str) -> list:
+        value = obj.get(key)
+        if not isinstance(value, list):
+            missing.append(f"{path}.{key}")
+            return []
+        return value
+
+    for key in ["id", "metadata", "research_scope", "category_list", "irrelevant_pages", "screen"]:
+        if key not in pipeline1_data:
+            missing.append(key)
+
+    metadata = require_dict(pipeline1_data, "metadata", "$")
+    for key in ["title", "author", "year", "description", "research_method"]:
+        if key not in metadata:
+            missing.append(f"metadata.{key}")
+
+    research_scope = require_dict(pipeline1_data, "research_scope", "$")
+    for key in ["country", "education_level", "discipline"]:
+        if key not in research_scope:
+            missing.append(f"research_scope.{key}")
+
+    irrelevant_pages = require_dict(pipeline1_data, "irrelevant_pages", "$")
+    require_list(irrelevant_pages, "page_numbers", "irrelevant_pages")
+    require_list(irrelevant_pages, "sections", "irrelevant_pages")
+
+    categories = require_list(pipeline1_data, "category_list", "$")
+    for idx, cat in enumerate(categories, start=1):
+        path = f"category_list[{idx}]"
+        if not isinstance(cat, dict):
+            missing.append(path)
+            continue
+        for key in ["category_id", "name", "label", "categorization_reasoning", "demographics", "extraction_eligibility"]:
+            if key not in cat:
+                missing.append(f"{path}.{key}")
+        if not isinstance(cat.get("label"), list):
+            missing.append(f"{path}.label")
+        demographics = require_dict(cat, "demographics", path)
+        for key in ["age", "gender", "background"]:
+            if key not in demographics:
+                missing.append(f"{path}.demographics.{key}")
+        eligibility = require_dict(cat, "extraction_eligibility", path)
+        for dim in ["student_behavior", "learning_context", "teacher_actions"]:
+            dim_data = require_dict(eligibility, dim, f"{path}.extraction_eligibility")
+            for key in ["assessment", "excerpt", "score"]:
+                if key not in dim_data:
+                    missing.append(f"{path}.extraction_eligibility.{dim}.{key}")
+
+    if missing:
+        raise ValueError(f"Pipeline 1 schema validation failed for {paper_id}: {', '.join(missing[:20])}")
+
+
+def validate_pipeline2_learner_schema(data: dict, paper_id: str, expected_category_ids: set[str]) -> None:
+    """Raise if learner excerpt extraction output is missing required fields or references unknown categories."""
+    errors = []
+    if not isinstance(data, dict):
+        raise ValueError(f"Pipeline 2 learner output must be a JSON object, got {type(data).__name__}")
+    if data.get("paper_id") != paper_id:
+        errors.append(f"paper_id={data.get('paper_id')!r}")
+
+    category_ids = data.get("category_ids")
+    if not isinstance(category_ids, list):
+        errors.append("category_ids")
+    elif set(category_ids) != expected_category_ids:
+        errors.append("category_ids_mismatch")
+
+    learner_excerpts = data.get("learner_excerpts")
+    if not isinstance(learner_excerpts, list):
+        errors.append("learner_excerpts")
+        learner_excerpts = []
+    for idx, excerpt in enumerate(learner_excerpts, start=1):
+        path = f"learner_excerpts[{idx}]"
+        if not isinstance(excerpt, dict):
+            errors.append(path)
+            continue
+        for key in ["excerpt_id", "applicable_categories", "excerpt_text", "source_location", "excerpt_type", "task_context"]:
+            if key not in excerpt:
+                errors.append(f"{path}.{key}")
+        cats = excerpt.get("applicable_categories")
+        if not isinstance(cats, list):
+            errors.append(f"{path}.applicable_categories")
+        else:
+            unknown = sorted(set(cats) - expected_category_ids)
+            if unknown:
+                errors.append(f"{path}.unknown_categories={unknown}")
+
+    student_quotes = data.get("student_quotes")
+    if not isinstance(student_quotes, list):
+        errors.append("student_quotes")
+        student_quotes = []
+    for idx, quote in enumerate(student_quotes, start=1):
+        path = f"student_quotes[{idx}]"
+        if not isinstance(quote, dict):
+            errors.append(path)
+            continue
+        for key in ["quote_id", "applicable_categories", "quote_text", "source_location", "context"]:
+            if key not in quote:
+                errors.append(f"{path}.{key}")
+        cats = quote.get("applicable_categories")
+        if not isinstance(cats, list):
+            errors.append(f"{path}.applicable_categories")
+        else:
+            unknown = sorted(set(cats) - expected_category_ids)
+            if unknown:
+                errors.append(f"{path}.unknown_categories={unknown}")
+
+    summary = data.get("extraction_summary")
+    if not isinstance(summary, dict):
+        errors.append("extraction_summary")
+    else:
+        for key in [
+            "total_excerpts",
+            "excerpts_per_category",
+            "excerpt_verbatim_check",
+            "total_quotes",
+            "quotes_per_category",
+            "quote_verbatim_check",
+            "verbatim_reasoning",
+            "verbatim_check_performed",
+        ]:
+            if key not in summary:
+                errors.append(f"extraction_summary.{key}")
+        if not isinstance(summary.get("excerpts_per_category"), dict):
+            errors.append("extraction_summary.excerpts_per_category")
+        if not isinstance(summary.get("quotes_per_category"), dict):
+            errors.append("extraction_summary.quotes_per_category")
+
+    if errors:
+        raise ValueError(f"Pipeline 2 learner schema validation failed for {paper_id}: {', '.join(errors[:20])}")
+
+
+def validate_pipeline2_instruction_schema(data: dict, paper_id: str, expected_category_ids: set[str], learner_excerpt_ids: set[str]) -> None:
+    """Raise if instructional excerpt extraction output is missing required fields or bad references."""
+    errors = []
+    if not isinstance(data, dict):
+        raise ValueError(f"Pipeline 2 instruction output must be a JSON object, got {type(data).__name__}")
+    if data.get("paper_id") != paper_id:
+        errors.append(f"paper_id={data.get('paper_id')!r}")
+
+    category_ids = data.get("category_ids")
+    if not isinstance(category_ids, list):
+        errors.append("category_ids")
+    elif set(category_ids) != expected_category_ids:
+        errors.append("category_ids_mismatch")
+
+    instructional_excerpts = data.get("instructional_excerpts")
+    if not isinstance(instructional_excerpts, list):
+        errors.append("instructional_excerpts")
+        instructional_excerpts = []
+    for idx, excerpt in enumerate(instructional_excerpts, start=1):
+        path = f"instructional_excerpts[{idx}]"
+        if not isinstance(excerpt, dict):
+            errors.append(path)
+            continue
+        for key in [
+            "excerpt_id",
+            "applicable_categories",
+            "excerpt_text",
+            "source_location",
+            "excerpt_type",
+            "instructional_context",
+            "linked_learner_excerpts",
+            "temporal_scope",
+        ]:
+            if key not in excerpt:
+                errors.append(f"{path}.{key}")
+        cats = excerpt.get("applicable_categories")
+        if not isinstance(cats, list):
+            errors.append(f"{path}.applicable_categories")
+        else:
+            unknown = sorted(set(cats) - expected_category_ids)
+            if unknown:
+                errors.append(f"{path}.unknown_categories={unknown}")
+        context = excerpt.get("instructional_context")
+        if not isinstance(context, dict):
+            errors.append(f"{path}.instructional_context")
+        else:
+            for key in ["when", "how", "outcome"]:
+                if key not in context:
+                    errors.append(f"{path}.instructional_context.{key}")
+        links = excerpt.get("linked_learner_excerpts")
+        if not isinstance(links, list):
+            errors.append(f"{path}.linked_learner_excerpts")
+        else:
+            for link_idx, link in enumerate(links, start=1):
+                link_path = f"{path}.linked_learner_excerpts[{link_idx}]"
+                if not isinstance(link, dict):
+                    errors.append(link_path)
+                    continue
+                for key in ["learner_excerpt_id", "linking_rationale", "link_strength"]:
+                    if key not in link:
+                        errors.append(f"{link_path}.{key}")
+                learner_id = link.get("learner_excerpt_id")
+                if learner_id and learner_id not in learner_excerpt_ids:
+                    errors.append(f"{link_path}.unknown_learner_excerpt_id={learner_id}")
+                try:
+                    strength = int(link.get("link_strength"))
+                    if not (0 <= strength <= 3):
+                        errors.append(f"{link_path}.link_strength={link.get('link_strength')!r}")
+                except Exception:
+                    errors.append(f"{link_path}.link_strength={link.get('link_strength')!r}")
+        if excerpt.get("temporal_scope") not in {"immediate", "long_term", "both"}:
+            errors.append(f"{path}.temporal_scope={excerpt.get('temporal_scope')!r}")
+
+    summary = data.get("extraction_summary")
+    if not isinstance(summary, dict):
+        errors.append("extraction_summary")
+    else:
+        for key in [
+            "total_excerpts",
+            "excerpts_per_category",
+            "excerpt_verbatim_check",
+            "verbatim_reasoning",
+            "verbatim_check_performed",
+            "linking_summary",
+        ]:
+            if key not in summary:
+                errors.append(f"extraction_summary.{key}")
+        if not isinstance(summary.get("excerpts_per_category"), dict):
+            errors.append("extraction_summary.excerpts_per_category")
+        linking_summary = summary.get("linking_summary")
+        if not isinstance(linking_summary, dict):
+            errors.append("extraction_summary.linking_summary")
+        else:
+            for key in [
+                "total_links",
+                "strong_links",
+                "moderate_links",
+                "weak_links",
+                "orphaned_learner_excerpts",
+                "orphaned_instruction_excerpts",
+                "linking_reasoning",
+            ]:
+                if key not in linking_summary:
+                    errors.append(f"extraction_summary.linking_summary.{key}")
+
+    if errors:
+        raise ValueError(f"Pipeline 2 instruction schema validation failed for {paper_id}: {', '.join(errors[:20])}")
+
+
+def _category_id_aliases(category_id: str) -> set[str]:
+    aliases = {category_id}
+    bare_suffix = re.search(r'\d{4}-\d{2}$', category_id)
+    if bare_suffix:
+        aliases.add(bare_suffix.group(0))
+    return aliases
+
+
+def _pipeline3_allowed_evidence_ids(category_id: str, learner_data: dict, instruction_data: dict) -> set[str]:
+    """Return excerpt/quote IDs available to Pipeline 3 for this category."""
+    cat_ids = _category_id_aliases(category_id)
+    allowed = set()
+
+    for excerpt in learner_data.get("learner_excerpts", []):
+        if cat_ids & set(excerpt.get("applicable_categories", [])):
+            excerpt_id = excerpt.get("excerpt_id")
+            if excerpt_id:
+                allowed.add(excerpt_id)
+
+    for quote in learner_data.get("student_quotes", []):
+        if cat_ids & set(quote.get("applicable_categories", [])):
+            quote_id = quote.get("quote_id")
+            if quote_id:
+                allowed.add(quote_id)
+
+    for excerpt in instruction_data.get("instructional_excerpts", []):
+        if cat_ids & set(excerpt.get("applicable_categories", [])):
+            excerpt_id = excerpt.get("excerpt_id")
+            if excerpt_id:
+                allowed.add(excerpt_id)
+
+    return allowed
+
+
+def validate_pipeline3_schema(data: dict, paper_id: str, category_id: str, allowed_evidence_ids: set[str]) -> None:
+    """Raise if scenario generation output is missing required prompt-schema fields."""
+    errors = []
+    challenge_types = {
+        "Task Resistance",
+        "Emotional Distress",
+        "Attention/Engagement Failure",
+        "Social-Interpersonal Difficulty",
+        "Academic Struggle",
+    }
+
+    def require_dict(obj: dict, key: str, path: str) -> dict:
+        value = obj.get(key)
+        if not isinstance(value, dict):
+            errors.append(f"{path}.{key}")
+            return {}
+        return value
+
+    def require_list(obj: dict, key: str, path: str) -> list:
+        value = obj.get(key)
+        if not isinstance(value, list):
+            errors.append(f"{path}.{key}")
+            return []
+        return value
+
+    def require_str(obj: dict, key: str, path: str) -> str:
+        value = obj.get(key)
+        if not isinstance(value, str):
+            errors.append(f"{path}.{key}")
+            return ""
+        return value
+
+    def check_evidence_basis(obj: dict, path: str) -> None:
+        basis = require_list(obj, "evidence_basis", path)
+        for idx, evidence_id in enumerate(basis, start=1):
+            if not isinstance(evidence_id, str):
+                errors.append(f"{path}.evidence_basis[{idx}]")
+            elif allowed_evidence_ids and evidence_id not in allowed_evidence_ids:
+                errors.append(f"{path}.evidence_basis[{idx}].unknown={evidence_id}")
+
+    def check_behavior(obj: dict, path: str, trigger: bool = False) -> None:
+        require_str(obj, "condition", path)
+        require_str(obj, "observable_behavior", path)
+        require_str(obj, "internal_state", path)
+        quotes = require_list(obj, "related_quotes", path)
+        for idx, quote in enumerate(quotes, start=1):
+            if not isinstance(quote, str):
+                errors.append(f"{path}.related_quotes[{idx}]")
+        check_evidence_basis(obj, path)
+
+    def check_strategy(action: dict, path: str, scenario_id: str, suffix: str) -> None:
+        if not isinstance(action, dict):
+            errors.append(path)
+            return
+        action_id = require_str(action, "action_id", path)
+        if action_id and not action_id.startswith(f"{scenario_id}_{suffix}_"):
+            errors.append(f"{path}.action_id={action_id!r}")
+        for key in ["instruction", "context", "outcome", "reason"]:
+            require_str(action, key, path)
+        check_evidence_basis(action, path)
+
+    if not isinstance(data, dict):
+        raise ValueError(f"Pipeline 3 output must be a JSON object, got {type(data).__name__}")
+
+    if data.get("category_id") != category_id:
+        errors.append(f"category_id={data.get('category_id')!r}")
+    if data.get("paper_id") != paper_id:
+        errors.append(f"paper_id={data.get('paper_id')!r}")
+    require_str(data, "name", "$")
+
+    scenarios = require_list(data, "scenarios", "$")
+    if not scenarios:
+        errors.append("scenarios.empty")
+    for idx, scenario in enumerate(scenarios, start=1):
+        path = f"scenarios[{idx}]"
+        if not isinstance(scenario, dict):
+            errors.append(path)
+            continue
+        scenario_id = require_str(scenario, "scenario_id", path)
+        if scenario_id and not scenario_id.startswith(f"{category_id}_scenario_"):
+            errors.append(f"{path}.scenario_id={scenario_id!r}")
+        require_str(scenario, "title", path)
+
+        content = require_dict(scenario, "content", path)
+        task = require_dict(content, "task", f"{path}.content")
+        for key in ["content", "learning_goal"]:
+            require_str(task, key, f"{path}.content.task")
+        check_evidence_basis(task, f"{path}.content.task")
+
+        context = require_dict(content, "context", f"{path}.content")
+        for key in ["environment", "materials", "social_setting", "time_context"]:
+            require_str(context, key, f"{path}.content.context")
+        check_evidence_basis(context, f"{path}.content.context")
+
+        trigger = require_dict(content, "challenging_behavior_trigger", f"{path}.content")
+        check_behavior(trigger, f"{path}.content.challenging_behavior_trigger", trigger=True)
+
+        patterns = require_list(content, "behavior_patterns", f"{path}.content")
+        for pattern_idx, pattern in enumerate(patterns, start=1):
+            if not isinstance(pattern, dict):
+                errors.append(f"{path}.content.behavior_patterns[{pattern_idx}]")
+                continue
+            check_behavior(pattern, f"{path}.content.behavior_patterns[{pattern_idx}]")
+
+        hidden = require_dict(scenario, "hidden_strategies", path)
+        for key, suffix in [
+            ("effective_immediate", "effim"),
+            ("effective_long_term", "efflt"),
+            ("ineffective", "ineff"),
+        ]:
+            actions = require_list(hidden, key, f"{path}.hidden_strategies")
+            for action_idx, action in enumerate(actions, start=1):
+                check_strategy(
+                    action,
+                    f"{path}.hidden_strategies.{key}[{action_idx}]",
+                    scenario_id,
+                    suffix,
+                )
+
+    persona = require_dict(data, "student_persona", "$")
+    for key in ["behavioral_patterns", "unique_triggers_and_needs", "approach_effectiveness", "description"]:
+        require_str(persona, key, "student_persona")
+    check_evidence_basis(persona, "student_persona")
+
+    categorization = require_dict(data, "challenge_categorization", "$")
+    primary = require_dict(categorization, "primary_challenge", "challenge_categorization")
+    for key in ["evidence_summary", "type"]:
+        require_str(primary, key, "challenge_categorization.primary_challenge")
+    if primary.get("type") not in challenge_types:
+        errors.append(f"challenge_categorization.primary_challenge.type={primary.get('type')!r}")
+    check_evidence_basis(primary, "challenge_categorization.primary_challenge")
+
+    secondary = categorization.get("secondary_challenge")
+    if secondary is not None:
+        if not isinstance(secondary, dict):
+            errors.append("challenge_categorization.secondary_challenge")
+        else:
+            for key in ["evidence_summary", "type"]:
+                require_str(secondary, key, "challenge_categorization.secondary_challenge")
+            if secondary.get("type") not in challenge_types:
+                errors.append(f"challenge_categorization.secondary_challenge.type={secondary.get('type')!r}")
+            check_evidence_basis(secondary, "challenge_categorization.secondary_challenge")
+
+    if errors:
+        raise ValueError(f"Pipeline 3 schema validation failed for {category_id}: {', '.join(errors[:20])}")
+
+
+def validate_pipeline4_schema(data: dict, paper_id: str, category_id: str, scenario_id: str, allowed_evidence_ids: set[str], expected_turns: int) -> None:
+    """Raise if synthesized dialogue output is missing fields needed by P5/evaluation."""
+    errors = []
+
+    def require_str(obj: dict, key: str, path: str) -> str:
+        value = obj.get(key)
+        if not isinstance(value, str):
+            errors.append(f"{path}.{key}")
+            return ""
+        return value
+
+    def require_list(obj: dict, key: str, path: str) -> list:
+        value = obj.get(key)
+        if not isinstance(value, list):
+            errors.append(f"{path}.{key}")
+            return []
+        return value
+
+    def check_evidence_basis(obj: dict, path: str, required: bool) -> None:
+        basis = obj.get("evidence_basis")
+        if basis is None:
+            if required:
+                errors.append(f"{path}.evidence_basis")
+            return
+        if not isinstance(basis, list):
+            errors.append(f"{path}.evidence_basis")
+            return
+        if required and not basis:
+            errors.append(f"{path}.evidence_basis.empty")
+        for idx, evidence_id in enumerate(basis, start=1):
+            if not isinstance(evidence_id, str):
+                errors.append(f"{path}.evidence_basis[{idx}]")
+            elif allowed_evidence_ids and evidence_id not in allowed_evidence_ids:
+                errors.append(f"{path}.evidence_basis[{idx}].unknown={evidence_id}")
+
+    if not isinstance(data, dict):
+        raise ValueError(f"Pipeline 4 output must be a JSON object, got {type(data).__name__}")
+
+    if data.get("category_id") != category_id:
+        errors.append(f"category_id={data.get('category_id')!r}")
+    if data.get("paper_id") != paper_id:
+        errors.append(f"paper_id={data.get('paper_id')!r}")
+    require_str(data, "name", "$")
+
+    dialogues = require_list(data, "dialogues", "$")
+    if len(dialogues) != 1:
+        errors.append(f"dialogues.len={len(dialogues)}")
+
+    for dialogue_idx, dialogue_case in enumerate(dialogues, start=1):
+        path = f"dialogues[{dialogue_idx}]"
+        if not isinstance(dialogue_case, dict):
+            errors.append(path)
+            continue
+
+        case_id = require_str(dialogue_case, "case_id", path)
+        if case_id and not re.match(rf"^{re.escape(category_id)}_case_\d{{3}}$", case_id):
+            errors.append(f"{path}.case_id={case_id!r}")
+        if dialogue_case.get("source_scenario_id") != scenario_id:
+            errors.append(f"{path}.source_scenario_id={dialogue_case.get('source_scenario_id')!r}")
+        require_str(dialogue_case, "minimal_context", path)
+
+        full_context = dialogue_case.get("full_context")
+        if not isinstance(full_context, dict):
+            errors.append(f"{path}.full_context")
+        elif full_context.get("scenario_id") != scenario_id:
+            errors.append(f"{path}.full_context.scenario_id={full_context.get('scenario_id')!r}")
+
+        turns = require_list(dialogue_case, "dialogue", path)
+        if len(turns) != expected_turns:
+            errors.append(f"{path}.dialogue.len={len(turns)} expected={expected_turns}")
+
+        for turn_idx, turn_data in enumerate(turns, start=1):
+            turn_path = f"{path}.dialogue[{turn_idx}]"
+            if not isinstance(turn_data, dict):
+                errors.append(turn_path)
+                continue
+            turn_id = turn_data.get("turn_id")
+            if turn_id != turn_idx:
+                errors.append(f"{turn_path}.turn_id={turn_id!r}")
+            speaker = turn_data.get("speaker")
+            expected_speaker = "tutor" if turn_idx % 2 == 1 else "student"
+            if speaker != expected_speaker:
+                errors.append(f"{turn_path}.speaker={speaker!r}")
+            require_str(turn_data, "message", turn_path)
+            check_evidence_basis(turn_data, turn_path, required=(speaker == "student"))
+
+            if turn_idx == expected_turns:
+                if speaker != "student":
+                    errors.append(f"{turn_path}.final_speaker={speaker!r}")
+                if turn_data.get("is_challenging_behavior") is not True:
+                    errors.append(f"{turn_path}.is_challenging_behavior")
+            elif turn_data.get("is_challenging_behavior") is True:
+                errors.append(f"{turn_path}.is_challenging_behavior_unexpected")
+
+    if errors:
+        raise ValueError(f"Pipeline 4 schema validation failed for {category_id}/{scenario_id}: {', '.join(errors[:20])}")
 
 
 
@@ -334,6 +979,13 @@ class StudentSimulatorPipeline:
         instruction_excerpt_data = {
             "instructional_excerpts": filtered_instructional_excerpts
         }
+        allowed_evidence_ids = sorted(
+            [
+                *(excerpt.get("excerpt_id") for excerpt in filtered_learner_excerpts),
+                *(quote.get("quote_id") for quote in filtered_student_quotes),
+                *(excerpt.get("excerpt_id") for excerpt in filtered_instructional_excerpts),
+            ]
+        )
         return generate_llm_response(
             "build_scenario",
             {
@@ -342,15 +994,14 @@ class StudentSimulatorPipeline:
                 "CATEGORY_ID": category_id,
                 "LEARNER_EXCERPT": str(learner_excerpt_data),
                 "INSTRUCTION_EXCERPT": str(instruction_excerpt_data),
+                "ALLOWED_EVIDENCE_IDS": str(allowed_evidence_ids),
                 "NUM_SCENARIOS": str(num_scenarios)
             },
             **self._p3
         )
 
     # Pipeline 4: Synthesize Dialogue
-    def synthesize_dialogue(self, paper_id: str, category: dict,
-                        scenario_data: dict, individual_scenario: dict,
-                        evidence: dict, turn: int = 3):
+    def synthesize_dialogue(self, paper_id: str, category: dict, scenario_data: dict, individual_scenario: dict, evidence: dict, turn: int = 3):
         if not individual_scenario:
             return
         scenario_visible = {
@@ -548,6 +1199,7 @@ def main():
                         help="Stop after Pipeline 5 (generate responses).")
 
     args = parser.parse_args()
+    os.environ.setdefault("PIPELINE_LOG_SCOPE", determine_log_scope(args))
     use_check = args.check.lower() == "true"
     scenario_cfg = load_scenario_config(args.filter_config)
     num_scenarios = scenario_cfg.get("num_scenarios", 3)
@@ -592,13 +1244,15 @@ def main():
         _filename_id   = path.replace("\\", "/").split("/")[-1].replace(".pdf", "")
         _study_group   = _derive_study_group(path)
         effective_paper_id = f"{_study_group}_{_filename_id}" if _study_group else _filename_id
+        llm_log_path = configure_paper_llm_log(effective_paper_id)
+        print(f"  [LOG] LLM calls: {llm_log_path}")
 
         # Extract PDF text once — shared by screen and analyze_paper
         pdf_texts = extract_text_from_pdf(path)
         if not pdf_texts:
             raise Exception(f"Error: Could not extract text from {path}")
 
-        # ── Screen: reject papers below score threshold ──────────────────────────
+        # ── Screen: reject papers with any required dimension < 3 ──────────────
         _existing_screen = resolve_pipeline_output(effective_paper_id, "pipeline1/screen_paper")
         if _existing_screen:
             print(f"\n  [SKIP] Screen — loading existing: {os.path.basename(_existing_screen)}")
@@ -612,16 +1266,20 @@ def main():
             save_json_output(screen_result, "pipeline1/screen_paper", effective_paper_id)
 
         _screen_dims = ["student_behavior", "learning_context", "teacher_actions"]
-        _failed_dims = [d for d in _screen_dims if screen_result.get(d, {}).get("score", 5) < 3]
+        _failed_dims = [
+            d for d in _screen_dims
+            if parse_quality_score(screen_result.get(d, {}).get("score")) < 3
+        ]
         if _failed_dims:
             print(f"  [SCREEN REJECTED] {effective_paper_id}: {', '.join(_failed_dims)} < 3.")
             _existing_rejected = resolve_pipeline_output(effective_paper_id, "pipeline1/analyze_paper")
             if not _existing_rejected:
                 _rejected_data = {"id": effective_paper_id, "screen": screen_result, "category_list": []}
+                _rejected_data = normalize_pipeline1_schema(_rejected_data, effective_paper_id, allow_rejected=True)
                 save_json_output(_rejected_data, "pipeline1/analyze_paper", effective_paper_id)
             return
         print(f"  [SCREEN PASSED] {effective_paper_id}: all required dimensions >= 3.")
-        
+
         _existing_p1 = resolve_pipeline_output(effective_paper_id, "pipeline1/analyze_paper")
         if _existing_p1:
             print(f"\n  [SKIP] Pipeline 1 — loading existing: {os.path.basename(_existing_p1)}")
@@ -633,13 +1291,14 @@ def main():
                 raise Exception("Error: No response from LLM")
 
             pipeline1_paper_data = extract_json_from_response(analyze_paper_response)
+            pipeline1_paper_data["screen"] = screen_result
+            pipeline1_paper_data = normalize_pipeline1_schema(pipeline1_paper_data, effective_paper_id)
 
             if args.verbose:
                 print("\n=== Pipeline 1: Analyze Paper ===")
                 print_pipeline1_verbose(pipeline1_paper_data)
 
-            # Embed screen result + mark each category as eligible or not
-            pipeline1_paper_data["screen"] = screen_result
+            # Mark each category as eligible or not
             _p1_dims = ["student_behavior", "learning_context", "teacher_actions"]
             for _cat in pipeline1_paper_data.get("category_list", []):
                 if not isinstance(_cat, dict):
@@ -647,10 +1306,10 @@ def main():
                 _elig = _cat.get("extraction_eligibility", {})
                 if not isinstance(_elig, dict):
                     _elig = {}
-                def _score(v):
-                    try: return int(v)
-                    except (ValueError, TypeError): return 5
-                _bad = [d for d in _p1_dims if _score(_elig.get(d, {}).get("score", 5)) <= 3]
+                _bad = [
+                    d for d in _p1_dims
+                    if parse_quality_score(_elig.get(d, {}).get("score")) <= 3
+                ]
                 _cat["eligible"] = len(_bad) == 0
                 if _bad:
                     print(f"  [CAT FILTERED] {_cat.get('category_id', '?')}: {', '.join(_bad)} <= 3.")
@@ -717,6 +1376,18 @@ def main():
 
             output_data1 = extract_json_from_response(extract_excerpt_response_learner)
             output_data2 = extract_json_from_response(extract_excerpt_response_instruction)
+            _p2_expected_category_ids = {
+                c["category_id"]
+                for c in pipeline1_paper_data.get("category_list", [])
+                if isinstance(c, dict) and c.get("category_id")
+            }
+            validate_pipeline2_learner_schema(output_data1, _paper_id_p2, _p2_expected_category_ids)
+            _learner_excerpt_ids = {
+                e.get("excerpt_id")
+                for e in output_data1.get("learner_excerpts", [])
+                if isinstance(e, dict) and e.get("excerpt_id")
+            }
+            validate_pipeline2_instruction_schema(output_data2, _paper_id_p2, _p2_expected_category_ids, _learner_excerpt_ids)
 
             if args.verbose:
                 print("\n=== Pipeline 2: Extract Excerpt ===")
@@ -789,6 +1460,12 @@ def main():
             if not output_data.get("category_id"):
                 print(f"  [FAILED] Pipeline 3 [{_cat_id_p3}]: invalid JSON structure, skipping.")
                 continue
+            validate_pipeline3_schema(
+                output_data,
+                pipeline1_paper_data["id"],
+                _cat_id_p3,
+                _pipeline3_allowed_evidence_ids(_cat_id_p3, pipeline2_excerpt_data[0], pipeline2_excerpt_data[1]),
+            )
 
             if args.verbose:
                 print(f"\n=== Pipeline 3: Build Scenario ({category['category_id']}) ===")
@@ -796,8 +1473,13 @@ def main():
 
             for _s in output_data.get("scenarios", []):
                 _hs = _s.get("hidden_strategies", {})
+                _content = _s.get("content", {})
                 _s["is_actionable"] = bool(
-                    _hs.get("effective_immediate") or _hs.get("effective_long_term")
+                    _content.get("task")
+                    and _content.get("context")
+                    and _content.get("challenging_behavior_trigger")
+                    and _content.get("behavior_patterns")
+                    and (_hs.get("effective_immediate") or _hs.get("effective_long_term"))
                 )
 
             json_path = save_json_output(output_data, "pipeline3/build_scenario", category["category_id"])
@@ -889,7 +1571,7 @@ def main():
             for individual_scenario in individual_scenarios:
                 scenario_id = individual_scenario.get("scenario_id", "unknown")
                 if not individual_scenario.get("is_actionable", True):
-                    print(f"\n  [SKIP] Scenario {scenario_id} — no effective strategies (is_actionable=false)")
+                    print(f"\n  [SKIP] Scenario {scenario_id} — not actionable (missing effective strategy or behavior pattern)")
                     continue
 
                 if scenario_id in _done_scenarios:
@@ -932,6 +1614,14 @@ def main():
                     dlg["case_id"] = f"{_cat_id}_case_{case_counter:03d}"
                     dlg["source_scenario_id"] = scenario_id
                     dlg["full_context"] = scenario_visible
+                validate_pipeline4_schema(
+                    output_data,
+                    pipeline1_paper_data["id"],
+                    _cat_id,
+                    scenario_id,
+                    set(evidence.keys()),
+                    turn * 2,
+                )
 
                 if args.verbose:
                     print(f"\n=== Pipeline 4: Synthesize Dialogue ({category['category_id']}) ===")

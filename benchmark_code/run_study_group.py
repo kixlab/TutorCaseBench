@@ -20,6 +20,9 @@ from utils.generate_response_utils import collect_model_responses, safe_model_la
 # to rubric generation, response collection, and evaluation
 # (evaluation_pipeline.py) — all in one command.
 #
+# All child processes share one log run (PIPELINE_RUN_ID / PIPELINE_LOG_SCOPE).
+# Each per-paper main.py job also gets a captured run log and a job-status JSON.
+#
 # -----------------------------------------------------------------------------
 # PIPELINE FLOW
 # -----------------------------------------------------------------------------
@@ -80,13 +83,30 @@ from utils.generate_response_utils import collect_model_responses, safe_model_la
 #   │   │   └── rubric_{cat_id}_{ts}.json                              # Generated rubrics
 #   │   └── result/
 #   │       └── {cat_id}_case_{n}_{type}_{model}_{ts}.json             # Evaluation results
-#   └── summaries/
-#       ├── pipeline1_summary_{ts}.json                                # Per-pipeline summaries
-#       ├── pipeline2_summary_{ts}.json                                #   (generated when
-#       ├── pipeline3_summary_{ts}.json                                #    --pipelineN-only
-#       ├── pipeline4_summary_{ts}.json                                #    flag is used)
-#       ├── pipeline5_summary_{ts}.json
-#       └── aggregate_summary_{ts}.json                                # Final aggregate summary
+#   ├── summaries/
+#   │   ├── pipeline1_summary_{ts}.json                                # Per-pipeline summaries
+#   │   ├── pipeline2_summary_{ts}.json                                #   (generated when
+#   │   ├── pipeline3_summary_{ts}.json                                #    --pipelineN-only
+#   │   ├── pipeline4_summary_{ts}.json                                #    flag is used)
+#   │   ├── pipeline5_summary_{ts}.json
+#   │   └── aggregate_summary_{ts}.json                                # Final aggregate summary
+#   └── logs/{scope}/
+#       ├── runs/{run_id}/{paper_id}.log                               # Captured stdout/stderr per main.py job
+#       ├── job_status/{run_id}/{paper_id}.json                        # Per-job status (ok, returncode, tails)
+#       ├── pipeline_detail/{run_id}/{paper_id}.txt                    # Pipeline run log (written by main.py)
+#       └── llm_calls/{run_id}/{paper_id}.jsonl                        # Per-call LLM usage log (written by main.py)
+#
+# -----------------------------------------------------------------------------
+# LOG SCOPE / ENVIRONMENT VARIABLES
+# -----------------------------------------------------------------------------
+#
+#   PIPELINE_RUN_ID    : Shared run id (default: run_{YYYYmmdd_HHMMSS})
+#   PIPELINE_LOG_SCOPE : Log scope folder (default: derived from flags)
+#                          --pipelineN-only → pipelineN
+#                          --from-rubric    → evaluation_rubric
+#                          --from-evaluate  → evaluation
+#                          (none)           → full_pipeline
+#   Both are respected if already set, so an outer caller can override them.
 #
 # -----------------------------------------------------------------------------
 # PIPELINE SUMMARY FLAGS
@@ -97,7 +117,8 @@ from utils.generate_response_utils import collect_model_responses, safe_model_la
 #   --pipeline2-only  : + extract excerpt → pipeline2_summary_{ts}.json
 #                       (excerpt counts, filter breakdown per category)
 #   --pipeline3-only  : + build scenario → pipeline3_summary_{ts}.json
-#                       (scenario counts, actionable rate, by challenge type)
+#                       (scenario counts, actionable rate & distribution,
+#                        by challenge type incl. actionable categories/scenarios)
 #   --pipeline4-only  : + synthesize dialogue → pipeline4_summary_{ts}.json
 #                       (dialogue counts, turn stats, immediate/long_term split)
 #   --pipeline5-only  : + collect responses → pipeline5_summary_{ts}.json
@@ -140,6 +161,24 @@ def find_category_ids_for_paper(paper_id: str) -> list[str]:
 
 def has_output(pattern: str) -> bool:
     return bool(glob.glob(pattern))
+
+
+def determine_log_scope(args) -> str:
+    if args.pipeline1_only:
+        return "pipeline1"
+    if args.pipeline2_only:
+        return "pipeline2"
+    if args.pipeline3_only:
+        return "pipeline3"
+    if args.pipeline4_only:
+        return "pipeline4"
+    if args.pipeline5_only:
+        return "pipeline5"
+    if args.from_rubric:
+        return "evaluation_rubric"
+    if args.from_evaluate:
+        return "evaluation"
+    return "full_pipeline"
 
 
 def load_models_to_test_from_config(config_path: str) -> list[str]:
@@ -205,11 +244,7 @@ def get_eval_coverage(category_id: str, models_to_test: list[str]) -> dict:
     return status
 
 
-def _generate_responses_for_category(
-    category_id: str,
-    response_models: list[str],
-    response_config_path: str,
-) -> str:
+def _generate_responses_for_category(category_id: str, response_models: list[str], response_config_path: str) -> str:
     cov_before = get_eval_coverage(category_id, response_models)
     missing_before = len(cov_before["missing_responses"])
     if missing_before == 0:
@@ -230,12 +265,7 @@ def _generate_responses_for_category(
     )
 
 
-def generate_missing_responses(
-    category_ids: list[str],
-    response_models: list[str],
-    response_config_path: str,
-    workers: int = 1,
-):
+def generate_missing_responses(category_ids: list[str], response_models: list[str], response_config_path: str, workers: int = 1):
     if not response_models:
         print("\n  [WARNING] No models_to_test found in config_response.json")
         print("  Skipping response generation coverage check.")
@@ -274,6 +304,7 @@ def run_step(label: str, cmd: list[str], stdin_input: bytes | None = None) -> bo
 
 
 def run_step_captured(label: str, cmd: list[str], stdin_input: bytes | None = None) -> tuple[bool, str]:
+    env = os.environ.copy()
     result = subprocess.run(
         cmd,
         cwd=BASE_DIR,
@@ -282,12 +313,52 @@ def run_step_captured(label: str, cmd: list[str], stdin_input: bytes | None = No
         text=True,
         encoding="utf-8",
         errors="replace",
+        env=env,
     )
     header = f"\n{'─'*70}\n  {label}\n  {' '.join(cmd)}\n{'─'*70}"
     body   = (result.stdout or "") + (result.stderr or "")
     if result.returncode != 0:
         body += f"\n  [ERROR] Step failed (exit code {result.returncode})"
-    return result.returncode == 0, header + "\n" + body
+    output = header + "\n" + body
+
+    # Per-paper main.py jobs ("Pipeline: {paper_id}"): persist run log + job status
+    m = re.match(r"^Pipeline:\s*(.+)$", label)
+    if m:
+        paper_id = m.group(1)
+        run_id = os.environ.get("PIPELINE_RUN_ID", "manual")
+        log_scope = os.environ.get("PIPELINE_LOG_SCOPE", "pipeline")
+        run_log_dir = os.path.join(BASE_DIR, "data", "logs", log_scope, "runs", run_id)
+        os.makedirs(run_log_dir, exist_ok=True)
+        run_log_path = os.path.join(run_log_dir, f"{paper_id}.log")
+        ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with open(run_log_path, "a", encoding="utf-8") as f:
+            f.write(f"\n{'='*70}\n")
+            f.write(f"[{ts}] returncode={result.returncode}\n")
+            f.write(output)
+            if not output.endswith("\n"):
+                f.write("\n")
+
+        status_dir = os.path.join(BASE_DIR, "data", "logs", log_scope, "job_status", run_id)
+        os.makedirs(status_dir, exist_ok=True)
+        status_path = os.path.join(status_dir, f"{paper_id}.json")
+        llm_call_log = os.path.join(BASE_DIR, "data", "logs", log_scope, "llm_calls", run_id, f"{paper_id}.jsonl")
+        status = {
+            "run_id": run_id,
+            "pipeline": log_scope,
+            "paper_id": paper_id,
+            "timestamp": ts,
+            "ok": result.returncode == 0,
+            "returncode": result.returncode,
+            "command": cmd,
+            "run_log": run_log_path,
+            "llm_call_log": llm_call_log,
+            "stdout_tail": (result.stdout or "")[-4000:],
+            "stderr_tail": (result.stderr or "")[-4000:],
+        }
+        with open(status_path, "w", encoding="utf-8") as f:
+            json.dump(status, f, indent=2, ensure_ascii=False)
+
+    return result.returncode == 0, output
 
 
 Job = tuple[str, list[str], bytes | None]
@@ -594,16 +665,22 @@ def generate_pipeline3_summary(paper_ids: list[str]) -> dict:
     sc_stats  = _stats(scenario_counts)
     act_stats = _stats(actionable_counts)
 
-    scenario_count_dist = dict(sorted(Counter(c["num_scenarios"] for c in actionable_cats).items()))
+    scenario_count_dist   = dict(sorted(Counter(c["num_scenarios"] for c in actionable_cats).items()))
+    actionable_count_dist = dict(sorted(Counter(c["num_actionable"] for c in actionable_cats).items()))
 
-    type_buckets = defaultdict(lambda: {"categories": 0, "scenarios": 0})
+    type_buckets = defaultdict(lambda: {
+        "categories": 0, "scenarios": 0,
+        "actionable_categories": 0, "actionable_scenarios": 0,
+    })
     for c in categories_processed:
         t = c["challenge_type"]
         type_buckets[t]["categories"] += 1
         type_buckets[t]["scenarios"]  += c["num_scenarios"]
+        if c["num_actionable"] > 0:
+            type_buckets[t]["actionable_categories"] += 1
+            type_buckets[t]["actionable_scenarios"]  += c["num_actionable"]
     by_challenge_type = {
-        t: {"categories": v["categories"], "scenarios": v["scenarios"]}
-        for t, v in sorted(type_buckets.items())
+        t: dict(v) for t, v in sorted(type_buckets.items())
     }
 
     summary = {
@@ -628,6 +705,7 @@ def generate_pipeline3_summary(paper_ids: list[str]) -> dict:
             "min_actionable_per_category":   act_stats["min"],
             "max_actionable_per_category":   act_stats["max"],
             "scenario_count_distribution":   scenario_count_dist,
+            "actionable_count_distribution": actionable_count_dist,
         },
         "by_challenge_type": by_challenge_type,
     }
@@ -898,8 +976,15 @@ def main():
     input_dir = os.path.abspath(args.input_dir.rstrip("/\\"))
 
     start_time = datetime.now()
+    # Shared log run: child main.py / evaluation_pipeline.py processes inherit these
+    run_id = os.environ.get("PIPELINE_RUN_ID") or start_time.strftime("run_%Y%m%d_%H%M%S")
+    log_scope = os.environ.get("PIPELINE_LOG_SCOPE") or determine_log_scope(args)
+    os.environ["PIPELINE_RUN_ID"] = run_id
+    os.environ["PIPELINE_LOG_SCOPE"] = log_scope
     print(f"\n{'='*70}")
     print(f"  PIPELINE BATCH RUN")
+    print(f"  Run ID    : {run_id}")
+    print(f"  Log scope : {log_scope}")
     print(f"  Directory : {input_dir}")
     print(f"  Model     : {args.model}")
     if args.pipeline1_only:
@@ -1211,12 +1296,7 @@ def main():
     sys.exit(1 if errors else 0)
 
 
-def _print_summary(
-    errors: list[str],
-    pdfs: list[str],
-    category_ids: list[str],
-    start_time: datetime,
-):
+def _print_summary(errors: list[str], pdfs: list[str], category_ids: list[str], start_time: datetime):
     elapsed = datetime.now() - start_time
     print(f"\n\n{'='*70}")
     print(f"  PIPELINE BATCH SUMMARY")
