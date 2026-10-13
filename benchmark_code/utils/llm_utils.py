@@ -767,8 +767,8 @@ def call_openrouter(prompt_filename: str, variables: Dict[str, str], model_name:
         api_key=key,
         base_url="https://openrouter.ai/api/v1",
         default_headers={
-            "HTTP-Referer": "https://github.com/kixlab/google-iitp-student-simulator",
-            "X-Title": "google-iitp-student-simulator",
+            "HTTP-Referer": "",  # Anonymous
+            "X-Title": "",  # Anonymous
         },
     )
     messages = []
